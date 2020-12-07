@@ -68,6 +68,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="About.aspx" />
+    <Content Include="AfterPayment.aspx" />
     <Content Include="assets\css\style-starter.css" />
     <Content Include="assets\fonts\fontawesome-webfont.svg" />
     <Content Include="assets\images\ambulance.png" />
@@ -118,7 +119,10 @@
     <Content Include="Contact.aspx" />
     <Content Include="changeCardInfo.aspx" />
     <Content Include="Payment.aspx" />
+    <Content Include="PaymentInfoDeleted.aspx" />
+    <Content Include="PaymentInfoEmpty.aspx" />
     <Content Include="PaymentInformation.aspx" />
+    <Content Include="ReceiptList.aspx" />
     <Content Include="Web.config" />
     <Content Include="Home.aspx" />
     <Content Include="Services.aspx" />
@@ -130,6 +134,13 @@
     </Compile>
     <Compile Include="About.aspx.designer.cs">
       <DependentUpon>About.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AfterPayment.aspx.cs">
+      <DependentUpon>AfterPayment.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AfterPayment.aspx.designer.cs">
+      <DependentUpon>AfterPayment.aspx</DependentUpon>
     </Compile>
     <Compile Include="Authentication.aspx.cs">
       <DependentUpon>Authentication.aspx</DependentUpon>
@@ -159,6 +170,20 @@
     <Compile Include="Payment.aspx.designer.cs">
       <DependentUpon>Payment.aspx</DependentUpon>
     </Compile>
+    <Compile Include="PaymentInfoDeleted.aspx.cs">
+      <DependentUpon>PaymentInfoDeleted.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="PaymentInfoDeleted.aspx.designer.cs">
+      <DependentUpon>PaymentInfoDeleted.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="PaymentInfoEmpty.aspx.cs">
+      <DependentUpon>PaymentInfoEmpty.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="PaymentInfoEmpty.aspx.designer.cs">
+      <DependentUpon>PaymentInfoEmpty.aspx</DependentUpon>
+    </Compile>
     <Compile Include="PaymentInformation.aspx.cs">
       <DependentUpon>PaymentInformation.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -167,6 +192,13 @@
       <DependentUpon>PaymentInformation.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ReceiptList.aspx.cs">
+      <DependentUpon>ReceiptList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ReceiptList.aspx.designer.cs">
+      <DependentUpon>ReceiptList.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Site.Master.cs">
       <DependentUpon>Site.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
