@@ -1,5 +1,6 @@
 ﻿<%@ Page Title="Payment" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Payment.aspx.cs" Inherits="EDP_Clinic.Payment" %>
 <asp:Content ID="head" ContentPlaceHolderID="head" runat="server">
+        <script src="https://js.stripe.com/v3/"></script>
 </asp:Content>
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
     <section class="w3l-contact py-5" id="payment" style="height:100vh;">
@@ -36,6 +37,7 @@
               <asp:Button ID="payPalBtn" runat="server" Text="Proceed to Paypal" CssClass="btn btn-primary btn-style" BackColor="#17449E" ForeColor="White"  Width="200px" /></div>
               <div class="col-md-2">
             <asp:Button ID="submitBtn" runat="server" Text="Submit" CssClass="btn btn-primary btn-style" BackColor="#17449E" ForeColor="White" Width="100px" />
+            <button id="checkout-button">Checkout</button>
           </div>
       </div>
       </div>

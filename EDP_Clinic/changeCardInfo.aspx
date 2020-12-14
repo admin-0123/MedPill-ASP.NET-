@@ -12,9 +12,10 @@
           <div class="col-md-8">
               <div class="contact-form">
         <form action="/" method="post">
-          <input type="text" class="form-control" name="nameOnCard" placeholder="Name on Card" />
+            <asp:TextBox ID="nameOnCardTB" runat="server" placeholder="Name On Card" CssClass="form-control"></asp:TextBox>
             <br />
-          <input type="text" class="form-control" name="cardNumber" placeholder="Card Number" />
+            <br />
+          <input type="text" class="form-control-range" name="cardNumber" placeholder="Card Number" />
             <br />
           <div class="row">
               <div class="col-md-6">
@@ -29,7 +30,12 @@
               </div>
           </div>
         </form>
-         <asp:Button ID="updateBtn" runat="server" Text="Submit" CssClass="btn btn-primary btn-style" BackColor="#17449E" ForeColor="White" style="margin-left: 625px" Width="100px" />
+                  <div class="row">
+                      <div class="col-md-10"></div>
+                      <div class="col-md-2">
+                          <asp:Button ID="updateBtn" runat="server" Text="Submit" CssClass="btn btn-primary btn-style" BackColor="#17449E" ForeColor="White" Width="100px" OnClick="updateBtn_Click" />
+</div>
+     </div>
       </div>
           </div>
           <div class="col-md-4">
