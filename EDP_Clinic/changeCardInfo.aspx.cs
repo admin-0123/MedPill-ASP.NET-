@@ -13,5 +13,19 @@ namespace EDP_Clinic
         {
 
         }
+
+        private bool ValidateInput()
+        {
+
+
+
+
+            return false;
+        }
+
+        protected void updateBtn_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
