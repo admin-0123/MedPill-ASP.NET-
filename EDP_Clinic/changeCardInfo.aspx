@@ -13,9 +13,12 @@
               <div class="contact-form">
         <form action="/" method="post">
             <asp:TextBox ID="nameOnCardTB" runat="server" placeholder="Name On Card" CssClass="form-control"></asp:TextBox>
+            <asp:Label ID="nameOnCardError" runat="server"></asp:Label>
             <br />
             <br />
-          <input type="text" class="form-control-range" name="cardNumber" placeholder="Card Number" />
+          <asp:TextBox ID="cardNumberTB" runat="server" placeholder="Card Number" CssClass="form-control"></asp:TextBox>
+             <asp:Label ID="cardNumberError" runat="server"></asp:Label>
+            <br />
             <br />
           <div class="row">
               <div class="col-md-6">
