@@ -4,7 +4,6 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-
 using System.Text.RegularExpressions;
 using System.Drawing;
 
@@ -28,27 +27,18 @@ namespace EDP_Clinic
                 nameOnCardError.Text = "Please enter name on card";
                 nameOnCardError.ForeColor = Color.Red;
                 nameOnCardError.Visible = true;
-                //return false;
-
+            }
+            else if(!Regex.IsMatch(nameOnCardTB.Text, "^[a-zA-Z0-9 ]*$"))
+            {
+                nameOnCardError.Text = "Please enter valid card name";
+                nameOnCardError.ForeColor = Color.Red;
+                nameOnCardError.Visible = true;
             }
             else
             {
                 nameOnCardError.Text = "";
                 nameOnCardError.Visible = false;
             }
-
-            //checks if card number is empty
-            //if (String.IsNullOrEmpty(cardNumberTB.Text))
-            //{
-            //    cardNumberError.Text = "Please enter card number";
-            //    cardNumberError.ForeColor = Color.Red;
-            //    cardNumberError.Visible = true;
-            //}
-            //else
-            //{
-            //    cardNumberError.Text = "";
-            //    cardNumberError.Visible = false;
-            //}
 
             //result = int.TryParse(cardNumberTB.Text, out cardNumber);
             //checks if card number is actually numbers     
@@ -124,7 +114,7 @@ namespace EDP_Clinic
                 double monthDifference = inputDate.Subtract(currentDate).Days / (365.25 / 12);
                 if(monthDifference < 3)
                 {
-                    cardExpiryError.Text = "Please ensure that your expiry date is at least 3 month from current date";
+                    cardExpiryError.Text = "Please ensure that your expiry date is at least 3 months from current date";
                     //cardExpiryError.Text = monthDifference.ToString();
                     cardExpiryError.ForeColor = Color.Red;
                     cardExpiryError.Visible = true;
