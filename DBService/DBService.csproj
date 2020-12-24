@@ -46,6 +46,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Entity\CardInfo.cs" />
+    <Compile Include="Entity\Receipt.cs" />
+    <Compile Include="Entity\ReceiptItems.cs" />
     <Compile Include="Entity\User.cs" />
     <Compile Include="IService1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
