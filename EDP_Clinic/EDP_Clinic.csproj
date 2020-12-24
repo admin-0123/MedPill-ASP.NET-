@@ -43,7 +43,27 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=1.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Bcl.AsyncInterfaces.1.1.0\lib\net461\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Stripe.net, Version=39.31.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Stripe.net.39.31.0\lib\net461\Stripe.net.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.4.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.4.5.2\lib\netstandard2.0\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.InteropServices.RuntimeInformation, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.InteropServices.RuntimeInformation.4.3.0\lib\net45\System.Runtime.InteropServices.RuntimeInformation.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Threading.Tasks.Extensions.4.5.2\lib\netstandard2.0\System.Threading.Tasks.Extensions.dll</HintPath>
+    </Reference>
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -67,14 +87,138 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="css\main.css" />
-    <Content Include="js\main.js" />
+    <Content Include="About.aspx" />
+    <Content Include="AfterPayment.aspx" />
+    <Content Include="assets\css\style-starter.css" />
+    <Content Include="assets\fonts\fontawesome-webfont.svg" />
+    <Content Include="assets\images\ambulance.png" />
+    <Content Include="assets\images\appointment.jpg" />
+    <Content Include="assets\images\award.png" />
+    <Content Include="assets\images\banner1.jpg" />
+    <Content Include="assets\images\banner2.jpg" />
+    <Content Include="assets\images\banner3.jpg" />
+    <Content Include="assets\images\banner4.jpg" />
+    <Content Include="assets\images\blog1.jpg" />
+    <Content Include="assets\images\blog2.jpg" />
+    <Content Include="assets\images\breadcrumbbg.jpg" />
+    <Content Include="assets\images\doctor1.jpg" />
+    <Content Include="assets\images\doctors.png" />
+    <Content Include="assets\images\down.png" />
+    <Content Include="assets\images\healthcare.jpg" />
+    <Content Include="assets\images\heart-big.png" />
+    <Content Include="assets\images\heart.png" />
+    <Content Include="assets\images\icon1.png" />
+    <Content Include="assets\images\logo1.png" />
+    <Content Include="assets\images\logo2.png" />
+    <Content Include="assets\images\logo3.png" />
+    <Content Include="assets\images\logo4.png" />
+    <Content Include="assets\images\logo5.png" />
+    <Content Include="assets\images\patients.png" />
+    <Content Include="assets\images\progress.jpg" />
+    <Content Include="assets\images\s1.jpg" />
+    <Content Include="assets\images\s1.png" />
+    <Content Include="assets\images\s2.jpg" />
+    <Content Include="assets\images\s2.png" />
+    <Content Include="assets\images\s3.jpg" />
+    <Content Include="assets\images\s3.png" />
+    <Content Include="assets\images\s4.jpg" />
+    <Content Include="assets\images\s4.png" />
+    <Content Include="assets\images\s5.png" />
+    <Content Include="assets\images\s6.png" />
+    <Content Include="assets\images\service.jpg" />
+    <Content Include="assets\images\services.png" />
+    <Content Include="assets\images\sthethoscope.png" />
+    <Content Include="assets\images\team1.jpg" />
+    <Content Include="assets\images\team2.jpg" />
+    <Content Include="assets\images\team3.jpg" />
+    <Content Include="assets\images\team4.jpg" />
+    <Content Include="assets\images\van.png" />
+    <Content Include="assets\js\bootstrap.min.js" />
+    <Content Include="assets\js\owl.carousel.js" />
+    <Content Include="Authentication.aspx" />
+    <Content Include="Contact.aspx" />
+    <Content Include="changeCardInfo.aspx" />
+    <Content Include="Payment.aspx" />
+    <Content Include="PaymentInfoDeleted.aspx" />
+    <Content Include="PaymentInfoEmpty.aspx" />
+    <Content Include="PaymentInformation.aspx" />
+    <Content Include="ReceiptList.aspx" />
     <Content Include="Web.config" />
     <Content Include="Home.aspx" />
-    <Content Include="WebForm2.aspx" />
+    <Content Include="Services.aspx" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="About.aspx.cs">
+      <DependentUpon>About.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="About.aspx.designer.cs">
+      <DependentUpon>About.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AfterPayment.aspx.cs">
+      <DependentUpon>AfterPayment.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AfterPayment.aspx.designer.cs">
+      <DependentUpon>AfterPayment.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Authentication.aspx.cs">
+      <DependentUpon>Authentication.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Authentication.aspx.designer.cs">
+      <DependentUpon>Authentication.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Contact.aspx.cs">
+      <DependentUpon>Contact.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Contact.aspx.designer.cs">
+      <DependentUpon>Contact.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="changeCardInfo.aspx.cs">
+      <DependentUpon>changeCardInfo.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="changeCardInfo.aspx.designer.cs">
+      <DependentUpon>changeCardInfo.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Payment.aspx.cs">
+      <DependentUpon>Payment.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Payment.aspx.designer.cs">
+      <DependentUpon>Payment.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="PaymentInfoDeleted.aspx.cs">
+      <DependentUpon>PaymentInfoDeleted.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="PaymentInfoDeleted.aspx.designer.cs">
+      <DependentUpon>PaymentInfoDeleted.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="PaymentInfoEmpty.aspx.cs">
+      <DependentUpon>PaymentInfoEmpty.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="PaymentInfoEmpty.aspx.designer.cs">
+      <DependentUpon>PaymentInfoEmpty.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="PaymentInformation.aspx.cs">
+      <DependentUpon>PaymentInformation.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="PaymentInformation.aspx.designer.cs">
+      <DependentUpon>PaymentInformation.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ReceiptList.aspx.cs">
+      <DependentUpon>ReceiptList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ReceiptList.aspx.designer.cs">
+      <DependentUpon>ReceiptList.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Site.Master.cs">
       <DependentUpon>Site.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -89,15 +233,21 @@
     <Compile Include="Home.aspx.designer.cs">
       <DependentUpon>Home.aspx</DependentUpon>
     </Compile>
-    <Compile Include="WebForm2.aspx.cs">
-      <DependentUpon>WebForm2.aspx</DependentUpon>
+    <Compile Include="Services.aspx.cs">
+      <DependentUpon>Services.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="WebForm2.aspx.designer.cs">
-      <DependentUpon>WebForm2.aspx</DependentUpon>
+    <Compile Include="Services.aspx.designer.cs">
+      <DependentUpon>Services.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="assets\fonts\fontawesome-webfont.eot" />
+    <Content Include="assets\fonts\fontawesome-webfont.ttf" />
+    <Content Include="assets\fonts\fontawesome-webfont.woff" />
+    <Content Include="assets\fonts\fontawesome-webfont.woff2" />
+    <Content Include="assets\fonts\FontAwesome.otf" />
+    <Content Include="assets\js\jquery-3.5.1.min.js" />
     <None Include="packages.config" />
     <Content Include="Site.Master" />
     <None Include="Web.Debug.config">
@@ -107,6 +257,7 @@
       <DependentUpon>Web.config</DependentUpon>
     </None>
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
