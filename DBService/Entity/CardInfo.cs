@@ -14,6 +14,7 @@ namespace DBService.Entity
         public string CardNumber { get; set; }
         public DateTime CardExpiry { get; set; }
         public string CVVNumber { get; set; }
+        //public bool StillValid { get; set; }
 
         //Empty Constructor
         public CardInfo()
@@ -29,6 +30,7 @@ namespace DBService.Entity
             CardNumber = cardNumber;
             CardExpiry = cardExpiry;
             CVVNumber = cvvNumber;
+            ///StillValid = checkCardValidation()
         }
         public int Insert()
         {
@@ -43,5 +45,9 @@ namespace DBService.Entity
         //{
 
         //}
+        public bool checkCardValidation()
+        {
+            return false;
+        }
     }
 }
