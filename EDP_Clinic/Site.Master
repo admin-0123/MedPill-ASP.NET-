@@ -131,8 +131,8 @@ Author URL: http://w3layouts.com
               href="https://w3layouts.com/">W3Layouts</a></p>
         </div>
       </div>
-      </div>
     </footer>
+      </section>
 
     <!-- move top -->
     <button onclick="topFunction()" id="movetop" title="Go to top">

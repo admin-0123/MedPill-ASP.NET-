@@ -18,8 +18,6 @@ namespace EDP_Clinic
 
         private bool ValidateInput()
         {
-            bool result;
-            int cardNumber;
             DateTime currentDate = DateTime.Now;
             //Checks if card name is empty
             if (String.IsNullOrEmpty(nameOnCardTB.Text))

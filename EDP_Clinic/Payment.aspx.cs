@@ -4,7 +4,6 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using System.Collections.Generic;
 //using Microsoft.AspNetCore.Mvc;
 //using Microsoft.Extensions.Options;
 using Stripe;
@@ -22,8 +21,6 @@ namespace EDP_Clinic
         }
         private bool ValidateInput()
         {
-            bool result;
-            int cardNumber;
             DateTime currentDate = DateTime.Now;
             //Checks if card name is empty
             if (String.IsNullOrEmpty(nameOnCardTB.Text))
@@ -142,6 +139,23 @@ namespace EDP_Clinic
         protected void submitBtn_Click(object sender, EventArgs e)
         {
             bool validInput = ValidateInput();
+            //Testing Stripe
+            StripeConfiguration.ApiKey = "sk_test_4eC39HqLyjWDarjtT1zdp7dc";
+            var options = new PaymentIntentCreateOptions
+            {
+                Amount = 1000,
+                Currency = "usd",
+                PaymentMethodTypes = new List<string>
+              {
+                "card",
+              },
+                ReceiptEmail = "jenny.rosen@example.com",
+            };
+
+            var service = new PaymentIntentService();
+            var paymentIntent = service.Create(options);
+            System.Diagnostics.Debug.WriteLine(paymentIntent);
+            //Console.WriteLine(paymentIntent);
         }
     }
 }
