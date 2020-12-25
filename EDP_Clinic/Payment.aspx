@@ -1,6 +1,6 @@
 ﻿<%@ Page Title="Payment" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Payment.aspx.cs" Inherits="EDP_Clinic.Payment" %>
 <asp:Content ID="head" ContentPlaceHolderID="head" runat="server">
-        <script src="https://js.stripe.com/v3/"></script>
+   <script src="https://js.stripe.com/v3/"></script>
 </asp:Content>
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
     <section class="w3l-contact py-5" id="payment" style="height:100vh;">
@@ -74,5 +74,6 @@
           </div>
         </div>
     </div>
+      </div>
 </section>
 </asp:Content>
