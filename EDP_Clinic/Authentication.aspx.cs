@@ -18,24 +18,28 @@ namespace EDP_Clinic
 
         private bool ValidateInput()
         {
+            //Checks if OTP is empty or null
             if (String.IsNullOrEmpty(OTPTB.Text))
             {
                 OTPError.Text = "Please enter 6-digit OTP";
                 OTPError.ForeColor = Color.Red;
                 OTPError.Visible = true;
             }
+            //Ensures that OTP consist of numbers
             else if(!Regex.IsMatch(OTPTB.Text, "^[0-9]*$"))
             {
                 OTPError.Text = "Please enter a valid 6-digit OTP";
                 OTPError.ForeColor = Color.Red;
                 OTPError.Visible = true;
             }
+            //Checks if OTP contains 6 digits long
             else if(OTPTB.Text.Length != 6)
             {
                 OTPError.Text = "Please enter a 6-digit OTP";
                 OTPError.ForeColor = Color.Red;
                 OTPError.Visible = true;
             }
+            //Valid
             else
             {
                 OTPError.Text = "";
