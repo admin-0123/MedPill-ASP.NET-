@@ -1,6 +1,6 @@
 ﻿<%@ Page Title="Payment" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Payment.aspx.cs" Inherits="EDP_Clinic.Payment" %>
 <asp:Content ID="head" ContentPlaceHolderID="head" runat="server">
-        <script src="https://js.stripe.com/v3/"></script>
+   <script src="https://js.stripe.com/v3/"></script>
 </asp:Content>
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
     <section class="w3l-contact py-5" id="payment" style="height:100vh;">
@@ -14,30 +14,40 @@
           <div class="col-md-8">
       <div class="contact-form">
         <form action="/" method="post">
-          <input type="text" class="form-control" name="nameOnCard" placeholder="Name on Card" />
+          <label>Name on Card</label>
+            <asp:TextBox ID="nameOnCardTB" runat="server" placeholder="Name On Card" CssClass="form-control"></asp:TextBox>
+            <asp:Label ID="nameOnCardError" runat="server"></asp:Label>
             <br />
-          <input type="text" class="form-control" name="cardNumber" placeholder="Card Number" />
+            <br />
+            <label>Card Number</label>
+          <asp:TextBox ID="cardNumberTB" runat="server" placeholder="Card Number" CssClass="form-control"></asp:TextBox>
+             <asp:Label ID="cardNumberError" runat="server"></asp:Label>
+            <br />
             <br />
           <div class="row">
               <div class="col-md-6">
                  <label>Card Expiry (MM YY)</label>
-                 <input type="month" class="form-control" name="expCard"/>
-            <br />
+                  <!---
+                 <input type="month" class="form-control" name="expCard"/>--->
+                  <asp:TextBox ID="cardExpiryTB" runat="server" type="month" placeholder="Card Expiry (MM YY)" CssClass="form-control"></asp:TextBox>
+                    <asp:Label ID="cardExpiryError" runat="server"></asp:Label>
+                <br />
+                  </div>
+                  <div class="col-md-6">
+                      <label>CVV Number</label>
+                      <asp:TextBox ID="CVVTB" runat="server" placeholder="CVV Number" CssClass="form-control"></asp:TextBox>
+                    <asp:Label ID="CVVError" runat="server"></asp:Label>
+                      <br />
+                      <br />
+                  </div>
               </div>
-              <div class="col-md-6">
-                  <label>CVV Number</label>
-                  <input type="text" class="form-control" name="CVVNum" placeholder="CVV Number" />
-            <br />
-              </div>
-          </div>
         </form>
           <div class="row">
                   <div class="col-md-6"></div>
                   <div class="col-md-4">
               <asp:Button ID="payPalBtn" runat="server" Text="Proceed to Paypal" CssClass="btn btn-primary btn-style" BackColor="#17449E" ForeColor="White"  Width="200px" /></div>
               <div class="col-md-2">
-            <asp:Button ID="submitBtn" runat="server" Text="Submit" CssClass="btn btn-primary btn-style" BackColor="#17449E" ForeColor="White" Width="100px" />
-            <button id="checkout-button">Checkout</button>
+            <asp:Button ID="submitBtn" runat="server" Text="Submit" CssClass="btn btn-primary btn-style" BackColor="#17449E" ForeColor="White" Width="100px" OnClick="submitBtn_Click" />
           </div>
       </div>
       </div>
@@ -64,5 +74,6 @@
           </div>
         </div>
     </div>
+      </div>
 </section>
 </asp:Content>
