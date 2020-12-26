@@ -60,7 +60,29 @@ namespace EDP_Clinic
         {
             bool ValidInput = ValidateInput();
 
+            if(ValidInput == true)
+            {
+                OTPError.Visible = false;
+                string guid = Guid.NewGuid().ToString();
+                Session["AuthToken"] = guid;
+                //A bunch of if else statements here to redirect user to respective pages
+                /*if ()
+                {
 
+                }
+                else if ()
+                {
+
+                }
+                else
+                {
+
+                }*/
+            }
+            else
+            {
+                OTPError.Visible = true;
+            }
 
         }
     }
