@@ -13,36 +13,35 @@
       <div class="row">
           <div class="col-md-8">
       <div class="contact-form">
-        <form action="/" method="post">
-          <label>Name on Card</label>
-            <asp:TextBox ID="nameOnCardTB" runat="server" placeholder="Name On Card" CssClass="form-control"></asp:TextBox>
-            <asp:Label ID="nameOnCardError" runat="server"></asp:Label>
-            <br />
-            <br />
-            <label>Card Number</label>
-          <asp:TextBox ID="cardNumberTB" runat="server" placeholder="Card Number" CssClass="form-control"></asp:TextBox>
-             <asp:Label ID="cardNumberError" runat="server"></asp:Label>
-            <br />
-            <br />
-          <div class="row">
+        <form id="paymentForm">
+            <div class="mb-3">
+                <label>Name on Card</label>
+                <asp:TextBox ID="nameOnCardTB" runat="server" placeholder="Name On Card" CssClass="form-control"></asp:TextBox>
+                <asp:Label ID="nameOnCardError" runat="server"></asp:Label>
+            </div>
+            <div class="mb-3">
+                <label>Card Number</label>
+                <asp:TextBox ID="cardNumberTB" runat="server" placeholder="Card Number" CssClass="form-control"></asp:TextBox>
+                <asp:Label ID="cardNumberError" runat="server"></asp:Label>
+            </div>
+          <div class="row mb-3">
               <div class="col-md-6">
-                 <label>Card Expiry (MM YY)</label>
-                  <!---
-                 <input type="month" class="form-control" name="expCard"/>--->
-                  <asp:TextBox ID="cardExpiryTB" runat="server" type="month" placeholder="Card Expiry (MM YY)" CssClass="form-control"></asp:TextBox>
-                    <asp:Label ID="cardExpiryError" runat="server"></asp:Label>
-                <br />
-                  </div>
-                  <div class="col-md-6">
-                      <label>CVV Number</label>
-                      <asp:TextBox ID="CVVTB" runat="server" placeholder="CVV Number" CssClass="form-control"></asp:TextBox>
-                    <asp:Label ID="CVVError" runat="server"></asp:Label>
-                      <br />
-                      <br />
+                  <div class="mb-3">
+                      <label>Card Expiry (MM YYYY)</label>
+                      <asp:TextBox ID="cardExpiryTB" runat="server" type="month" placeholder="Card Expiry (MM YY)" CssClass="form-control"></asp:TextBox>
+                      <asp:Label ID="cardExpiryError" runat="server"></asp:Label>
                   </div>
               </div>
+              <div class="col-md-6">
+                  <div class="mb-3">
+                      <label>CVV Number</label>
+                      <asp:TextBox ID="CVVTB" runat="server" placeholder="CVV Number" CssClass="form-control"></asp:TextBox>
+                      <asp:Label ID="CVVError" runat="server"></asp:Label>
+                  </div>
+              </div>
+          </div>
         </form>
-          <div class="row">
+          <div class="row mb-3">
                   <div class="col-md-6"></div>
                   <div class="col-md-4">
               <asp:Button ID="payPalBtn" runat="server" Text="Proceed to Paypal" CssClass="btn btn-primary btn-style" BackColor="#17449E" ForeColor="White"  Width="200px" /></div>
