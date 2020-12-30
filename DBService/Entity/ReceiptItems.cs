@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Configuration;
+using System.Data;
+using System.Data.SqlClient;
 
 namespace DBService.Entity
 {
@@ -27,6 +30,12 @@ namespace DBService.Entity
         }
         public int Insert()
         {
+            //Step 1 -  Define a connection to the database by getting
+            //          the connection string from App.config
+            string DBConnect = ConfigurationManager.ConnectionStrings["EDP_DB"].ConnectionString;
+            SqlConnection myConn = new SqlConnection(DBConnect);
+
+            //will continue adding more here
             return 0;
         }
         //public ReceiptItems SelectByReceiptItemID(string cardID)

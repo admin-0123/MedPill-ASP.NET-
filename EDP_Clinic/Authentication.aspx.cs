@@ -6,6 +6,9 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Text.RegularExpressions;
 using System.Drawing;
+using System.Configuration;
+using System.Collections.Specialized;
+using System.Net;
 
 namespace EDP_Clinic
 {
@@ -13,7 +16,23 @@ namespace EDP_Clinic
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            //if (Session["Login"] != null && Session["AuthToken"] != null && Request.Cookies["AuthToken"] != null)
+            //{
+            //    if (!Session["AuthToken"].ToString().Equals(Request.Cookies["AuthToken"].Value))
+            //    {
+            //        Response.Redirect("Login.aspx", false);
+            //    }
+            //    else
+            //    {
+            //        messageLbl.Text = "Congratulations !, you are logged in!";
+            //        messageLbl.ForeColor = System.Drawing.Color.Green;
+            //        logoutBtn.Visible = true;
+            //    }
+            //}
+            //else
+            //{
+            //    Response.Redirect("Login.aspx", false);
+            //}
         }
 
         private bool ValidateInput()
@@ -60,7 +79,36 @@ namespace EDP_Clinic
         {
             bool ValidInput = ValidateInput();
 
+            //Retrieve keys from web.config
+            NameValueCollection myKeys = ConfigurationManager.AppSettings;
 
+            //Reading keys
+            var twilioAccSid = myKeys["TWILIO_ACCOUNT_SID"];
+            var twilioAuth = myKeys["TWILIO_AUTH_TOKEN"];
+
+            if (ValidInput == true)
+            {
+                OTPError.Visible = false;
+                string guid = Guid.NewGuid().ToString();
+                Session["AuthOTPToken"] = guid;
+                //A bunch of if else statements here to redirect user to respective pages
+                /*if ()
+                {
+
+                }
+                else if ()
+                {
+
+                }
+                else
+                {
+
+                }*/
+            }
+            else
+            {
+                OTPError.Visible = true;
+            }
 
         }
     }

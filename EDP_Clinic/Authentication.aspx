@@ -7,12 +7,12 @@
            <h1 class="title mb-4">Verify your Identity</h1>
            <p class="mb-4">Click <a href="/">here</a> to resend your SMS.</p>
             <div class="contact-form">
-               <form action="/" method="post">
-                   <label>6-digit OTP</label>
-                   <asp:TextBox ID="OTPTB" runat="server" placeholder="6-digit OTP" CssClass="form-control" Width="200px"></asp:TextBox>
-                    <asp:Label ID="OTPError" runat="server"></asp:Label>
-                   <br />
-                   <br />
+               <form id="authenticationForm">
+                   <div class="mb-3">
+                       <label>6-digit OTP</label>
+                       <asp:TextBox ID="OTPTB" runat="server" placeholder="6-digit OTP" CssClass="form-control" Width="200px"></asp:TextBox>
+                       <asp:Label ID="OTPError" runat="server"></asp:Label>
+                   </div>
                     <asp:Button ID="verifyBtn" runat="server" Text="Verify" CssClass="btn btn-primary btn-style" BackColor="#17449E" ForeColor="White" Width="100px" OnClick="verifyBtn_Click" />
                </form>
             </div>
