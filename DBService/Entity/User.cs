@@ -5,6 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 
 // Add
+
+
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
@@ -16,21 +18,31 @@ namespace DBService.Entity
         // Let all properties start with caps
         public string Id { get; set; }
         public string Name { get; set; }
-        public string Job { get; set; }
+        public string Password { get; set; }
+
+        public string Email { get; set; }
+
+        public string PhoneNo { get; set; }
+
+        public string Role { get; set; }
+
 
         public User()
         {
 
         }
 
-        public User(string id, string name, string job)
+        public User(string id, string name, string password, string email, string phoneno, string role)
         {
             Id = id;
             Name = name;
-            Job = job;
+            Password = password;
+            Email = email;
+            PhoneNo = phoneno;
+            Role = role;
         }
 
-        public User SelectByNric(string nric)
+        public User SelectByID(string id)
         {
             //Step 1 -  Define a connection to the database by getting
             //          the connection string from App.config
@@ -38,9 +50,9 @@ namespace DBService.Entity
             SqlConnection myConn = new SqlConnection(DBConnect);
 
             //Step 2 -  Create a DataAdapter to retrieve data from the database table
-            string sqlStmt = "Select * from User where id = @paraId";
+            string sqlStmt = "Select * from [User] where id = @paraId";
             SqlDataAdapter da = new SqlDataAdapter(sqlStmt, myConn);
-            da.SelectCommand.Parameters.AddWithValue("@paraId", Id);
+            da.SelectCommand.Parameters.AddWithValue("@paraId", id);
 
             //Step 3 -  Create a DataSet to store the data to be retrieved
             DataSet ds = new DataSet();
@@ -55,15 +67,12 @@ namespace DBService.Entity
             {
                 DataRow row = ds.Tables[0].Rows[0];  // Sql command returns only one record
                 string Name = row["Name"].ToString();
-                string Job = row["Job"].ToString();
+                string Password = row["Password"].ToString();
+                string Email = row["Email"].ToString();
+                string PhoneNo = row["PhoneNo"].ToString();
+                string Role = row["Role"].ToString();
 
-                /*                DataRow row = ds.Tables[0].Rows[0];  // Sql command returns only one record
-                                string name = row["name"].ToString();
-                                DateTime dob = Convert.ToDateTime(row["birthdate"].ToString());
-                                string dept = row["department"].ToString();
-                                string payStr = row["mthlySalary"].ToString();
-                                double pay = Convert.ToDouble(payStr);*/
-                user = new User(Id, Name, Job);
+                user = new User(Id, Name, Password, Email, PhoneNo, Role);
             }
             return user;
         }
@@ -75,7 +84,7 @@ namespace DBService.Entity
             SqlConnection myConn = new SqlConnection(DBConnect);
 
             //Step 2 -  Create a DataAdapter object to retrieve data from the database table
-            string sqlStmt = "Select * from User";
+            string sqlStmt = "Select * from [User]";
             SqlDataAdapter da = new SqlDataAdapter(sqlStmt, myConn);
 
             //Step 3 -  Create a DataSet to store the data to be retrieved
@@ -92,14 +101,12 @@ namespace DBService.Entity
                 DataRow row = ds.Tables[0].Rows[i];  // Sql command returns only one record
                 string Id = row["Id"].ToString();
                 string Name = row["Name"].ToString();
-                string Job = row["Job"].ToString();
-                /*                string nric = row["nric"].ToString();
-                                string name = row["name"].ToString();
-                                DateTime dob = Convert.ToDateTime(row["birthdate"].ToString());
-                                string dept = row["department"].ToString();
-                                string payStr = row["mthlySalary"].ToString();
-                                double pay = Convert.ToDouble(payStr);*/
-                User obj = new User(Id, Name, Job);
+                string Password = row["Password"].ToString();
+                string Email = row["Email"].ToString();
+                string PhoneNo = row["PhoneNo"].ToString();
+                string Role = row["Role"].ToString();
+
+                User obj = new User(Id, Name, Password, Email, PhoneNo, Role);
                 userList.Add(obj);
             }
             return userList;
