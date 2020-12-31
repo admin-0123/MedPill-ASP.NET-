@@ -30,6 +30,11 @@ namespace DBService
             return composite;
         }
 
+        public User GetOneUser(string id)
+        {
+            User user = new User();
+            return user.SelectByID(id);
+        }
         public List<User> GetAllUsers()
         {
             User user = new User();
