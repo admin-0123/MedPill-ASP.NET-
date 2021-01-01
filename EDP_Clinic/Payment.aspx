@@ -46,7 +46,8 @@
                   <div class="col-md-4">
               <asp:Button ID="payPalBtn" runat="server" Text="Proceed to Paypal" CssClass="btn btn-primary btn-style" BackColor="#17449E" ForeColor="White"  Width="200px" /></div>
               <div class="col-md-2">
-            <asp:Button ID="submitBtn" runat="server" Text="Submit" CssClass="btn btn-primary btn-style" BackColor="#17449E" ForeColor="White" Width="100px" OnClick="submitBtn_Click" />
+                  <input type="hidden" id="g-recaptcha-response" name="g-recaptcha-response"/>
+                  <asp:Button ID="submitBtn" runat="server" Text="Submit" CssClass="btn btn-primary btn-style" BackColor="#17449E" ForeColor="White" Width="100px" OnClick="submitBtn_Click" />
           </div>
       </div>
       </div>

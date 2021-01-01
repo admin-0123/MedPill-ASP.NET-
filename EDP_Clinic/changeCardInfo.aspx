@@ -42,6 +42,7 @@
            <div class="row">
                <div class="col-md-10"></div>
                <div class="col-md-2">
+                   <input type="hidden" id="g-recaptcha-response" name="g-recaptcha-response"/>
                    <asp:Button ID="updateBtn" runat="server" Text="Submit" CssClass="btn btn-primary btn-style" BackColor="#17449E" ForeColor="White" Width="100px" OnClick="updateBtn_Click" />
                </div>
             </div>
