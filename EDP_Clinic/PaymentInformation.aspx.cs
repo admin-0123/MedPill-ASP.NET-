@@ -13,5 +13,20 @@ namespace EDP_Clinic
         {
 
         }
+
+        protected void backBtn_Click(object sender, EventArgs e)
+        {
+            //Redirect to userpage
+        }
+
+        protected void deleteBtn_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("/Authentication.aspx", false);
+        }
+
+        protected void updateBtn_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("/Authentication.aspx", false);
+        }
     }
 }

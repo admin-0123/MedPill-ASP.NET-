@@ -39,6 +39,8 @@ namespace EDP_Clinic
 
         private bool ValidateInput()
         {
+            var greenColor = Color.Green;
+
             //Checks if OTP is empty or null
             if (String.IsNullOrEmpty(OTPTB.Text))
             {
@@ -63,11 +65,12 @@ namespace EDP_Clinic
             //Valid
             else
             {
-                OTPError.Text = "";
-                OTPError.Visible = false;
+                OTPError.Text = "Excellent";
+                OTPError.ForeColor = Color.Green;
+                OTPError.Visible = true;
             }
 
-            if (String.IsNullOrEmpty(OTPError.Text))
+            if (OTPError.ForeColor == greenColor)
             {
                 return true;
             }

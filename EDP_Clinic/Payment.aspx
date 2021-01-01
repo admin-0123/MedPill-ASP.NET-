@@ -5,11 +5,10 @@
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
     <section class="w3l-contact py-5" id="payment" style="height:100vh;">
   <div class="container py-lg-3">
-      <button class="btn btn-primary btn-style">Back
-      </button>
-      <br />
-      <br />
-          <h1 class="title mb-4">Payment</h1>
+      <div class="mb-3">
+          <asp:Button ID="backBtn" runat="server" Text="Back" CssClass="btn btn-primary btn-style" OnClick="backBtn_Click"/>
+      </div>
+      <h1 class="title mb-4">Payment</h1>
       <div class="row">
           <div class="col-md-8">
       <div class="contact-form">
