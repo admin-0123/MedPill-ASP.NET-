@@ -39,6 +39,8 @@ namespace EDP_Clinic
 
         private bool ValidateInput()
         {
+            var greenColor = Color.Green;
+
             //Checks if OTP is empty or null
             if (String.IsNullOrEmpty(OTPTB.Text))
             {
@@ -63,11 +65,12 @@ namespace EDP_Clinic
             //Valid
             else
             {
-                OTPError.Text = "";
-                OTPError.Visible = false;
+                OTPError.Text = "Excellent";
+                OTPError.ForeColor = Color.Green;
+                OTPError.Visible = true;
             }
 
-            if (String.IsNullOrEmpty(OTPError.Text))
+            if (OTPError.ForeColor == greenColor)
             {
                 return true;
             }
@@ -81,6 +84,8 @@ namespace EDP_Clinic
         {
             bool ValidInput = ValidateInput();
 
+            bool validCaptcha = ValidateCaptcha();
+
             //Retrieve keys from web.config
             NameValueCollection myKeys = ConfigurationManager.AppSettings;
 
@@ -88,7 +93,7 @@ namespace EDP_Clinic
             var twilioAccSid = myKeys["TWILIO_ACCOUNT_SID"];
             var twilioAuth = myKeys["TWILIO_AUTH_TOKEN"];
 
-            if (ValidInput == true)
+            if (ValidInput == true && validCaptcha == true)
             {
                 OTPError.Visible = false;
                 string guid = Guid.NewGuid().ToString();

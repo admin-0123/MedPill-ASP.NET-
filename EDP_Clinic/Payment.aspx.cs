@@ -32,6 +32,8 @@ namespace EDP_Clinic
         private bool ValidateInput()
         {
             DateTime currentDate = DateTime.Now;
+            var greenColor = Color.Green;
+
             //Checks if card name is empty
             if (String.IsNullOrEmpty(nameOnCardTB.Text))
             {
@@ -47,8 +49,9 @@ namespace EDP_Clinic
             }
             else
             {
-                nameOnCardError.Text = "";
-                nameOnCardError.Visible = false;
+                nameOnCardError.Text = "Excellent";
+                nameOnCardError.ForeColor = Color.Green;
+                nameOnCardError.Visible = true;
             }
 
             //result = int.TryParse(cardNumberTB.Text, out cardNumber);
@@ -77,8 +80,9 @@ namespace EDP_Clinic
             }
             else
             {
-                cardNumberError.Text = "";
-                cardNumberError.Visible = false;
+                cardNumberError.Text = "Excellent";
+                cardNumberError.ForeColor = Color.Green;
+                cardNumberError.Visible = true;
             }
 
             //Checks Card CVV Number
@@ -103,8 +107,9 @@ namespace EDP_Clinic
             }
             else
             {
-                CVVError.Text = "";
-                CVVError.Visible = false;
+                CVVError.Text = "Excellent";
+                CVVError.ForeColor = Color.Green;
+                CVVError.Visible = true;
             }
 
             //Checks if card expiry date is chosen or not
@@ -127,17 +132,17 @@ namespace EDP_Clinic
                 else
                 {
                     //cardExpiryError.Text = monthDifference.ToString();
-                    //cardExpiryError.ForeColor = Color.Black;
-                    cardExpiryError.Text = "";
-                    cardExpiryError.Visible = false;
+                    cardExpiryError.Text = "Excellent";
+                    cardExpiryError.ForeColor = Color.Green;
+                    cardExpiryError.Visible = true;
                 }
             }
 
-            //checks if any error labels is empty or not
-            if (String.IsNullOrEmpty(cardNumberError.Text)
-                && String.IsNullOrEmpty(nameOnCardError.Text)
-                && String.IsNullOrEmpty(cardExpiryError.Text)
-                && String.IsNullOrEmpty(CVVError.Text))
+            //checks if any error labels is green or not
+            if (cardNumberError.ForeColor == greenColor
+                && nameOnCardError.ForeColor == greenColor
+                && cardExpiryError.ForeColor == greenColor
+                && CVVError.ForeColor == greenColor)
             {
                 return true;
             }
@@ -150,6 +155,11 @@ namespace EDP_Clinic
         protected void submitBtn_Click(object sender, EventArgs e)
         {
             bool validInput = ValidateInput();
+
+            bool validCaptcha = ValidateCaptcha();
+
+
+
             //Testing Stripe
             /*StripeConfiguration.ApiKey = "sk_test_4eC39HqLyjWDarjtT1zdp7dc";
             var options = new PaymentIntentCreateOptions
@@ -232,6 +242,11 @@ namespace EDP_Clinic
             {
                 throw ex;
             }
+        }
+
+        protected void backBtn_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

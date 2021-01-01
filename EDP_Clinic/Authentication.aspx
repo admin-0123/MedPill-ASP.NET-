@@ -10,10 +10,11 @@
                <form id="authenticationForm">
                    <div class="mb-3">
                        <label>6-digit OTP</label>
-                       <asp:TextBox ID="OTPTB" runat="server" placeholder="6-digit OTP" CssClass="form-control" Width="200px"></asp:TextBox>
+                       <asp:TextBox ID="OTPTB" runat="server" placeholder="6-digit OTP" CssClass="form-control" Width="200px" onkeyup="validateToken()"></asp:TextBox>
                        <asp:Label ID="OTPError" runat="server"></asp:Label>
                    </div>
-                    <asp:Button ID="verifyBtn" runat="server" Text="Verify" CssClass="btn btn-primary btn-style" BackColor="#17449E" ForeColor="White" Width="100px" OnClick="verifyBtn_Click" />
+                   <input type="hidden" id="g-recaptcha-response" name="g-recaptcha-response"/>
+                   <asp:Button ID="verifyBtn" runat="server" Text="Verify" CssClass="btn btn-primary btn-style" BackColor="#17449E" ForeColor="White" Width="100px" OnClick="verifyBtn_Click" />
                </form>
             </div>
        </div>
@@ -25,5 +26,41 @@
                 document.getElementById("g-recaptcha-response").value = token;
             });
         });
+    </script>
+    <script type="text/javascript">
+        function validateToken() {
+            var OTP = document.getElementById('<%=OTPTB.ClientID%>').value;
+
+            if (OTP.length <= 0) {
+                document.getElementById('<%=OTPError.ClientID%>').innerHTML = "Please enter your OTP";
+                document.getElementById('<%=OTPError.ClientID%>').style.color = "Red";
+                document.getElementById('<%=verifyBtn.ClientID%>').disabled = true;
+            }
+            else if (OTP.length != 4) {
+                document.getElementById('<%=OTPError.ClientID%>').innerHTML = "Please enter a 4-digit OTP number";
+                document.getElementById('<%=OTPError.ClientID%>').style.color = "Red";
+                document.getElementById('<%=verifyBtn.ClientID%>').disabled = true;
+            }
+            else if (OTP.search(/[`!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/) != -1) {
+                document.getElementById('<%=OTPError.ClientID%>').innerHTML = "Please enter a valid OTP number";
+                document.getElementById('<%=OTPError.ClientID%>').style.color = "Red";
+                document.getElementById('<%=verifyBtn.ClientID%>').disabled = true;
+            }
+            else if (OTP.search(/[A-Z]/) != -1) {
+                document.getElementById('<%=OTPError.ClientID%>').innerHTML = "Please enter a valid OTP number";
+                document.getElementById('<%=OTPError.ClientID%>').style.color = "Red";
+                document.getElementById('<%=verifyBtn.ClientID%>').disabled = true;
+            }
+            else if (OTP.search(/[a-z]/) != -1) {
+                document.getElementById('<%=OTPError.ClientID%>').innerHTML = "Please enter a valid OTP number";
+                document.getElementById('<%=OTPError.ClientID%>').style.color = "Red";
+                document.getElementById('<%=verifyBtn.ClientID%>').disabled = true;
+            }
+            else {
+                document.getElementById('<%=OTPError.ClientID%>').innerHTML = "Excellent";
+                document.getElementById('<%=OTPError.ClientID%>').style.color = "Green";
+                document.getElementById('<%=verifyBtn.ClientID%>').disabled = false;
+            }
+        }
     </script>
 </asp:Content>

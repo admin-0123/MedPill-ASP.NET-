@@ -138,9 +138,10 @@ Author URL: http://w3layouts.com
       </section>
 
     <!-- move top -->
+    <!---
     <button onclick="topFunction()" id="movetop" title="Go to top">
       &#10548;
-    </button>
+    </button>--->
     <script>
       // When the user scrolls down 20px from the top of the document, show the button
       window.onscroll = function () {
@@ -163,9 +164,9 @@ Author URL: http://w3layouts.com
     </script>
     <!-- /move top -->
 
-    <script src="assets/js/jquery-3.5.1.min.js"></script>
+    <script type="text/javascript" src="assets/js/jquery-3.5.1.min.js"></script>
     
-    <script src="assets/js/green-audio-player.js"></script>
+    <script type="text/javascript" src="assets/js/green-audio-player.js"></script>
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
