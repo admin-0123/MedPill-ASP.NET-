@@ -9,6 +9,8 @@ using System.Drawing;
 using System.Configuration;
 using System.Collections.Specialized;
 using System.Net;
+using System.IO;
+using System.Web.Script.Serialization;
 
 namespace EDP_Clinic
 {
@@ -110,6 +112,49 @@ namespace EDP_Clinic
                 OTPError.Visible = true;
             }
 
+        }
+
+        //Initialise an object to store Recaptcha response
+        public class reCaptchaResponseObject
+        {
+            public string success { get; set; }
+            public List<string> ErrorMessage { get; set; }
+        }
+
+        public bool ValidateCaptcha()
+        {
+            bool result = true;
+
+            //Retrieves captcha response from captcha api
+            string captchaResponse = Request.Form["g-recaptcha-response"];
+
+            HttpWebRequest req = (HttpWebRequest)WebRequest.Create("https://www.google.com/recaptcha/api/siteverify?secret=6LejmBwaAAAAAN_gzUf_AT0q_3ZrPbD5WP5oaTml &response=" + captchaResponse);
+
+            try
+            {
+                using (WebResponse wResponse = req.GetResponse())
+                {
+                    using (StreamReader readStream = new StreamReader(wResponse.GetResponseStream()))
+                    {
+                        //Read entire json response from recaptcha
+                        string jsonResponse = readStream.ReadToEnd();
+
+                        JavaScriptSerializer js = new JavaScriptSerializer();
+
+                        reCaptchaResponseObject jsonObject = js.Deserialize<reCaptchaResponseObject>(jsonResponse);
+
+                        //Console.WriteLine("--- Testing ---");
+                        //Console.WriteLine(jsonObject);
+                        //Read success property in json object
+                        result = Convert.ToBoolean(jsonObject.success);
+                    }
+                }
+                return result;
+            }
+            catch (WebException ex)
+            {
+                throw ex;
+            }
         }
     }
 }

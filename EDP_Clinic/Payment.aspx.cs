@@ -10,11 +10,21 @@ using Stripe;
 using Stripe.Checkout;
 using System.Text.RegularExpressions;
 using System.Drawing;
+using System.Security.Cryptography;
+using System.Text;
+using System.Net;
+using System.IO;
+using System.Web.Script.Serialization;
 
 namespace EDP_Clinic
 {
     public partial class Payment : System.Web.UI.Page
     {
+        static string finalHash;
+        static string salt;
+        byte[] Key;
+        byte[] IV;
+
         protected void Page_Load(object sender, EventArgs e)
         {
 
@@ -58,9 +68,10 @@ namespace EDP_Clinic
                 cardNumberError.ForeColor = Color.Red;
                 cardNumberError.Visible = true;
             }
-            else if (cardNumberTB.Text.Length > 16)
+            //If its not 16-digits
+            else if (cardNumberTB.Text.Length != 16)
             {
-                cardNumberError.Text = "Please enter a valid card number";
+                cardNumberError.Text = "Please enter a 16-digit card number";
                 cardNumberError.ForeColor = Color.Red;
                 cardNumberError.Visible = true;
             }
@@ -140,7 +151,7 @@ namespace EDP_Clinic
         {
             bool validInput = ValidateInput();
             //Testing Stripe
-            StripeConfiguration.ApiKey = "sk_test_4eC39HqLyjWDarjtT1zdp7dc";
+            /*StripeConfiguration.ApiKey = "sk_test_4eC39HqLyjWDarjtT1zdp7dc";
             var options = new PaymentIntentCreateOptions
             {
                 Amount = 1000,
@@ -154,8 +165,73 @@ namespace EDP_Clinic
 
             var service = new PaymentIntentService();
             var paymentIntent = service.Create(options);
-            System.Diagnostics.Debug.WriteLine(paymentIntent);
+            System.Diagnostics.Debug.WriteLine(paymentIntent);*/
             //Console.WriteLine(paymentIntent);
+        }
+
+        protected byte[] encryptData(string data)
+        {
+            byte[] cipherText = null;
+            try
+            {
+                RijndaelManaged cipher = new RijndaelManaged();
+                cipher.IV = IV;
+                cipher.Key = Key;
+                ICryptoTransform encryptTransform = cipher.CreateEncryptor();
+                //ICryptoTransform decryptTransform = cipher.CreateDecryptor();
+                byte[] plainText = Encoding.UTF8.GetBytes(data);
+                cipherText = encryptTransform.TransformFinalBlock(plainText, 0,
+               plainText.Length);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.ToString());
+            }
+            finally { }
+            return cipherText;
+        }
+
+        //Initialise an object to store Recaptcha response
+        public class reCaptchaResponseObject
+        {
+            public string success { get; set; }
+            public List<string> ErrorMessage { get; set; }
+        }
+
+        public bool ValidateCaptcha()
+        {
+            bool result = true;
+
+            //Retrieves captcha response from captcha api
+            string captchaResponse = Request.Form["g-recaptcha-response"];
+
+            HttpWebRequest req = (HttpWebRequest)WebRequest.Create("https://www.google.com/recaptcha/api/siteverify?secret=6LejmBwaAAAAAN_gzUf_AT0q_3ZrPbD5WP5oaTml &response=" + captchaResponse);
+
+            try
+            {
+                using (WebResponse wResponse = req.GetResponse())
+                {
+                    using (StreamReader readStream = new StreamReader(wResponse.GetResponseStream()))
+                    {
+                        //Read entire json response from recaptcha
+                        string jsonResponse = readStream.ReadToEnd();
+
+                        JavaScriptSerializer js = new JavaScriptSerializer();
+
+                        reCaptchaResponseObject jsonObject = js.Deserialize<reCaptchaResponseObject>(jsonResponse);
+
+                        //Console.WriteLine("--- Testing ---");
+                        //Console.WriteLine(jsonObject);
+                        //Read success property in json object
+                        result = Convert.ToBoolean(jsonObject.success);
+                    }
+                }
+                return result;
+            }
+            catch (WebException ex)
+            {
+                throw ex;
+            }
         }
     }
 }
