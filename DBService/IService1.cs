@@ -22,6 +22,10 @@ namespace DBService
         // TODO: Add your service operations here
 
         [OperationContract]
+
+        User GetOneUser(string id);
+
+        [OperationContract]
         List<User> GetAllUsers();
 
         // Taken from practical 4, methods are listed in the abstract interface, method bodies are in service1.cs
