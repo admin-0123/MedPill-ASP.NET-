@@ -6,11 +6,20 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Text.RegularExpressions;
 using System.Drawing;
+using System.Security.Cryptography;
+using System.Text;
+using System.Net;
+using System.IO;
+using System.Web.Script.Serialization;
 
 namespace EDP_Clinic
 {
     public partial class PaymentInfo : System.Web.UI.Page
     {
+        static string finalHash;
+        static string salt;
+        byte[] Key;
+        byte[] IV;
         protected void Page_Load(object sender, EventArgs e)
         {
 
@@ -159,6 +168,71 @@ namespace EDP_Clinic
                 cardNumberError.Visible = true;
                 cardExpiryError.Visible = true;
                 CVVError.Visible = true;
+            }
+        }
+
+        protected byte[] encryptData(string data)
+        {
+            byte[] cipherText = null;
+            try
+            {
+                RijndaelManaged cipher = new RijndaelManaged();
+                cipher.IV = IV;
+                cipher.Key = Key;
+                ICryptoTransform encryptTransform = cipher.CreateEncryptor();
+                //ICryptoTransform decryptTransform = cipher.CreateDecryptor();
+                byte[] plainText = Encoding.UTF8.GetBytes(data);
+                cipherText = encryptTransform.TransformFinalBlock(plainText, 0,
+               plainText.Length);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.ToString());
+            }
+            finally { }
+            return cipherText;
+        }
+
+        //Initialise an object to store Recaptcha response
+        public class reCaptchaResponseObject
+        {
+            public string success { get; set; }
+            public List<string> ErrorMessage { get; set; }
+        }
+
+        public bool ValidateCaptcha()
+        {
+            bool result = true;
+
+            //Retrieves captcha response from captcha api
+            string captchaResponse = Request.Form["g-recaptcha-response"];
+
+            HttpWebRequest req = (HttpWebRequest)WebRequest.Create("https://www.google.com/recaptcha/api/siteverify?secret=6LejmBwaAAAAAN_gzUf_AT0q_3ZrPbD5WP5oaTml &response=" + captchaResponse);
+
+            try
+            {
+                using (WebResponse wResponse = req.GetResponse())
+                {
+                    using (StreamReader readStream = new StreamReader(wResponse.GetResponseStream()))
+                    {
+                        //Read entire json response from recaptcha
+                        string jsonResponse = readStream.ReadToEnd();
+
+                        JavaScriptSerializer js = new JavaScriptSerializer();
+
+                        reCaptchaResponseObject jsonObject = js.Deserialize<reCaptchaResponseObject>(jsonResponse);
+
+                        //Console.WriteLine("--- Testing ---");
+                        //Console.WriteLine(jsonObject);
+                        //Read success property in json object
+                        result = Convert.ToBoolean(jsonObject.success);
+                    }
+                }
+                return result;
+            }
+            catch (WebException ex)
+            {
+                throw ex;
             }
         }
     }

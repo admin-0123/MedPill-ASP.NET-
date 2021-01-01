@@ -23,6 +23,9 @@ Author URL: http://w3layouts.com
     <!--- FontAwesome --->
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
 
+    <!--- Google Recaptcha --->
+    <script src="https://www.google.com/recaptcha/api.js?render=6LejmBwaAAAAAIDSwI7BQzo5s3UO3qDlAztog9Uh"></script>
+
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
 </head>
