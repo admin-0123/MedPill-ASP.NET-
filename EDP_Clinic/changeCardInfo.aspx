@@ -14,26 +14,26 @@
         <form id="changeCardForm">
             <div class="mb-3">
                 <label>Name on Card</label>
-                <asp:TextBox ID="nameOnCardTB" runat="server" placeholder="Name On Card" CssClass="form-control"></asp:TextBox>
+                <asp:TextBox ID="nameOnCardTB" runat="server" placeholder="Name On Card" CssClass="form-control" onkeyup="nameOnCardValidation()"></asp:TextBox>
                 <asp:Label ID="nameOnCardError" runat="server"></asp:Label>
             </div>
             <div class="mb-3">
                 <label>Card Number</label>
-                <asp:TextBox ID="cardNumberTB" runat="server" placeholder="Card Number" CssClass="form-control"></asp:TextBox>
+                <asp:TextBox ID="cardNumberTB" runat="server" placeholder="Card Number" CssClass="form-control" onkeyup="cardNumberValidation()"></asp:TextBox>
                 <asp:Label ID="cardNumberError" runat="server"></asp:Label>
             </div>
           <div class="row mb-3">
               <div class="col-md-6">
                   <div class="mb-3">
                       <label>Card Expiry (MM YY)</label>
-                      <asp:TextBox ID="cardExpiryTB" runat="server" type="month" placeholder="Card Expiry (MM YY)" CssClass="form-control"></asp:TextBox>
+                      <asp:TextBox ID="cardExpiryTB" runat="server" type="month" placeholder="Card Expiry (MM YY)" CssClass="form-control" onkeyup="cardExpiryValidation()"></asp:TextBox>
                       <asp:Label ID="cardExpiryError" runat="server"></asp:Label>
                   </div>
               </div>
               <div class="col-md-6">
                   <div class="mb-3">
                       <label>CVV Number</label>
-                      <asp:TextBox ID="CVVTB" runat="server" placeholder="CVV Number" CssClass="form-control"></asp:TextBox>
+                      <asp:TextBox ID="CVVTB" runat="server" placeholder="CVV Number" CssClass="form-control" onkeyup="cvvNumberValidation()"></asp:TextBox>
                       <asp:Label ID="CVVError" runat="server"></asp:Label>
                   </div>
               </div>
@@ -60,5 +60,133 @@
                 document.getElementById("g-recaptcha-response").value = token;
             });
         });
+    </script>
+        <!--- nameOnCard Validation --->
+    <script type="text/javascript">
+        function nameOnCardValidation() {
+            var nameOnCard = document.getElementById('<%=nameOnCardTB.ClientID%>').value;
+            console.log(nameOnCard.search(/[`!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/));
+            if (nameOnCard.length <= 0) {
+                document.getElementById('<%=nameOnCardError.ClientID%>').innerHTML = "Please enter your name on card";
+                document.getElementById('<%=nameOnCardError.ClientID%>').style.color = "Red";
+                document.getElementById('<%=updateBtn.ClientID%>').disabled = true;
+            }
+            //ensures that no special characters are in the cardnameTB
+            else if (nameOnCard.search(/[`!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/) != -1) {
+                document.getElementById('<%=nameOnCardError.ClientID%>').innerHTML = "Please enter a valid name on card";
+                document.getElementById('<%=nameOnCardError.ClientID%>').style.color = "Red";
+                document.getElementById('<%=updateBtn.ClientID%>').disabled = true;
+            }
+            else {
+                document.getElementById('<%=nameOnCardError.ClientID%>').innerHTML = "Excellent";
+                document.getElementById('<%=nameOnCardError.ClientID%>').style.color = "Green";
+                document.getElementById('<%=updateBtn.ClientID%>').disabled = false;
+            }
+        }
+    </script>
+    <!--- cardNumber Validation --->
+    <script type="text/javascript">
+        function cardNumberValidation() {
+            var cardNumber = document.getElementById('<%=cardNumberTB.ClientID%>').value;
+
+            if (cardNumber.length <= 0) {
+                document.getElementById('<%=cardNumberError.ClientID%>').innerHTML = "Please enter your card number";
+                document.getElementById('<%=cardNumberError.ClientID%>').style.color = "Red";
+                document.getElementById('<%=updateBtn.ClientID%>').disabled = true;
+            }
+            else if (cardNumber.length != 16) {
+                document.getElementById('<%=cardNumberError.ClientID%>').innerHTML = "Please enter your 16-digit card number";
+                document.getElementById('<%=cardNumberError.ClientID%>').style.color = "Red";
+                document.getElementById('<%=updateBtn.ClientID%>').disabled = true;
+            }
+            else if (cardNumber.search(/[ `!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/) != -1) {
+                document.getElementById('<%=cardNumberError.ClientID%>').innerHTML = "Please enter a valid 16-digit card number";
+                document.getElementById('<%=cardNumberError.ClientID%>').style.color = "Red";
+                document.getElementById('<%=updateBtn.ClientID%>').disabled = true;
+            }
+            else if (cardNumber.search(/[A-Z]/) != -1) {
+                document.getElementById('<%=cardNumberError.ClientID%>').innerHTML = "Please enter a valid 16-digit card number";
+                document.getElementById('<%=cardNumberError.ClientID%>').style.color = "Red";
+                document.getElementById('<%=updateBtn.ClientID%>').disabled = true;
+            }
+            else if (cardNumber.search(/[a-z]/) != -1) {
+                document.getElementById('<%=cardNumberError.ClientID%>').innerHTML = "Please enter a valid 16-digit card number";
+                document.getElementById('<%=cardNumberError.ClientID%>').style.color = "Red";
+                document.getElementById('<%=updateBtn.ClientID%>').disabled = true;
+            }
+            else {
+                document.getElementById('<%=cardNumberError.ClientID%>').innerHTML = "Excellent";
+                document.getElementById('<%=cardNumberError.ClientID%>').style.color = "Green";
+                document.getElementById('<%=updateBtn.ClientID%>').disabled = false;
+            }
+        }
+    </script>
+    <!--- cardExpiry Validation --->
+    <script type="text/javascript">
+        function cardExpiryValidation() {
+            var cardExpiry = document.getElementById('<%=cardExpiryTB.ClientID%>').value;
+            var currentDate = new Date();
+            var monthDifference = currentDate.getMonth() - cardExpiry.getMonth();
+
+
+            if (cardExpiry.length <= 0) {
+                document.getElementById('<%=cardExpiryError.ClientID%>').innerHTML = "Please choose your card expiry date";
+                document.getElementById('<%=cardExpiryError.ClientID%>').style.color = "Red";
+                document.getElementById('<%=updateBtn.ClientID%>').disabled = true;
+            }
+            else if (currentDate.getMonth() > cardExpiry.getMonth()) {
+                document.getElementById('<%=cardExpiryError.ClientID%>').innerHTML = "Please ensure that your card is not expired";
+                document.getElementById('<%=cardExpiryError.ClientID%>').style.color = "Red";
+                document.getElementById('<%=updateBtn.ClientID%>').disabled = true;
+            }
+            else if (monthDifference < 3) {
+                document.getElementById('<%=cardExpiryError.ClientID%>').innerHTML = "Please ensure that your card expiries 3 months from now";
+                document.getElementById('<%=cardExpiryError.ClientID%>').style.color = "Red";
+                document.getElementById('<%=updateBtn.ClientID%>').disabled = true;
+            }
+            else {
+                document.getElementById('<%=cardExpiryError.ClientID%>').innerHTML = "Excellent";
+                document.getElementById('<%=cardExpiryError.ClientID%>').style.color = "Green";
+                document.getElementById('<%=updateBtn.ClientID%>').disabled = false;
+            }
+
+        }
+    </script>
+    <!--- cvvNumber Validation --->
+    <script type="text/javascript">
+        function cvvNumberValidation() {
+            var cvvNumber = document.getElementById('<%=CVVTB.ClientID%>').value;
+
+            if (cvvNumber.length <= 0) {
+                document.getElementById('<%=CVVError.ClientID%>').innerHTML = "Please enter your CVV number";
+                document.getElementById('<%=CVVError.ClientID%>').style.color = "Red";
+                document.getElementById('<%=updateBtn.ClientID%>').disabled = true;
+            }
+            else if (cvvNumber.length != 4) {
+                document.getElementById('<%=CVVError.ClientID%>').innerHTML = "Please enter your 4-digit CVV number";
+                document.getElementById('<%=CVVError.ClientID%>').style.color = "Red";
+                document.getElementById('<%=updateBtn.ClientID%>').disabled = true;
+            }
+            else if (cvvNumber.search(/[ `!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/) != -1) {
+                document.getElementById('<%=CVVError.ClientID%>').innerHTML = "Please enter a valid 4-digit CVV number";
+                document.getElementById('<%=CVVError.ClientID%>').style.color = "Red";
+                document.getElementById('<%=updateBtn.ClientID%>').disabled = true;
+            }
+            else if (cvvNumber.search(/[A-Z]/) != -1) {
+                document.getElementById('<%=CVVError.ClientID%>').innerHTML = "Please enter a valid 4-digit CVV number";
+                document.getElementById('<%=CVVError.ClientID%>').style.color = "Red";
+                document.getElementById('<%=updateBtn.ClientID%>').disabled = true;
+            }
+            else if (cvvNumber.search(/[a-z]/) != -1) {
+                document.getElementById('<%=CVVError.ClientID%>').innerHTML = "Please enter a valid 4-digit CVV number";
+                document.getElementById('<%=CVVError.ClientID%>').style.color = "Red";
+                document.getElementById('<%=updateBtn.ClientID%>').disabled = true;
+            }
+            else{
+                document.getElementById('<%=CVVError.ClientID%>').innerHTML = "Excellent";
+                document.getElementById('<%=CVVError.ClientID%>').style.color = "Green";
+                document.getElementById('<%=updateBtn.ClientID%>').disabled = false;
+            }
+        }
     </script>
 </asp:Content>

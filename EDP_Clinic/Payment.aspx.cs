@@ -150,6 +150,11 @@ namespace EDP_Clinic
         protected void submitBtn_Click(object sender, EventArgs e)
         {
             bool validInput = ValidateInput();
+
+            bool validCaptcha = ValidateCaptcha();
+
+
+
             //Testing Stripe
             /*StripeConfiguration.ApiKey = "sk_test_4eC39HqLyjWDarjtT1zdp7dc";
             var options = new PaymentIntentCreateOptions

@@ -81,6 +81,8 @@ namespace EDP_Clinic
         {
             bool ValidInput = ValidateInput();
 
+            bool validCaptcha = ValidateCaptcha();
+
             //Retrieve keys from web.config
             NameValueCollection myKeys = ConfigurationManager.AppSettings;
 
@@ -88,7 +90,7 @@ namespace EDP_Clinic
             var twilioAccSid = myKeys["TWILIO_ACCOUNT_SID"];
             var twilioAuth = myKeys["TWILIO_AUTH_TOKEN"];
 
-            if (ValidInput == true)
+            if (ValidInput == true && validCaptcha == true)
             {
                 OTPError.Visible = false;
                 string guid = Guid.NewGuid().ToString();

@@ -152,9 +152,11 @@ namespace EDP_Clinic
         protected void updateBtn_Click(object sender, EventArgs e)
         {
             bool validInput = ValidateInput();
+
+            bool validCaptcha = ValidateCaptcha();
             
             //checks if all input has been validated
-            if (validInput == true)
+            if (validInput == true && validCaptcha == true)
             {
                 nameOnCardError.Visible = false;
                 cardNumberError.Visible = false;
