@@ -14,7 +14,7 @@ using System.Web.Script.Serialization;
 
 namespace EDP_Clinic
 {
-    public partial class PaymentInfo : System.Web.UI.Page
+    public partial class changeCardInfo : System.Web.UI.Page
     {
         static string finalHash;
         static string salt;

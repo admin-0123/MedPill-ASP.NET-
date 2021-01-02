@@ -1,7 +1,7 @@
-﻿<%@ Page Title="Payment History" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="ReceiptList.aspx.cs" Inherits="EDP_Clinic.Receipt" %>
-<asp:Content ID="head" ContentPlaceHolderID="head" runat="server">
+﻿<%@ Page Title="Payment History Admin" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="ReceiptListAdmin.aspx.cs" Inherits="EDP_Clinic.ReceiptListAdmin" %>
+<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
-<asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
+<asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <section class="w3l-contact py-5" id="paymentInfoEmpty" style="height:100vh;">
           <div class="container py-lg-3" >
               <div class="mb-3">

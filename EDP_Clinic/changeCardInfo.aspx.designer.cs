@@ -11,7 +11,7 @@ namespace EDP_Clinic
 {
 
 
-    public partial class PaymentInfo
+    public partial class changeCardInfo
     {
 
         /// <summary>

@@ -11,7 +11,7 @@ namespace EDP_Clinic
 {
 
 
-    public partial class Receipt
+    public partial class ReceiptListAdmin
     {
 
         /// <summary>

@@ -13,5 +13,10 @@ namespace EDP_Clinic
         {
 
         }
+
+        protected void goHomeBtn_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

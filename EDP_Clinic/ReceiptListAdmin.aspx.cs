@@ -7,14 +7,9 @@ using System.Web.UI.WebControls;
 
 namespace EDP_Clinic
 {
-    public partial class _500 : System.Web.UI.Page
+    public partial class ReceiptListAdmin : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        protected void goHomeBtn_Click(object sender, EventArgs e)
         {
 
         }

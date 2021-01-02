@@ -11,16 +11,16 @@ namespace EDP_Clinic
 {
 
 
-    public partial class Receipt
+    public partial class _403
     {
 
         /// <summary>
-        /// backBtn control.
+        /// goHomeBtn control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button backBtn;
+        protected global::System.Web.UI.WebControls.Button goHomeBtn;
     }
 }
