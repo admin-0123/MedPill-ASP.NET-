@@ -3,17 +3,16 @@
 <asp:Content ID="head" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
-    <section class="w3l-contact py-5" id="paymentInfoEmpty" style="height:100vh;">
+    <section class="w3l-contact py-5" id="404_Error" style="height:100vh;">
         <div class="container py-lg-3" >
-            <br />
-            <br />
-            <h1 class="title mb-4 align-center"style="text-align:center;">404 Error</h1>
-             <p class="mb-4" style="text-align:center;">It seems something went wrong somewhere</p>
-             <p class="mb-4" style="text-align:center;">Don't worry as you can go back easily to where you are!</p>
-             <div style="display: flex; justify-content: center;">
-                 <button class="btn btn-primary btn-style">Go back home
-                 </button>
-             </div>
+            <div class="mt-5 text-center">
+                <h1 class="title mb-4">404 Error</h1>
+                <p class="mb-4">It seems something went wrong somewhere</p>
+                <p class="mb-4">Don't worry as you can go back easily to where you are!</p>
+                <div style="display: flex; justify-content: center;">
+                    <asp:Button ID="goHomeBtn" runat="server" Text="Go back home" CssClass="btn btn-primary btn-style" OnClick="goHomeBtn_Click"/>
+                </div>
+            </div>
         </div>
     </section>
 </asp:Content>
