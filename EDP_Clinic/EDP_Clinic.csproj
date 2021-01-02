@@ -160,6 +160,7 @@
     <Content Include="Authentication.aspx" />
     <None Include="Connected Services\EDP_DBReference\configuration91.svcinfo" />
     <None Include="Connected Services\EDP_DBReference\configuration.svcinfo" />
+    <Content Include="CardList.aspx" />
     <Content Include="Connected Services\EDP_DBReference\EDP_Clinic.EDP_DBReference.CompositeType.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
@@ -177,6 +178,7 @@
     <Content Include="PaymentInfoEmpty.aspx" />
     <Content Include="PaymentInformation.aspx" />
     <Content Include="ReceiptList.aspx" />
+    <Content Include="ReceiptListAdmin.aspx" />
     <Content Include="Web.config" />
     <Content Include="Home.aspx" />
     <Content Include="Services.aspx" />
@@ -223,6 +225,13 @@
     </Compile>
     <Compile Include="Authentication.aspx.designer.cs">
       <DependentUpon>Authentication.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CardList.aspx.cs">
+      <DependentUpon>CardList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CardList.aspx.designer.cs">
+      <DependentUpon>CardList.aspx</DependentUpon>
     </Compile>
     <Compile Include="Connected Services\EDP_DBReference\Reference.cs">
       <AutoGen>True</AutoGen>
@@ -278,6 +287,13 @@
     </Compile>
     <Compile Include="ReceiptList.aspx.designer.cs">
       <DependentUpon>ReceiptList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ReceiptListAdmin.aspx.cs">
+      <DependentUpon>ReceiptListAdmin.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ReceiptListAdmin.aspx.designer.cs">
+      <DependentUpon>ReceiptListAdmin.aspx</DependentUpon>
     </Compile>
     <Compile Include="Site.Master.cs">
       <DependentUpon>Site.Master</DependentUpon>
