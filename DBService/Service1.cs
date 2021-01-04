@@ -42,26 +42,26 @@ namespace DBService
         }
 
         //Cards Methods
-        public int CreateCardInfo(string cardID, string cardName, string cardNumber, 
+        public int CreateCardInfo(string cardName, string cardNumber, 
             DateTime cardExpiry, string cvvNumber, byte[] iv, byte[] key)
         {
-            CardInfo cif = new CardInfo(cardID, cardName, cardNumber, cardExpiry, cvvNumber, iv, key);
+            CardInfo cif = new CardInfo(cardName, cardNumber, cardExpiry, cvvNumber, iv, key);
             return cif.Insert();
         }
-        public CardInfo GetCardByID(string cardID)
+        public CardInfo GetCardByCardNumber(string cardNumber)
         {
             CardInfo cif = new CardInfo();
-            return cif.SelectByCardID(cardID);
+            return cif.GetCardByCardNumber(cardNumber);
         }
         public List<CardInfo> GetAllCards()
         {
             CardInfo cif = new CardInfo();
             return cif.SelectAllCards();
         }
-        public int DeleteCardInfoByID(string cardID)
+        public int DeleteCardInfoByID(string cardNumber)
         {
             CardInfo cif = new CardInfo();
-            return cif.DeleteByCardID(cardID);
+            return cif.DeleteByCardID(cardNumber);
         }
         /* 
          Note by Hasan 4/1/2021

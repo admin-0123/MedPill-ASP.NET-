@@ -16,8 +16,8 @@ namespace EDP_Clinic
 {
     public partial class addCardInfo : System.Web.UI.Page
     {
-        static string finalHash;
-        static string salt;
+        //static string finalHash;
+        //static string salt;
         byte[] Key;
         byte[] IV;
         protected void Page_Load(object sender, EventArgs e)
@@ -163,15 +163,32 @@ namespace EDP_Clinic
             //checks if all input has been validated
             if (validInput == true && validCaptcha == true)
             {
+                //Will add another if else statement to check if card number already exists or not
+                RijndaelManaged cipher = new RijndaelManaged();
+                cipher.GenerateKey();
+                Key = cipher.Key;
+                IV = cipher.IV;
 
+                EDP_DBReference.Service1Client client = new EDP_DBReference.Service1Client();
+                //int result = client.CreateCardInfo(encryptData(nameOnCardTB.Text)
+                  //  , encryptData(cardNumberTB.Text), encryptData(cardExpiryTB.Text),
+                    //encryptData(CVVTB.Text), IV, Key);
+                /*if(result == 1)
+                {
+                    Response.Redirect("PaymentInformation.aspx");
+                }
+                else
+                {
+                    Throw error here
+                }
+                 */
 
-
-
+                /*
                 nameOnCardError.Visible = false;
                 cardNumberError.Visible = false;
                 cardExpiryError.Visible = false;
-                CVVError.Visible = false;
-                Response.Redirect("/PaymentInformation.aspx");
+                CVVError.Visible = false;*/
+                Response.Redirect("PaymentInformation.aspx");
             }
             else
             {

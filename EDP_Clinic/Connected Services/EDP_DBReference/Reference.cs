@@ -199,6 +199,163 @@ namespace EDP_Clinic.EDP_DBReference {
         }
     }
     
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="CardInfo", Namespace="http://schemas.datacontract.org/2004/07/DBService.Entity")]
+    [System.SerializableAttribute()]
+    public partial class CardInfo : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string CVVNumberField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.DateTime CardExpiryField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string CardIDField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string CardNameField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string CardNumberField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private byte[] IVField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private byte[] KeyField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private bool StillValidField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string CVVNumber {
+            get {
+                return this.CVVNumberField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.CVVNumberField, value) != true)) {
+                    this.CVVNumberField = value;
+                    this.RaisePropertyChanged("CVVNumber");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime CardExpiry {
+            get {
+                return this.CardExpiryField;
+            }
+            set {
+                if ((this.CardExpiryField.Equals(value) != true)) {
+                    this.CardExpiryField = value;
+                    this.RaisePropertyChanged("CardExpiry");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string CardID {
+            get {
+                return this.CardIDField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.CardIDField, value) != true)) {
+                    this.CardIDField = value;
+                    this.RaisePropertyChanged("CardID");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string CardName {
+            get {
+                return this.CardNameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.CardNameField, value) != true)) {
+                    this.CardNameField = value;
+                    this.RaisePropertyChanged("CardName");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string CardNumber {
+            get {
+                return this.CardNumberField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.CardNumberField, value) != true)) {
+                    this.CardNumberField = value;
+                    this.RaisePropertyChanged("CardNumber");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public byte[] IV {
+            get {
+                return this.IVField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.IVField, value) != true)) {
+                    this.IVField = value;
+                    this.RaisePropertyChanged("IV");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public byte[] Key {
+            get {
+                return this.KeyField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.KeyField, value) != true)) {
+                    this.KeyField = value;
+                    this.RaisePropertyChanged("Key");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool StillValid {
+            get {
+                return this.StillValidField;
+            }
+            set {
+                if ((this.StillValidField.Equals(value) != true)) {
+                    this.StillValidField = value;
+                    this.RaisePropertyChanged("StillValid");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="EDP_DBReference.IService1")]
     public interface IService1 {
@@ -226,6 +383,30 @@ namespace EDP_Clinic.EDP_DBReference {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetAllUsers", ReplyAction="http://tempuri.org/IService1/GetAllUsersResponse")]
         System.Threading.Tasks.Task<EDP_Clinic.EDP_DBReference.User[]> GetAllUsersAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/CreateCardInfo", ReplyAction="http://tempuri.org/IService1/CreateCardInfoResponse")]
+        int CreateCardInfo(string cardName, string cardNumber, System.DateTime cardExpiry, string cvvNumber, byte[] iv, byte[] key);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/CreateCardInfo", ReplyAction="http://tempuri.org/IService1/CreateCardInfoResponse")]
+        System.Threading.Tasks.Task<int> CreateCardInfoAsync(string cardName, string cardNumber, System.DateTime cardExpiry, string cvvNumber, byte[] iv, byte[] key);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetCardByCardNumber", ReplyAction="http://tempuri.org/IService1/GetCardByCardNumberResponse")]
+        EDP_Clinic.EDP_DBReference.CardInfo GetCardByCardNumber(string cardNumber);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetCardByCardNumber", ReplyAction="http://tempuri.org/IService1/GetCardByCardNumberResponse")]
+        System.Threading.Tasks.Task<EDP_Clinic.EDP_DBReference.CardInfo> GetCardByCardNumberAsync(string cardNumber);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetAllCards", ReplyAction="http://tempuri.org/IService1/GetAllCardsResponse")]
+        EDP_Clinic.EDP_DBReference.CardInfo[] GetAllCards();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetAllCards", ReplyAction="http://tempuri.org/IService1/GetAllCardsResponse")]
+        System.Threading.Tasks.Task<EDP_Clinic.EDP_DBReference.CardInfo[]> GetAllCardsAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/DeleteCardInfoByID", ReplyAction="http://tempuri.org/IService1/DeleteCardInfoByIDResponse")]
+        int DeleteCardInfoByID(string cardNumber);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/DeleteCardInfoByID", ReplyAction="http://tempuri.org/IService1/DeleteCardInfoByIDResponse")]
+        System.Threading.Tasks.Task<int> DeleteCardInfoByIDAsync(string cardNumber);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -285,6 +466,38 @@ namespace EDP_Clinic.EDP_DBReference {
         
         public System.Threading.Tasks.Task<EDP_Clinic.EDP_DBReference.User[]> GetAllUsersAsync() {
             return base.Channel.GetAllUsersAsync();
+        }
+        
+        public int CreateCardInfo(string cardName, string cardNumber, System.DateTime cardExpiry, string cvvNumber, byte[] iv, byte[] key) {
+            return base.Channel.CreateCardInfo(cardName, cardNumber, cardExpiry, cvvNumber, iv, key);
+        }
+        
+        public System.Threading.Tasks.Task<int> CreateCardInfoAsync(string cardName, string cardNumber, System.DateTime cardExpiry, string cvvNumber, byte[] iv, byte[] key) {
+            return base.Channel.CreateCardInfoAsync(cardName, cardNumber, cardExpiry, cvvNumber, iv, key);
+        }
+        
+        public EDP_Clinic.EDP_DBReference.CardInfo GetCardByCardNumber(string cardNumber) {
+            return base.Channel.GetCardByCardNumber(cardNumber);
+        }
+        
+        public System.Threading.Tasks.Task<EDP_Clinic.EDP_DBReference.CardInfo> GetCardByCardNumberAsync(string cardNumber) {
+            return base.Channel.GetCardByCardNumberAsync(cardNumber);
+        }
+        
+        public EDP_Clinic.EDP_DBReference.CardInfo[] GetAllCards() {
+            return base.Channel.GetAllCards();
+        }
+        
+        public System.Threading.Tasks.Task<EDP_Clinic.EDP_DBReference.CardInfo[]> GetAllCardsAsync() {
+            return base.Channel.GetAllCardsAsync();
+        }
+        
+        public int DeleteCardInfoByID(string cardNumber) {
+            return base.Channel.DeleteCardInfoByID(cardNumber);
+        }
+        
+        public System.Threading.Tasks.Task<int> DeleteCardInfoByIDAsync(string cardNumber) {
+            return base.Channel.DeleteCardInfoByIDAsync(cardNumber);
         }
     }
 }

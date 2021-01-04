@@ -17,4 +17,23 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="ArrayOfUser" nillable="true" type="tns:ArrayOfUser" />
+  <xs:complexType name="CardInfo">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="CVVNumber" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="CardExpiry" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="CardID" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="CardName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="CardNumber" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="IV" nillable="true" type="xs:base64Binary" />
+      <xs:element minOccurs="0" name="Key" nillable="true" type="xs:base64Binary" />
+      <xs:element minOccurs="0" name="StillValid" type="xs:boolean" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="CardInfo" nillable="true" type="tns:CardInfo" />
+  <xs:complexType name="ArrayOfCardInfo">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="CardInfo" nillable="true" type="tns:CardInfo" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfCardInfo" nillable="true" type="tns:ArrayOfCardInfo" />
 </xs:schema>

@@ -27,16 +27,21 @@ namespace DBService
 
         [OperationContract]
         List<User> GetAllUsers();
+
         //CardInfo Entity Class
         [OperationContract]
-        int CreateCardInfo(string cardID, string cardName, string cardNumber,
+        int CreateCardInfo(string cardName, string cardNumber,
             DateTime cardExpiry, string cvvNumber, byte[] iv, byte[] key);
+
         [OperationContract]
-        CardInfo GetCardByID(string cardID);
+        CardInfo GetCardByCardNumber(string cardNumber);
+
         [OperationContract]
         List<CardInfo> GetAllCards();
+
         [OperationContract]
-        int DeleteCardInfoByID(string cardID);
+
+        int DeleteCardInfoByID(string cardNumber);
 
         // Taken from practical 4, methods are listed in the abstract interface, method bodies are in service1.cs
         /*        [OperationContract]

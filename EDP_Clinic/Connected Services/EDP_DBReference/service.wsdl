@@ -32,6 +32,30 @@
   <wsdl:message name="IService1_GetAllUsers_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetAllUsersResponse" />
   </wsdl:message>
+  <wsdl:message name="IService1_CreateCardInfo_InputMessage">
+    <wsdl:part name="parameters" element="tns:CreateCardInfo" />
+  </wsdl:message>
+  <wsdl:message name="IService1_CreateCardInfo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CreateCardInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService1_GetCardByCardNumber_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetCardByCardNumber" />
+  </wsdl:message>
+  <wsdl:message name="IService1_GetCardByCardNumber_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetCardByCardNumberResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService1_GetAllCards_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllCards" />
+  </wsdl:message>
+  <wsdl:message name="IService1_GetAllCards_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllCardsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService1_DeleteCardInfoByID_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteCardInfoByID" />
+  </wsdl:message>
+  <wsdl:message name="IService1_DeleteCardInfoByID_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteCardInfoByIDResponse" />
+  </wsdl:message>
   <wsdl:portType name="IService1">
     <wsdl:operation name="GetData">
       <wsdl:input wsaw:Action="http://tempuri.org/IService1/GetData" message="tns:IService1_GetData_InputMessage" />
@@ -48,6 +72,22 @@
     <wsdl:operation name="GetAllUsers">
       <wsdl:input wsaw:Action="http://tempuri.org/IService1/GetAllUsers" message="tns:IService1_GetAllUsers_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IService1/GetAllUsersResponse" message="tns:IService1_GetAllUsers_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CreateCardInfo">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/CreateCardInfo" message="tns:IService1_CreateCardInfo_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/CreateCardInfoResponse" message="tns:IService1_CreateCardInfo_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCardByCardNumber">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/GetCardByCardNumber" message="tns:IService1_GetCardByCardNumber_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/GetCardByCardNumberResponse" message="tns:IService1_GetCardByCardNumber_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllCards">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/GetAllCards" message="tns:IService1_GetAllCards_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/GetAllCardsResponse" message="tns:IService1_GetAllCards_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteCardInfoByID">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/DeleteCardInfoByID" message="tns:IService1_DeleteCardInfoByID_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/DeleteCardInfoByIDResponse" message="tns:IService1_DeleteCardInfoByID_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IService1" type="tns:IService1">
@@ -81,6 +121,42 @@
     </wsdl:operation>
     <wsdl:operation name="GetAllUsers">
       <soap:operation soapAction="http://tempuri.org/IService1/GetAllUsers" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateCardInfo">
+      <soap:operation soapAction="http://tempuri.org/IService1/CreateCardInfo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCardByCardNumber">
+      <soap:operation soapAction="http://tempuri.org/IService1/GetCardByCardNumber" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllCards">
+      <soap:operation soapAction="http://tempuri.org/IService1/GetAllCards" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteCardInfoByID">
+      <soap:operation soapAction="http://tempuri.org/IService1/DeleteCardInfoByID" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
