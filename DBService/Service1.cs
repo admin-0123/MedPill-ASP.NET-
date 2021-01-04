@@ -41,6 +41,36 @@ namespace DBService
             return user.SelectAll();
         }
 
+        //Cards Methods
+        public int CreateCardInfo(string cardID, string cardName, string cardNumber, 
+            DateTime cardExpiry, string cvvNumber, byte[] iv, byte[] key)
+        {
+            CardInfo cif = new CardInfo(cardID, cardName, cardNumber, cardExpiry, cvvNumber, iv, key);
+            return cif.Insert();
+        }
+        public CardInfo GetCardByID(string cardID)
+        {
+            CardInfo cif = new CardInfo();
+            return cif.SelectByCardID(cardID);
+        }
+        public List<CardInfo> GetAllCards()
+        {
+            CardInfo cif = new CardInfo();
+            return cif.SelectAllCards();
+        }
+        public int DeleteCardInfoByID(string cardID)
+        {
+            CardInfo cif = new CardInfo();
+            return cif.DeleteByCardID(cardID);
+        }
+        /* 
+         Note by Hasan 4/1/2021
+
+        Will put in more methods here for other classes
+         
+         
+         
+         */
 
         // Taken from practical 4, here all the method bodies for the methods listed in IService1.CS
         /*        public List<Employee> GetAllEmployee()

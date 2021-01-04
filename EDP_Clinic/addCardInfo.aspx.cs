@@ -163,6 +163,10 @@ namespace EDP_Clinic
             //checks if all input has been validated
             if (validInput == true && validCaptcha == true)
             {
+
+
+
+
                 nameOnCardError.Visible = false;
                 cardNumberError.Visible = false;
                 cardExpiryError.Visible = false;

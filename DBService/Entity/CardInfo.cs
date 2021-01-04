@@ -53,12 +53,12 @@ namespace DBService.Entity
             SqlCommand sqlCmd = new SqlCommand(sqlStatement, myConn);
 
             //Step 3 - Add info to each parameterised variables
-            sqlCmd.Parameters.AddWithValue("paraCardID", CardID);
-            sqlCmd.Parameters.AddWithValue("paraCardName", CardName);
-            sqlCmd.Parameters.AddWithValue("paraCardNumber",CardNumber);
-            sqlCmd.Parameters.AddWithValue("paraCardExpiry",CardExpiry);
-            sqlCmd.Parameters.AddWithValue("paraCVVNumber",CVVNumber);
-            sqlCmd.Parameters.AddWithValue("paraStillValid",StillValid);
+            sqlCmd.Parameters.AddWithValue("@paraCardID", CardID);
+            sqlCmd.Parameters.AddWithValue("@paraCardName", CardName);
+            sqlCmd.Parameters.AddWithValue("@paraCardNumber",CardNumber);
+            sqlCmd.Parameters.AddWithValue("@paraCardExpiry",CardExpiry);
+            sqlCmd.Parameters.AddWithValue("@paraCVVNumber",CVVNumber);
+            sqlCmd.Parameters.AddWithValue("@paraStillValid",StillValid);
 
             //Key and IV
             sqlCmd.Parameters.AddWithValue("@IV", Convert.ToBase64String(IV));
@@ -110,10 +110,68 @@ namespace DBService.Entity
             return cif;
         }
 
-        //public List<CardInfo> SelectAll()
-        //{
+        //Select all card info
 
-        //}
+        //BIG NOTE HERE
+        //Make sure end product select cards based on userID
+        //Because currently, we select all users' cards
+        public List<CardInfo> SelectAllCards()
+        {
+            //Step 1 -  Define a connection to the database by getting
+            //          the connection string from App.config
+            string DBConnect = ConfigurationManager.ConnectionStrings["EDP_DB"].ConnectionString;
+            SqlConnection myConn = new SqlConnection(DBConnect);
+
+            //Step 2 -  Create a DataAdapter object to retrieve data from the database table
+            string sqlStatement = "SELECT * FROM CardInfo";
+            SqlDataAdapter da = new SqlDataAdapter(sqlStatement, myConn);
+
+            //Step 3 -  Create a DataSet to store the data to be retrieved
+            DataSet ds = new DataSet();
+
+            //Step 4 -  Use the DataAdapter to fill the DataSet with data retrieved
+            da.Fill(ds);
+
+            //Step 5 -  Read data from DataSet to List
+            List<CardInfo> cifList = new List<CardInfo>();
+            int rec_cnt = ds.Tables[0].Rows.Count;
+            for (int i = 0; i < rec_cnt; i++)
+            {
+                DataRow row = ds.Tables[0].Rows[i];  // Sql command returns only one record
+                string cardID = row["CardID"].ToString();
+                string cardName = row["CardName"].ToString();
+                string cardNumber = row["CardNumber"].ToString();
+                DateTime cardExpiry = Convert.ToDateTime(row["CardExpiry"].ToString());
+                string cvvNumber = row["CVVNumber"].ToString();
+                bool stillValid = Convert.ToBoolean(row["CardName"].ToString());
+                byte[] iv = Convert.FromBase64String(row["IV"].ToString());
+                byte[] key = Convert.FromBase64String(row["IV"].ToString());
+                CardInfo cif = new CardInfo(cardID, cardName, cardNumber, cardExpiry, cvvNumber, iv, key);
+                cifList.Add(cif);
+            }
+            return cifList;
+        }
+        //Delete card by id
+        public int DeleteByCardID(string cardID)
+        {
+            
+            string DBConnect = ConfigurationManager.ConnectionStrings["EDP_DB"].ConnectionString;
+            SqlConnection myConn = new SqlConnection(DBConnect);
+
+            string sqlStatement = "DELETE * FROM CardInfo WHERE CardID = @paraCardID";
+            //SqlDataAdapter da = new SqlDataAdapter(sqlStatement, myConn);
+            SqlCommand sqlCmd = new SqlCommand(sqlStatement, myConn);
+            sqlCmd.Parameters.AddWithValue("@paraCardID", cardID);
+            //sqlCmd.SelectCommand.Parameters.AddWithValue("@paraCardID", cardID);
+
+            myConn.Open();
+            int result = sqlCmd.ExecuteNonQuery();
+
+            myConn.Close();
+
+            return result;
+
+        }
         public bool checkCardValidation()
         {
             DateTime currentDate = DateTime.Now;
