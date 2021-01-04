@@ -22,16 +22,26 @@
                 <p> &nbsp;</p>
        <p class="text-dark"> My Appointments 
         </p>
-        <p> &nbsp;</p>
-        <div class="card-header profile_1">        <span class="profile_1"><img src="assets/images/profileImage_placeholder.png" class="img-fluid" width="50px" height="50px">&nbsp;&nbsp;&nbsp;&nbsp; Johnny Lim </span>
-        </img>                                                            <span class="fa fa-arrow-right" style="height:inherit; margin-left:891px;"></span> </div>
+        <div class="card-header profile_1">        <span class="profile_1">
+            <asp:Image ID="userPfp" runat="server" Height="50px" ImageUrl="~/assets/images/pfp_placeholder.png" Width="50px" />
+            &nbsp;&nbsp;&nbsp; </span>
+        </img>                                                            
+            <asp:Label ID="lbl_profileName" runat="server"></asp:Label>
+            <span class="profile_1">
+            <asp:Image ID="Image2" runat="server" Height="50px" ImageAlign="Right" ImageUrl="~/assets/images/rightArrow.png" Width="50px" />
+            </span>
+            </div>
         <p> &nbsp</p>
                <p class="text-dark"> My Care Receivers 
         </p>
                 <p> &nbsp</p>
-                <div class="card-header profile_2">        <span class="profile_1"><img src="assets/images/profileImage_placeholder.png" class="img-fluid" width="50px" height="50px">&nbsp;&nbsp;&nbsp;&nbsp; Jenny Lim </span>
-                                                            <span class="fa fa-arrow-right" style="height:inherit; margin-left:900px;"></span>
-        </img> </div>
+                <div class="card-header profile_2">        <span class="profile_1">&nbsp;<asp:Image ID="crPfp" runat="server" Height="50px" ImageUrl="~/assets/images/pfp_placeholder.png" Width="50px" />
+                    &nbsp;&nbsp;&nbsp;&nbsp; </span>
+                                                            <asp:Label ID="lbl_crName" runat="server"></asp:Label>
+        </img>        <span class="profile_1">
+                    <asp:Image ID="Image1" runat="server" Height="50px" ImageAlign="Right" ImageUrl="~/assets/images/rightArrow.png" Width="50px" />
+                    </span>
+                </div>
         </div>
                 <p> &nbsp</p>
                 <p> &nbsp</p>

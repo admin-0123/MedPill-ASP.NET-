@@ -15,8 +15,8 @@ namespace DBService.Entity
 {
     public class User
     {
-        // Let all properties start with caps
-        public string Id { get; set; }
+        // Non-Default Constructor (Mandatory properties recorded upon registration)
+        public int Id { get; set; }
         public string Name { get; set; }
         public string Password { get; set; }
 
@@ -26,13 +26,23 @@ namespace DBService.Entity
 
         public string Role { get; set; }
 
+        public bool Verified { get; set; }
+
+        // End
+
+        //Optional Properties
+
+        public int CareReceiverID { get; set; }
+
+        public bool Certified_CG { get; set; }
+
 
         public User()
         {
 
         }
 
-        public User(string id, string name, string password, string email, string phoneno, string role)
+        public User(int id, string name, string password, string email, string phoneno, string role, int crid)
         {
             Id = id;
             Name = name;
@@ -40,9 +50,10 @@ namespace DBService.Entity
             Email = email;
             PhoneNo = phoneno;
             Role = role;
+            CareReceiverID = crid;
         }
 
-        public User SelectByID(string id)
+        public User SelectByID(int id)
         {
             //Step 1 -  Define a connection to the database by getting
             //          the connection string from App.config
@@ -66,13 +77,17 @@ namespace DBService.Entity
             if (rec_cnt == 1)
             {
                 DataRow row = ds.Tables[0].Rows[0];  // Sql command returns only one record
-                string Name = row["Name"].ToString();
-                string Password = row["Password"].ToString();
-                string Email = row["Email"].ToString();
-                string PhoneNo = row["PhoneNo"].ToString();
-                string Role = row["Role"].ToString();
+                string Name = row["name"].ToString();
+                string Password = row["password"].ToString();
+                string Email = row["email"].ToString();
+                string PhoneNo = row["phoneno"].ToString();
+                string Role = row["role"].ToString();
 
-                user = new User(Id, Name, Password, Email, PhoneNo, Role);
+                // Fixing problem where unable to retrieve the value of carereceiver column (where value always = 0 )
+                // Make sure properties in non-default constructors do not have null value otherwise when you convert them will get a : 'Object cannot be cast from DBNull to other types.' error
+                int CareReceiverID = Convert.ToInt32(row["carereceiverID"]);
+
+                user = new User(Id, Name, Password, Email, PhoneNo, Role, CareReceiverID);
             }
             return user;
         }
@@ -99,14 +114,17 @@ namespace DBService.Entity
             for (int i = 0; i < rec_cnt; i++)
             {
                 DataRow row = ds.Tables[0].Rows[i];  // Sql command returns only one record
-                string Id = row["Id"].ToString();
+                int Id = Convert.ToInt32(row["Id"]);
                 string Name = row["Name"].ToString();
                 string Password = row["Password"].ToString();
                 string Email = row["Email"].ToString();
                 string PhoneNo = row["PhoneNo"].ToString();
                 string Role = row["Role"].ToString();
 
-                User obj = new User(Id, Name, Password, Email, PhoneNo, Role);
+                // Fixing problem where unable to retrieve the value of carereceiver column (where value always = 0 )
+                int CareReceiverID = Convert.ToInt32(row["carereceiverID"]);
+
+                User obj = new User(Id, Name, Password, Email, PhoneNo, Role, CareReceiverID);
                 userList.Add(obj);
             }
             return userList;

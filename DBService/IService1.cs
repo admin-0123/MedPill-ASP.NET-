@@ -23,7 +23,7 @@ namespace DBService
 
         [OperationContract]
 
-        User GetOneUser(string id);
+        User GetOneUser(int id);
 
         [OperationContract]
         List<User> GetAllUsers();

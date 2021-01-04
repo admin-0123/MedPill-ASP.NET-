@@ -84,10 +84,16 @@ namespace EDP_Clinic.EDP_DBReference {
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int CareReceiverIDField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private bool Certified_CGField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string EmailField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string IdField;
+        private int IdField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string NameField;
@@ -101,6 +107,9 @@ namespace EDP_Clinic.EDP_DBReference {
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string RoleField;
         
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private bool VerifiedField;
+        
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
             get {
@@ -108,6 +117,32 @@ namespace EDP_Clinic.EDP_DBReference {
             }
             set {
                 this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int CareReceiverID {
+            get {
+                return this.CareReceiverIDField;
+            }
+            set {
+                if ((this.CareReceiverIDField.Equals(value) != true)) {
+                    this.CareReceiverIDField = value;
+                    this.RaisePropertyChanged("CareReceiverID");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool Certified_CG {
+            get {
+                return this.Certified_CGField;
+            }
+            set {
+                if ((this.Certified_CGField.Equals(value) != true)) {
+                    this.Certified_CGField = value;
+                    this.RaisePropertyChanged("Certified_CG");
+                }
             }
         }
         
@@ -125,12 +160,12 @@ namespace EDP_Clinic.EDP_DBReference {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Id {
+        public int Id {
             get {
                 return this.IdField;
             }
             set {
-                if ((object.ReferenceEquals(this.IdField, value) != true)) {
+                if ((this.IdField.Equals(value) != true)) {
                     this.IdField = value;
                     this.RaisePropertyChanged("Id");
                 }
@@ -189,6 +224,19 @@ namespace EDP_Clinic.EDP_DBReference {
             }
         }
         
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool Verified {
+            get {
+                return this.VerifiedField;
+            }
+            set {
+                if ((this.VerifiedField.Equals(value) != true)) {
+                    this.VerifiedField = value;
+                    this.RaisePropertyChanged("Verified");
+                }
+            }
+        }
+        
         public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
         
         protected void RaisePropertyChanged(string propertyName) {
@@ -216,10 +264,10 @@ namespace EDP_Clinic.EDP_DBReference {
         System.Threading.Tasks.Task<EDP_Clinic.EDP_DBReference.CompositeType> GetDataUsingDataContractAsync(EDP_Clinic.EDP_DBReference.CompositeType composite);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetOneUser", ReplyAction="http://tempuri.org/IService1/GetOneUserResponse")]
-        EDP_Clinic.EDP_DBReference.User GetOneUser(string id);
+        EDP_Clinic.EDP_DBReference.User GetOneUser(int id);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetOneUser", ReplyAction="http://tempuri.org/IService1/GetOneUserResponse")]
-        System.Threading.Tasks.Task<EDP_Clinic.EDP_DBReference.User> GetOneUserAsync(string id);
+        System.Threading.Tasks.Task<EDP_Clinic.EDP_DBReference.User> GetOneUserAsync(int id);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetAllUsers", ReplyAction="http://tempuri.org/IService1/GetAllUsersResponse")]
         EDP_Clinic.EDP_DBReference.User[] GetAllUsers();
@@ -271,11 +319,11 @@ namespace EDP_Clinic.EDP_DBReference {
             return base.Channel.GetDataUsingDataContractAsync(composite);
         }
         
-        public EDP_Clinic.EDP_DBReference.User GetOneUser(string id) {
+        public EDP_Clinic.EDP_DBReference.User GetOneUser(int id) {
             return base.Channel.GetOneUser(id);
         }
         
-        public System.Threading.Tasks.Task<EDP_Clinic.EDP_DBReference.User> GetOneUserAsync(string id) {
+        public System.Threading.Tasks.Task<EDP_Clinic.EDP_DBReference.User> GetOneUserAsync(int id) {
             return base.Channel.GetOneUserAsync(id);
         }
         

@@ -30,7 +30,7 @@ namespace DBService
             return composite;
         }
 
-        public User GetOneUser(string id)
+        public User GetOneUser(int id)
         {
             User user = new User();
             return user.SelectByID(id);
