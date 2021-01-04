@@ -27,19 +27,29 @@ namespace DBService
 
         [OperationContract]
         List<User> GetAllUsers();
+        //CardInfo Entity Class
+        [OperationContract]
+        int CreateCardInfo(string cardID, string cardName, string cardNumber,
+            DateTime cardExpiry, string cvvNumber, byte[] iv, byte[] key);
+        [OperationContract]
+        CardInfo GetCardByID(string cardID);
+        [OperationContract]
+        List<CardInfo> GetAllCards();
+        [OperationContract]
+        int DeleteCardInfoByID(string cardID);
 
         // Taken from practical 4, methods are listed in the abstract interface, method bodies are in service1.cs
-/*        [OperationContract]
-        List<Employee> GetAllEmployee();
-        [OperationContract]
-        Employee GetEmployeeByNric(string nric);
+        /*        [OperationContract]
+                List<Employee> GetAllEmployee();
+                [OperationContract]
+                Employee GetEmployeeByNric(string nric);
 
-        [OperationContract]
-        int CreateEmployee(string nric, string name, DateTime dob, string dept, double wage);
+                [OperationContract]
+                int CreateEmployee(string nric, string name, DateTime dob, string dept, double wage);
 
-        [OperationContract]
+                [OperationContract]
 
-        Customer GetCustomerById(string id);*/
+                Customer GetCustomerById(string id);*/
     }
 
     // Use a data contract as illustrated in the sample below to add composite types to service operations.
