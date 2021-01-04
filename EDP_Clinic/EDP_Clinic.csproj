@@ -111,6 +111,10 @@
     <Content Include="500.aspx" />
     <Content Include="About.aspx" />
     <Content Include="AfterPayment.aspx" />
+    <Content Include="App_Data\EDP_DB.mdf" />
+    <Content Include="App_Data\EDP_DB_log.ldf">
+      <DependentUpon>EDP_DB.mdf</DependentUpon>
+    </Content>
     <Content Include="assets\css\style-starter.css" />
     <Content Include="assets\fonts\fontawesome-webfont.svg" />
     <Content Include="assets\images\ambulance.png" />
@@ -161,6 +165,7 @@
     <None Include="Connected Services\EDP_DBReference\configuration91.svcinfo" />
     <None Include="Connected Services\EDP_DBReference\configuration.svcinfo" />
     <Content Include="CardList.aspx" />
+    <Content Include="addCardInfo.aspx" />
     <Content Include="Connected Services\EDP_DBReference\EDP_Clinic.EDP_DBReference.CompositeType.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
@@ -232,6 +237,13 @@
     </Compile>
     <Compile Include="CardList.aspx.designer.cs">
       <DependentUpon>CardList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="addCardInfo.aspx.cs">
+      <DependentUpon>addCardInfo.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="addCardInfo.aspx.designer.cs">
+      <DependentUpon>addCardInfo.aspx</DependentUpon>
     </Compile>
     <Compile Include="Connected Services\EDP_DBReference\Reference.cs">
       <AutoGen>True</AutoGen>
@@ -346,9 +358,7 @@
       <DependentUpon>Web.config</DependentUpon>
     </None>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="App_Data\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>

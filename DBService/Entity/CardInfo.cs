@@ -18,6 +18,8 @@ namespace DBService.Entity
         public DateTime CardExpiry { get; set; }
         public string CVVNumber { get; set; }
         public bool StillValid { get; set; }
+        public byte[] IV { get; set; }
+        public byte[] Key { get; set; }
 
         //Empty Constructor
         public CardInfo()
@@ -26,13 +28,15 @@ namespace DBService.Entity
         }
 
         //Constructor with parameters to initialise all properties
-        public CardInfo(string cardID, string cardName, string cardNumber, DateTime cardExpiry, string cvvNumber)
+        public CardInfo(string cardID, string cardName, string cardNumber, DateTime cardExpiry, string cvvNumber, byte[] iv, byte[] key)
         {
             CardID = cardID;
             CardName = cardName;
             CardNumber = cardNumber;
             CardExpiry = cardExpiry;
             CVVNumber = cvvNumber;
+            IV = iv;
+            Key = key;
             StillValid = checkCardValidation();
         }
         public int Insert()
@@ -43,8 +47,8 @@ namespace DBService.Entity
             SqlConnection myConn = new SqlConnection(DBConnect);
 
             //Step 2 - Create SQL Statement
-            string sqlStatement = "INSERT INTO CardInfo (CardID, CardName, CardNumber, CardExpiry, CVVNumber, StillValid)"
-                + "VALUES (@paraCardID, @paraCardName, @paraCardNumber, @paraCardExpiry, @paraCVVNumber, @paraStillValid)";
+            string sqlStatement = "INSERT INTO CardInfo (CardID, CardName, CardNumber, CardExpiry, CVVNumber, StillValid, IV, Key)"
+                + "VALUES (@paraCardID, @paraCardName, @paraCardNumber, @paraCardExpiry, @paraCVVNumber, @paraStillValid, @paraIV, @paraKey)";
 
             SqlCommand sqlCmd = new SqlCommand(sqlStatement, myConn);
 
@@ -55,6 +59,10 @@ namespace DBService.Entity
             sqlCmd.Parameters.AddWithValue("paraCardExpiry",CardExpiry);
             sqlCmd.Parameters.AddWithValue("paraCVVNumber",CVVNumber);
             sqlCmd.Parameters.AddWithValue("paraStillValid",StillValid);
+
+            //Key and IV
+            sqlCmd.Parameters.AddWithValue("@IV", Convert.ToBase64String(IV));
+            sqlCmd.Parameters.AddWithValue("@Key", Convert.ToBase64String(Key));
 
             //Step 4 - Open Connection to database
             myConn.Open();
@@ -95,7 +103,9 @@ namespace DBService.Entity
                 DateTime cardExpiry = Convert.ToDateTime(row["CardExpiry"].ToString());
                 string cvvNumber = row["CVVNumber"].ToString();
                 bool stillValid = Convert.ToBoolean(row["CardName"].ToString());
-                cif = new CardInfo(cardID, cardName, cardNumber, cardExpiry, cvvNumber);
+                byte[] iv = Convert.FromBase64String(row["IV"].ToString());
+                byte[] key = Convert.FromBase64String(row["IV"].ToString());
+                cif = new CardInfo(cardID, cardName, cardNumber, cardExpiry, cvvNumber, iv, key);
             }
             return cif;
         }
