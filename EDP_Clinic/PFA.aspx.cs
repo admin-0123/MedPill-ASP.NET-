@@ -24,7 +24,10 @@ namespace EDP_Clinic
             {
                 Response.Redirect("404.aspx", false);
             }
+
+
         }
+
 
         protected void LoadProfile()
         {
@@ -34,24 +37,30 @@ namespace EDP_Clinic
             {
                 //lbl_profileName.Text = "NAME: " + userobj.Name;
                 lbl_profileName.Text = userobj.Name;
+                // Need to trim the string variable, or the image url will not display properly due to encoded whitespaces %20%20
+                userPfp.ImageUrl = $"~/assets/images/{userobj.Photo.Trim()}.jpg";
+
                 System.Diagnostics.Debug.WriteLine("CARE RECEIVER ID IS " + userobj.CareReceiverID);
                 User care_receiverobj = client.GetOneUser(userobj.CareReceiverID);
                 if (care_receiverobj != null)
-                {
+                {    
                     lbl_crName.Text = care_receiverobj.Name;
-
-                    //userPfp.ImageUrl = $"~/assets/images/{userobj.Photo}.png";
-                    crPfp.ImageUrl = "~/assets/images/rightArrow.png";
+                    crPfp.ImageUrl = $"~/assets/images/{care_receiverobj.Photo.Trim()}.jpg";
                 }
 
                 else
                 {
-                    lbl_crName.Text = "Null";
-
+                    crPfp.Visible = false;
+                    crArrow.Visible = false;
+                    lbl_crName.Text = "You do not have any care receivers";
                 }
             }
 
         }
 
+        protected void Arrow_Click(object sender, ImageClickEventArgs e)
+        {
+            Response.Redirect("~/PRFA2.aspx");
+        }
     }
 }

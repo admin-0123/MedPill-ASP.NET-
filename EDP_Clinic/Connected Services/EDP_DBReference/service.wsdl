@@ -32,6 +32,18 @@
   <wsdl:message name="IService1_GetAllUsers_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetAllUsersResponse" />
   </wsdl:message>
+  <wsdl:message name="IService1_GetAllApptAdmin_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllApptAdmin" />
+  </wsdl:message>
+  <wsdl:message name="IService1_GetAllApptAdmin_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllApptAdminResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService1_GetAllApptUser_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllApptUser" />
+  </wsdl:message>
+  <wsdl:message name="IService1_GetAllApptUser_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllApptUserResponse" />
+  </wsdl:message>
   <wsdl:portType name="IService1">
     <wsdl:operation name="GetData">
       <wsdl:input wsaw:Action="http://tempuri.org/IService1/GetData" message="tns:IService1_GetData_InputMessage" />
@@ -48,6 +60,14 @@
     <wsdl:operation name="GetAllUsers">
       <wsdl:input wsaw:Action="http://tempuri.org/IService1/GetAllUsers" message="tns:IService1_GetAllUsers_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IService1/GetAllUsersResponse" message="tns:IService1_GetAllUsers_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllApptAdmin">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/GetAllApptAdmin" message="tns:IService1_GetAllApptAdmin_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/GetAllApptAdminResponse" message="tns:IService1_GetAllApptAdmin_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllApptUser">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/GetAllApptUser" message="tns:IService1_GetAllApptUser_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/GetAllApptUserResponse" message="tns:IService1_GetAllApptUser_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IService1" type="tns:IService1">
@@ -81,6 +101,24 @@
     </wsdl:operation>
     <wsdl:operation name="GetAllUsers">
       <soap:operation soapAction="http://tempuri.org/IService1/GetAllUsers" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllApptAdmin">
+      <soap:operation soapAction="http://tempuri.org/IService1/GetAllApptAdmin" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllApptUser">
+      <soap:operation soapAction="http://tempuri.org/IService1/GetAllApptUser" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

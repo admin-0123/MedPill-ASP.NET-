@@ -159,10 +159,14 @@
     <Content Include="Authentication.aspx" />
     <None Include="Connected Services\EDP_DBReference\configuration91.svcinfo" />
     <None Include="Connected Services\EDP_DBReference\configuration.svcinfo" />
+    <Content Include="CA.aspx" />
     <Content Include="Connected Services\EDP_DBReference\EDP_Clinic.EDP_DBReference.CompositeType.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
     <Content Include="Connected Services\EDP_DBReference\EDP_Clinic.EDP_DBReference.User.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\EDP_DBReference\EDP_Clinic.EDP_DBReference.Appointment.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
     <None Include="Connected Services\EDP_DBReference\Reference.svcmap">
@@ -217,6 +221,13 @@
     </Compile>
     <Compile Include="Authentication.aspx.designer.cs">
       <DependentUpon>Authentication.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CA.aspx.cs">
+      <DependentUpon>CA.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CA.aspx.designer.cs">
+      <DependentUpon>CA.aspx</DependentUpon>
     </Compile>
     <Compile Include="Connected Services\EDP_DBReference\Reference.cs">
       <AutoGen>True</AutoGen>

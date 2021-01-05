@@ -105,6 +105,9 @@ namespace EDP_Clinic.EDP_DBReference {
         private string PhoneNoField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string PhotoField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string RoleField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -212,6 +215,19 @@ namespace EDP_Clinic.EDP_DBReference {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Photo {
+            get {
+                return this.PhotoField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.PhotoField, value) != true)) {
+                    this.PhotoField = value;
+                    this.RaisePropertyChanged("Photo");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
         public string Role {
             get {
                 return this.RoleField;
@@ -233,6 +249,211 @@ namespace EDP_Clinic.EDP_DBReference {
                 if ((this.VerifiedField.Equals(value) != true)) {
                     this.VerifiedField = value;
                     this.RaisePropertyChanged("Verified");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="Appointment", Namespace="http://schemas.datacontract.org/2004/07/DBService.Entity")]
+    [System.SerializableAttribute()]
+    public partial class Appointment : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int IdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string appointmentTypeField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int caregiverIDField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.DateTime dateTimeField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int doctorIDField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string followUpField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int nurseIDField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int patientIDField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string prescriptionField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string remarksField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string statusField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Id {
+            get {
+                return this.IdField;
+            }
+            set {
+                if ((this.IdField.Equals(value) != true)) {
+                    this.IdField = value;
+                    this.RaisePropertyChanged("Id");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string appointmentType {
+            get {
+                return this.appointmentTypeField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.appointmentTypeField, value) != true)) {
+                    this.appointmentTypeField = value;
+                    this.RaisePropertyChanged("appointmentType");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int caregiverID {
+            get {
+                return this.caregiverIDField;
+            }
+            set {
+                if ((this.caregiverIDField.Equals(value) != true)) {
+                    this.caregiverIDField = value;
+                    this.RaisePropertyChanged("caregiverID");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime dateTime {
+            get {
+                return this.dateTimeField;
+            }
+            set {
+                if ((this.dateTimeField.Equals(value) != true)) {
+                    this.dateTimeField = value;
+                    this.RaisePropertyChanged("dateTime");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int doctorID {
+            get {
+                return this.doctorIDField;
+            }
+            set {
+                if ((this.doctorIDField.Equals(value) != true)) {
+                    this.doctorIDField = value;
+                    this.RaisePropertyChanged("doctorID");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string followUp {
+            get {
+                return this.followUpField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.followUpField, value) != true)) {
+                    this.followUpField = value;
+                    this.RaisePropertyChanged("followUp");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int nurseID {
+            get {
+                return this.nurseIDField;
+            }
+            set {
+                if ((this.nurseIDField.Equals(value) != true)) {
+                    this.nurseIDField = value;
+                    this.RaisePropertyChanged("nurseID");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int patientID {
+            get {
+                return this.patientIDField;
+            }
+            set {
+                if ((this.patientIDField.Equals(value) != true)) {
+                    this.patientIDField = value;
+                    this.RaisePropertyChanged("patientID");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string prescription {
+            get {
+                return this.prescriptionField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.prescriptionField, value) != true)) {
+                    this.prescriptionField = value;
+                    this.RaisePropertyChanged("prescription");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string remarks {
+            get {
+                return this.remarksField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.remarksField, value) != true)) {
+                    this.remarksField = value;
+                    this.RaisePropertyChanged("remarks");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string status {
+            get {
+                return this.statusField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.statusField, value) != true)) {
+                    this.statusField = value;
+                    this.RaisePropertyChanged("status");
                 }
             }
         }
@@ -274,6 +495,18 @@ namespace EDP_Clinic.EDP_DBReference {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetAllUsers", ReplyAction="http://tempuri.org/IService1/GetAllUsersResponse")]
         System.Threading.Tasks.Task<EDP_Clinic.EDP_DBReference.User[]> GetAllUsersAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetAllApptAdmin", ReplyAction="http://tempuri.org/IService1/GetAllApptAdminResponse")]
+        EDP_Clinic.EDP_DBReference.Appointment[] GetAllApptAdmin();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetAllApptAdmin", ReplyAction="http://tempuri.org/IService1/GetAllApptAdminResponse")]
+        System.Threading.Tasks.Task<EDP_Clinic.EDP_DBReference.Appointment[]> GetAllApptAdminAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetAllApptUser", ReplyAction="http://tempuri.org/IService1/GetAllApptUserResponse")]
+        EDP_Clinic.EDP_DBReference.Appointment[] GetAllApptUser(int uid);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetAllApptUser", ReplyAction="http://tempuri.org/IService1/GetAllApptUserResponse")]
+        System.Threading.Tasks.Task<EDP_Clinic.EDP_DBReference.Appointment[]> GetAllApptUserAsync(int uid);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -333,6 +566,22 @@ namespace EDP_Clinic.EDP_DBReference {
         
         public System.Threading.Tasks.Task<EDP_Clinic.EDP_DBReference.User[]> GetAllUsersAsync() {
             return base.Channel.GetAllUsersAsync();
+        }
+        
+        public EDP_Clinic.EDP_DBReference.Appointment[] GetAllApptAdmin() {
+            return base.Channel.GetAllApptAdmin();
+        }
+        
+        public System.Threading.Tasks.Task<EDP_Clinic.EDP_DBReference.Appointment[]> GetAllApptAdminAsync() {
+            return base.Channel.GetAllApptAdminAsync();
+        }
+        
+        public EDP_Clinic.EDP_DBReference.Appointment[] GetAllApptUser(int uid) {
+            return base.Channel.GetAllApptUser(uid);
+        }
+        
+        public System.Threading.Tasks.Task<EDP_Clinic.EDP_DBReference.Appointment[]> GetAllApptUserAsync(int uid) {
+            return base.Channel.GetAllApptUserAsync(uid);
         }
     }
 }

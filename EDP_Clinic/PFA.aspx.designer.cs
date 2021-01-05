@@ -33,13 +33,13 @@ namespace EDP_Clinic
         protected global::System.Web.UI.WebControls.Label lbl_profileName;
 
         /// <summary>
-        /// Image2 control.
+        /// userArrow control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Image Image2;
+        protected global::System.Web.UI.WebControls.ImageButton userArrow;
 
         /// <summary>
         /// crPfp control.
@@ -60,12 +60,12 @@ namespace EDP_Clinic
         protected global::System.Web.UI.WebControls.Label lbl_crName;
 
         /// <summary>
-        /// Image1 control.
+        /// crArrow control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Image Image1;
+        protected global::System.Web.UI.WebControls.ImageButton crArrow;
     }
 }

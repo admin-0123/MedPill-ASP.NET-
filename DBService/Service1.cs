@@ -41,6 +41,19 @@ namespace DBService
             return user.SelectAll();
         }
 
+        public List<Appointment> GetAllApptAdmin()
+        {
+            Appointment appt = new Appointment();
+            return appt.SelectAllForAdmin();
+        }
+
+        public List<Appointment> GetAllApptUser(int uid)
+        {
+            Appointment appt = new Appointment();
+            return appt.SelectAllForOneUser(uid);
+        }
+
+
 
         // Taken from practical 4, here all the method bodies for the methods listed in IService1.CS
         /*        public List<Employee> GetAllEmployee()

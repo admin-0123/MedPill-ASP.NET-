@@ -9,6 +9,7 @@
       <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Password" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="PhoneNo" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Photo" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Role" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Verified" type="xs:boolean" />
     </xs:sequence>
@@ -20,4 +21,26 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="ArrayOfUser" nillable="true" type="tns:ArrayOfUser" />
+  <xs:complexType name="ArrayOfAppointment">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Appointment" nillable="true" type="tns:Appointment" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfAppointment" nillable="true" type="tns:ArrayOfAppointment" />
+  <xs:complexType name="Appointment">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Id" type="xs:int" />
+      <xs:element minOccurs="0" name="appointmentType" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="caregiverID" type="xs:int" />
+      <xs:element minOccurs="0" name="dateTime" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="doctorID" type="xs:int" />
+      <xs:element minOccurs="0" name="followUp" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="nurseID" type="xs:int" />
+      <xs:element minOccurs="0" name="patientID" type="xs:int" />
+      <xs:element minOccurs="0" name="prescription" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="remarks" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="status" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Appointment" nillable="true" type="tns:Appointment" />
 </xs:schema>
