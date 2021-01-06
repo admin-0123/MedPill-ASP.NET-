@@ -94,6 +94,8 @@ namespace EDP_Clinic
             //Calls Twilio API
             else
             {
+                //Might put the Twilio Verify API into a function - 6/1/2021
+
                 //Retrieve keys from web.config
                 NameValueCollection myKeys = ConfigurationManager.AppSettings;
 
@@ -103,6 +105,7 @@ namespace EDP_Clinic
                 TwilioClient.Init(twilioAccSid, twilioAuth);
 
                 //Sends OTP
+                
                 var verification = VerificationResource.Create(
                     to: "+6590251744",
                     channel: "sms",
@@ -116,6 +119,7 @@ namespace EDP_Clinic
             }
 
         }
+        //Checks Sessions and Cookies which are GUIDs
         private int checkIntention()
         {
             int resultNum;
@@ -175,6 +179,43 @@ namespace EDP_Clinic
             }
         }
 
+        //Checks OTP sent to user's phone no.
+        private bool checkOTP()
+        {
+
+            //Checks OTP
+            var verificationCheck = VerificationCheckResource.Create(
+                to: "+6590251744",
+                code: OTPTB.Text.ToString().Trim(),
+                pathServiceSid: "VA4ceee8345f84c5be3a44bc9ab3db5790"
+            );
+
+            //For debugging purposes
+            //Refer to https://www.twilio.com/docs/verify/api/verification-check
+            Console.WriteLine(verificationCheck.Status);
+
+            string otpResult = verificationCheck.Status;
+
+            //If user enters the right OTP 
+            if(otpResult == "approved")
+            {
+                return true;
+            }
+            else if (otpResult == "pending")
+            {
+                return false;
+            }
+            else if (otpResult == "canceled")
+            {
+                return false;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        //Checks user inputs
         private bool ValidateInput()
         {
             var greenColor = Color.Green;
@@ -226,15 +267,7 @@ namespace EDP_Clinic
 
             int validSessionReason = checkIntention();
 
-            //Retrieve keys from web.config
-            NameValueCollection myKeys = ConfigurationManager.AppSettings;
-
-            //Reading keys
-            var twilioAccSid = myKeys["TWILIO_ACCOUNT_SID"];
-            var twilioAuth = myKeys["TWILIO_AUTH_TOKEN"];
-
-            //if(name)
-
+            bool validOTP = checkOTP();
 
             //Checks if user enters a valid OTP format and is not a bot
             if (ValidInput == true && validCaptcha == true)
@@ -242,37 +275,39 @@ namespace EDP_Clinic
                 //OTPError.Visible = false;
                 //string guid = Guid.NewGuid().ToString();
                 //Session["AuthOTPToken"] = guid;
-                //A bunch of if else statements here to redirect user to respective pages
-                if (validSessionReason == 1)
-                {
-                    Response.Redirect("addCardInfo.aspx");
-                }
-                else if (validSessionReason == 2)
-                {
-                    //Checks OTP
-                    var verificationCheck = VerificationCheckResource.Create(
-                        to: "+6590251744",
-                        code: OTPTB.Text.ToString().Trim(),
-                        pathServiceSid: "VA4ceee8345f84c5be3a44bc9ab3db5790"
-                    );
 
-                    Console.WriteLine(verificationCheck.Status);
-
-                    Response.Redirect("changeCardInfo.aspx");
-                }
-                //Perform delete here
-                //And then redirect to delete page
-                else if (validSessionReason == 3)
+                //If OTP is valid
+                if(validOTP == true)
                 {
-                    //Delete process above
-                    Response.Redirect("PaymentInfoDeleted.aspx");
-                }
+                    //A bunch of if else statements here to redirect user to respective pages
+                    if (validSessionReason == 1)
+                    {
+                        Response.Redirect("addCardInfo.aspx");
+                    }
+                    else if (validSessionReason == 2)
+                    {
+                        Response.Redirect("changeCardInfo.aspx");
+                    }
+                    //Perform delete here
+                    //And then redirect to delete page
+                    else if (validSessionReason == 3)
+                    {
+                        //Delete process above
+                        Response.Redirect("PaymentInfoDeleted.aspx");
+                    }
 
-                //Just in case there is some error here
+                    //Just in case there is some error here
+                    else
+                    {
+                        Response.Redirect("CardList.aspx");
+                    }
+                }
+                //If OTP is invalid
                 else
                 {
-                    Response.Redirect("CardList.aspx");
+                    Response.Redirect("Authentication.aspx");
                 }
+
             }
             else
             {
