@@ -11,6 +11,8 @@ using System.Collections.Specialized;
 using System.Net;
 using System.IO;
 using System.Web.Script.Serialization;
+using Twilio;
+using Twilio.Rest.Verify.V2.Service;
 
 namespace EDP_Clinic
 {
@@ -75,6 +77,7 @@ namespace EDP_Clinic
                 Response.Redirect("CardList.aspx");
             }
             //Else if statements are for testing purposes only
+            /*
             else if(validSessionReason == 1)
             {
                 OTPError.Text = "Add Card";
@@ -86,19 +89,31 @@ namespace EDP_Clinic
             else if (validSessionReason == 3)
             {
                 OTPError.Text = "Delete Card";
-            }
+            }*/
+
+            //Calls Twilio API
             else
             {
-                Response.Redirect("CardList.aspx");
+                //Retrieve keys from web.config
+                NameValueCollection myKeys = ConfigurationManager.AppSettings;
+
+                //Reading keys
+                var twilioAccSid = myKeys["TWILIO_ACCOUNT_SID"];
+                var twilioAuth = myKeys["TWILIO_AUTH_TOKEN"];
+                TwilioClient.Init(twilioAccSid, twilioAuth);
+
+                //Sends OTP
+                var verification = VerificationResource.Create(
+                    to: "+6590251744",
+                    channel: "sms",
+                    pathServiceSid: "VA4ceee8345f84c5be3a44bc9ab3db5790"
+                );
+
+                Console.WriteLine(verification.Sid);
+
+                //string name = "123";
+                //Response.Redirect("CardList.aspx");
             }
-            /*
-              
-            else
-            {
-                Replace current else with this else
-                Call Twilio API here
-            }
-              */
 
         }
         private int checkIntention()
@@ -218,6 +233,10 @@ namespace EDP_Clinic
             var twilioAccSid = myKeys["TWILIO_ACCOUNT_SID"];
             var twilioAuth = myKeys["TWILIO_AUTH_TOKEN"];
 
+            //if(name)
+
+
+            //Checks if user enters a valid OTP format and is not a bot
             if (ValidInput == true && validCaptcha == true)
             {
                 //OTPError.Visible = false;
@@ -230,6 +249,15 @@ namespace EDP_Clinic
                 }
                 else if (validSessionReason == 2)
                 {
+                    //Checks OTP
+                    var verificationCheck = VerificationCheckResource.Create(
+                        to: "+6590251744",
+                        code: OTPTB.Text.ToString().Trim(),
+                        pathServiceSid: "VA4ceee8345f84c5be3a44bc9ab3db5790"
+                    );
+
+                    Console.WriteLine(verificationCheck.Status);
+
                     Response.Redirect("changeCardInfo.aspx");
                 }
                 //Perform delete here

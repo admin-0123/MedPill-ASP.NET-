@@ -1,15 +1,5 @@
 ﻿<%@ Page Title="Authentication" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Authentication.aspx.cs" Inherits="EDP_Clinic.Authentication" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
-    <style type="text/css">
-        .auto-style1 {
-            position: relative;
-            display: block;
-            padding-left: 1.25rem;
-            left: 0px;
-            top: 0px;
-            width: 318px;
-        }
-    </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <section class="w3l-contact py-5" id="changePaymentInfo" style="height:100vh;">
