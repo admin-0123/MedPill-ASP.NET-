@@ -104,7 +104,7 @@ namespace DBService.Entity
                 //string cardNumber = row["CardNumber"].ToString();
                 DateTime cardExpiry = Convert.ToDateTime(row["CardExpiry"].ToString());
                 string cvvNumber = row["CVVNumber"].ToString();
-                bool stillValid = Convert.ToBoolean(row["CardName"].ToString());
+                bool stillValid = Convert.ToBoolean(row["StillValid"].ToString());
                 byte[] iv = Convert.FromBase64String(row["IV"].ToString());
                 byte[] key = Convert.FromBase64String(row["IV"].ToString());
                 cif = new CardInfo(cardName, cardNumber, cardExpiry, cvvNumber, iv, key);
@@ -145,7 +145,7 @@ namespace DBService.Entity
                 string cardNumber = row["CardNumber"].ToString();
                 DateTime cardExpiry = Convert.ToDateTime(row["CardExpiry"].ToString());
                 string cvvNumber = row["CVVNumber"].ToString();
-                bool stillValid = Convert.ToBoolean(row["CardName"].ToString());
+                bool stillValid = Convert.ToBoolean(row["StillValid"].ToString());
                 byte[] iv = Convert.FromBase64String(row["IV"].ToString());
                 byte[] key = Convert.FromBase64String(row["IV"].ToString());
                 CardInfo cif = new CardInfo(cardName, cardNumber, cardExpiry, cvvNumber, iv, key);
