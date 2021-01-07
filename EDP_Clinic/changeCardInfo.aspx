@@ -11,6 +11,7 @@
                 <div class="col-md-8">
                     <div class="contact-form">
                         <form id="changeCardForm">
+                            <asp:Label ID="errorMsg" runat="server"></asp:Label>
                             <div class="mb-3">
                                 <label>Name on Card</label>
                                 <asp:TextBox ID="nameOnCardTB" runat="server" placeholder="Name On Card" CssClass="form-control" onkeyup="nameOnCardValidation()"></asp:TextBox>

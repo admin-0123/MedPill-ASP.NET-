@@ -22,7 +22,26 @@ namespace EDP_Clinic
         byte[] IV;
         protected void Page_Load(object sender, EventArgs e)
         {
+            /*  We will check user session here soon TM */
+
+
             //We check sessions here
+            //  Checks if user pass is to add card info
+            if (Session["authOTPAToken"] != null && Request.Cookies["authOTPAToken"] != null)
+            {
+                if (!Session["authOTPAToken"].ToString().Equals(Request.Cookies["authOTPAToken"].Value))
+                {
+                    Response.Redirect("CardList.aspx", false);
+                }
+                else
+                {
+                    //Nothing to put here since all credentials are there
+                }
+            }
+            else
+            {
+                Response.Redirect("CardList.aspx", false);
+            }
         }
 
         private bool ValidateInput()
@@ -173,6 +192,11 @@ namespace EDP_Clinic
                 int result = client.CreateCardInfo(nameOnCardTB.Text, cardNumberTB.Text, Convert.ToDateTime(cardExpiryTB.Text),CVVTB.Text, IV, Key);
                 if(result == 1)
                 {
+                    //Remove pass to add card info
+                    Session.Remove("authOTPAToken");
+                    Response.Cookies["authOTPAToken"].Value = string.Empty;
+                    Response.Cookies["authOTPAToken"].Expires = DateTime.Now.AddMonths(-20);
+
                     Response.Redirect("CardList.aspx");
                 }
                 else
@@ -180,13 +204,11 @@ namespace EDP_Clinic
                     errorMsg.Text = "Please enter valid information";
                 }
                  
-
                 /*
                 nameOnCardError.Visible = false;
                 cardNumberError.Visible = false;
                 cardExpiryError.Visible = false;
                 CVVError.Visible = false;*/
-                Response.Redirect("PaymentInformation.aspx");
             }
             else
             {
@@ -264,7 +286,12 @@ namespace EDP_Clinic
 
         protected void backBtn_Click(object sender, EventArgs e)
         {
-            Response.Redirect("/PaymentInformation.aspx", false);
+            //Remove pass to add card info
+            Session.Remove("authOTPAToken");
+            Response.Cookies["authOTPAToken"].Value = string.Empty;
+            Response.Cookies["authOTPAToken"].Expires = DateTime.Now.AddMonths(-20);
+
+            Response.Redirect("CardList.aspx", false);
         }
     }
 }

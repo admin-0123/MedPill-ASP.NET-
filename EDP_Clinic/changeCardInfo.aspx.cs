@@ -11,6 +11,7 @@ using System.Text;
 using System.Net;
 using System.IO;
 using System.Web.Script.Serialization;
+using EDP_Clinic.EDP_DBReference;
 
 namespace EDP_Clinic
 {
@@ -22,7 +23,38 @@ namespace EDP_Clinic
         byte[] IV;
         protected void Page_Load(object sender, EventArgs e)
         {
+            /*  We will check user session here soon TM */
 
+
+
+            //  Checks if user pass is to change card info
+            if (Session["authOTPCToken"] != null && Request.Cookies["authOTPCToken"] != null)
+            {
+                if (!Session["authOTPCToken"].ToString().Equals(Request.Cookies["authOTPCToken"].Value))
+                {
+                    Response.Redirect("CardList.aspx", false);
+                }
+                else
+                {
+                    //Will need to relook at this page later
+                    /*
+                    string cardNumber = Request.QueryString["cardNumber"];
+                    Service1Client client = new Service1Client();
+                    CardInfo cif = client.GetCardByCardNumber(cardNumber);
+
+                    DateTime cardExpiryDate = cif.CardExpiry;
+                    //Convert.ToDateTime(cardExpiryTB.Text);
+                    nameOnCardTB.Text = cif.CardName;
+                    cardNumberTB.Text = cif.CardNumber;
+                    cardExpiryTB.Text = cardExpiryDate.ToString("yyyy-MM");//Convert.ToDateTime.ToMon(cif.CardExpiry);
+                    CVVTB.Text = cif.CVVNumber;
+                    */
+                }
+            }
+            else
+            {
+                Response.Redirect("CardList.aspx", false);
+            }
         }
 
         private bool ValidateInput()
@@ -167,7 +199,26 @@ namespace EDP_Clinic
                 cardNumberError.Visible = false;
                 cardExpiryError.Visible = false;
                 CVVError.Visible = false;
-                Response.Redirect("/PaymentInformation.aspx");
+
+                string cardNumber = Request.QueryString["cardNumber"];
+
+                Service1Client client = new Service1Client();
+                int result = client.UpdateByCardNumber(cardNumber, nameOnCardTB.Text, cardNumberTB.Text, Convert.ToDateTime(cardExpiryTB.Text), CVVTB.Text);
+
+                if (result == 1)
+                {
+                    //Remove pass to add card info
+                    Session.Remove("authOTPCToken");
+                    Response.Cookies["authOTPCToken"].Value = string.Empty;
+                    Response.Cookies["authOTPCToken"].Expires = DateTime.Now.AddMonths(-20);
+
+                    Response.Redirect("CardList.aspx", false);
+                }
+                else
+                {
+                    errorMsg.Text = "Please enter valid information";
+                }
+
             }
             else
             {
@@ -245,7 +296,12 @@ namespace EDP_Clinic
 
         protected void backBtn_Click(object sender, EventArgs e)
         {
-            Response.Redirect("/PaymentInformation.aspx", false);
+            //Remove pass to change card info
+            Session.Remove("authOTPCToken");
+            Response.Cookies["authOTPCToken"].Value = string.Empty;
+            Response.Cookies["authOTPCToken"].Expires = DateTime.Now.AddMonths(-20);
+
+            Response.Redirect("CardList.aspx", false);
         }
     }
 }

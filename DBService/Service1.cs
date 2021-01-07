@@ -41,7 +41,7 @@ namespace DBService
             return user.SelectAll();
         }
 
-        //Cards Methods
+        //CardInfo Methods
         public int CreateCardInfo(string cardName, string cardNumber, 
             DateTime cardExpiry, string cvvNumber, byte[] iv, byte[] key)
         {
@@ -62,6 +62,11 @@ namespace DBService
         {
             CardInfo cif = new CardInfo();
             return cif.DeleteByCardNumber(cardNumber);
+        }
+        public int UpdateByCardNumber(string previousCardNumber, string cardName, string cardNumber, DateTime cardExpiry, string cvvNumber)
+        {
+            CardInfo cif = new CardInfo();
+            return cif.UpdateByCardNumber(previousCardNumber, cardName, cardNumber, cardExpiry, cvvNumber);
         }
         /* 
          Note by Hasan 4/1/2021

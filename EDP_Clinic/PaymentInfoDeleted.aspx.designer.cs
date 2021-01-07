@@ -13,5 +13,23 @@ namespace EDP_Clinic
 
     public partial class PaymentInfoDeleted
     {
+
+        /// <summary>
+        /// goHomeBtn control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button goHomeBtn;
+
+        /// <summary>
+        /// paymentListBtn control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button paymentListBtn;
     }
 }

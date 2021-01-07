@@ -71,6 +71,11 @@ namespace EDP_Clinic
             //else if()
         }
 
+        protected void backBtn_Click(object sender, EventArgs e)
+        {
+
+        }
+
         //Create function to censor cardnumber
         //protected string
     }

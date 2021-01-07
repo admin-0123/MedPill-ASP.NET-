@@ -161,7 +161,7 @@ namespace DBService.Entity
             SqlConnection myConn = new SqlConnection(DBConnect);
             //string sqlStatement = "SELECT * FROM CardInfo WHERE CardNumber = @paraCardNumber";
             string sqlStatement = "DELETE FROM CardInfo WHERE CardNumber = @paraCardNumber";
-            //SqlDataAdapter da = new SqlDataAdapter(sqlStatement, myConn);
+
             SqlCommand sqlCmd = new SqlCommand(sqlStatement, myConn);
             sqlCmd.Parameters.AddWithValue("@paraCardNumber", cardNumber);
             //sqlCmd.SelectCommand.Parameters.AddWithValue("@paraCardID", cardID);
@@ -173,6 +173,31 @@ namespace DBService.Entity
 
             return result;
 
+        }
+        public int UpdateByCardNumber(string previousCardNumber, string cardName, string cardNumber, DateTime cardExpiry, string cvvNumber)
+        {
+            string DBConnect = ConfigurationManager.ConnectionStrings["EDP_DB"].ConnectionString;
+            SqlConnection myConn = new SqlConnection(DBConnect);
+
+            string sqlStatement = "UPDATE CardInfo SET CardName = @paraCardName, CardNumber = @paraCardNumber, CardExpiry = @paraCardExpiry, CVVNumber = @paraCVVNumber, StillValid = @paraStillValid WHERE CardNumber = @paraPreviousCardNumber";
+            SqlCommand sqlCmd = new SqlCommand(sqlStatement, myConn);
+
+            //Previous card number
+            sqlCmd.Parameters.AddWithValue("@paraPreviousCardNumber", previousCardNumber);
+            
+            //New updated card Info
+            sqlCmd.Parameters.AddWithValue("@paraCardName", cardName);
+            sqlCmd.Parameters.AddWithValue("@paraCardNumber", cardNumber);
+            sqlCmd.Parameters.AddWithValue("@paraCardExpiry", cardExpiry);
+            sqlCmd.Parameters.AddWithValue("@paraCVVNumber", cvvNumber);
+            sqlCmd.Parameters.AddWithValue("@paraStillValid", StillValid);
+
+            myConn.Open();
+            int result = sqlCmd.ExecuteNonQuery();
+
+            myConn.Close();
+
+            return result;
         }
         public bool checkCardValidation()
         {
