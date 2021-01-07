@@ -58,10 +58,10 @@ namespace DBService
             CardInfo cif = new CardInfo();
             return cif.SelectAllCards();
         }
-        public int DeleteCardInfoByID(string cardNumber)
+        public int DeleteByCardNumber(string cardNumber)
         {
             CardInfo cif = new CardInfo();
-            return cif.DeleteByCardID(cardNumber);
+            return cif.DeleteByCardNumber(cardNumber);
         }
         /* 
          Note by Hasan 4/1/2021

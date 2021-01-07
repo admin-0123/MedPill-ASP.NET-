@@ -215,9 +215,6 @@ namespace EDP_Clinic.EDP_DBReference {
         private System.DateTime CardExpiryField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string CardIDField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string CardNameField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -264,19 +261,6 @@ namespace EDP_Clinic.EDP_DBReference {
                 if ((this.CardExpiryField.Equals(value) != true)) {
                     this.CardExpiryField = value;
                     this.RaisePropertyChanged("CardExpiry");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CardID {
-            get {
-                return this.CardIDField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.CardIDField, value) != true)) {
-                    this.CardIDField = value;
-                    this.RaisePropertyChanged("CardID");
                 }
             }
         }
@@ -402,11 +386,11 @@ namespace EDP_Clinic.EDP_DBReference {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetAllCards", ReplyAction="http://tempuri.org/IService1/GetAllCardsResponse")]
         System.Threading.Tasks.Task<EDP_Clinic.EDP_DBReference.CardInfo[]> GetAllCardsAsync();
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/DeleteCardInfoByID", ReplyAction="http://tempuri.org/IService1/DeleteCardInfoByIDResponse")]
-        int DeleteCardInfoByID(string cardNumber);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/DeleteByCardNumber", ReplyAction="http://tempuri.org/IService1/DeleteByCardNumberResponse")]
+        int DeleteByCardNumber(string cardNumber);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/DeleteCardInfoByID", ReplyAction="http://tempuri.org/IService1/DeleteCardInfoByIDResponse")]
-        System.Threading.Tasks.Task<int> DeleteCardInfoByIDAsync(string cardNumber);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/DeleteByCardNumber", ReplyAction="http://tempuri.org/IService1/DeleteByCardNumberResponse")]
+        System.Threading.Tasks.Task<int> DeleteByCardNumberAsync(string cardNumber);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -492,12 +476,12 @@ namespace EDP_Clinic.EDP_DBReference {
             return base.Channel.GetAllCardsAsync();
         }
         
-        public int DeleteCardInfoByID(string cardNumber) {
-            return base.Channel.DeleteCardInfoByID(cardNumber);
+        public int DeleteByCardNumber(string cardNumber) {
+            return base.Channel.DeleteByCardNumber(cardNumber);
         }
         
-        public System.Threading.Tasks.Task<int> DeleteCardInfoByIDAsync(string cardNumber) {
-            return base.Channel.DeleteCardInfoByIDAsync(cardNumber);
+        public System.Threading.Tasks.Task<int> DeleteByCardNumberAsync(string cardNumber) {
+            return base.Channel.DeleteByCardNumberAsync(cardNumber);
         }
     }
 }

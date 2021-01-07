@@ -37,7 +37,7 @@
                 document.getElementById('<%=verifyBtn.ClientID%>').disabled = true;
             }
             else if (OTP.length != 6) {
-                document.getElementById('<%=OTPError.ClientID%>').innerHTML = "Please enter a 4-digit OTP number";
+                document.getElementById('<%=OTPError.ClientID%>').innerHTML = "Please enter a 6-digit OTP number";
                 document.getElementById('<%=OTPError.ClientID%>').style.color = "Red";
                 document.getElementById('<%=verifyBtn.ClientID%>').disabled = true;
             }
