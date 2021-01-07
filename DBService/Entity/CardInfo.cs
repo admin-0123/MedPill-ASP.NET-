@@ -12,7 +12,7 @@ namespace DBService.Entity
     public class CardInfo
     {
         //Properties of CardInfo
-        //public string CardID { get; set; }
+        //public int CardID { get; set; }
         public string CardName { get; set; }
         public string CardNumber { get; set; }
         public DateTime CardExpiry { get; set; }
@@ -47,22 +47,24 @@ namespace DBService.Entity
             SqlConnection myConn = new SqlConnection(DBConnect);
 
             //Step 2 - Create SQL Statement
-            string sqlStatement = "INSERT INTO CardInfo (CardName, CardNumber, CardExpiry, CVVNumber, StillValid, IV, Key)"
-                + "VALUES (@paraCardName, @paraCardNumber, @paraCardExpiry, @paraCVVNumber, @paraStillValid, @paraIV, @paraKey)";
+            //string sqlStatement = "INSERT INTO CardInfo (CardName, CardNumber, CardExpiry, CVVNumber, StillValid, IV, Key)"
+            //  + " VALUES (@paraCardName, @paraCardNumber, @paraCardExpiry, @paraCVVNumber, @paraStillValid, @paraIV, @paraKey)";
+
+            string sqlStatement = "INSERT INTO CardInfo VALUES (@paraCardName, @paraCardNumber, @paraCardExpiry, @paraCVVNumber, @paraStillValid, @paraIV, @paraKey)";
 
             SqlCommand sqlCmd = new SqlCommand(sqlStatement, myConn);
 
             //Step 3 - Add info to each parameterised variables
             //sqlCmd.Parameters.AddWithValue("@paraCardID", CardID);
             sqlCmd.Parameters.AddWithValue("@paraCardName", CardName);
-            sqlCmd.Parameters.AddWithValue("@paraCardNumber",CardNumber);
-            sqlCmd.Parameters.AddWithValue("@paraCardExpiry",CardExpiry);
-            sqlCmd.Parameters.AddWithValue("@paraCVVNumber",CVVNumber);
-            sqlCmd.Parameters.AddWithValue("@paraStillValid",StillValid);
+            sqlCmd.Parameters.AddWithValue("@paraCardNumber", CardNumber);
+            sqlCmd.Parameters.AddWithValue("@paraCardExpiry", CardExpiry);
+            sqlCmd.Parameters.AddWithValue("@paraCVVNumber", CVVNumber);
+            sqlCmd.Parameters.AddWithValue("@paraStillValid", StillValid);
 
             //Key and IV
-            sqlCmd.Parameters.AddWithValue("@IV", Convert.ToBase64String(IV));
-            sqlCmd.Parameters.AddWithValue("@Key", Convert.ToBase64String(Key));
+            sqlCmd.Parameters.AddWithValue("@paraIV", Convert.ToBase64String(IV));
+            sqlCmd.Parameters.AddWithValue("@paraKey", Convert.ToBase64String(Key));
 
             //Step 4 - Open Connection to database
             myConn.Open();
@@ -94,15 +96,15 @@ namespace DBService.Entity
             //Step 5 - Read data from dataset
             CardInfo cif = null;
             int rec_cnt = ds.Tables[0].Rows.Count;
-            if(rec_cnt == 1)
+            if (rec_cnt == 1)
             {
                 DataRow row = ds.Tables[0].Rows[0]; //Returns one record
-                //string cardID = row["CardID"].ToString();
+                //int cardID = Convert.ToInt32(row["CardID"].ToString());
                 string cardName = row["CardName"].ToString();
                 //string cardNumber = row["CardNumber"].ToString();
                 DateTime cardExpiry = Convert.ToDateTime(row["CardExpiry"].ToString());
                 string cvvNumber = row["CVVNumber"].ToString();
-                bool stillValid = Convert.ToBoolean(row["CardName"].ToString());
+                bool stillValid = Convert.ToBoolean(row["StillValid"].ToString());
                 byte[] iv = Convert.FromBase64String(row["IV"].ToString());
                 byte[] key = Convert.FromBase64String(row["IV"].ToString());
                 cif = new CardInfo(cardName, cardNumber, cardExpiry, cvvNumber, iv, key);
@@ -138,12 +140,12 @@ namespace DBService.Entity
             for (int i = 0; i < rec_cnt; i++)
             {
                 DataRow row = ds.Tables[0].Rows[i];  // Sql command returns only one record
-                //string cardID = row["CardID"].ToString();
+                //int cardID = Convert.ToInt32(row["CardID"].ToString());
                 string cardName = row["CardName"].ToString();
                 string cardNumber = row["CardNumber"].ToString();
                 DateTime cardExpiry = Convert.ToDateTime(row["CardExpiry"].ToString());
                 string cvvNumber = row["CVVNumber"].ToString();
-                bool stillValid = Convert.ToBoolean(row["CardName"].ToString());
+                bool stillValid = Convert.ToBoolean(row["StillValid"].ToString());
                 byte[] iv = Convert.FromBase64String(row["IV"].ToString());
                 byte[] key = Convert.FromBase64String(row["IV"].ToString());
                 CardInfo cif = new CardInfo(cardName, cardNumber, cardExpiry, cvvNumber, iv, key);
@@ -152,13 +154,13 @@ namespace DBService.Entity
             return cifList;
         }
         //Delete card by card number
-        public int DeleteByCardID(string cardNumber)
+        public int DeleteByCardNumber(string cardNumber)
         {
-            
+
             string DBConnect = ConfigurationManager.ConnectionStrings["EDP_DB"].ConnectionString;
             SqlConnection myConn = new SqlConnection(DBConnect);
 
-            string sqlStatement = "DELETE * FROM CardInfo WHERE CardID = @paraCardNumber";
+            string sqlStatement = "DELETE * FROM CardInfo WHERE CardNumber = @paraCardNumber";
             //SqlDataAdapter da = new SqlDataAdapter(sqlStatement, myConn);
             SqlCommand sqlCmd = new SqlCommand(sqlStatement, myConn);
             sqlCmd.Parameters.AddWithValue("@paraCardNumber", cardNumber);

@@ -106,13 +106,13 @@ namespace EDP_Clinic
 
                 //Sends OTP
                 
-                var verification = VerificationResource.Create(
+                /*var verification = VerificationResource.Create(
                     to: "+6590251744",
                     channel: "sms",
                     pathServiceSid: "VA4ceee8345f84c5be3a44bc9ab3db5790"
                 );
 
-                Console.WriteLine(verification.Sid);
+                Console.WriteLine(verification.Sid);*/
 
                 //string name = "123";
                 //Response.Redirect("CardList.aspx");

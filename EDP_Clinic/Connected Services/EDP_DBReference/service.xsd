@@ -101,17 +101,17 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="DeleteCardInfoByID">
+  <xs:element name="DeleteByCardNumber">
     <xs:complexType>
       <xs:sequence>
         <xs:element minOccurs="0" name="cardNumber" nillable="true" type="xs:string" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="DeleteCardInfoByIDResponse">
+  <xs:element name="DeleteByCardNumberResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="DeleteCardInfoByIDResult" type="xs:int" />
+        <xs:element minOccurs="0" name="DeleteByCardNumberResult" type="xs:int" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

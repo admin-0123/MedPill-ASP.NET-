@@ -22,7 +22,7 @@ namespace EDP_Clinic
         byte[] IV;
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            //We check sessions here
         }
 
         private bool ValidateInput()
@@ -170,18 +170,16 @@ namespace EDP_Clinic
                 IV = cipher.IV;
 
                 EDP_DBReference.Service1Client client = new EDP_DBReference.Service1Client();
-                //int result = client.CreateCardInfo(encryptData(nameOnCardTB.Text)
-                  //  , encryptData(cardNumberTB.Text), encryptData(cardExpiryTB.Text),
-                    //encryptData(CVVTB.Text), IV, Key);
-                /*if(result == 1)
+                int result = client.CreateCardInfo(nameOnCardTB.Text, cardNumberTB.Text, Convert.ToDateTime(cardExpiryTB.Text),CVVTB.Text, IV, Key);
+                if(result == 1)
                 {
-                    Response.Redirect("PaymentInformation.aspx");
+                    Response.Redirect("CardList.aspx");
                 }
                 else
                 {
-                    Throw error here
+                    errorMsg.Text = "Please enter valid information";
                 }
-                 */
+                 
 
                 /*
                 nameOnCardError.Visible = false;

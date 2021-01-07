@@ -41,7 +41,7 @@ namespace DBService
 
         [OperationContract]
 
-        int DeleteCardInfoByID(string cardNumber);
+        int DeleteByCardNumber(string cardNumber);
 
         // Taken from practical 4, methods are listed in the abstract interface, method bodies are in service1.cs
         /*        [OperationContract]

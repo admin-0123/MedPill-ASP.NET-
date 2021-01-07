@@ -21,7 +21,6 @@
     <xs:sequence>
       <xs:element minOccurs="0" name="CVVNumber" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="CardExpiry" type="xs:dateTime" />
-      <xs:element minOccurs="0" name="CardID" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="CardName" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="CardNumber" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="IV" nillable="true" type="xs:base64Binary" />
