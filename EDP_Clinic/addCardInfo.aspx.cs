@@ -22,7 +22,7 @@ namespace EDP_Clinic
         byte[] IV;
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            //We check sessions here
         }
 
         private bool ValidateInput()

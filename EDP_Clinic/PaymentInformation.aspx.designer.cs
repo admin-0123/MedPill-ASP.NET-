@@ -24,6 +24,15 @@ namespace EDP_Clinic
         protected global::System.Web.UI.WebControls.Button backBtn;
 
         /// <summary>
+        /// cardNameText control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label cardNameText;
+
+        /// <summary>
         /// cardNumberText control.
         /// </summary>
         /// <remarks>
@@ -31,6 +40,24 @@ namespace EDP_Clinic
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label cardNumberText;
+
+        /// <summary>
+        /// cardExpiryText control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label cardExpiryText;
+
+        /// <summary>
+        /// cvvNumberText control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label cvvNumberText;
 
         /// <summary>
         /// deleteBtn control.

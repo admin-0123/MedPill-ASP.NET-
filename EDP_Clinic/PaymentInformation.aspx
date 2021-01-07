@@ -10,11 +10,15 @@
             </div>
             <div class="mb-3">
                 <h1 class="title mb-4">Payment Information</h1>
-                <h4 class="mb-4">Name on Card: Hasan</h4>
-                <h4 class="mb-4">Card Number:
+                <h4 class="mb-4">Name on Card: 
+                    <asp:Label ID="cardNameText" runat="server"></asp:Label></h4>
+                <h4 class="mb-4">Card Number: 
                     <asp:Label ID="cardNumberText" runat="server"></asp:Label></h4>
-                <h4 class="mb-4">Card Expiry: 12/2020</h4>
-                <h4 class="mb-4">CVV Number: 0123</h4>
+                <h4 class="mb-4">Card Expiry: 
+                    <asp:Label ID="cardExpiryText" runat="server"></asp:Label></h4>
+                <!--- Put all these information out for testing purposes --->
+                <h4 class="mb-4">CVV Number: 
+                    <asp:Label ID="cvvNumberText" runat="server"></asp:Label></h4>
             </div>
             <div class="row">
                 <div class="col-md-8"></div>

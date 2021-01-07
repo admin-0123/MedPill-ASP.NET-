@@ -54,6 +54,10 @@ namespace EDP_Clinic
                 //For now, just pass a plain-text number
                 Response.Redirect("PaymentInformation.aspx?cardNumber=" + e.CommandArgument);
             }
+            //else if()
         }
+
+        //Create function to censor cardnumber
+        //protected string
     }
 }
