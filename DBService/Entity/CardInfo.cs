@@ -159,8 +159,8 @@ namespace DBService.Entity
 
             string DBConnect = ConfigurationManager.ConnectionStrings["EDP_DB"].ConnectionString;
             SqlConnection myConn = new SqlConnection(DBConnect);
-
-            string sqlStatement = "DELETE * FROM CardInfo WHERE CardNumber = @paraCardNumber";
+            //string sqlStatement = "SELECT * FROM CardInfo WHERE CardNumber = @paraCardNumber";
+            string sqlStatement = "DELETE FROM CardInfo WHERE CardNumber = @paraCardNumber";
             //SqlDataAdapter da = new SqlDataAdapter(sqlStatement, myConn);
             SqlCommand sqlCmd = new SqlCommand(sqlStatement, myConn);
             sqlCmd.Parameters.AddWithValue("@paraCardNumber", cardNumber);
