@@ -73,7 +73,7 @@ namespace EDP_Clinic
             //This resulting value will direct user to respective pages
             int validSessionReason = checkIntention();
 
-            if(validSessionReason == 0)
+            if (validSessionReason == 0)
             {
                 Response.Redirect("CardList.aspx");
             }
@@ -106,7 +106,7 @@ namespace EDP_Clinic
                 TwilioClient.Init(twilioAccSid, twilioAuth);
 
                 //Sends OTP
-                
+
                 /*var verification = VerificationResource.Create(
                     to: "+6590251744",
                     channel: "sms",
@@ -114,9 +114,6 @@ namespace EDP_Clinic
                 );
 
                 Console.WriteLine(verification.Sid);*/
-
-                //string name = "123";
-                //Response.Redirect("CardList.aspx");
             }
 
         }
@@ -214,7 +211,7 @@ namespace EDP_Clinic
             string otpResult = verificationCheck.Status;
 
             //If user enters the right OTP 
-            if(otpResult == "approved")
+            if (otpResult == "approved")
             {
                 return true;
             }
@@ -245,14 +242,14 @@ namespace EDP_Clinic
                 OTPError.Visible = true;
             }
             //Ensures that OTP consist of numbers
-            else if(!Regex.IsMatch(OTPTB.Text, "^[0-9]*$"))
+            else if (!Regex.IsMatch(OTPTB.Text, "^[0-9]*$"))
             {
                 OTPError.Text = "Please enter a valid 6-digit OTP";
                 OTPError.ForeColor = Color.Red;
                 OTPError.Visible = true;
             }
             //Checks if OTP contains 6 digits long
-            else if(OTPTB.Text.Length != 6)
+            else if (OTPTB.Text.Length != 6)
             {
                 OTPError.Text = "Please enter a 6-digit OTP";
                 OTPError.ForeColor = Color.Red;
@@ -294,17 +291,38 @@ namespace EDP_Clinic
                 //Session["AuthOTPToken"] = guid;
 
                 //If OTP is valid
-                if(validOTP == true)
+                if (validOTP == true)
                 {
                     //A bunch of if else statements here to redirect user to respective pages
                     if (validSessionReason == 1)
                     {
+                        //Remove add card info session and cookie
+                        Session.Remove("addCardInfo");
+                        Response.Cookies["addCardInfo"].Value = string.Empty;
+                        Response.Cookies["addCardInfo"].Expires = DateTime.Now.AddMonths(-20);
+
+                        //Create valid pass for user to add card info
+                        string guid = Guid.NewGuid().ToString();
+                        Session["authOTPAToken"] = guid;
+
+                        Response.Cookies.Add(new HttpCookie("authOTPAToken", guid));
                         Response.Redirect("addCardInfo.aspx", false);
                     }
                     else if (validSessionReason == 2)
                     {
+                        //Remove change card info session and cookie
+                        Session.Remove("changeCardInfo");
+                        Response.Cookies["changeCardInfo"].Value = string.Empty;
+                        Response.Cookies["changeCardInfo"].Expires = DateTime.Now.AddMonths(-20);
+
+                        //Create valid pass for user to change card info
+                        string guid = Guid.NewGuid().ToString();
+                        Session["authOTPCToken"] = guid;
+
                         string cardNumber = Session["cardNumber"].ToString();
-                        Response.Redirect("changeCardInfo.aspx", false);
+
+                        //
+                        Response.Redirect("changeCardInfo.aspx?cardNumber=" + cardNumber, false);
                     }
                     //Perform delete here
                     //And then redirect to delete page
@@ -316,8 +334,13 @@ namespace EDP_Clinic
 
                         int result = client.DeleteByCardNumber(cardNumber);
 
-                        if(result == 1)
+                        if (result == 1)
                         {
+                            //Remove delete card info session and cookie
+                            Session.Remove("deleteCardInfo");
+                            Response.Cookies["deleteCardInfo"].Value = string.Empty;
+                            Response.Cookies["deleteCardInfo"].Expires = DateTime.Now.AddMonths(-20);
+
                             Response.Redirect("PaymentInfoDeleted.aspx", false);
                         }
                         else
@@ -328,8 +351,19 @@ namespace EDP_Clinic
                     //View more card information
                     else if (validSessionReason == 4)
                     {
+                        //Remove view more card info session and cookie
+                        Session.Remove("viewCardInfo");
+                        Response.Cookies["viewCardInfo"].Value = string.Empty;
+                        Response.Cookies["viewCardInfo"].Expires = DateTime.Now.AddMonths(-20);
+
                         string cardNumber = Session["cardNumber"].ToString();
-                        Response.Redirect("PaymentInformation.aspx?cardNumber=" + cardNumber);
+
+                        //Create valid pass for user to view more card info
+                        string guid = Guid.NewGuid().ToString();
+                        Session["authOTPVToken"] = guid;
+
+                        Response.Cookies.Add(new HttpCookie("authOTPVToken", guid));
+                        Response.Redirect("PaymentInformation.aspx?cardNumber=" + cardNumber, false);
                     }
 
                     //Just in case there is some error here

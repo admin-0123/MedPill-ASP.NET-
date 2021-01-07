@@ -6,7 +6,7 @@
             <div class="mb-3">
                 <asp:Button ID="backBtn" runat="server" Text="Back" CssClass="btn btn-primary btn-style" OnClick="backBtn_Click" />
             </div>
-            <h1 class="title mb-4">Change Card Information</h1>
+            <h1 class="title mb-4">Add Card Information</h1>
             <div class="row">
                 <div class="col-md-8">
                     <div class="contact-form">
