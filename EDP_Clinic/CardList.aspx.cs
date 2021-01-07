@@ -42,7 +42,13 @@ namespace EDP_Clinic
 
         protected void addCardInfo_Click(object sender, EventArgs e)
         {
-
+            //Create intention for user to add card info
+            string guid = Guid.NewGuid().ToString();
+            Session["addCardInfo"] = guid;
+            
+            Response.Cookies.Add(new HttpCookie("addCardInfo", guid));
+            Response.Redirect("Authentication.aspx", false);
+            //Response.Redirect("addCardInfo.aspx", false);
         }
 
         protected void cardListView_ItemCommand(object sender, ListViewCommandEventArgs e)
@@ -52,7 +58,15 @@ namespace EDP_Clinic
             {
                 //Card number will be encrypted later on
                 //For now, just pass a plain-text number
-                Response.Redirect("PaymentInformation.aspx?cardNumber=" + e.CommandArgument);
+                Session["cardNumber"] = e.CommandArgument;
+
+                //Create intention for user to view card info
+                string guid = Guid.NewGuid().ToString();
+                Session["viewCardInfo"] = guid;
+
+                Response.Cookies.Add(new HttpCookie("viewCardInfo", guid));
+                Response.Redirect("Authentication.aspx", false);
+                //Response.Redirect("PaymentInformation.aspx?cardNumber=" + e.CommandArgument);
             }
             //else if()
         }

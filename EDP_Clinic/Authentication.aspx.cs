@@ -13,6 +13,7 @@ using System.IO;
 using System.Web.Script.Serialization;
 using Twilio;
 using Twilio.Rest.Verify.V2.Service;
+using EDP_Clinic.EDP_DBReference;
 
 namespace EDP_Clinic
 {
@@ -46,9 +47,9 @@ namespace EDP_Clinic
 
             //For testing purposes
             //Each session should store random GUID
-            Session["addCardInfo"] = "111";
-            Session["changeCardInfo"] = "222";
-            Session["deleteCardInfo"] = "333";
+            //Session["addCardInfo"] = "111";
+            //Session["changeCardInfo"] = "222";
+            //Session["deleteCardInfo"] = "333";
 
 
             //Cookies
@@ -56,8 +57,8 @@ namespace EDP_Clinic
             //Response.Cookies["addCardInfo"].Value = "111";
             //Response.Cookies["addCardInfo"].Expires = DateTime.Now.AddMinutes(15);
 
-            Response.Cookies["changeCardInfo"].Value = "222";
-            Response.Cookies["changeCardInfo"].Expires = DateTime.Now.AddMinutes(15);
+            //Response.Cookies["changeCardInfo"].Value = "222";
+            //Response.Cookies["changeCardInfo"].Expires = DateTime.Now.AddMinutes(15);
 
             //Response.Cookies["deleteCardInfo"].Value = "333";
             //Response.Cookies["deleteCardInfo"].Expires = DateTime.Now.AddMinutes(15);
@@ -171,6 +172,22 @@ namespace EDP_Clinic
                     return resultNum;
                 }
             }
+            //  Checks if users intention is to delete card
+            else if (Session["viewCardInfo"] != null && Request.Cookies["viewCardInfo"] != null)
+            {
+                if (!Session["viewCardInfo"].ToString().Equals(Request.Cookies["viewCardInfo"].Value))
+                {
+                    //Response.Redirect("CardList.aspx");
+                    resultNum = 0;
+                    return resultNum;
+                }
+                else
+                {
+                    //OTPError.Text = "Delete Card";
+                    resultNum = 4;
+                    return resultNum;
+                }
+            }
             else
             {
                 //Response.Redirect("CardList.aspx");
@@ -267,7 +284,7 @@ namespace EDP_Clinic
 
             int validSessionReason = checkIntention();
 
-            bool validOTP = checkOTP();
+            bool validOTP = true;//checkOTP();
 
             //Checks if user enters a valid OTP format and is not a bot
             if (ValidInput == true && validCaptcha == true)
@@ -282,18 +299,37 @@ namespace EDP_Clinic
                     //A bunch of if else statements here to redirect user to respective pages
                     if (validSessionReason == 1)
                     {
-                        Response.Redirect("addCardInfo.aspx");
+                        Response.Redirect("addCardInfo.aspx", false);
                     }
                     else if (validSessionReason == 2)
                     {
-                        Response.Redirect("changeCardInfo.aspx");
+                        string cardNumber = Session["cardNumber"].ToString();
+                        Response.Redirect("changeCardInfo.aspx", false);
                     }
                     //Perform delete here
                     //And then redirect to delete page
                     else if (validSessionReason == 3)
                     {
                         //Delete process above
-                        Response.Redirect("PaymentInfoDeleted.aspx");
+                        string cardNumber = Session["cardNumber"].ToString();
+                        Service1Client client = new Service1Client();
+
+                        int result = client.DeleteByCardNumber(cardNumber);
+
+                        if(result == 1)
+                        {
+                            Response.Redirect("PaymentInfoDeleted.aspx", false);
+                        }
+                        else
+                        {
+                            Response.Redirect("CardList.aspx", false);
+                        }
+                    }
+                    //View more card information
+                    else if (validSessionReason == 4)
+                    {
+                        string cardNumber = Session["cardNumber"].ToString();
+                        Response.Redirect("PaymentInformation.aspx?cardNumber=" + cardNumber);
                     }
 
                     //Just in case there is some error here

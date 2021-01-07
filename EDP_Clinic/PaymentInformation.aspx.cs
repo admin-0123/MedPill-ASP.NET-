@@ -32,11 +32,33 @@ namespace EDP_Clinic
 
         protected void deleteBtn_Click(object sender, EventArgs e)
         {
+            //Create intention for user to delete card info
+            string guid = Guid.NewGuid().ToString();
+            Session["deleteCardInfo"] = guid;
+
+            string cardNumber = Request.QueryString["cardNumber"];
+            Service1Client client = new Service1Client();
+            CardInfo cif = client.GetCardByCardNumber(cardNumber);
+            //Delete at authentication page
+            Session["cardNumber"] = cif.CardNumber;
+
+            Response.Cookies.Add(new HttpCookie("deleteCardInfo", guid));
             Response.Redirect("Authentication.aspx", false);
         }
 
         protected void updateBtn_Click(object sender, EventArgs e)
         {
+            //Create intention for user to update card info
+            string guid = Guid.NewGuid().ToString();
+            Session["changeCardInfo"] = guid;
+
+            string cardNumber = Request.QueryString["cardNumber"];
+            Service1Client client = new Service1Client();
+            CardInfo cif = client.GetCardByCardNumber(cardNumber);
+            //Update at updateCard page
+            Session["cardNumber"] = cif.CardNumber;
+
+            Response.Cookies.Add(new HttpCookie("changeCardInfo", guid));
             Response.Redirect("Authentication.aspx", false);
         }
     }
