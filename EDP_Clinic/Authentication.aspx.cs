@@ -64,9 +64,6 @@ namespace EDP_Clinic
             //Response.Cookies["deleteCardInfo"].Expires = DateTime.Now.AddMinutes(15);
 
 
-            //HttpCookie addCardCookie = new HttpCookie("addCardInfo");
-            //addCardCookie.Value = 
-
             //addCardCookie.Values.add(true);
             //Response.Cookies.Add(addCardCookie);
 
@@ -321,7 +318,7 @@ namespace EDP_Clinic
 
                         string cardNumber = Session["cardNumber"].ToString();
 
-                        //
+                        Response.Cookies.Add(new HttpCookie("authOTPCToken", guid));
                         Response.Redirect("changeCardInfo.aspx?cardNumber=" + cardNumber, false);
                     }
                     //Perform delete here

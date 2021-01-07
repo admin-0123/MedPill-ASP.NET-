@@ -115,4 +115,22 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="UpdateByCardNumber">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="previousCardNumber" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="cardName" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="cardNumber" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="cardExpiry" type="xs:dateTime" />
+        <xs:element minOccurs="0" name="cvvNumber" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="UpdateByCardNumberResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="UpdateByCardNumberResult" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
 </xs:schema>

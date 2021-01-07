@@ -40,9 +40,10 @@ namespace DBService
         List<CardInfo> GetAllCards();
 
         [OperationContract]
-
         int DeleteByCardNumber(string cardNumber);
 
+        [OperationContract]
+        int UpdateByCardNumber(string previousCardNumber, string cardName, string cardNumber, DateTime cardExpiry, string cvvNumber);
         // Taken from practical 4, methods are listed in the abstract interface, method bodies are in service1.cs
         /*        [OperationContract]
                 List<Employee> GetAllEmployee();

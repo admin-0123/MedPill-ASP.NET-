@@ -391,6 +391,12 @@ namespace EDP_Clinic.EDP_DBReference {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/DeleteByCardNumber", ReplyAction="http://tempuri.org/IService1/DeleteByCardNumberResponse")]
         System.Threading.Tasks.Task<int> DeleteByCardNumberAsync(string cardNumber);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/UpdateByCardNumber", ReplyAction="http://tempuri.org/IService1/UpdateByCardNumberResponse")]
+        int UpdateByCardNumber(string previousCardNumber, string cardName, string cardNumber, System.DateTime cardExpiry, string cvvNumber);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/UpdateByCardNumber", ReplyAction="http://tempuri.org/IService1/UpdateByCardNumberResponse")]
+        System.Threading.Tasks.Task<int> UpdateByCardNumberAsync(string previousCardNumber, string cardName, string cardNumber, System.DateTime cardExpiry, string cvvNumber);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -482,6 +488,14 @@ namespace EDP_Clinic.EDP_DBReference {
         
         public System.Threading.Tasks.Task<int> DeleteByCardNumberAsync(string cardNumber) {
             return base.Channel.DeleteByCardNumberAsync(cardNumber);
+        }
+        
+        public int UpdateByCardNumber(string previousCardNumber, string cardName, string cardNumber, System.DateTime cardExpiry, string cvvNumber) {
+            return base.Channel.UpdateByCardNumber(previousCardNumber, cardName, cardNumber, cardExpiry, cvvNumber);
+        }
+        
+        public System.Threading.Tasks.Task<int> UpdateByCardNumberAsync(string previousCardNumber, string cardName, string cardNumber, System.DateTime cardExpiry, string cvvNumber) {
+            return base.Channel.UpdateByCardNumberAsync(previousCardNumber, cardName, cardNumber, cardExpiry, cvvNumber);
         }
     }
 }

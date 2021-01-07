@@ -26,7 +26,7 @@ namespace EDP_Clinic
 
 
             //We check sessions here
-            //  Checks if users intention is to view more card info
+            //  Checks if user pass is to add card info
             if (Session["authOTPAToken"] != null && Request.Cookies["authOTPAToken"] != null)
             {
                 if (!Session["authOTPAToken"].ToString().Equals(Request.Cookies["authOTPAToken"].Value))
@@ -204,13 +204,11 @@ namespace EDP_Clinic
                     errorMsg.Text = "Please enter valid information";
                 }
                  
-
                 /*
                 nameOnCardError.Visible = false;
                 cardNumberError.Visible = false;
                 cardExpiryError.Visible = false;
                 CVVError.Visible = false;*/
-                Response.Redirect("PaymentInformation.aspx");
             }
             else
             {
@@ -288,7 +286,12 @@ namespace EDP_Clinic
 
         protected void backBtn_Click(object sender, EventArgs e)
         {
-            Response.Redirect("/PaymentInformation.aspx", false);
+            //Remove pass to add card info
+            Session.Remove("authOTPAToken");
+            Response.Cookies["authOTPAToken"].Value = string.Empty;
+            Response.Cookies["authOTPAToken"].Expires = DateTime.Now.AddMonths(-20);
+
+            Response.Redirect("CardList.aspx", false);
         }
     }
 }
