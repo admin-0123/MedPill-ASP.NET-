@@ -48,7 +48,7 @@ namespace DBService.Entity
 
             //Step 2 - Create SQL Statement
             //string sqlStatement = "INSERT INTO CardInfo (CardName, CardNumber, CardExpiry, CVVNumber, StillValid, IV, Key)"
-              //  + " VALUES (@paraCardName, @paraCardNumber, @paraCardExpiry, @paraCVVNumber, @paraStillValid, @paraIV, @paraKey)";
+            //  + " VALUES (@paraCardName, @paraCardNumber, @paraCardExpiry, @paraCVVNumber, @paraStillValid, @paraIV, @paraKey)";
 
             string sqlStatement = "INSERT INTO CardInfo VALUES (@paraCardName, @paraCardNumber, @paraCardExpiry, @paraCVVNumber, @paraStillValid, @paraIV, @paraKey)";
 
@@ -57,10 +57,10 @@ namespace DBService.Entity
             //Step 3 - Add info to each parameterised variables
             //sqlCmd.Parameters.AddWithValue("@paraCardID", CardID);
             sqlCmd.Parameters.AddWithValue("@paraCardName", CardName);
-            sqlCmd.Parameters.AddWithValue("@paraCardNumber",CardNumber);
-            sqlCmd.Parameters.AddWithValue("@paraCardExpiry",CardExpiry);
-            sqlCmd.Parameters.AddWithValue("@paraCVVNumber",CVVNumber);
-            sqlCmd.Parameters.AddWithValue("@paraStillValid",StillValid);
+            sqlCmd.Parameters.AddWithValue("@paraCardNumber", CardNumber);
+            sqlCmd.Parameters.AddWithValue("@paraCardExpiry", CardExpiry);
+            sqlCmd.Parameters.AddWithValue("@paraCVVNumber", CVVNumber);
+            sqlCmd.Parameters.AddWithValue("@paraStillValid", StillValid);
 
             //Key and IV
             sqlCmd.Parameters.AddWithValue("@paraIV", Convert.ToBase64String(IV));
@@ -96,7 +96,7 @@ namespace DBService.Entity
             //Step 5 - Read data from dataset
             CardInfo cif = null;
             int rec_cnt = ds.Tables[0].Rows.Count;
-            if(rec_cnt == 1)
+            if (rec_cnt == 1)
             {
                 DataRow row = ds.Tables[0].Rows[0]; //Returns one record
                 //int cardID = Convert.ToInt32(row["CardID"].ToString());
@@ -156,7 +156,7 @@ namespace DBService.Entity
         //Delete card by card number
         public int DeleteByCardNumber(string cardNumber)
         {
-            
+
             string DBConnect = ConfigurationManager.ConnectionStrings["EDP_DB"].ConnectionString;
             SqlConnection myConn = new SqlConnection(DBConnect);
 

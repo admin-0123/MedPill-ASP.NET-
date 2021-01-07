@@ -1,11 +1,12 @@
 ﻿<%@ Page Title="Payment History Admin" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="ReceiptListAdmin.aspx.cs" Inherits="EDP_Clinic.ReceiptListAdmin" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-    <section class="w3l-contact py-5" id="paymentInfoEmpty" style="height:100vh;">
-          <div class="container py-lg-3" >
-              <div class="mb-3">
-                <asp:Button ID="backBtn" runat="server" Text="Back" CssClass="btn btn-primary btn-style"/>
+    <section class="w3l-contact py-5" id="paymentInfoEmpty" style="height: 100vh;">
+        <div class="container py-lg-3">
+            <div class="mb-3">
+                <asp:Button ID="backBtn" runat="server" Text="Back" CssClass="btn btn-primary btn-style" />
             </div>
             <div class="mb-3">
                 <h1 class="title mb-4">Receipt History</h1>
@@ -24,6 +25,6 @@
                     </div>
                 </div>
             </div>
-          </div>
+        </div>
     </section>
 </asp:Content>
