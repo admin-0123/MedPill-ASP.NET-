@@ -173,7 +173,8 @@ namespace EDP_Clinic
             }
         }
 
-        protected void updateBtn_Click(object sender, EventArgs e)
+        //Update button is actually add card btn
+        protected void addBtn_Click(object sender, EventArgs e)
         {
             bool validInput = ValidateInput();
 
