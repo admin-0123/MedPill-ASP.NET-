@@ -6,7 +6,6 @@
     <section class="w3l-contact py-5" id="changePaymentInfo" style="height: 100vh;">
         <div class="container py-lg-3">
             <h1 class="title mb-4">Verify your Identity</h1>
-            <!--- I'll add in resend OTP function here - Hasan 7/1/2021 --->
             <p class="mb-4">Click <asp:HyperLink ID="resendOTPLink" runat="server" Target="_self" NavigateUrl="~/Authentication.aspx" ToolTip="Resend your OTP number">here</asp:HyperLink> to resend your SMS.</p>
             <div class="contact-form">
                 <form id="authenticationForm">

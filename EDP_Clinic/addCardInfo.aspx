@@ -1,7 +1,7 @@
-﻿<%@ Page Language="C#" Title="Card Update" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="addCardInfo.aspx.cs" Inherits="EDP_Clinic.addCardInfo" %>
+﻿<%@ Page Language="C#" Title="Add Card" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="addCardInfo.aspx.cs" Inherits="EDP_Clinic.addCardInfo" %>
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
-    <section class="w3l-contact py-5" id="changePaymentInfo" style="height: 100vh;">
+    <section class="w3l-contact py-5" id="changePaymentInfo">
         <div class="container py-lg-3">
             <div class="mb-3">
                 <asp:Button ID="backBtn" runat="server" Text="Back" CssClass="btn btn-primary btn-style" OnClick="backBtn_Click" />

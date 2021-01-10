@@ -13,7 +13,10 @@ using System.IO;
 using System.Web.Script.Serialization;
 using Twilio;
 using Twilio.Rest.Verify.V2.Service;
+using Twilio.Rest.Notify;
 using EDP_Clinic.EDP_DBReference;
+using System.Diagnostics;
+using Twilio.Rest.Api.V2010.Account;
 
 namespace EDP_Clinic
 {
@@ -102,6 +105,8 @@ namespace EDP_Clinic
                 var twilioAuth = myKeys["TWILIO_AUTH_TOKEN"];
                 TwilioClient.Init(twilioAccSid, twilioAuth);
 
+                Debug.WriteLine("Calling Twilio OTP Function");
+
                 //Sends OTP
 
                 /*var verification = VerificationResource.Create(
@@ -110,7 +115,8 @@ namespace EDP_Clinic
                     pathServiceSid: "VA4ceee8345f84c5be3a44bc9ab3db5790"
                 );
 
-                Console.WriteLine(verification.Sid);*/
+                Debug.WriteLine(verification.Sid);
+                //Console.WriteLine(verification.Sid);*/
             }
 
         }
@@ -270,6 +276,32 @@ namespace EDP_Clinic
             }
         }
 
+        //Twilio SMS API
+        //Will need to put in parameters to add in phone number and personalise message
+        protected void TwilioSMS()
+        {
+            Debug.WriteLine("Calling Twilio SMS Function");
+            //Retrieve keys from web.config
+            NameValueCollection myKeys = ConfigurationManager.AppSettings;
+
+            //Reading keys
+            var twilioAccSid = myKeys["TWILIO_ACCOUNT_SID"];
+            var twilioAuth = myKeys["TWILIO_AUTH_TOKEN"];
+            //const string serviceSid = "IS118b50a34ccf7d845af153585b800f7b";
+
+            TwilioClient.Init(twilioAccSid, twilioAuth);
+            //(205) 946 - 1964
+              //  + 1 213 279 6783
+            var message = MessageResource.Create(
+            body: "Dear user, an authentication has been made on your account.",
+            from: new Twilio.Types.PhoneNumber("+12132796783"),
+            to: new Twilio.Types.PhoneNumber("+6590251744")
+        );
+
+            Debug.WriteLine(message.Sid);
+            //Console.WriteLine(message.Sid);
+        }
+
         protected void verifyBtn_Click(object sender, EventArgs e)
         {
             bool ValidInput = ValidateInput();
@@ -278,7 +310,7 @@ namespace EDP_Clinic
 
             int validSessionReason = checkIntention();
 
-            bool validOTP = true;//checkOTP();
+            bool validOTP = true;// checkOTP();
 
             //Checks if user enters a valid OTP format and is not a bot
             if (ValidInput == true && validCaptcha == true)
@@ -290,6 +322,8 @@ namespace EDP_Clinic
                 //If OTP is valid
                 if (validOTP == true)
                 {
+                    //Call Twilio SMS Function
+                    //TwilioSMS();
                     //A bunch of if else statements here to redirect user to respective pages
                     if (validSessionReason == 1)
                     {

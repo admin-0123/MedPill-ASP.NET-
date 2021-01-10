@@ -78,7 +78,7 @@ Author URL: http://w3layouts.com
         </div>
     </form>
     <!-- footer-28 block -->
-    <section class="w3l-medpill-footer ">
+    <section class="w3l-medpill-footer mt-5">
         <footer class="footer-28">
             <div class="footer-bg-layer">
                 <div class="container py-lg-3">
@@ -87,9 +87,11 @@ Author URL: http://w3layouts.com
                             <h6 class="footer-title-28">Contact information</h6>
                             <ul class="address">
                                 <li>
-                                    <p>#135 block, Barnard St. Brooklyn,
+                                    <p>
+                                        #135 block, Barnard St. Brooklyn,
                                         <br>
-                                        NY 10036, USA</p>
+                                        NY 10036, USA
+                                    </p>
                                 </li>
                                 <li class="mt-4">
                                     <p><span class="fa fa-phone"></span><a href="tel:+404-11-22-89">+1-2345-345-678-11</a></p>
