@@ -7,12 +7,12 @@
         <div class="container py-lg-3">
             <h1 class="title mb-4">Verify your Identity</h1>
             <!--- I'll add in resend OTP function here - Hasan 7/1/2021 --->
-            <p class="mb-4">Click <a href="/">here</a> to resend your SMS.</p>
+            <p class="mb-4">Click <asp:HyperLink ID="resendOTPLink" runat="server" Target="_self" NavigateUrl="~/Authentication.aspx" ToolTip="Resend your OTP number">here</asp:HyperLink> to resend your SMS.</p>
             <div class="contact-form">
                 <form id="authenticationForm">
                     <div class="mb-3">
                         <label>6-digit OTP</label>
-                        <asp:TextBox ID="OTPTB" runat="server" placeholder="6-digit OTP" CssClass="form-control" Width="200px" onkeyup="validateToken()"></asp:TextBox>
+                        <asp:TextBox ID="OTPTB" runat="server" placeholder="6-digit OTP" CssClass="form-control" Width="200px" onkeyup="validateToken()" ToolTip="6-digit OTP"></asp:TextBox>
                         <asp:Label ID="OTPError" runat="server"></asp:Label>
                     </div>
                     <input type="hidden" id="g-recaptcha-response" name="g-recaptcha-response" />

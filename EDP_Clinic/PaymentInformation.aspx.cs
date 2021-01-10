@@ -48,6 +48,8 @@ namespace EDP_Clinic
             Session.Remove("authOTPVToken");
             Response.Cookies["authOTPVToken"].Value = string.Empty;
             Response.Cookies["authOTPVToken"].Expires = DateTime.Now.AddMonths(-20);
+
+            Response.Redirect("CardList.aspx", false);
         }
 
         protected void deleteBtn_Click(object sender, EventArgs e)

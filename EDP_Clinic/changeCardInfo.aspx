@@ -14,26 +14,26 @@
                             <asp:Label ID="errorMsg" runat="server"></asp:Label>
                             <div class="mb-3">
                                 <label>Name on Card</label>
-                                <asp:TextBox ID="nameOnCardTB" runat="server" placeholder="Name On Card" CssClass="form-control" onkeyup="nameOnCardValidation()"></asp:TextBox>
+                                <asp:TextBox ID="nameOnCardTB" runat="server" placeholder="Name On Card" CssClass="form-control" onkeyup="nameOnCardValidation()" ToolTip="Name On Card"></asp:TextBox>
                                 <asp:Label ID="nameOnCardError" runat="server"></asp:Label>
                             </div>
                             <div class="mb-3">
                                 <label>Card Number</label>
-                                <asp:TextBox ID="cardNumberTB" runat="server" placeholder="Card Number" CssClass="form-control" onkeyup="cardNumberValidation()"></asp:TextBox>
+                                <asp:TextBox ID="cardNumberTB" runat="server" placeholder="Card Number" CssClass="form-control" onkeyup="cardNumberValidation()" ToolTip="Card Number"></asp:TextBox>
                                 <asp:Label ID="cardNumberError" runat="server"></asp:Label>
                             </div>
                             <div class="row mb-3">
                                 <div class="col-md-6">
                                     <div class="mb-3">
-                                        <label>Card Expiry (MM YY)</label>
-                                        <asp:TextBox ID="cardExpiryTB" runat="server" type="month" placeholder="Card Expiry (MM YY)" CssClass="form-control" onkeyup="cardExpiryValidation()"></asp:TextBox>
+                                        <label>Card Expiry (MM YYYY)</label>
+                                        <asp:TextBox ID="cardExpiryTB" runat="server" type="month" placeholder="Card Expiry (MM YYYY)" CssClass="form-control" onkeyup="cardExpiryValidation()" ToolTip="Card Expiry (MM YY)"></asp:TextBox>
                                         <asp:Label ID="cardExpiryError" runat="server"></asp:Label>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="mb-3">
                                         <label>CVV Number</label>
-                                        <asp:TextBox ID="CVVTB" runat="server" placeholder="CVV Number" CssClass="form-control" onkeyup="cvvNumberValidation()"></asp:TextBox>
+                                        <asp:TextBox ID="CVVTB" runat="server" placeholder="CVV Number" CssClass="form-control" onkeyup="cvvNumberValidation()" ToolTip="CVV Number"></asp:TextBox>
                                         <asp:Label ID="CVVError" runat="server"></asp:Label>
                                     </div>
                                 </div>

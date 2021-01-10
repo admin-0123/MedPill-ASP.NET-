@@ -43,6 +43,40 @@ namespace DBService.Entity
         {
             //Step 1 -  Define a connection to the database by getting
             //          the connection string from App.config
+            /*try
+            {
+                string DBConnect = ConfigurationManager.ConnectionStrings["EDP_DB"].ConnectionString;
+                using (SqlConnection myConn = new SqlConnection(DBConnect))
+                {
+                    string sqlStatement = "INSERT INTO CardInfo VALUES (@paraCardName, @paraCardNumber, @paraCardExpiry, @paraCVVNumber, @paraStillValid, @paraIV, @paraKey)";
+                    using (SqlCommand sqlCmd = new SqlCommand(sqlStatement))
+                    {
+                        //sqlCmd.Parameters.AddWithValue("@paraCardID", CardID);
+                        sqlCmd.Parameters.AddWithValue("@paraCardName", CardName);
+                        sqlCmd.Parameters.AddWithValue("@paraCardNumber", CardNumber);
+                        sqlCmd.Parameters.AddWithValue("@paraCardExpiry", CardExpiry);
+                        sqlCmd.Parameters.AddWithValue("@paraCVVNumber", CVVNumber);
+                        sqlCmd.Parameters.AddWithValue("@paraStillValid", StillValid);
+
+                        //Key and IV
+                        sqlCmd.Parameters.AddWithValue("@paraIV", Convert.ToBase64String(IV));
+                        sqlCmd.Parameters.AddWithValue("@paraKey", Convert.ToBase64String(Key));
+
+                        //Step 4 - Open Connection to database
+                        myConn.Open();
+                        int result = sqlCmd.ExecuteNonQuery();
+
+                        //Step 5 - Close Connection to database
+                        myConn.Close();
+
+                        return result;
+                    }
+                }
+            }
+            catch(SqlException ex)
+            {
+                //Add error code here
+            }*/
             string DBConnect = ConfigurationManager.ConnectionStrings["EDP_DB"].ConnectionString;
             SqlConnection myConn = new SqlConnection(DBConnect);
 
@@ -215,5 +249,7 @@ namespace DBService.Entity
                 return true;
             }
         }
+
+        //Might consider putting encryption and decryption inside this function
     }
 }
