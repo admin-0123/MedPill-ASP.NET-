@@ -19,11 +19,9 @@
                 $rows.hide().slice(min, max).show(); // hide all rows, then show only the range we want
                 return false;
             }
-
-            show(1, 5)
+            show(1, 100)
 
         });
-
 
     </script>
     <style type="text/css">
@@ -103,8 +101,8 @@
             </p>
             <p>&nbsp;</p>
             <asp:TextBox ID="tb_startdate" runat="server" placeholder="DD/MM/YYYY"></asp:TextBox>
-            <ajaxToolkit:CalendarExtender ID="tb_startdate_CalendarExtender" runat="server" BehaviorID="TextBox2_CalendarExtender" TargetControlID="tb_startdate" />
-            <asp:Button ID="btn_searchSlot" runat="server" Text="Search" OnClick="btn_searchSlot_Click" />
+            <ajaxToolkit:CalendarExtender ID="tb_startdate_CalendarExtender" runat="server" BehaviorID="TextBox2_CalendarExtender" TargetControlID="tb_startdate" Format="dd/MM/yyyy" />
+            <asp:Button ID="btn_searchSlot" runat="server" Text="Search" OnClick="btn_searchSlot_Click"/>
             <br />
             <asp:Label ID="lbl_validDates" runat="server"></asp:Label>
 

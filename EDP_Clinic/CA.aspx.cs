@@ -12,6 +12,7 @@ namespace EDP_Clinic
         public List<DateTime> mySlots;
         public DateTime startDate = DateTime.Now;
         public DateTime endDate = DateTime.Now.AddMonths(2);
+        List<DateTime> openSlots = new List<DateTime>();
         protected void Page_Load(object sender, EventArgs e)
         {
 
@@ -24,8 +25,6 @@ namespace EDP_Clinic
             lbl_validDates.Text = $"You may only pick a date between {startDate.Day} {startDate.ToString("MMMM")} to {endDate.Day} {endDate.ToString("MMMM")}";
 
             // Code block below to generate a list of available appointment timeslots 
-
-            var openSlots = new List<DateTime>();
 
             for (var dt = startDate; dt <= endDate; dt = dt.AddDays(1))
             {
@@ -59,7 +58,22 @@ namespace EDP_Clinic
 
         protected void btn_searchSlot_Click(object sender, EventArgs e)
         {
-            startDate = Convert.ToDateTime(tb_startdate.Text.ToString());
+            DateTime checkdate_input;
+            var checkdate_bool = DateTime.TryParse(tb_startdate.Text, out checkdate_input);
+
+            // if input is a valid date, run the code block
+            if (checkdate_bool != false)
+            {
+                startDate = Convert.ToDateTime(tb_startdate.Text);
+
+                // Remove all items earlier than startdate from the list
+                openSlots.RemoveAll(item => item < startDate);
+
+                // Change the available valid dates text
+                lbl_validDates.Text = $"You may only pick a date between {startDate.Day} {startDate.ToString("MMMM")} to {endDate.Day} {endDate.ToString("MMMM")}";
+
+            }
+
 
         }
 
