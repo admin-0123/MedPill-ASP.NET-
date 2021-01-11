@@ -33,40 +33,40 @@ namespace EDP_Clinic
         protected global::System.Web.UI.WebControls.DropDownList DropDownList1;
 
         /// <summary>
-        /// TextBox1 control.
+        /// tb_startdate control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBox1;
+        protected global::System.Web.UI.WebControls.TextBox tb_startdate;
 
         /// <summary>
-        /// Button1 control.
+        /// tb_startdate_CalendarExtender control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button Button1;
+        protected global::AjaxControlToolkit.CalendarExtender tb_startdate_CalendarExtender;
 
         /// <summary>
-        /// Calendar1 control.
+        /// btn_searchSlot control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Calendar Calendar1;
+        protected global::System.Web.UI.WebControls.Button btn_searchSlot;
 
         /// <summary>
-        /// Button2 control.
+        /// lbl_validDates control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button Button2;
+        protected global::System.Web.UI.WebControls.Label lbl_validDates;
 
         /// <summary>
         /// Button3 control.

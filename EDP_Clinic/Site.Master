@@ -26,6 +26,7 @@ Author URL: http://w3layouts.com
     <!--- Google Recaptcha --->
     <script src="https://www.google.com/recaptcha/api.js?render=6LejmBwaAAAAAIDSwI7BQzo5s3UO3qDlAztog9Uh"></script>
 
+
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
 </head>
@@ -56,7 +57,7 @@ Author URL: http://w3layouts.com
             <a class="nav-link" href="Services.aspx">Services</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="Contact.aspx">Contact</a>
+            <a class="nav-link" href="Contact.aspx">Con
           </li>
         </ul>
       </div>
@@ -71,7 +72,12 @@ Author URL: http://w3layouts.com
   </nav>
 </section>
         <form id="form1" runat="server">
+            <!-- Add the INVISIBLE SCRIPT MANAGER CONTROL IN ORDER TO USE AJAX TOOLKIT CONTROLS! -->
+                                        <asp:ScriptManager ID="ScriptManager1" runat="server">
+
+            </asp:ScriptManager>
         <div>
+
             <asp:ContentPlaceHolder ID="MainContent" runat="server">
             </asp:ContentPlaceHolder>
         </div>
@@ -83,7 +89,7 @@ Author URL: http://w3layouts.com
         <div class="container py-lg-3">
           <div class="row footer-top-28">
             <div class="col-lg-4 col-md-6 col-sm-7 footer-list-28 mt-sm-5 mt-4">
-              <h6 class="footer-title-28">Contact information</h6>
+              <h6 class="footer-title-28">Contact informationormation</h6>
               <ul class="address">
                 <li>
                   <p> #135 block, Barnard St. Brooklyn, <br>NY 10036, USA</p>
@@ -164,7 +170,8 @@ Author URL: http://w3layouts.com
     </script>
     <!-- /move top -->
 
-    <script type="text/javascript" src="assets/js/jquery-3.5.1.min.js"></script>
+    <script type="text/javascript" src="assets/js/jquery-3.5.1.min.js">
+    </script>
     
     <script type="text/javascript" src="assets/js/green-audio-player.js"></script>
 
