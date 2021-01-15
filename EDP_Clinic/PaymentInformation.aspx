@@ -17,8 +17,8 @@
                 <h4 class="mb-4">Card Expiry: 
                     <asp:Label ID="cardExpiryText" runat="server"></asp:Label></h4>
                 <!--- Put all these information out for testing purposes --->
-                <h4 class="mb-4">CVV Number: 
-                    <asp:Label ID="cvvNumberText" runat="server"></asp:Label></h4>
+<%--                <h4 class="mb-4">CVV Number: 
+                    <asp:Label ID="cvvNumberText" runat="server"></asp:Label></h4>--%>
             </div>
             <div class="row">
                 <div class="col-md-8"></div>

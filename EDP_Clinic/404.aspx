@@ -1,9 +1,9 @@
-﻿<%@ Page Title="404" Language="C#" AutoEventWireup="true" MasterPageFile="~/Site.Master" CodeBehind="404.aspx.cs" Inherits="EDP_Clinic._404" %>
+﻿<%@ Page Title="404 Error" Language="C#" AutoEventWireup="true" MasterPageFile="~/Site.Master" CodeBehind="404.aspx.cs" Inherits="EDP_Clinic._404" %>
 
 <asp:Content ID="head" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
-    <section class="w3l-contact py-5" id="404_Error" style="height: 100vh;">
+    <section class="w3l-contact py-5" id="404_Error">
         <div class="container py-lg-3">
             <div class="mt-5 text-center">
                 <h1 class="title mb-4">404 Error</h1>

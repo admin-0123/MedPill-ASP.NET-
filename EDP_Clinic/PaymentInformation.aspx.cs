@@ -31,7 +31,7 @@ namespace EDP_Clinic
                     cardNameText.Text = cif.CardName;
                     cardNumberText.Text = cif.CardNumber;
                     cardExpiryText.Text = cardExpiryDate.ToString("MMMM yyyy");//Convert.ToDateTime.ToMon(cif.CardExpiry);
-                    cvvNumberText.Text = cif.CVVNumber;
+                    //cvvNumberText.Text = cif.CVVNumber;
                 }
             }
             else

@@ -1,9 +1,9 @@
-﻿<%@ Page Title="500" Language="C#" AutoEventWireup="true" MasterPageFile="~/Site.Master" CodeBehind="500.aspx.cs" Inherits="EDP_Clinic._500" %>
+﻿<%@ Page Title="500 Error" Language="C#" AutoEventWireup="true" MasterPageFile="~/Site.Master" CodeBehind="500.aspx.cs" Inherits="EDP_Clinic._500" %>
 
 <asp:Content ID="head" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
-    <section class="w3l-contact py-5" id="500_Error" style="height: 100vh;">
+    <section class="w3l-contact py-5" id="500_Error">
         <div class="container py-lg-3">
             <div class="mt-5 text-center">
                 <h1 class="title mb-4">500 Error</h1>
