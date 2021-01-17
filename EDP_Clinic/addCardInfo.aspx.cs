@@ -190,7 +190,8 @@ namespace EDP_Clinic
                 IV = cipher.IV;
 
                 EDP_DBReference.Service1Client client = new EDP_DBReference.Service1Client();
-                int result = client.CreateCardInfo(nameOnCardTB.Text, cardNumberTB.Text, Convert.ToDateTime(cardExpiryTB.Text),CVVTB.Text, IV, Key);
+                int result = client.CreateCardInfo(nameOnCardTB.Text.Trim(), cardNumberTB.Text.Trim(),
+                    Convert.ToDateTime(cardExpiryTB.Text), CVVTB.Text.Trim(), IV, Key, true);
                 if(result == 1)
                 {
                     //Remove pass to add card info
@@ -219,7 +220,7 @@ namespace EDP_Clinic
                 CVVError.Visible = true;
             }
         }
-
+        /*
         protected byte[] encryptData(string data)
         {
             byte[] cipherText = null;
@@ -240,7 +241,7 @@ namespace EDP_Clinic
             }
             finally { }
             return cipherText;
-        }
+        }*/
 
         //Initialise an object to store Recaptcha response
         public class reCaptchaResponseObject

@@ -339,6 +339,8 @@ namespace EDP_Clinic
                         Response.Cookies.Add(new HttpCookie("authOTPAToken", guid));
                         Response.Redirect("addCardInfo.aspx", false);
                     }
+
+                    //Remove change card function
                     else if (validSessionReason == 2)
                     {
                         //Remove change card info session and cookie
@@ -387,14 +389,14 @@ namespace EDP_Clinic
                         Response.Cookies["viewCardInfo"].Value = string.Empty;
                         Response.Cookies["viewCardInfo"].Expires = DateTime.Now.AddMonths(-20);
 
-                        string cardNumber = Session["cardNumber"].ToString();
+                        //string cardNumber = Session["cardNumber"].ToString();
 
                         //Create valid pass for user to view more card info
                         string guid = Guid.NewGuid().ToString();
                         Session["authOTPVToken"] = guid;
 
                         Response.Cookies.Add(new HttpCookie("authOTPVToken", guid));
-                        Response.Redirect("PaymentInformation.aspx?cardNumber=" + cardNumber, false);
+                        Response.Redirect("PaymentInformation.aspx?", false);
                     }
 
                     //Just in case there is some error here

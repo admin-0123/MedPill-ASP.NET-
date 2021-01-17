@@ -29,9 +29,12 @@ namespace DBService
         List<User> GetAllUsers();
 
         //CardInfo Entity Class
+        //[OperationContract]
+        //int CreateCardInfo(byte[] cardName, byte[] cardNumber,
+          //  byte[] cardExpiry, byte[] cvvNumber, byte[] iv, byte[] key);
         [OperationContract]
         int CreateCardInfo(string cardName, string cardNumber,
-            DateTime cardExpiry, string cvvNumber, byte[] iv, byte[] key);
+            DateTime cardExpiry, string cvvNumber, byte[] iv, byte[] key, bool stillValid);
 
         [OperationContract]
         CardInfo GetCardByCardNumber(string cardNumber);

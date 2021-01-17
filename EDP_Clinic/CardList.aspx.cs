@@ -1,7 +1,10 @@
 ﻿using EDP_Clinic.EDP_DBReference;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Runtime.Serialization.Formatters.Binary;
+using System.Security.Cryptography;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -10,6 +13,8 @@ namespace EDP_Clinic
 {
     public partial class CardList : System.Web.UI.Page
     {
+        byte[] Key;
+        byte[] IV;
         protected void Page_Load(object sender, EventArgs e)
         {
             List<CardInfo> cifList = new List<CardInfo>();
@@ -31,6 +36,18 @@ namespace EDP_Clinic
             else
             {
                 addCardInfo.Enabled = false;
+            }
+        }
+
+        byte[] ObjectToByteArray(object obj)
+        {
+            if (obj == null)
+                return null;
+            BinaryFormatter bf = new BinaryFormatter();
+            using (MemoryStream ms = new MemoryStream())
+            {
+                bf.Serialize(ms, obj);
+                return ms.ToArray();
             }
         }
 
@@ -58,7 +75,11 @@ namespace EDP_Clinic
             {
                 //Card number will be encrypted later on
                 //For now, just pass a plain-text number
-                Session["cardNumber"] = e.CommandArgument;
+                //var cardNumber = ObjectToByteArray(e.CommandArgument);
+
+
+
+                Session["cardNumber"] = e.CommandArgument.ToString();
 
                 //Create intention for user to view card info
                 string guid = Guid.NewGuid().ToString();
@@ -74,6 +95,39 @@ namespace EDP_Clinic
         protected void backBtn_Click(object sender, EventArgs e)
         {
 
+        }
+        protected string decryptData(byte[] cipherText)
+        {
+            string plainText = null;
+            try
+            {
+                RijndaelManaged cipher = new RijndaelManaged();
+                cipher.IV = IV;
+                cipher.Key = Key;
+                // Create a decrytor to perform the stream transform.
+                ICryptoTransform decryptTransform = cipher.CreateDecryptor();
+                //Create the streams used for decryption
+
+                using (System.IO.MemoryStream msDecrypt = new System.IO.MemoryStream(cipherText))
+                {
+                    using (CryptoStream csDecrypt = new CryptoStream(msDecrypt, decryptTransform, CryptoStreamMode.Read))
+                    {
+                        using (StreamReader srDecrypt = new StreamReader(csDecrypt))
+                        {
+
+                            //Read the decrypted bytes from the decrypting stream
+                            //and place them in a string
+                            plainText = srDecrypt.ReadToEnd();
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.ToString());
+            }
+            finally { }
+            return plainText;
         }
 
         //Create function to censor cardnumber
