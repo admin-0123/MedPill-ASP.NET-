@@ -37,7 +37,7 @@ namespace EDP_Clinic
                 else
                 {
                     //Will need to relook at this page later
-                    
+                    /*
                     string cardNumber = Request.QueryString["cardNumber"];
                     Service1Client client = new Service1Client();
                     CardInfo cif = client.GetCardByCardNumber(cardNumber);
@@ -48,7 +48,7 @@ namespace EDP_Clinic
                     cardNumberResult.Text = cif.CardNumber.Trim();
                     cardExpiryResult.Text = cardExpiryDate.ToString("yyyy-MM").Trim();//Convert.ToDateTime.ToMon(cif.CardExpiry);
                     cvvNumberResult.Text = cif.CVVNumber.Trim();
-                    
+                    */
                 }
             }
             else

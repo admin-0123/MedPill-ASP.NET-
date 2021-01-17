@@ -33,7 +33,8 @@
                             <div class="row">
                                 <div class="col-md-10">
                                     <h5 class="card-title">Card No.:
-                                        <asp:Label ID="cardNumber" runat="server" Text='<%# Eval("CardNumber") %>'></asp:Label></h5>
+                                        <asp:Label ID="cardNumber" runat="server" Text='<%# "**** **** **** " + Eval("CardNumber").ToString().Substring(12,4) %>'></asp:Label></h5>
+
                                 </div>
                                 <div class="col-md-2">
                                     <asp:LinkButton ID="moreBtn" runat="server" CssClass="btn btn-primary btn-style" CommandName="viewMore" CommandArgument='<%# Eval("CardNumber") %>'>More</asp:LinkButton>
