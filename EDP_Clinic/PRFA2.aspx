@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="PRFA2.aspx.cs" Inherits="EDP_Clinic.PRFA2" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="PRFA2.aspx.cs" Inherits="EDP_Clinic.PRFA2"  %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <style>
         .btn_mka {
@@ -87,23 +87,29 @@
         <div>
             &nbsp
             &nbsp
+
         </div>
 
 
 
-        <asp:ListView ID="listview_appts" runat="server" OnPagePropertiesChanging="listview_appts_PagePropertiesChanging">
+                <asp:ListView ID="listview_appts" runat="server" OnPagePropertiesChanging="listview_appts_PagePropertiesChanging">
                         <ItemTemplate>
                             <div class="card-header">
-            <h4>Date Time: <%# Eval("dateTime") %> </h4>
-            <h4> Type: <%# Eval("appointmentType") %> </h4>
-            <h4> Doctor: <%# Convert_Placebo( Eval("doctorID") ) %> </h4>
+                                <p> Date Time: <asp:Label ID="lbl_c_dt" runat="server" Text='<%# Eval("dateTime") %>'></asp:Label> </p>
+                               <p> Type: <asp:Label ID="lbl_c_at" runat="server" Text='<%# Eval("appointmentType") %>'></asp:Label></p>
+                                <p> Doctor: <asp:Label ID="lbl_c_dn" runat="server" Text='<%# Convert_Placebo( Eval("doctorID") ) %>'></asp:Label> </p>
 
+
+                    <% if (Session["appt_viewstate"].ToString() == "upcoming")
+                        { %>
             <div class="row">
-                                    <asp:Button ID="btn_Rsch2" runat="server" Text="Reschedule" CssClass="btn_Rsch bg-primary text-white col-3 align-content-end ml-2" />
+                                    <asp:Button ID="btn_Rsch" runat="server" Text="Reschedule" CssClass="btn_Rsch bg-primary text-white col-3 align-content-end ml-2" OnClick="btn_RschOnClick" />
                                     <span class="col-3"></span>
-                                    <button class="btn_Cancel bg-white text-primary btn-outline-primary col-3"  data-toggle="modal" data-target="#cancelModal" onclick="btn_cancel_click" id="cancelBtn"> Cancel  </button>
+                                    <asp:Button ID="btn_Cancel" runat="server" Text="Cancel2" CssClass="btn_Cancel bg-white text-primary btn-outline-primary col-3" OnClick="btn_CancelOnClick" />
                          <span class="col-3"></span>
             </div>
+                                <% } %>
+
         </div>
             </ItemTemplate>
         </asp:ListView>
@@ -112,6 +118,7 @@
                 <asp:NumericPagerField ButtonType="Link" />
             </Fields>
         </asp:DataPager>
+
 
 
 

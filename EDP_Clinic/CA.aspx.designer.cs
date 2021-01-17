@@ -168,12 +168,12 @@ namespace EDP_Clinic
         protected global::System.Web.UI.WebControls.Button btn_createAppt;
 
         /// <summary>
-        /// Button6 control.
+        /// btn_cancelAppt control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button Button6;
+        protected global::System.Web.UI.WebControls.Button btn_cancelAppt;
     }
 }

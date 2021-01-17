@@ -429,6 +429,113 @@ namespace DBService.Entity
             return apptList;
         }
 
+        public Appointment SelectOne(int uid, DateTime appt_datetime)
+        {
+            //Step 1 -  Define a connection to the database by getting
+            //          the connection string from App.config
+            string DBConnect = ConfigurationManager.ConnectionStrings["EDP_DB"].ConnectionString;
+            SqlConnection myConn = new SqlConnection(DBConnect);
+
+            //Step 2 -  Create a DataAdapter object to retrieve data from the database table
+            string sqlStmt = "Select * from Appointment where patientID=@paraUID and dateTime=@dateTime";
+            SqlDataAdapter da = new SqlDataAdapter(sqlStmt, myConn);
+            da.SelectCommand.Parameters.AddWithValue("@paraUID", uid);
+            da.SelectCommand.Parameters.AddWithValue("@dateTime", appt_datetime);
+
+            //Step 3 -  Create a DataSet to store the data to be retrieved
+            DataSet ds = new DataSet();
+
+            //Step 4 -  Use the DataAdapter to fill the DataSet with data retrieved
+            da.Fill(ds);
+
+            //Step 5 -  Read data from DataSet to List
+            Appointment obj = new Appointment();
+            int rec_cnt = ds.Tables[0].Rows.Count;
+            for (int i = 0; i < rec_cnt; i++)
+            {
+                DataRow row = ds.Tables[0].Rows[i];  // Sql command returns only one record
+
+                int patientID = Convert.ToInt32(row["patientID"]);
+                int doctorID = 0;
+                int nurseID = 0;
+                int caregiverID = 0;
+                string appointmentType = row["appointmentType"].ToString();
+                string prescription = "none";
+                string remarks = "none";
+                DateTime dateTime = Convert.ToDateTime(row["dateTime"]);
+                string followUp = "none";
+                string status = row["status"].ToString();
+
+                if (row.IsNull("doctorID") == false)
+                {
+                    doctorID = Convert.ToInt32(row["doctorID"]);
+                }
+                if (row.IsNull("nurseID") == false)
+                {
+                    nurseID = Convert.ToInt32(row["nurseID"]);
+                }
+                if (row.IsNull("caregiverID") == false)
+                {
+                    caregiverID = Convert.ToInt32(row["caregiverID"]);
+                }
+                if (row.IsNull("prescription") == false)
+                {
+                    prescription = row["prescription"].ToString();
+                }
+                if (row.IsNull("remarks") == false)
+                {
+                    remarks = row["remarks"].ToString();
+                }
+                if (row.IsNull("followUp") == false)
+                {
+                    followUp = row["followUp"].ToString();
+                }
+                obj = new Appointment(patientID, doctorID, nurseID, caregiverID, appointmentType, prescription, remarks, dateTime, followUp, status);
+
+            }
+            return obj;
+        }
+
+        public int UpdateOne(int uid, string appointmentType, DateTime old_time, DateTime new_time)
+        {
+            string DBConnect = ConfigurationManager.ConnectionStrings["EDP_DB"].ConnectionString;
+            SqlConnection myConn = new SqlConnection(DBConnect);
+
+            string sqlStmt = "UPDATE Appointment SET dateTime = @newTime, appointmentType=@newApptType where patientID =  @uid and dateTime = @oldTime";
+
+            SqlCommand sqlCmd = new SqlCommand(sqlStmt, myConn);
+
+            sqlCmd.Parameters.AddWithValue("@uid", uid);
+            sqlCmd.Parameters.AddWithValue("@oldTime", old_time);
+            sqlCmd.Parameters.AddWithValue("@newTime", new_time);
+            sqlCmd.Parameters.AddWithValue("@newApptType", appointmentType);
+            myConn.Open();
+            int result = sqlCmd.ExecuteNonQuery();
+
+            myConn.Close();
+
+            return result;
+        }
+
+        public int DeleteOne(int uid, DateTime dateTime)
+        {
+            string DBConnect = ConfigurationManager.ConnectionStrings["EDP_DB"].ConnectionString;
+            SqlConnection myConn = new SqlConnection(DBConnect);
+
+            string sqlStmt = "DELETE FROM Appointment WHERE patientID=@uid and dateTime=@dateTime";
+
+            SqlCommand sqlCmd = new SqlCommand(sqlStmt, myConn);
+
+            sqlCmd.Parameters.AddWithValue("@uid", uid);
+            sqlCmd.Parameters.AddWithValue("@dateTime", dateTime);
+            myConn.Open();
+            int result = sqlCmd.ExecuteNonQuery();
+
+            myConn.Close();
+
+            return result;
+        }
+
     }
 
 

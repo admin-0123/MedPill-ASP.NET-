@@ -104,8 +104,8 @@
     <Reference Include="System.Configuration" />
     <Reference Include="System.Web.Services" />
     <Reference Include="System.EnterpriseServices" />
-    <Reference Include="Twilio, Version=5.52.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Twilio.5.52.1\lib\net451\Twilio.dll</HintPath>
+    <Reference Include="Twilio, Version=5.53.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Twilio.5.53.0\lib\net451\Twilio.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -160,6 +160,9 @@
     <Content Include="assets\js\bootstrap.min.js" />
     <Content Include="assets\js\owl.carousel.js" />
     <Content Include="Authentication.aspx" />
+    <Content Include="CA_Success.aspx" />
+    <Content Include="RA.aspx" />
+    <Content Include="RA_Success.aspx" />
     <Content Include="WebForm2.aspx" />
     <None Include="Connected Services\EDP_DBReference\configuration91.svcinfo" />
     <None Include="Connected Services\EDP_DBReference\configuration.svcinfo" />
@@ -233,6 +236,13 @@
     <Compile Include="CA.aspx.designer.cs">
       <DependentUpon>CA.aspx</DependentUpon>
     </Compile>
+    <Compile Include="CA_Success.aspx.cs">
+      <DependentUpon>CA_Success.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CA_Success.aspx.designer.cs">
+      <DependentUpon>CA_Success.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Connected Services\EDP_DBReference\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -295,6 +305,20 @@
       <DependentUpon>PRFA2.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RA.aspx.cs">
+      <DependentUpon>RA.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="RA.aspx.designer.cs">
+      <DependentUpon>RA.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="RA_Success.aspx.cs">
+      <DependentUpon>RA_Success.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="RA_Success.aspx.designer.cs">
+      <DependentUpon>RA_Success.aspx</DependentUpon>
+    </Compile>
     <Compile Include="ReceiptList.aspx.cs">
       <DependentUpon>ReceiptList.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

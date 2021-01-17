@@ -6,12 +6,14 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Drawing;
+using Twilio;
+using Twilio.Rest.Api.V2010.Account;
 
 namespace EDP_Clinic
 {
     public partial class WebForm5 : System.Web.UI.Page
     {
-        // Scraping the use of global variables because they suck
+        // Scraping the use of global variables because they arent good
         //public List<DateTime> mySlots = Get_AvailableAppt();
         //public DateTime startDate;
         //public DateTime endDate = Convert.ToDateTime("08/08/2021");
@@ -264,42 +266,35 @@ namespace EDP_Clinic
                 if (insert_result == 1)
                 {
 
-                   lbl_error_make_appt.ForeColor = System.Drawing.Color.Green;
+                   lbl_error_make_appt.ForeColor = Color.Green;
                    lbl_error_make_appt.Text = "Appointment Made Successfully!";
                     gv_timeslots.DataSource = Search_AvailableAppts();
                     gv_timeslots.DataBind();
+
+                    var appt_success_dict = new Dictionary<string, string>(){
+    {"appointmentType", appointmentType.ToString()},
+    {"dateTime", rb_userinput.ToString()},
+    {"status", status.ToString() }
+};
+                    Session["successful_appt_details"] = appt_success_dict;
+                    Response.Redirect("~/CA_Success.aspx");
                 }
                 else
-                    lbl_error_make_appt.Text = "Booking failed, please try again.";
-                gv_timeslots.DataSource = Search_AvailableAppts();
-                gv_timeslots.DataBind();
+                {
+                    lbl_error_make_appt.ForeColor = Color.Red;
+                    lbl_error_make_appt.Text = "Booking failed, exit the page and try again.";
+                    gv_timeslots.DataSource = Search_AvailableAppts();
+                    gv_timeslots.DataBind();
+                }
 
-                /*                DateTime dob = Convert.ToDateTime(tbBirthDate.Text);
-                                double wage = Convert.ToDouble(tbMthlySalary.Text);
 
-                                MyDBServiceReference.Service1Client client = new MyDBServiceReference.Service1Client();
-                                int result = client.CreateEmployee(tbNric.Text, tbName.Text, dob, ddlDept.Text, wage);
-                                if (result == 1)
-                                {
-                                    RefreshGridView();
-                                    lbMsg.ForeColor = Color.Green;
-                                    lbMsg.Text = "Employee Record Inserted Successfully!";
-                                }
-                                else
-                                    lbMsg.Text = "SQL Error. Insert Unsuccessful!";*/
+
             }
+        }
 
-            
-/*            if (Request["rb_apptslot"] == null)
-            {
-                lbl_validDates.Text = $"None selected!";
-            }
-            else
-            {
-                lbl_validDates.Text = $"You selected {rb_userinput}";
-            }*/
-
-
+        protected void btn_cancelAppt_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/PRFA2.aspx");
         }
         /*
 public List<Appointment> GetAppts()

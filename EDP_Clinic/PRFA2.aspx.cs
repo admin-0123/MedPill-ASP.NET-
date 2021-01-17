@@ -5,6 +5,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Drawing;
 
 namespace EDP_Clinic
 {
@@ -16,6 +17,27 @@ namespace EDP_Clinic
             if (!IsPostBack)
             {
                 Session["appt_viewstate"] = "upcoming";
+
+                // On every postback, search for the session, check the current session value of viewstate and display the contents accordingly.
+                // Edit: Shifted the switch statement from page load to here initial page load only as it is causing
+                // System.ArgumentException: Invalid postback or callback argument.  Event validation is enabled using <pages enableEventValidation="true"/> in configuration or <%@ Page EnableEventValidation="true" %> in a page.  For security purposes, this feature verifies that arguments to postback or callback events originate from the server control that originally rendered them.  If the data is valid and expected, use the ClientScriptManager.RegisterForEventValidation method in order to register the postback or callback data for validation.
+
+                switch (Session["appt_viewstate"])
+                {
+                    case "upcoming":
+                        listview_appts.DataSource = GetApptsUserUpcoming();
+                        listview_appts.DataBind();
+                        break;
+                    case "past":
+                        listview_appts.DataSource = GetApptsUserPast();
+                        listview_appts.DataBind();
+                        break;
+                    case "missed":
+                        listview_appts.DataSource = GetApptsUserMissed();
+                        listview_appts.DataBind();
+                        break;
+
+                }
             }
             
             // Search for the current profile selected and set the necessary contents like profileName.. etc
@@ -30,30 +52,16 @@ namespace EDP_Clinic
             //repeater_appts.DataSource = GetApptsUser();
             //repeater_appts.DataBind();
 
-            // On every postback, search for the session, check the current session value of viewstate and display the contents accordingly
-            switch (Session["appt_viewstate"])
-            {
-                case "upcoming":
-                    listview_appts.DataSource = GetApptsUserUpcoming();
-                    listview_appts.DataBind();
-                    break;
-                case "past":
-                    listview_appts.DataSource = GetApptsUserPast();
-                    listview_appts.DataBind();
-                    break;
-                case "missed":
-                    listview_appts.DataSource = GetApptsUserMissed();
-                    listview_appts.DataBind();
-                    break;
 
-            }
 
+            var test123 = listview_appts.SelectedIndex;
+            System.Diagnostics.Debug.WriteLine($"SELECTED INDEX IS {test123}");
         }
 
-        protected void btn_cancel_click(object sender, EventArgs e)
+/*        protected void btn_cancel_click(object sender, EventArgs e)
         {
             ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "showModal();", true);
-        }
+        }*/
 
 
         // Get All Appts for one user regardless of the status
@@ -200,6 +208,8 @@ namespace EDP_Clinic
                 Session["appt_viewstate"] = "past";
                 listview_appts.DataSource = GetApptsUserPast();
                 listview_appts.DataBind();
+                
+                
             }
 
 
@@ -218,5 +228,89 @@ namespace EDP_Clinic
             }
 
         }
+
+        protected void btn_RschOnClick(object sender, EventArgs e)
+        {
+            Button btn = sender as Button;
+            // Get the listviewitem from button
+            ListViewItem item = (ListViewItem)(sender as Control).NamingContainer;
+
+            // Find the label control
+            Label lblDT = (Label)item.FindControl("lbl_c_dt");
+            //get the value
+            DateTime lblDT_value = Convert.ToDateTime(lblDT.Text.ToString());
+
+            //Find the label control
+            Label lblAT = (Label)item.FindControl("lbl_c_at");
+            //get the value
+            string lblAT_value = lblAT.Text;
+
+            //Find the label control
+            Label lblDN = (Label)item.FindControl("lbl_c_dn");
+            //get the value
+            string lblDN_value = lblDN.Text;
+
+            // lbl_profileName.Text = lblDT_value.ToString();
+
+            Session["selected_appt_date"] = lblDT_value;
+            Session["selected_appt_type"] = lblAT_value;
+            Response.Redirect("~/RA.aspx");
+        }
+
+        protected void btn_CancelOnClick(object sender, EventArgs e)
+        {
+            Button btn = sender as Button;
+            // Get the listviewitem from button
+            ListViewItem item = (ListViewItem)(sender as Control).NamingContainer;
+
+            // Find the label control
+            Label lblDT = (Label)item.FindControl("lbl_c_dt");
+            //get the value
+            DateTime lblDT_value = Convert.ToDateTime(lblDT.Text.ToString());
+
+            //Find the label control
+            Label lblAT = (Label)item.FindControl("lbl_c_at");
+            //get the value
+            string lblAT_value = lblAT.Text;
+
+            //Find the label control
+            Label lblDN = (Label)item.FindControl("lbl_c_dn");
+            //get the value
+            string lblDN_value = lblDN.Text;
+
+            EDP_DBReference.Service1Client svc_client = new EDP_DBReference.Service1Client();
+            int delete_result = svc_client.DeleteOneAppt(Convert.ToInt32(Session["current_appt_profile"]), lblDT_value);
+
+            if (delete_result == 1)
+            {
+                // Response.Write("<script>alert('Data deleted successfully')</script>");
+
+                switch (Session["appt_viewstate"])
+                {
+                    case "upcoming":
+                        listview_appts.DataSource = GetApptsUserUpcoming();
+                        listview_appts.DataBind();
+                        break;
+                    case "past":
+                        listview_appts.DataSource = GetApptsUserPast();
+                        listview_appts.DataBind();
+                        break;
+                    case "missed":
+                        listview_appts.DataSource = GetApptsUserMissed();
+                        listview_appts.DataBind();
+                        break;
+
+                }
+
+
+            }
+            else
+            {
+                // Response.Write("<script>alert('Data deleted unsuccessfully')</script>");
+                listview_appts.DataSource = GetApptsUserUpcoming();
+                listview_appts.DataBind();
+            }
+        }
+
     }
 }

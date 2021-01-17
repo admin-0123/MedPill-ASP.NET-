@@ -531,6 +531,24 @@ namespace EDP_Clinic.EDP_DBReference {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/CreateAppointment", ReplyAction="http://tempuri.org/IService1/CreateAppointmentResponse")]
         System.Threading.Tasks.Task<int> CreateAppointmentAsync(int patientID, string appointmentType, System.DateTime dateTime, string status);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetOneAppt", ReplyAction="http://tempuri.org/IService1/GetOneApptResponse")]
+        EDP_Clinic.EDP_DBReference.Appointment GetOneAppt(int patientID, System.DateTime dateTime);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetOneAppt", ReplyAction="http://tempuri.org/IService1/GetOneApptResponse")]
+        System.Threading.Tasks.Task<EDP_Clinic.EDP_DBReference.Appointment> GetOneApptAsync(int patientID, System.DateTime dateTime);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/UpdateOneAppt", ReplyAction="http://tempuri.org/IService1/UpdateOneApptResponse")]
+        int UpdateOneAppt(int patientID, string appointmentType, System.DateTime oldTime, System.DateTime newTime);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/UpdateOneAppt", ReplyAction="http://tempuri.org/IService1/UpdateOneApptResponse")]
+        System.Threading.Tasks.Task<int> UpdateOneApptAsync(int patientID, string appointmentType, System.DateTime oldTime, System.DateTime newTime);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/DeleteOneAppt", ReplyAction="http://tempuri.org/IService1/DeleteOneApptResponse")]
+        int DeleteOneAppt(int uid, System.DateTime dateTime);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/DeleteOneAppt", ReplyAction="http://tempuri.org/IService1/DeleteOneApptResponse")]
+        System.Threading.Tasks.Task<int> DeleteOneApptAsync(int uid, System.DateTime dateTime);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -638,6 +656,30 @@ namespace EDP_Clinic.EDP_DBReference {
         
         public System.Threading.Tasks.Task<int> CreateAppointmentAsync(int patientID, string appointmentType, System.DateTime dateTime, string status) {
             return base.Channel.CreateAppointmentAsync(patientID, appointmentType, dateTime, status);
+        }
+        
+        public EDP_Clinic.EDP_DBReference.Appointment GetOneAppt(int patientID, System.DateTime dateTime) {
+            return base.Channel.GetOneAppt(patientID, dateTime);
+        }
+        
+        public System.Threading.Tasks.Task<EDP_Clinic.EDP_DBReference.Appointment> GetOneApptAsync(int patientID, System.DateTime dateTime) {
+            return base.Channel.GetOneApptAsync(patientID, dateTime);
+        }
+        
+        public int UpdateOneAppt(int patientID, string appointmentType, System.DateTime oldTime, System.DateTime newTime) {
+            return base.Channel.UpdateOneAppt(patientID, appointmentType, oldTime, newTime);
+        }
+        
+        public System.Threading.Tasks.Task<int> UpdateOneApptAsync(int patientID, string appointmentType, System.DateTime oldTime, System.DateTime newTime) {
+            return base.Channel.UpdateOneApptAsync(patientID, appointmentType, oldTime, newTime);
+        }
+        
+        public int DeleteOneAppt(int uid, System.DateTime dateTime) {
+            return base.Channel.DeleteOneAppt(uid, dateTime);
+        }
+        
+        public System.Threading.Tasks.Task<int> DeleteOneApptAsync(int uid, System.DateTime dateTime) {
+            return base.Channel.DeleteOneApptAsync(uid, dateTime);
         }
     }
 }

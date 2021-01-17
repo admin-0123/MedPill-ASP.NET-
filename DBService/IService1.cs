@@ -49,6 +49,15 @@ namespace DBService
         [OperationContract]
         int CreateAppointment(int patientID, string appointmentType, DateTime dateTime, string status);
 
+        [OperationContract]
+        Appointment GetOneAppt(int patientID, DateTime dateTime);
+
+        [OperationContract]
+        int UpdateOneAppt(int patientID, string appointmentType, DateTime oldTime, DateTime newTime);
+
+        [OperationContract]
+        int DeleteOneAppt(int uid, DateTime dateTime);
+
         // Taken from practical 4, methods are listed in the abstract interface, method bodies are in service1.cs
         /*        [OperationContract]
                 List<Employee> GetAllEmployee();

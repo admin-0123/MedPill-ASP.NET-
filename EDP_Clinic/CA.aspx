@@ -52,6 +52,19 @@
         .breadcrumb-item + .breadcrumb-item::before {
             content: ">";
         }
+
+        .gv_pager td
+{
+	padding-left: 4px;
+	padding-right: 4px;
+	padding-top: 3px;
+	padding-bottom: 3px;
+}
+
+                .btn_cancelAppt:hover {
+            background-color: lightgray;
+        }
+
     </style>
     </asp:Content>
     <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
@@ -70,9 +83,7 @@
       </li>
   </ol>
 </nav>
-            <h2 id="test123">Book an Appointment </h2>
-            <p>&nbsp;</p>
-            <p>&nbsp;</p>
+            <h2>Book an Appointment </h2>
             <div class="card-header">
             <div class="row">
                 <div class="col-sm-12"> 
@@ -104,33 +115,39 @@
                 </asp:DropDownList>
             </p>
             <p>&nbsp;</p>
-            <asp:TextBox ID="tb_startdate" runat="server" placeholder="DD/MM/YYYY"></asp:TextBox>
+            <div>
+                           <asp:TextBox ID="tb_startdate" runat="server" placeholder="DD/MM/YYYY"></asp:TextBox>
             <ajaxToolkit:CalendarExtender ID="tb_startdate_CalendarExtender" runat="server" BehaviorID="TextBox2_CalendarExtender" TargetControlID="tb_startdate" Format="dd/MM/yyyy" />
-            <asp:Button ID="btn_searchSlot" runat="server" Text="Search" OnClick="btn_searchSlot_Click"/>
+            <asp:Button ID="btn_searchSlot" runat="server" Text="Search" OnClick="btn_searchSlot_Click" CssClass="btn btn-primary"/>
             <br />
             <asp:Label ID="lbl_validDates" runat="server"></asp:Label>
+            </div>
+ 
 
 
 
             <div>
 
-                <p class="bg-primary text-light" style="text-align: center;">Available Slots </p>
+                <p class="bg-primary text-light mt-3" style="text-align: center;">Available Slots </p>
             </div>
 
-                <asp:GridView ID="gv_timeslots" runat="server" AutoGenerateColumns="False" ClientIDMode="Static" AllowPaging="True" BackColor="#99CCFF" CellPadding="3" GridLines="Vertical" OnPageIndexChanging="gv_timeslots_PageIndexChanging" OnSelectedIndexChanged="gv_timeslots_SelectedIndexChanged" PageSize="5" Width="100%">
-                        <AlternatingRowStyle BackColor="#0066FF" />
+                <asp:GridView ID="gv_timeslots" runat="server" AutoGenerateColumns="False" ClientIDMode="Static" AllowPaging="True" BackColor="#99CCFF" CellPadding="2" OnPageIndexChanging="gv_timeslots_PageIndexChanging" OnSelectedIndexChanged="gv_timeslots_SelectedIndexChanged" PageSize="10" Width="100%" CssClass="">
                         <Columns>
-            <asp:TemplateField HeaderText="Select">
+            <asp:TemplateField HeaderText="Select" ItemStyle-Width="75px">
                <ItemTemplate> <div class="custom-control custom-radio"><input type="radio" class="custom-control-input" id="<%# Container.DataItem %>" name="rb_apptslot" value="<%# Container.DataItem %>">
                     <label class="custom-control-label" for="<%# Container.DataItem %>"></label></div>
                 </ItemTemplate>
+
+<ItemStyle Width="75px"></ItemStyle>
             </asp:TemplateField>
             <asp:TemplateField HeaderText="Appointment Slot">
 
                 <ItemTemplate><asp:Label ID="lbl_apptSlot" runat="server" Text="<%# Container.DataItem %>"></asp:Label></ItemTemplate>
             </asp:TemplateField>
         </Columns>
-                        <HeaderStyle BackColor="#0066FF" ForeColor="White" />
+                        <HeaderStyle ForeColor="Black" BorderStyle="None" />
+                        <PagerSettings Mode="NumericFirstLast" />
+                        <PagerStyle CssClass="gv_pager" />
             </asp:GridView>
             
 
@@ -151,10 +168,10 @@
         <div class="col-lg-1">
         </div>
         <div class="col-lg-5">
-            <asp:Button ID="btn_createAppt" runat="server" Text="Next" Width="463px" CssClass="btn btn-primary" OnClick="btn_createAppt_Click" />
+            <asp:Button ID="btn_createAppt" runat="server" Text="Next" Width="463px" CssClass="btn btn-primary btn-block mt-3" OnClick="btn_createAppt_Click" />
         </div>
         <div class="col-lg-5">
-            <asp:Button ID="Button6" runat="server" Text="Cancel" Width="463px" CssClass="btn btn-link btn-outline-primary" />
+            <asp:Button ID="btn_cancelAppt" runat="server" Text="Cancel" Width="463px" CssClass="btn btn-link btn-outline-primary btn-block mt-3 btn_cancelAppt" OnClick="btn_cancelAppt_Click" />
         </div>
         <div class="col-lg-1"></div>
     </div>

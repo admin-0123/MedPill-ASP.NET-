@@ -81,6 +81,23 @@ namespace DBService
             return appt.Insert();
         }
 
+        public Appointment GetOneAppt(int patientID, DateTime dateTime)
+        {
+            Appointment appt = new Appointment();
+            return appt.SelectOne(patientID, dateTime);
+        }
+
+        public int UpdateOneAppt(int patientID, string appointmentType, DateTime oldTime, DateTime newTime)
+        {
+            Appointment appt = new Appointment();
+            return appt.UpdateOne(patientID, appointmentType, oldTime, newTime);
+        }
+
+        public int DeleteOneAppt(int uid, DateTime dateTime)
+        {
+            Appointment appt = new Appointment();
+            return appt.DeleteOne(uid, dateTime);
+        }
 
         // Taken from practical 4, here all the method bodies for the methods listed in IService1.CS
         /*        public List<Employee> GetAllEmployee()

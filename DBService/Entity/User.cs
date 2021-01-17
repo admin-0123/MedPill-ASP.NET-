@@ -82,13 +82,13 @@ namespace DBService.Entity
             if (rec_cnt == 1)
             {
                 DataRow row = ds.Tables[0].Rows[0];  // Sql command returns only one record
+                int Id = Convert.ToInt32(row["Id"].ToString());
                 string Name = row["name"].ToString();
                 string Password = row["password"].ToString();
                 string Email = row["email"].ToString();
                 string PhoneNo = row["phoneno"].ToString();
                 string Photo = row["photo"].ToString();
                 string Role = row["role"].ToString();
-
                 bool Verified = Convert.ToBoolean(Convert.ToInt32(row["verified"]));
 
                 bool Certified_CG = Convert.ToBoolean(Convert.ToInt32(row["certified_CG"]));
@@ -96,6 +96,7 @@ namespace DBService.Entity
 
                 // Fixing problem where unable to retrieve the value of carereceiver column (where value always = 0 )
                 // Make sure properties in non-default constructors do not have null value otherwise when you convert them will get a : 'Object cannot be cast from DBNull to other types.' error
+
 
 
                 // Using the TryParse method to if carereceiverID is NULL
@@ -111,6 +112,8 @@ namespace DBService.Entity
                 {
                     CareReceiverID = 0;
                 }
+
+
 
 
                 user = new User(Id, Name, Password, Email, PhoneNo, Photo, Role, Verified, CareReceiverID, Certified_CG);
