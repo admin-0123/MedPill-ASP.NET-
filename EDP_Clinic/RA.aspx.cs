@@ -24,11 +24,11 @@ namespace EDP_Clinic
             profilePfp.ImageUrl = $"~/assets/images/{current_user.Photo.Trim()}.jpg";
             lbl_profileName.Text = current_user.Name;
 
-            tb_startdate_CalendarExtender.StartDate = DateTime.Now;
+            tb_startdate_CalendarExtender.StartDate = DateTime.Now.AddDays(1);
             tb_startdate_CalendarExtender.EndDate = DateTime.Now.AddMonths(2);
             if (Session["gv_timeSlot"] == null)
             {
-                Session["startDate"] = DateTime.Now;
+                Session["startDate"] = DateTime.Now.AddDays(1);
                 DateTime startDate = Convert.ToDateTime(Session["startDate"]);
                 DateTime endDate = DateTime.Now.AddMonths(2);
                 lbl_validDates.Text = $"You may only pick a date between {startDate.Day} {startDate.ToString("MMMM")} to {endDate.Day} {endDate.ToString("MMMM")}";
@@ -105,7 +105,7 @@ namespace EDP_Clinic
         {
 
             List<DateTime> openSlots = new List<DateTime>();
-            DateTime startDate = DateTime.Now;
+            DateTime startDate = DateTime.Now.AddDays(1);
             DateTime endDate = DateTime.Now.AddMonths(2);
             EDP_DBReference.Service1Client svc_client = new EDP_DBReference.Service1Client();
             List<Appointment> Current_ApptList = svc_client.GetAllApptAdmin().ToList();

@@ -112,6 +112,7 @@
 
         </div>
             </ItemTemplate>
+                    <EmptyDataTemplate> No Record Found </EmptyDataTemplate>
         </asp:ListView>
         <asp:DataPager ID="dp_listview_appt" runat="server" PagedControlID="listview_appts" PageSize="2">
             <Fields>

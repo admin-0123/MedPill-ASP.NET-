@@ -37,7 +37,7 @@ namespace EDP_Clinic
                 lbl_doctorname.Text = $"Doctor: {doctor.Name}";
             }
 
-            lbl_patientname.Text = $"Patient: {patient.Name} {patient.Id}";
+            lbl_patientname.Text = $"Patient: {patient.Name}";
 
             // Set the Env variables in windows first
             // Get Env values from https://www.twilio.com/console

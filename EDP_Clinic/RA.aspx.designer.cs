@@ -33,13 +33,13 @@ namespace EDP_Clinic
         protected global::System.Web.UI.WebControls.HyperLink hl_bc_profileName;
 
         /// <summary>
-        /// hl_bc_makeappt control.
+        /// hl_bc_resch_appt control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HyperLink hl_bc_makeappt;
+        protected global::System.Web.UI.WebControls.HyperLink hl_bc_resch_appt;
 
         /// <summary>
         /// leftArrow_redirect control.
