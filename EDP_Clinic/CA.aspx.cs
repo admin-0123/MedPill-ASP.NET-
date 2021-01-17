@@ -1,4 +1,5 @@
-﻿using System;
+﻿using EDP_Clinic.EDP_DBReference;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -9,40 +10,64 @@ namespace EDP_Clinic
 {
     public partial class WebForm5 : System.Web.UI.Page
     {
-        public List<DateTime> mySlots;
-        public DateTime startDate = DateTime.Now;
-        public DateTime endDate = DateTime.Now.AddMonths(2);
-        List<DateTime> openSlots = new List<DateTime>();
+        // Scraping the use of global variables because they suck
+        //public List<DateTime> mySlots = Get_AvailableAppt();
+        //public DateTime startDate;
+        //public DateTime endDate = Convert.ToDateTime("08/08/2021");
+        // List<DateTime> openSlots = new List<DateTime>();
         protected void Page_Load(object sender, EventArgs e)
         {
+            
+            EDP_DBReference.Service1Client svc_client = new EDP_DBReference.Service1Client();
+            User current_user = svc_client.GetOneUser(Convert.ToInt32(Session["UserID"]));
+            // For breadcrumb elements
+            hl_bc_profileName.Text = current_user.Name;
+            //
+            profilePfp.ImageUrl = $"~/assets/images/{current_user.Photo.Trim()}.jpg";
+            lbl_profileName.Text = current_user.Name;
 
-            // Set the start and end range of selectable dates
-            tb_startdate_CalendarExtender.StartDate = startDate;
-            tb_startdate_CalendarExtender.EndDate = endDate;
-
-            // Tells the user the available selectable dates to search for slots
-
-            lbl_validDates.Text = $"You may only pick a date between {startDate.Day} {startDate.ToString("MMMM")} to {endDate.Day} {endDate.ToString("MMMM")}";
-
-            // Code block below to generate a list of available appointment timeslots 
-
-            for (var dt = startDate; dt <= endDate; dt = dt.AddDays(1))
+            tb_startdate_CalendarExtender.StartDate = DateTime.Now;
+            tb_startdate_CalendarExtender.EndDate = DateTime.Now.AddMonths(2);
+            if (Session["gv_timeSlot"] == null)
             {
-                dt = new DateTime(dt.Year, dt.Month, dt.Day, 9, 00, 00);
+                Session["startDate"] = DateTime.Now;
+                DateTime startDate = Convert.ToDateTime(Session["startDate"]);
+                DateTime endDate = DateTime.Now.AddMonths(2);
+                lbl_validDates.Text = $"You may only pick a date between {startDate.Day} {startDate.ToString("MMMM")} to {endDate.Day} {endDate.ToString("MMMM")}";
+                Session["gv_timeSlot"] = "Testing";
 
-                while (dt.Hour != 17) 
+ /*               List<DateTime> openSlots = new List<DateTime>();
+                for (var dt = startDate; dt <= endDate; dt = dt.AddDays(1))
                 {
-                    // Query from appointment table and check if timeslot alr exist (to be added)
-                    openSlots.Add(dt);
-                    dt = dt.AddMinutes(30);
-                }
+                    dt = new DateTime(dt.Year, dt.Month, dt.Day, 9, 00, 00);
+
+                    while (dt.Hour != 17)
+                    {
+                        // Query from appointment table and check if timeslot alr exist (to be added)
+                        openSlots.Add(dt);
+                        dt = dt.AddMinutes(30);
+                    }
 
 
+                }*/
+
+                gv_timeslots.Visible = true;
+                gv_timeslots.DataSource = Onload_Retrieve_Available_Appts();
+                gv_timeslots.DataBind();
+               
             }
 
-            mySlots = openSlots;
+            else
+            {
+                gv_timeslots.Visible = true;
+                gv_timeslots.DataSource = Search_AvailableAppts();
+                gv_timeslots.DataBind();
+            }
 
-           
+            // mySlots = openSlots;
+
+            //gv_timeslots.DataSource = mySlots;
+            //gv_timeslots.DataBind();
             /* Code to check the list items, more efficient than for loop, takes less memory, similar to an iterator/generator 
             var enumerator = openSlots.GetEnumerator();
             while (enumerator.MoveNext())
@@ -51,33 +76,246 @@ namespace EDP_Clinic
             }
             */
 
-           
+
         }
 
 
 
         protected void btn_searchSlot_Click(object sender, EventArgs e)
         {
+
             DateTime checkdate_input;
             var checkdate_bool = DateTime.TryParse(tb_startdate.Text, out checkdate_input);
 
             // if input is a valid date, run the code block
             if (checkdate_bool != false)
             {
-                startDate = Convert.ToDateTime(tb_startdate.Text);
+                Session["startDate"] = Convert.ToDateTime(tb_startdate.Text);
+                gv_timeslots.DataSource = Search_AvailableAppts();
+                gv_timeslots.DataBind();
 
-                // Remove all items earlier than startdate from the list
-                openSlots.RemoveAll(item => item < startDate);
-
-                // Change the available valid dates text
+                DateTime startDate = Convert.ToDateTime(Session["startDate"]);
+                DateTime endDate = DateTime.Now.AddMonths(2);
                 lbl_validDates.Text = $"You may only pick a date between {startDate.Day} {startDate.ToString("MMMM")} to {endDate.Day} {endDate.ToString("MMMM")}";
-
             }
 
 
         }
 
+        protected void gv_timeslots_SelectedIndexChanged(object sender, EventArgs e)
+        {
 
+        }
+
+        protected void gv_timeslots_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            gv_timeslots.PageIndex = e.NewPageIndex;
+            gv_timeslots.DataSource = Search_AvailableAppts();
+            gv_timeslots.DataBind();
+        }
+
+        // Method to retrieve available appointments on first load
+        public List<DateTime> Onload_Retrieve_Available_Appts()
+        {
+            
+            List<DateTime> openSlots = new List<DateTime>();
+            DateTime startDate = DateTime.Now;
+            DateTime endDate = DateTime.Now.AddMonths(2);
+            EDP_DBReference.Service1Client svc_client = new EDP_DBReference.Service1Client();
+            List<Appointment> Current_ApptList = svc_client.GetAllApptAdmin().ToList();
+            bool matching_appt_record = false;
+
+            // Loop through each day
+            for (var dt = startDate; dt <= endDate; dt = dt.AddDays(1))
+            {
+                dt = new DateTime(dt.Year, dt.Month, dt.Day, 9, 00, 00);
+
+                // Loop through the time until it reaches 5pm
+                while (dt.Hour != 17)
+                {
+                    // Query from appointment table and check if timeslot alr exist (to be added)
+                    // Loop through every appt in DB for matches
+                    foreach (var booked_appt in Current_ApptList)
+                    {                  
+                        if (dt == Convert.ToDateTime(booked_appt.dateTime))
+                        {
+                            //System.Diagnostics.Debug.WriteLine("Booked timeslot found");
+                            //System.Diagnostics.Debug.WriteLine(Convert.ToDateTime(booked_appt.dateTime));
+                            matching_appt_record = true;
+                        }
+
+                    }
+                    // If match is found, skip and reset the check counter
+                    if (matching_appt_record == true)
+                    {
+                        matching_appt_record = false;
+                    }
+
+                    else
+                    {
+                        openSlots.Add(dt);
+                    }
+                    dt = dt.AddMinutes(30);
+                }
+
+
+            }
+
+            return openSlots;
+        }
+
+        public List<DateTime> Search_AvailableAppts()
+        {
+
+            List<DateTime> openSlots = new List<DateTime>();
+            DateTime startDate = Convert.ToDateTime(Session["startDate"]);
+            DateTime endDate = DateTime.Now.AddMonths(2);
+            EDP_DBReference.Service1Client svc_client = new EDP_DBReference.Service1Client();
+            List<Appointment> Current_ApptList = svc_client.GetAllApptAdmin().ToList();
+            bool matching_appt_record = false;
+
+            // Loop through each day
+            for (var dt = startDate; dt <= endDate; dt = dt.AddDays(1))
+            {
+                dt = new DateTime(dt.Year, dt.Month, dt.Day, 9, 00, 00);
+
+                // Loop through the time until it reaches 5pm
+                while (dt.Hour != 17)
+                {
+                    // Query from appointment table and check if timeslot alr exist (to be added)
+                    // Loop through every appt in DB for matches
+                    foreach (var booked_appt in Current_ApptList)
+                    {
+                        if (dt == Convert.ToDateTime(booked_appt.dateTime))
+                        {
+                            //System.Diagnostics.Debug.WriteLine("Booked timeslot found");
+                            //System.Diagnostics.Debug.WriteLine(Convert.ToDateTime(booked_appt.dateTime));
+                            matching_appt_record = true;
+                        }
+
+                    }
+                    // If match is found, skip and reset the check counter
+                    if (matching_appt_record == true)
+                    {
+                        matching_appt_record = false;
+                    }
+
+                    else
+                    {
+                        openSlots.Add(dt);
+                    }
+                    dt = dt.AddMinutes(30);
+                }
+
+
+            }
+
+            return openSlots;
+        }
+
+        protected void leftArrow_redirect_Click(object sender, ImageClickEventArgs e)
+        {
+            Response.Redirect("~/PRFA2.aspx");
+        }
+
+
+        private bool ValidateInput()
+        {
+            bool result = true;
+
+            // If radio button no input
+            if (Request["rb_apptslot"] == null)
+            {
+                result = false;
+                lbl_error_make_appt.ForeColor = System.Drawing.Color.Red;
+                lbl_error_make_appt.Text = "You did not select an appointment timeslot";
+            }
+
+            return result;
+
+        }
+
+        protected void btn_createAppt_Click(object sender, EventArgs e)
+        {
+            bool validInput = ValidateInput();
+
+            if (validInput)
+            {
+                // Get the data needed
+
+                int current_profile = Convert.ToInt32(Session["current_appt_profile"]);
+                string appointmentType = ddl_apptType.SelectedValue;
+                DateTime rb_userinput = Convert.ToDateTime(Request["rb_apptslot"]);
+                string status = "upcoming";
+
+                EDP_DBReference.Service1Client svc_client = new EDP_DBReference.Service1Client();
+                int insert_result = svc_client.CreateAppointment(current_profile, appointmentType, rb_userinput, status);
+                if (insert_result == 1)
+                {
+
+                   lbl_error_make_appt.ForeColor = System.Drawing.Color.Green;
+                   lbl_error_make_appt.Text = "Appointment Made Successfully!";
+                }
+                else
+                    lbl_error_make_appt.Text = "Appointment Creation Failed :C";
+
+                /*                DateTime dob = Convert.ToDateTime(tbBirthDate.Text);
+                                double wage = Convert.ToDouble(tbMthlySalary.Text);
+
+                                MyDBServiceReference.Service1Client client = new MyDBServiceReference.Service1Client();
+                                int result = client.CreateEmployee(tbNric.Text, tbName.Text, dob, ddlDept.Text, wage);
+                                if (result == 1)
+                                {
+                                    RefreshGridView();
+                                    lbMsg.ForeColor = Color.Green;
+                                    lbMsg.Text = "Employee Record Inserted Successfully!";
+                                }
+                                else
+                                    lbMsg.Text = "SQL Error. Insert Unsuccessful!";*/
+            }
+
+            
+/*            if (Request["rb_apptslot"] == null)
+            {
+                lbl_validDates.Text = $"None selected!";
+            }
+            else
+            {
+                lbl_validDates.Text = $"You selected {rb_userinput}";
+            }*/
+
+
+        }
+        /*
+public List<Appointment> GetAppts()
+{
+List<Appointment> testList = new List<Appointment>();
+EDP_DBReference.Service1Client svc_client = new EDP_DBReference.Service1Client();
+
+testList = svc_client.GetAllApptAdmin().ToList<Appointment>();
+return testList;
+}
+private void RefreshGridView()
+{
+List<Employee> eList = new List<Employee>();
+MyDBServiceReference.Service1Client client = new MyDBServiceReference.Service1Client();
+eList = client.GetAllEmployee().ToList<Employee>();
+
+// using gridview to bind to the list of employee objects
+gvEmployee.Visible = true;
+gvEmployee.DataSource = eList;
+gvEmployee.DataBind();
+
+
+List<Appointment> aList = new List<Appointment>();
+
+aList = client.GetAllAppt().ToList<Appointment>();
+
+GridView1.Visible = true;
+GridView1.DataSource = aList;
+GridView1.DataBind();
+}
+*/
 
 
 

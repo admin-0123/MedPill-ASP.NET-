@@ -9,19 +9,7 @@
         crossorigin="anonymous"></script>
     <script type="text/javascript">
 
-        $(document).ready(function () {
-            $("#test123").hide();
-            function show(min, max) {
-                var $table = $('#slotTables'), // the table we are using
-                    $rows = $table.find('tbody tr'); // the rows we want to select
-                min = min ? min - 1 : 0;
-                max = max ? max : $rows.length;
-                $rows.hide().slice(min, max).show(); // hide all rows, then show only the range we want
-                return false;
-            }
-            show(1, 100)
 
-        });
 
     </script>
     <style type="text/css">
@@ -68,32 +56,48 @@
     </asp:Content>
     <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
         <div class="container">
-            <nav aria-label="breadcrumb">
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item active">Appointments</li>
-                    <li class="breadcrumb-item active">Johnny Lim </li>
-                    <li class="breadcrumb-item" aria-current="page"><a href="">New Appointment </a></li>
-                </ol>
-            </nav>
+        <!-- Breadcrumb -->
+        <nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+      <li class="breadcrumb-item active">
+              <asp:HyperLink ID="hl_bc_appt" runat="server" CssClass="hyperlink_breadcrumb" NavigateUrl="~/PFA.aspx">Appointments</asp:HyperLink></asp:Label>
+      </li>
+    <li class="breadcrumb-item active" aria-current="page"> 
+        <asp:HyperLink ID="hl_bc_profileName" runat="server" CssClass="hyperlink_breadcrumb"></asp:HyperLink></asp:Label>
+      </li>
+    <li class="breadcrumb-item active" aria-current="page"> 
+        <asp:HyperLink ID="hl_bc_makeappt" runat="server" CssClass="hyperlink_breadcrumb_active"></asp:HyperLink>Make Appointment</asp:Label>
+      </li>
+  </ol>
+</nav>
             <h2 id="test123">Book an Appointment </h2>
             <p>&nbsp;</p>
             <p>&nbsp;</p>
             <div class="card-header">
-                <div class="row">
-                    <div class="col-3">
-                        <span class="fa fa-arrow-left" style="height: inherit"></span>
-                        &nbsp
-                    <img src="assets/images/profileImage_placeholder.png" class="auto-style6"></img>
-                    </div>
-                    <div class="col-9">
-                        <p style="vertical-align: middle; margin-top: 10px; color: black;">Johnny Lim </p>
-                    </div>
+            <div class="row">
+                <div class="col-sm-12"> 
+                    <!--
+                    <span class="fa fa-arrow-left" style="height:inherit"></span>
+                    &nbsp
+                    <img src="assets/images/profileImage_placeholder.png" width="50px" height="50px"></img>
+                                        &nbsp
+                    <span> Johnny Lim</span>
+                        -->
+                    <asp:ImageButton ID="leftArrow_redirect" runat="server" Height="50px" ImageAlign="Left" ImageUrl="~/assets/images/leftArrow.png" Width="50px" OnClick="leftArrow_redirect_Click" />
+                    <asp:Image ID="profilePfp" runat="server" ImageUrl="~/assets/images/pfp_placeholder.png" Height="50px" Width="50px" />
+                    <asp:Label ID="lbl_profileName" runat="server" Text=""></asp:Label>
                 </div>
+                <!--
+                <div class="col-sm-4"> 
+                    <asp:Button runat="server" Text="Make New Appointment" CssClass="btn_mka btn btn-primary text-white" ID="btn_makeAppt"/>
+                    <!-- <button class="btn_mka btn btn-primary text-white"> Make New Appointment</button> 
+                </div> -->
+            </div>
             </div>
             <p>&nbsp;</p>
             <p>
                 <asp:Label ID="Label1" runat="server" Text="Appointment Type:"></asp:Label>
-                &nbsp;<asp:DropDownList ID="DropDownList1" runat="server">
+                &nbsp;<asp:DropDownList ID="ddl_apptType" runat="server">
                     <asp:ListItem>Consultation</asp:ListItem>
                     <asp:ListItem>Diagnosis</asp:ListItem>
                     <asp:ListItem>Treatment</asp:ListItem>
@@ -113,33 +117,24 @@
                 <p class="bg-primary text-light" style="text-align: center;">Available Slots </p>
             </div>
 
-            <table style="background-color: #FFFFFF; background-repeat: no-repeat;" id="slotTables" class="w-100">
-                <% foreach (var timeslot in mySlots) { %>
-                <tr>
-                    <td class="auto-style4">
-                        <div class="custom-control custom-radio ml-4">
-                            <input type="radio" class="custom-control-input" id="<%= timeslot %>" name="example1" value="<%= timeslot %>">
-                            <label class="custom-control-label" for="<%= timeslot %>"></label>
-                        </div>
-                    </td>
-                    <td class="auto-style5"><%= timeslot %></td>
-                </tr>
-                <% } %>
-                <!--
-                    <tr>
-                        <td class="auto-style4">
-                            <asp:Button ID="Button3" runat="server" Text="Select" />
-                        </td>
-                        <td class="auto-style5">03 Dec 2020 (Thu), 03:00 PM</td>
-                    </tr>
-                    <tr>
-                        <td class="auto-style4">
-                            <asp:Button ID="Button4" runat="server" Text="Select" />
-                        </td>
-                        <td class="auto-style5">04 Dec 2020 (Fri), 03:30 PM</td>
-                    </tr>
-            -->
-    </table>
+                <asp:GridView ID="gv_timeslots" runat="server" AutoGenerateColumns="False" ClientIDMode="Static" AllowPaging="True" BackColor="#99CCFF" CellPadding="3" GridLines="Vertical" OnPageIndexChanging="gv_timeslots_PageIndexChanging" OnSelectedIndexChanged="gv_timeslots_SelectedIndexChanged" PageSize="5" Width="100%">
+                        <AlternatingRowStyle BackColor="#0066FF" />
+                        <Columns>
+            <asp:TemplateField HeaderText="Select">
+               <ItemTemplate> <div class="custom-control custom-radio"><input type="radio" class="custom-control-input" id="<%# Container.DataItem %>" name="rb_apptslot" value="<%# Container.DataItem %>">
+                    <label class="custom-control-label" for="<%# Container.DataItem %>"></label></div>
+                </ItemTemplate>
+            </asp:TemplateField>
+            <asp:TemplateField HeaderText="Appointment Slot">
+
+                <ItemTemplate><asp:Label ID="lbl_apptSlot" runat="server" Text="<%# Container.DataItem %>"></asp:Label></ItemTemplate>
+            </asp:TemplateField>
+        </Columns>
+                        <HeaderStyle BackColor="White" />
+            </asp:GridView>
+            
+
+<!--
         <p>
             &nbsp;
         </p>
@@ -147,14 +142,16 @@
         <a href="#" class="load_more">Load more</a>
         <asp:Button ID="Btn_LoadMore" runat="server" Text="Load More" Width="1110px" CssClass="btn btn-primary" />
     </p>
-
+            -->
     <div>
         <br />
     </div>
     <div class="row">
-        <div class="col-lg-1"></div>
+        <div class="col-lg-1">
+            <asp:Label ID="lbl_error_make_appt" runat="server"></asp:Label>
+        </div>
         <div class="col-lg-5">
-            <asp:Button ID="Button5" runat="server" Text="Next" Width="463px" CssClass="btn btn-primary" />
+            <asp:Button ID="btn_createAppt" runat="server" Text="Next" Width="463px" CssClass="btn btn-primary" OnClick="btn_createAppt_Click" />
         </div>
         <div class="col-lg-5">
             <asp:Button ID="Button6" runat="server" Text="Cancel" Width="463px" CssClass="btn btn-link btn-outline-primary" />

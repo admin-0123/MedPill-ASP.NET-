@@ -58,8 +58,15 @@ namespace EDP_Clinic
 
         }
 
-        protected void Arrow_Click(object sender, ImageClickEventArgs e)
+        protected void View_Appt_Patient(object sender, ImageClickEventArgs e)
         {
+            Session["current_appt_profile"] = 1;
+            Response.Redirect("~/PRFA2.aspx");
+        }
+
+        protected void View_Appt_CR(object sender, ImageClickEventArgs e)
+        {
+            Session["current_appt_profile"] = 2;
             Response.Redirect("~/PRFA2.aspx");
         }
     }

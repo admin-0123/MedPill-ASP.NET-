@@ -160,6 +160,7 @@
     <Content Include="assets\js\bootstrap.min.js" />
     <Content Include="assets\js\owl.carousel.js" />
     <Content Include="Authentication.aspx" />
+    <Content Include="WebForm2.aspx" />
     <None Include="Connected Services\EDP_DBReference\configuration91.svcinfo" />
     <None Include="Connected Services\EDP_DBReference\configuration.svcinfo" />
     <Content Include="CA.aspx" />
@@ -321,6 +322,13 @@
     </Compile>
     <Compile Include="Services.aspx.designer.cs">
       <DependentUpon>Services.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebForm2.aspx.cs">
+      <DependentUpon>WebForm2.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebForm2.aspx.designer.cs">
+      <DependentUpon>WebForm2.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>

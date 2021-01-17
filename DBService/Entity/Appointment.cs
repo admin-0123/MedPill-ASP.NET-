@@ -46,6 +46,33 @@ namespace DBService.Entity
             this.status = status;
         }
 
+        public int Insert()
+        {
+            //Step 1 -  Define a connection to the database by getting
+            //          the connection string from App.config
+            string DBConnect = ConfigurationManager.ConnectionStrings["EDP_DB"].ConnectionString;
+            SqlConnection myConn = new SqlConnection(DBConnect);
+
+            // Step 2 - Create a SqlCommand object to add record with INSERT statement
+            string sqlStmt = "INSERT INTO Appointment (patientID, appointmentType, dateTime, status) " +
+                "VALUES (@paraPatientID, @paraAppointmentType, @paraDateTime, @paraStatus)";
+            SqlCommand sqlCmd = new SqlCommand(sqlStmt, myConn);
+
+            // Step 3 : Add each parameterised variable with value
+            sqlCmd.Parameters.AddWithValue("@paraPatientID", patientID);
+            sqlCmd.Parameters.AddWithValue("@paraAppointmentType", appointmentType);
+            sqlCmd.Parameters.AddWithValue("@paraDateTime", dateTime);
+            sqlCmd.Parameters.AddWithValue("@paraStatus", status);
+
+            // Step 4 Open connection the execute NonQuery of sql command   
+            myConn.Open();
+            int result = sqlCmd.ExecuteNonQuery();
+
+            // Step 5 :Close connection
+            myConn.Close();
+
+            return result;
+        }
         public List<Appointment> SelectAllForAdmin()
         {
             //Step 1 -  Define a connection to the database by getting
@@ -129,7 +156,138 @@ namespace DBService.Entity
             return apptList;
         }
 
+        public List<Appointment> SelectAllForOneUserUpcoming(int uid)
+        {
+            //Step 1 -  Define a connection to the database by getting
+            //          the connection string from App.config
+            string DBConnect = ConfigurationManager.ConnectionStrings["EDP_DB"].ConnectionString;
+            SqlConnection myConn = new SqlConnection(DBConnect);
+
+            //Step 2 -  Create a DataAdapter object to retrieve data from the database table
+            string sqlStmt = "Select * from Appointment where patientID=@paraUID and status=@apptStatus";
+            SqlDataAdapter da = new SqlDataAdapter(sqlStmt, myConn);
+            da.SelectCommand.Parameters.AddWithValue("@paraUID", uid);
+            da.SelectCommand.Parameters.AddWithValue("@apptStatus", "upcoming");
+
+            //Step 3 -  Create a DataSet to store the data to be retrieved
+            DataSet ds = new DataSet();
+
+            //Step 4 -  Use the DataAdapter to fill the DataSet with data retrieved
+            da.Fill(ds);
+
+            //Step 5 -  Read data from DataSet to List
+            List<Appointment> apptList = new List<Appointment>();
+            int rec_cnt = ds.Tables[0].Rows.Count;
+            for (int i = 0; i < rec_cnt; i++)
+            {
+                DataRow row = ds.Tables[0].Rows[i];  // Sql command returns only one record
+
+                int patientID = Convert.ToInt32(row["patientID"]);
+                int doctorID = Convert.ToInt32(row["doctorID"]);
+                int nurseID = Convert.ToInt32(row["nurseID"]);
+                int caregiverID = Convert.ToInt32(row["caregiverID"]);
+                string appointmentType = row["appointmentType"].ToString();
+                string prescription = row["prescription"].ToString();
+                string remarks = row["remarks"].ToString();
+                DateTime dateTime = Convert.ToDateTime(row["dateTime"]);
+                string followUp = row["followUp"].ToString();
+                string status = row["status"].ToString();
+                Appointment obj = new Appointment(patientID, doctorID, nurseID, caregiverID, appointmentType, prescription, remarks, dateTime, followUp, status);
+
+                apptList.Add(obj);
+            }
+            return apptList;
+        }
+
+        public List<Appointment> SelectAllForOneUserPast(int uid)
+        {
+            //Step 1 -  Define a connection to the database by getting
+            //          the connection string from App.config
+            string DBConnect = ConfigurationManager.ConnectionStrings["EDP_DB"].ConnectionString;
+            SqlConnection myConn = new SqlConnection(DBConnect);
+
+            //Step 2 -  Create a DataAdapter object to retrieve data from the database table
+            string sqlStmt = "Select * from Appointment where patientID=@paraUID and status=@apptStatus";
+            SqlDataAdapter da = new SqlDataAdapter(sqlStmt, myConn);
+            da.SelectCommand.Parameters.AddWithValue("@paraUID", uid);
+            da.SelectCommand.Parameters.AddWithValue("@apptStatus", "past");
+
+            //Step 3 -  Create a DataSet to store the data to be retrieved
+            DataSet ds = new DataSet();
+
+            //Step 4 -  Use the DataAdapter to fill the DataSet with data retrieved
+            da.Fill(ds);
+
+            //Step 5 -  Read data from DataSet to List
+            List<Appointment> apptList = new List<Appointment>();
+            int rec_cnt = ds.Tables[0].Rows.Count;
+            for (int i = 0; i < rec_cnt; i++)
+            {
+                DataRow row = ds.Tables[0].Rows[i];  // Sql command returns only one record
+
+                int patientID = Convert.ToInt32(row["patientID"]);
+                int doctorID = Convert.ToInt32(row["doctorID"]);
+                int nurseID = Convert.ToInt32(row["nurseID"]);
+                int caregiverID = Convert.ToInt32(row["caregiverID"]);
+                string appointmentType = row["appointmentType"].ToString();
+                string prescription = row["prescription"].ToString();
+                string remarks = row["remarks"].ToString();
+                DateTime dateTime = Convert.ToDateTime(row["dateTime"]);
+                string followUp = row["followUp"].ToString();
+                string status = row["status"].ToString();
+                Appointment obj = new Appointment(patientID, doctorID, nurseID, caregiverID, appointmentType, prescription, remarks, dateTime, followUp, status);
+
+                apptList.Add(obj);
+            }
+            return apptList;
+        }
+
+        public List<Appointment> SelectAllForOneUserMissed(int uid)
+        {
+            //Step 1 -  Define a connection to the database by getting
+            //          the connection string from App.config
+            string DBConnect = ConfigurationManager.ConnectionStrings["EDP_DB"].ConnectionString;
+            SqlConnection myConn = new SqlConnection(DBConnect);
+
+            //Step 2 -  Create a DataAdapter object to retrieve data from the database table
+            string sqlStmt = "Select * from Appointment where patientID=@paraUID and status=@apptStatus";
+            SqlDataAdapter da = new SqlDataAdapter(sqlStmt, myConn);
+            da.SelectCommand.Parameters.AddWithValue("@paraUID", uid);
+            da.SelectCommand.Parameters.AddWithValue("@apptStatus", "missed");
+
+            //Step 3 -  Create a DataSet to store the data to be retrieved
+            DataSet ds = new DataSet();
+
+            //Step 4 -  Use the DataAdapter to fill the DataSet with data retrieved
+            da.Fill(ds);
+
+            //Step 5 -  Read data from DataSet to List
+            List<Appointment> apptList = new List<Appointment>();
+            int rec_cnt = ds.Tables[0].Rows.Count;
+            for (int i = 0; i < rec_cnt; i++)
+            {
+                DataRow row = ds.Tables[0].Rows[i];  // Sql command returns only one record
+
+                int patientID = Convert.ToInt32(row["patientID"]);
+                int doctorID = Convert.ToInt32(row["doctorID"]);
+                int nurseID = Convert.ToInt32(row["nurseID"]);
+                int caregiverID = Convert.ToInt32(row["caregiverID"]);
+                string appointmentType = row["appointmentType"].ToString();
+                string prescription = row["prescription"].ToString();
+                string remarks = row["remarks"].ToString();
+                DateTime dateTime = Convert.ToDateTime(row["dateTime"]);
+                string followUp = row["followUp"].ToString();
+                string status = row["status"].ToString();
+                Appointment obj = new Appointment(patientID, doctorID, nurseID, caregiverID, appointmentType, prescription, remarks, dateTime, followUp, status);
+
+                apptList.Add(obj);
+            }
+            return apptList;
+        }
+
     }
 
 
+
 }
+

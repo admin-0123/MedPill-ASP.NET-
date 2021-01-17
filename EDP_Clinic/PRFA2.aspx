@@ -17,6 +17,16 @@
             .breadcrumb-item + .breadcrumb-item::before {
         content: ">";
     }
+
+            .hyperlink_breadcrumb {
+                color:black;
+    text-decoration:none;
+            }
+
+            .lbtn_inactive {
+                                color:black;
+    text-decoration:none;
+            }
     </style>
 
     <script>
@@ -40,18 +50,20 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <div class="container">
+        <!-- Breadcrumb -->
         <nav aria-label="breadcrumb">
   <ol class="breadcrumb">
       <li class="breadcrumb-item active">
-          <asp:Label ID="bc_Appointments" runat="server" Text="Appointments"></asp:Label>
+              <asp:HyperLink ID="hl_bc_appt" runat="server" CssClass="hyperlink_breadcrumb" NavigateUrl="~/PFA.aspx">Appointments</asp:HyperLink></asp:Label>
       </li>
     <li class="breadcrumb-item active" aria-current="page"> 
-        <asp:Label ID="bc_profileName" runat="server" Text="profileName"></asp:Label>
+        <asp:HyperLink ID="hl_bc_profileName" runat="server" CssClass="hyperlink_breadcrumb_active"></asp:HyperLink></asp:Label>
       </li>
-          <li class="breadcrumb-item" aria-current="page"> <!-- <a href=""> Upcoming Appointments </a>  -->
-              <asp:Label ID="bc_UAppointments" runat="server" Text="Upcoming Appointments"></asp:Label>
+      <!--
+          <li class="breadcrumb-item" aria-current="page"> <!-- <a href=""> Upcoming Appointments </a>  
+                            <asp:HyperLink ID="hl_bc_uappts" runat="server" CssClass="hyperlink_breadcrumb">Appointments</asp:HyperLink></asp:Label>
       </li>
-
+      -->
   </ol>
 </nav>
                     <h2> View Appointments </h2>
@@ -66,21 +78,23 @@
                                         &nbsp
                     <span> Johnny Lim</span>
                         -->
-                    <asp:ImageButton ID="leftArrow_redirect" runat="server" Height="50px" ImageAlign="Left" ImageUrl="~/assets/images/leftArrow.png" Width="50px" />
+                    <asp:ImageButton ID="leftArrow_redirect" runat="server" Height="50px" ImageAlign="Left" ImageUrl="~/assets/images/leftArrow.png" Width="50px" OnClick="leftArrow_redirect_Click" />
                     <asp:Image ID="profilePfp" runat="server" ImageUrl="~/assets/images/pfp_placeholder.png" Height="50px" Width="50px" />
+                                        <asp:Label ID="lbl_profileName" runat="server" Text=""></asp:Label>
                 </div>
                 <div class="col-sm-4"> 
-                    <asp:Button runat="server" Text="Make New Appointment" CssClass="btn_mka btn btn-primary text-white" ID="btn_makeAppt" />
+                    <asp:Button runat="server" Text="Make New Appointment" CssClass="btn_mka btn btn-primary text-white" ID="btn_makeAppt" OnClick="btn_makeAppt_Click" />
                     <!-- <button class="btn_mka btn btn-primary text-white"> Make New Appointment</button> -->
                 </div>
             </div>
             <div class="row mt-2">
-                <div class="col-4 upcoming text-primary"> 
-                    <asp:Label ID="lbl_Upcoming" runat="server" Text="Upcoming"></asp:Label> </div>
+                <div class="col-4 upcoming text-primary">
+                     <asp:LinkButton ID="lbtn_upcoming" runat="server" OnClick="lbtn_upcoming_Click" CssClass="test">Upcoming</asp:LinkButton>
+                     </div>
     
                                 <div class="col-4 missed">  
-                    <asp:Label ID="lbl_Past" runat="server" Text="Past"></asp:Label>  </div>
-                <div class="col-4 missed"> &nbsp;<asp:Label ID="lbl_Missed" runat="server" Text="Missed"></asp:Label>  </div>
+                                         <asp:LinkButton ID="lbtn_past" runat="server" CssClass="lbtn_inactive test" OnClick="lbtn_past_Click">Past</asp:LinkButton>  </div>
+                <div class="col-4 missed"> <asp:LinkButton ID="lbtn_missed" runat="server" OnClick="lbtn_missed_Click" CssClass="lbtn_inactive test">Missed</asp:LinkButton>  </div>
             </div>
         </div>
         <div>
@@ -114,12 +128,12 @@
             </div>
         -->
 
-        <% foreach (var appt in GetApptsUser())
-{ %>
-            <div class="card-header">
-            <h4>Date Time: <%= appt.dateTime %> </h4>
-            <h4> Type: <%= appt.appointmentType %> </h4>
-            <h4> Doctor: <%= appt.doctorID %> </h4>
+        <asp:ListView ID="listview_appts" runat="server" OnPagePropertiesChanging="listview_appts_PagePropertiesChanging">
+                        <ItemTemplate>
+                            <div class="card-header">
+            <h4>Date Time: <%#DataBinder.Eval(Container,"DataItem.dateTime")%> </h4>
+            <h4> Type: <%#DataBinder.Eval(Container,"DataItem.appointmentType")%> </h4>
+            <h4> Doctor: <%#DataBinder.Eval(Container,"DataItem.doctorID")%> </h4>
             <div class="row">
                                     <asp:Button ID="btn_Rsch2" runat="server" Text="Reschedule" CssClass="btn_Rsch bg-primary text-white col-3 align-content-end ml-2" />
                                     <span class="col-3"></span>
@@ -127,7 +141,16 @@
                          <span class="col-3"></span>
             </div>
         </div>
-        <%} %>
+            </ItemTemplate>
+        </asp:ListView>
+        <asp:DataPager ID="dp_listview_appt" runat="server" PagedControlID="listview_appts" PageSize="2">
+            <Fields>
+                <asp:NumericPagerField ButtonType="Link" />
+            </Fields>
+        </asp:DataPager>
+
+
+
 
         <!-- 
         <div class="card-header">

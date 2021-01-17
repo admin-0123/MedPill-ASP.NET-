@@ -15,31 +15,31 @@ namespace EDP_Clinic
     {
 
         /// <summary>
-        /// bc_Appointments control.
+        /// hl_bc_appt control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label bc_Appointments;
+        protected global::System.Web.UI.WebControls.HyperLink hl_bc_appt;
 
         /// <summary>
-        /// bc_profileName control.
+        /// hl_bc_profileName control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label bc_profileName;
+        protected global::System.Web.UI.WebControls.HyperLink hl_bc_profileName;
 
         /// <summary>
-        /// bc_UAppointments control.
+        /// hl_bc_uappts control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label bc_UAppointments;
+        protected global::System.Web.UI.WebControls.HyperLink hl_bc_uappts;
 
         /// <summary>
         /// leftArrow_redirect control.
@@ -60,6 +60,15 @@ namespace EDP_Clinic
         protected global::System.Web.UI.WebControls.Image profilePfp;
 
         /// <summary>
+        /// lbl_profileName control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbl_profileName;
+
+        /// <summary>
         /// btn_makeAppt control.
         /// </summary>
         /// <remarks>
@@ -69,31 +78,31 @@ namespace EDP_Clinic
         protected global::System.Web.UI.WebControls.Button btn_makeAppt;
 
         /// <summary>
-        /// lbl_Upcoming control.
+        /// lbtn_upcoming control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbl_Upcoming;
+        protected global::System.Web.UI.WebControls.LinkButton lbtn_upcoming;
 
         /// <summary>
-        /// lbl_Past control.
+        /// lbtn_past control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbl_Past;
+        protected global::System.Web.UI.WebControls.LinkButton lbtn_past;
 
         /// <summary>
-        /// lbl_Missed control.
+        /// lbtn_missed control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbl_Missed;
+        protected global::System.Web.UI.WebControls.LinkButton lbtn_missed;
 
         /// <summary>
         /// btn_Rsch control.
@@ -105,13 +114,22 @@ namespace EDP_Clinic
         protected global::System.Web.UI.WebControls.Button btn_Rsch;
 
         /// <summary>
-        /// btn_Rsch2 control.
+        /// listview_appts control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btn_Rsch2;
+        protected global::System.Web.UI.WebControls.ListView listview_appts;
+
+        /// <summary>
+        /// dp_listview_appt control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DataPager dp_listview_appt;
 
         /// <summary>
         /// btn_Rsch3 control.

@@ -39,7 +39,7 @@
             &nbsp;&nbsp;&nbsp; </span>
         </img>                                                            
             <asp:Label ID="lbl_profileName" runat="server"></asp:Label>
-            <asp:ImageButton ID="userArrow" runat="server" Height="50px" ImageAlign="Right" ImageUrl="~/assets/images/rightArrow.png" OnClick="Arrow_Click" Width="50px" />
+            <asp:ImageButton ID="userArrow" runat="server" Height="50px" ImageAlign="Right" ImageUrl="~/assets/images/rightArrow.png" OnClick="View_Appt_Patient" Width="50px" />
             </div>
         <p> &nbsp</p>
                <p class="text-dark"> My Care Receivers 
@@ -49,7 +49,7 @@
                     &nbsp;&nbsp;&nbsp;&nbsp; </span>
                                                             <asp:Label ID="lbl_crName" runat="server"></asp:Label>
         </img>        
-                    <asp:ImageButton ID="crArrow" runat="server" Height="50px" ImageAlign="Right" ImageUrl="~/assets/images/rightArrow.png" OnClick="Arrow_Click" Width="50px" />
+                    <asp:ImageButton ID="crArrow" runat="server" Height="50px" ImageAlign="Right" ImageUrl="~/assets/images/rightArrow.png" OnClick="View_Appt_CR" Width="50px" />
                 </div>
         </div>
                 <p> &nbsp;</p>
