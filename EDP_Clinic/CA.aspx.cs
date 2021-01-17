@@ -5,6 +5,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Drawing;
 
 namespace EDP_Clinic
 {
@@ -19,7 +20,7 @@ namespace EDP_Clinic
         {
             
             EDP_DBReference.Service1Client svc_client = new EDP_DBReference.Service1Client();
-            User current_user = svc_client.GetOneUser(Convert.ToInt32(Session["UserID"]));
+            User current_user = svc_client.GetOneUser(Convert.ToInt32(Session["current_appt_profile"]));
             // For breadcrumb elements
             hl_bc_profileName.Text = current_user.Name;
             //
@@ -96,7 +97,17 @@ namespace EDP_Clinic
 
                 DateTime startDate = Convert.ToDateTime(Session["startDate"]);
                 DateTime endDate = DateTime.Now.AddMonths(2);
-                lbl_validDates.Text = $"You may only pick a date between {startDate.Day} {startDate.ToString("MMMM")} to {endDate.Day} {endDate.ToString("MMMM")}";
+
+                if (startDate < endDate)
+                {
+                    lbl_validDates.Text = $"You may only pick a date between {startDate.Day} {startDate.ToString("MMMM")} to {endDate.Day} {endDate.ToString("MMMM")}";
+                }
+
+                else
+                {
+                    lbl_validDates.Text = $"Sorry, you can't enter a date later than two months of the current day";
+                    lbl_validDates.ForeColor = Color.Red;
+                }
             }
 
 
@@ -227,7 +238,7 @@ namespace EDP_Clinic
             if (Request["rb_apptslot"] == null)
             {
                 result = false;
-                lbl_error_make_appt.ForeColor = System.Drawing.Color.Red;
+                lbl_error_make_appt.ForeColor = Color.Red; 
                 lbl_error_make_appt.Text = "You did not select an appointment timeslot";
             }
 
@@ -255,9 +266,13 @@ namespace EDP_Clinic
 
                    lbl_error_make_appt.ForeColor = System.Drawing.Color.Green;
                    lbl_error_make_appt.Text = "Appointment Made Successfully!";
+                    gv_timeslots.DataSource = Search_AvailableAppts();
+                    gv_timeslots.DataBind();
                 }
                 else
-                    lbl_error_make_appt.Text = "Appointment Creation Failed :C";
+                    lbl_error_make_appt.Text = "Booking failed, please try again.";
+                gv_timeslots.DataSource = Search_AvailableAppts();
+                gv_timeslots.DataBind();
 
                 /*                DateTime dob = Convert.ToDateTime(tbBirthDate.Text);
                                 double wage = Convert.ToDouble(tbMthlySalary.Text);

@@ -130,7 +130,7 @@
                 <ItemTemplate><asp:Label ID="lbl_apptSlot" runat="server" Text="<%# Container.DataItem %>"></asp:Label></ItemTemplate>
             </asp:TemplateField>
         </Columns>
-                        <HeaderStyle BackColor="White" />
+                        <HeaderStyle BackColor="#0066FF" ForeColor="White" />
             </asp:GridView>
             
 
@@ -144,11 +144,11 @@
     </p>
             -->
     <div>
+                    <asp:Label ID="lbl_error_make_appt" runat="server"></asp:Label>
         <br />
     </div>
     <div class="row">
         <div class="col-lg-1">
-            <asp:Label ID="lbl_error_make_appt" runat="server"></asp:Label>
         </div>
         <div class="col-lg-5">
             <asp:Button ID="btn_createAppt" runat="server" Text="Next" Width="463px" CssClass="btn btn-primary" OnClick="btn_createAppt_Click" />

@@ -59,11 +59,6 @@
     <li class="breadcrumb-item active" aria-current="page"> 
         <asp:HyperLink ID="hl_bc_profileName" runat="server" CssClass="hyperlink_breadcrumb_active"></asp:HyperLink></asp:Label>
       </li>
-      <!--
-          <li class="breadcrumb-item" aria-current="page"> <!-- <a href=""> Upcoming Appointments </a>  
-                            <asp:HyperLink ID="hl_bc_uappts" runat="server" CssClass="hyperlink_breadcrumb">Appointments</asp:HyperLink></asp:Label>
-      </li>
-      -->
   </ol>
 </nav>
                     <h2> View Appointments </h2>
@@ -71,20 +66,12 @@
 
             <div class="row">
                 <div class="col-sm-8"> 
-                    <!--
-                    <span class="fa fa-arrow-left" style="height:inherit"></span>
-                    &nbsp
-                    <img src="assets/images/profileImage_placeholder.png" width="50px" height="50px"></img>
-                                        &nbsp
-                    <span> Johnny Lim</span>
-                        -->
                     <asp:ImageButton ID="leftArrow_redirect" runat="server" Height="50px" ImageAlign="Left" ImageUrl="~/assets/images/leftArrow.png" Width="50px" OnClick="leftArrow_redirect_Click" />
                     <asp:Image ID="profilePfp" runat="server" ImageUrl="~/assets/images/pfp_placeholder.png" Height="50px" Width="50px" />
                                         <asp:Label ID="lbl_profileName" runat="server" Text=""></asp:Label>
                 </div>
                 <div class="col-sm-4"> 
                     <asp:Button runat="server" Text="Make New Appointment" CssClass="btn_mka btn btn-primary text-white" ID="btn_makeAppt" OnClick="btn_makeAppt_Click" />
-                    <!-- <button class="btn_mka btn btn-primary text-white"> Make New Appointment</button> -->
                 </div>
             </div>
             <div class="row mt-2">
@@ -102,7 +89,55 @@
             &nbsp
         </div>
 
-        <!-- OLD CARD HEADER, LEAVE FOR POTENTIAL FUTURE RE-USE
+
+
+        <asp:ListView ID="listview_appts" runat="server" OnPagePropertiesChanging="listview_appts_PagePropertiesChanging">
+                        <ItemTemplate>
+                            <div class="card-header">
+            <h4>Date Time: <%# Eval("dateTime") %> </h4>
+            <h4> Type: <%# Eval("appointmentType") %> </h4>
+            <h4> Doctor: <%# Convert_Placebo( Eval("doctorID") ) %> </h4>
+
+            <div class="row">
+                                    <asp:Button ID="btn_Rsch2" runat="server" Text="Reschedule" CssClass="btn_Rsch bg-primary text-white col-3 align-content-end ml-2" />
+                                    <span class="col-3"></span>
+                                    <button class="btn_Cancel bg-white text-primary btn-outline-primary col-3"  data-toggle="modal" data-target="#cancelModal" onclick="btn_cancel_click" id="cancelBtn"> Cancel  </button>
+                         <span class="col-3"></span>
+            </div>
+        </div>
+            </ItemTemplate>
+        </asp:ListView>
+        <asp:DataPager ID="dp_listview_appt" runat="server" PagedControlID="listview_appts" PageSize="2">
+            <Fields>
+                <asp:NumericPagerField ButtonType="Link" />
+            </Fields>
+        </asp:DataPager>
+
+
+
+
+
+        <!-- Modal -->
+
+<div class="modal fade" id="cancelModal" tabindex="-1" role="dialog" aria-labelledby="cancelModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Cancel Appointment?</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Cancel</button>
+      </div>
+    </div>
+  </div>
+</div>
+    </div>
+
+                    <!-- OLD CARD HEADER, LEAVE FOR POTENTIAL FUTURE RE-USE
         <div class="card-header">
             <div class="row">
                 <div class="col-8">                            <h4> Date Time: 02 December 2020 (WED) 02:30PM</h4></h4> </div>
@@ -127,31 +162,6 @@
                 </div>
             </div>
         -->
-
-        <asp:ListView ID="listview_appts" runat="server" OnPagePropertiesChanging="listview_appts_PagePropertiesChanging">
-                        <ItemTemplate>
-                            <div class="card-header">
-            <h4>Date Time: <%#DataBinder.Eval(Container,"DataItem.dateTime")%> </h4>
-            <h4> Type: <%#DataBinder.Eval(Container,"DataItem.appointmentType")%> </h4>
-            <h4> Doctor: <%#DataBinder.Eval(Container,"DataItem.doctorID")%> </h4>
-            <div class="row">
-                                    <asp:Button ID="btn_Rsch2" runat="server" Text="Reschedule" CssClass="btn_Rsch bg-primary text-white col-3 align-content-end ml-2" />
-                                    <span class="col-3"></span>
-                                    <button class="btn_Cancel bg-white text-primary btn-outline-primary col-3"  data-toggle="modal" data-target="#cancelModal" onclick="btn_cancel_click" id="cancelBtn"> Cancel  </button>
-                         <span class="col-3"></span>
-            </div>
-        </div>
-            </ItemTemplate>
-        </asp:ListView>
-        <asp:DataPager ID="dp_listview_appt" runat="server" PagedControlID="listview_appts" PageSize="2">
-            <Fields>
-                <asp:NumericPagerField ButtonType="Link" />
-            </Fields>
-        </asp:DataPager>
-
-
-
-
         <!-- 
         <div class="card-header">
             <h4>Date Time: 02 December 2020 (WED) 02:30PM </h4>
@@ -165,23 +175,6 @@
             </div>
         </div>
         -->
-        <!-- Modal -->
-
-<div class="modal fade" id="cancelModal" tabindex="-1" role="dialog" aria-labelledby="cancelModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Cancel Appointment?</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Cancel</button>
-      </div>
-    </div>
-  </div>
-</div>
-    </div>
 </asp:Content>
+
+

@@ -59,10 +59,15 @@ namespace DBService.Entity
             SqlCommand sqlCmd = new SqlCommand(sqlStmt, myConn);
 
             // Step 3 : Add each parameterised variable with value
+
+            // Values from user input
             sqlCmd.Parameters.AddWithValue("@paraPatientID", patientID);
             sqlCmd.Parameters.AddWithValue("@paraAppointmentType", appointmentType);
             sqlCmd.Parameters.AddWithValue("@paraDateTime", dateTime);
             sqlCmd.Parameters.AddWithValue("@paraStatus", status);
+
+            // Default values since business side will decide who will be the doctor etc...
+
 
             // Step 4 Open connection the execute NonQuery of sql command   
             myConn.Open();
@@ -97,6 +102,7 @@ namespace DBService.Entity
             {
                 DataRow row = ds.Tables[0].Rows[i];  // Sql command returns only one record
 
+                /*
                 int patientID = Convert.ToInt32(row["patientID"]);
                 int doctorID = Convert.ToInt32(row["doctorID"]);
                 int nurseID = Convert.ToInt32(row["nurseID"]);
@@ -107,6 +113,44 @@ namespace DBService.Entity
                 DateTime dateTime = Convert.ToDateTime(row["dateTime"]);
                 string followUp = row["followUp"].ToString();
                 string status = row["status"].ToString();
+                */
+
+                int patientID = Convert.ToInt32(row["patientID"]);
+                int doctorID = 0;
+                int nurseID = 0;
+                int caregiverID = 0;
+                string appointmentType = row["appointmentType"].ToString();
+                string prescription = "none";
+                string remarks = "none";
+                DateTime dateTime = Convert.ToDateTime(row["dateTime"]);
+                string followUp = "none";
+                string status = row["status"].ToString();
+
+                if (row.IsNull("doctorID") == false)
+                {
+                    doctorID = Convert.ToInt32(row["doctorID"]);
+                }
+                if (row.IsNull("nurseID") == false)
+                {
+                    nurseID = Convert.ToInt32(row["nurseID"]);
+                }
+                if (row.IsNull("caregiverID") == false)
+                {
+                    caregiverID = Convert.ToInt32(row["caregiverID"]);
+                }
+                if (row.IsNull("prescription") == false)
+                {
+                    prescription = row["prescription"].ToString();
+                }
+                if (row.IsNull("remarks") == false)
+                {
+                    remarks = row["remarks"].ToString();
+                }
+                if (row.IsNull("followUp") == false)
+                {
+                    followUp = row["followUp"].ToString();
+                }
+
                 Appointment obj = new Appointment(patientID, doctorID, nurseID, caregiverID, appointmentType, prescription, remarks, dateTime, followUp, status);
                 
                 apptList.Add(obj);
@@ -140,15 +184,40 @@ namespace DBService.Entity
                 DataRow row = ds.Tables[0].Rows[i];  // Sql command returns only one record
 
                 int patientID = Convert.ToInt32(row["patientID"]);
-                int doctorID = Convert.ToInt32(row["doctorID"]);
-                int nurseID = Convert.ToInt32(row["nurseID"]);
-                int caregiverID = Convert.ToInt32(row["caregiverID"]);
+                int doctorID = 0;
+                int nurseID = 0;
+                int caregiverID = 0;
                 string appointmentType = row["appointmentType"].ToString();
-                string prescription = row["prescription"].ToString();
-                string remarks = row["remarks"].ToString();
+                string prescription = "none";
+                string remarks = "none";
                 DateTime dateTime = Convert.ToDateTime(row["dateTime"]);
-                string followUp = row["followUp"].ToString();
+                string followUp = "none";
                 string status = row["status"].ToString();
+
+                if (row.IsNull("doctorID") == false)
+                {
+                    doctorID = Convert.ToInt32(row["doctorID"]);
+                }
+                if (row.IsNull("nurseID") == false)
+                {
+                    nurseID = Convert.ToInt32(row["nurseID"]);
+                }
+                if (row.IsNull("caregiverID") == false)
+                {
+                    caregiverID = Convert.ToInt32(row["caregiverID"]);
+                }
+                if (row.IsNull("prescription") == false)
+                {
+                    prescription = row["prescription"].ToString();
+                }
+                if (row.IsNull("remarks") == false)
+                {
+                    remarks = row["remarks"].ToString();
+                }
+                if (row.IsNull("followUp") == false)
+                {
+                    followUp = row["followUp"].ToString();
+                }
                 Appointment obj = new Appointment(patientID, doctorID, nurseID, caregiverID, appointmentType, prescription, remarks, dateTime, followUp, status);
 
                 apptList.Add(obj);
@@ -183,15 +252,40 @@ namespace DBService.Entity
                 DataRow row = ds.Tables[0].Rows[i];  // Sql command returns only one record
 
                 int patientID = Convert.ToInt32(row["patientID"]);
-                int doctorID = Convert.ToInt32(row["doctorID"]);
-                int nurseID = Convert.ToInt32(row["nurseID"]);
-                int caregiverID = Convert.ToInt32(row["caregiverID"]);
+                int doctorID = 0;
+                int nurseID = 0;
+                int caregiverID = 0;
                 string appointmentType = row["appointmentType"].ToString();
-                string prescription = row["prescription"].ToString();
-                string remarks = row["remarks"].ToString();
+                string prescription = "none";
+                string remarks = "none";
                 DateTime dateTime = Convert.ToDateTime(row["dateTime"]);
-                string followUp = row["followUp"].ToString();
+                string followUp = "none";
                 string status = row["status"].ToString();
+
+                if (row.IsNull("doctorID") == false)
+                {
+                    doctorID = Convert.ToInt32(row["doctorID"]);
+                }
+                if (row.IsNull("nurseID") == false)
+                {
+                    nurseID = Convert.ToInt32(row["nurseID"]);
+                }
+                if (row.IsNull("caregiverID") == false)
+                {
+                    caregiverID = Convert.ToInt32(row["caregiverID"]);
+                }
+                if (row.IsNull("prescription") == false)
+                {
+                    prescription = row["prescription"].ToString();
+                }
+                if (row.IsNull("remarks") == false)
+                {
+                    remarks = row["remarks"].ToString();
+                }
+                if (row.IsNull("followUp") == false)
+                {
+                    followUp = row["followUp"].ToString();
+                }
                 Appointment obj = new Appointment(patientID, doctorID, nurseID, caregiverID, appointmentType, prescription, remarks, dateTime, followUp, status);
 
                 apptList.Add(obj);
@@ -226,15 +320,40 @@ namespace DBService.Entity
                 DataRow row = ds.Tables[0].Rows[i];  // Sql command returns only one record
 
                 int patientID = Convert.ToInt32(row["patientID"]);
-                int doctorID = Convert.ToInt32(row["doctorID"]);
-                int nurseID = Convert.ToInt32(row["nurseID"]);
-                int caregiverID = Convert.ToInt32(row["caregiverID"]);
+                int doctorID = 0;
+                int nurseID = 0;
+                int caregiverID = 0;
                 string appointmentType = row["appointmentType"].ToString();
-                string prescription = row["prescription"].ToString();
-                string remarks = row["remarks"].ToString();
+                string prescription = "none";
+                string remarks = "none";
                 DateTime dateTime = Convert.ToDateTime(row["dateTime"]);
-                string followUp = row["followUp"].ToString();
+                string followUp = "none";
                 string status = row["status"].ToString();
+
+                if (row.IsNull("doctorID") == false)
+                {
+                    doctorID = Convert.ToInt32(row["doctorID"]);
+                }
+                if (row.IsNull("nurseID") == false)
+                {
+                    nurseID = Convert.ToInt32(row["nurseID"]);
+                }
+                if (row.IsNull("caregiverID") == false)
+                {
+                    caregiverID = Convert.ToInt32(row["caregiverID"]);
+                }
+                if (row.IsNull("prescription") == false)
+                {
+                    prescription = row["prescription"].ToString();
+                }
+                if (row.IsNull("remarks") == false)
+                {
+                    remarks = row["remarks"].ToString();
+                }
+                if (row.IsNull("followUp") == false)
+                {
+                    followUp = row["followUp"].ToString();
+                }
                 Appointment obj = new Appointment(patientID, doctorID, nurseID, caregiverID, appointmentType, prescription, remarks, dateTime, followUp, status);
 
                 apptList.Add(obj);
@@ -269,15 +388,40 @@ namespace DBService.Entity
                 DataRow row = ds.Tables[0].Rows[i];  // Sql command returns only one record
 
                 int patientID = Convert.ToInt32(row["patientID"]);
-                int doctorID = Convert.ToInt32(row["doctorID"]);
-                int nurseID = Convert.ToInt32(row["nurseID"]);
-                int caregiverID = Convert.ToInt32(row["caregiverID"]);
+                int doctorID = 0;
+                int nurseID = 0;
+                int caregiverID = 0;
                 string appointmentType = row["appointmentType"].ToString();
-                string prescription = row["prescription"].ToString();
-                string remarks = row["remarks"].ToString();
+                string prescription = "none";
+                string remarks = "none";
                 DateTime dateTime = Convert.ToDateTime(row["dateTime"]);
-                string followUp = row["followUp"].ToString();
+                string followUp = "none";
                 string status = row["status"].ToString();
+
+                if (row.IsNull("doctorID") == false)
+                {
+                    doctorID = Convert.ToInt32(row["doctorID"]);
+                }
+                if (row.IsNull("nurseID") == false)
+                {
+                    nurseID = Convert.ToInt32(row["nurseID"]);
+                }
+                if (row.IsNull("caregiverID") == false)
+                {
+                    caregiverID = Convert.ToInt32(row["caregiverID"]);
+                }
+                if (row.IsNull("prescription") == false)
+                {
+                    prescription = row["prescription"].ToString();
+                }
+                if (row.IsNull("remarks") == false)
+                {
+                    remarks = row["remarks"].ToString();
+                }
+                if (row.IsNull("followUp") == false)
+                {
+                    followUp = row["followUp"].ToString();
+                }
                 Appointment obj = new Appointment(patientID, doctorID, nurseID, caregiverID, appointmentType, prescription, remarks, dateTime, followUp, status);
 
                 apptList.Add(obj);

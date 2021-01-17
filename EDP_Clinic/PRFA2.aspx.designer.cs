@@ -33,15 +33,6 @@ namespace EDP_Clinic
         protected global::System.Web.UI.WebControls.HyperLink hl_bc_profileName;
 
         /// <summary>
-        /// hl_bc_uappts control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.HyperLink hl_bc_uappts;
-
-        /// <summary>
         /// leftArrow_redirect control.
         /// </summary>
         /// <remarks>
@@ -105,15 +96,6 @@ namespace EDP_Clinic
         protected global::System.Web.UI.WebControls.LinkButton lbtn_missed;
 
         /// <summary>
-        /// btn_Rsch control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btn_Rsch;
-
-        /// <summary>
         /// listview_appts control.
         /// </summary>
         /// <remarks>
@@ -130,6 +112,15 @@ namespace EDP_Clinic
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DataPager dp_listview_appt;
+
+        /// <summary>
+        /// btn_Rsch control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btn_Rsch;
 
         /// <summary>
         /// btn_Rsch3 control.
