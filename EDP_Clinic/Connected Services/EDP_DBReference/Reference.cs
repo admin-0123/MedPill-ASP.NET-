@@ -586,10 +586,10 @@ namespace EDP_Clinic.EDP_DBReference {
         System.Threading.Tasks.Task<EDP_Clinic.EDP_DBReference.displayUser[]> ShowAllEmployeesAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/CreateCardInfo", ReplyAction="http://tempuri.org/IService1/CreateCardInfoResponse")]
-        int CreateCardInfo(string cardName, string cardNumber, System.DateTime cardExpiry, string cvvNumber, byte[] iv, byte[] key);
+        int CreateCardInfo(string cardName, string cardNumber, System.DateTime cardExpiry, string cvvNumber, byte[] iv, byte[] key, bool stillValid);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/CreateCardInfo", ReplyAction="http://tempuri.org/IService1/CreateCardInfoResponse")]
-        System.Threading.Tasks.Task<int> CreateCardInfoAsync(string cardName, string cardNumber, System.DateTime cardExpiry, string cvvNumber, byte[] iv, byte[] key);
+        System.Threading.Tasks.Task<int> CreateCardInfoAsync(string cardName, string cardNumber, System.DateTime cardExpiry, string cvvNumber, byte[] iv, byte[] key, bool stillValid);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetCardByCardNumber", ReplyAction="http://tempuri.org/IService1/GetCardByCardNumberResponse")]
         EDP_Clinic.EDP_DBReference.CardInfo GetCardByCardNumber(string cardNumber);
@@ -759,8 +759,8 @@ namespace EDP_Clinic.EDP_DBReference {
             return base.Channel.CreateCardInfo(cardName, cardNumber, cardExpiry, cvvNumber, iv, key);
         }
         
-        public System.Threading.Tasks.Task<int> CreateCardInfoAsync(string cardName, string cardNumber, System.DateTime cardExpiry, string cvvNumber, byte[] iv, byte[] key) {
-            return base.Channel.CreateCardInfoAsync(cardName, cardNumber, cardExpiry, cvvNumber, iv, key);
+        public System.Threading.Tasks.Task<int> CreateCardInfoAsync(string cardName, string cardNumber, System.DateTime cardExpiry, string cvvNumber, byte[] iv, byte[] key, bool stillValid) {
+            return base.Channel.CreateCardInfoAsync(cardName, cardNumber, cardExpiry, cvvNumber, iv, key, stillValid);
         }
         
         public EDP_Clinic.EDP_DBReference.CardInfo GetCardByCardNumber(string cardNumber) {

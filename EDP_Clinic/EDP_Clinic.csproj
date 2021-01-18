@@ -216,6 +216,7 @@
     <Content Include="EmployeePasswordSet.aspx" />
     <Content Include="Login.aspx" />
     <Content Include="PatientOverview.aspx" />
+    <Content Include="generalError.aspx" />
     <Content Include="Payment.aspx" />
     <Content Include="PaymentInfoDeleted.aspx" />
     <Content Include="PaymentInfoEmpty.aspx" />
@@ -324,6 +325,13 @@
     </Compile>
     <Compile Include="PatientOverview.aspx.designer.cs">
       <DependentUpon>PatientOverview.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="generalError.aspx.cs">
+      <DependentUpon>generalError.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="generalError.aspx.designer.cs">
+      <DependentUpon>generalError.aspx</DependentUpon>
     </Compile>
     <Compile Include="Payment.aspx.cs">
       <DependentUpon>Payment.aspx</DependentUpon>

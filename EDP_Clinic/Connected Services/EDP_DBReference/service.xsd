@@ -198,6 +198,7 @@
         <xs:element minOccurs="0" name="cvvNumber" nillable="true" type="xs:string" />
         <xs:element minOccurs="0" name="iv" nillable="true" type="xs:base64Binary" />
         <xs:element minOccurs="0" name="key" nillable="true" type="xs:base64Binary" />
+        <xs:element minOccurs="0" name="stillValid" type="xs:boolean" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

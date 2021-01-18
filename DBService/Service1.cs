@@ -92,10 +92,10 @@ namespace DBService
         }
 
         //CardInfo Methods
-        public int CreateCardInfo(string cardName, string cardNumber, 
-            DateTime cardExpiry, string cvvNumber, byte[] iv, byte[] key)
+        public int CreateCardInfo(string cardName, string cardNumber,
+            DateTime cardExpiry, string cvvNumber, byte[] iv, byte[] key, bool stillValid)
         {
-            CardInfo cif = new CardInfo(cardName, cardNumber, cardExpiry, cvvNumber, iv, key);
+            CardInfo cif = new CardInfo(cardName, cardNumber, cardExpiry, cvvNumber, iv, key, stillValid);
             return cif.Insert();
         }
         public CardInfo GetCardByCardNumber(string cardNumber)

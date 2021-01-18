@@ -22,16 +22,17 @@ namespace EDP_Clinic
                 else
                 {
                     //Might put these codes below into a function
-                    string cardNumber = Request.QueryString["cardNumber"];
+                    string cardNumber = Session["cardNumber"].ToString();//Request.QueryString["cardNumber"];
                     Service1Client client = new Service1Client();
                     CardInfo cif = client.GetCardByCardNumber(cardNumber);
 
                     DateTime cardExpiryDate = cif.CardExpiry;
 
                     cardNameText.Text = cif.CardName;
-                    cardNumberText.Text = cif.CardNumber;
+                    string cardNumberDisplay = cif.CardNumber.Substring(12, 4);
+                    cardNumberText.Text = "**** **** **** " + cardNumberDisplay;
                     cardExpiryText.Text = cardExpiryDate.ToString("MMMM yyyy");//Convert.ToDateTime.ToMon(cif.CardExpiry);
-                    cvvNumberText.Text = cif.CVVNumber;
+                    //cvvNumberText.Text = cif.CVVNumber;
                 }
             }
             else
@@ -63,11 +64,12 @@ namespace EDP_Clinic
             string guid = Guid.NewGuid().ToString();
             Session["deleteCardInfo"] = guid;
 
-            string cardNumber = Request.QueryString["cardNumber"];
+            string cardNumber = Session["cardNumber"].ToString();
+            //string cardNumber = Request.QueryString["cardNumber"];
             Service1Client client = new Service1Client();
-            CardInfo cif = client.GetCardByCardNumber(cardNumber);
+            //CardInfo cif = client.GetCardByCardNumber(cardNumber);
             //Delete at authentication page
-            Session["cardNumber"] = cif.CardNumber;
+            //Session["cardNumber"] = cif.CardNumber;
 
             Response.Cookies.Add(new HttpCookie("deleteCardInfo", guid));
             Response.Redirect("Authentication.aspx", false);
@@ -84,11 +86,12 @@ namespace EDP_Clinic
             string guid = Guid.NewGuid().ToString();
             Session["changeCardInfo"] = guid;
 
-            string cardNumber = Request.QueryString["cardNumber"];
+            //string cardNumber = Request.QueryString["cardNumber"];
+            string cardNumber = Session["cardNumber"].ToString();
             Service1Client client = new Service1Client();
-            CardInfo cif = client.GetCardByCardNumber(cardNumber);
+            //CardInfo cif = client.GetCardByCardNumber(cardNumber);
             //Update at updateCard page
-            Session["cardNumber"] = cif.CardNumber;
+            //Session["cardNumber"] = cif.CardNumber;
 
             Response.Cookies.Add(new HttpCookie("changeCardInfo", guid));
             Response.Redirect("Authentication.aspx", false);
