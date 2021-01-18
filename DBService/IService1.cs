@@ -47,6 +47,9 @@ namespace DBService
 
         [OperationContract]
         int UpdateByCardNumber(string previousCardNumber, string cardName, string cardNumber, DateTime cardExpiry, string cvvNumber);
+
+        [OperationContract]
+        int CreateReceipt(DateTime dateSale, double totalSum, bool isPaid);
         // Taken from practical 4, methods are listed in the abstract interface, method bodies are in service1.cs
         /*        [OperationContract]
                 List<Employee> GetAllEmployee();
