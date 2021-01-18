@@ -117,6 +117,8 @@
     </Content>
     <Content Include="assets\css\main.css" />
     <Content Include="assets\css\style-starter.css" />
+    <Content Include="assets\css\style.css" />
+    <Content Include="assets\css\util.css" />
     <Content Include="assets\fonts\fontawesome-webfont.svg" />
     <Content Include="assets\images\ambulance.png" />
     <Content Include="assets\images\appointment.jpg" />
@@ -162,7 +164,33 @@
     <Content Include="assets\images\van.png" />
     <Content Include="assets\js\bootstrap.min.js" />
     <Content Include="assets\js\owl.carousel.js" />
+    <Content Include="assets\vendor\animate\animate.css" />
+    <Content Include="assets\vendor\bootstrap\css\bootstrap-grid.css" />
+    <Content Include="assets\vendor\bootstrap\css\bootstrap-grid.min.css" />
+    <Content Include="assets\vendor\bootstrap\css\bootstrap-reboot.css" />
+    <Content Include="assets\vendor\bootstrap\css\bootstrap-reboot.min.css" />
+    <Content Include="assets\vendor\bootstrap\css\bootstrap.css" />
+    <Content Include="assets\vendor\bootstrap\css\bootstrap.min.css" />
+    <Content Include="assets\vendor\bootstrap\js\bootstrap.js" />
+    <Content Include="assets\vendor\bootstrap\js\bootstrap.min.js" />
+    <Content Include="assets\vendor\bootstrap\js\popper.js" />
+    <Content Include="assets\vendor\bootstrap\js\popper.min.js" />
+    <Content Include="assets\vendor\bootstrap\js\tooltip.js" />
+    <Content Include="assets\vendor\jquery\jquery-3.2.1.min.js" />
+    <Content Include="assets\vendor\perfect-scrollbar\perfect-scrollbar.css" />
+    <Content Include="assets\vendor\perfect-scrollbar\perfect-scrollbar.min.js" />
+    <Content Include="assets\vendor\select2\select2.css" />
+    <Content Include="assets\vendor\select2\select2.js" />
+    <Content Include="assets\vendor\select2\select2.min.css" />
+    <Content Include="assets\vendor\select2\select2.min.js" />
     <Content Include="Authentication.aspx" />
+    <Content Include="assets\vendor\bootstrap\css\bootstrap-grid.css.map" />
+    <Content Include="assets\vendor\bootstrap\css\bootstrap-grid.min.css.map" />
+    <Content Include="assets\vendor\bootstrap\css\bootstrap-reboot.css.map" />
+    <Content Include="assets\vendor\bootstrap\css\bootstrap-reboot.min.css.map" />
+    <Content Include="assets\vendor\bootstrap\css\bootstrap.css.map" />
+    <Content Include="assets\vendor\bootstrap\css\bootstrap.min.css.map" />
+    <Content Include="AdminPage.aspx" />
     <None Include="Connected Services\EDP_DBReference\configuration91.svcinfo" />
     <None Include="Connected Services\EDP_DBReference\configuration.svcinfo" />
     <Content Include="CardList.aspx" />
@@ -176,18 +204,26 @@
     <Content Include="Connected Services\EDP_DBReference\EDP_Clinic.EDP_DBReference.CardInfo.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
+    <Content Include="Connected Services\EDP_DBReference\EDP_Clinic.EDP_DBReference.displayUser.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
     <None Include="Connected Services\EDP_DBReference\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
     <Content Include="Contact.aspx" />
     <Content Include="changeCardInfo.aspx" />
+    <Content Include="EmployeePasswordSet.aspx" />
+    <Content Include="Login.aspx" />
+    <Content Include="PatientOverview.aspx" />
     <Content Include="Payment.aspx" />
     <Content Include="PaymentInfoDeleted.aspx" />
     <Content Include="PaymentInfoEmpty.aspx" />
     <Content Include="PaymentInformation.aspx" />
     <Content Include="ReceiptList.aspx" />
     <Content Include="ReceiptListAdmin.aspx" />
+    <Content Include="Register.aspx" />
+    <Content Include="UserPage.aspx" />
     <Content Include="Web.config" />
     <Content Include="Home.aspx" />
     <Content Include="Services.aspx" />
@@ -268,6 +304,27 @@
     <Compile Include="changeCardInfo.aspx.designer.cs">
       <DependentUpon>changeCardInfo.aspx</DependentUpon>
     </Compile>
+    <Compile Include="EmployeePasswordSet.aspx.cs">
+      <DependentUpon>EmployeePasswordSet.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="EmployeePasswordSet.aspx.designer.cs">
+      <DependentUpon>EmployeePasswordSet.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Login.aspx.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Login.aspx.designer.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="PatientOverview.aspx.cs">
+      <DependentUpon>PatientOverview.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="PatientOverview.aspx.designer.cs">
+      <DependentUpon>PatientOverview.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Payment.aspx.cs">
       <DependentUpon>Payment.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -311,6 +368,13 @@
     <Compile Include="ReceiptListAdmin.aspx.designer.cs">
       <DependentUpon>ReceiptListAdmin.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Register.aspx.cs">
+      <DependentUpon>Register.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Register.aspx.designer.cs">
+      <DependentUpon>Register.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Site.Master.cs">
       <DependentUpon>Site.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -331,6 +395,20 @@
     </Compile>
     <Compile Include="Services.aspx.designer.cs">
       <DependentUpon>Services.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AdminPage.aspx.cs">
+      <DependentUpon>AdminPage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdminPage.aspx.designer.cs">
+      <DependentUpon>AdminPage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="UserPage.aspx.cs">
+      <DependentUpon>UserPage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserPage.aspx.designer.cs">
+      <DependentUpon>UserPage.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>

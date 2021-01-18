@@ -13,13 +13,11 @@ using System.Data.SqlClient;
 
 namespace DBService.Entity
 {
-    public class User
+    public class displayUser
     {
         // Let all properties start with caps
         public string Id { get; set; }
-        public string Name { get; set; }
-        public string Password { get; set; }
-        public string Salt { get; set; }
+        public string Name { get; set; } 
 
         public string Email { get; set; }
 
@@ -28,24 +26,22 @@ namespace DBService.Entity
         public string Role { get; set; }
         public string Verified { get; set; }
 
-        public User()
+
+        public displayUser()
         {
 
         }
 
-        public User(string id, string name, string password, string salt,  string email, string phoneno, string role, string verified)
+        public displayUser(string id, string name,  string email, string phoneno, string role, string verified)
         {
             Id = id;
             Name = name;
-            Password = password;
-            Salt = salt;
             Email = email;
             PhoneNo = phoneno;
             Role = role;
             Verified = verified;
-      
         }
-        public User SelectByID(string id)
+        public displayUser DisplayByID(string id)
         {
             //Step 1 -  Define a connection to the database by getting
             //          the connection string from App.config
@@ -53,7 +49,7 @@ namespace DBService.Entity
             SqlConnection myConn = new SqlConnection(DBConnect);
 
             //Step 2 -  Create a DataAdapter to retrieve data from the database table
-            string sqlStmt = "Select * from [User] where Id = @paraId";
+            string sqlStmt = "Select * from [User] where id = @paraId";
             SqlDataAdapter da = new SqlDataAdapter(sqlStmt, myConn);
             da.SelectCommand.Parameters.AddWithValue("@paraId", id);
 
@@ -64,100 +60,22 @@ namespace DBService.Entity
             da.Fill(ds);
 
             //Step 5 -  Read data from DataSet.
-            User user = null;
+            displayUser user = null;
             int rec_cnt = ds.Tables[0].Rows.Count;
             if (rec_cnt == 1)
             {
                 DataRow row = ds.Tables[0].Rows[0];  // Sql command returns only one record
                 string Name = row["Name"].ToString();
-                string Password = row["Password"].ToString();
-                string Salt = row["Salt"].ToString();
                 string Email = row["Email"].ToString();
                 string PhoneNo = row["PhoneNo"].ToString();
                 string Role = row["Role"].ToString();
                 string Verified = row["Verified"].ToString();
 
-                user = new User(Id, Name, Password, Salt, Email, PhoneNo, Role, Verified);
+                user = new displayUser(id, Name, Email, PhoneNo, Role, Verified);
             }
             return user;
         }
-        public User SelectByEmail(string email)
-        {
-            //Step 1 -  Define a connection to the database by getting
-            //          the connection string from App.config
-            string DBConnect = ConfigurationManager.ConnectionStrings["EDP_DB"].ConnectionString;
-            SqlConnection myConn = new SqlConnection(DBConnect);
-
-            //Step 2 -  Create a DataAdapter to retrieve data from the database table
-            string sqlStmt = "Select * from [User] WHERE Email = @paraEmail";
-            SqlDataAdapter da = new SqlDataAdapter(sqlStmt, myConn);
-            da.SelectCommand.Parameters.AddWithValue("@paraEmail", email);
-
-            //Step 3 -  Create a DataSet to store the data to be retrieved
-            DataSet ds = new DataSet();
-
-            //Step 4 -  Use the DataAdapter to fill the DataSet with data retrieved
-            da.Fill(ds);
-
-            //Step 5 -  Read data from DataSet.
-            User user = null;
-            int rec_cnt = ds.Tables[0].Rows.Count;
-            if (rec_cnt == 1)
-            {
-                DataRow row = ds.Tables[0].Rows[0];  // Sql command returns only one record
-                string Name = row["Name"].ToString();
-                string Password = row["Password"].ToString();
-                string Salt = row["Salt"].ToString();
-                string Email = row["Email"].ToString();
-                string PhoneNo = row["PhoneNo"].ToString();
-                string Role = row["Role"].ToString();
-                string Verified = row["Verified"].ToString();
-
-                user = new User(Id, Name, Password, Salt, Email, PhoneNo, Role, Verified);
-            }
-            return user;
-        }
-        public int UpdateUser(string id,string name, string email, string mobile)
-        {
-            string DBConnect = ConfigurationManager.ConnectionStrings["EDP_DB"].ConnectionString;
-            SqlConnection myConn = new SqlConnection(DBConnect);
-            string sqlStatement = "UPDATE [User] SET Name = @Name, Email= @Email, PhoneNo = @PhoneNo  WHERE Id = @id";
-            SqlCommand cmd = new SqlCommand(sqlStatement, myConn);
-            cmd.Parameters.AddWithValue("@id", id);
-            cmd.Parameters.AddWithValue("@Name", name);
-            cmd.Parameters.AddWithValue("@Email", email);
-            cmd.Parameters.AddWithValue("@PhoneNo", mobile);
-            myConn.Open();
-            int result = cmd.ExecuteNonQuery();
-            myConn.Close();
-            return result;
-        }
-        public int CheckUser(string email)
-        {
-            string DBConnect = ConfigurationManager.ConnectionStrings["EDP_DB"].ConnectionString;
-            SqlConnection myConn = new SqlConnection(DBConnect);
-            string sqlStatement = "Select * from [User] WHERE Email = @paraEmail";
-            SqlCommand cmd = new SqlCommand(sqlStatement, myConn);
-            cmd.Parameters.AddWithValue("@paraEmail", email);
-            myConn.Open();
-            int result = cmd.ExecuteNonQuery();
-            myConn.Close();
-            return result;
-        }
-        public int DeleteUser(string id)
-        {
-            string DBConnect = ConfigurationManager.ConnectionStrings["EDP_DB"].ConnectionString;
-            SqlConnection myConn = new SqlConnection(DBConnect);
-            string sqlStatement = "DELETE FROM [User] WHERE Id = @id";
-            SqlCommand cmd = new SqlCommand(sqlStatement, myConn);
-            cmd.Parameters.AddWithValue("@id", id);
-            myConn.Open();
-            int result = cmd.ExecuteNonQuery();
-            myConn.Close();
-            return result;
-
-        }
-        public List<User> SelectAll()
+        public List<displayUser> DisplayAll()
         {
             //Step 1 -  Define a connection to the database by getting
             //          the connection string from App.config
@@ -175,7 +93,7 @@ namespace DBService.Entity
             da.Fill(ds);
 
             //Step 5 -  Read data from DataSet to List
-            List<User> userList = new List<User>();
+            List<displayUser> userList = new List<displayUser>();
             int rec_cnt = ds.Tables[0].Rows.Count;
             for (int i = 0; i < rec_cnt; i++)
             {
@@ -189,13 +107,13 @@ namespace DBService.Entity
                 string Role = row["Role"].ToString();
                 string Verified = row["Verified"].ToString();
 
-                User obj = new User(Id, Name, Password, Salt, Email, PhoneNo, Role, Verified);
+                displayUser obj = new displayUser(Id, Name, Password,  PhoneNo, Role, Verified);
                 userList.Add(obj);
             }
             return userList;
         }
 
-        public List<User> SelectAllPatients()
+        public List<displayUser> DisplayAllPatients()
         {
             //Step 1 -  Define a connection to the database by getting
             //          the connection string from App.config
@@ -213,26 +131,24 @@ namespace DBService.Entity
             da.Fill(ds);
 
             //Step 5 -  Read data from DataSet to List
-            List<User> userList = new List<User>();
+            List<displayUser> userList = new List<displayUser>();
             int rec_cnt = ds.Tables[0].Rows.Count;
             for (int i = 0; i < rec_cnt; i++)
             {
                 DataRow row = ds.Tables[0].Rows[i];  // Sql command returns only one record
                 string Id = row["Id"].ToString();
                 string Name = row["Name"].ToString();
-                string Password = row["Password"].ToString();
-                string Salt = row["Salt"].ToString();
                 string Email = row["Email"].ToString();
                 string PhoneNo = row["PhoneNo"].ToString();
                 string Role = row["Role"].ToString();
                 string Verified = row["Verified"].ToString();
 
-                User obj = new User(Id, Name, Password, Salt, Email, PhoneNo, Role, Verified);
+                displayUser obj = new displayUser(Id, Name, Email, PhoneNo, Role, Verified);
                 userList.Add(obj);
             }
             return userList;
         }
-        public List<User> SelectAllEmployees()
+        public List<displayUser> DisplayAllEmployees()
         {
             //Step 1 -  Define a connection to the database by getting
             //          the connection string from App.config
@@ -253,21 +169,19 @@ namespace DBService.Entity
             da.Fill(ds);
 
             //Step 5 -  Read data from DataSet to List
-            List<User> userList = new List<User>();
+            List<displayUser> userList = new List<displayUser>();
             int rec_cnt = ds.Tables[0].Rows.Count;
             for (int i = 0; i < rec_cnt; i++)
             {
                 DataRow row = ds.Tables[0].Rows[i];  // Sql command returns only one record
                 string Id = row["Id"].ToString();
                 string Name = row["Name"].ToString();
-                string Password = row["Password"].ToString();
-                string Salt = row["Salt"].ToString();
                 string Email = row["Email"].ToString();
                 string PhoneNo = row["PhoneNo"].ToString();
                 string Role = row["Role"].ToString();
                 string Verified = row["Verified"].ToString();
- 
-                User obj = new User(Id, Name, Password, Salt, Email, PhoneNo, Role, Verified);
+
+                displayUser obj = new displayUser(Id, Name, Email, PhoneNo, Role, Verified);
                 userList.Add(obj);
             }
             return userList;

@@ -26,11 +26,71 @@
   <wsdl:message name="IService1_GetOneUser_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetOneUserResponse" />
   </wsdl:message>
+  <wsdl:message name="IService1_EditOneUser_InputMessage">
+    <wsdl:part name="parameters" element="tns:EditOneUser" />
+  </wsdl:message>
+  <wsdl:message name="IService1_EditOneUser_OutputMessage">
+    <wsdl:part name="parameters" element="tns:EditOneUserResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService1_DeleteOneUser_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteOneUser" />
+  </wsdl:message>
+  <wsdl:message name="IService1_DeleteOneUser_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteOneUserResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService1_CheckOneUser_InputMessage">
+    <wsdl:part name="parameters" element="tns:CheckOneUser" />
+  </wsdl:message>
+  <wsdl:message name="IService1_CheckOneUser_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CheckOneUserResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService1_GetOneUserByEmail_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetOneUserByEmail" />
+  </wsdl:message>
+  <wsdl:message name="IService1_GetOneUserByEmail_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetOneUserByEmailResponse" />
+  </wsdl:message>
   <wsdl:message name="IService1_GetAllUsers_InputMessage">
     <wsdl:part name="parameters" element="tns:GetAllUsers" />
   </wsdl:message>
   <wsdl:message name="IService1_GetAllUsers_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetAllUsersResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService1_GetAllPatients_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllPatients" />
+  </wsdl:message>
+  <wsdl:message name="IService1_GetAllPatients_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllPatientsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService1_GetAllEmployees_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllEmployees" />
+  </wsdl:message>
+  <wsdl:message name="IService1_GetAllEmployees_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllEmployeesResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService1_ShowOneUser_InputMessage">
+    <wsdl:part name="parameters" element="tns:ShowOneUser" />
+  </wsdl:message>
+  <wsdl:message name="IService1_ShowOneUser_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ShowOneUserResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService1_ShowAllUsers_InputMessage">
+    <wsdl:part name="parameters" element="tns:ShowAllUsers" />
+  </wsdl:message>
+  <wsdl:message name="IService1_ShowAllUsers_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ShowAllUsersResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService1_ShowAllPatients_InputMessage">
+    <wsdl:part name="parameters" element="tns:ShowAllPatients" />
+  </wsdl:message>
+  <wsdl:message name="IService1_ShowAllPatients_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ShowAllPatientsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService1_ShowAllEmployees_InputMessage">
+    <wsdl:part name="parameters" element="tns:ShowAllEmployees" />
+  </wsdl:message>
+  <wsdl:message name="IService1_ShowAllEmployees_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ShowAllEmployeesResponse" />
   </wsdl:message>
   <wsdl:message name="IService1_CreateCardInfo_InputMessage">
     <wsdl:part name="parameters" element="tns:CreateCardInfo" />
@@ -75,9 +135,49 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IService1/GetOneUser" message="tns:IService1_GetOneUser_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IService1/GetOneUserResponse" message="tns:IService1_GetOneUser_OutputMessage" />
     </wsdl:operation>
+    <wsdl:operation name="EditOneUser">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/EditOneUser" message="tns:IService1_EditOneUser_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/EditOneUserResponse" message="tns:IService1_EditOneUser_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteOneUser">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/DeleteOneUser" message="tns:IService1_DeleteOneUser_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/DeleteOneUserResponse" message="tns:IService1_DeleteOneUser_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CheckOneUser">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/CheckOneUser" message="tns:IService1_CheckOneUser_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/CheckOneUserResponse" message="tns:IService1_CheckOneUser_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetOneUserByEmail">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/GetOneUserByEmail" message="tns:IService1_GetOneUserByEmail_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/GetOneUserByEmailResponse" message="tns:IService1_GetOneUserByEmail_OutputMessage" />
+    </wsdl:operation>
     <wsdl:operation name="GetAllUsers">
       <wsdl:input wsaw:Action="http://tempuri.org/IService1/GetAllUsers" message="tns:IService1_GetAllUsers_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IService1/GetAllUsersResponse" message="tns:IService1_GetAllUsers_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllPatients">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/GetAllPatients" message="tns:IService1_GetAllPatients_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/GetAllPatientsResponse" message="tns:IService1_GetAllPatients_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllEmployees">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/GetAllEmployees" message="tns:IService1_GetAllEmployees_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/GetAllEmployeesResponse" message="tns:IService1_GetAllEmployees_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ShowOneUser">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/ShowOneUser" message="tns:IService1_ShowOneUser_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/ShowOneUserResponse" message="tns:IService1_ShowOneUser_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ShowAllUsers">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/ShowAllUsers" message="tns:IService1_ShowAllUsers_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/ShowAllUsersResponse" message="tns:IService1_ShowAllUsers_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ShowAllPatients">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/ShowAllPatients" message="tns:IService1_ShowAllPatients_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/ShowAllPatientsResponse" message="tns:IService1_ShowAllPatients_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ShowAllEmployees">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/ShowAllEmployees" message="tns:IService1_ShowAllEmployees_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/ShowAllEmployeesResponse" message="tns:IService1_ShowAllEmployees_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="CreateCardInfo">
       <wsdl:input wsaw:Action="http://tempuri.org/IService1/CreateCardInfo" message="tns:IService1_CreateCardInfo_InputMessage" />
@@ -129,8 +229,98 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="EditOneUser">
+      <soap:operation soapAction="http://tempuri.org/IService1/EditOneUser" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteOneUser">
+      <soap:operation soapAction="http://tempuri.org/IService1/DeleteOneUser" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CheckOneUser">
+      <soap:operation soapAction="http://tempuri.org/IService1/CheckOneUser" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetOneUserByEmail">
+      <soap:operation soapAction="http://tempuri.org/IService1/GetOneUserByEmail" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="GetAllUsers">
       <soap:operation soapAction="http://tempuri.org/IService1/GetAllUsers" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllPatients">
+      <soap:operation soapAction="http://tempuri.org/IService1/GetAllPatients" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllEmployees">
+      <soap:operation soapAction="http://tempuri.org/IService1/GetAllEmployees" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ShowOneUser">
+      <soap:operation soapAction="http://tempuri.org/IService1/ShowOneUser" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ShowAllUsers">
+      <soap:operation soapAction="http://tempuri.org/IService1/ShowAllUsers" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ShowAllPatients">
+      <soap:operation soapAction="http://tempuri.org/IService1/ShowAllPatients" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ShowAllEmployees">
+      <soap:operation soapAction="http://tempuri.org/IService1/ShowAllEmployees" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
