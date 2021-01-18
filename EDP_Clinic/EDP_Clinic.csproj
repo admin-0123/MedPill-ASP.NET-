@@ -139,6 +139,7 @@
     <Content Include="assets\images\logo3.png" />
     <Content Include="assets\images\logo4.png" />
     <Content Include="assets\images\logo5.png" />
+    <Content Include="assets\images\mc_vrt_opt_pos_53_3x.png" />
     <Content Include="assets\images\patients.png" />
     <Content Include="assets\images\progress.jpg" />
     <Content Include="assets\images\s1.jpg" />
@@ -159,6 +160,7 @@
     <Content Include="assets\images\team3.jpg" />
     <Content Include="assets\images\team4.jpg" />
     <Content Include="assets\images\van.png" />
+    <Content Include="assets\images\VBM_COF.png" />
     <Content Include="assets\js\bootstrap.min.js" />
     <Content Include="assets\js\owl.carousel.js" />
     <Content Include="Authentication.aspx" />

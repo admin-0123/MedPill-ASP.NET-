@@ -42,6 +42,15 @@ namespace EDP_Clinic
         protected global::System.Web.UI.WebControls.Label cardNumberText;
 
         /// <summary>
+        /// cardIcon control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Image cardIcon;
+
+        /// <summary>
         /// cardExpiryText control.
         /// </summary>
         /// <remarks>
