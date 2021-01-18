@@ -30,17 +30,17 @@ namespace EDP_Clinic
                     string cardStartNum = cif.CardNumber.Substring(0, 1);
 
                     //Visa
-                    if(cardStartNum == "4")
+                    if (cardStartNum == "4")
                     {
                         cardIcon.ImageUrl = "~/assets/images/VBM_COF.png";
                     }
                     //Mastercard
-                    else if(cardStartNum == "5")
+                    else if (cardStartNum == "5")
                     {
                         cardIcon.ImageUrl = "~/assets/images/mc_vrt_opt_pos_53_3x.png";
                     }
                     //Discover Card
-                    else if(cardStartNum == "6")
+                    else if (cardStartNum == "6")
                     {
                         //
                     }

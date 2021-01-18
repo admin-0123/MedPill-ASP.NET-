@@ -299,7 +299,6 @@ namespace EDP_Clinic
         );
 
             Debug.WriteLine(message.Sid);
-            //Console.WriteLine(message.Sid);
         }
 
         protected void verifyBtn_Click(object sender, EventArgs e)
@@ -370,11 +369,12 @@ namespace EDP_Clinic
                         if (result == 1)
                         {
                             //Remove delete card info session and cookie
+                            Session.Remove("cardNumber");
                             Session.Remove("deleteCardInfo");
                             Response.Cookies["deleteCardInfo"].Value = string.Empty;
                             Response.Cookies["deleteCardInfo"].Expires = DateTime.Now.AddMonths(-20);
 
-                            Response.Redirect("PaymentInfoDeleted.aspx", false);
+                            Response.Redirect("CardList.aspx", false);
                         }
                         else
                         {
