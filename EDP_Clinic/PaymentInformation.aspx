@@ -25,9 +25,6 @@
                 </div>
                 <h4 class="mb-4">Card Expiry: 
                     <asp:Label ID="cardExpiryText" runat="server"></asp:Label></h4>
-                <!--- Put all these information out for testing purposes --->
-                <%--                <h4 class="mb-4">CVV Number: 
-                    <asp:Label ID="cvvNumberText" runat="server"></asp:Label></h4>--%>
             </div>
             <div class="row">
                 <div class="col-md-6"></div>
@@ -38,10 +35,6 @@
                     <asp:Button ID="updateBtn" runat="server" Text="Update" CssClass="btn btn-primary btn-style" OnClick="updateBtn_Click" Visible="False" />
                 </div>
             </div>
-            <%--              <button class="btn btn-primary btn-style mr-5">delete
-              </button>
-              <button class="btn btn-primary btn-style ml-5">update
-              </button>--%>
         </div>
     </section>
 </asp:Content>

@@ -1,12 +1,12 @@
-﻿<%@ Page Title="403 Error" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="403.aspx.cs" Inherits="EDP_Clinic._403" %>
+﻿<%@ Page Title="402 Error" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="402.aspx.cs" Inherits="EDP_Clinic._402" %>
 
 <asp:Content ID="head" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
-    <section class="w3l-contact py-5" id="403_Error">
+    <section class="w3l-contact py-5" id="402_Error">
         <div class="container py-lg-3">
             <div class="mt-5 text-center">
-                <h1 class="title mb-4">403 Error</h1>
+                <h1 class="title mb-4">402 Error</h1>
                 <p class="mb-4">It seems something went wrong somewhere</p>
                 <p class="mb-4">Don't worry as you can go back easily to where you are!</p>
                 <div style="display: flex; justify-content: center;">

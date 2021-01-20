@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
+using System.Security.Cryptography;
+using System.IO;
 
 namespace DBService.Entity
 {
@@ -15,6 +17,8 @@ namespace DBService.Entity
         public DateTime DateSale { get; set; }
         public double TotalSum { get; set; }
         public bool IsPaid { get; set; }
+        //public byte[] IV { get; set; }
+        //public byte[] Key { get; set; }
         public Receipt()
         {
 
@@ -80,6 +84,60 @@ namespace DBService.Entity
             //          the connection string from App.config
             string DBConnect = ConfigurationManager.ConnectionStrings["EDP_DB"].ConnectionString;
             SqlConnection myConn = new SqlConnection(DBConnect);
+        }*/
+        protected string decryptData(byte[] iv, byte[] key, byte[] cipherText)
+        {
+            string plainText = null;
+            try
+            {
+                RijndaelManaged cipher = new RijndaelManaged();
+                cipher.IV = iv;
+                cipher.Key = key;
+                // Create a decrytor to perform the stream transform.
+                ICryptoTransform decryptTransform = cipher.CreateDecryptor();
+                //Create the streams used for decryption
+
+                using (MemoryStream msDecrypt = new MemoryStream(cipherText))
+                {
+                    using (CryptoStream csDecrypt = new CryptoStream(msDecrypt, decryptTransform, CryptoStreamMode.Read))
+                    {
+                        using (StreamReader srDecrypt = new StreamReader(csDecrypt))
+                        {
+
+                            //Read the decrypted bytes from the decrypting stream
+                            //and place them in a string
+                            plainText = srDecrypt.ReadToEnd();
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.ToString());
+            }
+            finally { }
+            return plainText;
+        }
+        /*protected byte[] encryptData(string data)
+        {
+            byte[] cipherText = null;
+            try
+            {
+                RijndaelManaged cipher = new RijndaelManaged();
+                cipher.IV = IV;
+                cipher.Key = Key;
+                ICryptoTransform encryptTransform = cipher.CreateEncryptor();
+                //ICryptoTransform decryptTransform = cipher.CreateDecryptor();
+                byte[] plainText = Encoding.UTF8.GetBytes(data);
+                cipherText = encryptTransform.TransformFinalBlock(plainText, 0,
+               plainText.Length);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.ToString());
+            }
+            finally { }
+            return cipherText;
         }*/
     }
 }
