@@ -106,9 +106,15 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="400.aspx" />
+    <Content Include="401.aspx" />
+    <Content Include="402.aspx" />
     <Content Include="403.aspx" />
     <Content Include="404.aspx" />
+    <Content Include="408.aspx" />
     <Content Include="500.aspx" />
+    <Content Include="502.aspx" />
+    <Content Include="504.aspx" />
     <Content Include="About.aspx" />
     <Content Include="AfterPayment.aspx" />
     <Content Include="App_Data\EDP_DB.mdf" />
@@ -142,6 +148,7 @@
     <Content Include="assets\images\logo3.png" />
     <Content Include="assets\images\logo4.png" />
     <Content Include="assets\images\logo5.png" />
+    <Content Include="assets\images\mc_vrt_opt_pos_53_3x.png" />
     <Content Include="assets\images\patients.png" />
     <Content Include="assets\images\progress.jpg" />
     <Content Include="assets\images\s1.jpg" />
@@ -162,6 +169,7 @@
     <Content Include="assets\images\team3.jpg" />
     <Content Include="assets\images\team4.jpg" />
     <Content Include="assets\images\van.png" />
+    <Content Include="assets\images\VBM_COF.png" />
     <Content Include="assets\js\bootstrap.min.js" />
     <Content Include="assets\js\owl.carousel.js" />
     <Content Include="assets\vendor\animate\animate.css" />
@@ -230,6 +238,27 @@
     <Content Include="Services.aspx" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="400.aspx.cs">
+      <DependentUpon>400.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="400.aspx.designer.cs">
+      <DependentUpon>400.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="401.aspx.cs">
+      <DependentUpon>401.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="401.aspx.designer.cs">
+      <DependentUpon>401.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="402.aspx.cs">
+      <DependentUpon>402.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="402.aspx.designer.cs">
+      <DependentUpon>402.aspx</DependentUpon>
+    </Compile>
     <Compile Include="403.aspx.cs">
       <DependentUpon>403.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -244,12 +273,33 @@
     <Compile Include="404.aspx.designer.cs">
       <DependentUpon>404.aspx</DependentUpon>
     </Compile>
+    <Compile Include="408.aspx.cs">
+      <DependentUpon>408.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="408.aspx.designer.cs">
+      <DependentUpon>408.aspx</DependentUpon>
+    </Compile>
     <Compile Include="500.aspx.cs">
       <DependentUpon>500.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="500.aspx.designer.cs">
       <DependentUpon>500.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="502.aspx.cs">
+      <DependentUpon>502.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="502.aspx.designer.cs">
+      <DependentUpon>502.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="504.aspx.cs">
+      <DependentUpon>504.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="504.aspx.designer.cs">
+      <DependentUpon>504.aspx</DependentUpon>
     </Compile>
     <Compile Include="About.aspx.cs">
       <DependentUpon>About.aspx</DependentUpon>

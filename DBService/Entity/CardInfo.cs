@@ -229,7 +229,7 @@ namespace DBService.Entity
                 //Debug.WriteLine(decryptData(iv, key, cardName));
                 //CardInfo cif = new CardInfo(cardName, cardNumber, cardExpiry, cvvNumber, iv, key, stillValid);
 
-                CardInfo cif = new CardInfo(decryptData(iv, key,cardName), cardNumber, Convert.ToDateTime(decryptData(iv, key, cardExpiry))
+                CardInfo cif = new CardInfo(decryptData(iv, key, cardName), cardNumber, Convert.ToDateTime(decryptData(iv, key, cardExpiry))
                    , decryptData(iv, key, cvvNumber), iv, key, Convert.ToBoolean(decryptData(iv, key, stillValid)));
                 cifList.Add(cif);
             }
@@ -299,8 +299,8 @@ namespace DBService.Entity
             }
         }
         */
-        
-        
+
+
         //Might consider putting encryption and decryption inside this function
         protected string decryptData(byte[] iv, byte[] key, byte[] cipherText)
         {

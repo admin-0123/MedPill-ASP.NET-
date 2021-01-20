@@ -39,7 +39,7 @@ namespace EDP_Clinic
             }
         }
 
-        byte[] ObjectToByteArray(object obj)
+        /*byte[] ObjectToByteArray(object obj)
         {
             if (obj == null)
                 return null;
@@ -49,7 +49,7 @@ namespace EDP_Clinic
                 bf.Serialize(ms, obj);
                 return ms.ToArray();
             }
-        }
+        }*/
 
         protected void moreBtn_Click(object sender, EventArgs e)
         {
@@ -62,7 +62,7 @@ namespace EDP_Clinic
             //Create intention for user to add card info
             string guid = Guid.NewGuid().ToString();
             Session["addCardInfo"] = guid;
-            
+
             Response.Cookies.Add(new HttpCookie("addCardInfo", guid));
             Response.Redirect("Authentication.aspx", false);
             //Response.Redirect("addCardInfo.aspx", false);
@@ -77,8 +77,6 @@ namespace EDP_Clinic
                 //For now, just pass a plain-text number
                 //var cardNumber = ObjectToByteArray(e.CommandArgument);
 
-
-
                 Session["cardNumber"] = e.CommandArgument.ToString();
 
                 //Create intention for user to view card info
@@ -90,47 +88,14 @@ namespace EDP_Clinic
                 //Response.Redirect("PaymentInformation.aspx?cardNumber=" + e.CommandArgument);
             }
             //else if()
+
+
         }
 
         protected void backBtn_Click(object sender, EventArgs e)
         {
-
-        }
-        protected string decryptData(byte[] cipherText)
-        {
-            string plainText = null;
-            try
-            {
-                RijndaelManaged cipher = new RijndaelManaged();
-                cipher.IV = IV;
-                cipher.Key = Key;
-                // Create a decrytor to perform the stream transform.
-                ICryptoTransform decryptTransform = cipher.CreateDecryptor();
-                //Create the streams used for decryption
-
-                using (System.IO.MemoryStream msDecrypt = new System.IO.MemoryStream(cipherText))
-                {
-                    using (CryptoStream csDecrypt = new CryptoStream(msDecrypt, decryptTransform, CryptoStreamMode.Read))
-                    {
-                        using (StreamReader srDecrypt = new StreamReader(csDecrypt))
-                        {
-
-                            //Read the decrypted bytes from the decrypting stream
-                            //and place them in a string
-                            plainText = srDecrypt.ReadToEnd();
-                        }
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.ToString());
-            }
-            finally { }
-            return plainText;
+            //Response.Redirect();
         }
 
-        //Create function to censor cardnumber
-        //protected string
     }
 }

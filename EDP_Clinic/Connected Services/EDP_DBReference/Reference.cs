@@ -614,6 +614,12 @@ namespace EDP_Clinic.EDP_DBReference {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/UpdateByCardNumber", ReplyAction="http://tempuri.org/IService1/UpdateByCardNumberResponse")]
         System.Threading.Tasks.Task<int> UpdateByCardNumberAsync(string previousCardNumber, string cardName, string cardNumber, System.DateTime cardExpiry, string cvvNumber);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/CreateReceipt", ReplyAction="http://tempuri.org/IService1/CreateReceiptResponse")]
+        int CreateReceipt(System.DateTime dateSale, double totalSum, bool isPaid);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/CreateReceipt", ReplyAction="http://tempuri.org/IService1/CreateReceiptResponse")]
+        System.Threading.Tasks.Task<int> CreateReceiptAsync(System.DateTime dateSale, double totalSum, bool isPaid);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -793,6 +799,14 @@ namespace EDP_Clinic.EDP_DBReference {
         
         public System.Threading.Tasks.Task<int> UpdateByCardNumberAsync(string previousCardNumber, string cardName, string cardNumber, System.DateTime cardExpiry, string cvvNumber) {
             return base.Channel.UpdateByCardNumberAsync(previousCardNumber, cardName, cardNumber, cardExpiry, cvvNumber);
+        }
+        
+        public int CreateReceipt(System.DateTime dateSale, double totalSum, bool isPaid) {
+            return base.Channel.CreateReceipt(dateSale, totalSum, isPaid);
+        }
+        
+        public System.Threading.Tasks.Task<int> CreateReceiptAsync(System.DateTime dateSale, double totalSum, bool isPaid) {
+            return base.Channel.CreateReceiptAsync(dateSale, totalSum, isPaid);
         }
     }
 }

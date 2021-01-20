@@ -123,9 +123,14 @@ namespace DBService
 
         Will put in more methods here for other classes
          
-         
-         
          */
+
+        public int CreateReceipt(DateTime dateSale, double totalSum, bool isPaid)
+        {
+            Receipt rep = new Receipt(dateSale, totalSum, isPaid);
+            return rep.Insert();
+
+        }
 
         // Taken from practical 4, here all the method bodies for the methods listed in IService1.CS
         /*        public List<Employee> GetAllEmployee()

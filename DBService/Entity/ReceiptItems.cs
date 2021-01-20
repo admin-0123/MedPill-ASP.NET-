@@ -38,10 +38,10 @@ namespace DBService.Entity
             //will continue adding more here
             return 0;
         }
-        //public ReceiptItems SelectByReceiptItemID(string cardID)
+        /*public ReceiptItems SelectByReceiptItemID(string cardID)
         //{
         //    return ReceiptItems;
-        //}
+        }*/
 
         //public List<ReceiptItems> SelectAll()
         //{
