@@ -35,10 +35,60 @@ namespace DBService
             User user = new User();
             return user.SelectByID(id);
         }
+        public int EditOneUser(string id, string name, string email, string mobile)
+        {
+            User user = new User();
+            return user.UpdateUser(id, name, email, mobile);
+        }
+        public int DeleteOneUser(string id)
+        {
+            User user = new User();
+            return user.DeleteUser(id);
+        }
+        public int CheckOneUser(string email)
+        {
+            User user = new User();
+            return user.CheckUser(email);
+        }
+        public User GetOneUserByEmail(string email)
+        {
+            User user = new User();
+            return user.SelectByEmail(email);
+        }
         public List<User> GetAllUsers()
         {
             User user = new User();
             return user.SelectAll();
+        }
+        public List<User> GetAllPatients()
+        {
+            User user = new User();
+            return user.SelectAllPatients();
+        }
+        public List<User> GetAllEmployees()
+        {
+            User user = new User();
+            return user.SelectAllEmployees();
+        }
+        public displayUser ShowOneUser(string id)
+        {
+            displayUser user = new displayUser();
+            return user.DisplayByID(id);
+        }
+        public List<displayUser> ShowAllUsers()
+        {
+            displayUser user = new displayUser();
+            return user.DisplayAll();
+        }
+        public List<displayUser> ShowAllPatients()
+        {
+            displayUser user = new displayUser();
+            return user.DisplayAllPatients();
+        }
+        public List<displayUser> ShowAllEmployees()
+        {
+            displayUser user = new displayUser();
+            return user.DisplayAllEmployees();
         }
 
         //CardInfo Methods

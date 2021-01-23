@@ -8,6 +8,8 @@
       <xs:element minOccurs="0" name="Password" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="PhoneNo" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Role" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Salt" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Verified" nillable="true" type="xs:string" />
     </xs:sequence>
   </xs:complexType>
   <xs:element name="User" nillable="true" type="tns:User" />
@@ -17,6 +19,23 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="ArrayOfUser" nillable="true" type="tns:ArrayOfUser" />
+  <xs:complexType name="displayUser">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Email" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Id" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="PhoneNo" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Role" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Verified" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="displayUser" nillable="true" type="tns:displayUser" />
+  <xs:complexType name="ArrayOfdisplayUser">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="displayUser" nillable="true" type="tns:displayUser" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfdisplayUser" nillable="true" type="tns:ArrayOfdisplayUser" />
   <xs:complexType name="CardInfo">
     <xs:sequence>
       <xs:element minOccurs="0" name="CVVNumber" nillable="true" type="xs:string" />

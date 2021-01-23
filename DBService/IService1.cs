@@ -24,9 +24,32 @@ namespace DBService
         [OperationContract]
 
         User GetOneUser(string id);
+        [OperationContract]
 
+        int EditOneUser(string id, string name, string email, string mobile);
+        [OperationContract]
+
+        int DeleteOneUser(string id);
+        [OperationContract]
+
+        int CheckOneUser(string email);
+        [OperationContract]
+        User GetOneUserByEmail(string email);
         [OperationContract]
         List<User> GetAllUsers();
+        [OperationContract]
+        List<User> GetAllPatients();
+        [OperationContract]
+        List<User> GetAllEmployees();
+        [OperationContract]
+        displayUser ShowOneUser(string id);
+
+        [OperationContract]
+        List<displayUser> ShowAllUsers();
+        [OperationContract]
+        List<displayUser> ShowAllPatients();
+        [OperationContract]
+        List<displayUser> ShowAllEmployees();
 
         //CardInfo Entity Class
         //[OperationContract]
