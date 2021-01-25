@@ -227,7 +227,6 @@
     <Content Include="error\generalError.aspx" />
     <Content Include="Payment.aspx" />
     <Content Include="PaymentInfoDeleted.aspx" />
-    <Content Include="PaymentInfoEmpty.aspx" />
     <Content Include="PaymentInformation.aspx" />
     <Content Include="ReceiptList.aspx" />
     <Content Include="ReceiptListAdmin.aspx" />
@@ -396,13 +395,6 @@
     </Compile>
     <Compile Include="PaymentInfoDeleted.aspx.designer.cs">
       <DependentUpon>PaymentInfoDeleted.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="PaymentInfoEmpty.aspx.cs">
-      <DependentUpon>PaymentInfoEmpty.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="PaymentInfoEmpty.aspx.designer.cs">
-      <DependentUpon>PaymentInfoEmpty.aspx</DependentUpon>
     </Compile>
     <Compile Include="PaymentInformation.aspx.cs">
       <DependentUpon>PaymentInformation.aspx</DependentUpon>

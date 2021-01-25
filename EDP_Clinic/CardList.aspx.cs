@@ -94,7 +94,7 @@ namespace EDP_Clinic
 
         protected void backBtn_Click(object sender, EventArgs e)
         {
-            //Response.Redirect();
+            Response.Redirect("UserPage.aspx",false);
         }
 
     }
