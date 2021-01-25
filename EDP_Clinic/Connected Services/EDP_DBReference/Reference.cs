@@ -761,8 +761,8 @@ namespace EDP_Clinic.EDP_DBReference {
             return base.Channel.ShowAllEmployeesAsync();
         }
         
-        public int CreateCardInfo(string cardName, string cardNumber, System.DateTime cardExpiry, string cvvNumber, byte[] iv, byte[] key) {
-            return base.Channel.CreateCardInfo(cardName, cardNumber, cardExpiry, cvvNumber, iv, key);
+        public int CreateCardInfo(string cardName, string cardNumber, System.DateTime cardExpiry, string cvvNumber, byte[] iv, byte[] key, bool stillValid) {
+            return base.Channel.CreateCardInfo(cardName, cardNumber, cardExpiry, cvvNumber, iv, key, stillValid);
         }
         
         public System.Threading.Tasks.Task<int> CreateCardInfoAsync(string cardName, string cardNumber, System.DateTime cardExpiry, string cvvNumber, byte[] iv, byte[] key, bool stillValid) {

@@ -113,6 +113,7 @@ namespace DBService
             CardInfo cif = new CardInfo();
             return cif.DeleteByCardNumber(cardNumber);
         }
+        //Will prob delete update card number
         public int UpdateByCardNumber(string previousCardNumber, string cardName, string cardNumber, DateTime cardExpiry, string cvvNumber)
         {
             CardInfo cif = new CardInfo();
