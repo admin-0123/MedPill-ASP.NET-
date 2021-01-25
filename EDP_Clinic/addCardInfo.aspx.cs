@@ -189,13 +189,6 @@ namespace EDP_Clinic
                 Key = cipher.Key;
                 IV = cipher.IV;
 
-                string guid = Guid.NewGuid().ToString();
-                Debug.WriteLine(guid);
-                string cardNumberInput = cardNumberTB.Text.Trim().Substring(12, 4);
-                string cardNumberRandom = cardNumberInput + "-" + guid;
-                Debug.WriteLine(cardNumberRandom);
-
-
                 Service1Client client = new Service1Client();
                 bool resultCheck = client.CheckCardByCardNumber(cardNumberTB.Text.Trim());
                 //Checks if there is an existing card here
@@ -211,9 +204,14 @@ namespace EDP_Clinic
                 }
                 else
                 {
+                    string guid = Guid.NewGuid().ToString();
+                    Debug.WriteLine(guid);
+                    string cardNumberInput = cardNumberTB.Text.Trim().Substring(12, 4);
+                    string uniqueIdentifier = cardNumberInput + "-" + guid;
+                    Debug.WriteLine(uniqueIdentifier);
                     //Service1Client client = new Service1Client();
                     int result = client.CreateCardInfo(nameOnCardTB.Text.Trim(), cardNumberTB.Text.Trim(),
-                        Convert.ToDateTime(cardExpiryTB.Text), CVVTB.Text.Trim(), IV, Key, true);
+                        Convert.ToDateTime(cardExpiryTB.Text), CVVTB.Text.Trim(), IV, Key, true, uniqueIdentifier);
                     if (result == 1)
                     {
                         //Remove pass to add card info

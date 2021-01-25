@@ -23,6 +23,7 @@ namespace DBService.Entity
         public bool StillValid { get; set; }
         public byte[] IV { get; set; }
         public byte[] Key { get; set; }
+        public string UniqueIdentifier { get; set; }
 
         //Empty Constructor
         public CardInfo()
@@ -35,7 +36,9 @@ namespace DBService.Entity
         //}
 
         //Constructor with parameters to initialise all properties
-        public CardInfo(string cardName, string cardNumber, DateTime cardExpiry, string cvvNumber, byte[] iv, byte[] key, bool stillValid)
+        public CardInfo(string cardName, string cardNumber,
+            DateTime cardExpiry, string cvvNumber, byte[] iv,
+            byte[] key, bool stillValid, string uniqueIdentifier)
         {
             //CardID = cardID;
             CardName = cardName;
@@ -45,6 +48,7 @@ namespace DBService.Entity
             IV = iv;
             Key = key;
             StillValid = stillValid;//checkCardValidation();
+            UniqueIdentifier = uniqueIdentifier;
         }
 
         public int Insert()
@@ -55,16 +59,17 @@ namespace DBService.Entity
             using (SqlConnection myConn = new SqlConnection(DBConnect))
             {
                 //Step 2 - Create SQL Statement
-                string sqlStatement = "INSERT INTO CardInfo VALUES (@paraCardName, @paraCardNumber, @paraCardExpiry, @paraCVVNumber, @paraStillValid, @paraIV, @paraKey)";
+                string sqlStatement = "INSERT INTO CardInfo VALUES (@paraCardName, @paraCardNumber, @paraCardExpiry, @paraCVVNumber, @paraStillValid, @paraIV, @paraKey, @paraUniqueIdentifier)";
                 using (SqlCommand sqlCmd = new SqlCommand(sqlStatement))
                 {
                     //Step 3 - Add info to each parameterised variables
                     //sqlCmd.Parameters.AddWithValue("@paraCardID", CardID);
                     sqlCmd.Parameters.AddWithValue("@paraCardName", Convert.ToBase64String(encryptData(CardName)));
-                    sqlCmd.Parameters.AddWithValue("@paraCardNumber", CardNumber);
+                    sqlCmd.Parameters.AddWithValue("@paraCardNumber", Convert.ToBase64String(encryptData(CardNumber)));
                     sqlCmd.Parameters.AddWithValue("@paraCardExpiry", Convert.ToBase64String(encryptData(CardExpiry.ToString())));
                     sqlCmd.Parameters.AddWithValue("@paraCVVNumber", Convert.ToBase64String(encryptData(CVVNumber)));
                     sqlCmd.Parameters.AddWithValue("@paraStillValid", Convert.ToBase64String(encryptData(StillValid.ToString())));
+                    sqlCmd.Parameters.AddWithValue("@paraUniqueIdentifier", UniqueIdentifier);
 
                     //Key and IV
                     sqlCmd.Parameters.AddWithValue("@paraIV", Convert.ToBase64String(IV));
@@ -91,7 +96,7 @@ namespace DBService.Entity
                 }
             }
         }
-        public CardInfo GetCardByCardNumber(string cardNumber)
+        public CardInfo GetCardByCardNumber(string uniqueIdentifier)
         {
             //Step 1 -  Define a connection to the database by getting
             //          the connection string from App.config
@@ -99,10 +104,10 @@ namespace DBService.Entity
             using (SqlConnection myConn = new SqlConnection(DBConnect))
             {
                 //Step 2 - Create DataAdapter to retrieve data from database table
-                string sqlStatement = "SELECT * FROM CardInfo WHERE CardNumber = @paraCardNumber";
+                string sqlStatement = "SELECT * FROM CardInfo WHERE UniqueIdentifier = @paraUniqueIdentifier";
                 using (SqlDataAdapter da = new SqlDataAdapter(sqlStatement, myConn))
                 {
-                    da.SelectCommand.Parameters.AddWithValue("@paraCardNumber", cardNumber);
+                    da.SelectCommand.Parameters.AddWithValue("@paraUniqueIdentifier", uniqueIdentifier);
 
                     //Step 3 - Create a dataset to store data to be retrieved
                     using (DataSet ds = new DataSet())
@@ -121,6 +126,7 @@ namespace DBService.Entity
                                                                     //int cardID = Convert.ToInt32(row["Id"].ToString());
                                 byte[] cardName = Convert.FromBase64String(row["CardName"].ToString());
                                 //string cardName = row["CardName"].ToString();
+                                byte[] cardNumber = Convert.FromBase64String(row["CardNumber"].ToString());
                                 //string cardNumber = row["CardNumber"].ToString();
                                 byte[] cardExpiry = Convert.FromBase64String(row["CardExpiry"].ToString());
                                 //DateTime cardExpiry = Convert.ToDateTime(row["CardExpiry"].ToString());
@@ -131,8 +137,8 @@ namespace DBService.Entity
                                 byte[] iv = Convert.FromBase64String(row["IV"].ToString());
                                 byte[] key = Convert.FromBase64String(row["Key"].ToString());
                                 //cif = new CardInfo(cardName, cardNumber, cardExpiry, cvvNumber, iv, key, stillValid);
-                                cif = new CardInfo(decryptData(iv, key, cardName), cardNumber, Convert.ToDateTime(decryptData(iv, key, cardExpiry))
-                                , decryptData(iv, key, cvvNumber), iv, key, Convert.ToBoolean(decryptData(iv, key, stillValid)));
+                                cif = new CardInfo(decryptData(iv, key, cardName), decryptData(iv, key, cardNumber), Convert.ToDateTime(decryptData(iv, key, cardExpiry))
+                                , decryptData(iv, key, cvvNumber), iv, key, Convert.ToBoolean(decryptData(iv, key, stillValid)), uniqueIdentifier);
                                 //cif = new CardInfo(cardName, cardNumber, cardExpiry, cvvNumber, iv, key, stillValid);
 
                             }
@@ -155,7 +161,7 @@ namespace DBService.Entity
 
         public bool CheckCardByCardNumber(string cardNumber)
         {
-            string DBConnect = ConfigurationManager.ConnectionStrings["EDP_DB"].ConnectionString;
+            /*string DBConnect = ConfigurationManager.ConnectionStrings["EDP_DB"].ConnectionString;
             using (SqlConnection myConn = new SqlConnection(DBConnect))
             {
                 string sqlStatement = "SELECT CardNumber FROM CardInfo WHERE CardNumber = @paraCardNumber";
@@ -174,10 +180,10 @@ namespace DBService.Entity
                                 {
                                     if(reader["CardNumber"] != DBNull.Value)
                                     {
-                                        //byte[] iv = Convert.FromBase64String(reader["Iv"].ToString());
-                                        //byte[] key = Convert.FromBase64String(reader["Key"].ToString());
+                                        byte[] iv = Convert.FromBase64String(reader["Iv"].ToString());
+                                        byte[] key = Convert.FromBase64String(reader["Key"].ToString());
                                         //string cardNumberDBResult = decryptData(iv, key, reader["CardNumber"]);
-                                        string cardNumberResult = reader["CardNumber"].ToString();
+                                        //string cardNumberResult = reader["CardNumber"].ToString();
 
                                         if(cardNumberResult == cardNumber)
                                         {
@@ -208,7 +214,9 @@ namespace DBService.Entity
                     finally { myConn.Close(); }
                     return false;
                 }
-            }
+            }*/
+            //Hard code for a while
+            return false;
         }
         //Select all card info
 
@@ -243,8 +251,8 @@ namespace DBService.Entity
                                 int cardID = Convert.ToInt32(row["Id"].ToString());
                                 byte[] cardName = Convert.FromBase64String(row["CardName"].ToString());
                                 //string cardName = row["CardName"].ToString();
-                                //byte[] cardNumber = Convert.FromBase64String(row["CardNumber"].ToString());
-                                string cardNumber = row["CardNumber"].ToString();
+                                byte[] cardNumber = Convert.FromBase64String(row["CardNumber"].ToString());
+                                //string cardNumber = row["CardNumber"].ToString();
                                 byte[] cardExpiry = Convert.FromBase64String(row["CardExpiry"].ToString());
                                 //DateTime cardExpiry = Convert.ToDateTime(row["CardExpiry"].ToString());
                                 byte[] cvvNumber = Convert.FromBase64String(row["CVVNumber"].ToString());
@@ -253,19 +261,21 @@ namespace DBService.Entity
                                 //bool stillValid = Convert.ToBoolean(row["StillValid"].ToString());
                                 byte[] iv = Convert.FromBase64String(row["IV"].ToString());
                                 byte[] key = Convert.FromBase64String(row["Key"].ToString());
+
+                                string uniqueIdentifier = row["UniqueIdentifier"].ToString();
                                 //Debug.WriteLine("===============");
                                 //Debug.WriteLine("Testing" +Convert.ToDateTime(decryptData(iv,key, cardExpiry)));
                                 //Debug.WriteLine("===============");
                                 //Debug.WriteLine(decryptData(iv, key, cardName));
                                 //CardInfo cif = new CardInfo(cardName, cardNumber, cardExpiry, cvvNumber, iv, key, stillValid);
 
-                                CardInfo cif = new CardInfo(decryptData(iv, key, cardName), cardNumber, Convert.ToDateTime(decryptData(iv, key, cardExpiry))
-                                   , decryptData(iv, key, cvvNumber), iv, key, Convert.ToBoolean(decryptData(iv, key, stillValid)));
+                                CardInfo cif = new CardInfo(decryptData(iv, key, cardName), decryptData(iv, key, cardNumber), Convert.ToDateTime(decryptData(iv, key, cardExpiry))
+                                   , decryptData(iv, key, cvvNumber), iv, key, Convert.ToBoolean(decryptData(iv, key, stillValid)), uniqueIdentifier);
                                 cifList.Add(cif);
                             }
                             return cifList;
                         }
-                        catch(SqlException ex)
+                        catch (SqlException ex)
                         {
                             throw new Exception(ex.ToString());
                         }
@@ -278,16 +288,16 @@ namespace DBService.Entity
             }
         }
         //Delete card by card number
-        public int DeleteByCardNumber(string cardNumber)
+        public int DeleteByCardNumber(string uniqueIdentifier)
         {
 
             string DBConnect = ConfigurationManager.ConnectionStrings["EDP_DB"].ConnectionString;
             using (SqlConnection myConn = new SqlConnection(DBConnect))
             {
-                string sqlStatement = "DELETE FROM CardInfo WHERE CardNumber = @paraCardNumber";
+                string sqlStatement = "DELETE FROM CardInfo WHERE UniqueIdentifier = @paraUniqueIdentifier";
                 using (SqlCommand sqlCmd = new SqlCommand(sqlStatement, myConn))
                 {
-                    sqlCmd.Parameters.AddWithValue("@paraCardNumber", cardNumber);
+                    sqlCmd.Parameters.AddWithValue("@paraUniqueIdentifier", uniqueIdentifier);
                     //sqlCmd.SelectCommand.Parameters.AddWithValue("@paraCardID", cardID);
 
                     try

@@ -79,7 +79,7 @@ namespace EDP_Clinic
                 //For now, just pass a plain-text number
                 //var cardNumber = ObjectToByteArray(e.CommandArgument);
 
-                Session["cardNumber"] = e.CommandArgument.ToString();
+                Session["UniqueIdentifier"] = e.CommandArgument.ToString();
 
                 //Create intention for user to view card info
                 string guid = Guid.NewGuid().ToString();
@@ -98,7 +98,7 @@ namespace EDP_Clinic
         {
             string guid = Guid.NewGuid().ToString();
             Debug.WriteLine("====================");
-            Debug.WriteLine(guid);
+            Debug.WriteLine("4044-"+guid);
             Debug.WriteLine("====================");
 
             Response.Redirect("UserPage.aspx",false);

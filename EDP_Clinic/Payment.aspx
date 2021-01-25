@@ -26,7 +26,6 @@
                                         <asp:Label ID="cardNumber" runat="server" Text='<%# "**** **** **** " + Eval("CardNumber").ToString().Substring(12,4) %>'></asp:Label></h5>
                                                 </div>
                                                 <div class="col-md-2">
-                                                    <%--                                <a href="#" class="btn btn-primary">Choose this card</a>--%>
                                                     <asp:LinkButton ID="moreBtn" runat="server" CssClass="btn btn-primary" CommandName="viewMore" CommandArgument='<%# Eval("CardNumber") %>'>Select</asp:LinkButton>
                                                 </div>
                                             </div>

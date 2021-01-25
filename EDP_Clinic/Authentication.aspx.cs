@@ -361,15 +361,15 @@ namespace EDP_Clinic
                     else if (validSessionReason == 3)
                     {
                         //Delete process above
-                        string cardNumber = Session["cardNumber"].ToString();
+                        string uniqueIdentifier = Session["UniqueIdentifier"].ToString();
                         Service1Client client = new Service1Client();
 
-                        int result = client.DeleteByCardNumber(cardNumber);
+                        int result = client.DeleteByCardNumber(uniqueIdentifier);
 
                         if (result == 1)
                         {
                             //Remove delete card info session and cookie
-                            Session.Remove("cardNumber");
+                            Session.Remove("UniqueIdentifier");
                             Session.Remove("deleteCardInfo");
                             Response.Cookies["deleteCardInfo"].Value = string.Empty;
                             Response.Cookies["deleteCardInfo"].Expires = DateTime.Now.AddMonths(-20);
