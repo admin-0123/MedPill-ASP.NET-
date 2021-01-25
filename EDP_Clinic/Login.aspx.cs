@@ -14,7 +14,7 @@ namespace EDP_Clinic
 {
     public partial class Login : System.Web.UI.Page
     {
-        string MYDBConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["EDP_DB"].ConnectionString;
+        //string MYDBConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["EDP_DB"].ConnectionString;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -22,7 +22,7 @@ namespace EDP_Clinic
         }
         protected void Button1_Click(object sender, EventArgs e)
         {
-            var email = HttpUtility.HtmlEncode(tbemail.Text);
+            /*var email = HttpUtility.HtmlEncode(tbemail.Text);
             var password = HttpUtility.HtmlEncode(tbpassword.Text);
 
             using (var con = new SqlConnection(MYDBConnectionString))
@@ -90,7 +90,7 @@ namespace EDP_Clinic
                         }
                     }
                 }
-            }
+            }*/
 
         }
     }
