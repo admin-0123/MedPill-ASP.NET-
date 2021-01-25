@@ -33,7 +33,7 @@ namespace DBService.Entity
 
         }
 
-        public User(string id, string name, string password, string salt,  string email, string phoneno, string role, string verified)
+        public User(string id, string name, string password, string salt, string email, string phoneno, string role, string verified)
         {
             Id = id;
             Name = name;
@@ -43,7 +43,7 @@ namespace DBService.Entity
             PhoneNo = phoneno;
             Role = role;
             Verified = verified;
-      
+
         }
         public User SelectByID(string id)
         {
@@ -117,7 +117,7 @@ namespace DBService.Entity
             }
             return user;
         }
-        public int UpdateUser(string id,string name, string email, string mobile)
+        public int UpdateUser(string id, string name, string email, string mobile)
         {
             string DBConnect = ConfigurationManager.ConnectionStrings["EDP_DB"].ConnectionString;
             SqlConnection myConn = new SqlConnection(DBConnect);
@@ -266,7 +266,7 @@ namespace DBService.Entity
                 string PhoneNo = row["PhoneNo"].ToString();
                 string Role = row["Role"].ToString();
                 string Verified = row["Verified"].ToString();
- 
+
                 User obj = new User(Id, Name, Password, Salt, Email, PhoneNo, Role, Verified);
                 userList.Add(obj);
             }

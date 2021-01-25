@@ -12,20 +12,6 @@
                 <h1 class="title mb-4">Payment Methods</h1>
                 <p>You can only add up to 3 cards.</p>
             </div>
-            <!---
-            <div class="card mb-3">
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-md-9">
-                            <h5 class="card-title">Card No: 1</h5>
-                        </div>
-                        <div class="col-md-3">
-                            <a href="#" class="btn btn-primary">Choose this card</a>
-                            <a href="#" class="btn btn-primary">More</a>
-                        </div>
-                    </div>
-                </div>
-            </div> --->
             <asp:ListView ID="cardListView" runat="server" OnItemCommand="cardListView_ItemCommand">
                 <ItemTemplate>
                     <div class="card mb-3">
@@ -36,6 +22,7 @@
                                         <asp:Label ID="cardNumber" runat="server" Text='<%# "**** **** **** " + Eval("CardNumber").ToString().Substring(12,4) %>'></asp:Label></h5>
                                 </div>
                                 <div class="col-md-2">
+<%--                                <a href="#" class="btn btn-primary">Choose this card</a>--%>
                                     <asp:LinkButton ID="moreBtn" runat="server" CssClass="btn btn-primary btn-style" CommandName="viewMore" CommandArgument='<%# Eval("CardNumber") %>'>More</asp:LinkButton>
                                 </div>
                             </div>

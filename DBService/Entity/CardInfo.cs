@@ -54,9 +54,11 @@ namespace DBService.Entity
             string DBConnect = ConfigurationManager.ConnectionStrings["EDP_DB"].ConnectionString;
             using (SqlConnection myConn = new SqlConnection(DBConnect))
             {
+                //Step 2 - Create SQL Statement
                 string sqlStatement = "INSERT INTO CardInfo VALUES (@paraCardName, @paraCardNumber, @paraCardExpiry, @paraCVVNumber, @paraStillValid, @paraIV, @paraKey)";
                 using (SqlCommand sqlCmd = new SqlCommand(sqlStatement))
                 {
+                    //Step 3 - Add info to each parameterised variables
                     //sqlCmd.Parameters.AddWithValue("@paraCardID", CardID);
                     sqlCmd.Parameters.AddWithValue("@paraCardName", Convert.ToBase64String(encryptData(CardName)));
                     sqlCmd.Parameters.AddWithValue("@paraCardNumber", CardNumber);
@@ -69,18 +71,6 @@ namespace DBService.Entity
                     sqlCmd.Parameters.AddWithValue("@paraKey", Convert.ToBase64String(Key));
 
                     sqlCmd.Connection = myConn;
-                    //sqlCmd.Parameters.AddWithValue("@paraCardID", CardID);
-                    //sqlCmd.Parameters.AddWithValue("@paraCardName", CardName);
-                    //sqlCmd.Parameters.AddWithValue("@paraCardNumber", CardNumber);
-                    //sqlCmd.Parameters.AddWithValue("@paraCardExpiry", CardExpiry);
-                    //sqlCmd.Parameters.AddWithValue("@paraCVVNumber", CVVNumber);
-                    //sqlCmd.Parameters.AddWithValue("@paraStillValid", StillValid);
-
-                    ////Key and IV
-                    //sqlCmd.Parameters.AddWithValue("@paraIV", Convert.ToBase64String(IV));
-                    //sqlCmd.Parameters.AddWithValue("@paraKey", Convert.ToBase64String(Key));
-
-                    //sqlCmd.Connection = myConn;
 
                     try
                     {
@@ -91,7 +81,6 @@ namespace DBService.Entity
                     }
                     catch (SqlException ex)
                     {
-                        //Add error code here
                         throw new Exception(ex.ToString());
                     }
                     finally
@@ -101,83 +90,67 @@ namespace DBService.Entity
                     }
                 }
             }
-
-            /*string DBConnect = ConfigurationManager.ConnectionStrings["EDP_DB"].ConnectionString;
-            SqlConnection myConn = new SqlConnection(DBConnect);
-
-            //Step 2 - Create SQL Statement
-            //string sqlStatement = "INSERT INTO CardInfo (CardName, CardNumber, CardExpiry, CVVNumber, StillValid, IV, Key)"
-            //  + " VALUES (@paraCardName, @paraCardNumber, @paraCardExpiry, @paraCVVNumber, @paraStillValid, @paraIV, @paraKey)";
-
-            string sqlStatement = "INSERT INTO CardInfo VALUES (@paraCardName, @paraCardNumber, @paraCardExpiry, @paraCVVNumber, @paraStillValid, @paraIV, @paraKey)";
-
-            SqlCommand sqlCmd = new SqlCommand(sqlStatement, myConn);
-
-            //Step 3 - Add info to each parameterised variables
-            //sqlCmd.Parameters.AddWithValue("@paraCardID", CardID);
-            sqlCmd.Parameters.AddWithValue("@paraCardName", CardName);
-            sqlCmd.Parameters.AddWithValue("@paraCardNumber", CardNumber);
-            sqlCmd.Parameters.AddWithValue("@paraCardExpiry", CardExpiry);
-            sqlCmd.Parameters.AddWithValue("@paraCVVNumber", CVVNumber);
-            sqlCmd.Parameters.AddWithValue("@paraStillValid", StillValid);
-
-            //Key and IV
-            sqlCmd.Parameters.AddWithValue("@paraIV", Convert.ToBase64String(IV));
-            sqlCmd.Parameters.AddWithValue("@paraKey", Convert.ToBase64String(Key));
-
-            //Step 4 - Open Connection to database
-            myConn.Open();
-            int result = sqlCmd.ExecuteNonQuery();
-
-            //Step 5 - Close Connection to database
-            myConn.Close();
-
-            return result;*/
         }
         public CardInfo GetCardByCardNumber(string cardNumber)
         {
             //Step 1 -  Define a connection to the database by getting
             //          the connection string from App.config
             string DBConnect = ConfigurationManager.ConnectionStrings["EDP_DB"].ConnectionString;
-            SqlConnection myConn = new SqlConnection(DBConnect);
-
-            //Step 2 - Create DataAdapter to retrieve data from database table
-            string sqlStatement = "SELECT * FROM CardInfo WHERE CardNumber = @paraCardNumber";
-            SqlDataAdapter da = new SqlDataAdapter(sqlStatement, myConn);
-
-            da.SelectCommand.Parameters.AddWithValue("@paraCardNumber", cardNumber);
-
-            //Step 3 - Create a dataset to store data to be retrieved
-            DataSet ds = new DataSet();
-
-            //Step 4 - Use DataAdapter to fill dataset with retrieved data
-            da.Fill(ds);
-
-            //Step 5 - Read data from dataset
-            CardInfo cif = null;
-            int rec_cnt = ds.Tables[0].Rows.Count;
-            if (rec_cnt == 1)
+            using (SqlConnection myConn = new SqlConnection(DBConnect))
             {
-                DataRow row = ds.Tables[0].Rows[0]; //Returns one record
-                //int cardID = Convert.ToInt32(row["Id"].ToString());
-                byte[] cardName = Convert.FromBase64String(row["CardName"].ToString());
-                //string cardName = row["CardName"].ToString();
-                //string cardNumber = row["CardNumber"].ToString();
-                byte[] cardExpiry = Convert.FromBase64String(row["CardExpiry"].ToString());
-                //DateTime cardExpiry = Convert.ToDateTime(row["CardExpiry"].ToString());
-                byte[] cvvNumber = Convert.FromBase64String(row["CVVNumber"].ToString());
-                //string cvvNumber = row["CVVNumber"].ToString();
-                byte[] stillValid = Convert.FromBase64String(row["StillValid"].ToString());
-                //bool stillValid = Convert.ToBoolean(row["StillValid"].ToString());
-                byte[] iv = Convert.FromBase64String(row["IV"].ToString());
-                byte[] key = Convert.FromBase64String(row["Key"].ToString());
-                //cif = new CardInfo(cardName, cardNumber, cardExpiry, cvvNumber, iv, key, stillValid);
-                cif = new CardInfo(decryptData(iv, key, cardName), cardNumber, Convert.ToDateTime(decryptData(iv, key, cardExpiry))
-                , decryptData(iv, key, cvvNumber), iv, key, Convert.ToBoolean(decryptData(iv, key, stillValid)));
-                //cif = new CardInfo(cardName, cardNumber, cardExpiry, cvvNumber, iv, key, stillValid);
+                //Step 2 - Create DataAdapter to retrieve data from database table
+                string sqlStatement = "SELECT * FROM CardInfo WHERE CardNumber = @paraCardNumber";
+                using (SqlDataAdapter da = new SqlDataAdapter(sqlStatement, myConn))
+                {
+                    da.SelectCommand.Parameters.AddWithValue("@paraCardNumber", cardNumber);
 
+                    //Step 3 - Create a dataset to store data to be retrieved
+                    using (DataSet ds = new DataSet())
+                    {
+                        try
+                        {
+                            //Step 4 - Use DataAdapter to fill dataset with retrieved data
+                            da.Fill(ds);
+
+                            //Step 5 - Read data from dataset
+                            CardInfo cif = null;
+                            int rec_cnt = ds.Tables[0].Rows.Count;
+                            if (rec_cnt == 1)
+                            {
+                                DataRow row = ds.Tables[0].Rows[0]; //Returns one record
+                                                                    //int cardID = Convert.ToInt32(row["Id"].ToString());
+                                byte[] cardName = Convert.FromBase64String(row["CardName"].ToString());
+                                //string cardName = row["CardName"].ToString();
+                                //string cardNumber = row["CardNumber"].ToString();
+                                byte[] cardExpiry = Convert.FromBase64String(row["CardExpiry"].ToString());
+                                //DateTime cardExpiry = Convert.ToDateTime(row["CardExpiry"].ToString());
+                                byte[] cvvNumber = Convert.FromBase64String(row["CVVNumber"].ToString());
+                                //string cvvNumber = row["CVVNumber"].ToString();
+                                byte[] stillValid = Convert.FromBase64String(row["StillValid"].ToString());
+                                //bool stillValid = Convert.ToBoolean(row["StillValid"].ToString());
+                                byte[] iv = Convert.FromBase64String(row["IV"].ToString());
+                                byte[] key = Convert.FromBase64String(row["Key"].ToString());
+                                //cif = new CardInfo(cardName, cardNumber, cardExpiry, cvvNumber, iv, key, stillValid);
+                                cif = new CardInfo(decryptData(iv, key, cardName), cardNumber, Convert.ToDateTime(decryptData(iv, key, cardExpiry))
+                                , decryptData(iv, key, cvvNumber), iv, key, Convert.ToBoolean(decryptData(iv, key, stillValid)));
+                                //cif = new CardInfo(cardName, cardNumber, cardExpiry, cvvNumber, iv, key, stillValid);
+
+                            }
+                            return cif;
+                        }
+                        catch (SqlException ex)
+                        {
+                            throw new Exception(ex.ToString());
+                        }
+                        finally
+                        {
+                            Debug.WriteLine("Retrieve CardInfo complete!");
+                        }
+
+                    }
+                }
             }
-            return cif;
+
         }
 
         //Select all card info
@@ -190,70 +163,94 @@ namespace DBService.Entity
             //Step 1 -  Define a connection to the database by getting
             //          the connection string from App.config
             string DBConnect = ConfigurationManager.ConnectionStrings["EDP_DB"].ConnectionString;
-            SqlConnection myConn = new SqlConnection(DBConnect);
-
-            //Step 2 -  Create a DataAdapter object to retrieve data from the database table
-            string sqlStatement = "SELECT * FROM CardInfo";
-            SqlDataAdapter da = new SqlDataAdapter(sqlStatement, myConn);
-
-            //Step 3 -  Create a DataSet to store the data to be retrieved
-            DataSet ds = new DataSet();
-
-            //Step 4 -  Use the DataAdapter to fill the DataSet with data retrieved
-            da.Fill(ds);
-
-            //Step 5 -  Read data from DataSet to List
-            List<CardInfo> cifList = new List<CardInfo>();
-            int rec_cnt = ds.Tables[0].Rows.Count;
-            for (int i = 0; i < rec_cnt; i++)
+            using (SqlConnection myConn = new SqlConnection(DBConnect))
             {
-                DataRow row = ds.Tables[0].Rows[i];  // Sql command returns only one record
-                int cardID = Convert.ToInt32(row["Id"].ToString());
-                byte[] cardName = Convert.FromBase64String(row["CardName"].ToString());
-                //string cardName = row["CardName"].ToString();
-                //byte[] cardNumber = Convert.FromBase64String(row["CardNumber"].ToString());
-                string cardNumber = row["CardNumber"].ToString();
-                byte[] cardExpiry = Convert.FromBase64String(row["CardExpiry"].ToString());
-                //Debug.WriteLine(cardExpiry);
-                //DateTime cardExpiry = Convert.ToDateTime(row["CardExpiry"].ToString());
-                byte[] cvvNumber = Convert.FromBase64String(row["CVVNumber"].ToString());
-                //string cvvNumber = row["CVVNumber"].ToString();
-                byte[] stillValid = Convert.FromBase64String(row["StillValid"].ToString());
-                //bool stillValid = Convert.ToBoolean(row["StillValid"].ToString());
-                byte[] iv = Convert.FromBase64String(row["IV"].ToString());
-                //Debug.WriteLine(iv.ToString());
-                byte[] key = Convert.FromBase64String(row["Key"].ToString());
-                //Debug.WriteLine("===============");
-                //Debug.WriteLine("Testing" +Convert.ToDateTime(decryptData(iv,key, cardExpiry)));
-                //Debug.WriteLine("===============");
-                //Debug.WriteLine(decryptData(iv, key, cardName));
-                //CardInfo cif = new CardInfo(cardName, cardNumber, cardExpiry, cvvNumber, iv, key, stillValid);
+                //Step 2 -  Create a DataAdapter object to retrieve data from the database table
+                string sqlStatement = "SELECT * FROM CardInfo";
+                using (SqlDataAdapter da = new SqlDataAdapter(sqlStatement, myConn))
+                {
+                    //Step 3 -  Create a DataSet to store the data to be retrieved
+                    using (DataSet ds = new DataSet())
+                    {
+                        try
+                        {
+                            //Step 4 -  Use the DataAdapter to fill the DataSet with data retrieved
+                            da.Fill(ds);
 
-                CardInfo cif = new CardInfo(decryptData(iv, key, cardName), cardNumber, Convert.ToDateTime(decryptData(iv, key, cardExpiry))
-                   , decryptData(iv, key, cvvNumber), iv, key, Convert.ToBoolean(decryptData(iv, key, stillValid)));
-                cifList.Add(cif);
+                            //Step 5 -  Read data from DataSet to List
+                            List<CardInfo> cifList = new List<CardInfo>();
+                            int rec_cnt = ds.Tables[0].Rows.Count;
+                            for (int i = 0; i < rec_cnt; i++)
+                            {
+                                DataRow row = ds.Tables[0].Rows[i];  // Sql command returns only one record
+                                int cardID = Convert.ToInt32(row["Id"].ToString());
+                                byte[] cardName = Convert.FromBase64String(row["CardName"].ToString());
+                                //string cardName = row["CardName"].ToString();
+                                //byte[] cardNumber = Convert.FromBase64String(row["CardNumber"].ToString());
+                                string cardNumber = row["CardNumber"].ToString();
+                                byte[] cardExpiry = Convert.FromBase64String(row["CardExpiry"].ToString());
+                                //DateTime cardExpiry = Convert.ToDateTime(row["CardExpiry"].ToString());
+                                byte[] cvvNumber = Convert.FromBase64String(row["CVVNumber"].ToString());
+                                //string cvvNumber = row["CVVNumber"].ToString();
+                                byte[] stillValid = Convert.FromBase64String(row["StillValid"].ToString());
+                                //bool stillValid = Convert.ToBoolean(row["StillValid"].ToString());
+                                byte[] iv = Convert.FromBase64String(row["IV"].ToString());
+                                byte[] key = Convert.FromBase64String(row["Key"].ToString());
+                                //Debug.WriteLine("===============");
+                                //Debug.WriteLine("Testing" +Convert.ToDateTime(decryptData(iv,key, cardExpiry)));
+                                //Debug.WriteLine("===============");
+                                //Debug.WriteLine(decryptData(iv, key, cardName));
+                                //CardInfo cif = new CardInfo(cardName, cardNumber, cardExpiry, cvvNumber, iv, key, stillValid);
+
+                                CardInfo cif = new CardInfo(decryptData(iv, key, cardName), cardNumber, Convert.ToDateTime(decryptData(iv, key, cardExpiry))
+                                   , decryptData(iv, key, cvvNumber), iv, key, Convert.ToBoolean(decryptData(iv, key, stillValid)));
+                                cifList.Add(cif);
+                            }
+                            return cifList;
+                        }
+                        catch(SqlException ex)
+                        {
+                            throw new Exception(ex.ToString());
+                        }
+                        finally
+                        {
+                            Debug.WriteLine("Retrieve all CardInfo Complete!");
+                        }
+                    }
+                }
             }
-            return cifList;
         }
         //Delete card by card number
         public int DeleteByCardNumber(string cardNumber)
         {
 
             string DBConnect = ConfigurationManager.ConnectionStrings["EDP_DB"].ConnectionString;
-            SqlConnection myConn = new SqlConnection(DBConnect);
-            //string sqlStatement = "SELECT * FROM CardInfo WHERE CardNumber = @paraCardNumber";
-            string sqlStatement = "DELETE FROM CardInfo WHERE CardNumber = @paraCardNumber";
+            using (SqlConnection myConn = new SqlConnection(DBConnect))
+            {
+                string sqlStatement = "DELETE FROM CardInfo WHERE CardNumber = @paraCardNumber";
+                using (SqlCommand sqlCmd = new SqlCommand(sqlStatement, myConn))
+                {
+                    sqlCmd.Parameters.AddWithValue("@paraCardNumber", cardNumber);
+                    //sqlCmd.SelectCommand.Parameters.AddWithValue("@paraCardID", cardID);
 
-            SqlCommand sqlCmd = new SqlCommand(sqlStatement, myConn);
-            sqlCmd.Parameters.AddWithValue("@paraCardNumber", cardNumber);
-            //sqlCmd.SelectCommand.Parameters.AddWithValue("@paraCardID", cardID);
+                    try
+                    {
+                        myConn.Open();
+                        int result = sqlCmd.ExecuteNonQuery();
+                        return result;
+                    }
+                    catch (SqlException ex)
+                    {
+                        throw new Exception(ex.ToString());
+                    }
+                    finally
+                    {
+                        myConn.Close();
+                    }
 
-            myConn.Open();
-            int result = sqlCmd.ExecuteNonQuery();
+                }
+            }
 
-            myConn.Close();
-
-            return result;
 
         }
         public int UpdateByCardNumber(string previousCardNumber, string cardName, string cardNumber, DateTime cardExpiry, string cvvNumber)
