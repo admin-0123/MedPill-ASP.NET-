@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Services.aspx.cs" Inherits="EDP_Clinic.WebForm3" %>
+﻿<%@ Page Title="Services" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Services.aspx.cs" Inherits="EDP_Clinic.WebForm3" %>
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
     <!-- //Domain modal -->
@@ -19,7 +19,8 @@
                 <div class="row fea-gd-vv">
                     <div class="col-lg-4 col-md-6 float-lt feature-gd">
                         <div class="icon">
-                            <img src="assets/images/s1.png" class="img-fluid"></div>
+                            <img src="assets/images/s1.png" class="img-fluid">
+                        </div>
                         <div class="icon-info">
                             <h5><a href="#url">Heart Diseases</a></h5>
                             <p>
@@ -31,7 +32,8 @@
                     </div>
                     <div class="col-lg-4 col-md-6 float-mid feature-gd mt-md-0 mt-sm-5 mt-4">
                         <div class="icon">
-                            <img src="assets/images/s2.png" class="img-fluid"></div>
+                            <img src="assets/images/s2.png" class="img-fluid">
+                        </div>
                         <div class="icon-info">
                             <h5><a href="#url">Pharmocology</a></h5>
                             <p>
@@ -42,7 +44,8 @@
                     </div>
                     <div class="col-lg-4 col-md-6 float-rt feature-gd mt-lg-0 mt-sm-5 mt-4">
                         <div class="icon">
-                            <img src="assets/images/s3.png" class="img-fluid"></div>
+                            <img src="assets/images/s3.png" class="img-fluid">
+                        </div>
                         <div class="icon-info">
                             <h5><a href="#url">Cardiology</a></h5>
                             <p>
@@ -53,7 +56,8 @@
                     </div>
                     <div class="col-lg-4 col-md-6 float-lt feature-gd mt-sm-5 mt-4">
                         <div class="icon">
-                            <img src="assets/images/s4.png" class="img-fluid"></div>
+                            <img src="assets/images/s4.png" class="img-fluid">
+                        </div>
                         <div class="icon-info">
                             <h5><a href="#url">Dentistry</a></h5>
                             <p>
@@ -65,7 +69,8 @@
                     </div>
                     <div class="col-lg-4 col-md-6 float-mid feature-gd mt-sm-5 mt-4">
                         <div class="icon">
-                            <img src="assets/images/s5.png" class="img-fluid"></div>
+                            <img src="assets/images/s5.png" class="img-fluid">
+                        </div>
                         <div class="icon-info">
                             <h5><a href="#url">Eye Surgery</a>
                             </h5>
@@ -77,7 +82,8 @@
                     </div>
                     <div class="col-lg-4 col-md-6 float-rt feature-gd mt-sm-5 mt-4">
                         <div class="icon">
-                            <img src="assets/images/s6.png" class="img-fluid"></div>
+                            <img src="assets/images/s6.png" class="img-fluid">
+                        </div>
                         <div class="icon-info">
                             <h5><a href="#url">Virusology</a>
                             </h5>

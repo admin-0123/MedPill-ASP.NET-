@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="EmployeePasswordSet.aspx.cs" Inherits="EDP_Clinic.EmployeePasswordSet" %>
+﻿<%@ Page Title="Set Password" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="EmployeePasswordSet.aspx.cs" Inherits="EDP_Clinic.EmployeePasswordSet" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <style type="text/css">

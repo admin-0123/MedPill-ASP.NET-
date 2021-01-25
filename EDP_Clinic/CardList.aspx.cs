@@ -18,6 +18,7 @@ namespace EDP_Clinic
         byte[] IV;
         protected void Page_Load(object sender, EventArgs e)
         {
+            //Will put these into function
             List<CardInfo> cifList = new List<CardInfo>();
             Service1Client client = new Service1Client();
             cifList = client.GetAllCards().ToList<CardInfo>();
