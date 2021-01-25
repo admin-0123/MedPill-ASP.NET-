@@ -192,8 +192,7 @@ namespace EDP_Clinic
                 Service1Client client = new Service1Client();
                 bool resultCheck = client.CheckCardByCardNumber(cardNumberTB.Text.Trim());
                 //Checks if there is an existing card here
-                //It will return null if there is 2 cards here
-                //CardInfo cif = null;
+                //It will return true if there is 2 cards here
                 if(resultCheck == true)
                 {
 
@@ -209,9 +208,11 @@ namespace EDP_Clinic
                     string cardNumberInput = cardNumberTB.Text.Trim().Substring(12, 4);
                     string uniqueIdentifier = cardNumberInput + "-" + guid;
                     Debug.WriteLine(uniqueIdentifier);
+
                     //Service1Client client = new Service1Client();
                     int result = client.CreateCardInfo(nameOnCardTB.Text.Trim(), cardNumberTB.Text.Trim(),
                         Convert.ToDateTime(cardExpiryTB.Text), CVVTB.Text.Trim(), IV, Key, true, uniqueIdentifier);
+
                     if (result == 1)
                     {
                         //Remove pass to add card info

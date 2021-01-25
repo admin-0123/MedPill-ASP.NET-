@@ -21,12 +21,12 @@ namespace EDP_Clinic
 {
     public partial class Payment : System.Web.UI.Page
     {
-        byte[] Key;
-        byte[] IV;
-
         protected void Page_Load(object sender, EventArgs e)
         {
-            //Will put these into function
+            retrieveCardInfo();
+        }
+        protected void retrieveCardInfo()
+        {
             List<CardInfo> cifList = new List<CardInfo>();
             Service1Client client = new Service1Client();
             cifList = client.GetAllCards().ToList<CardInfo>();
@@ -34,8 +34,6 @@ namespace EDP_Clinic
             cardListView.Visible = true;
             cardListView.DataSource = cifList;
             cardListView.DataBind();
-
-
         }
         private bool ValidateInput()
         {
@@ -185,28 +183,6 @@ namespace EDP_Clinic
             var paymentIntent = service.Create(options);
             System.Diagnostics.Debug.WriteLine(paymentIntent);*/
             //Console.WriteLine(paymentIntent);
-        }
-
-        protected byte[] encryptData(string data)
-        {
-            byte[] cipherText = null;
-            try
-            {
-                RijndaelManaged cipher = new RijndaelManaged();
-                cipher.IV = IV;
-                cipher.Key = Key;
-                ICryptoTransform encryptTransform = cipher.CreateEncryptor();
-                //ICryptoTransform decryptTransform = cipher.CreateDecryptor();
-                byte[] plainText = Encoding.UTF8.GetBytes(data);
-                cipherText = encryptTransform.TransformFinalBlock(plainText, 0,
-               plainText.Length);
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.ToString());
-            }
-            finally { }
-            return cipherText;
         }
 
         //Initialise an object to store Recaptcha response

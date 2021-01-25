@@ -14,7 +14,7 @@ namespace DBService.Entity
 {
     public class CardInfo
     {
-        //Properties of CardInfo
+        //Properties of CardInfo Entity
         //public int CardID { get; set; }
         public string CardName { get; set; }
         public string CardNumber { get; set; }
@@ -30,10 +30,6 @@ namespace DBService.Entity
         {
 
         }
-        //static int generateId()
-        //{
-        //  return Id++;
-        //}
 
         //Constructor with parameters to initialise all properties
         public CardInfo(string cardName, string cardNumber,
@@ -47,7 +43,7 @@ namespace DBService.Entity
             CVVNumber = cvvNumber;
             IV = iv;
             Key = key;
-            StillValid = stillValid;//checkCardValidation();
+            StillValid = stillValid;
             UniqueIdentifier = uniqueIdentifier;
         }
 
@@ -123,23 +119,18 @@ namespace DBService.Entity
                             if (rec_cnt == 1)
                             {
                                 DataRow row = ds.Tables[0].Rows[0]; //Returns one record
-                                                                    //int cardID = Convert.ToInt32(row["Id"].ToString());
+                                //int cardID = Convert.ToInt32(row["Id"].ToString());
                                 byte[] cardName = Convert.FromBase64String(row["CardName"].ToString());
-                                //string cardName = row["CardName"].ToString();
                                 byte[] cardNumber = Convert.FromBase64String(row["CardNumber"].ToString());
-                                //string cardNumber = row["CardNumber"].ToString();
                                 byte[] cardExpiry = Convert.FromBase64String(row["CardExpiry"].ToString());
-                                //DateTime cardExpiry = Convert.ToDateTime(row["CardExpiry"].ToString());
                                 byte[] cvvNumber = Convert.FromBase64String(row["CVVNumber"].ToString());
-                                //string cvvNumber = row["CVVNumber"].ToString();
                                 byte[] stillValid = Convert.FromBase64String(row["StillValid"].ToString());
-                                //bool stillValid = Convert.ToBoolean(row["StillValid"].ToString());
+
                                 byte[] iv = Convert.FromBase64String(row["IV"].ToString());
                                 byte[] key = Convert.FromBase64String(row["Key"].ToString());
-                                //cif = new CardInfo(cardName, cardNumber, cardExpiry, cvvNumber, iv, key, stillValid);
+
                                 cif = new CardInfo(decryptData(iv, key, cardName), decryptData(iv, key, cardNumber), Convert.ToDateTime(decryptData(iv, key, cardExpiry))
                                 , decryptData(iv, key, cvvNumber), iv, key, Convert.ToBoolean(decryptData(iv, key, stillValid)), uniqueIdentifier);
-                                //cif = new CardInfo(cardName, cardNumber, cardExpiry, cvvNumber, iv, key, stillValid);
 
                             }
                             return cif;
@@ -248,26 +239,17 @@ namespace DBService.Entity
                             for (int i = 0; i < rec_cnt; i++)
                             {
                                 DataRow row = ds.Tables[0].Rows[i];  // Sql command returns only one record
-                                int cardID = Convert.ToInt32(row["Id"].ToString());
+                                //int cardID = Convert.ToInt32(row["Id"].ToString());
                                 byte[] cardName = Convert.FromBase64String(row["CardName"].ToString());
-                                //string cardName = row["CardName"].ToString();
                                 byte[] cardNumber = Convert.FromBase64String(row["CardNumber"].ToString());
-                                //string cardNumber = row["CardNumber"].ToString();
                                 byte[] cardExpiry = Convert.FromBase64String(row["CardExpiry"].ToString());
-                                //DateTime cardExpiry = Convert.ToDateTime(row["CardExpiry"].ToString());
                                 byte[] cvvNumber = Convert.FromBase64String(row["CVVNumber"].ToString());
-                                //string cvvNumber = row["CVVNumber"].ToString();
                                 byte[] stillValid = Convert.FromBase64String(row["StillValid"].ToString());
-                                //bool stillValid = Convert.ToBoolean(row["StillValid"].ToString());
+
                                 byte[] iv = Convert.FromBase64String(row["IV"].ToString());
                                 byte[] key = Convert.FromBase64String(row["Key"].ToString());
 
                                 string uniqueIdentifier = row["UniqueIdentifier"].ToString();
-                                //Debug.WriteLine("===============");
-                                //Debug.WriteLine("Testing" +Convert.ToDateTime(decryptData(iv,key, cardExpiry)));
-                                //Debug.WriteLine("===============");
-                                //Debug.WriteLine(decryptData(iv, key, cardName));
-                                //CardInfo cif = new CardInfo(cardName, cardNumber, cardExpiry, cvvNumber, iv, key, stillValid);
 
                                 CardInfo cif = new CardInfo(decryptData(iv, key, cardName), decryptData(iv, key, cardNumber), Convert.ToDateTime(decryptData(iv, key, cardExpiry))
                                    , decryptData(iv, key, cvvNumber), iv, key, Convert.ToBoolean(decryptData(iv, key, stillValid)), uniqueIdentifier);
@@ -290,7 +272,6 @@ namespace DBService.Entity
         //Delete card by card number
         public int DeleteByCardNumber(string uniqueIdentifier)
         {
-
             string DBConnect = ConfigurationManager.ConnectionStrings["EDP_DB"].ConnectionString;
             using (SqlConnection myConn = new SqlConnection(DBConnect))
             {
@@ -298,7 +279,6 @@ namespace DBService.Entity
                 using (SqlCommand sqlCmd = new SqlCommand(sqlStatement, myConn))
                 {
                     sqlCmd.Parameters.AddWithValue("@paraUniqueIdentifier", uniqueIdentifier);
-                    //sqlCmd.SelectCommand.Parameters.AddWithValue("@paraCardID", cardID);
 
                     try
                     {
@@ -314,12 +294,11 @@ namespace DBService.Entity
                     {
                         myConn.Close();
                     }
-
                 }
             }
-
-
         }
+
+        //Will remove this method below later
         public int UpdateByCardNumber(string previousCardNumber, string cardName, string cardNumber, DateTime cardExpiry, string cvvNumber)
         {
             string DBConnect = ConfigurationManager.ConnectionStrings["EDP_DB"].ConnectionString;
@@ -345,25 +324,6 @@ namespace DBService.Entity
 
             return result;
         }
-        /*
-        public bool checkCardValidation()
-        {
-            DateTime currentDate = DateTime.Now;
-
-            //Compares month difference by subtracting currentDate from CardExpiry, i.e. CardExpiry - currentDate
-            double monthDifference = decryptData(CardExpiry.Subtract(currentDate).Days) / (365.25 / 12);
-            if (monthDifference < 3)
-            {
-                return false;
-            }
-            // More than 3 months hence valid
-            else
-            {
-                return true;
-            }
-        }
-        */
-
 
         //Might consider putting encryption and decryption inside this function
         protected string decryptData(byte[] iv, byte[] key, byte[] cipherText)
@@ -374,7 +334,6 @@ namespace DBService.Entity
                 RijndaelManaged cipher = new RijndaelManaged();
                 cipher.IV = iv;
                 cipher.Key = key;
-                cipher.Padding = PaddingMode.Zeros;
                 // Create a decrytor to perform the stream transform.
                 ICryptoTransform decryptTransform = cipher.CreateDecryptor();
                 //Create the streams used for decryption
@@ -385,7 +344,6 @@ namespace DBService.Entity
                     {
                         using (StreamReader srDecrypt = new StreamReader(csDecrypt))
                         {
-
                             //Read the decrypted bytes from the decrypting stream
                             //and place them in a string
                             plainText = srDecrypt.ReadToEnd();
@@ -408,7 +366,6 @@ namespace DBService.Entity
                 RijndaelManaged cipher = new RijndaelManaged();
                 cipher.IV = IV;
                 cipher.Key = Key;
-                cipher.Padding = PaddingMode.Zeros;
                 ICryptoTransform encryptTransform = cipher.CreateEncryptor();
                 //ICryptoTransform decryptTransform = cipher.CreateDecryptor();
                 byte[] plainText = Encoding.UTF8.GetBytes(data);

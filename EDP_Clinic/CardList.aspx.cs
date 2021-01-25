@@ -14,11 +14,25 @@ namespace EDP_Clinic
 {
     public partial class CardList : System.Web.UI.Page
     {
-        byte[] Key;
-        byte[] IV;
         protected void Page_Load(object sender, EventArgs e)
         {
-            //Will put these into function
+            retrieveCardInfo();
+        }
+
+        /*byte[] ObjectToByteArray(object obj)
+        {
+            if (obj == null)
+                return null;
+            BinaryFormatter bf = new BinaryFormatter();
+            using (MemoryStream ms = new MemoryStream())
+            {
+                bf.Serialize(ms, obj);
+                return ms.ToArray();
+            }
+        }*/
+
+        protected void retrieveCardInfo()
+        {
             List<CardInfo> cifList = new List<CardInfo>();
             Service1Client client = new Service1Client();
             cifList = client.GetAllCards().ToList<CardInfo>();
@@ -40,18 +54,6 @@ namespace EDP_Clinic
                 addCardInfo.Enabled = false;
             }
         }
-
-        /*byte[] ObjectToByteArray(object obj)
-        {
-            if (obj == null)
-                return null;
-            BinaryFormatter bf = new BinaryFormatter();
-            using (MemoryStream ms = new MemoryStream())
-            {
-                bf.Serialize(ms, obj);
-                return ms.ToArray();
-            }
-        }*/
 
         protected void moreBtn_Click(object sender, EventArgs e)
         {
@@ -91,16 +93,10 @@ namespace EDP_Clinic
             }
             //else if()
 
-
         }
 
         protected void backBtn_Click(object sender, EventArgs e)
         {
-            string guid = Guid.NewGuid().ToString();
-            Debug.WriteLine("====================");
-            Debug.WriteLine("4044-"+guid);
-            Debug.WriteLine("====================");
-
             Response.Redirect("UserPage.aspx",false);
         }
 

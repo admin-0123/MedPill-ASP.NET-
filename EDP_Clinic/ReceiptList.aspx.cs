@@ -13,7 +13,6 @@ namespace EDP_Clinic
         protected void Page_Load(object sender, EventArgs e)
         {
             //getReceiptList();
-            
         }
 
         protected void getReceiptList()
@@ -24,6 +23,15 @@ namespace EDP_Clinic
 
             receiptListView.DataSource = cifList;
             receiptListView.Visible = true;
+
+            if(cifList.Count == 0 || cifList == null)
+            {
+                DataPager1.Visible = false;
+            }
+            else
+            {
+                DataPager1.Visible = true;
+            }
             //receiptListView.DataBind();
         }
 

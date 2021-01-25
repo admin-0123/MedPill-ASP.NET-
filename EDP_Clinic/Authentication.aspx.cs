@@ -323,6 +323,7 @@ namespace EDP_Clinic
                 {
                     //Call Twilio SMS Function
                     //TwilioSMS();
+
                     //A bunch of if else statements here to redirect user to respective pages
                     if (validSessionReason == 1)
                     {

@@ -31,7 +31,7 @@
                     </ItemTemplate>
                     <EmptyDataTemplate>
                         <div class="mb-3 mt-5 text-center">
-                            <h5>There is currently no payment information stored.</h5>
+                            <h5>There is currently no payment history stored.</h5>
                         </div>
                     </EmptyDataTemplate>
                 </asp:ListView>
