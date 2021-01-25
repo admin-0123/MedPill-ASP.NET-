@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="PatientOverview.aspx.cs" Inherits="EDP_Clinic.PatientOverview" %>
+﻿<%@ Page Title="Patient Overview" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="PatientOverview.aspx.cs" Inherits="EDP_Clinic.PatientOverview" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">

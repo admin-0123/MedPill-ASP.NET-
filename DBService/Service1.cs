@@ -93,25 +93,30 @@ namespace DBService
 
         //CardInfo Methods
         public int CreateCardInfo(string cardName, string cardNumber,
-            DateTime cardExpiry, string cvvNumber, byte[] iv, byte[] key, bool stillValid)
+            DateTime cardExpiry, string cvvNumber, byte[] iv, byte[] key, bool stillValid, string uniqueIdentifier)
         {
-            CardInfo cif = new CardInfo(cardName, cardNumber, cardExpiry, cvvNumber, iv, key, stillValid);
+            CardInfo cif = new CardInfo(cardName, cardNumber, cardExpiry, cvvNumber, iv, key, stillValid, uniqueIdentifier);
             return cif.Insert();
         }
-        public CardInfo GetCardByCardNumber(string cardNumber)
+        public CardInfo GetCardByCardNumber(string uniqueIdentifier)
         {
             CardInfo cif = new CardInfo();
-            return cif.GetCardByCardNumber(cardNumber);
+            return cif.GetCardByCardNumber(uniqueIdentifier);
         }
         public List<CardInfo> GetAllCards()
         {
             CardInfo cif = new CardInfo();
             return cif.SelectAllCards();
         }
-        public int DeleteByCardNumber(string cardNumber)
+        public bool CheckCardByCardNumber(string uniqueIdentifier)
         {
             CardInfo cif = new CardInfo();
-            return cif.DeleteByCardNumber(cardNumber);
+            return cif.CheckCardByCardNumber(uniqueIdentifier);
+        }
+        public int DeleteByCardNumber(string uniqueIdentifier)
+        {
+            CardInfo cif = new CardInfo();
+            return cif.DeleteByCardNumber(uniqueIdentifier);
         }
         //Will prob delete update card number
         public int UpdateByCardNumber(string previousCardNumber, string cardName, string cardNumber, DateTime cardExpiry, string cvvNumber)

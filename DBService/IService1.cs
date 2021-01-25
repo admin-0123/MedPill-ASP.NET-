@@ -57,16 +57,18 @@ namespace DBService
           //  byte[] cardExpiry, byte[] cvvNumber, byte[] iv, byte[] key);
         [OperationContract]
         int CreateCardInfo(string cardName, string cardNumber,
-            DateTime cardExpiry, string cvvNumber, byte[] iv, byte[] key, bool stillValid);
+            DateTime cardExpiry, string cvvNumber, byte[] iv, byte[] key, bool stillValid, string uniqueIdentifier);
 
         [OperationContract]
-        CardInfo GetCardByCardNumber(string cardNumber);
+        CardInfo GetCardByCardNumber(string uniqueIdentifier);
 
         [OperationContract]
         List<CardInfo> GetAllCards();
 
         [OperationContract]
-        int DeleteByCardNumber(string cardNumber);
+        int DeleteByCardNumber(string uniqueIdentifier);
+        [OperationContract]
+        bool CheckCardByCardNumber(string uniqueIdentifier);
 
         [OperationContract]
         int UpdateByCardNumber(string previousCardNumber, string cardName, string cardNumber, DateTime cardExpiry, string cvvNumber);

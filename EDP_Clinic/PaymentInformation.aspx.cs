@@ -23,7 +23,7 @@ namespace EDP_Clinic
                 else
                 {
                     //Might put these codes below into a function
-                    string cardNumber = Session["cardNumber"].ToString();//Request.QueryString["cardNumber"];
+                    string cardNumber = Session["UniqueIdentifier"].ToString();//Request.QueryString["cardNumber"];
                     Service1Client client = new Service1Client();
                     CardInfo cif = client.GetCardByCardNumber(cardNumber);
 
@@ -70,7 +70,7 @@ namespace EDP_Clinic
         {
             //Redirect to userpage
             //Remove pass to view more card info session and cookie
-            Session.Remove("cardNumber");
+            Session.Remove("UniqueIdentifier");
             Session.Remove("authOTPVToken");
             Response.Cookies["authOTPVToken"].Value = string.Empty;
             Response.Cookies["authOTPVToken"].Expires = DateTime.Now.AddMonths(-20);
@@ -89,7 +89,7 @@ namespace EDP_Clinic
             string guid = Guid.NewGuid().ToString();
             Session["deleteCardInfo"] = guid;
 
-            string cardNumber = Session["cardNumber"].ToString();
+            string cardNumber = Session["UniqueIdentifier"].ToString();
             //string cardNumber = Request.QueryString["cardNumber"];
             Service1Client client = new Service1Client();
             //CardInfo cif = client.GetCardByCardNumber(cardNumber);

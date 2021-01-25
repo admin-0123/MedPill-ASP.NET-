@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" Title="Add Card" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="addCardInfo.aspx.cs" Inherits="EDP_Clinic.addCardInfo" %>
+﻿<%@ Page Language="C#" Title="Add Card Information" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="addCardInfo.aspx.cs" Inherits="EDP_Clinic.addCardInfo" %>
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
     <section class="w3l-contact py-5" id="changePaymentInfo">

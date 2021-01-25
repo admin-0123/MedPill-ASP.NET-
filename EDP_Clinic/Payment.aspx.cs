@@ -15,18 +15,26 @@ using System.Text;
 using System.Net;
 using System.IO;
 using System.Web.Script.Serialization;
+using EDP_Clinic.EDP_DBReference;
 
 namespace EDP_Clinic
 {
     public partial class Payment : System.Web.UI.Page
     {
-        static string finalHash;
-        static string salt;
         byte[] Key;
         byte[] IV;
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            //Will put these into function
+            List<CardInfo> cifList = new List<CardInfo>();
+            Service1Client client = new Service1Client();
+            cifList = client.GetAllCards().ToList<CardInfo>();
+
+            cardListView.Visible = true;
+            cardListView.DataSource = cifList;
+            cardListView.DataBind();
+
 
         }
         private bool ValidateInput()
@@ -246,6 +254,30 @@ namespace EDP_Clinic
 
         protected void backBtn_Click(object sender, EventArgs e)
         {
+
+        }
+
+        protected void cardListView_ItemCommand(object sender, ListViewCommandEventArgs e)
+        {
+            //Checks if button clicked is view more button
+            //if (String.Equals(e.CommandName, "viewMore"))
+            //{
+            //    //Card number will be encrypted later on
+            //    //For now, just pass a plain-text number
+            //    //var cardNumber = ObjectToByteArray(e.CommandArgument);
+
+            //    Session["cardNumber"] = e.CommandArgument.ToString();
+
+            //    //Create intention for user to view card info
+            //    string guid = Guid.NewGuid().ToString();
+            //    Session["viewCardInfo"] = guid;
+
+            //    Response.Cookies.Add(new HttpCookie("viewCardInfo", guid));
+            //    Response.Redirect("Authentication.aspx", false);
+            //    //Response.Redirect("PaymentInformation.aspx?cardNumber=" + e.CommandArgument);
+            //}
+            //else if()
+
 
         }
     }

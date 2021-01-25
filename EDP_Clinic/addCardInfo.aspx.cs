@@ -11,6 +11,8 @@ using System.Text;
 using System.Net;
 using System.IO;
 using System.Web.Script.Serialization;
+using System.Diagnostics;
+using EDP_Clinic.EDP_DBReference;
 
 namespace EDP_Clinic
 {
@@ -187,28 +189,49 @@ namespace EDP_Clinic
                 Key = cipher.Key;
                 IV = cipher.IV;
 
-                EDP_DBReference.Service1Client client = new EDP_DBReference.Service1Client();
-                int result = client.CreateCardInfo(nameOnCardTB.Text.Trim(), cardNumberTB.Text.Trim(),
-                    Convert.ToDateTime(cardExpiryTB.Text), CVVTB.Text.Trim(), IV, Key, true);
-                if(result == 1)
+                Service1Client client = new Service1Client();
+                bool resultCheck = client.CheckCardByCardNumber(cardNumberTB.Text.Trim());
+                //Checks if there is an existing card here
+                //It will return null if there is 2 cards here
+                //CardInfo cif = null;
+                if(resultCheck == true)
                 {
-                    //Remove pass to add card info
-                    Session.Remove("authOTPAToken");
-                    Response.Cookies["authOTPAToken"].Value = string.Empty;
-                    Response.Cookies["authOTPAToken"].Expires = DateTime.Now.AddMonths(-20);
 
-                    Response.Redirect("CardList.aspx");
+                    cardNumberError.Text = "Please enter a valid card information";
+                    cardNumberError.Visible = true;
+                    cardNumberError.ForeColor = Color.Red;
+                    Debug.WriteLine("Card existed in database");
                 }
                 else
                 {
-                    errorMsg.Text = "Please enter valid information";
+                    string guid = Guid.NewGuid().ToString();
+                    Debug.WriteLine(guid);
+                    string cardNumberInput = cardNumberTB.Text.Trim().Substring(12, 4);
+                    string uniqueIdentifier = cardNumberInput + "-" + guid;
+                    Debug.WriteLine(uniqueIdentifier);
+                    //Service1Client client = new Service1Client();
+                    int result = client.CreateCardInfo(nameOnCardTB.Text.Trim(), cardNumberTB.Text.Trim(),
+                        Convert.ToDateTime(cardExpiryTB.Text), CVVTB.Text.Trim(), IV, Key, true, uniqueIdentifier);
+                    if (result == 1)
+                    {
+                        //Remove pass to add card info
+                        Session.Remove("authOTPAToken");
+                        Response.Cookies["authOTPAToken"].Value = string.Empty;
+                        Response.Cookies["authOTPAToken"].Expires = DateTime.Now.AddMonths(-20);
+
+                        Response.Redirect("CardList.aspx");
+                    }
+                    else
+                    {
+                        errorMsg.Text = "Please enter valid information";
+                    }
+
+                    /*
+                    nameOnCardError.Visible = false;
+                    cardNumberError.Visible = false;
+                    cardExpiryError.Visible = false;
+                    CVVError.Visible = false;*/
                 }
-                 
-                /*
-                nameOnCardError.Visible = false;
-                cardNumberError.Visible = false;
-                cardExpiryError.Visible = false;
-                CVVError.Visible = false;*/
             }
             else
             {
