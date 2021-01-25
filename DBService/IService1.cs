@@ -67,6 +67,8 @@ namespace DBService
 
         [OperationContract]
         int DeleteByCardNumber(string cardNumber);
+        [OperationContract]
+        bool CheckCardByCardNumber(string cardNumber);
 
         [OperationContract]
         int UpdateByCardNumber(string previousCardNumber, string cardName, string cardNumber, DateTime cardExpiry, string cvvNumber);

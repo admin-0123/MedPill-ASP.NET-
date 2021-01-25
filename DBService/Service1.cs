@@ -108,6 +108,11 @@ namespace DBService
             CardInfo cif = new CardInfo();
             return cif.SelectAllCards();
         }
+        public bool CheckCardByCardNumber(string cardNumber)
+        {
+            CardInfo cif = new CardInfo();
+            return cif.CheckCardByCardNumber(cardNumber);
+        }
         public int DeleteByCardNumber(string cardNumber)
         {
             CardInfo cif = new CardInfo();

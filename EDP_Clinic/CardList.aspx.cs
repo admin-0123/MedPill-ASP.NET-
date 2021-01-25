@@ -1,6 +1,7 @@
 ﻿using EDP_Clinic.EDP_DBReference;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Runtime.Serialization.Formatters.Binary;
@@ -94,6 +95,11 @@ namespace EDP_Clinic
 
         protected void backBtn_Click(object sender, EventArgs e)
         {
+            string guid = Guid.NewGuid().ToString();
+            Debug.WriteLine("====================");
+            Debug.WriteLine(guid);
+            Debug.WriteLine("====================");
+
             Response.Redirect("UserPage.aspx",false);
         }
 

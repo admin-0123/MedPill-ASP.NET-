@@ -153,6 +153,63 @@ namespace DBService.Entity
 
         }
 
+        public bool CheckCardByCardNumber(string cardNumber)
+        {
+            string DBConnect = ConfigurationManager.ConnectionStrings["EDP_DB"].ConnectionString;
+            using (SqlConnection myConn = new SqlConnection(DBConnect))
+            {
+                string sqlStatement = "SELECT CardNumber FROM CardInfo WHERE CardNumber = @paraCardNumber";
+                using (SqlCommand sqlCmd = new SqlCommand(sqlStatement))
+                {
+                    sqlCmd.Parameters.AddWithValue("@paraCardNumber", cardNumber);
+                    sqlCmd.Connection = myConn;
+                    try
+                    {
+                        myConn.Open();
+                        using(SqlDataReader reader = sqlCmd.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                if(reader["CardNumber"] != null)
+                                {
+                                    if(reader["CardNumber"] != DBNull.Value)
+                                    {
+                                        //byte[] iv = Convert.FromBase64String(reader["Iv"].ToString());
+                                        //byte[] key = Convert.FromBase64String(reader["Key"].ToString());
+                                        //string cardNumberDBResult = decryptData(iv, key, reader["CardNumber"]);
+                                        string cardNumberResult = reader["CardNumber"].ToString();
+
+                                        if(cardNumberResult == cardNumber)
+                                        {
+                                            return true;
+                                        }
+                                        else
+                                        {
+                                            return false;
+                                        }
+                                    }
+                                    else
+                                    {
+                                        return false;
+                                    }
+                                }
+                                else
+                                {
+                                    return false;
+                                }
+                            }
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        throw new Exception(ex.ToString());
+                    }
+
+                    finally { myConn.Close(); }
+                    return false;
+                }
+            }
+        }
         //Select all card info
 
         //BIG NOTE HERE

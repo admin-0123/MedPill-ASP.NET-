@@ -116,6 +116,12 @@
   <wsdl:message name="IService1_DeleteByCardNumber_OutputMessage">
     <wsdl:part name="parameters" element="tns:DeleteByCardNumberResponse" />
   </wsdl:message>
+  <wsdl:message name="IService1_CheckCardByCardNumber_InputMessage">
+    <wsdl:part name="parameters" element="tns:CheckCardByCardNumber" />
+  </wsdl:message>
+  <wsdl:message name="IService1_CheckCardByCardNumber_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CheckCardByCardNumberResponse" />
+  </wsdl:message>
   <wsdl:message name="IService1_UpdateByCardNumber_InputMessage">
     <wsdl:part name="parameters" element="tns:UpdateByCardNumber" />
   </wsdl:message>
@@ -200,6 +206,10 @@
     <wsdl:operation name="DeleteByCardNumber">
       <wsdl:input wsaw:Action="http://tempuri.org/IService1/DeleteByCardNumber" message="tns:IService1_DeleteByCardNumber_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IService1/DeleteByCardNumberResponse" message="tns:IService1_DeleteByCardNumber_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CheckCardByCardNumber">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/CheckCardByCardNumber" message="tns:IService1_CheckCardByCardNumber_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/CheckCardByCardNumberResponse" message="tns:IService1_CheckCardByCardNumber_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="UpdateByCardNumber">
       <wsdl:input wsaw:Action="http://tempuri.org/IService1/UpdateByCardNumber" message="tns:IService1_UpdateByCardNumber_InputMessage" />
@@ -367,6 +377,15 @@
     </wsdl:operation>
     <wsdl:operation name="DeleteByCardNumber">
       <soap:operation soapAction="http://tempuri.org/IService1/DeleteByCardNumber" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CheckCardByCardNumber">
+      <soap:operation soapAction="http://tempuri.org/IService1/CheckCardByCardNumber" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
