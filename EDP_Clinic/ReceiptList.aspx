@@ -31,13 +31,13 @@
                     </ItemTemplate>
                     <EmptyDataTemplate>
                         <div class="mb-3 mt-5 text-center">
-                            <h5>There is currently no payment information stored.</h5>
+                            <h5>There is currently no payment history stored.</h5>
                         </div>
                     </EmptyDataTemplate>
                 </asp:ListView>
             </div>
             <div class="mt-5 text-center">
-                <asp:DataPager ID="DataPager1" runat="server" PagedControlID="receiptListView" PageSize="1" OnPreRender="DataPager1_PreRender">
+                <asp:DataPager ID="receiptListPager" runat="server" PagedControlID="receiptListView" PageSize="1" OnPreRender="receiptListPager_PreRender">
                     <Fields>
                         <asp:NextPreviousPagerField ButtonCssClass="btn btn-primary" ButtonType="Button" ShowFirstPageButton="True" ShowNextPageButton="False" ShowPreviousPageButton="False" />
                         <asp:NumericPagerField />

@@ -24,99 +24,102 @@ namespace EDP_Clinic
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            //Before entering this page
-            //Check if user is authenticated first
-            //Though code is not here yet 6/1/2021
+            //Session code implemented on 27/01/2021
 
-            //if (Session["Login"] != null && Session["AuthToken"] != null && Request.Cookies["AuthToken"] != null)
-            //{
-            //    if (!Session["AuthToken"].ToString().Equals(Request.Cookies["AuthToken"].Value))
-            //    {
-            //        Response.Redirect("Login.aspx", false);
-            //    }
-            //    else
-            //    {
-            //        messageLbl.Text = "Congratulations !, you are logged in!";
-            //        messageLbl.ForeColor = System.Drawing.Color.Green;
-            //        logoutBtn.Visible = true;
-            //    }
-            //}
-            //else
-            //{
-            //    Response.Redirect("Login.aspx", false);
-            //}
+            Session["Login"] = "someone@example.com";
 
-            //Checks a list of sessions to give authentication
+            string guidToken = Guid.NewGuid().ToString();
+            Session["AuthToken"] = guidToken;
+            HttpCookie AuthToken = new HttpCookie("AuthToken");
+            AuthToken.Value = guidToken;
+            Response.Cookies.Add(AuthToken);
 
-            //For testing purposes
-            //Each session should store random GUID
-            //Session["addCardInfo"] = "111";
-            //Session["changeCardInfo"] = "222";
-            //Session["deleteCardInfo"] = "333";
-
-
-            //Cookies
-            //Comment out for testing purposes
-            //Response.Cookies["addCardInfo"].Value = "111";
-            //Response.Cookies["addCardInfo"].Expires = DateTime.Now.AddMinutes(15);
-
-            //Response.Cookies["changeCardInfo"].Value = "222";
-            //Response.Cookies["changeCardInfo"].Expires = DateTime.Now.AddMinutes(15);
-
-            //Response.Cookies["deleteCardInfo"].Value = "333";
-            //Response.Cookies["deleteCardInfo"].Expires = DateTime.Now.AddMinutes(15);
-
-
-            //addCardCookie.Values.add(true);
-            //Response.Cookies.Add(addCardCookie);
-
-            //This resulting value will direct user to respective pages
-            int validSessionReason = checkIntention();
-
-            if (validSessionReason == 0)
+            if (Session["Login"] != null && Session["AuthToken"] != null && Request.Cookies["AuthToken"] != null)
             {
-                Response.Redirect("CardList.aspx");
+                if (!Session["AuthToken"].ToString().Equals(Request.Cookies["AuthToken"].Value))
+                {
+                    Response.Redirect("Login.aspx", false);
+                }
+                else
+                {
+                    Debug.WriteLine("Currently at Authentication page");
+                    //Checks a list of sessions to give authentication
+
+                    //For testing purposes
+                    //Each session should store random GUID
+                    //Session["addCardInfo"] = "111";
+                    //Session["changeCardInfo"] = "222";
+                    //Session["deleteCardInfo"] = "333";
+
+
+                    //Cookies
+                    //Comment out for testing purposes
+                    //Response.Cookies["addCardInfo"].Value = "111";
+                    //Response.Cookies["addCardInfo"].Expires = DateTime.Now.AddMinutes(15);
+
+                    //Response.Cookies["changeCardInfo"].Value = "222";
+                    //Response.Cookies["changeCardInfo"].Expires = DateTime.Now.AddMinutes(15);
+
+                    //Response.Cookies["deleteCardInfo"].Value = "333";
+                    //Response.Cookies["deleteCardInfo"].Expires = DateTime.Now.AddMinutes(15);
+
+
+                    //addCardCookie.Values.add(true);
+                    //Response.Cookies.Add(addCardCookie);
+
+                    //This resulting value will direct user to respective pages
+                    int validSessionReason = checkIntention();
+
+                    if (validSessionReason == 0)
+                    {
+                        Response.Redirect("CardList.aspx");
+                    }
+                    //Else if statements are for testing purposes only
+                    /*
+                    else if(validSessionReason == 1)
+                    {
+                        OTPError.Text = "Add Card";
+                    }
+                    else if (validSessionReason == 2)
+                    {
+                        OTPError.Text = "Change Card";
+                    }
+                    else if (validSessionReason == 3)
+                    {
+                        OTPError.Text = "Delete Card";
+                    }*/
+
+                    //Calls Twilio API
+                    else
+                    {
+                        //Might put the Twilio Verify API into a function - 6/1/2021
+
+                        //Retrieve keys from web.config
+                        NameValueCollection myKeys = ConfigurationManager.AppSettings;
+
+                        //Reading keys
+                        var twilioAccSid = myKeys["TWILIO_ACCOUNT_SID"];
+                        var twilioAuth = myKeys["TWILIO_AUTH_TOKEN"];
+                        TwilioClient.Init(twilioAccSid, twilioAuth);
+
+                        Debug.WriteLine("Calling Twilio OTP Function");
+
+                        //Sends OTP
+
+                        /*var verification = VerificationResource.Create(
+                            to: "+6590251744",
+                            channel: "sms",
+                            pathServiceSid: "VA4ceee8345f84c5be3a44bc9ab3db5790"
+                        );
+
+                        Debug.WriteLine(verification.Sid);
+                        //Console.WriteLine(verification.Sid);*/
+                    }
+                }
             }
-            //Else if statements are for testing purposes only
-            /*
-            else if(validSessionReason == 1)
-            {
-                OTPError.Text = "Add Card";
-            }
-            else if (validSessionReason == 2)
-            {
-                OTPError.Text = "Change Card";
-            }
-            else if (validSessionReason == 3)
-            {
-                OTPError.Text = "Delete Card";
-            }*/
-
-            //Calls Twilio API
             else
             {
-                //Might put the Twilio Verify API into a function - 6/1/2021
-
-                //Retrieve keys from web.config
-                NameValueCollection myKeys = ConfigurationManager.AppSettings;
-
-                //Reading keys
-                var twilioAccSid = myKeys["TWILIO_ACCOUNT_SID"];
-                var twilioAuth = myKeys["TWILIO_AUTH_TOKEN"];
-                TwilioClient.Init(twilioAccSid, twilioAuth);
-
-                Debug.WriteLine("Calling Twilio OTP Function");
-
-                //Sends OTP
-
-                /*var verification = VerificationResource.Create(
-                    to: "+6590251744",
-                    channel: "sms",
-                    pathServiceSid: "VA4ceee8345f84c5be3a44bc9ab3db5790"
-                );
-
-                Debug.WriteLine(verification.Sid);
-                //Console.WriteLine(verification.Sid);*/
+                Response.Redirect("Login.aspx", false);
             }
 
         }
@@ -291,7 +294,7 @@ namespace EDP_Clinic
 
             TwilioClient.Init(twilioAccSid, twilioAuth);
             //(205) 946 - 1964
-              //  + 1 213 279 6783
+            //  + 1 213 279 6783
             var message = MessageResource.Create(
             body: "Dear user, an authentication has been made on your account.",
             from: new Twilio.Types.PhoneNumber("+12132796783"),
@@ -323,6 +326,7 @@ namespace EDP_Clinic
                 {
                     //Call Twilio SMS Function
                     //TwilioSMS();
+
                     //A bunch of if else statements here to redirect user to respective pages
                     if (validSessionReason == 1)
                     {

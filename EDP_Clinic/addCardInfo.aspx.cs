@@ -22,26 +22,49 @@ namespace EDP_Clinic
         byte[] IV;
         protected void Page_Load(object sender, EventArgs e)
         {
-            /*  We will check user session here soon TM */
+            Session["Login"] = "someone@example.com";
 
+            string guidToken = Guid.NewGuid().ToString();
+            Session["AuthToken"] = guidToken;
+            HttpCookie AuthToken = new HttpCookie("AuthToken");
+            AuthToken.Value = guidToken;
+            Response.Cookies.Add(AuthToken);
 
-            //We check sessions here
-            //  Checks if user pass is to add card info
-            if (Session["authOTPAToken"] != null && Request.Cookies["authOTPAToken"] != null)
+            //Checks user session
+            if (Session["Login"] != null && Session["AuthToken"] != null && Request.Cookies["AuthToken"] != null)
             {
-                if (!Session["authOTPAToken"].ToString().Equals(Request.Cookies["authOTPAToken"].Value))
+                if (!Session["AuthToken"].ToString().Equals(Request.Cookies["AuthToken"].Value))
                 {
-                    Response.Redirect("CardList.aspx", false);
+                    Response.Redirect("Login.aspx", false);
                 }
+                //User session exists
                 else
                 {
-                    //Nothing to put here since all credentials are there
+                    //  Checks if user pass is to add card info
+                    if (Session["authOTPAToken"] != null && Request.Cookies["authOTPAToken"] != null)
+                    {
+                        if (!Session["authOTPAToken"].ToString().Equals(Request.Cookies["authOTPAToken"].Value))
+                        {
+                            Response.Redirect("CardList.aspx", false);
+                        }
+                        else
+                        {
+                            //Nothing to put here since all credentials are there
+                            Debug.WriteLine("Valid Credentials to add card info");
+                        }
+                    }
+                    else
+                    {
+                        Response.Redirect("CardList.aspx", false);
+                    }
                 }
             }
+            //No credentials at all
             else
             {
-                Response.Redirect("CardList.aspx", false);
+                Response.Redirect("Login.aspx", false);
             }
+
         }
 
         private bool ValidateInput()
@@ -56,7 +79,7 @@ namespace EDP_Clinic
                 nameOnCardError.ForeColor = Color.Red;
                 nameOnCardError.Visible = true;
             }
-            else if(!Regex.IsMatch(nameOnCardTB.Text, "^[a-zA-Z0-9 ]*$"))
+            else if (!Regex.IsMatch(nameOnCardTB.Text, "^[a-zA-Z0-9 ]*$"))
             {
                 nameOnCardError.Text = "Please enter valid card name";
                 nameOnCardError.ForeColor = Color.Red;
@@ -86,7 +109,7 @@ namespace EDP_Clinic
                 cardNumberError.ForeColor = Color.Red;
                 cardNumberError.Visible = true;
             }
-            else if(cardNumberTB.Text.Length > 16)
+            else if (cardNumberTB.Text.Length > 16)
             {
                 cardNumberError.Text = "Please enter a valid card number";
                 cardNumberError.ForeColor = Color.Red;
@@ -143,7 +166,7 @@ namespace EDP_Clinic
                 //cardExpiryError.Text = cardExpiryTB.Text;
                 DateTime inputDate = Convert.ToDateTime(cardExpiryTB.Text);
                 double monthDifference = inputDate.Subtract(currentDate).Days / (365.25 / 12);
-                if(monthDifference < 3)
+                if (monthDifference < 3)
                 {
                     cardExpiryError.Text = "Please ensure that your expiry date is at least 3 months from current date";
                     //cardExpiryError.Text = monthDifference.ToString();
@@ -179,7 +202,7 @@ namespace EDP_Clinic
             bool validInput = ValidateInput();
 
             bool validCaptcha = ValidateCaptcha();
-            
+
             //checks if all input has been validated
             if (validInput == true && validCaptcha == true)
             {
@@ -192,9 +215,8 @@ namespace EDP_Clinic
                 Service1Client client = new Service1Client();
                 bool resultCheck = client.CheckCardByCardNumber(cardNumberTB.Text.Trim());
                 //Checks if there is an existing card here
-                //It will return null if there is 2 cards here
-                //CardInfo cif = null;
-                if(resultCheck == true)
+                //It will return true if there is 2 cards here
+                if (resultCheck == true)
                 {
 
                     cardNumberError.Text = "Please enter a valid card information";
@@ -209,9 +231,11 @@ namespace EDP_Clinic
                     string cardNumberInput = cardNumberTB.Text.Trim().Substring(12, 4);
                     string uniqueIdentifier = cardNumberInput + "-" + guid;
                     Debug.WriteLine(uniqueIdentifier);
+
                     //Service1Client client = new Service1Client();
                     int result = client.CreateCardInfo(nameOnCardTB.Text.Trim(), cardNumberTB.Text.Trim(),
                         Convert.ToDateTime(cardExpiryTB.Text), CVVTB.Text.Trim(), IV, Key, true, uniqueIdentifier);
+
                     if (result == 1)
                     {
                         //Remove pass to add card info

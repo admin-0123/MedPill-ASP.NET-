@@ -16,17 +16,44 @@ using System.Net;
 using System.IO;
 using System.Web.Script.Serialization;
 using EDP_Clinic.EDP_DBReference;
+using System.Diagnostics;
 
 namespace EDP_Clinic
 {
     public partial class Payment : System.Web.UI.Page
     {
-        byte[] Key;
-        byte[] IV;
-
         protected void Page_Load(object sender, EventArgs e)
         {
-            //Will put these into function
+            Session["Login"] = "someone@example.com";
+
+            string guidToken = Guid.NewGuid().ToString();
+            Session["AuthToken"] = guidToken;
+            HttpCookie AuthToken = new HttpCookie("AuthToken");
+            AuthToken.Value = guidToken;
+            Response.Cookies.Add(AuthToken);
+
+
+            //Checks user session
+            if (Session["Login"] != null && Session["AuthToken"] != null && Request.Cookies["AuthToken"] != null)
+            {
+                if (!Session["AuthToken"].ToString().Equals(Request.Cookies["AuthToken"].Value))
+                {
+                    Response.Redirect("Login.aspx", false);
+                }
+                else
+                {
+                    Debug.WriteLine("Going to payment page");
+                    retrieveCardInfo();
+                }
+            }
+            //No credentials at all
+            else
+            {
+                Response.Redirect("Login.aspx", false);
+            }
+        }
+        protected void retrieveCardInfo()
+        {
             List<CardInfo> cifList = new List<CardInfo>();
             Service1Client client = new Service1Client();
             cifList = client.GetAllCards().ToList<CardInfo>();
@@ -34,8 +61,6 @@ namespace EDP_Clinic
             cardListView.Visible = true;
             cardListView.DataSource = cifList;
             cardListView.DataBind();
-
-
         }
         private bool ValidateInput()
         {
@@ -169,7 +194,7 @@ namespace EDP_Clinic
 
 
             //Testing Stripe
-            /*StripeConfiguration.ApiKey = "sk_test_4eC39HqLyjWDarjtT1zdp7dc";
+            StripeConfiguration.ApiKey = "sk_test_4eC39HqLyjWDarjtT1zdp7dc";
             var options = new PaymentIntentCreateOptions
             {
                 Amount = 1000,
@@ -183,30 +208,8 @@ namespace EDP_Clinic
 
             var service = new PaymentIntentService();
             var paymentIntent = service.Create(options);
-            System.Diagnostics.Debug.WriteLine(paymentIntent);*/
+            Debug.WriteLine(paymentIntent);
             //Console.WriteLine(paymentIntent);
-        }
-
-        protected byte[] encryptData(string data)
-        {
-            byte[] cipherText = null;
-            try
-            {
-                RijndaelManaged cipher = new RijndaelManaged();
-                cipher.IV = IV;
-                cipher.Key = Key;
-                ICryptoTransform encryptTransform = cipher.CreateEncryptor();
-                //ICryptoTransform decryptTransform = cipher.CreateDecryptor();
-                byte[] plainText = Encoding.UTF8.GetBytes(data);
-                cipherText = encryptTransform.TransformFinalBlock(plainText, 0,
-               plainText.Length);
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.ToString());
-            }
-            finally { }
-            return cipherText;
         }
 
         //Initialise an object to store Recaptcha response

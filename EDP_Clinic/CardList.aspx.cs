@@ -14,11 +14,51 @@ namespace EDP_Clinic
 {
     public partial class CardList : System.Web.UI.Page
     {
-        byte[] Key;
-        byte[] IV;
         protected void Page_Load(object sender, EventArgs e)
         {
-            //Will put these into function
+            Session["Login"] = "someone@example.com";
+
+            string guidToken = Guid.NewGuid().ToString();
+            Session["AuthToken"] = guidToken;
+            HttpCookie AuthToken = new HttpCookie("AuthToken");
+            AuthToken.Value = guidToken;
+            Response.Cookies.Add(AuthToken);
+
+
+            //Checks user session
+            if (Session["Login"] != null && Session["AuthToken"] != null && Request.Cookies["AuthToken"] != null)
+            {
+                if (!Session["AuthToken"].ToString().Equals(Request.Cookies["AuthToken"].Value))
+                {
+                    Response.Redirect("Login.aspx", false);
+                }
+                else
+                {
+                    Debug.WriteLine("Retrieving card info");
+                    retrieveCardInfo();
+                }
+            }
+            //No credentials at all
+            else
+            {
+                Response.Redirect("Login.aspx", false);
+            }
+        }
+
+        /*byte[] ObjectToByteArray(object obj)
+        {
+            if (obj == null)
+                return null;
+            BinaryFormatter bf = new BinaryFormatter();
+            using (MemoryStream ms = new MemoryStream())
+            {
+                bf.Serialize(ms, obj);
+                return ms.ToArray();
+            }
+        }*/
+
+        protected void retrieveCardInfo()
+        {
             List<CardInfo> cifList = new List<CardInfo>();
             Service1Client client = new Service1Client();
             cifList = client.GetAllCards().ToList<CardInfo>();
@@ -41,18 +81,6 @@ namespace EDP_Clinic
             }
         }
 
-        /*byte[] ObjectToByteArray(object obj)
-        {
-            if (obj == null)
-                return null;
-            BinaryFormatter bf = new BinaryFormatter();
-            using (MemoryStream ms = new MemoryStream())
-            {
-                bf.Serialize(ms, obj);
-                return ms.ToArray();
-            }
-        }*/
-
         protected void moreBtn_Click(object sender, EventArgs e)
         {
             //string cardNumber = CommandArgument
@@ -67,7 +95,6 @@ namespace EDP_Clinic
 
             Response.Cookies.Add(new HttpCookie("addCardInfo", guid));
             Response.Redirect("Authentication.aspx", false);
-            //Response.Redirect("addCardInfo.aspx", false);
         }
 
         protected void cardListView_ItemCommand(object sender, ListViewCommandEventArgs e)
@@ -91,16 +118,10 @@ namespace EDP_Clinic
             }
             //else if()
 
-
         }
 
         protected void backBtn_Click(object sender, EventArgs e)
         {
-            string guid = Guid.NewGuid().ToString();
-            Debug.WriteLine("====================");
-            Debug.WriteLine("4044-"+guid);
-            Debug.WriteLine("====================");
-
             Response.Redirect("UserPage.aspx",false);
         }
 
