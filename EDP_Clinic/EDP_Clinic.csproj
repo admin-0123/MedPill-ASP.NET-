@@ -228,6 +228,7 @@
     <Content Include="Payment.aspx" />
     <Content Include="PaymentInfoDeleted.aspx" />
     <Content Include="PaymentInformation.aspx" />
+    <Content Include="ReceiptDetail.aspx" />
     <Content Include="ReceiptList.aspx" />
     <Content Include="ReceiptListAdmin.aspx" />
     <Content Include="Register.aspx" />
@@ -404,6 +405,13 @@
       <DependentUpon>PaymentInformation.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ReceiptDetail.aspx.cs">
+      <DependentUpon>ReceiptDetail.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ReceiptDetail.aspx.designer.cs">
+      <DependentUpon>ReceiptDetail.aspx</DependentUpon>
+    </Compile>
     <Compile Include="ReceiptList.aspx.cs">
       <DependentUpon>ReceiptList.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

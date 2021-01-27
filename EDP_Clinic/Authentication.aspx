@@ -3,7 +3,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-    <section class="w3l-contact py-5" id="changePaymentInfo" style="height: 100vh;">
+    <section class="w3l-contact py-5" id="changePaymentInfo">
         <div class="container py-lg-3">
             <h1 class="title mb-4">Verify your Identity</h1>
             <p class="mb-4">Click <asp:HyperLink ID="resendOTPLink" runat="server" Target="_self" NavigateUrl="~/Authentication.aspx" ToolTip="Resend your OTP number">here</asp:HyperLink> to resend your SMS.</p>
