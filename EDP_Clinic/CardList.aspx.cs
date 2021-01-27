@@ -16,7 +16,33 @@ namespace EDP_Clinic
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            retrieveCardInfo();
+            Session["Login"] = "someone@example.com";
+
+            string guidToken = Guid.NewGuid().ToString();
+            Session["AuthToken"] = guidToken;
+            HttpCookie AuthToken = new HttpCookie("AuthToken");
+            AuthToken.Value = guidToken;
+            Response.Cookies.Add(AuthToken);
+
+
+            //Checks user session
+            if (Session["Login"] != null && Session["AuthToken"] != null && Request.Cookies["AuthToken"] != null)
+            {
+                if (!Session["AuthToken"].ToString().Equals(Request.Cookies["AuthToken"].Value))
+                {
+                    Response.Redirect("Login.aspx", false);
+                }
+                else
+                {
+                    Debug.WriteLine("Retrieving card info");
+                    retrieveCardInfo();
+                }
+            }
+            //No credentials at all
+            else
+            {
+                Response.Redirect("Login.aspx", false);
+            }
         }
 
         /*byte[] ObjectToByteArray(object obj)
@@ -69,7 +95,6 @@ namespace EDP_Clinic
 
             Response.Cookies.Add(new HttpCookie("addCardInfo", guid));
             Response.Redirect("Authentication.aspx", false);
-            //Response.Redirect("addCardInfo.aspx", false);
         }
 
         protected void cardListView_ItemCommand(object sender, ListViewCommandEventArgs e)

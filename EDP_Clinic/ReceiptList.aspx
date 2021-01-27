@@ -37,7 +37,7 @@
                 </asp:ListView>
             </div>
             <div class="mt-5 text-center">
-                <asp:DataPager ID="DataPager1" runat="server" PagedControlID="receiptListView" PageSize="1" OnPreRender="DataPager1_PreRender">
+                <asp:DataPager ID="receiptListPager" runat="server" PagedControlID="receiptListView" PageSize="1" OnPreRender="receiptListPager_PreRender">
                     <Fields>
                         <asp:NextPreviousPagerField ButtonCssClass="btn btn-primary" ButtonType="Button" ShowFirstPageButton="True" ShowNextPageButton="False" ShowPreviousPageButton="False" />
                         <asp:NumericPagerField />
