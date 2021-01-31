@@ -26,7 +26,7 @@
                                         <asp:Label ID="cardNumber" runat="server" Text='<%# "**** **** **** " + Eval("CardNumber").ToString().Substring(12,4) %>'></asp:Label></h5>
                                                 </div>
                                                 <div class="col-md-2">
-                                                    <asp:LinkButton ID="moreBtn" runat="server" CssClass="btn btn-primary" CommandName="viewMore" CommandArgument='<%# Eval("UniqueIdentifier") %>'>Select</asp:LinkButton>
+                                                    <asp:LinkButton ID="moreBtn" runat="server" CssClass="btn btn-primary" CommandName="payNow" CommandArgument='<%# Eval("UniqueIdentifier") %>'>Select</asp:LinkButton>
                                                 </div>
                                             </div>
                                         </div>
@@ -232,23 +232,23 @@
                 document.getElementById('<%=CVVError.ClientID%>').style.color = "Red";
                 document.getElementById('<%=submitBtn.ClientID%>').disabled = true;
             }
-            else if (cvvNumber.length != 4) {
-                document.getElementById('<%=CVVError.ClientID%>').innerHTML = "Please enter your 4-digit CVV number";
+            else if (cvvNumber.length != 3) {
+                document.getElementById('<%=CVVError.ClientID%>').innerHTML = "Please enter your 3-digit CVV number";
                 document.getElementById('<%=CVVError.ClientID%>').style.color = "Red";
                 document.getElementById('<%=submitBtn.ClientID%>').disabled = true;
             }
             else if (cvvNumber.search(/[ `!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/) != -1) {
-                document.getElementById('<%=CVVError.ClientID%>').innerHTML = "Please enter a valid 4-digit CVV number";
+                document.getElementById('<%=CVVError.ClientID%>').innerHTML = "Please enter a valid 3-digit CVV number";
                 document.getElementById('<%=CVVError.ClientID%>').style.color = "Red";
                 document.getElementById('<%=submitBtn.ClientID%>').disabled = true;
             }
             else if (cvvNumber.search(/[A-Z]/) != -1) {
-                document.getElementById('<%=CVVError.ClientID%>').innerHTML = "Please enter a valid 4-digit CVV number";
+                document.getElementById('<%=CVVError.ClientID%>').innerHTML = "Please enter a valid 3-digit CVV number";
                 document.getElementById('<%=CVVError.ClientID%>').style.color = "Red";
                 document.getElementById('<%=submitBtn.ClientID%>').disabled = true;
             }
             else if (cvvNumber.search(/[a-z]/) != -1) {
-                document.getElementById('<%=CVVError.ClientID%>').innerHTML = "Please enter a valid 4-digit CVV number";
+                document.getElementById('<%=CVVError.ClientID%>').innerHTML = "Please enter a valid 3-digit CVV number";
                 document.getElementById('<%=CVVError.ClientID%>').style.color = "Red";
                 document.getElementById('<%=submitBtn.ClientID%>').disabled = true;
             }

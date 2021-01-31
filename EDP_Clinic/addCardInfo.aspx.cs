@@ -22,13 +22,13 @@ namespace EDP_Clinic
         byte[] IV;
         protected void Page_Load(object sender, EventArgs e)
         {
-            Session["Login"] = "someone@example.com";
+            //Session["Login"] = "someone@example.com";
 
-            string guidToken = Guid.NewGuid().ToString();
-            Session["AuthToken"] = guidToken;
-            HttpCookie AuthToken = new HttpCookie("AuthToken");
-            AuthToken.Value = guidToken;
-            Response.Cookies.Add(AuthToken);
+            //string guidToken = Guid.NewGuid().ToString();
+            //Session["AuthToken"] = guidToken;
+            //HttpCookie AuthToken = new HttpCookie("AuthToken");
+            //AuthToken.Value = guidToken;
+            //Response.Cookies.Add(AuthToken);
 
             //Checks user session
             if (Session["Login"] != null && Session["AuthToken"] != null && Request.Cookies["AuthToken"] != null)
@@ -136,9 +136,9 @@ namespace EDP_Clinic
                 CVVError.ForeColor = Color.Red;
                 CVVError.Visible = true;
             }
-            else if (CVVTB.Text.Length != 4)
+            else if (CVVTB.Text.Length != 3)
             {
-                CVVError.Text = "Please enter a 4 digit CVV number";
+                CVVError.Text = "Please enter a 3 digit CVV number";
                 CVVError.ForeColor = Color.Red;
                 CVVError.Visible = true;
             }
