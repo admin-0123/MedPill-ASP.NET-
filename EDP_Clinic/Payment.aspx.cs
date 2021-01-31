@@ -17,6 +17,7 @@ using System.IO;
 using System.Web.Script.Serialization;
 using EDP_Clinic.EDP_DBReference;
 using System.Diagnostics;
+using System.Net.Http;
 
 namespace EDP_Clinic
 {
@@ -191,25 +192,85 @@ namespace EDP_Clinic
 
             bool validCaptcha = ValidateCaptcha();
 
+            //HttpClient client = new HttpClient();
+
+            //client.BaseAddress = new Uri("https://localhost:44310/");
 
 
             //Testing Stripe
-            StripeConfiguration.ApiKey = "sk_test_4eC39HqLyjWDarjtT1zdp7dc";
+            StripeConfiguration.ApiKey = "sk_test_51HveuKAVRV4JC5fkn1zDUAxrUGZgetyR05RVCIGpNFFAlZczY6xwAQtn60BO1stWGXHJJJOh1DZQozuL4RtJSW4700ONZrgRzD";
+
+            var paymentMethod = new PaymentMethodCreateOptions
+            {
+                Type = "card",
+                Card = new PaymentMethodCardOptions
+                {
+                    Number = "4242424242424242",
+                    ExpMonth = 1,
+                    ExpYear = 2022,
+                    Cvc = "314",
+                },
+            };
+            var paymentMethodService = new PaymentMethodService();
+            var resultPay = paymentMethodService.Create(paymentMethod);
+            var paymentId = resultPay.Id;
+            Debug.WriteLine(resultPay.Id);
+            Debug.WriteLine(resultPay.Object);
+            Debug.WriteLine(resultPay.Card.Brand);
+
             var options = new PaymentIntentCreateOptions
             {
                 Amount = 1000,
-                Currency = "usd",
+                Currency = "sgd",
                 PaymentMethodTypes = new List<string>
-              {
-                "card",
-              },
-                ReceiptEmail = "jenny.rosen@example.com",
+                {
+                    "card",
+                },
+                ReceiptEmail = "cilipadi270@gmail.com",
+                PaymentMethod = paymentId,
             };
-
             var service = new PaymentIntentService();
-            var paymentIntent = service.Create(options);
-            Debug.WriteLine(paymentIntent);
-            //Console.WriteLine(paymentIntent);
+            var resultPayment = service.Create(options);
+            var paymentIntentID = resultPayment.Id;
+            var resultConfirmPayment = service.Confirm(paymentIntentID);
+            Debug.WriteLine(resultConfirmPayment);
+            Debug.WriteLine("+++++++++++++++++++++++++++++++++");
+            //Debug.WriteLine(options);
+            //Debug.WriteLine(resultPayment);
+            //Debug.WriteLine(resultPayment.Id);
+            //Debug.WriteLine("===========================================");
+            //Debug.WriteLine(resultPayment.Status);
+
+            //var service = new PaymentIntentService();
+            //var paymentIntent = service.Create(options);
+            //Debug.WriteLine(paymentIntent);
+
+            //var service = new PaymentMethodService();
+            //service.Create(options);
+
+            //var options = new SessionCreateOptions
+            //{
+            //    SuccessUrl = "https://localhost:44310/Home.aspx",
+            //    CancelUrl = "https://example.com/cancel",
+            //    PaymentMethodTypes = new List<string>
+            //  {
+            //    "card",
+            //  },
+            //    LineItems = new List<SessionLineItemOptions>
+            //  {
+            //    new SessionLineItemOptions
+            //    {
+            //      Price = "price_1IFcWdAVRV4JC5fkywjZt6Tf",
+            //      Quantity = 1,
+            //    },
+            //  },
+            //    Mode = "payment",
+            //};
+            //var service = new SessionService();
+            //service.Create(options);
+
+
+            //Debug.WriteLine(service);
         }
 
         //Initialise an object to store Recaptcha response
