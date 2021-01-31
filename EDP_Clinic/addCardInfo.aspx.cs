@@ -136,9 +136,9 @@ namespace EDP_Clinic
                 CVVError.ForeColor = Color.Red;
                 CVVError.Visible = true;
             }
-            else if (CVVTB.Text.Length != 4)
+            else if (CVVTB.Text.Length != 3)
             {
-                CVVError.Text = "Please enter a 4 digit CVV number";
+                CVVError.Text = "Please enter a 3 digit CVV number";
                 CVVError.ForeColor = Color.Red;
                 CVVError.Visible = true;
             }
