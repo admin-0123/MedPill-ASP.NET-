@@ -11,26 +11,17 @@ namespace EDP_Clinic
 {
 
 
-    public partial class EmployeePasswordSet
+    public partial class ForgetPassword
     {
 
         /// <summary>
-        /// tbpassword control.
+        /// tbEmail control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox tbpassword;
-
-        /// <summary>
-        /// tbpassword2 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox tbpassword2;
+        protected global::System.Web.UI.WebControls.TextBox tbEmail;
 
         /// <summary>
         /// errorMsg control.
@@ -49,14 +40,5 @@ namespace EDP_Clinic
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button Button1;
-
-        /// <summary>
-        /// codeLbl control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label codeLbl;
     }
 }

@@ -26,6 +26,12 @@
   <wsdl:message name="IService1_GetOneUser_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetOneUserResponse" />
   </wsdl:message>
+  <wsdl:message name="IService1_AddOneUser_InputMessage">
+    <wsdl:part name="parameters" element="tns:AddOneUser" />
+  </wsdl:message>
+  <wsdl:message name="IService1_AddOneUser_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AddOneUserResponse" />
+  </wsdl:message>
   <wsdl:message name="IService1_EditOneUser_InputMessage">
     <wsdl:part name="parameters" element="tns:EditOneUser" />
   </wsdl:message>
@@ -43,6 +49,18 @@
   </wsdl:message>
   <wsdl:message name="IService1_CheckOneUser_OutputMessage">
     <wsdl:part name="parameters" element="tns:CheckOneUserResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService1_VerifyOneUser_InputMessage">
+    <wsdl:part name="parameters" element="tns:VerifyOneUser" />
+  </wsdl:message>
+  <wsdl:message name="IService1_VerifyOneUser_OutputMessage">
+    <wsdl:part name="parameters" element="tns:VerifyOneUserResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService1_ChangePassword_InputMessage">
+    <wsdl:part name="parameters" element="tns:ChangePassword" />
+  </wsdl:message>
+  <wsdl:message name="IService1_ChangePassword_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ChangePasswordResponse" />
   </wsdl:message>
   <wsdl:message name="IService1_GetOneUserByEmail_InputMessage">
     <wsdl:part name="parameters" element="tns:GetOneUserByEmail" />
@@ -92,6 +110,30 @@
   <wsdl:message name="IService1_ShowAllEmployees_OutputMessage">
     <wsdl:part name="parameters" element="tns:ShowAllEmployeesResponse" />
   </wsdl:message>
+  <wsdl:message name="IService1_GetEmailbyCode_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetEmailbyCode" />
+  </wsdl:message>
+  <wsdl:message name="IService1_GetEmailbyCode_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetEmailbyCodeResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService1_CheckCodeExist_InputMessage">
+    <wsdl:part name="parameters" element="tns:CheckCodeExist" />
+  </wsdl:message>
+  <wsdl:message name="IService1_CheckCodeExist_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CheckCodeExistResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService1_CheckCodeByEmail_InputMessage">
+    <wsdl:part name="parameters" element="tns:CheckCodeByEmail" />
+  </wsdl:message>
+  <wsdl:message name="IService1_CheckCodeByEmail_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CheckCodeByEmailResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService1_AddCode_InputMessage">
+    <wsdl:part name="parameters" element="tns:AddCode" />
+  </wsdl:message>
+  <wsdl:message name="IService1_AddCode_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AddCodeResponse" />
+  </wsdl:message>
   <wsdl:message name="IService1_CreateCardInfo_InputMessage">
     <wsdl:part name="parameters" element="tns:CreateCardInfo" />
   </wsdl:message>
@@ -135,6 +177,10 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IService1/GetOneUser" message="tns:IService1_GetOneUser_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IService1/GetOneUserResponse" message="tns:IService1_GetOneUser_OutputMessage" />
     </wsdl:operation>
+    <wsdl:operation name="AddOneUser">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/AddOneUser" message="tns:IService1_AddOneUser_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/AddOneUserResponse" message="tns:IService1_AddOneUser_OutputMessage" />
+    </wsdl:operation>
     <wsdl:operation name="EditOneUser">
       <wsdl:input wsaw:Action="http://tempuri.org/IService1/EditOneUser" message="tns:IService1_EditOneUser_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IService1/EditOneUserResponse" message="tns:IService1_EditOneUser_OutputMessage" />
@@ -146,6 +192,14 @@
     <wsdl:operation name="CheckOneUser">
       <wsdl:input wsaw:Action="http://tempuri.org/IService1/CheckOneUser" message="tns:IService1_CheckOneUser_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IService1/CheckOneUserResponse" message="tns:IService1_CheckOneUser_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="VerifyOneUser">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/VerifyOneUser" message="tns:IService1_VerifyOneUser_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/VerifyOneUserResponse" message="tns:IService1_VerifyOneUser_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ChangePassword">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/ChangePassword" message="tns:IService1_ChangePassword_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/ChangePasswordResponse" message="tns:IService1_ChangePassword_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="GetOneUserByEmail">
       <wsdl:input wsaw:Action="http://tempuri.org/IService1/GetOneUserByEmail" message="tns:IService1_GetOneUserByEmail_InputMessage" />
@@ -178,6 +232,22 @@
     <wsdl:operation name="ShowAllEmployees">
       <wsdl:input wsaw:Action="http://tempuri.org/IService1/ShowAllEmployees" message="tns:IService1_ShowAllEmployees_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IService1/ShowAllEmployeesResponse" message="tns:IService1_ShowAllEmployees_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetEmailbyCode">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/GetEmailbyCode" message="tns:IService1_GetEmailbyCode_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/GetEmailbyCodeResponse" message="tns:IService1_GetEmailbyCode_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CheckCodeExist">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/CheckCodeExist" message="tns:IService1_CheckCodeExist_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/CheckCodeExistResponse" message="tns:IService1_CheckCodeExist_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CheckCodeByEmail">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/CheckCodeByEmail" message="tns:IService1_CheckCodeByEmail_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/CheckCodeByEmailResponse" message="tns:IService1_CheckCodeByEmail_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AddCode">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/AddCode" message="tns:IService1_AddCode_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/AddCodeResponse" message="tns:IService1_AddCode_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="CreateCardInfo">
       <wsdl:input wsaw:Action="http://tempuri.org/IService1/CreateCardInfo" message="tns:IService1_CreateCardInfo_InputMessage" />
@@ -229,6 +299,15 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="AddOneUser">
+      <soap:operation soapAction="http://tempuri.org/IService1/AddOneUser" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="EditOneUser">
       <soap:operation soapAction="http://tempuri.org/IService1/EditOneUser" style="document" />
       <wsdl:input>
@@ -249,6 +328,24 @@
     </wsdl:operation>
     <wsdl:operation name="CheckOneUser">
       <soap:operation soapAction="http://tempuri.org/IService1/CheckOneUser" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifyOneUser">
+      <soap:operation soapAction="http://tempuri.org/IService1/VerifyOneUser" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ChangePassword">
+      <soap:operation soapAction="http://tempuri.org/IService1/ChangePassword" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -321,6 +418,42 @@
     </wsdl:operation>
     <wsdl:operation name="ShowAllEmployees">
       <soap:operation soapAction="http://tempuri.org/IService1/ShowAllEmployees" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetEmailbyCode">
+      <soap:operation soapAction="http://tempuri.org/IService1/GetEmailbyCode" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CheckCodeExist">
+      <soap:operation soapAction="http://tempuri.org/IService1/CheckCodeExist" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CheckCodeByEmail">
+      <soap:operation soapAction="http://tempuri.org/IService1/CheckCodeByEmail" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddCode">
+      <soap:operation soapAction="http://tempuri.org/IService1/AddCode" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

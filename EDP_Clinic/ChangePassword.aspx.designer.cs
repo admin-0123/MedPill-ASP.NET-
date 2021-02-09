@@ -11,7 +11,7 @@ namespace EDP_Clinic
 {
 
 
-    public partial class EmployeePasswordSet
+    public partial class ChangePassword
     {
 
         /// <summary>

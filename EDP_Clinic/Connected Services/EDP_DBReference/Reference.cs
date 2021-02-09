@@ -90,6 +90,9 @@ namespace EDP_Clinic.EDP_DBReference {
         private string IdField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string IsDeletedField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string NameField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -139,6 +142,19 @@ namespace EDP_Clinic.EDP_DBReference {
                 if ((object.ReferenceEquals(this.IdField, value) != true)) {
                     this.IdField = value;
                     this.RaisePropertyChanged("Id");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string IsDeleted {
+            get {
+                return this.IsDeletedField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.IsDeletedField, value) != true)) {
+                    this.IsDeletedField = value;
+                    this.RaisePropertyChanged("IsDeleted");
                 }
             }
         }
@@ -519,6 +535,12 @@ namespace EDP_Clinic.EDP_DBReference {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetOneUser", ReplyAction="http://tempuri.org/IService1/GetOneUserResponse")]
         System.Threading.Tasks.Task<EDP_Clinic.EDP_DBReference.User> GetOneUserAsync(string id);
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/AddOneUser", ReplyAction="http://tempuri.org/IService1/AddOneUserResponse")]
+        int AddOneUser(string name, string password, string salt, string email, string phoneNo, string role, string verified);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/AddOneUser", ReplyAction="http://tempuri.org/IService1/AddOneUserResponse")]
+        System.Threading.Tasks.Task<int> AddOneUserAsync(string name, string password, string salt, string email, string phoneNo, string role, string verified);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/EditOneUser", ReplyAction="http://tempuri.org/IService1/EditOneUserResponse")]
         int EditOneUser(string id, string name, string email, string mobile);
         
@@ -536,6 +558,18 @@ namespace EDP_Clinic.EDP_DBReference {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/CheckOneUser", ReplyAction="http://tempuri.org/IService1/CheckOneUserResponse")]
         System.Threading.Tasks.Task<int> CheckOneUserAsync(string email);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/VerifyOneUser", ReplyAction="http://tempuri.org/IService1/VerifyOneUserResponse")]
+        int VerifyOneUser(string email);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/VerifyOneUser", ReplyAction="http://tempuri.org/IService1/VerifyOneUserResponse")]
+        System.Threading.Tasks.Task<int> VerifyOneUserAsync(string email);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/ChangePassword", ReplyAction="http://tempuri.org/IService1/ChangePasswordResponse")]
+        int ChangePassword(string password, string email);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/ChangePassword", ReplyAction="http://tempuri.org/IService1/ChangePasswordResponse")]
+        System.Threading.Tasks.Task<int> ChangePasswordAsync(string password, string email);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetOneUserByEmail", ReplyAction="http://tempuri.org/IService1/GetOneUserByEmailResponse")]
         EDP_Clinic.EDP_DBReference.User GetOneUserByEmail(string email);
@@ -584,6 +618,30 @@ namespace EDP_Clinic.EDP_DBReference {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/ShowAllEmployees", ReplyAction="http://tempuri.org/IService1/ShowAllEmployeesResponse")]
         System.Threading.Tasks.Task<EDP_Clinic.EDP_DBReference.displayUser[]> ShowAllEmployeesAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetEmailbyCode", ReplyAction="http://tempuri.org/IService1/GetEmailbyCodeResponse")]
+        string GetEmailbyCode(string code);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetEmailbyCode", ReplyAction="http://tempuri.org/IService1/GetEmailbyCodeResponse")]
+        System.Threading.Tasks.Task<string> GetEmailbyCodeAsync(string code);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/CheckCodeExist", ReplyAction="http://tempuri.org/IService1/CheckCodeExistResponse")]
+        int CheckCodeExist(string code);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/CheckCodeExist", ReplyAction="http://tempuri.org/IService1/CheckCodeExistResponse")]
+        System.Threading.Tasks.Task<int> CheckCodeExistAsync(string code);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/CheckCodeByEmail", ReplyAction="http://tempuri.org/IService1/CheckCodeByEmailResponse")]
+        string CheckCodeByEmail(string email);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/CheckCodeByEmail", ReplyAction="http://tempuri.org/IService1/CheckCodeByEmailResponse")]
+        System.Threading.Tasks.Task<string> CheckCodeByEmailAsync(string email);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/AddCode", ReplyAction="http://tempuri.org/IService1/AddCodeResponse")]
+        int AddCode(string email, string code);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/AddCode", ReplyAction="http://tempuri.org/IService1/AddCodeResponse")]
+        System.Threading.Tasks.Task<int> AddCodeAsync(string email, string code);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/CreateCardInfo", ReplyAction="http://tempuri.org/IService1/CreateCardInfoResponse")]
         int CreateCardInfo(string cardName, string cardNumber, System.DateTime cardExpiry, string cvvNumber, byte[] iv, byte[] key, bool stillValid);
@@ -667,6 +725,14 @@ namespace EDP_Clinic.EDP_DBReference {
             return base.Channel.GetOneUserAsync(id);
         }
         
+        public int AddOneUser(string name, string password, string salt, string email, string phoneNo, string role, string verified) {
+            return base.Channel.AddOneUser(name, password, salt, email, phoneNo, role, verified);
+        }
+        
+        public System.Threading.Tasks.Task<int> AddOneUserAsync(string name, string password, string salt, string email, string phoneNo, string role, string verified) {
+            return base.Channel.AddOneUserAsync(name, password, salt, email, phoneNo, role, verified);
+        }
+        
         public int EditOneUser(string id, string name, string email, string mobile) {
             return base.Channel.EditOneUser(id, name, email, mobile);
         }
@@ -689,6 +755,22 @@ namespace EDP_Clinic.EDP_DBReference {
         
         public System.Threading.Tasks.Task<int> CheckOneUserAsync(string email) {
             return base.Channel.CheckOneUserAsync(email);
+        }
+        
+        public int VerifyOneUser(string email) {
+            return base.Channel.VerifyOneUser(email);
+        }
+        
+        public System.Threading.Tasks.Task<int> VerifyOneUserAsync(string email) {
+            return base.Channel.VerifyOneUserAsync(email);
+        }
+        
+        public int ChangePassword(string password, string email) {
+            return base.Channel.ChangePassword(password, email);
+        }
+        
+        public System.Threading.Tasks.Task<int> ChangePasswordAsync(string password, string email) {
+            return base.Channel.ChangePasswordAsync(password, email);
         }
         
         public EDP_Clinic.EDP_DBReference.User GetOneUserByEmail(string email) {
@@ -755,8 +837,40 @@ namespace EDP_Clinic.EDP_DBReference {
             return base.Channel.ShowAllEmployeesAsync();
         }
         
-        public int CreateCardInfo(string cardName, string cardNumber, System.DateTime cardExpiry, string cvvNumber, byte[] iv, byte[] key) {
-            return base.Channel.CreateCardInfo(cardName, cardNumber, cardExpiry, cvvNumber, iv, key);
+        public string GetEmailbyCode(string code) {
+            return base.Channel.GetEmailbyCode(code);
+        }
+        
+        public System.Threading.Tasks.Task<string> GetEmailbyCodeAsync(string code) {
+            return base.Channel.GetEmailbyCodeAsync(code);
+        }
+        
+        public int CheckCodeExist(string code) {
+            return base.Channel.CheckCodeExist(code);
+        }
+        
+        public System.Threading.Tasks.Task<int> CheckCodeExistAsync(string code) {
+            return base.Channel.CheckCodeExistAsync(code);
+        }
+        
+        public string CheckCodeByEmail(string email) {
+            return base.Channel.CheckCodeByEmail(email);
+        }
+        
+        public System.Threading.Tasks.Task<string> CheckCodeByEmailAsync(string email) {
+            return base.Channel.CheckCodeByEmailAsync(email);
+        }
+        
+        public int AddCode(string email, string code) {
+            return base.Channel.AddCode(email, code);
+        }
+        
+        public System.Threading.Tasks.Task<int> AddCodeAsync(string email, string code) {
+            return base.Channel.AddCodeAsync(email, code);
+        }
+        
+        public int CreateCardInfo(string cardName, string cardNumber, System.DateTime cardExpiry, string cvvNumber, byte[] iv, byte[] key, bool stillValid) {
+            return base.Channel.CreateCardInfo(cardName, cardNumber, cardExpiry, cvvNumber, iv, key, stillValid);
         }
         
         public System.Threading.Tasks.Task<int> CreateCardInfoAsync(string cardName, string cardNumber, System.DateTime cardExpiry, string cvvNumber, byte[] iv, byte[] key, bool stillValid) {

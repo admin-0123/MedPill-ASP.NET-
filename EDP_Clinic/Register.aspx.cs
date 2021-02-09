@@ -7,6 +7,7 @@ using System.Diagnostics;
 using System.Drawing;
 using System.Globalization;
 using System.Linq;
+using System.Net.Mail;
 using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -20,6 +21,7 @@ namespace EDP_Clinic
     {
         string MYDBConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["EDP_DB"].ConnectionString;
         static string finalHash;
+        SmtpClient emailClient = new SmtpClient("smtp-relay.sendinblue.com", 587);
         static string salt;
         Service1Client client = new Service1Client();
         protected void Page_Load(object sender, EventArgs e)
@@ -46,6 +48,7 @@ namespace EDP_Clinic
             else
             {
                 var emailexist = client.CheckOneUser(email);
+                Debug.WriteLine(emailexist);
                 if (emailexist == 1)
                 {
                     errorMsg.Text = "Email already exists";
@@ -59,14 +62,25 @@ namespace EDP_Clinic
                     errorMsg.ForeColor = System.Drawing.Color.Red;
                     errorMsg.Visible = true;
                     return;
-                    
+
                 }
-                if (password == password2)
+                if (!Regex.IsMatch(mobile, @"\d{8}"))
                 {
-                    var errors = passwordcheck(password);
-                    errorMsg.Text = errors;
+                    errorMsg.Text = "Enter valid phone number";
                     errorMsg.ForeColor = System.Drawing.Color.Red;
                     errorMsg.Visible = true;
+                    return;
+                }
+                    if (password == password2)
+                {
+                    var errors = passwordcheck(password);
+                    if (errors != "")
+                    {
+                        errorMsg.Text = errors;
+                        errorMsg.ForeColor = System.Drawing.Color.Red;
+                        errorMsg.Visible = true;
+                        return;
+                    }
                 }
                 else
                 {
@@ -93,38 +107,39 @@ namespace EDP_Clinic
 
                 finalHash = Convert.ToBase64String(hashWithSalt);
 
-                //store info in database
-                try
+                var result = client.AddOneUser(name, finalHash, salt, email, tbMobile.Text, "Patient", "No");
+                if (result == 0)
                 {
-                    using (SqlConnection con = new SqlConnection(MYDBConnectionString))
+                    errorMsg.Text = "unknown error has occured ";
+                    errorMsg.ForeColor = System.Drawing.Color.Red;
+                    errorMsg.Visible = true;
+                    return;
+                }
+                else
+                {
+                    var code = makeCode();
+                    var codeExist = client.CheckCodeExist(code);
+                    while (codeExist == 1)
                     {
-
-                        using (SqlCommand cmd = new SqlCommand("INSERT INTO [User] VALUES(@Name, @Password, @Salt, @Email, @PhoneNo, @Role, @Verified)"))
-                        {
-                            using (SqlDataAdapter sda = new SqlDataAdapter())
-                            {
-
-                                cmd.CommandType = CommandType.Text;
-                                cmd.Parameters.AddWithValue("@Name", name);
-                                cmd.Parameters.AddWithValue("@Password", finalHash);
-                                cmd.Parameters.AddWithValue("@Salt", salt);
-                                cmd.Parameters.AddWithValue("@Email", email);
-                                cmd.Parameters.AddWithValue("@PhoneNo", tbMobile.Text);
-                                cmd.Parameters.AddWithValue("@Role", "Patient");
-                                cmd.Parameters.AddWithValue("@Verified", "Yes");  // change to no after 2FA is added
-                                cmd.Connection = con;
-                                con.Open();
-                                cmd.ExecuteNonQuery();
-                                con.Close();
-                                //create link by encrpyting email
-                            }
-                        }
+                        code = makeCode();
+                        codeExist = client.CheckCodeExist(code);
                     }
+                    client.AddCode(email, code);
+                    var link = "https://localhost:44310/Verify.aspx?value=" + code;
+                    emailClient.Credentials = new System.Net.NetworkCredential("bryanchinzw@gmail.com", "vPDBKArZRY7HcIJC");
+                    emailClient.DeliveryMethod = SmtpDeliveryMethod.Network;
+                    emailClient.EnableSsl = true;
+                    MailMessage mail = new MailMessage();
+                    mail.Subject = "Verify Account (MedPill)";
+                    mail.SubjectEncoding = System.Text.Encoding.UTF8;
+                    mail.Body = "Please to verify account <br>" + link;
+                    mail.IsBodyHtml = true;
+                    mail.Priority = MailPriority.High;
+                    mail.From = new MailAddress("bryanchinzw@gmail.com");
+                    mail.To.Add(new MailAddress(email));
+                    emailClient.Send(mail);
                 }
-                catch (Exception ex)
-                {
-                    throw new Exception(ex.ToString());
-                }
+                
 
                 Response.Redirect("Login.aspx", false);
 
@@ -135,69 +150,52 @@ namespace EDP_Clinic
             var errors = "";
             if (password.Length < 8)
             {
-                errors = errors + "Password must at least be 8 characters long \n";
+                errors = errors + "Password must at least be 8 characters long <br/>";
             }
-            if (Regex.IsMatch(password, "[a-s]"))
+            if (!Regex.IsMatch(password, "[a-s]"))
             {
-                errors = errors + "Password must contain lowercase letters \n";
+                errors = errors + "Password must contain lowercase letters <br/>";
             }
-            if (Regex.IsMatch(password, "[A-Z]"))
+            if (!Regex.IsMatch(password, "[A-Z]"))
             {
-                errors = errors + "Password must contain uppercase letters \n";
+                errors = errors + "Password must contain uppercase letters <br/>";
             }
-            if (Regex.IsMatch(password, "[0-9]"))
+            if (!Regex.IsMatch(password, "[0-9]"))
             {
-                errors = errors + "Password must contain at least 1 number \n";
+                errors = errors + "Password must contain at least 1 number <br/>";
             }
-            if (Regex.IsMatch(password, "[^0-9a-zA-Z]"))
+            if (!Regex.IsMatch(password, "[^0-9a-zA-Z]"))
             {
-                errors = errors + "Password must contain at least one symbol \n";
+                errors = errors + "Password must contain at least one symbol <br/>";
             }
             return errors;
         }
         public static bool IsValidEmail(string email)
         {
-            if (string.IsNullOrWhiteSpace(email))
-                return false;
-
             try
             {
-                // Normalize the domain
-                email = Regex.Replace(email, @"(@)(.+)$", DomainMapper,
-                                      RegexOptions.None, TimeSpan.FromMilliseconds(200));
+                MailAddress m = new MailAddress(email);
 
-                // Examines the domain part of the email and normalizes it.
-                string DomainMapper(Match match)
-                {
-                    // Use IdnMapping class to convert Unicode domain names.
-                    var idn = new IdnMapping();
-
-                    // Pull out and process domain name (throws ArgumentException on invalid)
-                    string domainName = idn.GetAscii(match.Groups[2].Value);
-
-                    return match.Groups[1].Value + domainName;
-                }
+                return true;
             }
-            catch (RegexMatchTimeoutException e)
-            {
-                return false;
-            }
-            catch (ArgumentException e)
-            {
-                return false;
-            }
-
-            try
-            {
-                return Regex.IsMatch(email,
-                    @"^[^@\s]+@[^@\s]+\.[^@\s]+$",
-                    RegexOptions.IgnoreCase, TimeSpan.FromMilliseconds(250));
-            }
-            catch (RegexMatchTimeoutException)
+            catch (FormatException)
             {
                 return false;
             }
         }
-        
+        public string makeCode()
+        {
+            var exist = 1;
+            string r = "yes";
+            while (exist == 1)
+            {
+                Random generator = new Random();
+                r = generator.Next(0, 1000000).ToString("D6");
+                exist = client.CheckCodeExist(r);
+            }
+
+            return r;
+        }
+
     }
 }
