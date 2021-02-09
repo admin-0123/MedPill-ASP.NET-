@@ -16,6 +16,7 @@ using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
 using System.Drawing;
+using System.Net.Mail;
 
 namespace EDP_Clinic
 {
@@ -26,6 +27,9 @@ namespace EDP_Clinic
         string deleteid;
         string MYDBConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["EDP_DB"].ConnectionString;
         Service1Client client = new Service1Client();
+        SmtpClient emailClient = new SmtpClient("smtp-relay.sendinblue.com", 587);
+       
+        
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!this.IsPostBack)
@@ -39,6 +43,7 @@ namespace EDP_Clinic
                     Debug.WriteLine(ex);
                 }
             }
+           
         }
         protected void EmployeeGridView_RowCommand1(object sender, GridViewCommandEventArgs e)
         {
@@ -52,7 +57,6 @@ namespace EDP_Clinic
                 string id = selectedRow.Cells[3].Text;
                 Debug.WriteLine(id);
                 editLbl.Text = id;
-                Service1Client client = new Service1Client();
                 User employee = new User();
                 employee = client.GetOneUser(id);
                 tbEditName.Text = employee.Name;
@@ -114,7 +118,7 @@ namespace EDP_Clinic
                 }
                 else
                 {
-                    Debug.WriteLine("rip u screwed up yes");
+                    Debug.WriteLine("edit error");
                 }
 
             }
@@ -135,6 +139,7 @@ namespace EDP_Clinic
             var role = AddRole.SelectedValue.ToString();
             if (email == "" || name == "" || mobile == "")
             {
+                //add error msg for modal
                 return;
             }
             else
@@ -157,88 +162,56 @@ namespace EDP_Clinic
                     byte[] saltByte = new byte[8];
                     rng.GetBytes(saltByte);
                     var salt = Convert.ToBase64String(saltByte);
-                    RijndaelManaged cipher = new RijndaelManaged();
-                    cipher.GenerateKey();
-                    Key = cipher.Key;
-                    IV = cipher.IV;
-                    var key = Encoding.UTF8.GetString(Key);
-                    var iv = Encoding.UTF8.GetString(IV);
-                    try
+                    var result  =  client.AddOneUser(name, "placeholder", salt, email, mobile, role, "No");
+                    if (result == 0)
                     {
-                        using (SqlConnection con = new SqlConnection(MYDBConnectionString))
+                        return;
+                    }
+                    else
+                    {
+                        var code = makeCode();
+                        var codeExist = client.CheckCodeExist(code);
+                        while (codeExist == 1)
                         {
-
-                            using (SqlCommand cmd = new SqlCommand("INSERT INTO [User] VALUES(@Name, @Password, @Salt, @Email, @PhoneNo, @Role, @Verified)"))
-                            {
-                                using (SqlDataAdapter sda = new SqlDataAdapter())
-                                {
-
-                                    cmd.CommandType = CommandType.Text;
-                                    cmd.Parameters.AddWithValue("@Name", name);
-                                    cmd.Parameters.AddWithValue("@Password", "placeholder");
-                                    cmd.Parameters.AddWithValue("@Salt", salt);
-                                    cmd.Parameters.AddWithValue("@Email", email);
-                                    cmd.Parameters.AddWithValue("@PhoneNo", mobile);
-                                    cmd.Parameters.AddWithValue("@Role", role);
-                                    cmd.Parameters.AddWithValue("@Verified", "Yes");// change to no after 2FA is added
-                                    cmd.Connection = con;
-                                    con.Open();
-                                    cmd.ExecuteNonQuery();
-                                    con.Close();
-                                    var token = Convert.ToBase64String(encryptData(email));
-                                    Debug.WriteLine("Employee created");
-                                    Debug.WriteLine("https://localhost:44310/EmployeePasswordSet.aspx?value=" + email);
-                                }
-                            }
+                            code = makeCode();
+                            codeExist = client.CheckCodeExist(code);
+                        }
+                        client.AddCode(email, code);
+                        var link = "https://localhost:44310/EmployeePasswordSet.aspx?value=" + code;
+                        emailClient.Credentials = new System.Net.NetworkCredential("bryanchinzw@gmail.com", "vPDBKArZRY7HcIJC");
+                        emailClient.DeliveryMethod = SmtpDeliveryMethod.Network;
+                        emailClient.EnableSsl = true;
+                        MailMessage mail = new MailMessage();
+                        mail.Subject = "Set Password (MedPill)";
+                        mail.SubjectEncoding = System.Text.Encoding.UTF8;
+                        mail.Body = "Please Click link to change password <br> <a>" + link + "</a>";
+                        mail.IsBodyHtml = true;
+                        mail.Priority = MailPriority.High;
+                        mail.From = new MailAddress("bryanchinzw@gmail.com");
+                        mail.To.Add(new MailAddress(email));
+                        try
+                        {
+                            emailClient.Send(mail);
+                        }
+                        catch (SmtpFailedRecipientException ex)
+                        {
+                            Debug.WriteLine(ex);
                         }
                     }
-                    catch (Exception ex)
-                    {
-                        Debug.WriteLine(ex.ToString());
-                    }
+                    
                 }
 
             }
         }
         public static bool IsValidEmail(string email)
         {
-            if (string.IsNullOrWhiteSpace(email))
-                return false;
-
-            try
+           try
             {
-                // Normalize the domain
-                email = Regex.Replace(email, @"(@)(.+)$", DomainMapper,
-                                      RegexOptions.None, TimeSpan.FromMilliseconds(200));
+                MailAddress m = new MailAddress(email);
 
-                // Examines the domain part of the email and normalizes it.
-                string DomainMapper(Match match)
-                {
-                    // Use IdnMapping class to convert Unicode domain names.
-                    var idn = new IdnMapping();
-
-                    // Pull out and process domain name (throws ArgumentException on invalid)
-                    string domainName = idn.GetAscii(match.Groups[2].Value);
-
-                    return match.Groups[1].Value + domainName;
-                }
+                return true;
             }
-            catch (RegexMatchTimeoutException ex)
-            {
-                return false;
-            }
-            catch (ArgumentException ex)
-            {
-                return false;
-            }
-
-            try
-            {
-                return Regex.IsMatch(email,
-                    @"^[^@\s]+@[^@\s]+\.[^@\s]+$",
-                    RegexOptions.IgnoreCase, TimeSpan.FromMilliseconds(250));
-            }
-            catch (RegexMatchTimeoutException)
+            catch (FormatException)
             {
                 return false;
             }
@@ -254,26 +227,18 @@ namespace EDP_Clinic
             EmployeeGridView.DataSource = patientList;
             EmployeeGridView.DataBind();
         }
-
-        
-        protected byte[] encryptData(string data)
+        public string makeCode()
         {
-            byte[] cipherText = null;
-            try
+            var exist = 1;
+            string r = "yes";
+            while (exist == 1)
             {
-                RijndaelManaged cipher = new RijndaelManaged();
-                cipher.IV = IV;
-                cipher.Key = Key;
-                ICryptoTransform encryptTransform = cipher.CreateEncryptor();
-                byte[] plainText = Encoding.UTF8.GetBytes(data);
-                cipherText = encryptTransform.TransformFinalBlock(plainText, 0, plainText.Length);
+                Random generator = new Random();
+                r = generator.Next(0, 1000000).ToString("D6");
+                exist = client.CheckCodeExist(r);
             }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.ToString());
-            }
-            finally { }
-            return cipherText;
+            
+            return r;
         }
     }
 }

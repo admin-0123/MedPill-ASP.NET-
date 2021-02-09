@@ -203,6 +203,7 @@
     <None Include="Connected Services\EDP_DBReference\configuration.svcinfo" />
     <Content Include="CardList.aspx" />
     <Content Include="addCardInfo.aspx" />
+    <Content Include="ChangePassword.aspx" />
     <Content Include="Connected Services\EDP_DBReference\EDP_Clinic.EDP_DBReference.CompositeType.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
@@ -221,6 +222,7 @@
     </None>
     <Content Include="Contact.aspx" />
     <Content Include="EmployeePasswordSet.aspx" />
+    <Content Include="ForgetPassword.aspx" />
     <Content Include="Login.aspx" />
     <Content Include="PatientOverview.aspx" />
     <Content Include="error\generalError.aspx" />
@@ -232,6 +234,7 @@
     <Content Include="ReceiptListAdmin.aspx" />
     <Content Include="Register.aspx" />
     <Content Include="UserPage.aspx" />
+    <Content Include="Verify.aspx" />
     <Content Include="Web.config" />
     <Content Include="Home.aspx" />
     <Content Include="Services.aspx" />
@@ -335,6 +338,13 @@
     <Compile Include="addCardInfo.aspx.designer.cs">
       <DependentUpon>addCardInfo.aspx</DependentUpon>
     </Compile>
+    <Compile Include="ChangePassword.aspx.cs">
+      <DependentUpon>ChangePassword.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ChangePassword.aspx.designer.cs">
+      <DependentUpon>ChangePassword.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Connected Services\EDP_DBReference\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -353,6 +363,13 @@
     </Compile>
     <Compile Include="EmployeePasswordSet.aspx.designer.cs">
       <DependentUpon>EmployeePasswordSet.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ForgetPassword.aspx.cs">
+      <DependentUpon>ForgetPassword.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ForgetPassword.aspx.designer.cs">
+      <DependentUpon>ForgetPassword.aspx</DependentUpon>
     </Compile>
     <Compile Include="Login.aspx.cs">
       <DependentUpon>Login.aspx</DependentUpon>
@@ -459,6 +476,13 @@
     </Compile>
     <Compile Include="UserPage.aspx.designer.cs">
       <DependentUpon>UserPage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Verify.aspx.cs">
+      <DependentUpon>Verify.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Verify.aspx.designer.cs">
+      <DependentUpon>Verify.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>

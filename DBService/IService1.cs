@@ -25,7 +25,8 @@ namespace DBService
 
         User GetOneUser(string id);
         [OperationContract]
-
+        int AddOneUser(string name, string password, string salt, string email, string phoneNo, string role, string verified);
+        [OperationContract]
         int EditOneUser(string id, string name, string email, string mobile);
         [OperationContract]
 
@@ -33,6 +34,10 @@ namespace DBService
         [OperationContract]
 
         int CheckOneUser(string email);
+        [OperationContract]
+        int VerifyOneUser(string email);
+        [OperationContract]
+        int ChangePassword(string password, string email);
         [OperationContract]
         User GetOneUserByEmail(string email);
         [OperationContract]
@@ -50,11 +55,18 @@ namespace DBService
         List<displayUser> ShowAllPatients();
         [OperationContract]
         List<displayUser> ShowAllEmployees();
-
+        [OperationContract]
+        string GetEmailbyCode(string code);
+        [OperationContract]
+        int CheckCodeExist(string code);
+        [OperationContract]
+        string CheckCodeByEmail(string email);
+        [OperationContract]
+        int AddCode(string email, string code);
         //CardInfo Entity Class
         //[OperationContract]
         //int CreateCardInfo(byte[] cardName, byte[] cardNumber,
-          //  byte[] cardExpiry, byte[] cvvNumber, byte[] iv, byte[] key);
+        //  byte[] cardExpiry, byte[] cvvNumber, byte[] iv, byte[] key);
         [OperationContract]
         int CreateCardInfo(string cardName, string cardNumber,
             DateTime cardExpiry, string cvvNumber, byte[] iv, byte[] key, bool stillValid, string uniqueIdentifier);

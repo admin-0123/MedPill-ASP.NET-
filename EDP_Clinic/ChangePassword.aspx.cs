@@ -1,34 +1,27 @@
-﻿using System;
+﻿using EDP_Clinic.EDP_DBReference;
+using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
+using System.Security.Cryptography;
+using System.Text;
+using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using System.Collections.Specialized;
-using System.Security.Claims;
-using System.Security.Cryptography;
-using System.Text;
-using System.Data.SqlClient;
-using System.Data;
-using System.Diagnostics;
-using System.IO;
-using EDP_Clinic.EDP_DBReference;
-using System.Text.RegularExpressions;
 
 namespace EDP_Clinic
 {
-    public partial class EmployeePasswordSet : System.Web.UI.Page
+    public partial class ChangePassword : System.Web.UI.Page
     {
         string MYDBConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["EDP_DB"].ConnectionString;
         static string finalHash;
         static string salt;
-
         protected void Page_Load(object sender, EventArgs e)
         {
             var code = Request.QueryString["value"];
             Debug.WriteLine(code);
             codeLbl.Text = code;
-
         }
 
         protected void Button1_Click(object sender, EventArgs e)
@@ -73,6 +66,7 @@ namespace EDP_Clinic
                 return;
             }
             Response.Redirect("Login.aspx", false);
+        
         }
         protected string passwordcheck(string password)
         {
@@ -98,9 +92,6 @@ namespace EDP_Clinic
                 errors = errors + "Password must contain at least one symbol <br/>";
             }
             return errors;
-        }
-
+        }   
     }
-    
-
 }

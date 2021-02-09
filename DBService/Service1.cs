@@ -35,6 +35,11 @@ namespace DBService
             User user = new User();
             return user.SelectByID(id);
         }
+        public int AddOneUser(string name, string password, string salt, string email, string phoneNo, string role, string verified)
+        {
+            User user = new User();
+            return user.AddUser(name, password,salt,email,phoneNo,role,verified);
+        }
         public int EditOneUser(string id, string name, string email, string mobile)
         {
             User user = new User();
@@ -49,6 +54,16 @@ namespace DBService
         {
             User user = new User();
             return user.CheckUser(email);
+        }
+        public int VerifyOneUser(string email)
+        {
+            User user = new User();
+            return user.VerifyUser(email);
+        }
+        public int ChangePassword(string password, string email)
+        {
+            User user = new User();
+            return user.ChangePassword(password, email);
         }
         public User GetOneUserByEmail(string email)
         {
@@ -90,6 +105,27 @@ namespace DBService
             displayUser user = new displayUser();
             return user.DisplayAllEmployees();
         }
+        public string GetEmailbyCode(string code)
+        {
+            EmailCode user = new EmailCode();
+            return user.SelectByCode(code);
+        }
+        public int CheckCodeExist(string code)
+        {
+            EmailCode user = new EmailCode();
+            return user.CheckCode(code);
+        }
+        public string CheckCodeByEmail (string email)
+        {
+            EmailCode user = new EmailCode();
+            return user.CheckCodeByEmail(email);
+        }
+        public int AddCode(string email, string code)
+        {
+            EmailCode user = new EmailCode();
+            return user.Insert(email, code);
+        }
+
 
         //CardInfo Methods
         public int CreateCardInfo(string cardName, string cardNumber,
