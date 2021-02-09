@@ -14,6 +14,7 @@
                 <div class="col-md-8">
                     <div class="contact-form">
                         <div class="mb-3">
+                            <h4 class="mb-3"><asp:Label ID="errorMsg" runat="server" CssClass="mb-3" Visible="False"></asp:Label></h4>
                             <h5 class="title mb-3">Choose existing card information</h5>
                             <p class="mb-3">Choosing your stored card information will complete the following transaction.</p>
                             <asp:ListView ID="cardListView" runat="server" OnItemCommand="cardListView_ItemCommand">
