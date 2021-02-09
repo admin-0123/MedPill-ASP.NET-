@@ -100,26 +100,5 @@ namespace EDP_Clinic
             Response.Redirect("Authentication.aspx", false);
         }
 
-        protected void updateBtn_Click(object sender, EventArgs e)
-        {
-            //Remove pass to view more card info session and cookie
-            Session.Remove("authOTPVToken");
-            Response.Cookies["authOTPVToken"].Value = string.Empty;
-            Response.Cookies["authOTPVToken"].Expires = DateTime.Now.AddMonths(-20);
-
-            //Create intention for user to update card info
-            string guid = Guid.NewGuid().ToString();
-            Session["changeCardInfo"] = guid;
-
-            //string cardNumber = Request.QueryString["cardNumber"];
-            string cardNumber = Session["cardNumber"].ToString();
-            Service1Client client = new Service1Client();
-            //CardInfo cif = client.GetCardByCardNumber(cardNumber);
-            //Update at updateCard page
-            //Session["cardNumber"] = cif.CardNumber;
-
-            Response.Cookies.Add(new HttpCookie("changeCardInfo", guid));
-            Response.Redirect("Authentication.aspx", false);
-        }
     }
 }
