@@ -4,8 +4,6 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-//using Microsoft.AspNetCore.Mvc;
-//using Microsoft.Extensions.Options;
 using Stripe;
 using Stripe.Checkout;
 using System.Text.RegularExpressions;
@@ -15,19 +13,53 @@ using System.Text;
 using System.Net;
 using System.IO;
 using System.Web.Script.Serialization;
+using EDP_Clinic.EDP_DBReference;
+using System.Diagnostics;
+using System.Net.Http;
 
 namespace EDP_Clinic
 {
     public partial class Payment : System.Web.UI.Page
     {
-        static string finalHash;
-        static string salt;
-        byte[] Key;
-        byte[] IV;
-
         protected void Page_Load(object sender, EventArgs e)
         {
+            Session["Login"] = "someone@example.com";
 
+            string guidToken = Guid.NewGuid().ToString();
+            Session["AuthToken"] = guidToken;
+            HttpCookie AuthToken = new HttpCookie("AuthToken");
+            AuthToken.Value = guidToken;
+            Response.Cookies.Add(AuthToken);
+
+
+            //Checks user session
+            if (Session["Login"] != null && Session["AuthToken"] != null && Request.Cookies["AuthToken"] != null)
+            {
+                if (!Session["AuthToken"].ToString().Equals(Request.Cookies["AuthToken"].Value))
+                {
+                    Response.Redirect("Login.aspx", false);
+                }
+                else
+                {
+                    Debug.WriteLine("Going to payment page");
+                    retrieveCardInfo();
+                }
+            }
+            //No credentials at all
+            else
+            {
+                Response.Redirect("Login.aspx", false);
+            }
+        }
+        protected void retrieveCardInfo()
+        {
+            List<CardInfo> cifList = new List<CardInfo>();
+            Service1Client client = new Service1Client();
+            cifList = client.GetAllCards().ToList<CardInfo>();
+
+            cardListView.Visible = true;
+            cardListView.DataSource = cifList;
+            cardListView.DataBind();
         }
         private bool ValidateInput()
         {
@@ -99,9 +131,9 @@ namespace EDP_Clinic
                 CVVError.ForeColor = Color.Red;
                 CVVError.Visible = true;
             }
-            else if (CVVTB.Text.Length != 4)
+            else if (CVVTB.Text.Length != 3)
             {
-                CVVError.Text = "Please enter a 4 digit CVV number";
+                CVVError.Text = "Please enter a 3 digit CVV number";
                 CVVError.ForeColor = Color.Red;
                 CVVError.Visible = true;
             }
@@ -158,47 +190,127 @@ namespace EDP_Clinic
 
             bool validCaptcha = ValidateCaptcha();
 
+            //HttpClient client = new HttpClient();
 
+            //client.BaseAddress = new Uri("https://localhost:44310/");
 
-            //Testing Stripe
-            /*StripeConfiguration.ApiKey = "sk_test_4eC39HqLyjWDarjtT1zdp7dc";
-            var options = new PaymentIntentCreateOptions
+            if (validInput == true && validCaptcha == true)
             {
-                Amount = 1000,
-                Currency = "usd",
-                PaymentMethodTypes = new List<string>
-              {
-                "card",
-              },
-                ReceiptEmail = "jenny.rosen@example.com",
-            };
 
-            var service = new PaymentIntentService();
-            var paymentIntent = service.Create(options);
-            System.Diagnostics.Debug.WriteLine(paymentIntent);*/
-            //Console.WriteLine(paymentIntent);
-        }
+                string cardNumber = HttpUtility.HtmlEncode(cardNumberTB.Text.Trim());
 
-        protected byte[] encryptData(string data)
-        {
-            byte[] cipherText = null;
-            try
-            {
-                RijndaelManaged cipher = new RijndaelManaged();
-                cipher.IV = IV;
-                cipher.Key = Key;
-                ICryptoTransform encryptTransform = cipher.CreateEncryptor();
-                //ICryptoTransform decryptTransform = cipher.CreateDecryptor();
-                byte[] plainText = Encoding.UTF8.GetBytes(data);
-                cipherText = encryptTransform.TransformFinalBlock(plainText, 0,
-               plainText.Length);
+                string cardName = HttpUtility.HtmlEncode(nameOnCardTB.Text.Trim());
+                string cardExpiry = HttpUtility.HtmlEncode(cardExpiryTB.Text.Trim());
+                string cardCVV = HttpUtility.HtmlEncode(CVVTB.Text.Trim());
+
+                long cardYear = Convert.ToInt32(cardExpiry.Substring(0, 4));
+                long cardMonth = Convert.ToInt32(cardExpiry.Substring(5, 2));
+
+                Debug.WriteLine(cardNumber);
+
+                Debug.WriteLine(cardExpiry.Substring(0, 4));
+                Debug.WriteLine(cardExpiry.Substring(5, 2));
+
+                Debug.WriteLine(cardMonth);
+
+
+                //Consolidate Stripe Payment API by 3/2/2021
+
+
+                //Testing Stripe
+                StripeConfiguration.ApiKey = "sk_test_51HveuKAVRV4JC5fkn1zDUAxrUGZgetyR05RVCIGpNFFAlZczY6xwAQtn60BO1stWGXHJJJOh1DZQozuL4RtJSW4700ONZrgRzD";
+
+                try
+                {
+                    var paymentMethod = new PaymentMethodCreateOptions
+                    {
+                        Type = "card",
+                        Card = new PaymentMethodCardOptions
+                        {
+                            Number = cardNumber,
+                            ExpMonth = cardMonth,
+                            ExpYear = cardYear,
+                            Cvc = cardCVV,
+                        },
+                    };
+                    var paymentMethodService = new PaymentMethodService();
+                    var resultPay = paymentMethodService.Create(paymentMethod);
+                    var paymentId = resultPay.Id;
+                    Debug.WriteLine(resultPay.Id);
+                    Debug.WriteLine(resultPay.Object);
+                    Debug.WriteLine(resultPay.Card.Brand);
+
+                    var options = new PaymentIntentCreateOptions
+                    {
+                        //We will change the total amount charged here
+
+
+                        Amount = 1000,
+                        Currency = "sgd",
+                        PaymentMethodTypes = new List<string>
+                {
+                    "card",
+                },
+                        ReceiptEmail = "cilipadi270@gmail.com",
+                        PaymentMethod = paymentId,
+                        Description = "Paying for medical appointment",
+                    };
+                    var service = new PaymentIntentService();
+                    var resultPayment = service.Create(options);
+                    var paymentIntentID = resultPayment.Id;
+                    var resultConfirmPayment = service.Confirm(paymentIntentID);
+                    Debug.WriteLine(resultConfirmPayment);
+                    Debug.WriteLine("+++++++++++++++++++++++++++++++++");
+                    //Debug.WriteLine(options);
+                    //Debug.WriteLine(resultPayment);
+                    //Debug.WriteLine(resultPayment.Id);
+                    //Debug.WriteLine("===========================================");
+                    //Debug.WriteLine(resultPayment.Status);
+
+                    //var service = new PaymentIntentService();
+                    //var paymentIntent = service.Create(options);
+                    //Debug.WriteLine(paymentIntent);
+
+                    //var service = new PaymentMethodService();
+                    //service.Create(options);
+
+                    //var options = new SessionCreateOptions
+                    //{
+                    //    SuccessUrl = "https://localhost:44310/Home.aspx",
+                    //    CancelUrl = "https://example.com/cancel",
+                    //    PaymentMethodTypes = new List<string>
+                    //  {
+                    //    "card",
+                    //  },
+                    //    LineItems = new List<SessionLineItemOptions>
+                    //  {
+                    //    new SessionLineItemOptions
+                    //    {
+                    //      Price = "price_1IFcWdAVRV4JC5fkywjZt6Tf",
+                    //      Quantity = 1,
+                    //    },
+                    //  },
+                    //    Mode = "payment",
+                    //};
+                    //var service = new SessionService();
+                    //service.Create(options);
+
+
+                    //Debug.WriteLine(service);
+                    Response.Redirect("AfterPayment.aspx", false);
+                }
+                catch (StripeException ex)
+                {
+
+                    //Add more error functions here
+                    Debug.WriteLine(ex.ToString());
+                    throw new Exception(ex.ToString());
+                }
             }
-            catch (Exception ex)
+            else
             {
-                throw new Exception(ex.ToString());
+                //Error code here
             }
-            finally { }
-            return cipherText;
         }
 
         //Initialise an object to store Recaptcha response
@@ -247,6 +359,91 @@ namespace EDP_Clinic
         protected void backBtn_Click(object sender, EventArgs e)
         {
 
+        }
+
+        protected void cardListView_ItemCommand(object sender, ListViewCommandEventArgs e)
+        {
+            //Checks if button clicked is view more button
+            if (String.Equals(e.CommandName, "payNow"))
+            {
+                Service1Client client = new Service1Client();
+
+                string uniqueIdentifier = e.CommandArgument.ToString();
+
+                CardInfo cif = client.GetCardByCardNumber(uniqueIdentifier);
+
+                string cardNumber = cif.CardNumber;
+
+                string cardName = cif.CardName;
+                DateTime cardExpiry = cif.CardExpiry;
+                string cardCVV = cif.CVVNumber;
+
+                long cardYear = cardExpiry.Year;
+                long cardMonth = cardExpiry.Month;
+
+                Debug.WriteLine(cardNumber);
+                Debug.WriteLine(cardName);
+                Debug.WriteLine(cardYear);
+                Debug.WriteLine(cardMonth);
+                Debug.WriteLine(cardCVV);
+
+                Debug.WriteLine("===============");
+                Debug.WriteLine(e.CommandArgument.ToString());
+                //Testing Stripe
+                StripeConfiguration.ApiKey = "sk_test_51HveuKAVRV4JC5fkn1zDUAxrUGZgetyR05RVCIGpNFFAlZczY6xwAQtn60BO1stWGXHJJJOh1DZQozuL4RtJSW4700ONZrgRzD";
+
+                try
+                {
+                    var paymentMethod = new PaymentMethodCreateOptions
+                    {
+                        Type = "card",
+                        Card = new PaymentMethodCardOptions
+                        {
+                            Number = cardNumber,
+                            ExpMonth = cardMonth,
+                            ExpYear = cardYear,
+                            Cvc = cardCVV,
+                        },
+                    };
+                    var paymentMethodService = new PaymentMethodService();
+                    var resultPay = paymentMethodService.Create(paymentMethod);
+                    var paymentId = resultPay.Id;
+                    Debug.WriteLine(resultPay.Id);
+                    Debug.WriteLine(resultPay.Object);
+                    Debug.WriteLine(resultPay.Card.Brand);
+
+                    var options = new PaymentIntentCreateOptions
+                    {
+                        //We will change the total amount charged here
+
+
+                        Amount = 1000,
+                        Currency = "sgd",
+                        PaymentMethodTypes = new List<string>
+                {
+                    "card",
+                },
+                        ReceiptEmail = "cilipadi270@gmail.com",
+                        PaymentMethod = paymentId,
+                        Description = "Paying for medical appointment",
+                    };
+                    var service = new PaymentIntentService();
+                    var resultPayment = service.Create(options);
+                    var paymentIntentID = resultPayment.Id;
+                    var resultConfirmPayment = service.Confirm(paymentIntentID);
+                    Debug.WriteLine(resultConfirmPayment);
+                    Debug.WriteLine("+++++++++++++++++++++++++++++++++");
+                    Response.Redirect("AfterPayment.aspx", false);
+                }
+                catch (StripeException ex)
+                {
+
+                    //Add more error functions here
+                    Debug.WriteLine(ex.ToString());
+                    throw new Exception(ex.ToString());
+                }
+
+            }
         }
     }
 }

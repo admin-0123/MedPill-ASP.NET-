@@ -1,6 +1,7 @@
 ﻿using EDP_Clinic.EDP_DBReference;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -22,9 +23,32 @@ namespace EDP_Clinic
                 else
                 {
                     //Might put these codes below into a function
-                    string cardNumber = Session["cardNumber"].ToString();//Request.QueryString["cardNumber"];
+                    string cardNumber = Session["UniqueIdentifier"].ToString();//Request.QueryString["cardNumber"];
                     Service1Client client = new Service1Client();
                     CardInfo cif = client.GetCardByCardNumber(cardNumber);
+
+                    string cardStartNum = cif.CardNumber.Substring(0, 1);
+
+                    //Visa
+                    if (cardStartNum == "4")
+                    {
+                        cardIcon.ImageUrl = "~/assets/images/VBM_COF.png";
+                    }
+                    //Mastercard
+                    else if (cardStartNum == "5")
+                    {
+                        cardIcon.ImageUrl = "~/assets/images/mc_vrt_opt_pos_53_3x.png";
+                    }
+                    //Discover Card
+                    else if (cardStartNum == "6")
+                    {
+                        //
+                    }
+                    else
+                    {
+                        //Add codes to show other cards
+                    }
+                    Debug.WriteLine(cif.CardNumber.Substring(0, 1));
 
                     DateTime cardExpiryDate = cif.CardExpiry;
 
@@ -46,6 +70,7 @@ namespace EDP_Clinic
         {
             //Redirect to userpage
             //Remove pass to view more card info session and cookie
+            Session.Remove("UniqueIdentifier");
             Session.Remove("authOTPVToken");
             Response.Cookies["authOTPVToken"].Value = string.Empty;
             Response.Cookies["authOTPVToken"].Expires = DateTime.Now.AddMonths(-20);
@@ -64,7 +89,7 @@ namespace EDP_Clinic
             string guid = Guid.NewGuid().ToString();
             Session["deleteCardInfo"] = guid;
 
-            string cardNumber = Session["cardNumber"].ToString();
+            string cardNumber = Session["UniqueIdentifier"].ToString();
             //string cardNumber = Request.QueryString["cardNumber"];
             Service1Client client = new Service1Client();
             //CardInfo cif = client.GetCardByCardNumber(cardNumber);

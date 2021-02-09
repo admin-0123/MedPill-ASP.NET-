@@ -129,26 +129,32 @@ namespace DBService
 
         //CardInfo Methods
         public int CreateCardInfo(string cardName, string cardNumber,
-            DateTime cardExpiry, string cvvNumber, byte[] iv, byte[] key, bool stillValid)
+            DateTime cardExpiry, string cvvNumber, byte[] iv, byte[] key, bool stillValid, string uniqueIdentifier)
         {
-            CardInfo cif = new CardInfo(cardName, cardNumber, cardExpiry, cvvNumber, iv, key, stillValid);
+            CardInfo cif = new CardInfo(cardName, cardNumber, cardExpiry, cvvNumber, iv, key, stillValid, uniqueIdentifier);
             return cif.Insert();
         }
-        public CardInfo GetCardByCardNumber(string cardNumber)
+        public CardInfo GetCardByCardNumber(string uniqueIdentifier)
         {
             CardInfo cif = new CardInfo();
-            return cif.GetCardByCardNumber(cardNumber);
+            return cif.GetCardByCardNumber(uniqueIdentifier);
         }
         public List<CardInfo> GetAllCards()
         {
             CardInfo cif = new CardInfo();
             return cif.SelectAllCards();
         }
-        public int DeleteByCardNumber(string cardNumber)
+        public bool CheckCardByCardNumber(string uniqueIdentifier)
         {
             CardInfo cif = new CardInfo();
-            return cif.DeleteByCardNumber(cardNumber);
+            return cif.CheckCardByCardNumber(uniqueIdentifier);
         }
+        public int DeleteByCardNumber(string uniqueIdentifier)
+        {
+            CardInfo cif = new CardInfo();
+            return cif.DeleteByCardNumber(uniqueIdentifier);
+        }
+        //Will prob delete update card number
         public int UpdateByCardNumber(string previousCardNumber, string cardName, string cardNumber, DateTime cardExpiry, string cvvNumber)
         {
             CardInfo cif = new CardInfo();
@@ -159,9 +165,14 @@ namespace DBService
 
         Will put in more methods here for other classes
          
-         
-         
          */
+
+        public int CreateReceipt(DateTime dateSale, double totalSum, bool isPaid)
+        {
+            Receipt rep = new Receipt(dateSale, totalSum, isPaid);
+            return rep.Insert();
+
+        }
 
         // Taken from practical 4, here all the method bodies for the methods listed in IService1.CS
         /*        public List<Employee> GetAllEmployee()

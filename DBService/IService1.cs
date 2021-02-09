@@ -69,19 +69,24 @@ namespace DBService
         //  byte[] cardExpiry, byte[] cvvNumber, byte[] iv, byte[] key);
         [OperationContract]
         int CreateCardInfo(string cardName, string cardNumber,
-            DateTime cardExpiry, string cvvNumber, byte[] iv, byte[] key, bool stillValid);
+            DateTime cardExpiry, string cvvNumber, byte[] iv, byte[] key, bool stillValid, string uniqueIdentifier);
 
         [OperationContract]
-        CardInfo GetCardByCardNumber(string cardNumber);
+        CardInfo GetCardByCardNumber(string uniqueIdentifier);
 
         [OperationContract]
         List<CardInfo> GetAllCards();
 
         [OperationContract]
-        int DeleteByCardNumber(string cardNumber);
+        int DeleteByCardNumber(string uniqueIdentifier);
+        [OperationContract]
+        bool CheckCardByCardNumber(string uniqueIdentifier);
 
         [OperationContract]
         int UpdateByCardNumber(string previousCardNumber, string cardName, string cardNumber, DateTime cardExpiry, string cvvNumber);
+
+        [OperationContract]
+        int CreateReceipt(DateTime dateSale, double totalSum, bool isPaid);
         // Taken from practical 4, methods are listed in the abstract interface, method bodies are in service1.cs
         /*        [OperationContract]
                 List<Employee> GetAllEmployee();

@@ -10,7 +10,7 @@
 
 namespace EDP_Clinic
 {
-    public partial class PaymentInfoEmpty
+    public partial class ReceiptDetail
     {
     }
 }

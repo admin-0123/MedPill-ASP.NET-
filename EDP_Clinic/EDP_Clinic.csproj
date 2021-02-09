@@ -64,8 +64,8 @@
     <Reference Include="PayPal, Version=1.9.1.0, Culture=neutral, PublicKeyToken=5b4afc1ccaef40fb, processorArchitecture=MSIL">
       <HintPath>..\packages\PayPal.1.9.1\lib\net451\PayPal.dll</HintPath>
     </Reference>
-    <Reference Include="Stripe.net, Version=39.32.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Stripe.net.39.32.0\lib\net461\Stripe.net.dll</HintPath>
+    <Reference Include="Stripe.net, Version=39.33.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Stripe.net.39.33.0\lib\net461\Stripe.net.dll</HintPath>
     </Reference>
     <Reference Include="System.IdentityModel.Tokens.Jwt, Version=6.8.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\System.IdentityModel.Tokens.Jwt.6.8.0\lib\net461\System.IdentityModel.Tokens.Jwt.dll</HintPath>
@@ -106,9 +106,15 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="403.aspx" />
-    <Content Include="404.aspx" />
-    <Content Include="500.aspx" />
+    <Content Include="error\400.aspx" />
+    <Content Include="error\401.aspx" />
+    <Content Include="error\402.aspx" />
+    <Content Include="error\403.aspx" />
+    <Content Include="error\404.aspx" />
+    <Content Include="error\408.aspx" />
+    <Content Include="error\500.aspx" />
+    <Content Include="error\502.aspx" />
+    <Content Include="error\504.aspx" />
     <Content Include="About.aspx" />
     <Content Include="AfterPayment.aspx" />
     <Content Include="App_Data\EDP_DB.mdf" />
@@ -142,6 +148,7 @@
     <Content Include="assets\images\logo3.png" />
     <Content Include="assets\images\logo4.png" />
     <Content Include="assets\images\logo5.png" />
+    <Content Include="assets\images\mc_vrt_opt_pos_53_3x.png" />
     <Content Include="assets\images\patients.png" />
     <Content Include="assets\images\progress.jpg" />
     <Content Include="assets\images\s1.jpg" />
@@ -162,6 +169,7 @@
     <Content Include="assets\images\team3.jpg" />
     <Content Include="assets\images\team4.jpg" />
     <Content Include="assets\images\van.png" />
+    <Content Include="assets\images\VBM_COF.png" />
     <Content Include="assets\js\bootstrap.min.js" />
     <Content Include="assets\js\owl.carousel.js" />
     <Content Include="assets\vendor\animate\animate.css" />
@@ -218,11 +226,11 @@
     <Content Include="ForgetPassword.aspx" />
     <Content Include="Login.aspx" />
     <Content Include="PatientOverview.aspx" />
-    <Content Include="generalError.aspx" />
+    <Content Include="error\generalError.aspx" />
     <Content Include="Payment.aspx" />
     <Content Include="PaymentInfoDeleted.aspx" />
-    <Content Include="PaymentInfoEmpty.aspx" />
     <Content Include="PaymentInformation.aspx" />
+    <Content Include="ReceiptDetail.aspx" />
     <Content Include="ReceiptList.aspx" />
     <Content Include="ReceiptListAdmin.aspx" />
     <Content Include="Register.aspx" />
@@ -233,26 +241,68 @@
     <Content Include="Services.aspx" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="403.aspx.cs">
+    <Compile Include="error\400.aspx.cs">
+      <DependentUpon>400.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="error\400.aspx.designer.cs">
+      <DependentUpon>400.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="error\401.aspx.cs">
+      <DependentUpon>401.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="error\401.aspx.designer.cs">
+      <DependentUpon>401.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="error\402.aspx.cs">
+      <DependentUpon>402.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="error\402.aspx.designer.cs">
+      <DependentUpon>402.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="error\403.aspx.cs">
       <DependentUpon>403.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="403.aspx.designer.cs">
+    <Compile Include="error\403.aspx.designer.cs">
       <DependentUpon>403.aspx</DependentUpon>
     </Compile>
-    <Compile Include="404.aspx.cs">
+    <Compile Include="error\404.aspx.cs">
       <DependentUpon>404.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="404.aspx.designer.cs">
+    <Compile Include="error\404.aspx.designer.cs">
       <DependentUpon>404.aspx</DependentUpon>
     </Compile>
-    <Compile Include="500.aspx.cs">
+    <Compile Include="error\408.aspx.cs">
+      <DependentUpon>408.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="error\408.aspx.designer.cs">
+      <DependentUpon>408.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="error\500.aspx.cs">
       <DependentUpon>500.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="500.aspx.designer.cs">
+    <Compile Include="error\500.aspx.designer.cs">
       <DependentUpon>500.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="error\502.aspx.cs">
+      <DependentUpon>502.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="error\502.aspx.designer.cs">
+      <DependentUpon>502.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="error\504.aspx.cs">
+      <DependentUpon>504.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="error\504.aspx.designer.cs">
+      <DependentUpon>504.aspx</DependentUpon>
     </Compile>
     <Compile Include="About.aspx.cs">
       <DependentUpon>About.aspx</DependentUpon>
@@ -343,11 +393,11 @@
     <Compile Include="PatientOverview.aspx.designer.cs">
       <DependentUpon>PatientOverview.aspx</DependentUpon>
     </Compile>
-    <Compile Include="generalError.aspx.cs">
+    <Compile Include="error\generalError.aspx.cs">
       <DependentUpon>generalError.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="generalError.aspx.designer.cs">
+    <Compile Include="error\generalError.aspx.designer.cs">
       <DependentUpon>generalError.aspx</DependentUpon>
     </Compile>
     <Compile Include="Payment.aspx.cs">
@@ -364,13 +414,6 @@
     <Compile Include="PaymentInfoDeleted.aspx.designer.cs">
       <DependentUpon>PaymentInfoDeleted.aspx</DependentUpon>
     </Compile>
-    <Compile Include="PaymentInfoEmpty.aspx.cs">
-      <DependentUpon>PaymentInfoEmpty.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="PaymentInfoEmpty.aspx.designer.cs">
-      <DependentUpon>PaymentInfoEmpty.aspx</DependentUpon>
-    </Compile>
     <Compile Include="PaymentInformation.aspx.cs">
       <DependentUpon>PaymentInformation.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -379,6 +422,13 @@
       <DependentUpon>PaymentInformation.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ReceiptDetail.aspx.cs">
+      <DependentUpon>ReceiptDetail.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ReceiptDetail.aspx.designer.cs">
+      <DependentUpon>ReceiptDetail.aspx</DependentUpon>
+    </Compile>
     <Compile Include="ReceiptList.aspx.cs">
       <DependentUpon>ReceiptList.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

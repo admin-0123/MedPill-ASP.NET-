@@ -12,27 +12,29 @@
                 <h1 class="title mb-4">Payment Information</h1>
                 <h4 class="mb-4">Name on Card: 
                     <asp:Label ID="cardNameText" runat="server"></asp:Label></h4>
-                <h4 class="mb-4">Card Number: 
-                    <asp:Label ID="cardNumberText" runat="server"></asp:Label></h4>
+                <div class="row mb-4">
+                    <div class="col-md-4">
+                        <h4 class="mt-2">Card Number:
+                            <asp:Label ID="cardNumberText" runat="server"></asp:Label></h4>
+                    </div>
+                    <div class="col-md-8">
+                        <div>
+                            <asp:Image ID="cardIcon" runat="server" ImageAlign="Left" Width="76px" Height="48px" />
+                        </div>
+                    </div>
+                </div>
                 <h4 class="mb-4">Card Expiry: 
                     <asp:Label ID="cardExpiryText" runat="server"></asp:Label></h4>
-                <!--- Put all these information out for testing purposes --->
-<%--                <h4 class="mb-4">CVV Number: 
-                    <asp:Label ID="cvvNumberText" runat="server"></asp:Label></h4>--%>
             </div>
             <div class="row">
-                <div class="col-md-8"></div>
-                <div class="col-md-2">
-                    <asp:Button ID="deleteBtn" runat="server" Text="Delete" CssClass="btn btn-primary btn-style" OnClick="deleteBtn_Click" />
+                <div class="col-md-6"></div>
+                <div class="col-md-3">
+                    <asp:Button ID="deleteBtn" runat="server" Text="Delete" CssClass="btn btn-primary btn-style" OnClick="deleteBtn_Click" Visible="True" />
                 </div>
-                <div class="col-md-2">
-                    <asp:Button ID="updateBtn" runat="server" Text="Update" CssClass="btn btn-primary btn-style" OnClick="updateBtn_Click" />
+                <div class="col-md-3">
+                    <asp:Button ID="updateBtn" runat="server" Text="Update" CssClass="btn btn-primary btn-style" OnClick="updateBtn_Click" Visible="False" />
                 </div>
             </div>
-            <%--              <button class="btn btn-primary btn-style mr-5">delete
-              </button>
-              <button class="btn btn-primary btn-style ml-5">update
-              </button>--%>
         </div>
     </section>
 </asp:Content>

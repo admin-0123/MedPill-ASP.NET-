@@ -13,5 +13,27 @@ namespace EDP_Clinic
         {
 
         }
+
+        protected void appointmentBtn_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void medicationBtn_Click(object sender, EventArgs e)
+        {
+
+        }
+
+
+        //Hasan's Stuff
+        protected void paymentMethodBtn_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("CardList.aspx", false);
+        }
+
+        protected void paymentHistoryBtn_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("ReceiptList.aspx", false);
+        }
     }
 }

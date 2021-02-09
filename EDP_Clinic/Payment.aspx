@@ -4,43 +4,73 @@
     <script src="https://js.stripe.com/v3/"></script>
 </asp:Content>
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
-    <section class="w3l-contact py-5" id="payment" style="height: 100vh;">
+    <section class="w3l-contact py-5" id="payment">
         <div class="container py-lg-3">
             <div class="mb-3">
                 <asp:Button ID="backBtn" runat="server" Text="Back" CssClass="btn btn-primary btn-style" OnClick="backBtn_Click" />
             </div>
             <h1 class="title mb-4">Payment</h1>
-            <div class="row">
+            <div class="row mt-5">
                 <div class="col-md-8">
                     <div class="contact-form">
-                        <form id="paymentForm">
-                            <div class="mb-3">
-                                <label>Name on Card</label>
-                                <asp:TextBox ID="nameOnCardTB" runat="server" placeholder="Name On Card" CssClass="form-control" onkeyup="nameOnCardValidation()" ToolTip="Name On Card"></asp:TextBox>
-                                <asp:Label ID="nameOnCardError" runat="server"></asp:Label>
-                            </div>
-                            <div class="mb-3">
-                                <label>Card Number</label>
-                                <asp:TextBox ID="cardNumberTB" runat="server" placeholder="Card Number" CssClass="form-control" onkeyup="cardNumberValidation()" ToolTip="Card Number"></asp:TextBox>
-                                <asp:Label ID="cardNumberError" runat="server"></asp:Label>
-                            </div>
-                            <div class="row mb-3">
-                                <div class="col-md-6">
-                                    <div class="mb-3">
-                                        <label>Card Expiry (MM YYYY)</label>
-                                        <asp:TextBox ID="cardExpiryTB" runat="server" type="month" placeholder="Card Expiry (MM YY)" CssClass="form-control" onkeyup="cardExpiryValidation()" ToolTip="Card Expiry (MM YYYY)"></asp:TextBox>
-                                        <asp:Label ID="cardExpiryError" runat="server"></asp:Label>
+                        <div class="mb-3">
+                            <h5 class="title mb-3">Choose existing card information</h5>
+                            <p class="mb-3">Choosing your stored card information will complete the following transaction.</p>
+                            <asp:ListView ID="cardListView" runat="server" OnItemCommand="cardListView_ItemCommand">
+                                <ItemTemplate>
+                                    <div class="card mb-3">
+                                        <div class="card-body">
+                                            <div class="row">
+                                                <div class="col-md-10">
+                                                    <h5 class="card-title">Card No.:
+                                        <asp:Label ID="cardNumber" runat="server" Text='<%# "**** **** **** " + Eval("CardNumber").ToString().Substring(12,4) %>'></asp:Label></h5>
+                                                </div>
+                                                <div class="col-md-2">
+                                                    <asp:LinkButton ID="moreBtn" runat="server" CssClass="btn btn-primary" CommandName="payNow" CommandArgument='<%# Eval("UniqueIdentifier") %>'>Select</asp:LinkButton>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </ItemTemplate>
+                                <EmptyDataTemplate>
+                                    <div class="mb-5 mt-5 text-center">
+                                        <h5 class="title mb-5">There is currently no card information stored.</h5>
+                                    </div>
+                                </EmptyDataTemplate>
+                            </asp:ListView>
+                        </div>
+                        <hr />
+                        <div class="mb-3">
+                            <h5 class="title mb-3">Add your own card information</h5>
+                            <form id="paymentForm">
+                                <div class="mb-3">
+                                    <label>Name on Card</label>
+                                    <asp:TextBox ID="nameOnCardTB" runat="server" placeholder="Name On Card" CssClass="form-control" onkeyup="nameOnCardValidation()" ToolTip="Name On Card"></asp:TextBox>
+                                    <asp:Label ID="nameOnCardError" runat="server"></asp:Label>
+                                </div>
+                                <div class="mb-3">
+                                    <label>Card Number</label>
+                                    <asp:TextBox ID="cardNumberTB" runat="server" placeholder="Card Number" CssClass="form-control" onkeyup="cardNumberValidation()" ToolTip="Card Number"></asp:TextBox>
+                                    <asp:Label ID="cardNumberError" runat="server"></asp:Label>
+                                </div>
+                                <div class="row mb-3">
+                                    <div class="col-md-6">
+                                        <div class="mb-3">
+                                            <label>Card Expiry (MM YYYY)</label>
+                                            <asp:TextBox ID="cardExpiryTB" runat="server" type="month" placeholder="Card Expiry (MM YY)" CssClass="form-control" onkeyup="cardExpiryValidation()" ToolTip="Card Expiry (MM YYYY)"></asp:TextBox>
+                                            <asp:Label ID="cardExpiryError" runat="server"></asp:Label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="mb-3">
+                                            <label>CVV Number</label>
+                                            <asp:TextBox ID="CVVTB" runat="server" placeholder="CVV Number" CssClass="form-control" onkeyup="cvvNumberValidation()" ToolTip="CVV Number"></asp:TextBox>
+                                            <asp:Label ID="CVVError" runat="server"></asp:Label>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="col-md-6">
-                                    <div class="mb-3">
-                                        <label>CVV Number</label>
-                                        <asp:TextBox ID="CVVTB" runat="server" placeholder="CVV Number" CssClass="form-control" onkeyup="cvvNumberValidation()" ToolTip="CVV Number"></asp:TextBox>
-                                        <asp:Label ID="CVVError" runat="server"></asp:Label>
-                                    </div>
-                                </div>
-                            </div>
-                        </form>
+                            </form>
+                        </div>
                         <div class="row mb-3">
                             <div class="col-md-6"></div>
                             <div class="col-md-4">
@@ -202,23 +232,23 @@
                 document.getElementById('<%=CVVError.ClientID%>').style.color = "Red";
                 document.getElementById('<%=submitBtn.ClientID%>').disabled = true;
             }
-            else if (cvvNumber.length != 4) {
-                document.getElementById('<%=CVVError.ClientID%>').innerHTML = "Please enter your 4-digit CVV number";
+            else if (cvvNumber.length != 3) {
+                document.getElementById('<%=CVVError.ClientID%>').innerHTML = "Please enter your 3-digit CVV number";
                 document.getElementById('<%=CVVError.ClientID%>').style.color = "Red";
                 document.getElementById('<%=submitBtn.ClientID%>').disabled = true;
             }
             else if (cvvNumber.search(/[ `!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/) != -1) {
-                document.getElementById('<%=CVVError.ClientID%>').innerHTML = "Please enter a valid 4-digit CVV number";
+                document.getElementById('<%=CVVError.ClientID%>').innerHTML = "Please enter a valid 3-digit CVV number";
                 document.getElementById('<%=CVVError.ClientID%>').style.color = "Red";
                 document.getElementById('<%=submitBtn.ClientID%>').disabled = true;
             }
             else if (cvvNumber.search(/[A-Z]/) != -1) {
-                document.getElementById('<%=CVVError.ClientID%>').innerHTML = "Please enter a valid 4-digit CVV number";
+                document.getElementById('<%=CVVError.ClientID%>').innerHTML = "Please enter a valid 3-digit CVV number";
                 document.getElementById('<%=CVVError.ClientID%>').style.color = "Red";
                 document.getElementById('<%=submitBtn.ClientID%>').disabled = true;
             }
             else if (cvvNumber.search(/[a-z]/) != -1) {
-                document.getElementById('<%=CVVError.ClientID%>').innerHTML = "Please enter a valid 4-digit CVV number";
+                document.getElementById('<%=CVVError.ClientID%>').innerHTML = "Please enter a valid 3-digit CVV number";
                 document.getElementById('<%=CVVError.ClientID%>').style.color = "Red";
                 document.getElementById('<%=submitBtn.ClientID%>').disabled = true;
             }

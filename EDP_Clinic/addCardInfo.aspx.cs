@@ -11,37 +11,60 @@ using System.Text;
 using System.Net;
 using System.IO;
 using System.Web.Script.Serialization;
+using System.Diagnostics;
+using EDP_Clinic.EDP_DBReference;
 
 namespace EDP_Clinic
 {
     public partial class addCardInfo : System.Web.UI.Page
     {
-        //static string finalHash;
-        //static string salt;
         byte[] Key;
         byte[] IV;
         protected void Page_Load(object sender, EventArgs e)
         {
-            /*  We will check user session here soon TM */
+            //Session["Login"] = "someone@example.com";
 
+            //string guidToken = Guid.NewGuid().ToString();
+            //Session["AuthToken"] = guidToken;
+            //HttpCookie AuthToken = new HttpCookie("AuthToken");
+            //AuthToken.Value = guidToken;
+            //Response.Cookies.Add(AuthToken);
 
-            //We check sessions here
-            //  Checks if user pass is to add card info
-            if (Session["authOTPAToken"] != null && Request.Cookies["authOTPAToken"] != null)
+            //Checks user session
+            if (Session["Login"] != null && Session["AuthToken"] != null && Request.Cookies["AuthToken"] != null)
             {
-                if (!Session["authOTPAToken"].ToString().Equals(Request.Cookies["authOTPAToken"].Value))
+                if (!Session["AuthToken"].ToString().Equals(Request.Cookies["AuthToken"].Value))
                 {
-                    Response.Redirect("CardList.aspx", false);
+                    Response.Redirect("Login.aspx", false);
                 }
+                //User session exists
                 else
                 {
-                    //Nothing to put here since all credentials are there
+                    //  Checks if user pass is to add card info
+                    if (Session["authOTPAToken"] != null && Request.Cookies["authOTPAToken"] != null)
+                    {
+                        if (!Session["authOTPAToken"].ToString().Equals(Request.Cookies["authOTPAToken"].Value))
+                        {
+                            Response.Redirect("CardList.aspx", false);
+                        }
+                        else
+                        {
+                            //Nothing to put here since all credentials are there
+                            Debug.WriteLine("Valid Credentials to add card info");
+                        }
+                    }
+                    else
+                    {
+                        Response.Redirect("CardList.aspx", false);
+                    }
                 }
             }
+            //No credentials at all
             else
             {
-                Response.Redirect("CardList.aspx", false);
+                Response.Redirect("Login.aspx", false);
             }
+
         }
 
         private bool ValidateInput()
@@ -56,7 +79,7 @@ namespace EDP_Clinic
                 nameOnCardError.ForeColor = Color.Red;
                 nameOnCardError.Visible = true;
             }
-            else if(!Regex.IsMatch(nameOnCardTB.Text, "^[a-zA-Z0-9 ]*$"))
+            else if (!Regex.IsMatch(nameOnCardTB.Text, "^[a-zA-Z0-9 ]*$"))
             {
                 nameOnCardError.Text = "Please enter valid card name";
                 nameOnCardError.ForeColor = Color.Red;
@@ -86,7 +109,7 @@ namespace EDP_Clinic
                 cardNumberError.ForeColor = Color.Red;
                 cardNumberError.Visible = true;
             }
-            else if(cardNumberTB.Text.Length > 16)
+            else if (cardNumberTB.Text.Length > 16)
             {
                 cardNumberError.Text = "Please enter a valid card number";
                 cardNumberError.ForeColor = Color.Red;
@@ -113,9 +136,9 @@ namespace EDP_Clinic
                 CVVError.ForeColor = Color.Red;
                 CVVError.Visible = true;
             }
-            else if (CVVTB.Text.Length != 4)
+            else if (CVVTB.Text.Length != 3)
             {
-                CVVError.Text = "Please enter a 4 digit CVV number";
+                CVVError.Text = "Please enter a 3 digit CVV number";
                 CVVError.ForeColor = Color.Red;
                 CVVError.Visible = true;
             }
@@ -143,7 +166,7 @@ namespace EDP_Clinic
                 //cardExpiryError.Text = cardExpiryTB.Text;
                 DateTime inputDate = Convert.ToDateTime(cardExpiryTB.Text);
                 double monthDifference = inputDate.Subtract(currentDate).Days / (365.25 / 12);
-                if(monthDifference < 3)
+                if (monthDifference < 3)
                 {
                     cardExpiryError.Text = "Please ensure that your expiry date is at least 3 months from current date";
                     //cardExpiryError.Text = monthDifference.ToString();
@@ -179,7 +202,7 @@ namespace EDP_Clinic
             bool validInput = ValidateInput();
 
             bool validCaptcha = ValidateCaptcha();
-            
+
             //checks if all input has been validated
             if (validInput == true && validCaptcha == true)
             {
@@ -189,28 +212,50 @@ namespace EDP_Clinic
                 Key = cipher.Key;
                 IV = cipher.IV;
 
-                EDP_DBReference.Service1Client client = new EDP_DBReference.Service1Client();
-                int result = client.CreateCardInfo(nameOnCardTB.Text.Trim(), cardNumberTB.Text.Trim(),
-                    Convert.ToDateTime(cardExpiryTB.Text), CVVTB.Text.Trim(), IV, Key, true);
-                if(result == 1)
+                Service1Client client = new Service1Client();
+                bool resultCheck = client.CheckCardByCardNumber(cardNumberTB.Text.Trim());
+                //Checks if there is an existing card here
+                //It will return true if there is 2 cards here
+                if (resultCheck == true)
                 {
-                    //Remove pass to add card info
-                    Session.Remove("authOTPAToken");
-                    Response.Cookies["authOTPAToken"].Value = string.Empty;
-                    Response.Cookies["authOTPAToken"].Expires = DateTime.Now.AddMonths(-20);
 
-                    Response.Redirect("CardList.aspx");
+                    cardNumberError.Text = "Please enter a valid card information";
+                    cardNumberError.Visible = true;
+                    cardNumberError.ForeColor = Color.Red;
+                    Debug.WriteLine("Card existed in database");
                 }
                 else
                 {
-                    errorMsg.Text = "Please enter valid information";
+                    string guid = Guid.NewGuid().ToString();
+                    Debug.WriteLine(guid);
+                    string cardNumberInput = cardNumberTB.Text.Trim().Substring(12, 4);
+                    string uniqueIdentifier = cardNumberInput + "-" + guid;
+                    Debug.WriteLine(uniqueIdentifier);
+
+                    //Service1Client client = new Service1Client();
+                    int result = client.CreateCardInfo(nameOnCardTB.Text.Trim(), cardNumberTB.Text.Trim(),
+                        Convert.ToDateTime(cardExpiryTB.Text), CVVTB.Text.Trim(), IV, Key, true, uniqueIdentifier);
+
+                    if (result == 1)
+                    {
+                        //Remove pass to add card info
+                        Session.Remove("authOTPAToken");
+                        Response.Cookies["authOTPAToken"].Value = string.Empty;
+                        Response.Cookies["authOTPAToken"].Expires = DateTime.Now.AddMonths(-20);
+
+                        Response.Redirect("CardList.aspx");
+                    }
+                    else
+                    {
+                        errorMsg.Text = "Please enter valid information";
+                    }
+
+                    /*
+                    nameOnCardError.Visible = false;
+                    cardNumberError.Visible = false;
+                    cardExpiryError.Visible = false;
+                    CVVError.Visible = false;*/
                 }
-                 
-                /*
-                nameOnCardError.Visible = false;
-                cardNumberError.Visible = false;
-                cardExpiryError.Visible = false;
-                CVVError.Visible = false;*/
             }
             else
             {
@@ -220,28 +265,6 @@ namespace EDP_Clinic
                 CVVError.Visible = true;
             }
         }
-        /*
-        protected byte[] encryptData(string data)
-        {
-            byte[] cipherText = null;
-            try
-            {
-                RijndaelManaged cipher = new RijndaelManaged();
-                cipher.IV = IV;
-                cipher.Key = Key;
-                ICryptoTransform encryptTransform = cipher.CreateEncryptor();
-                //ICryptoTransform decryptTransform = cipher.CreateDecryptor();
-                byte[] plainText = Encoding.UTF8.GetBytes(data);
-                cipherText = encryptTransform.TransformFinalBlock(plainText, 0,
-               plainText.Length);
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.ToString());
-            }
-            finally { }
-            return cipherText;
-        }*/
 
         //Initialise an object to store Recaptcha response
         public class reCaptchaResponseObject
