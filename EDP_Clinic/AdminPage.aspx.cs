@@ -25,7 +25,6 @@ namespace EDP_Clinic
         byte[] Key;
         byte[] IV;
         string deleteid;
-        string MYDBConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["EDP_DB"].ConnectionString;
         Service1Client client = new Service1Client();
         SmtpClient emailClient = new SmtpClient("smtp-relay.sendinblue.com", 587);
        

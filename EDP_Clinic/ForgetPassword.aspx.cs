@@ -15,7 +15,6 @@ namespace EDP_Clinic
     public partial class ForgetPassword : System.Web.UI.Page
     {
         SmtpClient emailClient = new SmtpClient("smtp-relay.sendinblue.com", 587);
-        string MYDBConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["EDP_DB"].ConnectionString;
         Service1Client client = new Service1Client();
         protected void Page_Load(object sender, EventArgs e)
         {

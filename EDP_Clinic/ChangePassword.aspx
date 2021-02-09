@@ -9,7 +9,7 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     
     <div class="login-card">
-    <h1>Set Password</h1><br>
+    <h1>Change Password</h1><br>
     <form>
       <p>Password</p>
       <asp:TextBox ID="tbpassword" runat="server" TextMode="Password"></asp:TextBox>
