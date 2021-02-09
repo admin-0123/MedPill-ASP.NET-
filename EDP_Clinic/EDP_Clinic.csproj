@@ -221,7 +221,6 @@
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
     <Content Include="Contact.aspx" />
-    <Content Include="changeCardInfo.aspx" />
     <Content Include="EmployeePasswordSet.aspx" />
     <Content Include="ForgetPassword.aspx" />
     <Content Include="Login.aspx" />
@@ -357,13 +356,6 @@
     </Compile>
     <Compile Include="Contact.aspx.designer.cs">
       <DependentUpon>Contact.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="changeCardInfo.aspx.cs">
-      <DependentUpon>changeCardInfo.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="changeCardInfo.aspx.designer.cs">
-      <DependentUpon>changeCardInfo.aspx</DependentUpon>
     </Compile>
     <Compile Include="EmployeePasswordSet.aspx.cs">
       <DependentUpon>EmployeePasswordSet.aspx</DependentUpon>

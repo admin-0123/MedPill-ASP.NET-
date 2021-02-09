@@ -74,20 +74,6 @@ namespace EDP_Clinic
                     {
                         Response.Redirect("CardList.aspx");
                     }
-                    //Else if statements are for testing purposes only
-                    /*
-                    else if(validSessionReason == 1)
-                    {
-                        OTPError.Text = "Add Card";
-                    }
-                    else if (validSessionReason == 2)
-                    {
-                        OTPError.Text = "Change Card";
-                    }
-                    else if (validSessionReason == 3)
-                    {
-                        OTPError.Text = "Delete Card";
-                    }*/
 
                     //Calls Twilio API
                     else
@@ -341,24 +327,6 @@ namespace EDP_Clinic
 
                         Response.Cookies.Add(new HttpCookie("authOTPAToken", guid));
                         Response.Redirect("addCardInfo.aspx", false);
-                    }
-
-                    //Remove change card function
-                    else if (validSessionReason == 2)
-                    {
-                        //Remove change card info session and cookie
-                        Session.Remove("changeCardInfo");
-                        Response.Cookies["changeCardInfo"].Value = string.Empty;
-                        Response.Cookies["changeCardInfo"].Expires = DateTime.Now.AddMonths(-20);
-
-                        //Create valid pass for user to change card info
-                        string guid = Guid.NewGuid().ToString();
-                        Session["authOTPCToken"] = guid;
-
-                        string cardNumber = Session["cardNumber"].ToString();
-
-                        Response.Cookies.Add(new HttpCookie("authOTPCToken", guid));
-                        Response.Redirect("changeCardInfo.aspx?cardNumber=" + cardNumber, false);
                     }
                     //Perform delete here
                     //And then redirect to delete page

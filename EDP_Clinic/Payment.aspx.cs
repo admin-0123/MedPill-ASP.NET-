@@ -16,6 +16,7 @@ using System.Web.Script.Serialization;
 using EDP_Clinic.EDP_DBReference;
 using System.Diagnostics;
 using System.Net.Http;
+using System.Net.Mail;
 
 namespace EDP_Clinic
 {
@@ -33,23 +34,23 @@ namespace EDP_Clinic
 
 
             //Checks user session
-            if (Session["Login"] != null && Session["AuthToken"] != null && Request.Cookies["AuthToken"] != null)
-            {
-                if (!Session["AuthToken"].ToString().Equals(Request.Cookies["AuthToken"].Value))
-                {
-                    Response.Redirect("Login.aspx", false);
-                }
-                else
-                {
-                    Debug.WriteLine("Going to payment page");
-                    retrieveCardInfo();
-                }
-            }
-            //No credentials at all
-            else
-            {
-                Response.Redirect("Login.aspx", false);
-            }
+            //if (Session["Login"] != null && Session["AuthToken"] != null && Request.Cookies["AuthToken"] != null)
+            //{
+            //    if (!Session["AuthToken"].ToString().Equals(Request.Cookies["AuthToken"].Value))
+            //    {
+            //        Response.Redirect("Login.aspx", false);
+            //    }
+            //    else
+            //    {
+            //        Debug.WriteLine("Going to payment page");
+            retrieveCardInfo();
+            //    }
+            //}
+            ////No credentials at all
+            //else
+            //{
+            //    Response.Redirect("Login.aspx", false);
+            //}
         }
         protected void retrieveCardInfo()
         {
@@ -206,16 +207,10 @@ namespace EDP_Clinic
                 long cardYear = Convert.ToInt32(cardExpiry.Substring(0, 4));
                 long cardMonth = Convert.ToInt32(cardExpiry.Substring(5, 2));
 
-                Debug.WriteLine(cardNumber);
-
                 Debug.WriteLine(cardExpiry.Substring(0, 4));
                 Debug.WriteLine(cardExpiry.Substring(5, 2));
 
-                Debug.WriteLine(cardMonth);
-
-
                 //Consolidate Stripe Payment API by 3/2/2021
-
 
                 //Testing Stripe
                 StripeConfiguration.ApiKey = "sk_test_51HveuKAVRV4JC5fkn1zDUAxrUGZgetyR05RVCIGpNFFAlZczY6xwAQtn60BO1stWGXHJJJOh1DZQozuL4RtJSW4700ONZrgRzD";
@@ -236,21 +231,17 @@ namespace EDP_Clinic
                     var paymentMethodService = new PaymentMethodService();
                     var resultPay = paymentMethodService.Create(paymentMethod);
                     var paymentId = resultPay.Id;
-                    Debug.WriteLine(resultPay.Id);
-                    Debug.WriteLine(resultPay.Object);
-                    Debug.WriteLine(resultPay.Card.Brand);
 
                     var options = new PaymentIntentCreateOptions
                     {
                         //We will change the total amount charged here
 
-
                         Amount = 1000,
                         Currency = "sgd",
                         PaymentMethodTypes = new List<string>
-                {
-                    "card",
-                },
+                    {
+                        "card",
+                    },
                         ReceiptEmail = "cilipadi270@gmail.com",
                         PaymentMethod = paymentId,
                         Description = "Paying for medical appointment",
@@ -258,14 +249,14 @@ namespace EDP_Clinic
                     var service = new PaymentIntentService();
                     var resultPayment = service.Create(options);
                     var paymentIntentID = resultPayment.Id;
+                    var emailLink = resultPayment.ReceiptEmail;
                     var resultConfirmPayment = service.Confirm(paymentIntentID);
                     Debug.WriteLine(resultConfirmPayment);
                     Debug.WriteLine("+++++++++++++++++++++++++++++++++");
-                    //Debug.WriteLine(options);
-                    //Debug.WriteLine(resultPayment);
-                    //Debug.WriteLine(resultPayment.Id);
-                    //Debug.WriteLine("===========================================");
-                    //Debug.WriteLine(resultPayment.Status);
+                    var receiptLink = resultConfirmPayment.Charges.Data[0].ReceiptUrl;
+                    Debug.WriteLine(receiptLink);
+                    Debug.WriteLine(resultConfirmPayment);
+                    SendEmail(receiptLink, emailLink);
 
                     //var service = new PaymentIntentService();
                     //var paymentIntent = service.Create(options);
@@ -295,21 +286,54 @@ namespace EDP_Clinic
                     //var service = new SessionService();
                     //service.Create(options);
 
-
                     //Debug.WriteLine(service);
                     Response.Redirect("AfterPayment.aspx", false);
                 }
                 catch (StripeException ex)
                 {
-
-                    //Add more error functions here
-                    Debug.WriteLine(ex.ToString());
-                    throw new Exception(ex.ToString());
+                    var errorCode = ex.StripeError.Code.ToString();
+                    if (errorCode == "incorrect_number")
+                    {
+                        errorMsg.Text = "Please enter a correct card number";
+                        errorMsg.ForeColor = Color.Red;
+                        errorMsg.Visible = true;
+                    }
+                    else if(errorCode == "incorrect_cvc")
+                    {
+                        errorMsg.Text = "Please enter a correct card number";
+                        errorMsg.ForeColor = Color.Red;
+                        errorMsg.Visible = true;
+                    }
+                    else if (errorCode == "invalid_expiry_month")
+                    {
+                        errorMsg.Text = "Please enter a correct expiry card month";
+                        errorMsg.ForeColor = Color.Red;
+                        errorMsg.Visible = true;
+                    }
+                    else if (errorCode == "invalid_expiry_year")
+                    {
+                        errorMsg.Text = "Please enter a correct expiry card year";
+                        errorMsg.ForeColor = Color.Red;
+                        errorMsg.Visible = true;
+                    }
+                    else
+                    {
+                        errorMsg.Text = "Please correct card credentials";
+                        errorMsg.ForeColor = Color.Red;
+                        errorMsg.Visible = true;
+                        Debug.WriteLine(ex.ToString());
+                    }
+                    //throw new Exception(ex.ToString());
                 }
             }
             else
             {
-                //Error code here
+                //Reset to empty fields
+                nameOnCardTB.Text = "";
+                cardNumberTB.Text = "";
+                cardExpiryTB.Text = "";
+                CVVTB.Text = "";
+                Debug.WriteLine("Wrong format or a bot");
             }
         }
 
@@ -381,13 +405,6 @@ namespace EDP_Clinic
                 long cardYear = cardExpiry.Year;
                 long cardMonth = cardExpiry.Month;
 
-                Debug.WriteLine(cardNumber);
-                Debug.WriteLine(cardName);
-                Debug.WriteLine(cardYear);
-                Debug.WriteLine(cardMonth);
-                Debug.WriteLine(cardCVV);
-
-                Debug.WriteLine("===============");
                 Debug.WriteLine(e.CommandArgument.ToString());
                 //Testing Stripe
                 StripeConfiguration.ApiKey = "sk_test_51HveuKAVRV4JC5fkn1zDUAxrUGZgetyR05RVCIGpNFFAlZczY6xwAQtn60BO1stWGXHJJJOh1DZQozuL4RtJSW4700ONZrgRzD";
@@ -408,21 +425,17 @@ namespace EDP_Clinic
                     var paymentMethodService = new PaymentMethodService();
                     var resultPay = paymentMethodService.Create(paymentMethod);
                     var paymentId = resultPay.Id;
-                    Debug.WriteLine(resultPay.Id);
-                    Debug.WriteLine(resultPay.Object);
-                    Debug.WriteLine(resultPay.Card.Brand);
 
                     var options = new PaymentIntentCreateOptions
                     {
                         //We will change the total amount charged here
 
-
                         Amount = 1000,
                         Currency = "sgd",
                         PaymentMethodTypes = new List<string>
-                {
-                    "card",
-                },
+                    {
+                        "card",
+                    },
                         ReceiptEmail = "cilipadi270@gmail.com",
                         PaymentMethod = paymentId,
                         Description = "Paying for medical appointment",
@@ -430,20 +443,75 @@ namespace EDP_Clinic
                     var service = new PaymentIntentService();
                     var resultPayment = service.Create(options);
                     var paymentIntentID = resultPayment.Id;
+                    var emailLink = resultPayment.ReceiptEmail;
+                    //Debug.WriteLine(emailLink);
                     var resultConfirmPayment = service.Confirm(paymentIntentID);
+                    var receiptLink = resultConfirmPayment.Charges.Data[0].ReceiptUrl;
+                    Debug.WriteLine(receiptLink);
                     Debug.WriteLine(resultConfirmPayment);
-                    Debug.WriteLine("+++++++++++++++++++++++++++++++++");
+                    SendEmail(receiptLink, emailLink);
                     Response.Redirect("AfterPayment.aspx", false);
                 }
                 catch (StripeException ex)
                 {
-
-                    //Add more error functions here
-                    Debug.WriteLine(ex.ToString());
-                    throw new Exception(ex.ToString());
+                    var errorCode = ex.StripeError.Code.ToString();
+                    if (errorCode == "incorrect_number")
+                    {
+                        errorMsg.Text = "Please enter a correct card number";
+                        errorMsg.ForeColor = Color.Red;
+                        errorMsg.Visible = true;
+                    }
+                    else if (errorCode == "incorrect_cvc")
+                    {
+                        errorMsg.Text = "Please enter a correct card number";
+                        errorMsg.ForeColor = Color.Red;
+                        errorMsg.Visible = true;
+                    }
+                    else if (errorCode == "invalid_expiry_month")
+                    {
+                        errorMsg.Text = "Please enter a correct expiry card month";
+                        errorMsg.ForeColor = Color.Red;
+                        errorMsg.Visible = true;
+                    }
+                    else if (errorCode == "invalid_expiry_year")
+                    {
+                        errorMsg.Text = "Please enter a correct expiry card year";
+                        errorMsg.ForeColor = Color.Red;
+                        errorMsg.Visible = true;
+                    }
+                    else
+                    {
+                        errorMsg.Text = "Please correct card credentials";
+                        errorMsg.ForeColor = Color.Red;
+                        errorMsg.Visible = true;
+                        Debug.WriteLine(ex.ToString());
+                    }
+                    //throw new Exception(ex.ToString());
                 }
 
             }
         }
+
+        //Send email function
+        protected void SendEmail(string receiptLink, string emailLink)
+        {
+            SmtpClient emailClient = new SmtpClient("smtp-relay.sendinblue.com", 587);
+            emailClient.Credentials = new NetworkCredential("bryanchinzw@gmail.com", "vPDBKArZRY7HcIJC");
+            emailClient.DeliveryMethod = SmtpDeliveryMethod.Network;
+            emailClient.EnableSsl = true;
+
+            MailMessage mail = new MailMessage();
+            mail.Subject = "Payment Receipt";
+            mail.SubjectEncoding = Encoding.UTF8;
+            mail.Body = "This is your receipt. Click on the link below to view it. <br>" + receiptLink;
+            mail.IsBodyHtml = true;
+            mail.Priority = MailPriority.High;
+
+            mail.From = new MailAddress("bryanchinzw@gmail.com");
+            mail.To.Add(new MailAddress(emailLink));
+            emailClient.Send(mail);
+        }
+
     }
+
 }

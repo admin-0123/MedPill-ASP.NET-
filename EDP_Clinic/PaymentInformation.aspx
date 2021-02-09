@@ -3,7 +3,7 @@
 <asp:Content ID="head" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
-    <section class="w3l-contact py-5" id="paymentInfo" style="height: 100vh;">
+    <section class="w3l-contact py-5" id="paymentInfo">
         <div class="container py-lg-3">
             <div class="mb-3">
                 <asp:Button ID="backBtn" runat="server" Text="Back" CssClass="btn btn-primary btn-style" OnClick="backBtn_Click" />
@@ -32,7 +32,6 @@
                     <asp:Button ID="deleteBtn" runat="server" Text="Delete" CssClass="btn btn-primary btn-style" OnClick="deleteBtn_Click" Visible="True" />
                 </div>
                 <div class="col-md-3">
-                    <asp:Button ID="updateBtn" runat="server" Text="Update" CssClass="btn btn-primary btn-style" OnClick="updateBtn_Click" Visible="False" />
                 </div>
             </div>
         </div>
