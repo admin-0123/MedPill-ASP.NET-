@@ -55,5 +55,26 @@ namespace DBService.Entity
             }
             return photo;
         }
+
+
+        public int UpdatePhoto(string id, string new_photo)
+        {
+
+            string DBConnect = ConfigurationManager.ConnectionStrings["EDP_DB"].ConnectionString;
+            SqlConnection myConn = new SqlConnection(DBConnect);
+
+            string sqlStmt = "UPDATE [Photo] SET photo_resource = @paraNewPhoto WHERE Id = @paraId";
+
+            SqlCommand sqlCmd = new SqlCommand(sqlStmt, myConn);
+            sqlCmd.Parameters.AddWithValue("@paraNewPhoto", new_photo);
+            sqlCmd.Parameters.AddWithValue("@paraId", id);
+            myConn.Open();
+            int result = sqlCmd.ExecuteNonQuery();
+
+            myConn.Close();
+
+            return result;
+
+        }
     }
 }
