@@ -357,6 +357,12 @@
                         </div>
                         <div class="col-sm-6">
                             <a href="#addEmployeeModal" class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Add New Employee</span></a>
+
+                             <asp:LinkButton ID="RefreshBtn" runat="server" style="color: white;" Text="<i class='fas fa-sync-alt fa-lg'></i>" OnClick="RefreshBtn_Click"/>
+                            &nbsp;&nbsp;
+                            <asp:TextBox ID="searchtb" runat="server" Height="25px" Width="250px"></asp:TextBox>
+                            <asp:LinkButton ID="SearchBtn"  runat="server" style="color: white;" Text="<i class='fas fa-search fa-lg'></i>" OnClick="SearchBtn_Click" />                    
+     
                         </div>
                     </div>
                 </div>

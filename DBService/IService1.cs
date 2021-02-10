@@ -32,7 +32,10 @@ namespace DBService
 
         int DeleteOneUser(string id);
         [OperationContract]
-
+        int AddCaretaker(string id);
+        [OperationContract]
+        int RemoveCaretaker(string id);
+        [OperationContract]
         int CheckOneUser(string email);
         [OperationContract]
         int VerifyOneUser(string email);
@@ -55,6 +58,10 @@ namespace DBService
         List<displayUser> ShowAllPatients();
         [OperationContract]
         List<displayUser> ShowAllEmployees();
+        [OperationContract]
+        List<displayUser> ShowSearchedEmployees(string name);
+        [OperationContract]
+        List<displayUser> ShowSearchedPatients(string name);
         [OperationContract]
         string GetEmailbyCode(string code);
         [OperationContract]

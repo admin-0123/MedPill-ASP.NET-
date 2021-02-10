@@ -95,6 +95,34 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="AddCaretaker">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="id" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AddCaretakerResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="AddCaretakerResult" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="RemoveCaretaker">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="id" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="RemoveCaretakerResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="RemoveCaretakerResult" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
   <xs:element name="CheckOneUser">
     <xs:complexType>
       <xs:sequence>
@@ -238,6 +266,34 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="ShowSearchedEmployees">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="name" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ShowSearchedEmployeesResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q12="http://schemas.datacontract.org/2004/07/DBService.Entity" minOccurs="0" name="ShowSearchedEmployeesResult" nillable="true" type="q12:ArrayOfdisplayUser" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ShowSearchedPatients">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="name" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ShowSearchedPatientsResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q13="http://schemas.datacontract.org/2004/07/DBService.Entity" minOccurs="0" name="ShowSearchedPatientsResult" nillable="true" type="q13:ArrayOfdisplayUser" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
   <xs:element name="GetEmailbyCode">
     <xs:complexType>
       <xs:sequence>
@@ -326,7 +382,7 @@
   <xs:element name="GetCardByCardNumberResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q12="http://schemas.datacontract.org/2004/07/DBService.Entity" minOccurs="0" name="GetCardByCardNumberResult" nillable="true" type="q12:CardInfo" />
+        <xs:element xmlns:q14="http://schemas.datacontract.org/2004/07/DBService.Entity" minOccurs="0" name="GetCardByCardNumberResult" nillable="true" type="q14:CardInfo" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -338,7 +394,7 @@
   <xs:element name="GetAllCardsResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q13="http://schemas.datacontract.org/2004/07/DBService.Entity" minOccurs="0" name="GetAllCardsResult" nillable="true" type="q13:ArrayOfCardInfo" />
+        <xs:element xmlns:q15="http://schemas.datacontract.org/2004/07/DBService.Entity" minOccurs="0" name="GetAllCardsResult" nillable="true" type="q15:ArrayOfCardInfo" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

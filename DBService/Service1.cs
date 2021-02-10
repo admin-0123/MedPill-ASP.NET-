@@ -50,6 +50,16 @@ namespace DBService
             User user = new User();
             return user.DeleteUser(id);
         }
+        public int AddCaretaker(string id)
+        {
+            User user = new User();
+            return user.AddCaretaker(id);
+        }
+        public int RemoveCaretaker(string id)
+        {
+            User user = new User();
+            return user.RemoveCaretaker(id);
+        }
         public int CheckOneUser(string email)
         {
             User user = new User();
@@ -105,6 +115,17 @@ namespace DBService
             displayUser user = new displayUser();
             return user.DisplayAllEmployees();
         }
+        public List<displayUser> ShowSearchedEmployees(string name)
+        {
+            displayUser user = new displayUser();
+            return user.DisplaySearchedEmployees(name);
+        }
+        public List<displayUser> ShowSearchedPatients(string name)
+        {
+            displayUser user = new displayUser();
+            return user.DisplaySearchedPatients(name);
+        }
+
         public string GetEmailbyCode(string code)
         {
             EmailCode user = new EmailCode();

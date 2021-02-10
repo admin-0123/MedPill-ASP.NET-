@@ -129,8 +129,23 @@ namespace EDP_Clinic
             ScriptManager.RegisterStartupScript(this, this.GetType(), "Yes", "closeEditModal();", true);
 
         }
+        protected void SearchBtn_Click(object sender, EventArgs e)
+        {
+            var search = HttpUtility.HtmlEncode(searchtb.Text);
+            List<displayUser> patientList = new List<displayUser>();
+            List<User> userlist = new List<User>();
+            //patientList = client.ShowAllPatients().ToList<displayUser>();
+            patientList = client.ShowSearchedEmployees(search).ToList<displayUser>();
+            EmployeeGridView.Visible = true;
+            EmployeeGridView.DataSource = patientList;
+            EmployeeGridView.DataBind();
 
-        protected void Button1_Click(object sender, EventArgs e)
+        }
+        protected void RefreshBtn_Click(object sender, EventArgs e)
+        {
+            refreshgrid();
+        }
+            protected void Button1_Click(object sender, EventArgs e)
         {
             var email = tbAddEmail.Text;
             var name = tbAddName.Text;
@@ -220,8 +235,8 @@ namespace EDP_Clinic
         {
             List<displayUser> patientList = new List<displayUser>();
             List<User> userlist = new List<User>();
-            patientList = client.ShowAllPatients().ToList<displayUser>();
-            //patientList = client.ShowAllEmployees().ToList<displayUser>();
+            //patientList = client.ShowAllPatients().ToList<displayUser>();
+            patientList = client.ShowAllEmployees().ToList<displayUser>();
             EmployeeGridView.Visible = true;
             EmployeeGridView.DataSource = patientList;
             EmployeeGridView.DataBind();
@@ -239,5 +254,6 @@ namespace EDP_Clinic
             
             return r;
         }
+
     }
 }
