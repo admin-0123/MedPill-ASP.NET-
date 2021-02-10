@@ -311,7 +311,7 @@ namespace EDP_Clinic
                 if (validOTP == true)
                 {
                     //Call Twilio SMS Function
-                    TwilioSMS("an authentication has been made on your account.");
+                    //TwilioSMS("an authentication has been made on your account.");
 
                     //A bunch of if else statements here to redirect user to respective pages
                     if (validSessionReason == 1)
@@ -347,7 +347,7 @@ namespace EDP_Clinic
                             Response.Cookies["deleteCardInfo"].Expires = DateTime.Now.AddMonths(-20);
 
                             //Call Twilio SMS Function to tell user that cardInfo has been deleted
-                            TwilioSMS("we have successfully deleted your card information.");
+                            //TwilioSMS("we have successfully deleted your card information.");
 
                             Response.Redirect("CardList.aspx", false);
                         }

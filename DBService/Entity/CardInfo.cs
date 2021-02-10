@@ -57,7 +57,7 @@ namespace DBService.Entity
             using (SqlConnection myConn = new SqlConnection(DBConnect))
             {
                 //Step 2 - Create SQL Statement
-                string sqlStatement = "INSERT INTO CardInfo VALUES (@paraCardName, @paraCardNumber, @paraCardExpiry, @paraCVVNumber, @paraStillValid, @paraIV, @paraKey, @paraUniqueIdentifier)";
+                string sqlStatement = "INSERT INTO CardInfo VALUES (@paraUserID, @paraCardName, @paraCardNumber, @paraCardExpiry, @paraCVVNumber, @paraStillValid, @paraIV, @paraKey, @paraUniqueIdentifier)";
                 using (SqlCommand sqlCmd = new SqlCommand(sqlStatement))
                 {
                     //Step 3 - Add info to each parameterised variables
