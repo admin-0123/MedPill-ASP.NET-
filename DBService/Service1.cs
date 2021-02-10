@@ -174,24 +174,30 @@ namespace DBService
             CardInfo cif = new CardInfo();
             return cif.DeleteByCardNumber(uniqueIdentifier);
         }
-        //Will prob delete update card number
-        //public int UpdateByCardNumber(string previousCardNumber, string cardName, string cardNumber, DateTime cardExpiry, string cvvNumber)
-        //{
-        //    CardInfo cif = new CardInfo();
-        //    return cif.UpdateByCardNumber(previousCardNumber, cardName, cardNumber, cardExpiry, cvvNumber);
-        //}
         /* 
-         Note by Hasan 4/1/2021
+         Note by Hasan 10/02/2021
 
         Will put in more methods here for other classes
          
          */
-
-        public int CreateReceipt(DateTime dateSale, double totalSum, bool isPaid)
+        //Receipt Entity Methods
+        public int CreateReceipt(string userID, DateTime dateSale, double totalSum, bool isPaid, string receiptLink, string uniqueIdentifier)
         {
-            Receipt rep = new Receipt(dateSale, totalSum, isPaid);
+            Receipt rep = new Receipt(userID, dateSale, totalSum, isPaid, receiptLink, uniqueIdentifier);
             return rep.Insert();
 
+        }
+
+        public List<Receipt> SelectAllReceipt(string userID)
+        {
+            Receipt rep = new Receipt();
+            return rep.SelectAllReceipt(userID);
+        }
+
+        public Receipt SelectByReceiptID(string userID, string uniqueIdentifier)
+        {
+            Receipt rep = new Receipt();
+            return rep.SelectByReceiptID(userID, uniqueIdentifier);
         }
 
         /* Appointment Methods - Wilfred */

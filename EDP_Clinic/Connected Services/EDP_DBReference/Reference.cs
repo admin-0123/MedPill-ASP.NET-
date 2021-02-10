@@ -563,6 +563,131 @@ namespace EDP_Clinic.EDP_DBReference {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="Receipt", Namespace="http://schemas.datacontract.org/2004/07/DBService.Entity")]
+    [System.SerializableAttribute()]
+    public partial class Receipt : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.DateTime DateSaleField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private bool IsPaidField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string ReceiptLinkField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private double TotalSumField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string UniqueIdentifierField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string UserIDField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime DateSale {
+            get {
+                return this.DateSaleField;
+            }
+            set {
+                if ((this.DateSaleField.Equals(value) != true)) {
+                    this.DateSaleField = value;
+                    this.RaisePropertyChanged("DateSale");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool IsPaid {
+            get {
+                return this.IsPaidField;
+            }
+            set {
+                if ((this.IsPaidField.Equals(value) != true)) {
+                    this.IsPaidField = value;
+                    this.RaisePropertyChanged("IsPaid");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string ReceiptLink {
+            get {
+                return this.ReceiptLinkField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ReceiptLinkField, value) != true)) {
+                    this.ReceiptLinkField = value;
+                    this.RaisePropertyChanged("ReceiptLink");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public double TotalSum {
+            get {
+                return this.TotalSumField;
+            }
+            set {
+                if ((this.TotalSumField.Equals(value) != true)) {
+                    this.TotalSumField = value;
+                    this.RaisePropertyChanged("TotalSum");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string UniqueIdentifier {
+            get {
+                return this.UniqueIdentifierField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.UniqueIdentifierField, value) != true)) {
+                    this.UniqueIdentifierField = value;
+                    this.RaisePropertyChanged("UniqueIdentifier");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string UserID {
+            get {
+                return this.UserIDField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.UserIDField, value) != true)) {
+                    this.UserIDField = value;
+                    this.RaisePropertyChanged("UserID");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="Appointment", Namespace="http://schemas.datacontract.org/2004/07/DBService.Entity")]
     [System.SerializableAttribute()]
     public partial class Appointment : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
@@ -1089,10 +1214,22 @@ namespace EDP_Clinic.EDP_DBReference {
         System.Threading.Tasks.Task<bool> CheckCardByCardNumberAsync(string uniqueIdentifier);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/CreateReceipt", ReplyAction="http://tempuri.org/IService1/CreateReceiptResponse")]
-        int CreateReceipt(System.DateTime dateSale, double totalSum, bool isPaid);
+        int CreateReceipt(string userID, System.DateTime dateSale, double totalSum, bool isPaid, string receiptLink, string uniqueIdentifier);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/CreateReceipt", ReplyAction="http://tempuri.org/IService1/CreateReceiptResponse")]
-        System.Threading.Tasks.Task<int> CreateReceiptAsync(System.DateTime dateSale, double totalSum, bool isPaid);
+        System.Threading.Tasks.Task<int> CreateReceiptAsync(string userID, System.DateTime dateSale, double totalSum, bool isPaid, string receiptLink, string uniqueIdentifier);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/SelectAllReceipt", ReplyAction="http://tempuri.org/IService1/SelectAllReceiptResponse")]
+        EDP_Clinic.EDP_DBReference.Receipt[] SelectAllReceipt(string userID);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/SelectAllReceipt", ReplyAction="http://tempuri.org/IService1/SelectAllReceiptResponse")]
+        System.Threading.Tasks.Task<EDP_Clinic.EDP_DBReference.Receipt[]> SelectAllReceiptAsync(string userID);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/SelectByReceiptID", ReplyAction="http://tempuri.org/IService1/SelectByReceiptIDResponse")]
+        EDP_Clinic.EDP_DBReference.Receipt SelectByReceiptID(string userID, string uniqueIdentifier);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/SelectByReceiptID", ReplyAction="http://tempuri.org/IService1/SelectByReceiptIDResponse")]
+        System.Threading.Tasks.Task<EDP_Clinic.EDP_DBReference.Receipt> SelectByReceiptIDAsync(string userID, string uniqueIdentifier);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetAllApptAdmin", ReplyAction="http://tempuri.org/IService1/GetAllApptAdminResponse")]
         EDP_Clinic.EDP_DBReference.Appointment[] GetAllApptAdmin();
@@ -1428,12 +1565,28 @@ namespace EDP_Clinic.EDP_DBReference {
             return base.Channel.CheckCardByCardNumberAsync(uniqueIdentifier);
         }
         
-        public int CreateReceipt(System.DateTime dateSale, double totalSum, bool isPaid) {
-            return base.Channel.CreateReceipt(dateSale, totalSum, isPaid);
+        public int CreateReceipt(string userID, System.DateTime dateSale, double totalSum, bool isPaid, string receiptLink, string uniqueIdentifier) {
+            return base.Channel.CreateReceipt(userID, dateSale, totalSum, isPaid, receiptLink, uniqueIdentifier);
         }
         
-        public System.Threading.Tasks.Task<int> CreateReceiptAsync(System.DateTime dateSale, double totalSum, bool isPaid) {
-            return base.Channel.CreateReceiptAsync(dateSale, totalSum, isPaid);
+        public System.Threading.Tasks.Task<int> CreateReceiptAsync(string userID, System.DateTime dateSale, double totalSum, bool isPaid, string receiptLink, string uniqueIdentifier) {
+            return base.Channel.CreateReceiptAsync(userID, dateSale, totalSum, isPaid, receiptLink, uniqueIdentifier);
+        }
+        
+        public EDP_Clinic.EDP_DBReference.Receipt[] SelectAllReceipt(string userID) {
+            return base.Channel.SelectAllReceipt(userID);
+        }
+        
+        public System.Threading.Tasks.Task<EDP_Clinic.EDP_DBReference.Receipt[]> SelectAllReceiptAsync(string userID) {
+            return base.Channel.SelectAllReceiptAsync(userID);
+        }
+        
+        public EDP_Clinic.EDP_DBReference.Receipt SelectByReceiptID(string userID, string uniqueIdentifier) {
+            return base.Channel.SelectByReceiptID(userID, uniqueIdentifier);
+        }
+        
+        public System.Threading.Tasks.Task<EDP_Clinic.EDP_DBReference.Receipt> SelectByReceiptIDAsync(string userID, string uniqueIdentifier) {
+            return base.Channel.SelectByReceiptIDAsync(userID, uniqueIdentifier);
         }
         
         public EDP_Clinic.EDP_DBReference.Appointment[] GetAllApptAdmin() {

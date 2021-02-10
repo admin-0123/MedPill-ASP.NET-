@@ -8,29 +8,34 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Security.Cryptography;
 using System.IO;
+using System.Diagnostics;
 
 namespace DBService.Entity
 {
     public class Receipt
     {
         //public string ReceiptID { get; set; }
+        public string UserID { get; set; }
         public DateTime DateSale { get; set; }
         public double TotalSum { get; set; }
         public bool IsPaid { get; set; }
         public string ReceiptLink { get; set; }
-        //public byte[] IV { get; set; }
-        //public byte[] Key { get; set; }
+        public string UniqueIdentifier { get; set; }
         public Receipt()
         {
 
         }
 
-        public Receipt(DateTime dateSale, double totalSum, bool isPaid)
+        public Receipt(string userID, DateTime dateSale, double totalSum,
+            bool isPaid, string receiptLink, string uniqueIdentifier)
         {
             //ReceiptID = receiptID;
+            UserID = userID;
             DateSale = dateSale;
             TotalSum = totalSum;
             IsPaid = isPaid;
+            ReceiptLink = receiptLink;
+            UniqueIdentifier = uniqueIdentifier;
         }
         public int Insert()
         {
@@ -39,12 +44,15 @@ namespace DBService.Entity
             string DBConnect = ConfigurationManager.ConnectionStrings["EDP_DB"].ConnectionString;
             using (SqlConnection myConn = new SqlConnection(DBConnect))
             {
-                string sqlStatement = "INSERT INTO Receipt VALUES (@paraDateSale, @paraTotalSum, @IsPaid)";
+                string sqlStatement = "INSERT INTO Receipt VALUES (@paraUserID,@paraDateSale, @paraTotalSum, @IsPaid, @paraReceiptLink, @paraUniqueIdentifier)";
                 using (SqlCommand sqlCmd = new SqlCommand(sqlStatement))
                 {
+                    sqlCmd.Parameters.AddWithValue("@paraUserID", UserID);
                     sqlCmd.Parameters.AddWithValue("@paraDateSale", DateSale);
                     sqlCmd.Parameters.AddWithValue("@paraTotalSum", TotalSum);
                     sqlCmd.Parameters.AddWithValue("@IsPaid", IsPaid);
+                    sqlCmd.Parameters.AddWithValue("@paraReceiptLink", ReceiptLink);
+                    sqlCmd.Parameters.AddWithValue("@paraUniqueIdentifier", UniqueIdentifier);
 
                     sqlCmd.Connection = myConn;
 
@@ -70,75 +78,91 @@ namespace DBService.Entity
 
             //will continue adding more here
         }
-        /*public Receipt SelectByReceiptID(string cardID)
+        public Receipt SelectByReceiptID(string userID, string uniqueIdentifier)
         {
-            Step 1 -  Define a connection to the database by getting
-                      the connection string from App.config
             string DBConnect = ConfigurationManager.ConnectionStrings["EDP_DB"].ConnectionString;
-            SqlConnection myConn = new SqlConnection(DBConnect);
-        //    return Receipt;
-        }*/
-
-        /*public List<Receipt> SelectAll()
-        {
-            //Step 1 -  Define a connection to the database by getting
-            //          the connection string from App.config
-            string DBConnect = ConfigurationManager.ConnectionStrings["EDP_DB"].ConnectionString;
-            SqlConnection myConn = new SqlConnection(DBConnect);
-        }*/
-        protected string decryptData(byte[] iv, byte[] key, byte[] cipherText)
-        {
-            string plainText = null;
-            try
+            using (SqlConnection myConn = new SqlConnection(DBConnect))
             {
-                RijndaelManaged cipher = new RijndaelManaged();
-                cipher.IV = iv;
-                cipher.Key = key;
-                // Create a decrytor to perform the stream transform.
-                ICryptoTransform decryptTransform = cipher.CreateDecryptor();
-                //Create the streams used for decryption
-
-                using (MemoryStream msDecrypt = new MemoryStream(cipherText))
+                string sqlStatement = "SELECT * FROM Receipt WHERE UserId = @paraUserID, UniqueIdentifier = @paraUniqueIdentifier";
+                using (SqlDataAdapter da = new SqlDataAdapter(sqlStatement, myConn))
                 {
-                    using (CryptoStream csDecrypt = new CryptoStream(msDecrypt, decryptTransform, CryptoStreamMode.Read))
+                    da.SelectCommand.Parameters.AddWithValue("@paraUserID", userID);
+                    da.SelectCommand.Parameters.AddWithValue("@paraUniqueIdentifier", uniqueIdentifier);
+                    using (DataSet ds = new DataSet())
                     {
-                        using (StreamReader srDecrypt = new StreamReader(csDecrypt))
+                        try
                         {
+                            da.Fill(ds);
+                            Receipt rep = null;
 
-                            //Read the decrypted bytes from the decrypting stream
-                            //and place them in a string
-                            plainText = srDecrypt.ReadToEnd();
+                            int rec_cnt = ds.Tables[0].Rows.Count;
+                            if (rec_cnt == 1)
+                            {
+                                DataRow row = ds.Tables[0].Rows[0];
+                                DateTime dateSale = Convert.ToDateTime(row["DateSale"].ToString());
+                                double totalSum = Convert.ToDouble(row["TotalSum"].ToString());
+                                bool isPaid = Convert.ToBoolean(row["IsPaid"].ToString());
+                                string receiptLink = row["ReceiptLink"].ToString();
+
+                                rep = new Receipt(userID, dateSale, totalSum, isPaid, receiptLink, uniqueIdentifier);
+                            }
+                            return rep;
+                        }
+                        catch (SqlException ex)
+                        {
+                            throw new Exception(ex.ToString());
+                        }
+                        finally
+                        {
+                            Debug.WriteLine("Retrieve ReceiptInfo Complete!");
                         }
                     }
                 }
             }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.ToString());
-            }
-            finally { }
-            return plainText;
         }
-        /*protected byte[] encryptData(string data)
+
+        public List<Receipt> SelectAllReceipt(string userID)
         {
-            byte[] cipherText = null;
-            try
+            string DBConnect = ConfigurationManager.ConnectionStrings["EDP_DB"].ConnectionString;
+            using (SqlConnection myConn = new SqlConnection(DBConnect))
             {
-                RijndaelManaged cipher = new RijndaelManaged();
-                cipher.IV = IV;
-                cipher.Key = Key;
-                ICryptoTransform encryptTransform = cipher.CreateEncryptor();
-                //ICryptoTransform decryptTransform = cipher.CreateDecryptor();
-                byte[] plainText = Encoding.UTF8.GetBytes(data);
-                cipherText = encryptTransform.TransformFinalBlock(plainText, 0,
-               plainText.Length);
+                string sqlStatement = "SELECT * FROM Receipt WHERE UserId = @paraUserID";
+                using (SqlDataAdapter da = new SqlDataAdapter(sqlStatement, myConn))
+                {
+                    da.SelectCommand.Parameters.AddWithValue("@paraUserID", userID);
+                    using (DataSet ds = new DataSet())
+                    {
+                        try
+                        {
+                            da.Fill(ds);
+
+                            List<Receipt> repList = new List<Receipt>();
+                            int rec_cnt = ds.Tables[0].Rows.Count;
+                            for (int i = 0; i < rec_cnt; i++)
+                            {
+                                DataRow row = ds.Tables[0].Rows[i];
+                                DateTime dateSale = Convert.ToDateTime(row["DateSale"].ToString());
+                                double totalSum = Convert.ToDouble(row["TotalSum"].ToString());
+                                bool isPaid = Convert.ToBoolean(row["IsPaid"].ToString());
+                                string receiptLink = row["ReceiptLink"].ToString();
+                                string uniqueIdentifier = row["UniqueIdentifier"].ToString();
+
+                                Receipt rep = new Receipt(userID, dateSale, totalSum, isPaid, receiptLink, uniqueIdentifier);
+                                repList.Add(rep);
+                            }
+                            return repList;
+                        }
+                        catch (SqlException ex)
+                        {
+                            throw new Exception(ex.ToString());
+                        }
+                        finally
+                        {
+                            Debug.WriteLine("Retrieve all Receipt Complete!");
+                        }
+                    }
+                }
             }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.ToString());
-            }
-            finally { }
-            return cipherText;
-        }*/
+        }
     }
 }
