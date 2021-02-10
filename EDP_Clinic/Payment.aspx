@@ -2,6 +2,8 @@
 
 <asp:Content ID="head" ContentPlaceHolderID="head" runat="server">
     <script src="https://js.stripe.com/v3/"></script>
+        <script type="text/javascript" src="https://www.paypal.com/sdk/js?client-id=AT9DJyeJMIR8vwF_hXg51sixRS0sEi3gKj6NZIzrlFq0JdlldbY5NKstWc6AYYNYiNIjZz4xLwnac153" async>
+    </script>
 </asp:Content>
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
     <section class="w3l-contact py-5" id="payment">
@@ -14,7 +16,8 @@
                 <div class="col-md-8">
                     <div class="contact-form">
                         <div class="mb-3">
-                            <h4 class="mb-3"><asp:Label ID="errorMsg" runat="server" CssClass="mb-3" Visible="False"></asp:Label></h4>
+                            <h4 class="mb-3">
+                                <asp:Label ID="errorMsg" runat="server" CssClass="mb-3" Visible="False"></asp:Label></h4>
                             <h5 class="title mb-3">Choose existing card information</h5>
                             <p class="mb-3">Choosing your stored card information will complete the following transaction.</p>
                             <asp:ListView ID="cardListView" runat="server" OnItemCommand="cardListView_ItemCommand">
@@ -75,7 +78,7 @@
                         <div class="row mb-3">
                             <div class="col-md-6"></div>
                             <div class="col-md-4">
-                                <asp:Button ID="payPalBtn" runat="server" Text="Proceed to Paypal" CssClass="btn btn-primary btn-style" BackColor="#17449E" ForeColor="White" Width="200px" ToolTip="Pay by PayPal" />
+                                <asp:Button ID="payPalBtn" runat="server" Text="Proceed to Paypal" CssClass="btn btn-primary btn-style" BackColor="#17449E" ForeColor="White" Width="200px" ToolTip="Pay by PayPal" OnClick="payPalBtn_Click" />
                             </div>
                             <div class="col-md-2">
                                 <input type="hidden" id="g-recaptcha-response" name="g-recaptcha-response" />

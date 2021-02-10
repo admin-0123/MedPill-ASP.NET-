@@ -13,17 +13,17 @@ namespace EDP_Clinic
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            Session["Login"] = "someone@example.com";
+            //Session["Login"] = "someone@example.com";
 
-            string guidToken = Guid.NewGuid().ToString();
-            Session["AuthToken"] = guidToken;
-            HttpCookie AuthToken = new HttpCookie("AuthToken");
-            AuthToken.Value = guidToken;
-            Response.Cookies.Add(AuthToken);
+            //string guidToken = Guid.NewGuid().ToString();
+            //Session["AuthToken"] = guidToken;
+            //HttpCookie AuthToken = new HttpCookie("AuthToken");
+            //AuthToken.Value = guidToken;
+            //Response.Cookies.Add(AuthToken);
 
 
             //Checks user session
-            if (Session["Login"] != null && Session["AuthToken"] != null && Request.Cookies["AuthToken"] != null)
+            if (Session["LoggedIn"] != null && Session["AuthToken"] != null && Request.Cookies["AuthToken"] != null)
             {
                 if (!Session["AuthToken"].ToString().Equals(Request.Cookies["AuthToken"].Value))
                 {
@@ -43,9 +43,11 @@ namespace EDP_Clinic
 
         protected void getReceiptList()
         {
+            string userID = Session["LoggedIn"].ToString().Trim();
+
             List<CardInfo> cifList = new List<CardInfo>();
             Service1Client client = new Service1Client();
-            cifList = client.GetAllCards().ToList<CardInfo>();
+            cifList = client.GetAllCards(userID).ToList<CardInfo>();
 
             receiptListAdminView.DataSource = cifList;
             receiptListAdminView.Visible = true;
