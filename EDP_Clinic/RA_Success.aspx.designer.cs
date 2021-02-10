@@ -11,61 +11,79 @@ namespace EDP_Clinic
 {
 
 
-    public partial class PFA
+    public partial class RA_Success
     {
 
         /// <summary>
-        /// userPfp control.
+        /// lbl_success_msg control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Image userPfp;
+        protected global::System.Web.UI.WebControls.Label lbl_success_msg;
 
         /// <summary>
-        /// lbl_profileName control.
+        /// lbl_apptdetails control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbl_profileName;
+        protected global::System.Web.UI.WebControls.Label lbl_apptdetails;
 
         /// <summary>
-        /// userArrow control.
+        /// lbl_apptType control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ImageButton userArrow;
+        protected global::System.Web.UI.WebControls.Label lbl_apptType;
 
         /// <summary>
-        /// crPfp control.
+        /// lbl_doctorname control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Image crPfp;
+        protected global::System.Web.UI.WebControls.Label lbl_doctorname;
 
         /// <summary>
-        /// lbl_crName control.
+        /// lbl_patientname control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbl_crName;
+        protected global::System.Web.UI.WebControls.Label lbl_patientname;
 
         /// <summary>
-        /// crArrow control.
+        /// lbl_datetime control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ImageButton crArrow;
+        protected global::System.Web.UI.WebControls.Label lbl_datetime;
+
+        /// <summary>
+        /// btn_go_dashboard control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btn_go_dashboard;
+
+        /// <summary>
+        /// btn_go_pfa control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btn_go_pfa;
     }
 }

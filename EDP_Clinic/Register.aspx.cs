@@ -19,7 +19,7 @@ namespace EDP_Clinic
 {
     public partial class Register : System.Web.UI.Page
     {
-        string MYDBConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["EDP_DB"].ConnectionString;
+        //string MYDBConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["EDP_DB"].ConnectionString;
         static string finalHash;
         SmtpClient emailClient = new SmtpClient("smtp-relay.sendinblue.com", 587);
         static string salt;
