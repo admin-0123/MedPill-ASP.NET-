@@ -90,6 +90,9 @@ namespace EDP_Clinic.EDP_DBReference {
         private string IdField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string IsCaretakerField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string IsDeletedField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -142,6 +145,19 @@ namespace EDP_Clinic.EDP_DBReference {
                 if ((object.ReferenceEquals(this.IdField, value) != true)) {
                     this.IdField = value;
                     this.RaisePropertyChanged("Id");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string IsCaretaker {
+            get {
+                return this.IsCaretakerField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.IsCaretakerField, value) != true)) {
+                    this.IsCaretakerField = value;
+                    this.RaisePropertyChanged("IsCaretaker");
                 }
             }
         }
@@ -912,6 +928,18 @@ namespace EDP_Clinic.EDP_DBReference {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/DeleteOneUser", ReplyAction="http://tempuri.org/IService1/DeleteOneUserResponse")]
         System.Threading.Tasks.Task<int> DeleteOneUserAsync(string id);
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/AddCaretaker", ReplyAction="http://tempuri.org/IService1/AddCaretakerResponse")]
+        int AddCaretaker(string id);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/AddCaretaker", ReplyAction="http://tempuri.org/IService1/AddCaretakerResponse")]
+        System.Threading.Tasks.Task<int> AddCaretakerAsync(string id);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/RemoveCaretaker", ReplyAction="http://tempuri.org/IService1/RemoveCaretakerResponse")]
+        int RemoveCaretaker(string id);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/RemoveCaretaker", ReplyAction="http://tempuri.org/IService1/RemoveCaretakerResponse")]
+        System.Threading.Tasks.Task<int> RemoveCaretakerAsync(string id);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/CheckOneUser", ReplyAction="http://tempuri.org/IService1/CheckOneUserResponse")]
         int CheckOneUser(string email);
         
@@ -977,6 +1005,18 @@ namespace EDP_Clinic.EDP_DBReference {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/ShowAllEmployees", ReplyAction="http://tempuri.org/IService1/ShowAllEmployeesResponse")]
         System.Threading.Tasks.Task<EDP_Clinic.EDP_DBReference.displayUser[]> ShowAllEmployeesAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/ShowSearchedEmployees", ReplyAction="http://tempuri.org/IService1/ShowSearchedEmployeesResponse")]
+        EDP_Clinic.EDP_DBReference.displayUser[] ShowSearchedEmployees(string name);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/ShowSearchedEmployees", ReplyAction="http://tempuri.org/IService1/ShowSearchedEmployeesResponse")]
+        System.Threading.Tasks.Task<EDP_Clinic.EDP_DBReference.displayUser[]> ShowSearchedEmployeesAsync(string name);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/ShowSearchedPatients", ReplyAction="http://tempuri.org/IService1/ShowSearchedPatientsResponse")]
+        EDP_Clinic.EDP_DBReference.displayUser[] ShowSearchedPatients(string name);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/ShowSearchedPatients", ReplyAction="http://tempuri.org/IService1/ShowSearchedPatientsResponse")]
+        System.Threading.Tasks.Task<EDP_Clinic.EDP_DBReference.displayUser[]> ShowSearchedPatientsAsync(string name);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetEmailbyCode", ReplyAction="http://tempuri.org/IService1/GetEmailbyCodeResponse")]
         string GetEmailbyCode(string code);
@@ -1186,6 +1226,22 @@ namespace EDP_Clinic.EDP_DBReference {
             return base.Channel.DeleteOneUserAsync(id);
         }
         
+        public int AddCaretaker(string id) {
+            return base.Channel.AddCaretaker(id);
+        }
+        
+        public System.Threading.Tasks.Task<int> AddCaretakerAsync(string id) {
+            return base.Channel.AddCaretakerAsync(id);
+        }
+        
+        public int RemoveCaretaker(string id) {
+            return base.Channel.RemoveCaretaker(id);
+        }
+        
+        public System.Threading.Tasks.Task<int> RemoveCaretakerAsync(string id) {
+            return base.Channel.RemoveCaretakerAsync(id);
+        }
+        
         public int CheckOneUser(string email) {
             return base.Channel.CheckOneUser(email);
         }
@@ -1272,6 +1328,22 @@ namespace EDP_Clinic.EDP_DBReference {
         
         public System.Threading.Tasks.Task<EDP_Clinic.EDP_DBReference.displayUser[]> ShowAllEmployeesAsync() {
             return base.Channel.ShowAllEmployeesAsync();
+        }
+        
+        public EDP_Clinic.EDP_DBReference.displayUser[] ShowSearchedEmployees(string name) {
+            return base.Channel.ShowSearchedEmployees(name);
+        }
+        
+        public System.Threading.Tasks.Task<EDP_Clinic.EDP_DBReference.displayUser[]> ShowSearchedEmployeesAsync(string name) {
+            return base.Channel.ShowSearchedEmployeesAsync(name);
+        }
+        
+        public EDP_Clinic.EDP_DBReference.displayUser[] ShowSearchedPatients(string name) {
+            return base.Channel.ShowSearchedPatients(name);
+        }
+        
+        public System.Threading.Tasks.Task<EDP_Clinic.EDP_DBReference.displayUser[]> ShowSearchedPatientsAsync(string name) {
+            return base.Channel.ShowSearchedPatientsAsync(name);
         }
         
         public string GetEmailbyCode(string code) {

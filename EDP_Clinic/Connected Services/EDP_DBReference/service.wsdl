@@ -44,6 +44,18 @@
   <wsdl:message name="IService1_DeleteOneUser_OutputMessage">
     <wsdl:part name="parameters" element="tns:DeleteOneUserResponse" />
   </wsdl:message>
+  <wsdl:message name="IService1_AddCaretaker_InputMessage">
+    <wsdl:part name="parameters" element="tns:AddCaretaker" />
+  </wsdl:message>
+  <wsdl:message name="IService1_AddCaretaker_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AddCaretakerResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService1_RemoveCaretaker_InputMessage">
+    <wsdl:part name="parameters" element="tns:RemoveCaretaker" />
+  </wsdl:message>
+  <wsdl:message name="IService1_RemoveCaretaker_OutputMessage">
+    <wsdl:part name="parameters" element="tns:RemoveCaretakerResponse" />
+  </wsdl:message>
   <wsdl:message name="IService1_CheckOneUser_InputMessage">
     <wsdl:part name="parameters" element="tns:CheckOneUser" />
   </wsdl:message>
@@ -109,6 +121,18 @@
   </wsdl:message>
   <wsdl:message name="IService1_ShowAllEmployees_OutputMessage">
     <wsdl:part name="parameters" element="tns:ShowAllEmployeesResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService1_ShowSearchedEmployees_InputMessage">
+    <wsdl:part name="parameters" element="tns:ShowSearchedEmployees" />
+  </wsdl:message>
+  <wsdl:message name="IService1_ShowSearchedEmployees_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ShowSearchedEmployeesResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService1_ShowSearchedPatients_InputMessage">
+    <wsdl:part name="parameters" element="tns:ShowSearchedPatients" />
+  </wsdl:message>
+  <wsdl:message name="IService1_ShowSearchedPatients_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ShowSearchedPatientsResponse" />
   </wsdl:message>
   <wsdl:message name="IService1_GetEmailbyCode_InputMessage">
     <wsdl:part name="parameters" element="tns:GetEmailbyCode" />
@@ -267,6 +291,14 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IService1/DeleteOneUser" message="tns:IService1_DeleteOneUser_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IService1/DeleteOneUserResponse" message="tns:IService1_DeleteOneUser_OutputMessage" />
     </wsdl:operation>
+    <wsdl:operation name="AddCaretaker">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/AddCaretaker" message="tns:IService1_AddCaretaker_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/AddCaretakerResponse" message="tns:IService1_AddCaretaker_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="RemoveCaretaker">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/RemoveCaretaker" message="tns:IService1_RemoveCaretaker_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/RemoveCaretakerResponse" message="tns:IService1_RemoveCaretaker_OutputMessage" />
+    </wsdl:operation>
     <wsdl:operation name="CheckOneUser">
       <wsdl:input wsaw:Action="http://tempuri.org/IService1/CheckOneUser" message="tns:IService1_CheckOneUser_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IService1/CheckOneUserResponse" message="tns:IService1_CheckOneUser_OutputMessage" />
@@ -310,6 +342,14 @@
     <wsdl:operation name="ShowAllEmployees">
       <wsdl:input wsaw:Action="http://tempuri.org/IService1/ShowAllEmployees" message="tns:IService1_ShowAllEmployees_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IService1/ShowAllEmployeesResponse" message="tns:IService1_ShowAllEmployees_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ShowSearchedEmployees">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/ShowSearchedEmployees" message="tns:IService1_ShowSearchedEmployees_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/ShowSearchedEmployeesResponse" message="tns:IService1_ShowSearchedEmployees_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ShowSearchedPatients">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/ShowSearchedPatients" message="tns:IService1_ShowSearchedPatients_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/ShowSearchedPatientsResponse" message="tns:IService1_ShowSearchedPatients_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="GetEmailbyCode">
       <wsdl:input wsaw:Action="http://tempuri.org/IService1/GetEmailbyCode" message="tns:IService1_GetEmailbyCode_InputMessage" />
@@ -456,6 +496,24 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="AddCaretaker">
+      <soap:operation soapAction="http://tempuri.org/IService1/AddCaretaker" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RemoveCaretaker">
+      <soap:operation soapAction="http://tempuri.org/IService1/RemoveCaretaker" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="CheckOneUser">
       <soap:operation soapAction="http://tempuri.org/IService1/CheckOneUser" style="document" />
       <wsdl:input>
@@ -548,6 +606,24 @@
     </wsdl:operation>
     <wsdl:operation name="ShowAllEmployees">
       <soap:operation soapAction="http://tempuri.org/IService1/ShowAllEmployees" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ShowSearchedEmployees">
+      <soap:operation soapAction="http://tempuri.org/IService1/ShowSearchedEmployees" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ShowSearchedPatients">
+      <soap:operation soapAction="http://tempuri.org/IService1/ShowSearchedPatients" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
