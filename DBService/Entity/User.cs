@@ -81,6 +81,7 @@ namespace DBService.Entity
             if (rec_cnt == 1)
             {
                 DataRow row = ds.Tables[0].Rows[0];  // Sql command returns only one record
+                string Id = row["Id"].ToString();
                 string Name = row["Name"].ToString();
                 string Password = row["Password"].ToString();
                 string Salt = row["Salt"].ToString();
@@ -119,6 +120,7 @@ namespace DBService.Entity
             if (rec_cnt == 1)
             {
                 DataRow row = ds.Tables[0].Rows[0];  // Sql command returns only one record
+                string Id = row["Id"].ToString();
                 string Name = row["Name"].ToString();
                 string Password = row["Password"].ToString();
                 string Salt = row["Salt"].ToString();
@@ -128,6 +130,7 @@ namespace DBService.Entity
                 string Verified = row["Verified"].ToString();
                 string IsDeleted = row["IsDeleted"].ToString();
                 string IsCaretaker = row["IsCaretaker"].ToString();
+
 
                 user = new User(Id, Name, Password, Salt, Email, PhoneNo, Role, Verified, IsDeleted, IsCaretaker);
             }

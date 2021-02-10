@@ -16,6 +16,7 @@ namespace EDP_Clinic
             //Session["UserID"] = 1;
             //Session["LoggedIn"] = "placeholder";
             // Session["userName"]
+
             if (Session["LoggedIn"] != null) {
                 LoadProfile();
             }
@@ -33,7 +34,12 @@ namespace EDP_Clinic
         {
             EDP_DBReference.Service1Client client = new EDP_DBReference.Service1Client();
 
+            System.Diagnostics.Debug.WriteLine("SESSION EMAIL IS " + Session["LoggedIn"].ToString());
+
             User userobj = client.GetOneUserByEmail(Session["LoggedIn"].ToString());
+
+            System.Diagnostics.Debug.WriteLine("USER ID IS " + userobj.Id);
+
             Photo photo_obj = client.GetOnePhoto(userobj.Id);
 
             if (userobj != null)
@@ -43,14 +49,16 @@ namespace EDP_Clinic
                 // Need to trim the string variable, or the image url will not display properly due to encoded whitespaces %20%20
                 userPfp.ImageUrl = $"~/assets/images/{photo_obj.Photo_Resource.Trim()}.jpg";
 
-                //System.Diagnostics.Debug.WriteLine("CARE RECEIVER ID IS " + userobj.CareReceiverID);
-
+                System.Diagnostics.Debug.WriteLine("CARE GIVER ID IS " + userobj.Id);
                 Caregiver caregiver_obj = client.GetOneCG(userobj.Id);
 
-                //User care_receiverobj = client.GetOneUser(userobj.CareReceiverID);
+                System.Diagnostics.Debug.WriteLine("CARE RECEIVER ID IS " + caregiver_obj.Carereceiver_id);
                 User care_receiverobj = client.GetOneUser(caregiver_obj.Carereceiver_id);
+                System.Diagnostics.Debug.WriteLine("CARE RECEIVER NAME IS " + care_receiverobj.Name);
+                System.Diagnostics.Debug.WriteLine("CARE RECEIVER ID IS " + care_receiverobj.Id);
 
                 Photo photo_obj_cr = client.GetOnePhoto(caregiver_obj.Carereceiver_id);
+
 
                 if (care_receiverobj != null)
                 {    

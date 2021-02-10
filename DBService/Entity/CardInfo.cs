@@ -124,7 +124,6 @@ namespace DBService.Entity
                             {
                                 DataRow row = ds.Tables[0].Rows[0]; //Returns one record
                                 //int cardID = Convert.ToInt32(row["Id"].ToString());
-                                //string userID = row["UserId"].ToString();
                                 byte[] cardName = Convert.FromBase64String(row["CardName"].ToString());
                                 byte[] cardNumber = Convert.FromBase64String(row["CardNumber"].ToString());
                                 byte[] cardExpiry = Convert.FromBase64String(row["CardExpiry"].ToString());
@@ -247,7 +246,6 @@ namespace DBService.Entity
                             {
                                 DataRow row = ds.Tables[0].Rows[i];  // Sql command returns only one record
                                 //int cardID = Convert.ToInt32(row["Id"].ToString());
-                                //string userID = row["UserId"].ToString();
                                 byte[] cardName = Convert.FromBase64String(row["CardName"].ToString());
                                 byte[] cardNumber = Convert.FromBase64String(row["CardNumber"].ToString());
                                 byte[] cardExpiry = Convert.FromBase64String(row["CardExpiry"].ToString());

@@ -57,7 +57,6 @@
     <Compile Include="Entity\EmailCode.cs" />
     <Compile Include="Entity\displayUser.cs" />
     <Compile Include="Entity\Receipt.cs" />
-    <Compile Include="Entity\ReceiptItems.cs" />
     <Compile Include="Entity\User.cs" />
     <Compile Include="IService1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
