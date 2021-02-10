@@ -42,11 +42,13 @@ namespace EDP_Clinic
             
             // Search for the current profile selected and set the necessary contents like profileName.. etc
             EDP_DBReference.Service1Client svc_client = new EDP_DBReference.Service1Client();
-            User current_user = svc_client.GetOneUser(Convert.ToInt32(Session["current_appt_profile"]));
+            User current_user = svc_client.GetOneUser(Session["current_appt_profile"].ToString());
             // For breadcrumb elements
             hl_bc_profileName.Text = current_user.Name;
             //
-            profilePfp.ImageUrl = $"~/assets/images/{current_user.Photo.Trim()}.jpg";
+
+            Photo current_user_photo_obj = svc_client.GetOnePhoto(current_user.Id);
+            profilePfp.ImageUrl = $"~/assets/images/{current_user_photo_obj.Photo_Resource.Trim()}.jpg";
             lbl_profileName.Text = current_user.Name;
 
             //repeater_appts.DataSource = GetApptsUser();
@@ -55,7 +57,7 @@ namespace EDP_Clinic
 
 
             var test123 = listview_appts.SelectedIndex;
-            System.Diagnostics.Debug.WriteLine($"SELECTED INDEX IS {test123}");
+            //System.Diagnostics.Debug.WriteLine($"SELECTED INDEX IS {test123}");
         }
 
 /*        protected void btn_cancel_click(object sender, EventArgs e)
@@ -70,7 +72,7 @@ namespace EDP_Clinic
             List<Appointment> testList = new List<Appointment>();
             EDP_DBReference.Service1Client svc_client = new EDP_DBReference.Service1Client();
 
-            System.Diagnostics.Debug.WriteLine("THE SESSION VALUE IS " + Session["UserID"]);
+            //System.Diagnostics.Debug.WriteLine("THE SESSION VALUE IS " + Session["UserID"]);
             testList = svc_client.GetAllApptUser(Convert.ToInt32(Session["current_appt_profile"].ToString())).ToList<Appointment>();
             
             if (testList == null)
@@ -86,7 +88,7 @@ namespace EDP_Clinic
             List<Appointment> testList = new List<Appointment>();
             EDP_DBReference.Service1Client svc_client = new EDP_DBReference.Service1Client();
 
-            System.Diagnostics.Debug.WriteLine("THE SESSION VALUE IS " + Session["UserID"]);
+            //System.Diagnostics.Debug.WriteLine("THE SESSION VALUE IS " + Session["UserID"]);
             testList = svc_client.GetAllApptUserUpcoming(Convert.ToInt32(Session["current_appt_profile"].ToString())).ToList<Appointment>();
 
             if (testList == null)
@@ -103,7 +105,7 @@ namespace EDP_Clinic
             List<Appointment> testList = new List<Appointment>();
             EDP_DBReference.Service1Client svc_client = new EDP_DBReference.Service1Client();
 
-            System.Diagnostics.Debug.WriteLine("THE SESSION VALUE IS " + Session["UserID"]);
+            //System.Diagnostics.Debug.WriteLine("THE SESSION VALUE IS " + Session["UserID"]);
             testList = svc_client.GetAllApptUserPast(Convert.ToInt32(Session["current_appt_profile"].ToString())).ToList<Appointment>();
 
             if (testList == null)
@@ -119,7 +121,7 @@ namespace EDP_Clinic
             List<Appointment> testList = new List<Appointment>();
             EDP_DBReference.Service1Client svc_client = new EDP_DBReference.Service1Client();
 
-            System.Diagnostics.Debug.WriteLine("THE SESSION VALUE IS " + Session["UserID"]);
+            //System.Diagnostics.Debug.WriteLine("THE SESSION VALUE IS " + Session["UserID"]);
             testList = svc_client.GetAllApptUserMissed(Convert.ToInt32(Session["current_appt_profile"].ToString())).ToList<Appointment>();
 
             if (testList == null)

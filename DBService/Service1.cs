@@ -234,6 +234,18 @@ namespace DBService
             return appt.DeleteOne(uid, dateTime);
         }
 
+        public Photo GetOnePhoto(string id)
+        {
+            Photo photo = new Photo();
+            return photo.SelectById(id);
+        }
+
+        public Caregiver GetOneCG(string id)
+        {
+            Caregiver cg = new Caregiver();
+            return cg.SelectById(id);
+        }
+
         /* Appointments End - */
 
 

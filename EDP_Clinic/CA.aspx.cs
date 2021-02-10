@@ -22,11 +22,14 @@ namespace EDP_Clinic
         {
             
             EDP_DBReference.Service1Client svc_client = new EDP_DBReference.Service1Client();
-            User current_user = svc_client.GetOneUser(Convert.ToInt32(Session["current_appt_profile"]));
+            User current_user = svc_client.GetOneUser(Session["current_appt_profile"].ToString());
             // For breadcrumb elements
             hl_bc_profileName.Text = current_user.Name;
             //
-            profilePfp.ImageUrl = $"~/assets/images/{current_user.Photo.Trim()}.jpg";
+
+            Photo current_user_photo_obj = svc_client.GetOnePhoto(current_user.Id);
+
+            profilePfp.ImageUrl = $"~/assets/images/{current_user_photo_obj.Photo_Resource.Trim()}.jpg";
             lbl_profileName.Text = current_user.Name;
 
             tb_startdate_CalendarExtender.StartDate = DateTime.Now.AddDays(1);

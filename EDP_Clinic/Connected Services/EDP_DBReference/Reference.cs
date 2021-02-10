@@ -734,6 +734,144 @@ namespace EDP_Clinic.EDP_DBReference {
         }
     }
     
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="Photo", Namespace="http://schemas.datacontract.org/2004/07/DBService.Entity")]
+    [System.SerializableAttribute()]
+    public partial class Photo : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string IdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string Photo_ResourceField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Id {
+            get {
+                return this.IdField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.IdField, value) != true)) {
+                    this.IdField = value;
+                    this.RaisePropertyChanged("Id");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Photo_Resource {
+            get {
+                return this.Photo_ResourceField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.Photo_ResourceField, value) != true)) {
+                    this.Photo_ResourceField = value;
+                    this.RaisePropertyChanged("Photo_Resource");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="Caregiver", Namespace="http://schemas.datacontract.org/2004/07/DBService.Entity")]
+    [System.SerializableAttribute()]
+    public partial class Caregiver : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string Carereceiver_idField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int Certified_cgField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string IdField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Carereceiver_id {
+            get {
+                return this.Carereceiver_idField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.Carereceiver_idField, value) != true)) {
+                    this.Carereceiver_idField = value;
+                    this.RaisePropertyChanged("Carereceiver_id");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Certified_cg {
+            get {
+                return this.Certified_cgField;
+            }
+            set {
+                if ((this.Certified_cgField.Equals(value) != true)) {
+                    this.Certified_cgField = value;
+                    this.RaisePropertyChanged("Certified_cg");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Id {
+            get {
+                return this.IdField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.IdField, value) != true)) {
+                    this.IdField = value;
+                    this.RaisePropertyChanged("Id");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="EDP_DBReference.IService1")]
     public interface IService1 {
@@ -959,6 +1097,18 @@ namespace EDP_Clinic.EDP_DBReference {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/DeleteOneAppt", ReplyAction="http://tempuri.org/IService1/DeleteOneApptResponse")]
         System.Threading.Tasks.Task<int> DeleteOneApptAsync(int uid, System.DateTime dateTime);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetOnePhoto", ReplyAction="http://tempuri.org/IService1/GetOnePhotoResponse")]
+        EDP_Clinic.EDP_DBReference.Photo GetOnePhoto(string id);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetOnePhoto", ReplyAction="http://tempuri.org/IService1/GetOnePhotoResponse")]
+        System.Threading.Tasks.Task<EDP_Clinic.EDP_DBReference.Photo> GetOnePhotoAsync(string id);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetOneCG", ReplyAction="http://tempuri.org/IService1/GetOneCGResponse")]
+        EDP_Clinic.EDP_DBReference.Caregiver GetOneCG(string id);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetOneCG", ReplyAction="http://tempuri.org/IService1/GetOneCGResponse")]
+        System.Threading.Tasks.Task<EDP_Clinic.EDP_DBReference.Caregiver> GetOneCGAsync(string id);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -1282,6 +1432,22 @@ namespace EDP_Clinic.EDP_DBReference {
         
         public System.Threading.Tasks.Task<int> DeleteOneApptAsync(int uid, System.DateTime dateTime) {
             return base.Channel.DeleteOneApptAsync(uid, dateTime);
+        }
+        
+        public EDP_Clinic.EDP_DBReference.Photo GetOnePhoto(string id) {
+            return base.Channel.GetOnePhoto(id);
+        }
+        
+        public System.Threading.Tasks.Task<EDP_Clinic.EDP_DBReference.Photo> GetOnePhotoAsync(string id) {
+            return base.Channel.GetOnePhotoAsync(id);
+        }
+        
+        public EDP_Clinic.EDP_DBReference.Caregiver GetOneCG(string id) {
+            return base.Channel.GetOneCG(id);
+        }
+        
+        public System.Threading.Tasks.Task<EDP_Clinic.EDP_DBReference.Caregiver> GetOneCGAsync(string id) {
+            return base.Channel.GetOneCGAsync(id);
         }
     }
 }

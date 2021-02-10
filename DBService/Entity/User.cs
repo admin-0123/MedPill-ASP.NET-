@@ -29,6 +29,14 @@ namespace DBService.Entity
         public string Verified { get; set; }
         public string IsDeleted { get; set; }
 
+/*        public string Photo { get; set; }
+
+        //Optional Properties
+
+        public int CareReceiverID { get; set; }
+
+        public bool Certified_CG { get; set; }*/
+
         public User()
         {
 
