@@ -106,6 +106,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="CA.aspx" />
+    <Content Include="CA_Success.aspx" />
     <Content Include="error\400.aspx" />
     <Content Include="error\401.aspx" />
     <Content Include="error\402.aspx" />
@@ -216,6 +218,9 @@
     <Content Include="Connected Services\EDP_DBReference\EDP_Clinic.EDP_DBReference.displayUser.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
+    <Content Include="Connected Services\EDP_DBReference\EDP_Clinic.EDP_DBReference.Appointment1.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
     <None Include="Connected Services\EDP_DBReference\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
@@ -229,6 +234,9 @@
     <Content Include="Payment.aspx" />
     <Content Include="PaymentInfoDeleted.aspx" />
     <Content Include="PaymentInformation.aspx" />
+    <Content Include="PFA.aspx" />
+    <Content Include="PRFA2.aspx" />
+    <Content Include="RA.aspx" />
     <Content Include="ReceiptDetail.aspx" />
     <Content Include="ReceiptList.aspx" />
     <Content Include="ReceiptListAdmin.aspx" />
@@ -240,6 +248,20 @@
     <Content Include="Services.aspx" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CA.aspx.cs">
+      <DependentUpon>CA.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CA.aspx.designer.cs">
+      <DependentUpon>CA.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CA_Success.aspx.cs">
+      <DependentUpon>CA_Success.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CA_Success.aspx.designer.cs">
+      <DependentUpon>CA_Success.aspx</DependentUpon>
+    </Compile>
     <Compile Include="error\400.aspx.cs">
       <DependentUpon>400.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -413,7 +435,28 @@
     <Compile Include="PaymentInformation.aspx.designer.cs">
       <DependentUpon>PaymentInformation.aspx</DependentUpon>
     </Compile>
+    <Compile Include="PFA.aspx.cs">
+      <DependentUpon>PFA.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="PFA.aspx.designer.cs">
+      <DependentUpon>PFA.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="PRFA2.aspx.cs">
+      <DependentUpon>PRFA2.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="PRFA2.aspx.designer.cs">
+      <DependentUpon>PRFA2.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RA.aspx.cs">
+      <DependentUpon>RA.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="RA.aspx.designer.cs">
+      <DependentUpon>RA.aspx</DependentUpon>
+    </Compile>
     <Compile Include="ReceiptDetail.aspx.cs">
       <DependentUpon>ReceiptDetail.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

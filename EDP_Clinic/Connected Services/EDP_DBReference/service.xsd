@@ -33,7 +33,7 @@
   <xs:element name="GetOneUser">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="id" type="xs:int" />
+        <xs:element minOccurs="0" name="id" nillable="true" type="xs:string" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -412,7 +412,7 @@
   <xs:element name="GetAllApptAdminResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/DBService.Entity" minOccurs="0" name="GetAllApptAdminResult" nillable="true" type="q5:ArrayOfAppointment" />
+        <xs:element xmlns:q14="http://schemas.datacontract.org/2004/07/DBService.Entity" minOccurs="0" name="GetAllApptAdminResult" nillable="true" type="q14:ArrayOfAppointment" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -426,7 +426,7 @@
   <xs:element name="GetAllApptUserResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/DBService.Entity" minOccurs="0" name="GetAllApptUserResult" nillable="true" type="q6:ArrayOfAppointment" />
+        <xs:element xmlns:q15="http://schemas.datacontract.org/2004/07/DBService.Entity" minOccurs="0" name="GetAllApptUserResult" nillable="true" type="q15:ArrayOfAppointment" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -440,7 +440,7 @@
   <xs:element name="GetAllApptUserUpcomingResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/DBService.Entity" minOccurs="0" name="GetAllApptUserUpcomingResult" nillable="true" type="q7:ArrayOfAppointment" />
+        <xs:element xmlns:q16="http://schemas.datacontract.org/2004/07/DBService.Entity" minOccurs="0" name="GetAllApptUserUpcomingResult" nillable="true" type="q16:ArrayOfAppointment" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -454,7 +454,7 @@
   <xs:element name="GetAllApptUserPastResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/DBService.Entity" minOccurs="0" name="GetAllApptUserPastResult" nillable="true" type="q8:ArrayOfAppointment" />
+        <xs:element xmlns:q17="http://schemas.datacontract.org/2004/07/DBService.Entity" minOccurs="0" name="GetAllApptUserPastResult" nillable="true" type="q17:ArrayOfAppointment" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -468,7 +468,7 @@
   <xs:element name="GetAllApptUserMissedResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/DBService.Entity" minOccurs="0" name="GetAllApptUserMissedResult" nillable="true" type="q9:ArrayOfAppointment" />
+        <xs:element xmlns:q18="http://schemas.datacontract.org/2004/07/DBService.Entity" minOccurs="0" name="GetAllApptUserMissedResult" nillable="true" type="q18:ArrayOfAppointment" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -500,7 +500,7 @@
   <xs:element name="GetOneApptResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q10="http://schemas.datacontract.org/2004/07/DBService.Entity" minOccurs="0" name="GetOneApptResult" nillable="true" type="q10:Appointment" />
+        <xs:element xmlns:q19="http://schemas.datacontract.org/2004/07/DBService.Entity" minOccurs="0" name="GetOneApptResult" nillable="true" type="q19:Appointment" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

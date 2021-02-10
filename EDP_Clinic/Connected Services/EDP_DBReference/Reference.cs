@@ -529,6 +529,211 @@ namespace EDP_Clinic.EDP_DBReference {
         }
     }
     
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="Appointment", Namespace="http://schemas.datacontract.org/2004/07/DBService.Entity")]
+    [System.SerializableAttribute()]
+    public partial class Appointment : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int IdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string appointmentTypeField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int caregiverIDField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.DateTime dateTimeField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int doctorIDField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string followUpField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int nurseIDField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int patientIDField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string prescriptionField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string remarksField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string statusField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Id {
+            get {
+                return this.IdField;
+            }
+            set {
+                if ((this.IdField.Equals(value) != true)) {
+                    this.IdField = value;
+                    this.RaisePropertyChanged("Id");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string appointmentType {
+            get {
+                return this.appointmentTypeField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.appointmentTypeField, value) != true)) {
+                    this.appointmentTypeField = value;
+                    this.RaisePropertyChanged("appointmentType");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int caregiverID {
+            get {
+                return this.caregiverIDField;
+            }
+            set {
+                if ((this.caregiverIDField.Equals(value) != true)) {
+                    this.caregiverIDField = value;
+                    this.RaisePropertyChanged("caregiverID");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime dateTime {
+            get {
+                return this.dateTimeField;
+            }
+            set {
+                if ((this.dateTimeField.Equals(value) != true)) {
+                    this.dateTimeField = value;
+                    this.RaisePropertyChanged("dateTime");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int doctorID {
+            get {
+                return this.doctorIDField;
+            }
+            set {
+                if ((this.doctorIDField.Equals(value) != true)) {
+                    this.doctorIDField = value;
+                    this.RaisePropertyChanged("doctorID");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string followUp {
+            get {
+                return this.followUpField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.followUpField, value) != true)) {
+                    this.followUpField = value;
+                    this.RaisePropertyChanged("followUp");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int nurseID {
+            get {
+                return this.nurseIDField;
+            }
+            set {
+                if ((this.nurseIDField.Equals(value) != true)) {
+                    this.nurseIDField = value;
+                    this.RaisePropertyChanged("nurseID");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int patientID {
+            get {
+                return this.patientIDField;
+            }
+            set {
+                if ((this.patientIDField.Equals(value) != true)) {
+                    this.patientIDField = value;
+                    this.RaisePropertyChanged("patientID");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string prescription {
+            get {
+                return this.prescriptionField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.prescriptionField, value) != true)) {
+                    this.prescriptionField = value;
+                    this.RaisePropertyChanged("prescription");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string remarks {
+            get {
+                return this.remarksField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.remarksField, value) != true)) {
+                    this.remarksField = value;
+                    this.RaisePropertyChanged("remarks");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string status {
+            get {
+                return this.statusField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.statusField, value) != true)) {
+                    this.statusField = value;
+                    this.RaisePropertyChanged("status");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="EDP_DBReference.IService1")]
     public interface IService1 {
@@ -700,6 +905,60 @@ namespace EDP_Clinic.EDP_DBReference {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/CreateReceipt", ReplyAction="http://tempuri.org/IService1/CreateReceiptResponse")]
         System.Threading.Tasks.Task<int> CreateReceiptAsync(System.DateTime dateSale, double totalSum, bool isPaid);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetAllApptAdmin", ReplyAction="http://tempuri.org/IService1/GetAllApptAdminResponse")]
+        EDP_Clinic.EDP_DBReference.Appointment[] GetAllApptAdmin();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetAllApptAdmin", ReplyAction="http://tempuri.org/IService1/GetAllApptAdminResponse")]
+        System.Threading.Tasks.Task<EDP_Clinic.EDP_DBReference.Appointment[]> GetAllApptAdminAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetAllApptUser", ReplyAction="http://tempuri.org/IService1/GetAllApptUserResponse")]
+        EDP_Clinic.EDP_DBReference.Appointment[] GetAllApptUser(int uid);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetAllApptUser", ReplyAction="http://tempuri.org/IService1/GetAllApptUserResponse")]
+        System.Threading.Tasks.Task<EDP_Clinic.EDP_DBReference.Appointment[]> GetAllApptUserAsync(int uid);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetAllApptUserUpcoming", ReplyAction="http://tempuri.org/IService1/GetAllApptUserUpcomingResponse")]
+        EDP_Clinic.EDP_DBReference.Appointment[] GetAllApptUserUpcoming(int uid);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetAllApptUserUpcoming", ReplyAction="http://tempuri.org/IService1/GetAllApptUserUpcomingResponse")]
+        System.Threading.Tasks.Task<EDP_Clinic.EDP_DBReference.Appointment[]> GetAllApptUserUpcomingAsync(int uid);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetAllApptUserPast", ReplyAction="http://tempuri.org/IService1/GetAllApptUserPastResponse")]
+        EDP_Clinic.EDP_DBReference.Appointment[] GetAllApptUserPast(int uid);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetAllApptUserPast", ReplyAction="http://tempuri.org/IService1/GetAllApptUserPastResponse")]
+        System.Threading.Tasks.Task<EDP_Clinic.EDP_DBReference.Appointment[]> GetAllApptUserPastAsync(int uid);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetAllApptUserMissed", ReplyAction="http://tempuri.org/IService1/GetAllApptUserMissedResponse")]
+        EDP_Clinic.EDP_DBReference.Appointment[] GetAllApptUserMissed(int uid);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetAllApptUserMissed", ReplyAction="http://tempuri.org/IService1/GetAllApptUserMissedResponse")]
+        System.Threading.Tasks.Task<EDP_Clinic.EDP_DBReference.Appointment[]> GetAllApptUserMissedAsync(int uid);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/CreateAppointment", ReplyAction="http://tempuri.org/IService1/CreateAppointmentResponse")]
+        int CreateAppointment(int patientID, string appointmentType, System.DateTime dateTime, string status);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/CreateAppointment", ReplyAction="http://tempuri.org/IService1/CreateAppointmentResponse")]
+        System.Threading.Tasks.Task<int> CreateAppointmentAsync(int patientID, string appointmentType, System.DateTime dateTime, string status);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetOneAppt", ReplyAction="http://tempuri.org/IService1/GetOneApptResponse")]
+        EDP_Clinic.EDP_DBReference.Appointment GetOneAppt(int patientID, System.DateTime dateTime);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetOneAppt", ReplyAction="http://tempuri.org/IService1/GetOneApptResponse")]
+        System.Threading.Tasks.Task<EDP_Clinic.EDP_DBReference.Appointment> GetOneApptAsync(int patientID, System.DateTime dateTime);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/UpdateOneAppt", ReplyAction="http://tempuri.org/IService1/UpdateOneApptResponse")]
+        int UpdateOneAppt(int patientID, string appointmentType, System.DateTime oldTime, System.DateTime newTime);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/UpdateOneAppt", ReplyAction="http://tempuri.org/IService1/UpdateOneApptResponse")]
+        System.Threading.Tasks.Task<int> UpdateOneApptAsync(int patientID, string appointmentType, System.DateTime oldTime, System.DateTime newTime);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/DeleteOneAppt", ReplyAction="http://tempuri.org/IService1/DeleteOneApptResponse")]
+        int DeleteOneAppt(int uid, System.DateTime dateTime);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/DeleteOneAppt", ReplyAction="http://tempuri.org/IService1/DeleteOneApptResponse")]
+        System.Threading.Tasks.Task<int> DeleteOneApptAsync(int uid, System.DateTime dateTime);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -951,6 +1210,78 @@ namespace EDP_Clinic.EDP_DBReference {
         
         public System.Threading.Tasks.Task<int> CreateReceiptAsync(System.DateTime dateSale, double totalSum, bool isPaid) {
             return base.Channel.CreateReceiptAsync(dateSale, totalSum, isPaid);
+        }
+        
+        public EDP_Clinic.EDP_DBReference.Appointment[] GetAllApptAdmin() {
+            return base.Channel.GetAllApptAdmin();
+        }
+        
+        public System.Threading.Tasks.Task<EDP_Clinic.EDP_DBReference.Appointment[]> GetAllApptAdminAsync() {
+            return base.Channel.GetAllApptAdminAsync();
+        }
+        
+        public EDP_Clinic.EDP_DBReference.Appointment[] GetAllApptUser(int uid) {
+            return base.Channel.GetAllApptUser(uid);
+        }
+        
+        public System.Threading.Tasks.Task<EDP_Clinic.EDP_DBReference.Appointment[]> GetAllApptUserAsync(int uid) {
+            return base.Channel.GetAllApptUserAsync(uid);
+        }
+        
+        public EDP_Clinic.EDP_DBReference.Appointment[] GetAllApptUserUpcoming(int uid) {
+            return base.Channel.GetAllApptUserUpcoming(uid);
+        }
+        
+        public System.Threading.Tasks.Task<EDP_Clinic.EDP_DBReference.Appointment[]> GetAllApptUserUpcomingAsync(int uid) {
+            return base.Channel.GetAllApptUserUpcomingAsync(uid);
+        }
+        
+        public EDP_Clinic.EDP_DBReference.Appointment[] GetAllApptUserPast(int uid) {
+            return base.Channel.GetAllApptUserPast(uid);
+        }
+        
+        public System.Threading.Tasks.Task<EDP_Clinic.EDP_DBReference.Appointment[]> GetAllApptUserPastAsync(int uid) {
+            return base.Channel.GetAllApptUserPastAsync(uid);
+        }
+        
+        public EDP_Clinic.EDP_DBReference.Appointment[] GetAllApptUserMissed(int uid) {
+            return base.Channel.GetAllApptUserMissed(uid);
+        }
+        
+        public System.Threading.Tasks.Task<EDP_Clinic.EDP_DBReference.Appointment[]> GetAllApptUserMissedAsync(int uid) {
+            return base.Channel.GetAllApptUserMissedAsync(uid);
+        }
+        
+        public int CreateAppointment(int patientID, string appointmentType, System.DateTime dateTime, string status) {
+            return base.Channel.CreateAppointment(patientID, appointmentType, dateTime, status);
+        }
+        
+        public System.Threading.Tasks.Task<int> CreateAppointmentAsync(int patientID, string appointmentType, System.DateTime dateTime, string status) {
+            return base.Channel.CreateAppointmentAsync(patientID, appointmentType, dateTime, status);
+        }
+        
+        public EDP_Clinic.EDP_DBReference.Appointment GetOneAppt(int patientID, System.DateTime dateTime) {
+            return base.Channel.GetOneAppt(patientID, dateTime);
+        }
+        
+        public System.Threading.Tasks.Task<EDP_Clinic.EDP_DBReference.Appointment> GetOneApptAsync(int patientID, System.DateTime dateTime) {
+            return base.Channel.GetOneApptAsync(patientID, dateTime);
+        }
+        
+        public int UpdateOneAppt(int patientID, string appointmentType, System.DateTime oldTime, System.DateTime newTime) {
+            return base.Channel.UpdateOneAppt(patientID, appointmentType, oldTime, newTime);
+        }
+        
+        public System.Threading.Tasks.Task<int> UpdateOneApptAsync(int patientID, string appointmentType, System.DateTime oldTime, System.DateTime newTime) {
+            return base.Channel.UpdateOneApptAsync(patientID, appointmentType, oldTime, newTime);
+        }
+        
+        public int DeleteOneAppt(int uid, System.DateTime dateTime) {
+            return base.Channel.DeleteOneAppt(uid, dateTime);
+        }
+        
+        public System.Threading.Tasks.Task<int> DeleteOneApptAsync(int uid, System.DateTime dateTime) {
+            return base.Channel.DeleteOneApptAsync(uid, dateTime);
         }
     }
 }

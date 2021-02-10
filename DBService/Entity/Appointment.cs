@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
@@ -152,7 +153,7 @@ namespace DBService.Entity
                 }
 
                 Appointment obj = new Appointment(patientID, doctorID, nurseID, caregiverID, appointmentType, prescription, remarks, dateTime, followUp, status);
-                
+
                 apptList.Add(obj);
             }
             return apptList;
@@ -541,4 +542,3 @@ namespace DBService.Entity
 
 
 }
-

@@ -87,6 +87,41 @@ namespace DBService
 
         [OperationContract]
         int CreateReceipt(DateTime dateSale, double totalSum, bool isPaid);
+
+        // Appointments IService Methods
+        [OperationContract]
+        List<Appointment> GetAllApptAdmin();
+
+        [OperationContract]
+
+        List<Appointment> GetAllApptUser(int uid);
+        [OperationContract]
+
+        List<Appointment> GetAllApptUserUpcoming(int uid);
+
+        [OperationContract]
+
+        List<Appointment> GetAllApptUserPast(int uid);
+
+        [OperationContract]
+
+        List<Appointment> GetAllApptUserMissed(int uid);
+
+        [OperationContract]
+        int CreateAppointment(int patientID, string appointmentType, DateTime dateTime, string status);
+
+        [OperationContract]
+        Appointment GetOneAppt(int patientID, DateTime dateTime);
+
+        [OperationContract]
+        int UpdateOneAppt(int patientID, string appointmentType, DateTime oldTime, DateTime newTime);
+
+        [OperationContract]
+        int DeleteOneAppt(int uid, DateTime dateTime);
+
+
+        // End of Appointments IService Methods
+
         // Taken from practical 4, methods are listed in the abstract interface, method bodies are in service1.cs
         /*        [OperationContract]
                 List<Employee> GetAllEmployee();
@@ -99,6 +134,7 @@ namespace DBService
                 [OperationContract]
 
                 Customer GetCustomerById(string id);*/
+
     }
 
     // Use a data contract as illustrated in the sample below to add composite types to service operations.
