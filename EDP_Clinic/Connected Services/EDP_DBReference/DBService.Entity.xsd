@@ -58,6 +58,23 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="ArrayOfCardInfo" nillable="true" type="tns:ArrayOfCardInfo" />
+  <xs:complexType name="ArrayOfReceipt">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Receipt" nillable="true" type="tns:Receipt" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfReceipt" nillable="true" type="tns:ArrayOfReceipt" />
+  <xs:complexType name="Receipt">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="DateSale" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="IsPaid" type="xs:boolean" />
+      <xs:element minOccurs="0" name="ReceiptLink" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="TotalSum" type="xs:double" />
+      <xs:element minOccurs="0" name="UniqueIdentifier" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="UserID" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Receipt" nillable="true" type="tns:Receipt" />
   <xs:complexType name="ArrayOfAppointment">
     <xs:sequence>
       <xs:element minOccurs="0" maxOccurs="unbounded" name="Appointment" nillable="true" type="tns:Appointment" />

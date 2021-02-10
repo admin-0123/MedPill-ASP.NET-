@@ -70,6 +70,7 @@ namespace DBService
         string CheckCodeByEmail(string email);
         [OperationContract]
         int AddCode(string email, string code);
+
         //CardInfo Entity Class
         [OperationContract]
         int CreateCardInfo(string userID, string cardName, string cardNumber,
@@ -90,7 +91,13 @@ namespace DBService
         //int UpdateByCardNumber(string previousCardNumber, string cardName, string cardNumber, DateTime cardExpiry, string cvvNumber);
 
         [OperationContract]
-        int CreateReceipt(DateTime dateSale, double totalSum, bool isPaid);
+        int CreateReceipt(string userID, DateTime dateSale, double totalSum, bool isPaid, string receiptLink, string uniqueIdentifier);
+
+        [OperationContract]
+        List<Receipt> SelectAllReceipt(string userID);
+
+        [OperationContract]
+        Receipt SelectByReceiptID(string userID, string uniqueIdentifier);
 
         // Appointments IService Methods
         [OperationContract]
