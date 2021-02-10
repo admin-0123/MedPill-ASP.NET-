@@ -23,9 +23,10 @@ namespace EDP_Clinic
                 else
                 {
                     //Might put these codes below into a function
+                    string userID = Session["LoggedIn"].ToString().Trim();
                     string cardNumber = Session["UniqueIdentifier"].ToString();//Request.QueryString["cardNumber"];
                     Service1Client client = new Service1Client();
-                    CardInfo cif = client.GetCardByCardNumber(cardNumber);
+                    CardInfo cif = client.GetCardByCardNumber(userID, cardNumber);
 
                     string cardStartNum = cif.CardNumber.Substring(0, 1);
 

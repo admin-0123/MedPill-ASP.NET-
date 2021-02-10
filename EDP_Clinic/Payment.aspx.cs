@@ -31,13 +31,13 @@ namespace EDP_Clinic
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            Session["Login"] = "someone@example.com";
+            //Session["Login"] = "someone@example.com";
 
-            string guidToken = Guid.NewGuid().ToString();
-            Session["AuthToken"] = guidToken;
-            HttpCookie AuthToken = new HttpCookie("AuthToken");
-            AuthToken.Value = guidToken;
-            Response.Cookies.Add(AuthToken);
+            //string guidToken = Guid.NewGuid().ToString();
+            //Session["AuthToken"] = guidToken;
+            //HttpCookie AuthToken = new HttpCookie("AuthToken");
+            //AuthToken.Value = guidToken;
+            //Response.Cookies.Add(AuthToken);
 
 
             //Checks user session
@@ -61,9 +61,11 @@ namespace EDP_Clinic
         }
         protected void retrieveCardInfo()
         {
+            string userID = Session["LoggedIn"].ToString().Trim();
+
             List<CardInfo> cifList = new List<CardInfo>();
             Service1Client client = new Service1Client();
-            cifList = client.GetAllCards().ToList<CardInfo>();
+            cifList = client.GetAllCards(userID).ToList<CardInfo>();
 
             cardListView.Visible = true;
             cardListView.DataSource = cifList;
@@ -398,11 +400,13 @@ namespace EDP_Clinic
             //Checks if button clicked is view more button
             if (String.Equals(e.CommandName, "payNow"))
             {
+                string userID = Session["LoggedIn"].ToString().Trim();
+
                 Service1Client client = new Service1Client();
 
                 string uniqueIdentifier = e.CommandArgument.ToString();
 
-                CardInfo cif = client.GetCardByCardNumber(uniqueIdentifier);
+                CardInfo cif = client.GetCardByCardNumber(userID, uniqueIdentifier);
 
                 string cardNumber = cif.CardNumber;
 

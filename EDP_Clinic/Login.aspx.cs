@@ -57,14 +57,17 @@ namespace EDP_Clinic
                 Session["AuthToken"] = guid;
                 if (role == "Patient")
                 {
+                    Response.Cookies.Add(new HttpCookie("AuthToken", guid));
                     Response.Redirect("UserPage.aspx", false);
                 }
                 else if (role == "Admin")
                 {
+                    Response.Cookies.Add(new HttpCookie("AuthToken", guid));
                     Response.Redirect("AdminPage.aspx", false);
                 }
                 else
                 {
+                    Response.Cookies.Add(new HttpCookie("AuthToken", guid));
                     Response.Redirect("PatientOverview.aspx", false);
                 }
             }

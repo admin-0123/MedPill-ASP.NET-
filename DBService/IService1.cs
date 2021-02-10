@@ -76,10 +76,10 @@ namespace DBService
             DateTime cardExpiry, string cvvNumber, byte[] iv, byte[] key, bool stillValid, string uniqueIdentifier);
 
         [OperationContract]
-        CardInfo GetCardByCardNumber(string uniqueIdentifier);
+        CardInfo GetCardByCardNumber(string userID, string uniqueIdentifier);
 
         [OperationContract]
-        List<CardInfo> GetAllCards();
+        List<CardInfo> GetAllCards(string userID);
 
         [OperationContract]
         int DeleteByCardNumber(string uniqueIdentifier);

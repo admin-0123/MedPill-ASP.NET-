@@ -34,7 +34,7 @@ namespace EDP_Clinic
             //AuthToken.Value = guidToken;
             //Response.Cookies.Add(AuthToken);
 
-            if (Session["Login"] != null && Session["AuthToken"] != null && Request.Cookies["AuthToken"] != null)
+            if (Session["LoggedIn"] != null && Session["AuthToken"] != null && Request.Cookies["AuthToken"] != null)
             {
                 if (!Session["AuthToken"].ToString().Equals(Request.Cookies["AuthToken"].Value))
                 {

@@ -95,7 +95,7 @@ namespace DBService.Entity
                 }
             }
         }
-        public CardInfo GetCardByCardNumber(string uniqueIdentifier)
+        public CardInfo GetCardByCardNumber(string userID, string uniqueIdentifier)
         {
             //Step 1 -  Define a connection to the database by getting
             //          the connection string from App.config
@@ -103,9 +103,10 @@ namespace DBService.Entity
             using (SqlConnection myConn = new SqlConnection(DBConnect))
             {
                 //Step 2 - Create DataAdapter to retrieve data from database table
-                string sqlStatement = "SELECT * FROM CardInfo WHERE UniqueIdentifier = @paraUniqueIdentifier";
+                string sqlStatement = "SELECT * FROM CardInfo WHERE UniqueIdentifier = @paraUniqueIdentifier, UserId = @paraUserID";
                 using (SqlDataAdapter da = new SqlDataAdapter(sqlStatement, myConn))
                 {
+                    da.SelectCommand.Parameters.AddWithValue("@paraUserID", userID);
                     da.SelectCommand.Parameters.AddWithValue("@paraUniqueIdentifier", uniqueIdentifier);
 
                     //Step 3 - Create a dataset to store data to be retrieved
@@ -123,7 +124,7 @@ namespace DBService.Entity
                             {
                                 DataRow row = ds.Tables[0].Rows[0]; //Returns one record
                                 //int cardID = Convert.ToInt32(row["Id"].ToString());
-                                string userID = row["UserId"].ToString();
+                                //string userID = row["UserId"].ToString();
                                 byte[] cardName = Convert.FromBase64String(row["CardName"].ToString());
                                 byte[] cardNumber = Convert.FromBase64String(row["CardNumber"].ToString());
                                 byte[] cardExpiry = Convert.FromBase64String(row["CardExpiry"].ToString());
@@ -218,7 +219,7 @@ namespace DBService.Entity
         //BIG NOTE HERE
         //Make sure end product select cards based on userID
         //Because currently, we select all users' cards
-        public List<CardInfo> SelectAllCards()
+        public List<CardInfo> SelectAllCards(string userID)
         {
             //Step 1 -  Define a connection to the database by getting
             //          the connection string from App.config
@@ -226,9 +227,11 @@ namespace DBService.Entity
             using (SqlConnection myConn = new SqlConnection(DBConnect))
             {
                 //Step 2 -  Create a DataAdapter object to retrieve data from the database table
-                string sqlStatement = "SELECT * FROM CardInfo";
+                string sqlStatement = "SELECT * FROM CardInfo WHERE UserId = @paraUserID";
                 using (SqlDataAdapter da = new SqlDataAdapter(sqlStatement, myConn))
                 {
+                    da.SelectCommand.Parameters.AddWithValue("@paraUserID", userID);
+
                     //Step 3 -  Create a DataSet to store the data to be retrieved
                     using (DataSet ds = new DataSet())
                     {
@@ -244,7 +247,7 @@ namespace DBService.Entity
                             {
                                 DataRow row = ds.Tables[0].Rows[i];  // Sql command returns only one record
                                 //int cardID = Convert.ToInt32(row["Id"].ToString());
-                                string userID = row["UserId"].ToString();
+                                //string userID = row["UserId"].ToString();
                                 byte[] cardName = Convert.FromBase64String(row["CardName"].ToString());
                                 byte[] cardNumber = Convert.FromBase64String(row["CardNumber"].ToString());
                                 byte[] cardExpiry = Convert.FromBase64String(row["CardExpiry"].ToString());

@@ -154,15 +154,15 @@ namespace DBService
             CardInfo cif = new CardInfo(userID, cardName, cardNumber, cardExpiry, cvvNumber, iv, key, stillValid, uniqueIdentifier);
             return cif.Insert();
         }
-        public CardInfo GetCardByCardNumber(string uniqueIdentifier)
+        public CardInfo GetCardByCardNumber(string userID, string uniqueIdentifier)
         {
             CardInfo cif = new CardInfo();
-            return cif.GetCardByCardNumber(uniqueIdentifier);
+            return cif.GetCardByCardNumber(userID, uniqueIdentifier);
         }
-        public List<CardInfo> GetAllCards()
+        public List<CardInfo> GetAllCards(string userID)
         {
             CardInfo cif = new CardInfo();
-            return cif.SelectAllCards();
+            return cif.SelectAllCards(userID);
         }
         public bool CheckCardByCardNumber(string uniqueIdentifier)
         {

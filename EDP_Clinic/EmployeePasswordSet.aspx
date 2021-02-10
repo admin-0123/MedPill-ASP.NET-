@@ -21,9 +21,9 @@
         <asp:TextBox ID="tbpassword2" runat="server" TextMode="Password"></asp:TextBox>
         &nbsp;<asp:Label ID="errorMsg" runat="server"></asp:Label>
         </br>
-      <asp:Button ID="Button1" runat="server" Text="Submit" class="login login-submit" OnClick="Button1_Click"/>
+      <asp:Button ID="Button1" runat="server" Text="Submit" class="login login-submit" OnClick="Button1_Click" />
         <asp:Label ID="codeLbl" runat="server" Visible="False"></asp:Label>
-&nbsp;</form>
+        &nbsp;</form>
   <div class="login-help">
       <a href="#">Register</a> • <a href="#">Forgot Password</a>
   </div>
