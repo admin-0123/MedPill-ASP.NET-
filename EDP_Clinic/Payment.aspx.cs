@@ -17,6 +17,13 @@ using EDP_Clinic.EDP_DBReference;
 using System.Diagnostics;
 using System.Net.Http;
 using System.Net.Mail;
+using System.Threading.Tasks;
+using System.Net.Http.Headers;
+using PayPal.Api;
+using Twilio;
+using Twilio.Rest.Api.V2010.Account;
+using System.Collections.Specialized;
+using System.Configuration;
 
 namespace EDP_Clinic
 {
@@ -257,6 +264,7 @@ namespace EDP_Clinic
                     Debug.WriteLine(receiptLink);
                     Debug.WriteLine(resultConfirmPayment);
                     SendEmail(receiptLink, emailLink);
+                    //TwilioSMS();
 
                     //var service = new PaymentIntentService();
                     //var paymentIntent = service.Create(options);
@@ -382,7 +390,7 @@ namespace EDP_Clinic
 
         protected void backBtn_Click(object sender, EventArgs e)
         {
-
+            //Response.Redirect
         }
 
         protected void cardListView_ItemCommand(object sender, ListViewCommandEventArgs e)
@@ -450,6 +458,7 @@ namespace EDP_Clinic
                     Debug.WriteLine(receiptLink);
                     Debug.WriteLine(resultConfirmPayment);
                     SendEmail(receiptLink, emailLink);
+                    //TwilioSMS();
                     Response.Redirect("AfterPayment.aspx", false);
                 }
                 catch (StripeException ex)
@@ -510,6 +519,213 @@ namespace EDP_Clinic
             mail.From = new MailAddress("bryanchinzw@gmail.com");
             mail.To.Add(new MailAddress(emailLink));
             emailClient.Send(mail);
+        }
+
+        //PayPal Payment
+        protected void payPalBtn_Click(object sender, EventArgs e)
+        {
+            // Get a reference to the config
+            var config = ConfigManager.Instance.GetProperties();
+
+            // Use OAuthTokenCredential to request an access token from PayPal
+            var accessToken = new OAuthTokenCredential(config).GetAccessToken();
+
+            var apiContext = new APIContext(accessToken);
+
+            //// Initialize the apiContext's configuration with the default configuration for this application.
+            //apiContext.Config = ConfigManager.Instance.GetProperties();
+
+            //// Define any custom configuration settings for calls that will use this object.
+            //apiContext.Config["connectionTimeout"] = "1000"; // Quick timeout for testing purposes
+
+            //// Define any HTTP headers to be used in HTTP requests made with this APIContext object
+            //if (apiContext.HTTPHeaders == null)
+            //{
+            //    apiContext.HTTPHeaders = new Dictionary<string, string>();
+            //}
+            //apiContext.HTTPHeaders["some-header-name"] = "some-value";
+
+            //string payerId = Request.Params["PayerID"];
+            //if (string.IsNullOrEmpty(payerId))
+            //{
+            //    // ###Items
+            //    // Items within a transaction.
+            //    var itemList = new ItemList()
+            //    {
+            //        items = new List<Item>()
+            //        {
+            //            new Item()
+            //            {
+            //                name = "Item Name",
+            //                currency = "USD",
+            //                price = "15",
+            //                quantity = "5",
+            //                sku = "sku"
+            //            }
+            //        }
+            //    };
+
+            //    // ###Payer
+            //    // A resource representing a Payer that funds a payment
+            //    // Payment Method
+            //    // as `paypal`
+            //    var payer = new Payer() { payment_method = "paypal" };
+
+            //    // ###Redirect URLS
+            //    // These URLs will determine how the user is redirected from PayPal once they have either approved or canceled the payment.
+            //    var baseURI = Request.Url.Scheme + "://" + Request.Url.Authority + "/PaymentWithPayPal.aspx?";
+            //    var guid = Convert.ToString((new Random()).Next(100000));
+            //    var redirectUrl = baseURI + "guid=" + guid;
+            //    var redirUrls = new RedirectUrls()
+            //    {
+            //        cancel_url = redirectUrl + "&cancel=true",
+            //        return_url = redirectUrl
+            //    };
+
+            //    // ###Details
+            //    // Let's you specify details of a payment amount.
+            //    var details = new Details()
+            //    {
+            //        tax = "15",
+            //        shipping = "10",
+            //        subtotal = "75"
+            //    };
+
+            //    // ###Amount
+            //    // Let's you specify a payment amount.
+            //    var amount = new Amount()
+            //    {
+            //        currency = "USD",
+            //        total = "100.00", // Total must be equal to sum of shipping, tax and subtotal.
+            //        details = details
+            //    };
+
+            //    // ###Transaction
+            //    // A transaction defines the contract of a
+            //    // payment - what is the payment for and who
+            //    // is fulfilling it. 
+            //    var transactionList = new List<Transaction>();
+
+            //    // The Payment creation API requires a list of
+            //    // Transaction; add the created `Transaction`
+            //    // to a List
+            //    transactionList.Add(new Transaction()
+            //    {
+            //        description = "Transaction description.",
+            //        invoice_number = Common.GetRandomInvoiceNumber(),
+            //        amount = amount,
+            //        item_list = itemList
+            //    });
+
+            //    // ###Payment
+            //    // A Payment Resource; create one using
+            //    // the above types and intent as `sale` or `authorize`
+            //    var payment = new Payment()
+            //    {
+            //        intent = "sale",
+            //        payer = payer,
+            //        transactions = transactionList,
+            //        redirect_urls = redirUrls
+            //    };
+
+            //    // ^ Ignore workflow code segment
+            //    #region Track Workflow
+            //    this.flow.AddNewRequest("Create PayPal payment", payment);
+            //    #endregion
+
+            //    // Create a payment using a valid APIContext
+            //    var createdPayment = payment.Create(apiContext);
+
+            //    // ^ Ignore workflow code segment
+            //    #region Track Workflow
+            //    this.flow.RecordResponse(createdPayment);
+            //    #endregion
+
+            //    // Using the `links` provided by the `createdPayment` object, we can give the user the option to redirect to PayPal to approve the payment.
+            //    var links = createdPayment.links.GetEnumerator();
+            //    while (links.MoveNext())
+            //    {
+            //        var link = links.Current;
+            //        if (link.rel.ToLower().Trim().Equals("approval_url"))
+            //        {
+            //            this.flow.RecordRedirectUrl("Redirect to PayPal to approve the payment...", link.href);
+            //        }
+            //    }
+            //    Session.Add(guid, createdPayment.id);
+            //    Session.Add("flow-" + guid, this.flow);
+            //}
+            //else
+            //{
+            //    var guid = Request.Params["guid"];
+
+            //    // ^ Ignore workflow code segment
+            //    #region Track Workflow
+            //    this.flow = Session["flow-" + guid] as RequestFlow;
+            //    this.RegisterSampleRequestFlow();
+            //    this.flow.RecordApproval("PayPal payment approved successfully.");
+            //    #endregion
+
+            //    // Using the information from the redirect, setup the payment to execute.
+            //    var paymentId = Session[guid] as string;
+            //    var paymentExecution = new PaymentExecution() { payer_id = payerId };
+            //    var payment = new Payment() { id = paymentId };
+
+            //    // ^ Ignore workflow code segment
+            //    #region Track Workflow
+            //    this.flow.AddNewRequest("Execute PayPal payment", payment);
+            //    #endregion
+
+            //    // Execute the payment.
+            //    var executedPayment = payment.Execute(apiContext, paymentExecution);
+            //    // ^ Ignore workflow code segment
+
+
+            //    // For more information, please visit [PayPal Developer REST API Reference](https://developer.paypal.com/docs/api/).
+            //}
+
+
+            //HttpClient client = new HttpClient();
+
+            //client.BaseAddress = new Uri("https://api-m.sandbox.paypal.com/");
+            //client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("client_id", "AT9DJyeJMIR8vwF_hXg51sixRS0sEi3gKj6NZIzrlFq0JdlldbY5NKstWc6AYYNYiNIjZz4xLwnac153");
+            //client.DefaultRequestHeaders
+            //    .Accept
+            //    .Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+            //Task<HttpResponseMessage> responseTask;
+            //responseTask = client.GetAsync("v1/oauth2/token");
+            //responseTask.Wait();
+
+            //var result = responseTask.Result;
+            //Debug.WriteLine(result.ToString());
+            //Debug.WriteLine(result.StatusCode);
+            ////Debug.WriteLine(result.Content.ReadAsStreamAsync());
+            //var jsonResponse = result.Content.ReadAsStreamAsync();
+            //Debug.WriteLine(jsonResponse.Result);
+
+        }
+
+        protected void TwilioSMS()
+        {
+            Debug.WriteLine("Calling Twilio SMS Function");
+            //Retrieve keys from web.config
+            NameValueCollection myKeys = ConfigurationManager.AppSettings;
+
+            //Reading keys
+            var twilioAccSid = myKeys["TWILIO_ACCOUNT_SID"];
+            var twilioAuth = myKeys["TWILIO_AUTH_TOKEN"];
+            //const string serviceSid = "IS118b50a34ccf7d845af153585b800f7b";
+
+            TwilioClient.Init(twilioAccSid, twilioAuth);
+            //(205) 946 - 1964
+            //  + 1 213 279 6783
+            var message = MessageResource.Create(
+            body: "Dear user, you have successfully paid your appointment.",
+            from: new Twilio.Types.PhoneNumber("+12132796783"),
+            to: new Twilio.Types.PhoneNumber("+6590251744")
+        );
+
+            Debug.WriteLine(message.Sid);
         }
 
     }

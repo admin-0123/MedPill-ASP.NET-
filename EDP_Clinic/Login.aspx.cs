@@ -88,6 +88,7 @@ namespace EDP_Clinic
             {
                 return false;
             }
+            */
         }
     }
 }

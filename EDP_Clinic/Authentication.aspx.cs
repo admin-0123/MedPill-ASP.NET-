@@ -267,7 +267,7 @@ namespace EDP_Clinic
 
         //Twilio SMS API
         //Will need to put in parameters to add in phone number and personalise message
-        protected void TwilioSMS()
+        protected void TwilioSMS(string messageBody)
         {
             Debug.WriteLine("Calling Twilio SMS Function");
             //Retrieve keys from web.config
@@ -282,7 +282,7 @@ namespace EDP_Clinic
             //(205) 946 - 1964
             //  + 1 213 279 6783
             var message = MessageResource.Create(
-            body: "Dear user, an authentication has been made on your account.",
+            body: "Dear user, " + messageBody,
             from: new Twilio.Types.PhoneNumber("+12132796783"),
             to: new Twilio.Types.PhoneNumber("+6590251744")
         );
@@ -311,7 +311,7 @@ namespace EDP_Clinic
                 if (validOTP == true)
                 {
                     //Call Twilio SMS Function
-                    //TwilioSMS();
+                    TwilioSMS("an authentication has been made on your account.");
 
                     //A bunch of if else statements here to redirect user to respective pages
                     if (validSessionReason == 1)
@@ -345,6 +345,9 @@ namespace EDP_Clinic
                             Session.Remove("deleteCardInfo");
                             Response.Cookies["deleteCardInfo"].Value = string.Empty;
                             Response.Cookies["deleteCardInfo"].Expires = DateTime.Now.AddMonths(-20);
+
+                            //Call Twilio SMS Function to tell user that cardInfo has been deleted
+                            TwilioSMS("we have successfully deleted your card information.");
 
                             Response.Redirect("CardList.aspx", false);
                         }
