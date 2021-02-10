@@ -20,9 +20,9 @@ namespace EDP_Clinic
             dateTimeinput = Convert.ToDateTime(apptDetail["dateTime"]);
             var appt = svc_client.GetOneAppt(Convert.ToInt32(Session["current_appt_profile"]), dateTimeinput);
 
-            var patient = svc_client.GetOneUser(appt.patientID);
+            var patient = svc_client.GetOneUser(appt.patientID.ToString());
 
-            var doctor = svc_client.GetOneUser(appt.doctorID);
+            var doctor = svc_client.GetOneUser(appt.doctorID.ToString());
 
             lbl_apptType.Text = $"Appointment Type: {appt.appointmentType.ToString()}";
             lbl_datetime.Text = $"Appointment Time: {appt.dateTime.ToString()}";
@@ -50,7 +50,7 @@ namespace EDP_Clinic
 
                 TwilioClient.Init(accountSid, authToken);
 
-                if (patient.Id != Convert.ToInt32(Session["UserID"]))
+                if (patient.Id != Session["current_appt_profile"].ToString())
                 {
                     var message = MessageResource.Create(
                     body: $"You have successfully made an appointment for {patient.Name.Trim()} with MedPill Clinic, report to the clinic on {appt.dateTime.ToString("G")}",

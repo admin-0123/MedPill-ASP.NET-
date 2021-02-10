@@ -126,6 +126,16 @@ namespace DBService
         [OperationContract]
         int DeleteOneAppt(int uid, DateTime dateTime);
 
+        [OperationContract]
+
+        Photo GetOnePhoto(string id);
+
+        [OperationContract]
+
+        Caregiver GetOneCG(string id);
+
+
+
 
         // End of Appointments IService Methods
 
