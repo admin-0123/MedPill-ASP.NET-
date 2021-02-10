@@ -79,4 +79,19 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="Appointment" nillable="true" type="tns:Appointment" />
+  <xs:complexType name="Photo">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Id" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Photo_Resource" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Photo" nillable="true" type="tns:Photo" />
+  <xs:complexType name="Caregiver">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Carereceiver_id" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Certified_cg" type="xs:int" />
+      <xs:element minOccurs="0" name="Id" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Caregiver" nillable="true" type="tns:Caregiver" />
 </xs:schema>

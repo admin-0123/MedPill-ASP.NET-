@@ -592,4 +592,32 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="GetOnePhoto">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="id" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetOnePhotoResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q20="http://schemas.datacontract.org/2004/07/DBService.Entity" minOccurs="0" name="GetOnePhotoResult" nillable="true" type="q20:Photo" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetOneCG">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="id" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetOneCGResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q21="http://schemas.datacontract.org/2004/07/DBService.Entity" minOccurs="0" name="GetOneCGResult" nillable="true" type="q21:Caregiver" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
 </xs:schema>
