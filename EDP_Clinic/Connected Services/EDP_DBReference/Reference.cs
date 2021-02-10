@@ -421,6 +421,9 @@ namespace EDP_Clinic.EDP_DBReference {
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string UniqueIdentifierField;
         
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string UserIDField;
+        
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
             get {
@@ -531,6 +534,19 @@ namespace EDP_Clinic.EDP_DBReference {
                 if ((object.ReferenceEquals(this.UniqueIdentifierField, value) != true)) {
                     this.UniqueIdentifierField = value;
                     this.RaisePropertyChanged("UniqueIdentifier");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string UserID {
+            get {
+                return this.UserIDField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.UserIDField, value) != true)) {
+                    this.UserIDField = value;
+                    this.RaisePropertyChanged("UserID");
                 }
             }
         }
@@ -1043,10 +1059,10 @@ namespace EDP_Clinic.EDP_DBReference {
         System.Threading.Tasks.Task<int> AddCodeAsync(string email, string code);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/CreateCardInfo", ReplyAction="http://tempuri.org/IService1/CreateCardInfoResponse")]
-        int CreateCardInfo(string cardName, string cardNumber, System.DateTime cardExpiry, string cvvNumber, byte[] iv, byte[] key, bool stillValid, string uniqueIdentifier);
+        int CreateCardInfo(string userID, string cardName, string cardNumber, System.DateTime cardExpiry, string cvvNumber, byte[] iv, byte[] key, bool stillValid, string uniqueIdentifier);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/CreateCardInfo", ReplyAction="http://tempuri.org/IService1/CreateCardInfoResponse")]
-        System.Threading.Tasks.Task<int> CreateCardInfoAsync(string cardName, string cardNumber, System.DateTime cardExpiry, string cvvNumber, byte[] iv, byte[] key, bool stillValid, string uniqueIdentifier);
+        System.Threading.Tasks.Task<int> CreateCardInfoAsync(string userID, string cardName, string cardNumber, System.DateTime cardExpiry, string cvvNumber, byte[] iv, byte[] key, bool stillValid, string uniqueIdentifier);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetCardByCardNumber", ReplyAction="http://tempuri.org/IService1/GetCardByCardNumberResponse")]
         EDP_Clinic.EDP_DBReference.CardInfo GetCardByCardNumber(string uniqueIdentifier);
@@ -1071,12 +1087,6 @@ namespace EDP_Clinic.EDP_DBReference {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/CheckCardByCardNumber", ReplyAction="http://tempuri.org/IService1/CheckCardByCardNumberResponse")]
         System.Threading.Tasks.Task<bool> CheckCardByCardNumberAsync(string uniqueIdentifier);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/UpdateByCardNumber", ReplyAction="http://tempuri.org/IService1/UpdateByCardNumberResponse")]
-        int UpdateByCardNumber(string previousCardNumber, string cardName, string cardNumber, System.DateTime cardExpiry, string cvvNumber);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/UpdateByCardNumber", ReplyAction="http://tempuri.org/IService1/UpdateByCardNumberResponse")]
-        System.Threading.Tasks.Task<int> UpdateByCardNumberAsync(string previousCardNumber, string cardName, string cardNumber, System.DateTime cardExpiry, string cvvNumber);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/CreateReceipt", ReplyAction="http://tempuri.org/IService1/CreateReceiptResponse")]
         int CreateReceipt(System.DateTime dateSale, double totalSum, bool isPaid);
@@ -1378,12 +1388,12 @@ namespace EDP_Clinic.EDP_DBReference {
             return base.Channel.AddCodeAsync(email, code);
         }
         
-        public int CreateCardInfo(string cardName, string cardNumber, System.DateTime cardExpiry, string cvvNumber, byte[] iv, byte[] key, bool stillValid, string uniqueIdentifier) {
-            return base.Channel.CreateCardInfo(cardName, cardNumber, cardExpiry, cvvNumber, iv, key, stillValid, uniqueIdentifier);
+        public int CreateCardInfo(string userID, string cardName, string cardNumber, System.DateTime cardExpiry, string cvvNumber, byte[] iv, byte[] key, bool stillValid, string uniqueIdentifier) {
+            return base.Channel.CreateCardInfo(userID, cardName, cardNumber, cardExpiry, cvvNumber, iv, key, stillValid, uniqueIdentifier);
         }
         
-        public System.Threading.Tasks.Task<int> CreateCardInfoAsync(string cardName, string cardNumber, System.DateTime cardExpiry, string cvvNumber, byte[] iv, byte[] key, bool stillValid, string uniqueIdentifier) {
-            return base.Channel.CreateCardInfoAsync(cardName, cardNumber, cardExpiry, cvvNumber, iv, key, stillValid, uniqueIdentifier);
+        public System.Threading.Tasks.Task<int> CreateCardInfoAsync(string userID, string cardName, string cardNumber, System.DateTime cardExpiry, string cvvNumber, byte[] iv, byte[] key, bool stillValid, string uniqueIdentifier) {
+            return base.Channel.CreateCardInfoAsync(userID, cardName, cardNumber, cardExpiry, cvvNumber, iv, key, stillValid, uniqueIdentifier);
         }
         
         public EDP_Clinic.EDP_DBReference.CardInfo GetCardByCardNumber(string uniqueIdentifier) {
@@ -1416,14 +1426,6 @@ namespace EDP_Clinic.EDP_DBReference {
         
         public System.Threading.Tasks.Task<bool> CheckCardByCardNumberAsync(string uniqueIdentifier) {
             return base.Channel.CheckCardByCardNumberAsync(uniqueIdentifier);
-        }
-        
-        public int UpdateByCardNumber(string previousCardNumber, string cardName, string cardNumber, System.DateTime cardExpiry, string cvvNumber) {
-            return base.Channel.UpdateByCardNumber(previousCardNumber, cardName, cardNumber, cardExpiry, cvvNumber);
-        }
-        
-        public System.Threading.Tasks.Task<int> UpdateByCardNumberAsync(string previousCardNumber, string cardName, string cardNumber, System.DateTime cardExpiry, string cvvNumber) {
-            return base.Channel.UpdateByCardNumberAsync(previousCardNumber, cardName, cardNumber, cardExpiry, cvvNumber);
         }
         
         public int CreateReceipt(System.DateTime dateSale, double totalSum, bool isPaid) {

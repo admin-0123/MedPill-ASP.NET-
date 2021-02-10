@@ -16,6 +16,7 @@ namespace DBService.Entity
     {
         //Properties of CardInfo Entity
         //public int CardID { get; set; }
+        public string UserID { get; set; }
         public string CardName { get; set; }
         public string CardNumber { get; set; }
         public DateTime CardExpiry { get; set; }
@@ -32,11 +33,12 @@ namespace DBService.Entity
         }
 
         //Constructor with parameters to initialise all properties
-        public CardInfo(string cardName, string cardNumber,
+        public CardInfo(string userID, string cardName, string cardNumber,
             DateTime cardExpiry, string cvvNumber, byte[] iv,
             byte[] key, bool stillValid, string uniqueIdentifier)
         {
             //CardID = cardID;
+            UserID = userID;
             CardName = cardName;
             CardNumber = cardNumber;
             CardExpiry = cardExpiry;
@@ -60,6 +62,7 @@ namespace DBService.Entity
                 {
                     //Step 3 - Add info to each parameterised variables
                     //sqlCmd.Parameters.AddWithValue("@paraCardID", CardID);
+                    sqlCmd.Parameters.AddWithValue("@paraUserID", UserID);
                     sqlCmd.Parameters.AddWithValue("@paraCardName", Convert.ToBase64String(encryptData(CardName)));
                     sqlCmd.Parameters.AddWithValue("@paraCardNumber", Convert.ToBase64String(encryptData(CardNumber)));
                     sqlCmd.Parameters.AddWithValue("@paraCardExpiry", Convert.ToBase64String(encryptData(CardExpiry.ToString())));
@@ -120,6 +123,7 @@ namespace DBService.Entity
                             {
                                 DataRow row = ds.Tables[0].Rows[0]; //Returns one record
                                 //int cardID = Convert.ToInt32(row["Id"].ToString());
+                                string userID = row["UserId"].ToString();
                                 byte[] cardName = Convert.FromBase64String(row["CardName"].ToString());
                                 byte[] cardNumber = Convert.FromBase64String(row["CardNumber"].ToString());
                                 byte[] cardExpiry = Convert.FromBase64String(row["CardExpiry"].ToString());
@@ -129,7 +133,7 @@ namespace DBService.Entity
                                 byte[] iv = Convert.FromBase64String(row["IV"].ToString());
                                 byte[] key = Convert.FromBase64String(row["Key"].ToString());
 
-                                cif = new CardInfo(decryptData(iv, key, cardName), decryptData(iv, key, cardNumber), Convert.ToDateTime(decryptData(iv, key, cardExpiry))
+                                cif = new CardInfo(userID, decryptData(iv, key, cardName), decryptData(iv, key, cardNumber), Convert.ToDateTime(decryptData(iv, key, cardExpiry))
                                 , decryptData(iv, key, cvvNumber), iv, key, Convert.ToBoolean(decryptData(iv, key, stillValid)), uniqueIdentifier);
 
                             }
@@ -240,6 +244,7 @@ namespace DBService.Entity
                             {
                                 DataRow row = ds.Tables[0].Rows[i];  // Sql command returns only one record
                                 //int cardID = Convert.ToInt32(row["Id"].ToString());
+                                string userID = row["UserId"].ToString();
                                 byte[] cardName = Convert.FromBase64String(row["CardName"].ToString());
                                 byte[] cardNumber = Convert.FromBase64String(row["CardNumber"].ToString());
                                 byte[] cardExpiry = Convert.FromBase64String(row["CardExpiry"].ToString());
@@ -251,7 +256,7 @@ namespace DBService.Entity
 
                                 string uniqueIdentifier = row["UniqueIdentifier"].ToString();
 
-                                CardInfo cif = new CardInfo(decryptData(iv, key, cardName), decryptData(iv, key, cardNumber), Convert.ToDateTime(decryptData(iv, key, cardExpiry))
+                                CardInfo cif = new CardInfo(userID, decryptData(iv, key, cardName), decryptData(iv, key, cardNumber), Convert.ToDateTime(decryptData(iv, key, cardExpiry))
                                    , decryptData(iv, key, cvvNumber), iv, key, Convert.ToBoolean(decryptData(iv, key, stillValid)), uniqueIdentifier);
                                 cifList.Add(cif);
                             }

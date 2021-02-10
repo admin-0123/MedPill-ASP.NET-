@@ -147,12 +147,11 @@ namespace DBService
             return user.Insert(email, code);
         }
 
-
         //CardInfo Methods
-        public int CreateCardInfo(string cardName, string cardNumber,
+        public int CreateCardInfo(string userID, string cardName, string cardNumber,
             DateTime cardExpiry, string cvvNumber, byte[] iv, byte[] key, bool stillValid, string uniqueIdentifier)
         {
-            CardInfo cif = new CardInfo(cardName, cardNumber, cardExpiry, cvvNumber, iv, key, stillValid, uniqueIdentifier);
+            CardInfo cif = new CardInfo(userID, cardName, cardNumber, cardExpiry, cvvNumber, iv, key, stillValid, uniqueIdentifier);
             return cif.Insert();
         }
         public CardInfo GetCardByCardNumber(string uniqueIdentifier)
@@ -176,11 +175,11 @@ namespace DBService
             return cif.DeleteByCardNumber(uniqueIdentifier);
         }
         //Will prob delete update card number
-        public int UpdateByCardNumber(string previousCardNumber, string cardName, string cardNumber, DateTime cardExpiry, string cvvNumber)
-        {
-            CardInfo cif = new CardInfo();
-            return cif.UpdateByCardNumber(previousCardNumber, cardName, cardNumber, cardExpiry, cvvNumber);
-        }
+        //public int UpdateByCardNumber(string previousCardNumber, string cardName, string cardNumber, DateTime cardExpiry, string cvvNumber)
+        //{
+        //    CardInfo cif = new CardInfo();
+        //    return cif.UpdateByCardNumber(previousCardNumber, cardName, cardNumber, cardExpiry, cvvNumber);
+        //}
         /* 
          Note by Hasan 4/1/2021
 

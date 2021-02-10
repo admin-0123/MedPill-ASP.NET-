@@ -188,12 +188,6 @@
   <wsdl:message name="IService1_CheckCardByCardNumber_OutputMessage">
     <wsdl:part name="parameters" element="tns:CheckCardByCardNumberResponse" />
   </wsdl:message>
-  <wsdl:message name="IService1_UpdateByCardNumber_InputMessage">
-    <wsdl:part name="parameters" element="tns:UpdateByCardNumber" />
-  </wsdl:message>
-  <wsdl:message name="IService1_UpdateByCardNumber_OutputMessage">
-    <wsdl:part name="parameters" element="tns:UpdateByCardNumberResponse" />
-  </wsdl:message>
   <wsdl:message name="IService1_CreateReceipt_InputMessage">
     <wsdl:part name="parameters" element="tns:CreateReceipt" />
   </wsdl:message>
@@ -386,10 +380,6 @@
     <wsdl:operation name="CheckCardByCardNumber">
       <wsdl:input wsaw:Action="http://tempuri.org/IService1/CheckCardByCardNumber" message="tns:IService1_CheckCardByCardNumber_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IService1/CheckCardByCardNumberResponse" message="tns:IService1_CheckCardByCardNumber_OutputMessage" />
-    </wsdl:operation>
-    <wsdl:operation name="UpdateByCardNumber">
-      <wsdl:input wsaw:Action="http://tempuri.org/IService1/UpdateByCardNumber" message="tns:IService1_UpdateByCardNumber_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IService1/UpdateByCardNumberResponse" message="tns:IService1_UpdateByCardNumber_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="CreateReceipt">
       <wsdl:input wsaw:Action="http://tempuri.org/IService1/CreateReceipt" message="tns:IService1_CreateReceipt_InputMessage" />
@@ -705,15 +695,6 @@
     </wsdl:operation>
     <wsdl:operation name="CheckCardByCardNumber">
       <soap:operation soapAction="http://tempuri.org/IService1/CheckCardByCardNumber" style="document" />
-      <wsdl:input>
-        <soap:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="UpdateByCardNumber">
-      <soap:operation soapAction="http://tempuri.org/IService1/UpdateByCardNumber" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
