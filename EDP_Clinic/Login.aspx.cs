@@ -15,7 +15,6 @@ namespace EDP_Clinic
 {
     public partial class Login : System.Web.UI.Page
     {
-        string MYDBConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["EDP_DB"].ConnectionString;
         Service1Client client = new Service1Client();
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -23,13 +22,13 @@ namespace EDP_Clinic
         }
         protected void Button1_Click(object sender, EventArgs e)
         {
-            /*var email = HttpUtility.HtmlEncode(tbemail.Text);
+            var email = HttpUtility.HtmlEncode(tbemail.Text);
             var password = HttpUtility.HtmlEncode(tbpassword.Text);
 
             var emailexist = client.CheckOneUser(email);
-            if (emailexist == 1)
+            if (emailexist == 0)
             {
-                errorMsg.Text = "Email already exists";
+                errorMsg.Text = "Email does not exists";
                 errorMsg.ForeColor = Color.Red;
                 return;
             }

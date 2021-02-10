@@ -19,7 +19,6 @@ namespace EDP_Clinic
 {
     public partial class EmployeePasswordSet : System.Web.UI.Page
     {
-        string MYDBConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["EDP_DB"].ConnectionString;
         static string finalHash;
         static string salt;
 

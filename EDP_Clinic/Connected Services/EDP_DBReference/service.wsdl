@@ -44,6 +44,18 @@
   <wsdl:message name="IService1_DeleteOneUser_OutputMessage">
     <wsdl:part name="parameters" element="tns:DeleteOneUserResponse" />
   </wsdl:message>
+  <wsdl:message name="IService1_AddCaretaker_InputMessage">
+    <wsdl:part name="parameters" element="tns:AddCaretaker" />
+  </wsdl:message>
+  <wsdl:message name="IService1_AddCaretaker_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AddCaretakerResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService1_RemoveCaretaker_InputMessage">
+    <wsdl:part name="parameters" element="tns:RemoveCaretaker" />
+  </wsdl:message>
+  <wsdl:message name="IService1_RemoveCaretaker_OutputMessage">
+    <wsdl:part name="parameters" element="tns:RemoveCaretakerResponse" />
+  </wsdl:message>
   <wsdl:message name="IService1_CheckOneUser_InputMessage">
     <wsdl:part name="parameters" element="tns:CheckOneUser" />
   </wsdl:message>
@@ -109,6 +121,18 @@
   </wsdl:message>
   <wsdl:message name="IService1_ShowAllEmployees_OutputMessage">
     <wsdl:part name="parameters" element="tns:ShowAllEmployeesResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService1_ShowSearchedEmployees_InputMessage">
+    <wsdl:part name="parameters" element="tns:ShowSearchedEmployees" />
+  </wsdl:message>
+  <wsdl:message name="IService1_ShowSearchedEmployees_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ShowSearchedEmployeesResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService1_ShowSearchedPatients_InputMessage">
+    <wsdl:part name="parameters" element="tns:ShowSearchedPatients" />
+  </wsdl:message>
+  <wsdl:message name="IService1_ShowSearchedPatients_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ShowSearchedPatientsResponse" />
   </wsdl:message>
   <wsdl:message name="IService1_GetEmailbyCode_InputMessage">
     <wsdl:part name="parameters" element="tns:GetEmailbyCode" />
@@ -176,6 +200,60 @@
   <wsdl:message name="IService1_CreateReceipt_OutputMessage">
     <wsdl:part name="parameters" element="tns:CreateReceiptResponse" />
   </wsdl:message>
+  <wsdl:message name="IService1_GetAllApptAdmin_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllApptAdmin" />
+  </wsdl:message>
+  <wsdl:message name="IService1_GetAllApptAdmin_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllApptAdminResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService1_GetAllApptUser_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllApptUser" />
+  </wsdl:message>
+  <wsdl:message name="IService1_GetAllApptUser_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllApptUserResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService1_GetAllApptUserUpcoming_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllApptUserUpcoming" />
+  </wsdl:message>
+  <wsdl:message name="IService1_GetAllApptUserUpcoming_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllApptUserUpcomingResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService1_GetAllApptUserPast_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllApptUserPast" />
+  </wsdl:message>
+  <wsdl:message name="IService1_GetAllApptUserPast_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllApptUserPastResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService1_GetAllApptUserMissed_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllApptUserMissed" />
+  </wsdl:message>
+  <wsdl:message name="IService1_GetAllApptUserMissed_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllApptUserMissedResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService1_CreateAppointment_InputMessage">
+    <wsdl:part name="parameters" element="tns:CreateAppointment" />
+  </wsdl:message>
+  <wsdl:message name="IService1_CreateAppointment_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CreateAppointmentResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService1_GetOneAppt_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetOneAppt" />
+  </wsdl:message>
+  <wsdl:message name="IService1_GetOneAppt_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetOneApptResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService1_UpdateOneAppt_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateOneAppt" />
+  </wsdl:message>
+  <wsdl:message name="IService1_UpdateOneAppt_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateOneApptResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService1_DeleteOneAppt_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteOneAppt" />
+  </wsdl:message>
+  <wsdl:message name="IService1_DeleteOneAppt_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteOneApptResponse" />
+  </wsdl:message>
   <wsdl:portType name="IService1">
     <wsdl:operation name="GetData">
       <wsdl:input wsaw:Action="http://tempuri.org/IService1/GetData" message="tns:IService1_GetData_InputMessage" />
@@ -200,6 +278,14 @@
     <wsdl:operation name="DeleteOneUser">
       <wsdl:input wsaw:Action="http://tempuri.org/IService1/DeleteOneUser" message="tns:IService1_DeleteOneUser_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IService1/DeleteOneUserResponse" message="tns:IService1_DeleteOneUser_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AddCaretaker">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/AddCaretaker" message="tns:IService1_AddCaretaker_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/AddCaretakerResponse" message="tns:IService1_AddCaretaker_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="RemoveCaretaker">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/RemoveCaretaker" message="tns:IService1_RemoveCaretaker_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/RemoveCaretakerResponse" message="tns:IService1_RemoveCaretaker_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="CheckOneUser">
       <wsdl:input wsaw:Action="http://tempuri.org/IService1/CheckOneUser" message="tns:IService1_CheckOneUser_InputMessage" />
@@ -245,6 +331,14 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IService1/ShowAllEmployees" message="tns:IService1_ShowAllEmployees_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IService1/ShowAllEmployeesResponse" message="tns:IService1_ShowAllEmployees_OutputMessage" />
     </wsdl:operation>
+    <wsdl:operation name="ShowSearchedEmployees">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/ShowSearchedEmployees" message="tns:IService1_ShowSearchedEmployees_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/ShowSearchedEmployeesResponse" message="tns:IService1_ShowSearchedEmployees_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ShowSearchedPatients">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/ShowSearchedPatients" message="tns:IService1_ShowSearchedPatients_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/ShowSearchedPatientsResponse" message="tns:IService1_ShowSearchedPatients_OutputMessage" />
+    </wsdl:operation>
     <wsdl:operation name="GetEmailbyCode">
       <wsdl:input wsaw:Action="http://tempuri.org/IService1/GetEmailbyCode" message="tns:IService1_GetEmailbyCode_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IService1/GetEmailbyCodeResponse" message="tns:IService1_GetEmailbyCode_OutputMessage" />
@@ -288,6 +382,42 @@
     <wsdl:operation name="CreateReceipt">
       <wsdl:input wsaw:Action="http://tempuri.org/IService1/CreateReceipt" message="tns:IService1_CreateReceipt_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IService1/CreateReceiptResponse" message="tns:IService1_CreateReceipt_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllApptAdmin">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/GetAllApptAdmin" message="tns:IService1_GetAllApptAdmin_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/GetAllApptAdminResponse" message="tns:IService1_GetAllApptAdmin_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllApptUser">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/GetAllApptUser" message="tns:IService1_GetAllApptUser_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/GetAllApptUserResponse" message="tns:IService1_GetAllApptUser_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllApptUserUpcoming">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/GetAllApptUserUpcoming" message="tns:IService1_GetAllApptUserUpcoming_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/GetAllApptUserUpcomingResponse" message="tns:IService1_GetAllApptUserUpcoming_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllApptUserPast">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/GetAllApptUserPast" message="tns:IService1_GetAllApptUserPast_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/GetAllApptUserPastResponse" message="tns:IService1_GetAllApptUserPast_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllApptUserMissed">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/GetAllApptUserMissed" message="tns:IService1_GetAllApptUserMissed_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/GetAllApptUserMissedResponse" message="tns:IService1_GetAllApptUserMissed_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CreateAppointment">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/CreateAppointment" message="tns:IService1_CreateAppointment_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/CreateAppointmentResponse" message="tns:IService1_CreateAppointment_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetOneAppt">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/GetOneAppt" message="tns:IService1_GetOneAppt_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/GetOneApptResponse" message="tns:IService1_GetOneAppt_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateOneAppt">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/UpdateOneAppt" message="tns:IService1_UpdateOneAppt_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/UpdateOneApptResponse" message="tns:IService1_UpdateOneAppt_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteOneAppt">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/DeleteOneAppt" message="tns:IService1_DeleteOneAppt_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/DeleteOneApptResponse" message="tns:IService1_DeleteOneAppt_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IService1" type="tns:IService1">
@@ -339,6 +469,24 @@
     </wsdl:operation>
     <wsdl:operation name="DeleteOneUser">
       <soap:operation soapAction="http://tempuri.org/IService1/DeleteOneUser" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddCaretaker">
+      <soap:operation soapAction="http://tempuri.org/IService1/AddCaretaker" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RemoveCaretaker">
+      <soap:operation soapAction="http://tempuri.org/IService1/RemoveCaretaker" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -445,6 +593,24 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="ShowSearchedEmployees">
+      <soap:operation soapAction="http://tempuri.org/IService1/ShowSearchedEmployees" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ShowSearchedPatients">
+      <soap:operation soapAction="http://tempuri.org/IService1/ShowSearchedPatients" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="GetEmailbyCode">
       <soap:operation soapAction="http://tempuri.org/IService1/GetEmailbyCode" style="document" />
       <wsdl:input>
@@ -537,6 +703,87 @@
     </wsdl:operation>
     <wsdl:operation name="CreateReceipt">
       <soap:operation soapAction="http://tempuri.org/IService1/CreateReceipt" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllApptAdmin">
+      <soap:operation soapAction="http://tempuri.org/IService1/GetAllApptAdmin" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllApptUser">
+      <soap:operation soapAction="http://tempuri.org/IService1/GetAllApptUser" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllApptUserUpcoming">
+      <soap:operation soapAction="http://tempuri.org/IService1/GetAllApptUserUpcoming" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllApptUserPast">
+      <soap:operation soapAction="http://tempuri.org/IService1/GetAllApptUserPast" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllApptUserMissed">
+      <soap:operation soapAction="http://tempuri.org/IService1/GetAllApptUserMissed" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateAppointment">
+      <soap:operation soapAction="http://tempuri.org/IService1/CreateAppointment" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetOneAppt">
+      <soap:operation soapAction="http://tempuri.org/IService1/GetOneAppt" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateOneAppt">
+      <soap:operation soapAction="http://tempuri.org/IService1/UpdateOneAppt" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteOneAppt">
+      <soap:operation soapAction="http://tempuri.org/IService1/DeleteOneAppt" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

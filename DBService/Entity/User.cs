@@ -28,13 +28,14 @@ namespace DBService.Entity
         public string Role { get; set; }
         public string Verified { get; set; }
         public string IsDeleted { get; set; }
+        public string IsCaretaker { get; set; }
 
         public User()
         {
 
         }
 
-        public User(string id, string name, string password, string salt,  string email, string phoneno, string role, string verified, string isdeleted)
+        public User(string id, string name, string password, string salt,  string email, string phoneno, string role, string verified, string isdeleted, string iscaretaker)
         {
             Id = id;
             Name = name;
@@ -45,6 +46,7 @@ namespace DBService.Entity
             Role = role;
             Verified = verified;
             IsDeleted = isdeleted;
+            IsCaretaker = iscaretaker;
       
         }
         public User SelectByID(string id)
@@ -79,8 +81,9 @@ namespace DBService.Entity
                 string Role = row["Role"].ToString();
                 string Verified = row["Verified"].ToString();
                 string IsDeleted = row["IsDeleted"].ToString();
+                string IsCaretaker = row["IsCaretaker"].ToString();
 
-                user = new User(Id, Name, Password, Salt, Email, PhoneNo, Role, Verified, IsDeleted);
+                user = new User(Id, Name, Password, Salt, Email, PhoneNo, Role, Verified, IsDeleted, IsCaretaker);
             }
             return user;
         }
@@ -116,8 +119,9 @@ namespace DBService.Entity
                 string Role = row["Role"].ToString();
                 string Verified = row["Verified"].ToString();
                 string IsDeleted = row["IsDeleted"].ToString();
+                string IsCaretaker = row["IsCaretaker"].ToString();
 
-                user = new User(Id, Name, Password, Salt, Email, PhoneNo, Role, Verified, IsDeleted);
+                user = new User(Id, Name, Password, Salt, Email, PhoneNo, Role, Verified, IsDeleted, IsCaretaker);
             }
             return user;
         }
@@ -125,7 +129,7 @@ namespace DBService.Entity
         {
             string DBConnect = ConfigurationManager.ConnectionStrings["EDP_DB"].ConnectionString;
             SqlConnection myConn = new SqlConnection(DBConnect);
-            string sqlStatement = "INSERT INTO [User] VALUES(@Name, @Password, @Salt, @Email, @PhoneNo, @Role, @Verified, @IsDeleted)";
+            string sqlStatement = "INSERT INTO [User] VALUES(@Name, @Password, @Salt, @Email, @PhoneNo, @Role, @Verified, @IsDeleted, @IsCaretaker)";
             SqlCommand cmd = new SqlCommand(sqlStatement, myConn);
             cmd.Parameters.AddWithValue("@Name", name);
             cmd.Parameters.AddWithValue("@Password", password);
@@ -135,6 +139,7 @@ namespace DBService.Entity
             cmd.Parameters.AddWithValue("@Role", role);
             cmd.Parameters.AddWithValue("@Verified", verified);
             cmd.Parameters.AddWithValue("@IsDeleted", "No");
+            cmd.Parameters.AddWithValue("@IsCaretaker", "No");
             myConn.Open();
             int result = cmd.ExecuteNonQuery();
             myConn.Close();
@@ -216,6 +221,35 @@ namespace DBService.Entity
             return result;
 
         }
+        public int AddCaretaker(string id)
+        {
+            string DBConnect = ConfigurationManager.ConnectionStrings["EDP_DB"].ConnectionString;
+            SqlConnection myConn = new SqlConnection(DBConnect);
+            string sqlStatement = "UPDATE [User] SET IsCaretaker = @Caretaker WHERE Id = @id";
+            SqlCommand cmd = new SqlCommand(sqlStatement, myConn);
+            cmd.Parameters.AddWithValue("@id", id);
+            cmd.Parameters.AddWithValue("@Caretaker", "Yes");
+            myConn.Open();
+            int result = cmd.ExecuteNonQuery();
+            myConn.Close();
+            return result;
+
+        }
+        public int RemoveCaretaker(string id)
+        {
+            string DBConnect = ConfigurationManager.ConnectionStrings["EDP_DB"].ConnectionString;
+            SqlConnection myConn = new SqlConnection(DBConnect);
+            string sqlStatement = "UPDATE [User] SET IsCaretaker = @Caretaker WHERE Id = @id";
+            SqlCommand cmd = new SqlCommand(sqlStatement, myConn);
+            cmd.Parameters.AddWithValue("@id", id);
+            cmd.Parameters.AddWithValue("@Caretaker", "No");
+            myConn.Open();
+            int result = cmd.ExecuteNonQuery();
+            myConn.Close();
+            return result;
+
+        }
+
         public List<User> SelectAll()
         {
             //Step 1 -  Define a connection to the database by getting
@@ -248,8 +282,9 @@ namespace DBService.Entity
                 string Role = row["Role"].ToString();
                 string Verified = row["Verified"].ToString();
                 string IsDeleted = row["IsDeleted"].ToString();
+                string IsCaretaker = row["IsCaretaker"].ToString();
 
-                User obj = new User(Id, Name, Password, Salt, Email, PhoneNo, Role, Verified, IsDeleted);
+                User obj = new User(Id, Name, Password, Salt, Email, PhoneNo, Role, Verified, IsDeleted, IsCaretaker);
                 userList.Add(obj);
             }
             return userList;
@@ -287,8 +322,9 @@ namespace DBService.Entity
                 string Role = row["Role"].ToString();
                 string Verified = row["Verified"].ToString();
                 string IsDeleted = row["IsDeleted"].ToString();
+                string IsCaretaker = row["IsCaretaker"].ToString();
 
-                User obj = new User(Id, Name, Password, Salt, Email, PhoneNo, Role, Verified, IsDeleted);
+                User obj = new User(Id, Name, Password, Salt, Email, PhoneNo, Role, Verified, IsDeleted, IsCaretaker);
                 userList.Add(obj);
             }
             return userList;
@@ -328,12 +364,14 @@ namespace DBService.Entity
                 string Role = row["Role"].ToString();
                 string Verified = row["Verified"].ToString();
                 string IsDeleted = row["IsDeleted"].ToString();
- 
-                User obj = new User(Id, Name, Password, Salt, Email, PhoneNo, Role, Verified,IsDeleted);
+                string IsCaretaker = row["IsCaretaker"].ToString();
+
+                User obj = new User(Id, Name, Password, Salt, Email, PhoneNo, Role, Verified,IsDeleted, IsCaretaker);
                 userList.Add(obj);
             }
             return userList;
         }
+        
 
 
 

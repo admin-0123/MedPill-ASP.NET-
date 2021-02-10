@@ -14,7 +14,6 @@ namespace EDP_Clinic
 {
     public partial class ChangePassword : System.Web.UI.Page
     {
-        string MYDBConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["EDP_DB"].ConnectionString;
         static string finalHash;
         static string salt;
         protected void Page_Load(object sender, EventArgs e)
