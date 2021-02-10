@@ -17,6 +17,7 @@ namespace DBService.Entity
         public DateTime DateSale { get; set; }
         public double TotalSum { get; set; }
         public bool IsPaid { get; set; }
+        public string ReceiptLink { get; set; }
         //public byte[] IV { get; set; }
         //public byte[] Key { get; set; }
         public Receipt()

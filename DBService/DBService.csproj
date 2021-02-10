@@ -51,6 +51,8 @@
   <ItemGroup>
     <Compile Include="Entity\Appointment.cs" />
     <Compile Include="Entity\CardInfo.cs" />
+    <Compile Include="Entity\Caregiver.cs" />
+    <Compile Include="Entity\Photo.cs" />
     <Compile Include="Entity\EmailCode.cs" />
     <Compile Include="Entity\displayUser.cs" />
     <Compile Include="Entity\Receipt.cs" />

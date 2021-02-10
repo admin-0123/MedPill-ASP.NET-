@@ -13,6 +13,10 @@ using System.IO;
 using System.Web.Script.Serialization;
 using System.Diagnostics;
 using EDP_Clinic.EDP_DBReference;
+using Twilio;
+using System.Collections.Specialized;
+using System.Configuration;
+using Twilio.Rest.Api.V2010.Account;
 
 namespace EDP_Clinic
 {
@@ -31,7 +35,7 @@ namespace EDP_Clinic
             //Response.Cookies.Add(AuthToken);
 
             //Checks user session
-            if (Session["Login"] != null && Session["AuthToken"] != null && Request.Cookies["AuthToken"] != null)
+            if (Session["LoggedIn"] != null && Session["AuthToken"] != null && Request.Cookies["AuthToken"] != null)
             {
                 if (!Session["AuthToken"].ToString().Equals(Request.Cookies["AuthToken"].Value))
                 {
@@ -231,9 +235,10 @@ namespace EDP_Clinic
                     string cardNumberInput = cardNumberTB.Text.Trim().Substring(12, 4);
                     string uniqueIdentifier = cardNumberInput + "-" + guid;
                     Debug.WriteLine(uniqueIdentifier);
+                    string userID = Session["LoggedIn"].ToString().Trim();
 
                     //Service1Client client = new Service1Client();
-                    int result = client.CreateCardInfo(nameOnCardTB.Text.Trim(), cardNumberTB.Text.Trim(),
+                    int result = client.CreateCardInfo(userID, nameOnCardTB.Text.Trim(), cardNumberTB.Text.Trim(),
                         Convert.ToDateTime(cardExpiryTB.Text), CVVTB.Text.Trim(), IV, Key, true, uniqueIdentifier);
 
                     if (result == 1)
@@ -316,7 +321,32 @@ namespace EDP_Clinic
             Response.Cookies["authOTPAToken"].Value = string.Empty;
             Response.Cookies["authOTPAToken"].Expires = DateTime.Now.AddMonths(-20);
 
+            //TwilioSMS();
+
             Response.Redirect("CardList.aspx", false);
+        }
+
+        protected void TwilioSMS()
+        {
+            Debug.WriteLine("Calling Twilio SMS Function");
+            //Retrieve keys from web.config
+            NameValueCollection myKeys = ConfigurationManager.AppSettings;
+
+            //Reading keys
+            var twilioAccSid = myKeys["TWILIO_ACCOUNT_SID"];
+            var twilioAuth = myKeys["TWILIO_AUTH_TOKEN"];
+            //const string serviceSid = "IS118b50a34ccf7d845af153585b800f7b";
+
+            TwilioClient.Init(twilioAccSid, twilioAuth);
+            //(205) 946 - 1964
+            //  + 1 213 279 6783
+            var message = MessageResource.Create(
+            body: "Dear user, you have successfully added a card information.",
+            from: new Twilio.Types.PhoneNumber("+12132796783"),
+            to: new Twilio.Types.PhoneNumber("+6590251744")
+        );
+
+            Debug.WriteLine(message.Sid);
         }
     }
 }

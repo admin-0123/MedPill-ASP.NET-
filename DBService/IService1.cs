@@ -71,26 +71,23 @@ namespace DBService
         [OperationContract]
         int AddCode(string email, string code);
         //CardInfo Entity Class
-        //[OperationContract]
-        //int CreateCardInfo(byte[] cardName, byte[] cardNumber,
-        //  byte[] cardExpiry, byte[] cvvNumber, byte[] iv, byte[] key);
         [OperationContract]
-        int CreateCardInfo(string cardName, string cardNumber,
+        int CreateCardInfo(string userID, string cardName, string cardNumber,
             DateTime cardExpiry, string cvvNumber, byte[] iv, byte[] key, bool stillValid, string uniqueIdentifier);
 
         [OperationContract]
-        CardInfo GetCardByCardNumber(string uniqueIdentifier);
+        CardInfo GetCardByCardNumber(string userID, string uniqueIdentifier);
 
         [OperationContract]
-        List<CardInfo> GetAllCards();
+        List<CardInfo> GetAllCards(string userID);
 
         [OperationContract]
         int DeleteByCardNumber(string uniqueIdentifier);
         [OperationContract]
         bool CheckCardByCardNumber(string uniqueIdentifier);
 
-        [OperationContract]
-        int UpdateByCardNumber(string previousCardNumber, string cardName, string cardNumber, DateTime cardExpiry, string cvvNumber);
+        //[OperationContract]
+        //int UpdateByCardNumber(string previousCardNumber, string cardName, string cardNumber, DateTime cardExpiry, string cvvNumber);
 
         [OperationContract]
         int CreateReceipt(DateTime dateSale, double totalSum, bool isPaid);
@@ -125,6 +122,16 @@ namespace DBService
 
         [OperationContract]
         int DeleteOneAppt(int uid, DateTime dateTime);
+
+        [OperationContract]
+
+        Photo GetOnePhoto(string id);
+
+        [OperationContract]
+
+        Caregiver GetOneCG(string id);
+
+
 
 
         // End of Appointments IService Methods

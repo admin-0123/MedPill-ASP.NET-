@@ -354,6 +354,7 @@
   <xs:element name="CreateCardInfo">
     <xs:complexType>
       <xs:sequence>
+        <xs:element minOccurs="0" name="userID" nillable="true" type="xs:string" />
         <xs:element minOccurs="0" name="cardName" nillable="true" type="xs:string" />
         <xs:element minOccurs="0" name="cardNumber" nillable="true" type="xs:string" />
         <xs:element minOccurs="0" name="cardExpiry" type="xs:dateTime" />
@@ -375,6 +376,7 @@
   <xs:element name="GetCardByCardNumber">
     <xs:complexType>
       <xs:sequence>
+        <xs:element minOccurs="0" name="userID" nillable="true" type="xs:string" />
         <xs:element minOccurs="0" name="uniqueIdentifier" nillable="true" type="xs:string" />
       </xs:sequence>
     </xs:complexType>
@@ -388,7 +390,9 @@
   </xs:element>
   <xs:element name="GetAllCards">
     <xs:complexType>
-      <xs:sequence />
+      <xs:sequence>
+        <xs:element minOccurs="0" name="userID" nillable="true" type="xs:string" />
+      </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="GetAllCardsResponse">
@@ -423,24 +427,6 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element minOccurs="0" name="CheckCardByCardNumberResult" type="xs:boolean" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="UpdateByCardNumber">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" name="previousCardNumber" nillable="true" type="xs:string" />
-        <xs:element minOccurs="0" name="cardName" nillable="true" type="xs:string" />
-        <xs:element minOccurs="0" name="cardNumber" nillable="true" type="xs:string" />
-        <xs:element minOccurs="0" name="cardExpiry" type="xs:dateTime" />
-        <xs:element minOccurs="0" name="cvvNumber" nillable="true" type="xs:string" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="UpdateByCardNumberResponse">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" name="UpdateByCardNumberResult" type="xs:int" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -589,6 +575,34 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element minOccurs="0" name="DeleteOneApptResult" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetOnePhoto">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="id" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetOnePhotoResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q22="http://schemas.datacontract.org/2004/07/DBService.Entity" minOccurs="0" name="GetOnePhotoResult" nillable="true" type="q22:Photo" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetOneCG">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="id" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetOneCGResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q23="http://schemas.datacontract.org/2004/07/DBService.Entity" minOccurs="0" name="GetOneCGResult" nillable="true" type="q23:Caregiver" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

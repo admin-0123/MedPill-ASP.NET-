@@ -20,13 +20,16 @@ namespace EDP_Clinic
         // List<DateTime> openSlots = new List<DateTime>();
         protected void Page_Load(object sender, EventArgs e)
         {
-            
+
             EDP_DBReference.Service1Client svc_client = new EDP_DBReference.Service1Client();
-            User current_user = svc_client.GetOneUser(Convert.ToInt32(Session["current_appt_profile"]));
+            User current_user = svc_client.GetOneUser(Session["current_appt_profile"].ToString());
             // For breadcrumb elements
             hl_bc_profileName.Text = current_user.Name;
             //
-            profilePfp.ImageUrl = $"~/assets/images/{current_user.Photo.Trim()}.jpg";
+
+            Photo current_user_photo_obj = svc_client.GetOnePhoto(current_user.Id);
+
+            profilePfp.ImageUrl = $"~/assets/images/{current_user_photo_obj.Photo_Resource.Trim()}.jpg";
             lbl_profileName.Text = current_user.Name;
 
             tb_startdate_CalendarExtender.StartDate = DateTime.Now.AddDays(1);
@@ -39,25 +42,25 @@ namespace EDP_Clinic
                 lbl_validDates.Text = $"You may only pick a date between {startDate.Day} {startDate.ToString("MMMM")} to {endDate.Day} {endDate.ToString("MMMM")}";
                 Session["gv_timeSlot"] = "Testing";
 
- /*               List<DateTime> openSlots = new List<DateTime>();
-                for (var dt = startDate; dt <= endDate; dt = dt.AddDays(1))
-                {
-                    dt = new DateTime(dt.Year, dt.Month, dt.Day, 9, 00, 00);
+                /*               List<DateTime> openSlots = new List<DateTime>();
+                               for (var dt = startDate; dt <= endDate; dt = dt.AddDays(1))
+                               {
+                                   dt = new DateTime(dt.Year, dt.Month, dt.Day, 9, 00, 00);
 
-                    while (dt.Hour != 17)
-                    {
-                        // Query from appointment table and check if timeslot alr exist (to be added)
-                        openSlots.Add(dt);
-                        dt = dt.AddMinutes(30);
-                    }
+                                   while (dt.Hour != 17)
+                                   {
+                                       // Query from appointment table and check if timeslot alr exist (to be added)
+                                       openSlots.Add(dt);
+                                       dt = dt.AddMinutes(30);
+                                   }
 
 
-                }*/
+                               }*/
 
                 gv_timeslots.Visible = true;
                 gv_timeslots.DataSource = Onload_Retrieve_Available_Appts();
                 gv_timeslots.DataBind();
-               
+
             }
 
             else
@@ -79,10 +82,7 @@ namespace EDP_Clinic
             }
             */
 
-
         }
-
-
 
         protected void btn_searchSlot_Click(object sender, EventArgs e)
         {
@@ -130,7 +130,7 @@ namespace EDP_Clinic
         // Method to retrieve available appointments on first load
         public List<DateTime> Onload_Retrieve_Available_Appts()
         {
-            
+
             List<DateTime> openSlots = new List<DateTime>();
             DateTime startDate = DateTime.Now.AddDays(1);
             DateTime endDate = DateTime.Now.AddMonths(2);
@@ -149,7 +149,7 @@ namespace EDP_Clinic
                     // Query from appointment table and check if timeslot alr exist (to be added)
                     // Loop through every appt in DB for matches
                     foreach (var booked_appt in Current_ApptList)
-                    {                  
+                    {
                         if (dt == Convert.ToDateTime(booked_appt.dateTime))
                         {
                             //System.Diagnostics.Debug.WriteLine("Booked timeslot found");
@@ -240,7 +240,7 @@ namespace EDP_Clinic
             if (Request["rb_apptslot"] == null)
             {
                 result = false;
-                lbl_error_make_appt.ForeColor = Color.Red; 
+                lbl_error_make_appt.ForeColor = Color.Red;
                 lbl_error_make_appt.Text = "You did not select an appointment timeslot";
             }
 
@@ -266,8 +266,8 @@ namespace EDP_Clinic
                 if (insert_result == 1)
                 {
 
-                   lbl_error_make_appt.ForeColor = Color.Green;
-                   lbl_error_make_appt.Text = "Appointment Made Successfully!";
+                    lbl_error_make_appt.ForeColor = Color.Green;
+                    lbl_error_make_appt.Text = "Appointment Made Successfully!";
                     gv_timeslots.DataSource = Search_AvailableAppts();
                     gv_timeslots.DataBind();
 
