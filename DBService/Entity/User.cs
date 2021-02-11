@@ -119,6 +119,7 @@ namespace DBService.Entity
             if (rec_cnt == 1)
             {
                 DataRow row = ds.Tables[0].Rows[0];  // Sql command returns only one record
+                string Id = row["Id"].ToString();
                 string Name = row["Name"].ToString();
                 string Password = row["Password"].ToString();
                 string Salt = row["Salt"].ToString();

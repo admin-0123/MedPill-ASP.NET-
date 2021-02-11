@@ -245,7 +245,7 @@ namespace EDP_Clinic
                     {
                         //We will change the total amount charged here
 
-                        Amount = 1000,
+                        Amount = 20000,
                         Currency = "sgd",
                         PaymentMethodTypes = new List<string>
                     {
@@ -266,6 +266,18 @@ namespace EDP_Clinic
                     Debug.WriteLine(receiptLink);
                     Debug.WriteLine(resultConfirmPayment);
                     SendEmail(receiptLink, emailLink);
+
+
+                    string userID = Session["LoggedIn"].ToString().Trim();
+                    DateTime dateSale = DateTime.Now;
+                    string guid = Guid.NewGuid().ToString();
+
+                    Service1Client client = new Service1Client();
+
+                    int result = client.CreateReceipt(userID, dateSale, 200, true, receiptLink, guid);
+
+                    //Add if else for create receipt
+
                     //TwilioSMS();
 
                     //var service = new PaymentIntentService();
@@ -308,7 +320,7 @@ namespace EDP_Clinic
                         errorMsg.ForeColor = Color.Red;
                         errorMsg.Visible = true;
                     }
-                    else if(errorCode == "incorrect_cvc")
+                    else if (errorCode == "incorrect_cvc")
                     {
                         errorMsg.Text = "Please enter a correct card number";
                         errorMsg.ForeColor = Color.Red;
@@ -501,7 +513,6 @@ namespace EDP_Clinic
                     }
                     //throw new Exception(ex.ToString());
                 }
-
             }
         }
 
@@ -535,6 +546,95 @@ namespace EDP_Clinic
             var accessToken = new OAuthTokenCredential(config).GetAccessToken();
 
             var apiContext = new APIContext(accessToken);
+
+            string payerId = Request.Params["PayerID"];
+
+            if (String.IsNullOrEmpty(payerId))
+            {
+                var itemList = new ItemList()
+                {
+                    items = new List<Item>()
+                    {
+                        new Item()
+                        {
+                            name = "MedPill Services",
+                            currency = "SGD",
+                            price = "200",
+                            quantity = "1",
+                            sku = "sku"
+                        }
+                    }
+                };
+
+
+                var payer = new Payer() { payment_method = "paypal" };
+
+                var baseURI = Request.Url.Scheme + "://" + Request.Url.Authority + "/Payment.aspx?";
+                var guid = Convert.ToString((new Random()).Next(100000));
+                var redirectUrl = baseURI + "guid=" + guid;
+                var redirUrls = new RedirectUrls()
+                {
+                    cancel_url = redirectUrl + "&cancel=true",
+                    return_url = redirectUrl
+                };
+
+                var details = new Details()
+                {
+                    tax = "0",
+                    shipping = "0",
+                    subtotal = "200"
+                };
+
+                var amount = new Amount()
+                {
+                    currency = "SGD",
+                    total = "200.00", // Total must be equal to sum of shipping, tax and subtotal.
+                    details = details
+                };
+
+                var transactionList = new List<Transaction>();
+
+                transactionList.Add(new Transaction()
+                {
+                    description = "Transaction description.",
+                    invoice_number = Guid.NewGuid().ToString(),
+                    amount = amount,
+                    item_list = itemList
+                });
+
+                var payments = new PayPal.Api.Payment()
+                {
+                    intent = "sale",
+                    payer = payer,
+                    transactions = transactionList,
+                    redirect_urls = redirUrls
+                };
+
+                var createdPayment = payments.Create(apiContext);
+
+                var links = createdPayment.links.GetEnumerator();
+
+                var link = links.Current;
+
+                //while (links.MoveNext())
+                //{
+                //    var link = links.Current;
+                //    if (link.rel.ToLower().Trim().Equals("approval_url"))
+                //    {
+                //        var flow = RecordRedirectUrl("Redirect to PayPal to approve the payment...", link.href);
+                //    }
+                //}
+                Session.Add(guid, createdPayment.id);
+                //Session.Add("flow-" + guid, link.href);
+            }
+            else
+            {
+
+            }
+
+            var payment = PayPal.Api.Payment.Get(apiContext, "PAY-0XL713371A312273YKE2GCNI");//Payment.Get(apiContext, "PAY-0XL713371A312273YKE2GCNI");
+
+            Debug.WriteLine(payment.ConvertToJson());
 
             //// Initialize the apiContext's configuration with the default configuration for this application.
             //apiContext.Config = ConfigManager.Instance.GetProperties();

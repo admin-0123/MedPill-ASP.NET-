@@ -191,7 +191,7 @@ namespace DBService
         public List<Receipt> SelectAllReceipt(string userID)
         {
             Receipt rep = new Receipt();
-            return rep.SelectAllReceipt(userID);
+            return rep.SelectAllReceipts(userID);
         }
 
         public Receipt SelectByReceiptID(string userID, string uniqueIdentifier)
