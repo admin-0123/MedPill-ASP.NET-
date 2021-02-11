@@ -80,7 +80,12 @@ Author URL: http://w3layouts.com
             </div>
         </nav>
     </section>
+
     <form id="form1" runat="server">
+                        <!-- Add the INVISIBLE SCRIPT MANAGER CONTROL IN ORDER TO USE AJAX TOOLKIT CONTROLS! -->
+                                        <asp:ScriptManager ID="ScriptManager1" runat="server">
+
+            </asp:ScriptManager>
         <div>
             <asp:ContentPlaceHolder ID="MainContent" runat="server">
             </asp:ContentPlaceHolder>
