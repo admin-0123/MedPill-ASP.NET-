@@ -233,6 +233,9 @@
     <Content Include="Connected Services\EDP_DBReference\EDP_Clinic.EDP_DBReference.Receipt.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
+    <Content Include="Connected Services\EDP_DBReference\EDP_Clinic.EDP_DBReference.displayPatient.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
     <None Include="Connected Services\EDP_DBReference\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
@@ -241,6 +244,7 @@
     <Content Include="EmployeePasswordSet.aspx" />
     <Content Include="ForgetPassword.aspx" />
     <Content Include="Login.aspx" />
+    <Content Include="Logout.aspx" />
     <Content Include="PatientOverview.aspx" />
     <Content Include="error\generalError.aspx" />
     <Content Include="Payment.aspx" />
@@ -411,6 +415,13 @@
     </Compile>
     <Compile Include="Login.aspx.designer.cs">
       <DependentUpon>Login.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Logout.aspx.cs">
+      <DependentUpon>Logout.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Logout.aspx.designer.cs">
+      <DependentUpon>Logout.aspx</DependentUpon>
     </Compile>
     <Compile Include="PatientOverview.aspx.cs">
       <DependentUpon>PatientOverview.aspx</DependentUpon>

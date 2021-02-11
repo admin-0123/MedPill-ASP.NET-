@@ -38,6 +38,22 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="ArrayOfdisplayUser" nillable="true" type="tns:ArrayOfdisplayUser" />
+  <xs:complexType name="displayPatient">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Email" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="IsCaretaker" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="PhoneNo" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Verified" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="displayPatient" nillable="true" type="tns:displayPatient" />
+  <xs:complexType name="ArrayOfdisplayPatient">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="displayPatient" nillable="true" type="tns:displayPatient" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfdisplayPatient" nillable="true" type="tns:ArrayOfdisplayPatient" />
   <xs:complexType name="CardInfo">
     <xs:sequence>
       <xs:element minOccurs="0" name="CVVNumber" nillable="true" type="xs:string" />

@@ -134,6 +134,36 @@
   <wsdl:message name="IService1_ShowSearchedPatients_OutputMessage">
     <wsdl:part name="parameters" element="tns:ShowSearchedPatientsResponse" />
   </wsdl:message>
+  <wsdl:message name="IService1_DisplayOnePatient_InputMessage">
+    <wsdl:part name="parameters" element="tns:DisplayOnePatient" />
+  </wsdl:message>
+  <wsdl:message name="IService1_DisplayOnePatient_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DisplayOnePatientResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService1_DisplayAllPatients_InputMessage">
+    <wsdl:part name="parameters" element="tns:DisplayAllPatients" />
+  </wsdl:message>
+  <wsdl:message name="IService1_DisplayAllPatients_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DisplayAllPatientsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService1_DisplayCaretakers_InputMessage">
+    <wsdl:part name="parameters" element="tns:DisplayCaretakers" />
+  </wsdl:message>
+  <wsdl:message name="IService1_DisplayCaretakers_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DisplayCaretakersResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService1_DisplayPatientsOnly_InputMessage">
+    <wsdl:part name="parameters" element="tns:DisplayPatientsOnly" />
+  </wsdl:message>
+  <wsdl:message name="IService1_DisplayPatientsOnly_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DisplayPatientsOnlyResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService1_DisplayAllSearchedPatients_InputMessage">
+    <wsdl:part name="parameters" element="tns:DisplayAllSearchedPatients" />
+  </wsdl:message>
+  <wsdl:message name="IService1_DisplayAllSearchedPatients_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DisplayAllSearchedPatientsResponse" />
+  </wsdl:message>
   <wsdl:message name="IService1_GetEmailbyCode_InputMessage">
     <wsdl:part name="parameters" element="tns:GetEmailbyCode" />
   </wsdl:message>
@@ -356,6 +386,26 @@
     <wsdl:operation name="ShowSearchedPatients">
       <wsdl:input wsaw:Action="http://tempuri.org/IService1/ShowSearchedPatients" message="tns:IService1_ShowSearchedPatients_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IService1/ShowSearchedPatientsResponse" message="tns:IService1_ShowSearchedPatients_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DisplayOnePatient">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/DisplayOnePatient" message="tns:IService1_DisplayOnePatient_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/DisplayOnePatientResponse" message="tns:IService1_DisplayOnePatient_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DisplayAllPatients">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/DisplayAllPatients" message="tns:IService1_DisplayAllPatients_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/DisplayAllPatientsResponse" message="tns:IService1_DisplayAllPatients_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DisplayCaretakers">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/DisplayCaretakers" message="tns:IService1_DisplayCaretakers_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/DisplayCaretakersResponse" message="tns:IService1_DisplayCaretakers_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DisplayPatientsOnly">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/DisplayPatientsOnly" message="tns:IService1_DisplayPatientsOnly_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/DisplayPatientsOnlyResponse" message="tns:IService1_DisplayPatientsOnly_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DisplayAllSearchedPatients">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/DisplayAllSearchedPatients" message="tns:IService1_DisplayAllSearchedPatients_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/DisplayAllSearchedPatientsResponse" message="tns:IService1_DisplayAllSearchedPatients_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="GetEmailbyCode">
       <wsdl:input wsaw:Action="http://tempuri.org/IService1/GetEmailbyCode" message="tns:IService1_GetEmailbyCode_InputMessage" />
@@ -634,6 +684,51 @@
     </wsdl:operation>
     <wsdl:operation name="ShowSearchedPatients">
       <soap:operation soapAction="http://tempuri.org/IService1/ShowSearchedPatients" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DisplayOnePatient">
+      <soap:operation soapAction="http://tempuri.org/IService1/DisplayOnePatient" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DisplayAllPatients">
+      <soap:operation soapAction="http://tempuri.org/IService1/DisplayAllPatients" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DisplayCaretakers">
+      <soap:operation soapAction="http://tempuri.org/IService1/DisplayCaretakers" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DisplayPatientsOnly">
+      <soap:operation soapAction="http://tempuri.org/IService1/DisplayPatientsOnly" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DisplayAllSearchedPatients">
+      <soap:operation soapAction="http://tempuri.org/IService1/DisplayAllSearchedPatients" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

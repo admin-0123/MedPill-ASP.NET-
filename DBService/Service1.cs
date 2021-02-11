@@ -105,7 +105,7 @@ namespace DBService
             displayUser user = new displayUser();
             return user.DisplayAll();
         }
-        public List<displayUser> ShowAllPatients()
+        public List<displayUser> ShowAllPatients()// dont use this
         {
             displayUser user = new displayUser();
             return user.DisplayAllPatients();
@@ -120,10 +120,35 @@ namespace DBService
             displayUser user = new displayUser();
             return user.DisplaySearchedEmployees(name);
         }
-        public List<displayUser> ShowSearchedPatients(string name)
+        public List<displayUser> ShowSearchedPatients(string name)// dont use this
         {
             displayUser user = new displayUser();
             return user.DisplaySearchedPatients(name);
+        }
+        public displayPatient DisplayOnePatient(string email)
+        {
+            displayPatient user = new displayPatient();
+            return user.PatientDisplayByEmail(email);
+        }
+        public List<displayPatient> DisplayAllPatients()
+        {
+            displayPatient user = new displayPatient();
+            return user.DisplayAllPatients();
+        }
+        public List<displayPatient> DisplayCaretakers()
+        {
+            displayPatient user = new displayPatient();
+            return user.DisplayAllCaretakers();
+        }
+        public List<displayPatient> DisplayPatientsOnly()
+        {
+            displayPatient user = new displayPatient();
+            return user.DisplayAllPatientsOnly();
+        }
+        public List<displayPatient> DisplayAllSearchedPatients(string name)
+        {
+            displayPatient user = new displayPatient();
+            return user.DisplayAllSearchPatients(name);
         }
 
         public string GetEmailbyCode(string code)

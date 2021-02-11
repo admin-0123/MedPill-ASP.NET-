@@ -390,6 +390,115 @@ namespace EDP_Clinic.EDP_DBReference {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="displayPatient", Namespace="http://schemas.datacontract.org/2004/07/DBService.Entity")]
+    [System.SerializableAttribute()]
+    public partial class displayPatient : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string EmailField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string IsCaretakerField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string NameField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string PhoneNoField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string VerifiedField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Email {
+            get {
+                return this.EmailField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.EmailField, value) != true)) {
+                    this.EmailField = value;
+                    this.RaisePropertyChanged("Email");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string IsCaretaker {
+            get {
+                return this.IsCaretakerField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.IsCaretakerField, value) != true)) {
+                    this.IsCaretakerField = value;
+                    this.RaisePropertyChanged("IsCaretaker");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Name {
+            get {
+                return this.NameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.NameField, value) != true)) {
+                    this.NameField = value;
+                    this.RaisePropertyChanged("Name");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string PhoneNo {
+            get {
+                return this.PhoneNoField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.PhoneNoField, value) != true)) {
+                    this.PhoneNoField = value;
+                    this.RaisePropertyChanged("PhoneNo");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Verified {
+            get {
+                return this.VerifiedField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.VerifiedField, value) != true)) {
+                    this.VerifiedField = value;
+                    this.RaisePropertyChanged("Verified");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="CardInfo", Namespace="http://schemas.datacontract.org/2004/07/DBService.Entity")]
     [System.SerializableAttribute()]
     public partial class CardInfo : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
@@ -1159,6 +1268,36 @@ namespace EDP_Clinic.EDP_DBReference {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/ShowSearchedPatients", ReplyAction="http://tempuri.org/IService1/ShowSearchedPatientsResponse")]
         System.Threading.Tasks.Task<EDP_Clinic.EDP_DBReference.displayUser[]> ShowSearchedPatientsAsync(string name);
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/DisplayOnePatient", ReplyAction="http://tempuri.org/IService1/DisplayOnePatientResponse")]
+        EDP_Clinic.EDP_DBReference.displayPatient DisplayOnePatient(string email);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/DisplayOnePatient", ReplyAction="http://tempuri.org/IService1/DisplayOnePatientResponse")]
+        System.Threading.Tasks.Task<EDP_Clinic.EDP_DBReference.displayPatient> DisplayOnePatientAsync(string email);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/DisplayAllPatients", ReplyAction="http://tempuri.org/IService1/DisplayAllPatientsResponse")]
+        EDP_Clinic.EDP_DBReference.displayPatient[] DisplayAllPatients();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/DisplayAllPatients", ReplyAction="http://tempuri.org/IService1/DisplayAllPatientsResponse")]
+        System.Threading.Tasks.Task<EDP_Clinic.EDP_DBReference.displayPatient[]> DisplayAllPatientsAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/DisplayCaretakers", ReplyAction="http://tempuri.org/IService1/DisplayCaretakersResponse")]
+        EDP_Clinic.EDP_DBReference.displayPatient[] DisplayCaretakers();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/DisplayCaretakers", ReplyAction="http://tempuri.org/IService1/DisplayCaretakersResponse")]
+        System.Threading.Tasks.Task<EDP_Clinic.EDP_DBReference.displayPatient[]> DisplayCaretakersAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/DisplayPatientsOnly", ReplyAction="http://tempuri.org/IService1/DisplayPatientsOnlyResponse")]
+        EDP_Clinic.EDP_DBReference.displayPatient[] DisplayPatientsOnly();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/DisplayPatientsOnly", ReplyAction="http://tempuri.org/IService1/DisplayPatientsOnlyResponse")]
+        System.Threading.Tasks.Task<EDP_Clinic.EDP_DBReference.displayPatient[]> DisplayPatientsOnlyAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/DisplayAllSearchedPatients", ReplyAction="http://tempuri.org/IService1/DisplayAllSearchedPatientsResponse")]
+        EDP_Clinic.EDP_DBReference.displayPatient[] DisplayAllSearchedPatients(string name);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/DisplayAllSearchedPatients", ReplyAction="http://tempuri.org/IService1/DisplayAllSearchedPatientsResponse")]
+        System.Threading.Tasks.Task<EDP_Clinic.EDP_DBReference.displayPatient[]> DisplayAllSearchedPatientsAsync(string name);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetEmailbyCode", ReplyAction="http://tempuri.org/IService1/GetEmailbyCodeResponse")]
         string GetEmailbyCode(string code);
         
@@ -1491,6 +1630,46 @@ namespace EDP_Clinic.EDP_DBReference {
         
         public System.Threading.Tasks.Task<EDP_Clinic.EDP_DBReference.displayUser[]> ShowSearchedPatientsAsync(string name) {
             return base.Channel.ShowSearchedPatientsAsync(name);
+        }
+        
+        public EDP_Clinic.EDP_DBReference.displayPatient DisplayOnePatient(string email) {
+            return base.Channel.DisplayOnePatient(email);
+        }
+        
+        public System.Threading.Tasks.Task<EDP_Clinic.EDP_DBReference.displayPatient> DisplayOnePatientAsync(string email) {
+            return base.Channel.DisplayOnePatientAsync(email);
+        }
+        
+        public EDP_Clinic.EDP_DBReference.displayPatient[] DisplayAllPatients() {
+            return base.Channel.DisplayAllPatients();
+        }
+        
+        public System.Threading.Tasks.Task<EDP_Clinic.EDP_DBReference.displayPatient[]> DisplayAllPatientsAsync() {
+            return base.Channel.DisplayAllPatientsAsync();
+        }
+        
+        public EDP_Clinic.EDP_DBReference.displayPatient[] DisplayCaretakers() {
+            return base.Channel.DisplayCaretakers();
+        }
+        
+        public System.Threading.Tasks.Task<EDP_Clinic.EDP_DBReference.displayPatient[]> DisplayCaretakersAsync() {
+            return base.Channel.DisplayCaretakersAsync();
+        }
+        
+        public EDP_Clinic.EDP_DBReference.displayPatient[] DisplayPatientsOnly() {
+            return base.Channel.DisplayPatientsOnly();
+        }
+        
+        public System.Threading.Tasks.Task<EDP_Clinic.EDP_DBReference.displayPatient[]> DisplayPatientsOnlyAsync() {
+            return base.Channel.DisplayPatientsOnlyAsync();
+        }
+        
+        public EDP_Clinic.EDP_DBReference.displayPatient[] DisplayAllSearchedPatients(string name) {
+            return base.Channel.DisplayAllSearchedPatients(name);
+        }
+        
+        public System.Threading.Tasks.Task<EDP_Clinic.EDP_DBReference.displayPatient[]> DisplayAllSearchedPatientsAsync(string name) {
+            return base.Channel.DisplayAllSearchedPatientsAsync(name);
         }
         
         public string GetEmailbyCode(string code) {

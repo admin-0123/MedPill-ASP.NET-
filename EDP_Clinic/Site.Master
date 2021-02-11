@@ -59,6 +59,15 @@ Author URL: http://w3layouts.com
                         <li class="nav-item">
                             <a class="nav-link" href="Contact.aspx">Contact</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="Login.aspx" ID="loginBtn" runat="server">Log In</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="UserPage.aspx" ID="userPageBtn" runat="server">User Page</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="Logout.aspx" ID="logoutBtn" runat="server">Log Out</a>
+                        </li>
                     </ul>
                 </div>
                 <a href="#domain" class="domain ml-3" data-toggle="modal" data-target="#DomainModal">

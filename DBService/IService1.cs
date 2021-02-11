@@ -63,6 +63,16 @@ namespace DBService
         [OperationContract]
         List<displayUser> ShowSearchedPatients(string name);
         [OperationContract]
+        displayPatient DisplayOnePatient(string email);
+        [OperationContract]
+        List<displayPatient> DisplayAllPatients();
+        [OperationContract]
+        List<displayPatient> DisplayCaretakers();
+        [OperationContract]
+        List<displayPatient> DisplayPatientsOnly();
+        [OperationContract]
+        List<displayPatient> DisplayAllSearchedPatients(string name);
+        [OperationContract]
         string GetEmailbyCode(string code);
         [OperationContract]
         int CheckCodeExist(string code);
