@@ -198,7 +198,7 @@ namespace EDP_Clinic
 
             //For debugging purposes
             //Refer to https://www.twilio.com/docs/verify/api/verification-check
-            Console.WriteLine(verificationCheck.Status);
+            Debug.WriteLine(verificationCheck.Status);
 
             string otpResult = verificationCheck.Status;
 

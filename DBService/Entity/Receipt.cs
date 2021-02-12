@@ -44,7 +44,7 @@ namespace DBService.Entity
             string DBConnect = ConfigurationManager.ConnectionStrings["EDP_DB"].ConnectionString;
             using (SqlConnection myConn = new SqlConnection(DBConnect))
             {
-                string sqlStatement = "INSERT INTO Receipt VALUES (@paraUserID,@paraDateSale, @paraTotalSum, @IsPaid, @paraReceiptLink, @paraUniqueIdentifier)";
+                string sqlStatement = "INSERT INTO Receipt VALUES (@paraUserID, @paraDateSale, @paraTotalSum, @IsPaid, @paraReceiptLink, @paraUniqueIdentifier)";
                 using (SqlCommand sqlCmd = new SqlCommand(sqlStatement))
                 {
                     sqlCmd.Parameters.AddWithValue("@paraUserID", UserID);
@@ -121,7 +121,7 @@ namespace DBService.Entity
             }
         }
 
-        public List<Receipt> SelectAllReceipt(string userID)
+        public List<Receipt> SelectAllReceipts(string userID)
         {
             string DBConnect = ConfigurationManager.ConnectionStrings["EDP_DB"].ConnectionString;
             using (SqlConnection myConn = new SqlConnection(DBConnect))

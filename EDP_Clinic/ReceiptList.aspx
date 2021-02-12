@@ -19,7 +19,7 @@
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col-md-11">
-                                        <h5 class="card-title">Receipt No: <%# Eval("CardNumber")%></h5>
+                                        <h5 class="card-title">Receipt No:</h5>
                                         <p class="card-text">Appointment No: 1</p>
                                     </div>
                                     <div class="col-md-1">
