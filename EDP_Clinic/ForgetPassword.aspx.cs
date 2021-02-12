@@ -56,7 +56,7 @@ namespace EDP_Clinic
             mail.From = new MailAddress("bryanchinzw@gmail.com");
             mail.To.Add(new MailAddress(email));
             emailClient.Send(mail);
-            Response.Redirect("Login.aspx",false);
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "Redit", "alert('A link to reset your password has been sent to your email'); window.location='" + Request.ApplicationPath + "Login.aspx';", true);
             Context.ApplicationInstance.CompleteRequest();
 
 

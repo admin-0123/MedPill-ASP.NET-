@@ -10,15 +10,56 @@ namespace EDP_Clinic
 {
     public partial class PatientOverview : System.Web.UI.Page
     {
+        Service1Client client = new Service1Client();
         protected void Page_Load(object sender, EventArgs e)
         {
-            Service1Client client = new Service1Client();
-            List<displayUser> patientList = new List<displayUser>();
-            List<User> userlist = new List<User>();
-            patientList = client.ShowAllPatients().ToList<displayUser>();
+            List<displayPatient> patientList = new List<displayPatient>();
+            patientList = client.DisplayAllPatients().ToList<displayPatient>();
             PatientGridView.Visible = true;
             PatientGridView.DataSource = patientList;
             PatientGridView.DataBind();
         }
+        protected void ViewPatients_Click(object sender, EventArgs e)
+        {
+            List<displayPatient> patientList = new List<displayPatient>();
+            List<User> userlist = new List<User>();
+            patientList = client.DisplayPatientsOnly().ToList<displayPatient>();
+            PatientGridView.Visible = true;
+            PatientGridView.DataSource = patientList;
+            PatientGridView.DataBind();
+        }
+        protected void ViewCaretaker_Click(object sender, EventArgs e)
+        {
+            List<displayPatient> patientList = new List<displayPatient>();
+            List<User> userlist = new List<User>();
+            patientList = client.DisplayCaretakers().ToList<displayPatient>();
+            PatientGridView.Visible = true;
+            PatientGridView.DataSource = patientList;
+            PatientGridView.DataBind();
+        }
+        protected void RefreshBtn_Click(object sender, EventArgs e)
+        {
+            refreshgrid();
+        }
+        protected void SearchBtn_Click(object sender, EventArgs e)
+        {
+            var search = HttpUtility.HtmlEncode(searchtb.Text);
+            List<displayPatient> patientList = new List<displayPatient>();
+            patientList = client.DisplayAllSearchedPatients(search).ToList<displayPatient>();
+            PatientGridView.Visible = true;
+            PatientGridView.DataSource = patientList;
+            PatientGridView.DataBind();
+        }
+        
+        public void refreshgrid()
+        {
+            List<displayPatient> patientList = new List<displayPatient>();
+            List<User> userlist = new List<User>();
+            patientList = client.DisplayAllPatients().ToList<displayPatient>();
+            PatientGridView.Visible = true;
+            PatientGridView.DataSource = patientList;
+            PatientGridView.DataBind();
+        }
+
     }
 }
