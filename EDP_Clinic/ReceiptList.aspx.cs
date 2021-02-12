@@ -10,19 +10,10 @@ using System.Web.UI.WebControls;
 
 namespace EDP_Clinic
 {
-    public partial class Receipt : System.Web.UI.Page
+    public partial class ReceiptList : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            //Session["Login"] = "someone@example.com";
-
-            //string guidToken = Guid.NewGuid().ToString();
-            //Session["AuthToken"] = guidToken;
-            //HttpCookie AuthToken = new HttpCookie("AuthToken");
-            //AuthToken.Value = guidToken;
-            //Response.Cookies.Add(AuthToken);
-
-
             //Checks user session
             if (Session["LoggedIn"] != null && Session["AuthToken"] != null && Request.Cookies["AuthToken"] != null)
             {
@@ -48,13 +39,7 @@ namespace EDP_Clinic
 
             List<Receipt> repList = new List<Receipt>();
             Service1Client client = new Service1Client();
-            //var result = client.SelectAllReceipt(userID).ToList<Receipt>();
-            //Debug.WriteLine(result);
-            //List<Receipt> repList = result.ToList();
-            //List<CardInfo> cifList = new List<CardInfo>();
-            ////Service1Client client = new Service1Client();
-            //cifList = client.GetAllCards(userID).ToList<CardInfo>();
-
+            repList = client.SelectAllReceipts(userID).ToList();
 
             receiptListView.DataSource = repList;
             receiptListView.Visible = true;
@@ -79,6 +64,21 @@ namespace EDP_Clinic
         protected void backBtn_Click(object sender, EventArgs e)
         {
             Response.Redirect("UserPage.aspx", false);
+        }
+
+        protected void receiptListView_ItemCommand(object sender, ListViewCommandEventArgs e)
+        {
+            //Checks if button clicked is view more button
+            if (String.Equals(e.CommandName, "viewMore"))
+            {
+                string userID = Session["LoggedIn"].ToString().Trim();
+                string uniqueIdentifier = e.CommandArgument.ToString().Trim();
+                Service1Client client = new Service1Client();
+                Receipt rep = client.SelectByReceiptID(userID, uniqueIdentifier);
+                string receiptLink = rep.ReceiptLink.ToString().Trim();
+                Response.Redirect(receiptLink, false);
+            }
+            //else if()
             //PrintNodeNet
         }
     }

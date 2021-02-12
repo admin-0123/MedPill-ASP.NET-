@@ -109,7 +109,7 @@ namespace DBService
         int CreateReceipt(string userID, DateTime dateSale, double totalSum, bool isPaid, string receiptLink, string uniqueIdentifier);
 
         [OperationContract]
-        List<Receipt> SelectAllReceipt(string userID);
+        List<Receipt> SelectAllReceipts(string userID);
 
         [OperationContract]
         Receipt SelectByReceiptID(string userID, string uniqueIdentifier);

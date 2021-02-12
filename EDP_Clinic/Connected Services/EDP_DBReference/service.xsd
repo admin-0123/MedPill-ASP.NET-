@@ -559,17 +559,17 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="SelectAllReceipt">
+  <xs:element name="SelectAllReceipts">
     <xs:complexType>
       <xs:sequence>
         <xs:element minOccurs="0" name="userID" nillable="true" type="xs:string" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="SelectAllReceiptResponse">
+  <xs:element name="SelectAllReceiptsResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q22="http://schemas.datacontract.org/2004/07/DBService.Entity" minOccurs="0" name="SelectAllReceiptResult" nillable="true" type="q22:ArrayOfReceipt" />
+        <xs:element xmlns:q22="http://schemas.datacontract.org/2004/07/DBService.Entity" minOccurs="0" name="SelectAllReceiptsResult" nillable="true" type="q22:ArrayOfReceipt" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

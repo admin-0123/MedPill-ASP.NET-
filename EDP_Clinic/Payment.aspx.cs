@@ -416,7 +416,7 @@ namespace EDP_Clinic
 
                 Service1Client client = new Service1Client();
 
-                string uniqueIdentifier = e.CommandArgument.ToString();
+                string uniqueIdentifier = e.CommandArgument.ToString().Trim();
 
                 CardInfo cif = client.GetCardByCardNumber(userID, uniqueIdentifier);
 
@@ -474,6 +474,12 @@ namespace EDP_Clinic
                     Debug.WriteLine(receiptLink);
                     Debug.WriteLine(resultConfirmPayment);
                     SendEmail(receiptLink, emailLink);
+
+                    DateTime dateSale = DateTime.Now;
+                    string guid = Guid.NewGuid().ToString();
+
+                    int result = client.CreateReceipt(userID, dateSale, 200, true, receiptLink, guid);
+
                     //TwilioSMS();
                     Response.Redirect("AfterPayment.aspx", false);
                 }
