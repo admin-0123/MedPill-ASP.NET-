@@ -35,5 +35,11 @@ namespace EDP_Clinic
         {
             Response.Redirect("ReceiptList.aspx", false);
         }
+
+        protected void changeinfoBtn_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("ChangeInfo.aspx", false);
+
+        }
     }
 }

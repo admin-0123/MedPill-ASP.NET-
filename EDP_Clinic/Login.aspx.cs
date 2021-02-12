@@ -92,5 +92,10 @@ namespace EDP_Clinic
             }
             
         }
+
+        protected void Button2_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("PhoneLogin.aspx", false);
+        }
     }
 }

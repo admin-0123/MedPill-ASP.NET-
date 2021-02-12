@@ -1172,6 +1172,12 @@ namespace EDP_Clinic.EDP_DBReference {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/EditOneUser", ReplyAction="http://tempuri.org/IService1/EditOneUserResponse")]
         System.Threading.Tasks.Task<int> EditOneUserAsync(string id, string name, string email, string mobile);
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/UpdateOneUser", ReplyAction="http://tempuri.org/IService1/UpdateOneUserResponse")]
+        int UpdateOneUser(string id, string name, string email, string mobile, string password);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/UpdateOneUser", ReplyAction="http://tempuri.org/IService1/UpdateOneUserResponse")]
+        System.Threading.Tasks.Task<int> UpdateOneUserAsync(string id, string name, string email, string mobile, string password);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/DeleteOneUser", ReplyAction="http://tempuri.org/IService1/DeleteOneUserResponse")]
         int DeleteOneUser(string id);
         
@@ -1196,6 +1202,12 @@ namespace EDP_Clinic.EDP_DBReference {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/CheckOneUser", ReplyAction="http://tempuri.org/IService1/CheckOneUserResponse")]
         System.Threading.Tasks.Task<int> CheckOneUserAsync(string email);
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/CheckPhoneNo", ReplyAction="http://tempuri.org/IService1/CheckPhoneNoResponse")]
+        int CheckPhoneNo(string phoneno);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/CheckPhoneNo", ReplyAction="http://tempuri.org/IService1/CheckPhoneNoResponse")]
+        System.Threading.Tasks.Task<int> CheckPhoneNoAsync(string phoneno);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/VerifyOneUser", ReplyAction="http://tempuri.org/IService1/VerifyOneUserResponse")]
         int VerifyOneUser(string email);
         
@@ -1213,6 +1225,12 @@ namespace EDP_Clinic.EDP_DBReference {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetOneUserByEmail", ReplyAction="http://tempuri.org/IService1/GetOneUserByEmailResponse")]
         System.Threading.Tasks.Task<EDP_Clinic.EDP_DBReference.User> GetOneUserByEmailAsync(string email);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetOneUserByPhoneNo", ReplyAction="http://tempuri.org/IService1/GetOneUserByPhoneNoResponse")]
+        EDP_Clinic.EDP_DBReference.User GetOneUserByPhoneNo(string phonoNo);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetOneUserByPhoneNo", ReplyAction="http://tempuri.org/IService1/GetOneUserByPhoneNoResponse")]
+        System.Threading.Tasks.Task<EDP_Clinic.EDP_DBReference.User> GetOneUserByPhoneNoAsync(string phonoNo);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetAllUsers", ReplyAction="http://tempuri.org/IService1/GetAllUsersResponse")]
         EDP_Clinic.EDP_DBReference.User[] GetAllUsers();
@@ -1504,6 +1522,14 @@ namespace EDP_Clinic.EDP_DBReference {
             return base.Channel.EditOneUserAsync(id, name, email, mobile);
         }
         
+        public int UpdateOneUser(string id, string name, string email, string mobile, string password) {
+            return base.Channel.UpdateOneUser(id, name, email, mobile, password);
+        }
+        
+        public System.Threading.Tasks.Task<int> UpdateOneUserAsync(string id, string name, string email, string mobile, string password) {
+            return base.Channel.UpdateOneUserAsync(id, name, email, mobile, password);
+        }
+        
         public int DeleteOneUser(string id) {
             return base.Channel.DeleteOneUser(id);
         }
@@ -1536,6 +1562,14 @@ namespace EDP_Clinic.EDP_DBReference {
             return base.Channel.CheckOneUserAsync(email);
         }
         
+        public int CheckPhoneNo(string phoneno) {
+            return base.Channel.CheckPhoneNo(phoneno);
+        }
+        
+        public System.Threading.Tasks.Task<int> CheckPhoneNoAsync(string phoneno) {
+            return base.Channel.CheckPhoneNoAsync(phoneno);
+        }
+        
         public int VerifyOneUser(string email) {
             return base.Channel.VerifyOneUser(email);
         }
@@ -1558,6 +1592,14 @@ namespace EDP_Clinic.EDP_DBReference {
         
         public System.Threading.Tasks.Task<EDP_Clinic.EDP_DBReference.User> GetOneUserByEmailAsync(string email) {
             return base.Channel.GetOneUserByEmailAsync(email);
+        }
+        
+        public EDP_Clinic.EDP_DBReference.User GetOneUserByPhoneNo(string phonoNo) {
+            return base.Channel.GetOneUserByPhoneNo(phonoNo);
+        }
+        
+        public System.Threading.Tasks.Task<EDP_Clinic.EDP_DBReference.User> GetOneUserByPhoneNoAsync(string phonoNo) {
+            return base.Channel.GetOneUserByPhoneNoAsync(phonoNo);
         }
         
         public EDP_Clinic.EDP_DBReference.User[] GetAllUsers() {

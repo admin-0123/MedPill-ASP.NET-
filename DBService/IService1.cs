@@ -29,7 +29,8 @@ namespace DBService
         [OperationContract]
         int EditOneUser(string id, string name, string email, string mobile);
         [OperationContract]
-
+        int UpdateOneUser(string id, string name, string email, string mobile, string password);
+        [OperationContract]
         int DeleteOneUser(string id);
         [OperationContract]
         int AddCaretaker(string id);
@@ -38,11 +39,15 @@ namespace DBService
         [OperationContract]
         int CheckOneUser(string email);
         [OperationContract]
+        int CheckPhoneNo(string phoneno);
+        [OperationContract]
         int VerifyOneUser(string email);
         [OperationContract]
         int ChangePassword(string password, string email);
         [OperationContract]
         User GetOneUserByEmail(string email);
+        [OperationContract]
+        User GetOneUserByPhoneNo(string phonoNo);
         [OperationContract]
         List<User> GetAllUsers();
         [OperationContract]

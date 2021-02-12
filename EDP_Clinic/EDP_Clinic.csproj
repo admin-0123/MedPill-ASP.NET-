@@ -111,6 +111,7 @@
   <ItemGroup>
     <Content Include="CA.aspx" />
     <Content Include="CA_Success.aspx" />
+    <Content Include="ChangeInfo.aspx" />
     <Content Include="error\400.aspx" />
     <Content Include="error\401.aspx" />
     <Content Include="error\402.aspx" />
@@ -251,6 +252,8 @@
     <Content Include="PaymentInfoDeleted.aspx" />
     <Content Include="PaymentInformation.aspx" />
     <Content Include="PFA.aspx" />
+    <Content Include="PhoneLogin.aspx" />
+    <Content Include="PhoneOTP.aspx" />
     <Content Include="PRFA2.aspx" />
     <Content Include="RA.aspx" />
     <Content Include="ReceiptDetail.aspx" />
@@ -277,6 +280,13 @@
     </Compile>
     <Compile Include="CA_Success.aspx.designer.cs">
       <DependentUpon>CA_Success.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ChangeInfo.aspx.cs">
+      <DependentUpon>ChangeInfo.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ChangeInfo.aspx.designer.cs">
+      <DependentUpon>ChangeInfo.aspx</DependentUpon>
     </Compile>
     <Compile Include="error\400.aspx.cs">
       <DependentUpon>400.aspx</DependentUpon>
@@ -464,6 +474,20 @@
     </Compile>
     <Compile Include="PFA.aspx.designer.cs">
       <DependentUpon>PFA.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="PhoneLogin.aspx.cs">
+      <DependentUpon>PhoneLogin.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="PhoneLogin.aspx.designer.cs">
+      <DependentUpon>PhoneLogin.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="PhoneOTP.aspx.cs">
+      <DependentUpon>PhoneOTP.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="PhoneOTP.aspx.designer.cs">
+      <DependentUpon>PhoneOTP.aspx</DependentUpon>
     </Compile>
     <Compile Include="PRFA2.aspx.cs">
       <DependentUpon>PRFA2.aspx</DependentUpon>
