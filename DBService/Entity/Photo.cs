@@ -13,7 +13,6 @@ namespace DBService.Entity
     {
         public string Id { get; set; }
         public string Photo_Resource { get; set; }
-
         public Photo() {
 
         }

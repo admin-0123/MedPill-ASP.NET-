@@ -74,19 +74,19 @@ namespace EDP_Clinic
             {
                 errors = errors + "Password must at least be 8 characters long <br/>";
             }
-            if (Regex.IsMatch(password, "[a-s]"))
+            if (!Regex.IsMatch(password, "[a-s]"))
             {
                 errors = errors + "Password must contain lowercase letters <br/>";
             }
-            if (Regex.IsMatch(password, "[A-Z]"))
+            if (!Regex.IsMatch(password, "[A-Z]"))
             {
                 errors = errors + "Password must contain uppercase letters <br/>";
             }
-            if (Regex.IsMatch(password, "[0-9]"))
+            if (!Regex.IsMatch(password, "[0-9]"))
             {
                 errors = errors + "Password must contain at least 1 number <br/>";
             }
-            if (Regex.IsMatch(password, "[^0-9a-zA-Z]"))
+            if (!Regex.IsMatch(password, "[^0-9a-zA-Z]"))
             {
                 errors = errors + "Password must contain at least one symbol <br/>";
             }

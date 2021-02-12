@@ -129,6 +129,10 @@ namespace EDP_Clinic
         }
         public static bool IsValidEmail(string email)
         {
+            if (email == "")
+            {
+                email = "random placeholder text";
+            }
             try
             {
                 MailAddress m = new MailAddress(email);

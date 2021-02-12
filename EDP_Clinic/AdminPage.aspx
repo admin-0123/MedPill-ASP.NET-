@@ -480,6 +480,7 @@
                         <label>Phone</label>
                         <asp:TextBox ID="tbEditMobile" runat="server" CssClass="form-control"></asp:TextBox>
                     </div>
+                     <asp:Label ID="editError" runat="server"></asp:Label>
                 </div>
                 <div class="modal-footer">
                     <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">

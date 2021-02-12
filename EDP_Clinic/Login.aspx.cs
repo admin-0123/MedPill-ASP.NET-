@@ -42,6 +42,14 @@ namespace EDP_Clinic
 
             }
             var user = client.GetOneUserByEmail(email);
+            var verify = user.Verified;
+            if (verify == "No")
+            {
+                errorMsg.Text = "Please verify account";
+                errorMsg.ForeColor = System.Drawing.Color.Red;
+                errorMsg.Visible = true;
+                return;
+            }
             var salt = user.Salt;
             var pwdWithSalt = password + salt;
             SHA512Managed hashing = new SHA512Managed();
