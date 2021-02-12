@@ -2,7 +2,7 @@
 
 <asp:Content ID="head" ContentPlaceHolderID="head" runat="server">
     <script src="https://js.stripe.com/v3/"></script>
-        <script type="text/javascript" src="https://www.paypal.com/sdk/js?client-id=AT9DJyeJMIR8vwF_hXg51sixRS0sEi3gKj6NZIzrlFq0JdlldbY5NKstWc6AYYNYiNIjZz4xLwnac153" async>
+    <script type="text/javascript" src="https://www.paypal.com/sdk/js?client-id=AT9DJyeJMIR8vwF_hXg51sixRS0sEi3gKj6NZIzrlFq0JdlldbY5NKstWc6AYYNYiNIjZz4xLwnac153">
     </script>
 </asp:Content>
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
@@ -78,11 +78,12 @@
                         <div class="row mb-3">
                             <div class="col-md-6"></div>
                             <div class="col-md-4">
-                                <asp:Button ID="payPalBtn" runat="server" Text="Proceed to Paypal" CssClass="btn btn-primary btn-style" BackColor="#17449E" ForeColor="White" Width="200px" ToolTip="Pay by PayPal" OnClick="payPalBtn_Click" />
+                                <div id="paypal-button-container"></div>
+                                <%--<asp:Button ID="payPalBtn" runat="server" Text="Proceed to Paypal" CssClass="btn btn-primary btn-style" BackColor="#17449E" ForeColor="White" Width="200px" ToolTip="Pay by PayPal" OnClick="payPalBtn_Click" />--%>
                             </div>
                             <div class="col-md-2">
                                 <input type="hidden" id="g-recaptcha-response" name="g-recaptcha-response" />
-                                <asp:Button ID="submitBtn" runat="server" Text="Submit" CssClass="btn btn-primary btn-style" BackColor="#17449E" ForeColor="White" Width="100px" OnClick="submitBtn_Click" ToolTip="Submit" />
+                                <asp:Button ID="submitBtn" runat="server" Text="Submit" CssClass="btn btn-primary" BackColor="#17449E" ForeColor="White" Width="100px" OnClick="submitBtn_Click" ToolTip="Submit" />
                             </div>
                         </div>
                     </div>
@@ -100,10 +101,10 @@
                     </div>
                     <div class="row">
                         <div class="col-6">
-                            <p>Appointment</p>
+                            <p>Consultation Fee</p>
                         </div>
                         <div class="col-6">
-                            <p>50</p>
+                            <p>100</p>
                         </div>
                     </div>
                     <div class="row">
@@ -117,16 +118,53 @@
                     <hr />
                     <div class="row">
                         <div class="col-6">
-                            <h4>Total ($)</h4>
+                            <h4>Total (S$)</h4>
                         </div>
                         <div class="col-6">
-                            <h4>150</h4>
+                            <h4>200</h4>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
+    <script>
+        // Render the PayPal button into #paypal-button-container
+        paypal.Buttons({
+            env: 'sandbox',
+            style: {
+                layout: 'horizontal',
+                size: 'responsive'
+            },
+            // Set up the transaction
+            createOrder: function (data, actions) {
+                return actions.order.create({
+                    purchase_units: [{
+                        amount: {
+                            value: '200.00',
+                            currency: "SGD"              
+                        }
+                    }]
+                });
+            },
+
+            // Finalize the transaction
+            onApprove: function (data, actions) {
+                return actions.order.capture().then(function (details) {
+                    // Show a success message to the buyer
+                    //alert('Transaction completed by ' + details.payer.name.given_name + '!');
+                    //Modify the link below
+                    window.location.replace('localhost:44310/AfterPayment.aspx');
+                });
+            },
+            // Show an error message here, when an error occurs
+            onError: function (err) {
+                document.getElementById('<%=errorMsg.ClientID%>').innerHTML = "Please ensure that you have the right PayPal Credentials.";
+                document.getElementById('<%=errorMsg.ClientID%>').style.color = "Red";
+            }
+        })
+            .render('#paypal-button-container');
+    </script>
     <!--- Recaptcha --->
     <script>
         grecaptcha.ready(function () {

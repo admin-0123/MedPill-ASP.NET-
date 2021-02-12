@@ -1,6 +1,7 @@
 ﻿using EDP_Clinic.EDP_DBReference;
 using System;
 using System.Collections.Generic;
+using System.Collections;
 using System.Diagnostics;
 using System.Linq;
 using System.Web;
@@ -45,14 +46,20 @@ namespace EDP_Clinic
         {
             string userID = Session["LoggedIn"].ToString().Trim();
 
-            List<CardInfo> cifList = new List<CardInfo>();
+            List<Receipt> repList = new List<Receipt>();
             Service1Client client = new Service1Client();
-            cifList = client.GetAllCards(userID).ToList<CardInfo>();
+            //var result = client.SelectAllReceipt(userID).ToList<Receipt>();
+            //Debug.WriteLine(result);
+            //List<Receipt> repList = result.ToList();
+            //List<CardInfo> cifList = new List<CardInfo>();
+            ////Service1Client client = new Service1Client();
+            //cifList = client.GetAllCards(userID).ToList<CardInfo>();
 
-            receiptListView.DataSource = cifList;
+
+            receiptListView.DataSource = repList;
             receiptListView.Visible = true;
 
-            if(cifList.Count == 0 || cifList == null)
+            if(repList.Count == 0 || repList == null)
             {
                 receiptListPager.Visible = false;
             }
@@ -72,6 +79,7 @@ namespace EDP_Clinic
         protected void backBtn_Click(object sender, EventArgs e)
         {
             Response.Redirect("UserPage.aspx", false);
+            //PrintNodeNet
         }
     }
 }
