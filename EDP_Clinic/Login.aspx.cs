@@ -66,7 +66,7 @@ namespace EDP_Clinic
                 if (role == "Patient")
                 {
                     Response.Cookies.Add(new HttpCookie("AuthToken", guid));
-                    Response.Redirect("UserPage.aspx", false);
+                    Response.Redirect("Home.aspx", false);
                 }
                 else if (role == "Admin")
                 {
@@ -76,7 +76,7 @@ namespace EDP_Clinic
                 else
                 {
                     Response.Cookies.Add(new HttpCookie("AuthToken", guid));
-                    Response.Redirect("PatientOverview.aspx", false);
+                    Response.Redirect("Home.aspx", false);
                 }
             }
             else

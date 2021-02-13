@@ -66,6 +66,15 @@ Author URL: http://w3layouts.com
                             <a class="nav-link" href="UserPage.aspx" ID="userPageBtn" runat="server">User Page</a>
                         </li>
                         <li class="nav-item">
+                            <a class="nav-link" href="ReceptionistPage.aspx" ID="receptionistPageBtn" runat="server">Receptionist Page</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="PatientOverview.aspx" ID="employeePageBtn" runat="server">Patient Overview</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="AdminPage.aspx" ID="adminPageBtn" runat="server">Admin Page</a>
+                        </li>
+                        <li class="nav-item">
                             <a class="nav-link" href="Logout.aspx" ID="logoutBtn" runat="server">Log Out</a>
                         </li>
                     </ul>

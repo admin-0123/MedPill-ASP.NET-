@@ -115,6 +115,7 @@
     <Content Include="CA.aspx" />
     <Content Include="CA_Success.aspx" />
     <Content Include="ChangeInfo.aspx" />
+    <Content Include="receptionistPage.aspx" />
     <Content Include="error\400.aspx" />
     <Content Include="error\401.aspx" />
     <Content Include="error\402.aspx" />
@@ -290,6 +291,13 @@
     </Compile>
     <Compile Include="ChangeInfo.aspx.designer.cs">
       <DependentUpon>ChangeInfo.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="receptionistPage.aspx.cs">
+      <DependentUpon>receptionistPage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="receptionistPage.aspx.designer.cs">
+      <DependentUpon>receptionistPage.aspx</DependentUpon>
     </Compile>
     <Compile Include="error\400.aspx.cs">
       <DependentUpon>400.aspx</DependentUpon>
