@@ -115,8 +115,8 @@
     <Content Include="CA.aspx" />
     <Content Include="CA_Success.aspx" />
     <Content Include="ChangeInfo.aspx" />
-	<Content Include="Create Report.aspx" />
-	<Content Include="Dashboard.aspx" />
+    <Content Include="Create_Report.aspx" />
+    <Content Include="Dashboard.aspx" />
     <Content Include="error\400.aspx" />
     <Content Include="error\401.aspx" />
     <Content Include="error\402.aspx" />
@@ -311,28 +311,28 @@
     <Compile Include="CA_Success.aspx.designer.cs">
       <DependentUpon>CA_Success.aspx</DependentUpon>
     </Compile>
-	  <Compile Include="Create Report.aspx.cs">
-		  <DependentUpon>Create Report.aspx</DependentUpon>
-		  <SubType>ASPXCodeBehind</SubType>
-	  </Compile>
-	  <Compile Include="Create Report.aspx.designer.cs">
-		  <DependentUpon>Create Report.aspx</DependentUpon>
-	  </Compile>
-	  <Compile Include="Dashboard.aspx.cs">
-		  <DependentUpon>Dashboard.aspx</DependentUpon>
-		  <SubType>ASPXCodeBehind</SubType>
-	  </Compile>
-	  <Compile Include="Dashboard.aspx.designer.cs">
-		  <DependentUpon>Dashboard.aspx</DependentUpon>
-	  </Compile>
-	  <Compile Include="ChangeInfo.aspx.cs">
-		  <DependentUpon>ChangeInfo.aspx</DependentUpon>
-		  <SubType>ASPXCodeBehind</SubType>
-	  </Compile>
-	  <Compile Include="ChangeInfo.aspx.designer.cs">
-		  <DependentUpon>ChangeInfo.aspx</DependentUpon>
-	  </Compile>
-	  <Compile Include="error\400.aspx.cs">
+    <Compile Include="Create_Report.aspx.cs">
+      <DependentUpon>Create_Report.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Create_Report.aspx.designer.cs">
+      <DependentUpon>Create_Report.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Dashboard.aspx.cs">
+      <DependentUpon>Dashboard.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Dashboard.aspx.designer.cs">
+      <DependentUpon>Dashboard.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ChangeInfo.aspx.cs">
+      <DependentUpon>ChangeInfo.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ChangeInfo.aspx.designer.cs">
+      <DependentUpon>ChangeInfo.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="error\400.aspx.cs">
       <DependentUpon>400.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
@@ -556,7 +556,6 @@
     </Compile>
     <Compile Include="Payment.aspx.cs">
       <DependentUpon>Payment.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Payment.aspx.designer.cs">
       <DependentUpon>Payment.aspx</DependentUpon>

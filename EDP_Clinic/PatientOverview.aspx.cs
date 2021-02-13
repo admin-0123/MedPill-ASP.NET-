@@ -61,5 +61,9 @@ namespace EDP_Clinic
             PatientGridView.DataBind();
         }
 
+        protected void ViewReport_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("Create_Report.aspx");
+        }
     }
 }

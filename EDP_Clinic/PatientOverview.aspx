@@ -1,6 +1,6 @@
 ﻿<%@ Page Title="Patient Overview" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="PatientOverview.aspx.cs" Inherits="EDP_Clinic.PatientOverview" %>
 
-<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server" >
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
@@ -333,7 +333,7 @@
     </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-    <div id="form1" runat="server">
+    <div id="form1" runat="server" >
         <div class="container-xl">
             <div class="table-responsive">
                 <div class="table-wrapper">
@@ -349,6 +349,9 @@
                             <asp:LinkButton ID="RefreshBtn" runat="server" style="color: white;" Text="<i class='fas fa-sync-alt fa-lg'></i>" OnClick="RefreshBtn_Click"/>
                             <asp:TextBox ID="searchtb" runat="server" Height="25px" Width="250px"></asp:TextBox>
                             <asp:LinkButton ID="SearchBtn"  runat="server" style="color: white;" Text="<i class='fas fa-search fa-lg'></i>" OnClick="SearchBtn_Click" />                    
+               
+                            <asp:Button ID="ViewReport" runat="server" Text="View Reports" OnClick="ViewReport_Click"/>
+               
                             </div>
                         </div>
                     </div>
@@ -384,11 +387,11 @@
                     <div class="modal-body">
                         <div class="form-group">
                             <label>Name</label>
-                            <input type="text" class="form-control" required>
+                            <input type="text" class="form-control" >
                         </div>
                         <div class="form-group">
                             <label>Email</label>
-                            <input type="email" class="form-control" required>
+                            <input type="email" class="form-control" >
                         </div>
                         <div class="form-group">
                             <label>Role</label>
@@ -400,7 +403,7 @@
                         </div>
                         <div class="form-group">
                             <label>Phone</label>
-                            <input type="text" class="form-control" required>
+                            <input type="text" class="form-control" >
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -423,11 +426,11 @@
                     <div class="modal-body">
                         <div class="form-group">
                             <label>Name</label>
-                            <input type="text" class="form-control" required>
+                            <input type="text" class="form-control" >
                         </div>
                         <div class="form-group">
                             <label>Email</label>
-                            <input type="email" class="form-control" required>
+                            <input type="email" class="form-control" >
                         </div>
                         <div class="form-group">
                             <label>Role</label>
@@ -439,7 +442,7 @@
                         </div>
                         <div class="form-group">
                             <label>Phone</label>
-                            <input type="text" class="form-control" required>
+                            <input type="text" class="form-control" >
                         </div>
                     </div>
                     <div class="modal-footer">
