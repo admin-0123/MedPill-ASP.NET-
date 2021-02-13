@@ -75,8 +75,6 @@ namespace DBService.Entity
                     }
                 }
             }
-
-            //will continue adding more here
         }
         public Receipt SelectByReceiptID(string userID, string uniqueIdentifier)
         {

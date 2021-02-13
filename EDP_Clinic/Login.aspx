@@ -22,10 +22,10 @@
         &nbsp;<asp:Label ID="errorMsg" runat="server"></asp:Label>
         </br>
       <asp:Button ID="Button1" runat="server" Text="Submit" class="login login-submit" OnClick="Button1_Click" />
-       <asp:Button ID="Button2" runat="server" Text="Login via Phone" class="login login-submit" OnClick="Button2_Click"  />  
+        <asp:Button ID="Button2" runat="server" Text="Login via Phone" class="login login-submit" OnClick="Button2_Click" />
         &nbsp;</form>
   <div class="login-help">
-    <a href="Register.aspx">Register</a> • <a href="ForgetPassword.aspx">Forgot Password</a>
+      <a href="Register.aspx">Register</a> • <a href="ForgetPassword.aspx">Forgot Password</a>
   </div>
     </div>
 

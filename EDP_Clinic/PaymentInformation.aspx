@@ -25,6 +25,7 @@
                 </div>
                 <h4 class="mb-4">Card Expiry: 
                     <asp:Label ID="cardExpiryText" runat="server"></asp:Label></h4>
+                <p class="mb-4"><asp:Label ID="cardExpiryStatus" runat="server"></asp:Label></p>
             </div>
             <div class="row">
                 <div class="col-md-6"></div>
