@@ -21,7 +21,6 @@
     <div class="login-card" style="width:400px;">
         <h1>Register</h1>
         <br>
-
             <p>Email</p>
             <asp:TextBox ID="tbemail" runat="server"></asp:TextBox>
             &nbsp;</br>
@@ -40,7 +39,7 @@
       <asp:Button ID="Button1" runat="server" Text="Sign Up" class="login login-submit" OnClick="Button1_Click" CssClass="auto-style1" />
         &nbsp;<asp:Label ID="errorMsg" runat="server"></asp:Label>
         &nbsp;<div class="login-help">
-            <a href="#">Already have an account ?</a>
+            <a href="Login.aspx">Already have an account ?</a>
         </div>
     </div>
 

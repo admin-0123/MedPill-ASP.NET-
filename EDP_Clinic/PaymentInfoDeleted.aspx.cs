@@ -12,15 +12,6 @@ namespace EDP_Clinic
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            //Session["Login"] = "someone@example.com";
-
-            //string guidToken = Guid.NewGuid().ToString();
-            //Session["AuthToken"] = guidToken;
-            //HttpCookie AuthToken = new HttpCookie("AuthToken");
-            //AuthToken.Value = guidToken;
-            //Response.Cookies.Add(AuthToken);
-
-
             //Checks user session
             if (Session["LoggedIn"] != null && Session["AuthToken"] != null && Request.Cookies["AuthToken"] != null)
             {
@@ -31,7 +22,7 @@ namespace EDP_Clinic
                 else
                 {
                     //No error
-                    Debug.WriteLine("Retrieving deleted card info");
+                    Debug.WriteLine("Currently at deleted card info page");
                 }
             }
             //No credentials at all
@@ -43,12 +34,12 @@ namespace EDP_Clinic
 
         protected void goHomeBtn_Click(object sender, EventArgs e)
         {
-
+            Response.Redirect("UserPage.aspx",false);
         }
 
         protected void paymentListBtn_Click(object sender, EventArgs e)
         {
-
+            Response.Redirect("CardList.aspx",false);
         }
     }
 }

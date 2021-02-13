@@ -7,22 +7,19 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using PrintNodeNet;
+using System.Net.Http;
+using System.Text;
+using System.Net;
+using System.IO;
+using System.Net.Http.Headers;
 
 namespace EDP_Clinic
 {
-    public partial class Receipt : System.Web.UI.Page
+    public partial class ReceiptList : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            //Session["Login"] = "someone@example.com";
-
-            //string guidToken = Guid.NewGuid().ToString();
-            //Session["AuthToken"] = guidToken;
-            //HttpCookie AuthToken = new HttpCookie("AuthToken");
-            //AuthToken.Value = guidToken;
-            //Response.Cookies.Add(AuthToken);
-
-
             //Checks user session
             if (Session["LoggedIn"] != null && Session["AuthToken"] != null && Request.Cookies["AuthToken"] != null)
             {
@@ -48,18 +45,12 @@ namespace EDP_Clinic
 
             List<Receipt> repList = new List<Receipt>();
             Service1Client client = new Service1Client();
-            //var result = client.SelectAllReceipt(userID).ToList<Receipt>();
-            //Debug.WriteLine(result);
-            //List<Receipt> repList = result.ToList();
-            //List<CardInfo> cifList = new List<CardInfo>();
-            ////Service1Client client = new Service1Client();
-            //cifList = client.GetAllCards(userID).ToList<CardInfo>();
-
+            repList = client.SelectAllReceipts(userID).ToList();
 
             receiptListView.DataSource = repList;
             receiptListView.Visible = true;
 
-            if(repList.Count == 0 || repList == null)
+            if (repList.Count == 0 || repList == null)
             {
                 receiptListPager.Visible = false;
             }
@@ -79,7 +70,102 @@ namespace EDP_Clinic
         protected void backBtn_Click(object sender, EventArgs e)
         {
             Response.Redirect("UserPage.aspx", false);
-            //PrintNodeNet
+        }
+
+        protected void receiptListView_ItemCommand(object sender, ListViewCommandEventArgs e)
+        {
+            //Checks if button clicked is view more button
+            if (String.Equals(e.CommandName, "viewMore"))
+            {
+                string userID = Session["LoggedIn"].ToString().Trim();
+                string uniqueIdentifier = e.CommandArgument.ToString().Trim();
+                Service1Client client = new Service1Client();
+                Receipt rep = client.SelectByReceiptID(userID, uniqueIdentifier);
+                string receiptLink = rep.ReceiptLink.ToString().Trim();
+                Response.Redirect(receiptLink, false);
+            }
+            else if (String.Equals(e.CommandName, "printReceipt"))
+            {
+                //var testing = PrintNodeAuthenticationType.BasicAuth;
+                //PrintNodeConfiguration.ApiKey = "DGjrFiPUgRwFrGqlSEJjGntiRj-DHjoqOxXeRX7RV-o";
+                //Debug.WriteLine(testing);
+                ////var testing2 = PrintNodeComputer;
+                //var printingType = PrintNodeContentType.raw_uri;
+                ////var testing3 = PrintNodePrinter.Id;
+
+                //PrintNodeComputer computer = new PrintNodeComputer();
+
+
+                ////PrintNodePrintJobAuthentication.
+                ////PrintNodeRequestOptions;
+                //var type = PrintNodeNet.PrintNodeConfiguration.ApiKey;
+                //PrintNodeCredentials cre = new PrintNodeCredentials();
+                //Debug.WriteLine(cre.Pass);
+                //Debug.WriteLine(cre.User);
+                //Debug.WriteLine(type);
+                //using (var httpClient = new HttpClient())
+                //{
+                //    using (var request = new HttpRequestMessage(new HttpMethod("GET"), "https://api.printnode.com/whoami"))
+                //    {
+                //        var base64authorization = Convert.ToBase64String(Encoding.ASCII.GetBytes("DGjrFiPUgRwFrGqlSEJjGntiRj-DHjoqOxXeRX7RV-o"));
+                //        request.Headers.TryAddWithoutValidation("Authorization", $"Basic {base64authorization}");
+
+                //        var response = httpClient.GetAsync(request);
+                //        var testing2 = response.ToString();
+                //        Debug.WriteLine(response.ToString());
+                //    }
+                //}
+                // Create a request for the URL.
+                //WebRequest request = WebRequest.Create(
+                //  "https://api.printnode.com/whoami");
+                //// If required by the server, set the credentials.
+                //request.Credentials = CredentialCache.DefaultCredentials;
+                //request.Method = "GET";
+                ////Base 64
+                ////REdqckZpUFVnUndGckdxbFNFSmpHbnRpUmotREhqb3FPeFhlUlg3UlYtbw==
+                //request.Headers.Add("Authorization", "Basic " + "REdqckZpUFVnUndGckdxbFNFSmpHbnRpUmotREhqb3FPeFhlUlg3UlYtbw");
+                ////request.Headers["Authorization"] = "DGjrFiPUgRwFrGqlSEJjGntiRj-DHjoqOxXeRX7RV-o";
+                //request.ContentType = "application/json";
+
+                //// Get the response.
+
+                //WebResponse response = request.GetResponse();
+
+
+                //// Display the status.
+                //Debug.WriteLine(((HttpWebResponse)response).StatusDescription);
+
+                //// Get the stream containing content returned by the server.
+                //// The using block ensures the stream is automatically closed.
+                //using (Stream dataStream = response.GetResponseStream())
+                //{
+                //    // Open the stream using a StreamReader for easy access.
+                //    StreamReader reader = new StreamReader(dataStream);
+                //    // Read the content.
+                //    string responseFromServer = reader.ReadToEnd();
+                //    // Display the content.
+                //    Debug.WriteLine(responseFromServer);
+                //}
+
+                //// Close the response.
+                //response.Close();
+                //var Renderer = new IronPdf.HtmlToPdf();
+                //Renderer.RenderHtmlAsPdf("<h1>Html with CSS and Images</h1>").SaveAs("example.pdf");
+                // Create a PDF from any existing web page
+                //var Renderer = new IronPdf.HtmlToPdf();
+                //var PDF = Renderer.RenderUrlAsPdf("https://en.wikipedia.org/wiki/Portable_Document_Format");
+                //PDF.SaveAs("wikipedia.pdf");
+                //// This neat trick opens our PDF file so we can see the result
+                //System.Diagnostics.Process.Start("~/wikipedia.pdf");
+            }
+            else if (String.Equals(e.CommandName, "downloadReceipt"))
+            {
+                //using (var client = new WebClient())
+                //{
+                //    client.DownloadFile("https://pay.stripe.com/receipts/", "acct_1HveuKAVRV4JC5fk/ch_1IIbzrAVRV4JC5fkguWPM0CF/rcpt_IuQrRNFAPkLyCK19cQlB497Z4i67HB3");
+                //}
+                //Debug.WriteLine("Downloading Receipt");
+            }
         }
     }
 }

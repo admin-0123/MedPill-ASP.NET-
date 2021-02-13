@@ -199,26 +199,6 @@ Author URL: http://w3layouts.com
 
     <script type="text/javascript" src="assets/js/jquery-3.5.1.min.js"></script>
 
-    <script type="text/javascript" src="assets/js/green-audio-player.js"></script>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            new GreenAudioPlayer('.ready-player-1', { stopOthersOnPlay: true });
-        });
-    </script>
-
-    <!-- video popup -->
-    <script>
-        $('#notify').change(function () {
-            if ($('#notify').is("Active")) {
-                $('body').css('overflow', 'hidden');
-            } else {
-                $('body').css('overflow', 'auto');
-            }
-        });
-    </script>
-    <!-- //video popup -->
-
     <script src="assets/js/owl.carousel.js"></script>
     <!-- script for banner slider-->
     <script>

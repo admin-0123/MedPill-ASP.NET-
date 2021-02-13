@@ -103,7 +103,7 @@ namespace DBService.Entity
             using (SqlConnection myConn = new SqlConnection(DBConnect))
             {
                 //Step 2 - Create DataAdapter to retrieve data from database table
-                string sqlStatement = "SELECT * FROM CardInfo WHERE UniqueIdentifier = @paraUniqueIdentifier, UserId = @paraUserID";
+                string sqlStatement = "SELECT * FROM CardInfo WHERE UserId = @paraUserID AND UniqueIdentifier = @paraUniqueIdentifier";
                 using (SqlDataAdapter da = new SqlDataAdapter(sqlStatement, myConn))
                 {
                     da.SelectCommand.Parameters.AddWithValue("@paraUserID", userID);

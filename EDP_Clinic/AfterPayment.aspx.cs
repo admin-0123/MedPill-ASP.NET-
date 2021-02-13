@@ -13,5 +13,15 @@ namespace EDP_Clinic
         {
 
         }
+
+        protected void goToReceipt_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("ReceiptList.aspx",false);
+        }
+
+        protected void goHomeBtn_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("UserPage.aspx", false);
+        }
     }
 }

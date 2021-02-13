@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="PhoneLogin.aspx.cs" Inherits="EDP_Clinic.PhoneLogin" %>
+﻿<%@ Page Title="Phone Login" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="PhoneLogin.aspx.cs" Inherits="EDP_Clinic.PhoneLogin" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <style type="text/css">
  
