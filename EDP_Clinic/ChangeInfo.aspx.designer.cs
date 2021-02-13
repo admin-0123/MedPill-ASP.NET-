@@ -11,7 +11,7 @@ namespace EDP_Clinic
 {
 
 
-    public partial class Payment
+    public partial class ChangeInfo
     {
 
         /// <summary>
@@ -33,85 +33,94 @@ namespace EDP_Clinic
         protected global::System.Web.UI.WebControls.Label errorMsg;
 
         /// <summary>
-        /// cardListView control.
+        /// nameTB control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ListView cardListView;
+        protected global::System.Web.UI.WebControls.TextBox nameTB;
 
         /// <summary>
-        /// nameOnCardTB control.
+        /// nameError control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox nameOnCardTB;
+        protected global::System.Web.UI.WebControls.Label nameError;
 
         /// <summary>
-        /// nameOnCardError control.
+        /// emailTB control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label nameOnCardError;
+        protected global::System.Web.UI.WebControls.TextBox emailTB;
 
         /// <summary>
-        /// cardNumberTB control.
+        /// emailError control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox cardNumberTB;
+        protected global::System.Web.UI.WebControls.Label emailError;
 
         /// <summary>
-        /// cardNumberError control.
+        /// phoneTB control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label cardNumberError;
+        protected global::System.Web.UI.WebControls.TextBox phoneTB;
 
         /// <summary>
-        /// cardExpiryTB control.
+        /// phoneError control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox cardExpiryTB;
+        protected global::System.Web.UI.WebControls.Label phoneError;
 
         /// <summary>
-        /// cardExpiryError control.
+        /// passwordTB control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label cardExpiryError;
+        protected global::System.Web.UI.WebControls.TextBox passwordTB;
 
         /// <summary>
-        /// CVVTB control.
+        /// passError control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox CVVTB;
+        protected global::System.Web.UI.WebControls.Label passError;
 
         /// <summary>
-        /// CVVError control.
+        /// password2TB control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label CVVError;
+        protected global::System.Web.UI.WebControls.TextBox password2TB;
+
+        /// <summary>
+        /// pass2Error control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label pass2Error;
 
         /// <summary>
         /// submitBtn control.

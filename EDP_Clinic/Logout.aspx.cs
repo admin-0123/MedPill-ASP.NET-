@@ -24,6 +24,8 @@ namespace EDP_Clinic
                 Response.Cookies["AuthToken"].Value = string.Empty;
                 Response.Cookies["AuthToken"].Expires = DateTime.Now.AddMonths(-20);
             }
+            Response.Redirect("Home.aspx", false);
+
         }
     }
 }

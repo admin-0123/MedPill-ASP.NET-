@@ -38,6 +38,12 @@
   <wsdl:message name="IService1_EditOneUser_OutputMessage">
     <wsdl:part name="parameters" element="tns:EditOneUserResponse" />
   </wsdl:message>
+  <wsdl:message name="IService1_UpdateOneUser_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateOneUser" />
+  </wsdl:message>
+  <wsdl:message name="IService1_UpdateOneUser_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateOneUserResponse" />
+  </wsdl:message>
   <wsdl:message name="IService1_DeleteOneUser_InputMessage">
     <wsdl:part name="parameters" element="tns:DeleteOneUser" />
   </wsdl:message>
@@ -62,6 +68,12 @@
   <wsdl:message name="IService1_CheckOneUser_OutputMessage">
     <wsdl:part name="parameters" element="tns:CheckOneUserResponse" />
   </wsdl:message>
+  <wsdl:message name="IService1_CheckPhoneNo_InputMessage">
+    <wsdl:part name="parameters" element="tns:CheckPhoneNo" />
+  </wsdl:message>
+  <wsdl:message name="IService1_CheckPhoneNo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CheckPhoneNoResponse" />
+  </wsdl:message>
   <wsdl:message name="IService1_VerifyOneUser_InputMessage">
     <wsdl:part name="parameters" element="tns:VerifyOneUser" />
   </wsdl:message>
@@ -79,6 +91,12 @@
   </wsdl:message>
   <wsdl:message name="IService1_GetOneUserByEmail_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetOneUserByEmailResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService1_GetOneUserByPhoneNo_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetOneUserByPhoneNo" />
+  </wsdl:message>
+  <wsdl:message name="IService1_GetOneUserByPhoneNo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetOneUserByPhoneNoResponse" />
   </wsdl:message>
   <wsdl:message name="IService1_GetAllUsers_InputMessage">
     <wsdl:part name="parameters" element="tns:GetAllUsers" />
@@ -431,6 +449,10 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IService1/EditOneUser" message="tns:IService1_EditOneUser_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IService1/EditOneUserResponse" message="tns:IService1_EditOneUser_OutputMessage" />
     </wsdl:operation>
+    <wsdl:operation name="UpdateOneUser">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/UpdateOneUser" message="tns:IService1_UpdateOneUser_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/UpdateOneUserResponse" message="tns:IService1_UpdateOneUser_OutputMessage" />
+    </wsdl:operation>
     <wsdl:operation name="DeleteOneUser">
       <wsdl:input wsaw:Action="http://tempuri.org/IService1/DeleteOneUser" message="tns:IService1_DeleteOneUser_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IService1/DeleteOneUserResponse" message="tns:IService1_DeleteOneUser_OutputMessage" />
@@ -447,6 +469,10 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IService1/CheckOneUser" message="tns:IService1_CheckOneUser_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IService1/CheckOneUserResponse" message="tns:IService1_CheckOneUser_OutputMessage" />
     </wsdl:operation>
+    <wsdl:operation name="CheckPhoneNo">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/CheckPhoneNo" message="tns:IService1_CheckPhoneNo_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/CheckPhoneNoResponse" message="tns:IService1_CheckPhoneNo_OutputMessage" />
+    </wsdl:operation>
     <wsdl:operation name="VerifyOneUser">
       <wsdl:input wsaw:Action="http://tempuri.org/IService1/VerifyOneUser" message="tns:IService1_VerifyOneUser_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IService1/VerifyOneUserResponse" message="tns:IService1_VerifyOneUser_OutputMessage" />
@@ -458,6 +484,10 @@
     <wsdl:operation name="GetOneUserByEmail">
       <wsdl:input wsaw:Action="http://tempuri.org/IService1/GetOneUserByEmail" message="tns:IService1_GetOneUserByEmail_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IService1/GetOneUserByEmailResponse" message="tns:IService1_GetOneUserByEmail_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetOneUserByPhoneNo">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/GetOneUserByPhoneNo" message="tns:IService1_GetOneUserByPhoneNo_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/GetOneUserByPhoneNoResponse" message="tns:IService1_GetOneUserByPhoneNo_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="GetAllUsers">
       <wsdl:input wsaw:Action="http://tempuri.org/IService1/GetAllUsers" message="tns:IService1_GetAllUsers_InputMessage" />
@@ -727,6 +757,15 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="UpdateOneUser">
+      <soap:operation soapAction="http://tempuri.org/IService1/UpdateOneUser" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="DeleteOneUser">
       <soap:operation soapAction="http://tempuri.org/IService1/DeleteOneUser" style="document" />
       <wsdl:input>
@@ -763,6 +802,15 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="CheckPhoneNo">
+      <soap:operation soapAction="http://tempuri.org/IService1/CheckPhoneNo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="VerifyOneUser">
       <soap:operation soapAction="http://tempuri.org/IService1/VerifyOneUser" style="document" />
       <wsdl:input>
@@ -783,6 +831,15 @@
     </wsdl:operation>
     <wsdl:operation name="GetOneUserByEmail">
       <soap:operation soapAction="http://tempuri.org/IService1/GetOneUserByEmail" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetOneUserByPhoneNo">
+      <soap:operation soapAction="http://tempuri.org/IService1/GetOneUserByPhoneNo" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

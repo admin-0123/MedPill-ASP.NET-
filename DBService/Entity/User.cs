@@ -136,6 +136,46 @@ namespace DBService.Entity
             }
             return user;
         }
+        public User SelectByPhone(string phoneNo)
+        {
+            //Step 1 -  Define a connection to the database by getting
+            //          the connection string from App.config
+            string DBConnect = ConfigurationManager.ConnectionStrings["EDP_DB"].ConnectionString;
+            SqlConnection myConn = new SqlConnection(DBConnect);
+
+            //Step 2 -  Create a DataAdapter to retrieve data from the database table
+            string sqlStmt = "Select * from [User] WHERE PhoneNo = @paraPhone AND IsDeleted = 'No'";
+            SqlDataAdapter da = new SqlDataAdapter(sqlStmt, myConn);
+            da.SelectCommand.Parameters.AddWithValue("@paraPhone", phoneNo);
+
+            //Step 3 -  Create a DataSet to store the data to be retrieved
+            DataSet ds = new DataSet();
+
+            //Step 4 -  Use the DataAdapter to fill the DataSet with data retrieved
+            da.Fill(ds);
+
+            //Step 5 -  Read data from DataSet.
+            User user = null;
+            int rec_cnt = ds.Tables[0].Rows.Count;
+            if (rec_cnt == 1)
+            {
+                DataRow row = ds.Tables[0].Rows[0];  // Sql command returns only one record
+                string Id = row["Id"].ToString();
+                string Name = row["Name"].ToString();
+                string Password = row["Password"].ToString();
+                string Salt = row["Salt"].ToString();
+                string Email = row["Email"].ToString();
+                string PhoneNo = row["PhoneNo"].ToString();
+                string Role = row["Role"].ToString();
+                string Verified = row["Verified"].ToString();
+                string IsDeleted = row["IsDeleted"].ToString();
+                string IsCaretaker = row["IsCaretaker"].ToString();
+
+
+                user = new User(Id, Name, Password, Salt, Email, PhoneNo, Role, Verified, IsDeleted, IsCaretaker);
+            }
+            return user;
+        }
         public int AddUser(string name, string password, string salt, string email, string phoneNo, string role, string verified)
         {
             string DBConnect = ConfigurationManager.ConnectionStrings["EDP_DB"].ConnectionString;
@@ -171,6 +211,22 @@ namespace DBService.Entity
             myConn.Close();
             return result;
         }
+        public int UpdateUserInfo(string id, string name, string email, string mobile, string password)
+        {
+            string DBConnect = ConfigurationManager.ConnectionStrings["EDP_DB"].ConnectionString;
+            SqlConnection myConn = new SqlConnection(DBConnect);
+            string sqlStatement = "UPDATE [User] SET Name = @Name, Email= @Email, PhoneNo = @PhoneNo, Password = @Password WHERE Id = @id";
+            SqlCommand cmd = new SqlCommand(sqlStatement, myConn);
+            cmd.Parameters.AddWithValue("@id", id);
+            cmd.Parameters.AddWithValue("@Name", name);
+            cmd.Parameters.AddWithValue("@Email", email);
+            cmd.Parameters.AddWithValue("@PhoneNo", mobile);
+            cmd.Parameters.AddWithValue("@Password", password);
+            myConn.Open();
+            int result = cmd.ExecuteNonQuery();
+            myConn.Close();
+            return result;
+        }
         public int ChangePassword(string password, string email)
         {
             string DBConnect = ConfigurationManager.ConnectionStrings["EDP_DB"].ConnectionString;
@@ -178,7 +234,8 @@ namespace DBService.Entity
             string sqlStatement = "UPDATE [User] SET Password = @Password, Verified = @Verified WHERE Email = @Email";
             SqlCommand cmd = new SqlCommand(sqlStatement, myConn);
             cmd.Parameters.AddWithValue("@Password", password);
-            cmd.Parameters.AddWithValue("Email", email);
+            cmd.Parameters.AddWithValue("@Email", email);
+            cmd.Parameters.AddWithValue("@Verified", "Yes");
             myConn.Open();
             int result = cmd.ExecuteNonQuery();
             myConn.Close();
@@ -205,6 +262,26 @@ namespace DBService.Entity
             string sqlStatement = "Select * from [User] WHERE Email = @paraEmail AND IsDeleted = @paraDeleted";
             SqlCommand cmd = new SqlCommand(sqlStatement, myConn);
             cmd.Parameters.AddWithValue("@paraEmail", email);
+            cmd.Parameters.AddWithValue("@paraDeleted", "No");
+            myConn.Open();
+            var result = cmd.ExecuteScalar();
+            myConn.Close();
+            if (result != null)
+            {
+                return 1;
+            }
+            else
+            {
+                return 0;
+            }
+        }
+        public int CheckPhoneNo(string phoneno)
+        {
+            string DBConnect = ConfigurationManager.ConnectionStrings["EDP_DB"].ConnectionString;
+            SqlConnection myConn = new SqlConnection(DBConnect);
+            string sqlStatement = "Select * from [User] WHERE PhoneNo = @paraPhone AND IsDeleted = @paraDeleted";
+            SqlCommand cmd = new SqlCommand(sqlStatement, myConn);
+            cmd.Parameters.AddWithValue("@paraPhone", phoneno);
             cmd.Parameters.AddWithValue("@paraDeleted", "No");
             myConn.Open();
             var result = cmd.ExecuteScalar();

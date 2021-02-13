@@ -45,6 +45,11 @@ namespace DBService
             User user = new User();
             return user.UpdateUser(id, name, email, mobile);
         }
+        public int UpdateOneUser(string id, string name, string email, string mobile, string password)
+        {
+            User user = new User();
+            return user.UpdateUserInfo(id, name, email, mobile, password);
+        }
         public int DeleteOneUser(string id)
         {
             User user = new User();
@@ -65,6 +70,11 @@ namespace DBService
             User user = new User();
             return user.CheckUser(email);
         }
+        public int CheckPhoneNo(string phoneno)
+        {
+            User user = new User();
+            return user.CheckPhoneNo(phoneno);
+        }
         public int VerifyOneUser(string email)
         {
             User user = new User();
@@ -79,6 +89,11 @@ namespace DBService
         {
             User user = new User();
             return user.SelectByEmail(email);
+        }
+        public User GetOneUserByPhoneNo(string phonoNo)
+        {
+            User user = new User();
+            return user.SelectByPhone(phonoNo);
         }
         public List<User> GetAllUsers()
         {
@@ -216,7 +231,7 @@ namespace DBService
         public List<Receipt> SelectAllReceipt(string userID)
         {
             Receipt rep = new Receipt();
-            return rep.SelectAllReceipt(userID);
+            return rep.SelectAllReceipts(userID);
         }
 
         public Receipt SelectByReceiptID(string userID, string uniqueIdentifier)

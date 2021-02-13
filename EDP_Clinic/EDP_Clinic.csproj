@@ -64,8 +64,11 @@
     <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
-    <Reference Include="PayPal, Version=1.9.1.0, Culture=neutral, PublicKeyToken=5b4afc1ccaef40fb, processorArchitecture=MSIL">
-      <HintPath>..\packages\PayPal.1.9.1\lib\net451\PayPal.dll</HintPath>
+    <Reference Include="PayPal, Version=1.3.1.0, Culture=neutral, PublicKeyToken=5b4afc1ccaef40fb, processorArchitecture=MSIL">
+      <HintPath>..\packages\PayPal.1.3.1\lib\net451\PayPal.dll</HintPath>
+    </Reference>
+    <Reference Include="PrintNodeNet, Version=1.1.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\PrintNode.Net.1.1.2\lib\netstandard2.0\PrintNodeNet.dll</HintPath>
     </Reference>
     <Reference Include="Stripe.net, Version=39.33.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Stripe.net.39.33.0\lib\net461\Stripe.net.dll</HintPath>
@@ -111,8 +114,9 @@
   <ItemGroup>
     <Content Include="CA.aspx" />
     <Content Include="CA_Success.aspx" />
-    <Content Include="Create Report.aspx" />
-    <Content Include="Dashboard.aspx" />
+    <Content Include="ChangeInfo.aspx" />
+	<Content Include="Create Report.aspx" />
+	<Content Include="Dashboard.aspx" />
     <Content Include="error\400.aspx" />
     <Content Include="error\401.aspx" />
     <Content Include="error\402.aspx" />
@@ -277,6 +281,8 @@
     <Content Include="PaymentInfoDeleted.aspx" />
     <Content Include="PaymentInformation.aspx" />
     <Content Include="PFA.aspx" />
+    <Content Include="PhoneLogin.aspx" />
+    <Content Include="PhoneOTP.aspx" />
     <Content Include="PRFA2.aspx" />
     <Content Include="RA.aspx" />
     <Content Include="ReceiptDetail.aspx" />
@@ -305,21 +311,28 @@
     <Compile Include="CA_Success.aspx.designer.cs">
       <DependentUpon>CA_Success.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Create Report.aspx.cs">
-      <DependentUpon>Create Report.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Create Report.aspx.designer.cs">
-      <DependentUpon>Create Report.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Dashboard.aspx.cs">
-      <DependentUpon>Dashboard.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Dashboard.aspx.designer.cs">
-      <DependentUpon>Dashboard.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="error\400.aspx.cs">
+	  <Compile Include="Create Report.aspx.cs">
+		  <DependentUpon>Create Report.aspx</DependentUpon>
+		  <SubType>ASPXCodeBehind</SubType>
+	  </Compile>
+	  <Compile Include="Create Report.aspx.designer.cs">
+		  <DependentUpon>Create Report.aspx</DependentUpon>
+	  </Compile>
+	  <Compile Include="Dashboard.aspx.cs">
+		  <DependentUpon>Dashboard.aspx</DependentUpon>
+		  <SubType>ASPXCodeBehind</SubType>
+	  </Compile>
+	  <Compile Include="Dashboard.aspx.designer.cs">
+		  <DependentUpon>Dashboard.aspx</DependentUpon>
+	  </Compile>
+	  <Compile Include="ChangeInfo.aspx.cs">
+		  <DependentUpon>ChangeInfo.aspx</DependentUpon>
+		  <SubType>ASPXCodeBehind</SubType>
+	  </Compile>
+	  <Compile Include="ChangeInfo.aspx.designer.cs">
+		  <DependentUpon>ChangeInfo.aspx</DependentUpon>
+	  </Compile>
+	  <Compile Include="error\400.aspx.cs">
       <DependentUpon>400.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
@@ -568,6 +581,20 @@
     </Compile>
     <Compile Include="PFA.aspx.designer.cs">
       <DependentUpon>PFA.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="PhoneLogin.aspx.cs">
+      <DependentUpon>PhoneLogin.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="PhoneLogin.aspx.designer.cs">
+      <DependentUpon>PhoneLogin.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="PhoneOTP.aspx.cs">
+      <DependentUpon>PhoneOTP.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="PhoneOTP.aspx.designer.cs">
+      <DependentUpon>PhoneOTP.aspx</DependentUpon>
     </Compile>
     <Compile Include="PRFA2.aspx.cs">
       <DependentUpon>PRFA2.aspx</DependentUpon>

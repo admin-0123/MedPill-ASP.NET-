@@ -132,16 +132,16 @@ namespace EDP_Clinic
                     MailMessage mail = new MailMessage();
                     mail.Subject = "Verify Account (MedPill)";
                     mail.SubjectEncoding = System.Text.Encoding.UTF8;
-                    mail.Body = "Please to verify account <br>" + link;
+                    mail.Body = "Please to verify account <br> <a>" + link +"</a>";
                     mail.IsBodyHtml = true;
                     mail.Priority = MailPriority.High;
                     mail.From = new MailAddress("bryanchinzw@gmail.com");
                     mail.To.Add(new MailAddress(email));
                     emailClient.Send(mail);
                 }
-                
 
-                Response.Redirect("Login.aspx", false);
+
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "Redit", "alert('Please check email to verify account'); window.location='" + Request.ApplicationPath + "Login.aspx';", true);
 
             }
         }
