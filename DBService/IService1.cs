@@ -149,7 +149,46 @@ namespace DBService
         Caregiver GetOneCG(string id);
 
 
+        [OperationContract]
+        int CreateReport(string id, string dname, string pname, string clinic, string date_of_report, string details);
+        [OperationContract]
+        Report GetReportById(string id);
+        [OperationContract]
+        List<Report> GetAllReport();
+        [OperationContract]
+        int UpdateReportById(string id, string dname, string pname, string clinic, string date_of_report, string details);
 
+        [OperationContract]
+        int CreateDetails(string name, string nric, string date_of_birth, string gender, string phone, string email, string address, string postal);
+        [OperationContract]
+        Details GetDetailsById(string id);
+        [OperationContract]
+        List<Details> GetAllDetails();
+        [OperationContract]
+        int UpdateDetailsById(string id, string name, string nric, string date_of_birth, string gender, string phone, string email, string address, string postal);
+
+        [OperationContract]
+        int CreateMedicalCondition(string id, string name, string med_condition, string date_diagnosis, string doctor, string clinic, string treatment, string condition_desc, string patient_codition, string comments);
+        [OperationContract]
+        Medical_Condition GetMedicalConditionById(string id);
+        [OperationContract]
+        List<Medical_Condition> GetAllMedicalCondition();
+        [OperationContract]
+        int UpdateMedicalConditionById(string id, string Patient_Condition, string Comments);
+
+        [OperationContract]
+        int CreatePatient_MC(string reg_no, string name, string nric, string duration, string type_of_leave, string clinic, string signature, string date);
+        [OperationContract]
+        Patient_MC GetPatient_MCById(string id);
+        [OperationContract]
+        List<Patient_MC> GetAllPatient_MC();
+
+        [OperationContract]
+        int CreatePayment_Report(string date_of_appointment, string purpose_visit, string fees);
+        [OperationContract]
+        Payment_Report GetPayment_ReportById(string id);
+        [OperationContract]
+        List<Payment_Report> GetAllPayment_Report();
 
         // End of Appointments IService Methods
 

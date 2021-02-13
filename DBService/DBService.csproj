@@ -52,11 +52,16 @@
     <Compile Include="Entity\Appointment.cs" />
     <Compile Include="Entity\CardInfo.cs" />
     <Compile Include="Entity\Caregiver.cs" />
+    <Compile Include="Entity\Details.cs" />
     <Compile Include="Entity\displayPatient.cs" />
+    <Compile Include="Entity\Medical_Condition.cs" />
+    <Compile Include="Entity\Patient_MC.cs" />
+    <Compile Include="Entity\Payment_Report.cs" />
     <Compile Include="Entity\Photo.cs" />
     <Compile Include="Entity\EmailCode.cs" />
     <Compile Include="Entity\displayUser.cs" />
     <Compile Include="Entity\Receipt.cs" />
+    <Compile Include="Entity\Report.cs" />
     <Compile Include="Entity\User.cs" />
     <Compile Include="IService1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

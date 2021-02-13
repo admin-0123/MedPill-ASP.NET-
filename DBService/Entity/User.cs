@@ -30,20 +30,20 @@ namespace DBService.Entity
         public string IsDeleted { get; set; }
         public string IsCaretaker { get; set; }
 
-/*        public string Photo { get; set; }
+        /*        public string Photo { get; set; }
 
-        //Optional Properties
+                //Optional Properties
 
-        public int CareReceiverID { get; set; }
+                public int CareReceiverID { get; set; }
 
-        public bool Certified_CG { get; set; }*/
+                public bool Certified_CG { get; set; }*/
 
         public User()
         {
 
         }
 
-        public User(string id, string name, string password, string salt,  string email, string phoneno, string role, string verified, string isdeleted, string iscaretaker)
+        public User(string id, string name, string password, string salt, string email, string phoneno, string role, string verified, string isdeleted, string iscaretaker)
         {
             Id = id;
             Name = name;
@@ -55,7 +55,7 @@ namespace DBService.Entity
             Verified = verified;
             IsDeleted = isdeleted;
             IsCaretaker = iscaretaker;
-      
+
         }
         public User SelectByID(string id)
         {
@@ -156,7 +156,7 @@ namespace DBService.Entity
             myConn.Close();
             return result;
         }
-        public int UpdateUser(string id,string name, string email, string mobile)
+        public int UpdateUser(string id, string name, string email, string mobile)
         {
             string DBConnect = ConfigurationManager.ConnectionStrings["EDP_DB"].ConnectionString;
             SqlConnection myConn = new SqlConnection(DBConnect);
@@ -214,7 +214,7 @@ namespace DBService.Entity
                 return 1;
             }
             else
-            { 
+            {
                 return 0;
             }
         }
@@ -377,12 +377,12 @@ namespace DBService.Entity
                 string IsDeleted = row["IsDeleted"].ToString();
                 string IsCaretaker = row["IsCaretaker"].ToString();
 
-                User obj = new User(Id, Name, Password, Salt, Email, PhoneNo, Role, Verified,IsDeleted, IsCaretaker);
+                User obj = new User(Id, Name, Password, Salt, Email, PhoneNo, Role, Verified, IsDeleted, IsCaretaker);
                 userList.Add(obj);
             }
             return userList;
         }
-        
+
 
 
 
