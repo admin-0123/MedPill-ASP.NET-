@@ -107,9 +107,10 @@ namespace DBService.Entity
             SqlConnection myConn = new SqlConnection(DBConnect);
 
             //Step 2 -  Create a DataAdapter object to retrieve data from the database table
-            string sqlStmt = "Select * from [User] WHERE Role = @Role AND IsDeleted = 'No' AND IsCaretaker = 'Yes'";
+            string sqlStmt = "Select * from [User] WHERE Role = @Role AND IsCaretaker = @IsCaretaker";
             SqlDataAdapter da = new SqlDataAdapter(sqlStmt, myConn);
             da.SelectCommand.Parameters.AddWithValue("@Role", "Patient");
+            da.SelectCommand.Parameters.AddWithValue("@IsCaretaker", "Yes");
             //Step 3 -  Create a DataSet to store the data to be retrieved
             DataSet ds = new DataSet();
 
@@ -141,9 +142,10 @@ namespace DBService.Entity
             SqlConnection myConn = new SqlConnection(DBConnect);
 
             //Step 2 -  Create a DataAdapter object to retrieve data from the database table
-            string sqlStmt = "Select * from [User] WHERE Role = @Role AND IsDeleted = 'No' AND IsCaretaker = 'Yes'";
+            string sqlStmt = "Select * from [User] WHERE Role = @Role AND IsCaretaker = @IsCaretaker";
             SqlDataAdapter da = new SqlDataAdapter(sqlStmt, myConn);
             da.SelectCommand.Parameters.AddWithValue("@Role", "Patient");
+            da.SelectCommand.Parameters.AddWithValue("@IsCaretaker", "No");
             //Step 3 -  Create a DataSet to store the data to be retrieved
             DataSet ds = new DataSet();
 

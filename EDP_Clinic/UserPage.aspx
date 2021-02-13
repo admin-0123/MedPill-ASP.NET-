@@ -43,7 +43,8 @@
     <link rel="stylesheet" href="assets/css/style.css" media="screen" type="text/css" />
     <section class="w3l-contact py-5" id="400_Error">
         <div class="container py-lg-3">
-            <img class="pfp mb-3" src="https://icon-library.com/images/default-profile-icon/default-profile-icon-16.jpg">
+            <img class="pfp mb-3" id="defaultPfp" src="https://icon-library.com/images/default-profile-icon/default-profile-icon-16.jpg" runat="server">
+            <asp:Image class="pfp mb-3" ID="imgPfp" runat="server"  /> 
             <asp:Button ID="changeinfoBtn" runat="server" Text="Change Infomation" CssClass="btn btn-primary" OnClick="changeinfoBtn_Click" />
             
             &nbsp;<div class="mb-3" style="margin-left: auto; margin-right: auto; text-align: center;">
