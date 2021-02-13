@@ -1,7 +1,9 @@
 ﻿using EDP_Clinic.EDP_DBReference;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Net.Mail;
 using System.Security.Cryptography;
@@ -23,6 +25,8 @@ namespace EDP_Clinic
 
         protected void submitBtn_Click(object sender, EventArgs e)
         {
+            HttpPostedFile postedFile = imgUpload.PostedFile;
+            string filename = Path.GetFileName(postedFile.FileName);
             var redColor = Color.Red;
             var user = client.GetOneUserByEmail(Session["LoggedIn"].ToString());
             var name = HttpUtility.HtmlEncode(nameTB.Text);
@@ -30,7 +34,13 @@ namespace EDP_Clinic
             var phoneNo = HttpUtility.HtmlEncode(phoneTB.Text);
             var password = HttpUtility.HtmlEncode(passwordTB.Text);
             var password2 = HttpUtility.HtmlEncode(password2TB.Text);
-            
+            if (password == "")
+            {
+                passError.Text = "Password must be filled";
+                passError.ForeColor = Color.Red;
+                passError.Visible = true;
+                return;
+            }
             if (name == "")
             {
                 name = user.Name.ToString();
@@ -113,7 +123,37 @@ namespace EDP_Clinic
             {
                 var id = user.Id;
                 if (password2 != "")
-                {
+                {   if (filename != "")
+                    {
+                        var photoExist = client.CheckPhotoExist(id);
+                        if(photoExist == 1)
+                        {
+                            var path = Server.MapPath("~/UserImg");
+                            client.UpdateOnePhoto(id, filename);
+                            var directory = new DirectoryInfo(path);
+
+                            if (directory.Exists == false)
+                            {
+                                directory.Create();
+                            }
+                            var file = Path.Combine(path, filename);
+                            postedFile.SaveAs(file);
+                        }
+                        else
+                        {
+                            var path = Server.MapPath("~/UserImg");
+                            client.UpdateOnePhoto(id, filename);
+                            var directory = new DirectoryInfo(path);
+
+                            if (directory.Exists == false)
+                            {
+                                directory.Create();
+                            }
+                            var file = Path.Combine(path, filename);
+                            postedFile.SaveAs(file);
+                            client.AddOnePhoto(id, filename);
+                        }
+                    }
                     var pwd2WithSalt = password2 + salt;
                     byte[] hash2WithSalt = hashing.ComputeHash(Encoding.UTF8.GetBytes(pwd2WithSalt));
                     var finalHash2 = Convert.ToBase64String(hash2WithSalt);
@@ -122,6 +162,38 @@ namespace EDP_Clinic
                 }
                 else
                 {
+                    if (filename != "")
+                    {
+                        var photoExist = client.CheckPhotoExist(id);
+                        if (photoExist == 1)
+                        {
+                            var path = Server.MapPath("~/UserImg");
+                            client.UpdateOnePhoto(id, filename);
+                            var directory = new DirectoryInfo(path);
+
+                            if (directory.Exists == false)
+                            {
+                                directory.Create();
+                            }
+                            var file = Path.Combine(path, filename);
+                            postedFile.SaveAs(file);
+                            client.UpdateOnePhoto(id, filename);
+                        }
+                        else
+                        {
+                            var path = Server.MapPath("~/UserImg");
+                            client.UpdateOnePhoto(id, filename);
+                            var directory = new DirectoryInfo(path);
+
+                            if (directory.Exists == false)
+                            {
+                                directory.Create();
+                            }
+                            var file = Path.Combine(path, filename);
+                            postedFile.SaveAs(file);
+                            client.AddOnePhoto(id, filename);
+                        }
+                    }
                     client.UpdateOneUser(id, name, email, phoneNo, passInDB);
                     Response.Redirect("UserPage.aspx", false);
                 }
@@ -129,6 +201,10 @@ namespace EDP_Clinic
         }
         public static bool IsValidEmail(string email)
         {
+            if (email == "")
+            {
+                email = "random placeholder text";
+            }
             try
             {
                 MailAddress m = new MailAddress(email);
@@ -171,5 +247,6 @@ namespace EDP_Clinic
         {
             Response.Redirect("UserPage.aspx", false);
         }
+
     }
 }

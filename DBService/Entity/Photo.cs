@@ -13,7 +13,6 @@ namespace DBService.Entity
     {
         public string Id { get; set; }
         public string Photo_Resource { get; set; }
-
         public Photo() {
 
         }
@@ -55,8 +54,42 @@ namespace DBService.Entity
             }
             return photo;
         }
+        public int PhotoExist(string id)
+        {
+            string DBConnect = ConfigurationManager.ConnectionStrings["EDP_DB"].ConnectionString;
+            SqlConnection myConn = new SqlConnection(DBConnect);
 
+            string sqlStmt = "SELECT * from [Photo]  WHERE Id = @paraId";
 
+            SqlCommand sqlCmd = new SqlCommand(sqlStmt, myConn);
+            sqlCmd.Parameters.AddWithValue("@paraId", id);
+            myConn.Open();
+            var result =sqlCmd.ExecuteScalar();
+            myConn.Close();
+            if (result != null)
+            {
+                return 1;
+            }
+            else
+            {
+                return 0;
+            }
+        }
+        public int AddPhoto(string id, string photo)
+        {
+            string DBConnect = ConfigurationManager.ConnectionStrings["EDP_DB"].ConnectionString;
+            SqlConnection myConn = new SqlConnection(DBConnect);
+
+            string sqlStmt = "INSERT INTO  [Photo] VALUES(@paraId, @paraNewPhoto)";
+
+            SqlCommand sqlCmd = new SqlCommand(sqlStmt, myConn);
+            sqlCmd.Parameters.AddWithValue("@paraId", id);
+            sqlCmd.Parameters.AddWithValue("@paraNewPhoto", photo);
+            myConn.Open();
+            int result = sqlCmd.ExecuteNonQuery();
+            myConn.Close();
+            return result;
+        }
         public int UpdatePhoto(string id, string new_photo)
         {
 
@@ -76,5 +109,7 @@ namespace DBService.Entity
             return result;
 
         }
+                    
+
     }
 }

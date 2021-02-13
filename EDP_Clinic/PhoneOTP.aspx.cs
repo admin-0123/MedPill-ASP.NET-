@@ -41,7 +41,7 @@ namespace EDP_Clinic
                 var user = client.GetOneUserByPhoneNo(phoneNo);
                 var role = user.Role;
                 Session["UserRole"] = role;
-                Session["LoggedIn"] = user.Email;
+                Session["LoggedIn"] = user.Email.ToString();
                 string guid = Guid.NewGuid().ToString();
                 Session["AuthToken"] = guid;
                 if (role == "Patient")

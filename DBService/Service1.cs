@@ -299,7 +299,22 @@ namespace DBService
             Photo photo = new Photo();
             return photo.SelectById(id);
         }
+        public int CheckPhotoExist(string id)
+        {
+            Photo photo = new Photo();
+            return photo.PhotoExist(id);
+        }
+        public int AddOnePhoto(string id, string img)
+        {
 
+            Photo photo = new Photo();
+            return photo.AddPhoto(id, img);
+        }
+        public int UpdateOnePhoto(string id, string img)
+        {
+            Photo photo = new Photo();
+            return photo.UpdatePhoto(id, img);
+        }
         public Caregiver GetOneCG(string id)
         {
             Caregiver cg = new Caregiver();

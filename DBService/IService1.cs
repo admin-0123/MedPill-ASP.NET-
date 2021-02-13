@@ -148,9 +148,14 @@ namespace DBService
         [OperationContract]
 
         Photo GetOnePhoto(string id);
+        [OperationContract]
+        int CheckPhotoExist(string id);
+        [OperationContract]
+        int AddOnePhoto(string id, string img);
+        [OperationContract]
+        int UpdateOnePhoto(string id, string img);
 
         [OperationContract]
-
         Caregiver GetOneCG(string id);
 
 

@@ -314,6 +314,24 @@
   <wsdl:message name="IService1_GetOnePhoto_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetOnePhotoResponse" />
   </wsdl:message>
+  <wsdl:message name="IService1_CheckPhotoExist_InputMessage">
+    <wsdl:part name="parameters" element="tns:CheckPhotoExist" />
+  </wsdl:message>
+  <wsdl:message name="IService1_CheckPhotoExist_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CheckPhotoExistResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService1_AddOnePhoto_InputMessage">
+    <wsdl:part name="parameters" element="tns:AddOnePhoto" />
+  </wsdl:message>
+  <wsdl:message name="IService1_AddOnePhoto_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AddOnePhotoResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService1_UpdateOnePhoto_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateOnePhoto" />
+  </wsdl:message>
+  <wsdl:message name="IService1_UpdateOnePhoto_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateOnePhotoResponse" />
+  </wsdl:message>
   <wsdl:message name="IService1_GetOneCG_InputMessage">
     <wsdl:part name="parameters" element="tns:GetOneCG" />
   </wsdl:message>
@@ -524,6 +542,18 @@
     <wsdl:operation name="GetOnePhoto">
       <wsdl:input wsaw:Action="http://tempuri.org/IService1/GetOnePhoto" message="tns:IService1_GetOnePhoto_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IService1/GetOnePhotoResponse" message="tns:IService1_GetOnePhoto_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CheckPhotoExist">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/CheckPhotoExist" message="tns:IService1_CheckPhotoExist_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/CheckPhotoExistResponse" message="tns:IService1_CheckPhotoExist_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AddOnePhoto">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/AddOnePhoto" message="tns:IService1_AddOnePhoto_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/AddOnePhotoResponse" message="tns:IService1_AddOnePhoto_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateOnePhoto">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/UpdateOnePhoto" message="tns:IService1_UpdateOnePhoto_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/UpdateOnePhotoResponse" message="tns:IService1_UpdateOnePhoto_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="GetOneCG">
       <wsdl:input wsaw:Action="http://tempuri.org/IService1/GetOneCG" message="tns:IService1_GetOneCG_InputMessage" />
@@ -984,6 +1014,33 @@
     </wsdl:operation>
     <wsdl:operation name="GetOnePhoto">
       <soap:operation soapAction="http://tempuri.org/IService1/GetOnePhoto" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CheckPhotoExist">
+      <soap:operation soapAction="http://tempuri.org/IService1/CheckPhotoExist" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddOnePhoto">
+      <soap:operation soapAction="http://tempuri.org/IService1/AddOnePhoto" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateOnePhoto">
+      <soap:operation soapAction="http://tempuri.org/IService1/UpdateOnePhoto" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
