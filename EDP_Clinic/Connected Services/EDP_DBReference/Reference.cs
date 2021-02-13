@@ -2153,6 +2153,24 @@ namespace EDP_Clinic.EDP_DBReference {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetOnePhoto", ReplyAction="http://tempuri.org/IService1/GetOnePhotoResponse")]
         System.Threading.Tasks.Task<EDP_Clinic.EDP_DBReference.Photo> GetOnePhotoAsync(string id);
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/CheckPhotoExist", ReplyAction="http://tempuri.org/IService1/CheckPhotoExistResponse")]
+        int CheckPhotoExist(string id);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/CheckPhotoExist", ReplyAction="http://tempuri.org/IService1/CheckPhotoExistResponse")]
+        System.Threading.Tasks.Task<int> CheckPhotoExistAsync(string id);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/AddOnePhoto", ReplyAction="http://tempuri.org/IService1/AddOnePhotoResponse")]
+        int AddOnePhoto(string id, string img);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/AddOnePhoto", ReplyAction="http://tempuri.org/IService1/AddOnePhotoResponse")]
+        System.Threading.Tasks.Task<int> AddOnePhotoAsync(string id, string img);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/UpdateOnePhoto", ReplyAction="http://tempuri.org/IService1/UpdateOnePhotoResponse")]
+        int UpdateOnePhoto(string id, string img);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/UpdateOnePhoto", ReplyAction="http://tempuri.org/IService1/UpdateOnePhotoResponse")]
+        System.Threading.Tasks.Task<int> UpdateOnePhotoAsync(string id, string img);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetOneCG", ReplyAction="http://tempuri.org/IService1/GetOneCGResponse")]
         EDP_Clinic.EDP_DBReference.Caregiver GetOneCG(string id);
         
@@ -2701,6 +2719,30 @@ namespace EDP_Clinic.EDP_DBReference {
         
         public System.Threading.Tasks.Task<EDP_Clinic.EDP_DBReference.Photo> GetOnePhotoAsync(string id) {
             return base.Channel.GetOnePhotoAsync(id);
+        }
+        
+        public int CheckPhotoExist(string id) {
+            return base.Channel.CheckPhotoExist(id);
+        }
+        
+        public System.Threading.Tasks.Task<int> CheckPhotoExistAsync(string id) {
+            return base.Channel.CheckPhotoExistAsync(id);
+        }
+        
+        public int AddOnePhoto(string id, string img) {
+            return base.Channel.AddOnePhoto(id, img);
+        }
+        
+        public System.Threading.Tasks.Task<int> AddOnePhotoAsync(string id, string img) {
+            return base.Channel.AddOnePhotoAsync(id, img);
+        }
+        
+        public int UpdateOnePhoto(string id, string img) {
+            return base.Channel.UpdateOnePhoto(id, img);
+        }
+        
+        public System.Threading.Tasks.Task<int> UpdateOnePhotoAsync(string id, string img) {
+            return base.Channel.UpdateOnePhotoAsync(id, img);
         }
         
         public EDP_Clinic.EDP_DBReference.Caregiver GetOneCG(string id) {
