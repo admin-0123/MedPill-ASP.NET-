@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Payment History" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="ReceiptList.aspx.cs" Inherits="EDP_Clinic.Receipt" %>
+﻿<%@ Page Title="Payment History" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="ReceiptList.aspx.cs" Inherits="EDP_Clinic.ReceiptList" %>
 
 <asp:Content ID="head" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
@@ -10,20 +10,31 @@
             </div>
             <div class="mb-3">
                 <h1 class="title mb-4">Payment History</h1>
-                <p>You can view your payment history here.</p>
+                <p>You can view your payment history here. You can view your PayPal Receipts at your <a href="https://www.paypal.com/sg/signin" target="_blank">PayPal Account</a> .</p>
             </div>
             <div class="mb-3">
-                <asp:ListView ID="receiptListView" runat="server">
+                <asp:ListView ID="receiptListView" runat="server" OnItemCommand="receiptListView_ItemCommand">
                     <ItemTemplate>
                         <div class="card mb-3">
                             <div class="card-body">
                                 <div class="row">
-                                    <div class="col-md-11">
-                                        <h5 class="card-title">Receipt No:</h5>
-                                        <p class="card-text">Appointment No: 1</p>
+                                    <div class="col-md-9">
+                                        <h5 class="card-title">Receipt ID: 
+                                            <asp:Label ID="receiptID" runat="server" Text='<%#Eval("UniqueIdentifier").ToString()%>'></asp:Label></h5>
+                                        </h5>
+                                        <p class="card-text">
+                                            Date Payment:
+                                            <asp:Label ID="datePayment" runat="server" Text='<%#Convert.ToDateTime(Eval("DateSale")).ToString("dd/MM/yyyy")%>'></asp:Label>
+                                        </p>
                                     </div>
                                     <div class="col-md-1">
-                                        <a href="#" class="btn btn-primary">More</a>
+                                        <asp:LinkButton ID="downloadBtn" runat="server" CssClass="btn btn-primary" CommandName="downloadReceipt" CommandArgument='<%# Eval("UniqueIdentifier") %>'>Download</asp:LinkButton>
+                                    </div>
+                                    <div class="col-md-1">
+                                        <asp:LinkButton ID="printBtn" runat="server" CssClass="btn btn-primary" CommandName="printReceipt" CommandArgument='<%# Eval("UniqueIdentifier") %>'>Print</asp:LinkButton>
+                                    </div>
+                                    <div class="col-md-1">
+                                        <asp:LinkButton ID="moreBtn" runat="server" CssClass="btn btn-primary" CommandName="viewMore" CommandArgument='<%# Eval("UniqueIdentifier") %>'>More</asp:LinkButton>
                                     </div>
                                 </div>
                             </div>
@@ -37,7 +48,7 @@
                 </asp:ListView>
             </div>
             <div class="mt-5 text-center">
-                <asp:DataPager ID="receiptListPager" runat="server" PagedControlID="receiptListView" PageSize="1" OnPreRender="receiptListPager_PreRender">
+                <asp:DataPager ID="receiptListPager" runat="server" PagedControlID="receiptListView" PageSize="3" OnPreRender="receiptListPager_PreRender">
                     <Fields>
                         <asp:NextPreviousPagerField ButtonCssClass="btn btn-primary" ButtonType="Button" ShowFirstPageButton="True" ShowNextPageButton="False" ShowPreviousPageButton="False" />
                         <asp:NumericPagerField />

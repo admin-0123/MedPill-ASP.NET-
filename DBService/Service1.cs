@@ -214,12 +214,6 @@ namespace DBService
             CardInfo cif = new CardInfo();
             return cif.DeleteByCardNumber(uniqueIdentifier);
         }
-        /* 
-         Note by Hasan 10/02/2021
-
-        Will put in more methods here for other classes
-         
-         */
         //Receipt Entity Methods
         public int CreateReceipt(string userID, DateTime dateSale, double totalSum, bool isPaid, string receiptLink, string uniqueIdentifier)
         {
@@ -228,7 +222,7 @@ namespace DBService
 
         }
 
-        public List<Receipt> SelectAllReceipt(string userID)
+        public List<Receipt> SelectAllReceipts(string userID)
         {
             Receipt rep = new Receipt();
             return rep.SelectAllReceipts(userID);

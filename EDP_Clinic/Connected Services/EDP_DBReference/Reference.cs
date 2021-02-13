@@ -1376,11 +1376,11 @@ namespace EDP_Clinic.EDP_DBReference {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/CreateReceipt", ReplyAction="http://tempuri.org/IService1/CreateReceiptResponse")]
         System.Threading.Tasks.Task<int> CreateReceiptAsync(string userID, System.DateTime dateSale, double totalSum, bool isPaid, string receiptLink, string uniqueIdentifier);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/SelectAllReceipt", ReplyAction="http://tempuri.org/IService1/SelectAllReceiptResponse")]
-        EDP_Clinic.EDP_DBReference.Receipt[] SelectAllReceipt(string userID);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/SelectAllReceipts", ReplyAction="http://tempuri.org/IService1/SelectAllReceiptsResponse")]
+        EDP_Clinic.EDP_DBReference.Receipt[] SelectAllReceipts(string userID);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/SelectAllReceipt", ReplyAction="http://tempuri.org/IService1/SelectAllReceiptResponse")]
-        System.Threading.Tasks.Task<EDP_Clinic.EDP_DBReference.Receipt[]> SelectAllReceiptAsync(string userID);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/SelectAllReceipts", ReplyAction="http://tempuri.org/IService1/SelectAllReceiptsResponse")]
+        System.Threading.Tasks.Task<EDP_Clinic.EDP_DBReference.Receipt[]> SelectAllReceiptsAsync(string userID);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/SelectByReceiptID", ReplyAction="http://tempuri.org/IService1/SelectByReceiptIDResponse")]
         EDP_Clinic.EDP_DBReference.Receipt SelectByReceiptID(string userID, string uniqueIdentifier);
@@ -1812,12 +1812,12 @@ namespace EDP_Clinic.EDP_DBReference {
             return base.Channel.CreateReceiptAsync(userID, dateSale, totalSum, isPaid, receiptLink, uniqueIdentifier);
         }
         
-        public EDP_Clinic.EDP_DBReference.Receipt[] SelectAllReceipt(string userID) {
-            return base.Channel.SelectAllReceipt(userID);
+        public EDP_Clinic.EDP_DBReference.Receipt[] SelectAllReceipts(string userID) {
+            return base.Channel.SelectAllReceipts(userID);
         }
         
-        public System.Threading.Tasks.Task<EDP_Clinic.EDP_DBReference.Receipt[]> SelectAllReceiptAsync(string userID) {
-            return base.Channel.SelectAllReceiptAsync(userID);
+        public System.Threading.Tasks.Task<EDP_Clinic.EDP_DBReference.Receipt[]> SelectAllReceiptsAsync(string userID) {
+            return base.Channel.SelectAllReceiptsAsync(userID);
         }
         
         public EDP_Clinic.EDP_DBReference.Receipt SelectByReceiptID(string userID, string uniqueIdentifier) {

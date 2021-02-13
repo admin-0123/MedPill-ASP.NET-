@@ -6,18 +6,14 @@
     <section class="w3l-contact py-5" id="paymentInfoEmpty" style="height: 100vh;">
         <div class="container py-lg-3">
             <div class="mb-3">
-                <button class="btn btn-primary btn-style">
-                    Home
-                </button>
+                <asp:Button ID="goHomeBtn" runat="server" Text="Home" CssClass="btn btn-primary btn-style" OnClick="goHomeBtn_Click" />>
             </div>
             <div class="mt-5 text-center">
                 <h1 class="title mb-4">Thank You</h1>
                 <p class="mb-4">You have now completed your transaction. You can continue by checking out your latest receipts.</p>
             </div>
             <div style="display: flex; justify-content: center;">
-                <button class="btn btn-primary btn-style">
-                    Check Latest Receipts
-                </button>
+                <asp:Button ID="goToReceipt" runat="server" Text="Check Receipts" CssClass="btn btn-primary btn-style" OnClick="goToReceipt_Click" />
             </div>
         </div>
     </section>
