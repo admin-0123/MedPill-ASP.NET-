@@ -389,19 +389,6 @@
                     </Columns>
                     <PagerSettings FirstPageText="First" LastPageText="Last" PageButtonCount="5" />
                 </asp:GridView>
-
-                <div class="clearfix">
-                    <div class="hint-text">Showing <b>5</b> out of <b>25</b> entries</div>
-                    <ul class="pagination">
-                        <li class="page-item disabled"><a href="#">Previous</a></li>
-                        <li class="page-item"><a href="#" class="page-link">1</a></li>
-                        <li class="page-item"><a href="#" class="page-link">2</a></li>
-                        <li class="page-item active"><a href="#" class="page-link">3</a></li>
-                        <li class="page-item"><a href="#" class="page-link">4</a></li>
-                        <li class="page-item"><a href="#" class="page-link">5</a></li>
-                        <li class="page-item"><a href="#" class="page-link">Next</a></li>
-                    </ul>
-                </div>
             </div>
             <asp:Label ID="editLbl" runat="server" Visible="False"></asp:Label>
             <asp:Label ID="delLbl" runat="server" Visible="False"></asp:Label>
@@ -480,6 +467,7 @@
                         <label>Phone</label>
                         <asp:TextBox ID="tbEditMobile" runat="server" CssClass="form-control"></asp:TextBox>
                     </div>
+                     <asp:Label ID="editError" runat="server"></asp:Label>
                 </div>
                 <div class="modal-footer">
                     <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">

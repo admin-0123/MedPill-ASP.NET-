@@ -47,6 +47,15 @@ namespace EDP_Clinic
                     var exist = client.CheckPhoneNo(phoneNo);
                     if (exist == 1)
                     {
+                        var user = client.GetOneUserByPhoneNo(phoneNo);
+                        var verified = user.Verified;
+                        if (verified == "No")
+                        {
+                            errorMsg.Text = "Enter proper phone number";
+                            errorMsg.ForeColor = Color.Red;
+                            errorMsg.Visible = true;
+                            return;
+                        }
                         //Might put the Twilio Verify API into a function - 6/1/2021
 
                         //Retrieve keys from web.config

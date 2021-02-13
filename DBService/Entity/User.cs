@@ -234,7 +234,8 @@ namespace DBService.Entity
             string sqlStatement = "UPDATE [User] SET Password = @Password, Verified = @Verified WHERE Email = @Email";
             SqlCommand cmd = new SqlCommand(sqlStatement, myConn);
             cmd.Parameters.AddWithValue("@Password", password);
-            cmd.Parameters.AddWithValue("Email", email);
+            cmd.Parameters.AddWithValue("@Email", email);
+            cmd.Parameters.AddWithValue("@Verified", "Yes");
             myConn.Open();
             int result = cmd.ExecuteNonQuery();
             myConn.Close();

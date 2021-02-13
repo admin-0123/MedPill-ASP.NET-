@@ -3,8 +3,8 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <style>
         .login-card {
-            width: 450px;
-            margin: 50px auto 50px;
+            width: 400px;
+            margin: 100px auto 100px;
         }
 
         .auto-style1 {
@@ -18,7 +18,7 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
 
-    <div class="login-card">
+    <div class="login-card" style="width:400px;">
         <h1>Register</h1>
         <br>
             <p>Email</p>

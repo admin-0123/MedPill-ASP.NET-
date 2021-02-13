@@ -105,9 +105,48 @@ namespace EDP_Clinic
             var email = tbEditEmail.Text;
             var mobile = tbEditMobile.Text;
             var id = editLbl.Text;
-            Debug.WriteLine("id:"+id);
-            Debug.WriteLine(email);
-
+            var user = client.GetOneUserByEmail(email);
+            if (name == "")
+            {
+                editError.Text = "Enter name";
+                editError.ForeColor = Color.Red;
+                editError.Visible = true;
+                return;
+            }
+            if (!IsValidEmail(email))
+            {
+                editError.Text = "Enter proper email";
+                editError.ForeColor = Color.Red;
+                editError.Visible = true;
+                return;
+                
+            }
+            else
+            {
+                var exist = client.CheckOneUser(email);
+                if (exist == 1)
+                {
+                    editError.Text = "Email already in use";
+                    editError.ForeColor = Color.Red;
+                    editError.Visible = true;
+                }
+            }
+            if (!Regex.IsMatch(mobile, @"\d{8}"))
+            {
+                editError.Text = "Enter proper phone number";
+                editError.ForeColor = Color.Red;
+                editError.Visible = true;
+            }
+            else
+            {
+                var exist = client.CheckPhoneNo(mobile);
+                if (exist == 1)
+                {
+                editError.Text = "Phone number already in use";
+                editError.ForeColor = Color.Red;
+                editError.Visible = true;
+                }
+            }
             try
             {
                 var result = client.EditOneUser(id, name, email, mobile);
@@ -172,6 +211,13 @@ namespace EDP_Clinic
                         addError.ForeColor = Color.Red;
                         return;
                     }
+                    var exist2 = client.CheckPhoneNo(mobile);
+                    if (exist2 == 1)
+                    {
+                        addError.Text = "Phone Number in use";
+                        addError.ForeColor = Color.Red;
+                        return;
+                    }
                     RNGCryptoServiceProvider rng = new RNGCryptoServiceProvider();
                     byte[] saltByte = new byte[8];
                     rng.GetBytes(saltByte);
@@ -183,13 +229,7 @@ namespace EDP_Clinic
                     }
                     else
                     {
-                        var code = makeCode();
-                        var codeExist = client.CheckCodeExist(code);
-                        while (codeExist == 1)
-                        {
-                            code = makeCode();
-                            codeExist = client.CheckCodeExist(code);
-                        }
+                        var code = makeCode(); 
                         client.AddCode(email, code);
                         var link = "https://localhost:44310/EmployeePasswordSet.aspx?value=" + code;
                         emailClient.Credentials = new System.Net.NetworkCredential("bryanchinzw@gmail.com", "vPDBKArZRY7HcIJC");
