@@ -254,6 +254,12 @@
   <wsdl:message name="IService1_SelectByReceiptID_OutputMessage">
     <wsdl:part name="parameters" element="tns:SelectByReceiptIDResponse" />
   </wsdl:message>
+  <wsdl:message name="IService1_SelectAllReceiptsAdmin_InputMessage">
+    <wsdl:part name="parameters" element="tns:SelectAllReceiptsAdmin" />
+  </wsdl:message>
+  <wsdl:message name="IService1_SelectAllReceiptsAdmin_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SelectAllReceiptsAdminResponse" />
+  </wsdl:message>
   <wsdl:message name="IService1_GetAllApptAdmin_InputMessage">
     <wsdl:part name="parameters" element="tns:GetAllApptAdmin" />
   </wsdl:message>
@@ -379,6 +385,12 @@
   </wsdl:message>
   <wsdl:message name="IService1_GetPatientByName_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetPatientByNameResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService1_ApproveCaregiver_InputMessage">
+    <wsdl:part name="parameters" element="tns:ApproveCaregiver" />
+  </wsdl:message>
+  <wsdl:message name="IService1_ApproveCaregiver_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ApproveCaregiverResponse" />
   </wsdl:message>
   <wsdl:message name="IService1_CreateReport_InputMessage">
     <wsdl:part name="parameters" element="tns:CreateReport" />
@@ -653,6 +665,10 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IService1/SelectByReceiptID" message="tns:IService1_SelectByReceiptID_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IService1/SelectByReceiptIDResponse" message="tns:IService1_SelectByReceiptID_OutputMessage" />
     </wsdl:operation>
+    <wsdl:operation name="SelectAllReceiptsAdmin">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/SelectAllReceiptsAdmin" message="tns:IService1_SelectAllReceiptsAdmin_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/SelectAllReceiptsAdminResponse" message="tns:IService1_SelectAllReceiptsAdmin_OutputMessage" />
+    </wsdl:operation>
     <wsdl:operation name="GetAllApptAdmin">
       <wsdl:input wsaw:Action="http://tempuri.org/IService1/GetAllApptAdmin" message="tns:IService1_GetAllApptAdmin_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IService1/GetAllApptAdminResponse" message="tns:IService1_GetAllApptAdmin_OutputMessage" />
@@ -736,6 +752,10 @@
     <wsdl:operation name="GetPatientByName">
       <wsdl:input wsaw:Action="http://tempuri.org/IService1/GetPatientByName" message="tns:IService1_GetPatientByName_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IService1/GetPatientByNameResponse" message="tns:IService1_GetPatientByName_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ApproveCaregiver">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/ApproveCaregiver" message="tns:IService1_ApproveCaregiver_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/ApproveCaregiverResponse" message="tns:IService1_ApproveCaregiver_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="CreateReport">
       <wsdl:input wsaw:Action="http://tempuri.org/IService1/CreateReport" message="tns:IService1_CreateReport_InputMessage" />
@@ -1181,6 +1201,15 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="SelectAllReceiptsAdmin">
+      <soap:operation soapAction="http://tempuri.org/IService1/SelectAllReceiptsAdmin" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="GetAllApptAdmin">
       <soap:operation soapAction="http://tempuri.org/IService1/GetAllApptAdmin" style="document" />
       <wsdl:input>
@@ -1363,6 +1392,15 @@
     </wsdl:operation>
     <wsdl:operation name="GetPatientByName">
       <soap:operation soapAction="http://tempuri.org/IService1/GetPatientByName" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ApproveCaregiver">
+      <soap:operation soapAction="http://tempuri.org/IService1/ApproveCaregiver" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

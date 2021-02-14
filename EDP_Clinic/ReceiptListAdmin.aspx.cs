@@ -9,19 +9,10 @@ using System.Web.UI.WebControls;
 
 namespace EDP_Clinic
 {
-    public partial class ReceiptListAdmin : System.Web.UI.Page
+    public partial class ReceiptListAdmin : Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            //Session["Login"] = "someone@example.com";
-
-            //string guidToken = Guid.NewGuid().ToString();
-            //Session["AuthToken"] = guidToken;
-            //HttpCookie AuthToken = new HttpCookie("AuthToken");
-            //AuthToken.Value = guidToken;
-            //Response.Cookies.Add(AuthToken);
-
-
             //Checks user session
             if (Session["LoggedIn"] != null && Session["AuthToken"] != null && Request.Cookies["AuthToken"] != null)
             {
@@ -45,14 +36,14 @@ namespace EDP_Clinic
         {
             string userID = Session["LoggedIn"].ToString().Trim();
 
-            List<CardInfo> cifList = new List<CardInfo>();
+            List<Receipt> repList = new List<Receipt>();
             Service1Client client = new Service1Client();
-            cifList = client.GetAllCards(userID).ToList<CardInfo>();
+            repList = client.SelectAllReceiptsAdmin().ToList();
 
-            receiptListAdminView.DataSource = cifList;
+            receiptListAdminView.DataSource = repList;
             receiptListAdminView.Visible = true;
 
-            if (cifList.Count == 0 || cifList == null)
+            if (repList.Count == 0 || repList == null)
             {
                 receiptListAdminPager.Visible = false;
             }

@@ -87,6 +87,15 @@ namespace EDP_Clinic
         protected global::System.Web.UI.WebControls.Button paymentHistoryBtn;
 
         /// <summary>
+        /// cgBtn control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button cgBtn;
+
+        /// <summary>
         /// changeinfoBtn0 control.
         /// </summary>
         /// <remarks>

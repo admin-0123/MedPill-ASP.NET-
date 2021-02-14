@@ -121,6 +121,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="assets\images\pfp_placeholder.png" />
     <Content Include="CA.aspx" />
     <Content Include="CA_Success.aspx" />
     <Content Include="ChangeInfo.aspx" />
@@ -224,6 +225,9 @@
     <Content Include="assets\vendor\bootstrap\css\bootstrap.css.map" />
     <Content Include="assets\vendor\bootstrap\css\bootstrap.min.css.map" />
     <Content Include="AdminPage.aspx" />
+    <Content Include="CaregiverSignup.aspx" />
+    <Content Include="CaregiverNotification.aspx" />
+    <Content Include="CaregiverApproval.aspx" />
     <None Include="Connected Services\EDP_DBReference\configuration91.svcinfo" />
     <None Include="Connected Services\EDP_DBReference\configuration.svcinfo" />
     <Content Include="CardList.aspx" />
@@ -727,6 +731,27 @@
     </Compile>
     <Compile Include="Verify.aspx.designer.cs">
       <DependentUpon>Verify.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CaregiverSignup.aspx.cs">
+      <DependentUpon>CaregiverSignup.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CaregiverSignup.aspx.designer.cs">
+      <DependentUpon>CaregiverSignup.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CaregiverNotification.aspx.cs">
+      <DependentUpon>CaregiverNotification.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CaregiverNotification.aspx.designer.cs">
+      <DependentUpon>CaregiverNotification.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CaregiverApproval.aspx.cs">
+      <DependentUpon>CaregiverApproval.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CaregiverApproval.aspx.designer.cs">
+      <DependentUpon>CaregiverApproval.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>

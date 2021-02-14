@@ -71,6 +71,7 @@
                     <asp:Button ID="medicationBtn" runat="server" Text="Medication" CssClass="btn btn-primary" OnClick="medicationBtn_Click" />
                     <asp:Button ID="paymentMethodBtn" runat="server" Text="Payment Methods" CssClass="btn btn-primary" OnClick="paymentMethodBtn_Click" />
                     <asp:Button ID="paymentHistoryBtn" runat="server" Text="Payment History" CssClass="btn btn-primary" OnClick="paymentHistoryBtn_Click" />
+                    <asp:Button ID="cgBtn" runat="server" Text="Caregiver signup" CssClass="btn btn-primary" OnClick="cgBtn_Click" />
             <asp:Button ID="changeinfoBtn0" runat="server" Text="Change Personal Information" CssClass="btn btn-primary" OnClick="Change_Personal_Info_Click" Width="283px" />
             
                 </div>
