@@ -32,6 +32,12 @@ namespace EDP_Clinic
 
         protected void receptionistBtn_Click(object sender, EventArgs e)
         {
+            Response.Redirect("ReceptAppts.aspx", false);
+        }
+
+        protected void changeinfoBtn_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("ChangeInfo.aspx", false);
 
         }
     }

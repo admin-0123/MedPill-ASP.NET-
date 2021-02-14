@@ -9,13 +9,12 @@ using System.Web.UI.WebControls;
 
 namespace EDP_Clinic
 {
-    public partial class WebForm9 : System.Web.UI.Page
+    public partial class CA_admin : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
             EDP_DBReference.Service1Client svc_client = new EDP_DBReference.Service1Client();
-            //User current_user = svc_client.GetOneUser(Session["selected_appt_user"].ToString());
+            //User current_user = svc_client.GetOneUser(Session["current_appt_profile"].ToString());
             // For breadcrumb elements
             //hl_bc_profileName.Text = current_user.Name;
             //
@@ -23,7 +22,21 @@ namespace EDP_Clinic
             //Photo current_user_photo_obj = svc_client.GetOnePhoto(current_user.Id);
 
             //profilePfp.ImageUrl = $"~/assets/images/{current_user_photo_obj.Photo_Resource.Trim()}.jpg";
-            //lbl_profileName.Text = current_user.Name;
+            /*            var exist = svc_client.CheckPhotoExist(current_user.Id);
+                        if (exist == 1)
+                        {
+                            var photo = svc_client.GetOnePhoto(current_user.Id);
+                            var fileName = photo.Photo_Resource.ToString();
+                            var path = "~/UserImg/" + fileName;
+                            profilePfp.ImageUrl = path;
+                        }
+
+                        lbl_profileName.Text = current_user.Name;*/
+            if (!IsPostBack)
+            {
+                Session["admin_userInput"] = "nothing";
+            }
+
 
             tb_startdate_CalendarExtender.StartDate = DateTime.Now.AddDays(1);
             tb_startdate_CalendarExtender.EndDate = DateTime.Now.AddMonths(2);
@@ -34,6 +47,21 @@ namespace EDP_Clinic
                 DateTime endDate = DateTime.Now.AddMonths(2);
                 lbl_validDates.Text = $"You may only pick a date between {startDate.Day} {startDate.ToString("MMMM")} to {endDate.Day} {endDate.ToString("MMMM")}";
                 Session["gv_timeSlot"] = "Testing";
+
+                /*               List<DateTime> openSlots = new List<DateTime>();
+                               for (var dt = startDate; dt <= endDate; dt = dt.AddDays(1))
+                               {
+                                   dt = new DateTime(dt.Year, dt.Month, dt.Day, 9, 00, 00);
+
+                                   while (dt.Hour != 17)
+                                   {
+                                       // Query from appointment table and check if timeslot alr exist (to be added)
+                                       openSlots.Add(dt);
+                                       dt = dt.AddMinutes(30);
+                                   }
+
+
+                               }*/
 
                 gv_timeslots.Visible = true;
                 gv_timeslots.DataSource = Onload_Retrieve_Available_Appts();
@@ -48,7 +76,17 @@ namespace EDP_Clinic
                 gv_timeslots.DataBind();
             }
 
+            // mySlots = openSlots;
 
+            //gv_timeslots.DataSource = mySlots;
+            //gv_timeslots.DataBind();
+            /* Code to check the list items, more efficient than for loop, takes less memory, similar to an iterator/generator 
+            var enumerator = openSlots.GetEnumerator();
+            while (enumerator.MoveNext())
+            {
+                System.Diagnostics.Debug.WriteLine("THE LIST OF DATES ARE " + enumerator.Current);
+            }
+            */
         }
 
         protected void btn_searchSlot_Click(object sender, EventArgs e)
@@ -60,22 +98,35 @@ namespace EDP_Clinic
             // if input is a valid date, run the code block
             if (checkdate_bool != false)
             {
-                Session["startDate"] = Convert.ToDateTime(tb_startdate.Text);
-                gv_timeslots.DataSource = Search_AvailableAppts();
-                gv_timeslots.DataBind();
-
-                DateTime startDate = Convert.ToDateTime(Session["startDate"]);
-                DateTime endDate = DateTime.Now.AddMonths(2);
-
-                if (startDate < endDate)
+                if (Convert.ToDateTime(tb_startdate.Text) < DateTime.Now)
                 {
-                    lbl_validDates.Text = $"You may only pick a date between {startDate.Day} {startDate.ToString("MMMM")} to {endDate.Day} {endDate.ToString("MMMM")}";
+                    Session["startDate"] = DateTime.Now.AddDays(1);
+                    lbl_validDates.Text = $"Invalid past date searched";
+                    lbl_validDates.ForeColor = Color.Red;
                 }
 
                 else
                 {
-                    lbl_validDates.Text = $"Sorry, you can't enter a date later than two months of the current day";
-                    lbl_validDates.ForeColor = Color.Red;
+                    Session["startDate"] = Convert.ToDateTime(tb_startdate.Text);
+                    gv_timeslots.DataSource = Search_AvailableAppts();
+                    gv_timeslots.DataBind();
+
+                    DateTime startDate = Convert.ToDateTime(Session["startDate"]);
+                    DateTime endDate = DateTime.Now.AddMonths(2);
+
+
+                    if (startDate < endDate)
+                    {
+                        //lbl_validDates.Text = $"You may only pick a date between {startDate.Day} {startDate.ToString("MMMM")} to {endDate.Day} {endDate.ToString("MMMM")}";
+                        lbl_validDates.Text = $"You may only pick a date between {DateTime.Now.AddDays(1).Day} {DateTime.Now.AddDays(1).ToString("MMMM")} to {endDate.Day} {endDate.ToString("MMMM")}";
+                        lbl_validDates.ForeColor = Color.Black;
+                    }
+
+                    else
+                    {
+                        lbl_validDates.Text = $"Sorry, you can't enter a date later than two months of the current day";
+                        lbl_validDates.ForeColor = Color.Red;
+                    }
                 }
             }
 
@@ -195,7 +246,7 @@ namespace EDP_Clinic
 
         protected void leftArrow_redirect_Click(object sender, ImageClickEventArgs e)
         {
-            Response.Redirect("~/PRFA2.aspx");
+            Response.Redirect("~/ReceptAppts.aspx");
         }
 
 
@@ -211,6 +262,13 @@ namespace EDP_Clinic
                 lbl_error_make_appt.Text = "You did not select an appointment timeslot";
             }
 
+            else if (Session["admin_userInput"].ToString() == "nothing" )
+            {
+                result = false;
+                lbl_error_make_appt.ForeColor = Color.Red;
+                lbl_error_make_appt.Text = "You did not search an actual user";
+            }
+
             return result;
 
         }
@@ -223,7 +281,7 @@ namespace EDP_Clinic
             {
                 // Get the data needed
 
-                int current_profile = Convert.ToInt32(Session["selected_appt_user"]);
+                int current_profile = Convert.ToInt32(Session["admin_userInput"]);
                 string appointmentType = ddl_apptType.SelectedValue;
                 DateTime rb_userinput = Convert.ToDateTime(Request["rb_apptslot"]);
                 string status = "upcoming";
@@ -244,7 +302,7 @@ namespace EDP_Clinic
     {"status", status.ToString() }
 };
                     Session["successful_appt_details"] = appt_success_dict;
-                    Response.Redirect("~/CA_Success.aspx");
+                    Response.Redirect("~/CA_admin_Success.aspx");
                 }
                 else
                 {
@@ -261,7 +319,41 @@ namespace EDP_Clinic
 
         protected void btn_cancelAppt_Click(object sender, EventArgs e)
         {
-            Response.Redirect("~/PRFA2.aspx");
+            Response.Redirect("~/ReceptAppts.aspx");
+        }
+
+        protected void btn_searchUser_Click(object sender, EventArgs e)
+        {
+            var userInput = tb_searchUser.Text.Trim();
+            EDP_DBReference.Service1Client svc_client = new EDP_DBReference.Service1Client();
+            var userObj = svc_client.GetOneUserByPhoneNo(userInput);
+
+
+            if (userObj != null)
+            {
+                Session["admin_userInput"] = userObj.Id;
+                lbl_searchUserResult.Text = $"Successfully found user {userObj.Name} with email address of {userObj.Email}";
+                lbl_searchUserResult.ForeColor = Color.Black;
+                var exist = svc_client.CheckPhotoExist(Session["admin_userInput"].ToString());
+                if (exist == 1)
+                {
+                var photo = svc_client.GetOnePhoto(Session["admin_userInput"].ToString());
+                var fileName = photo.Photo_Resource.ToString();
+                var path = "~/UserImg/" + fileName;
+                profilePfp.ImageUrl = path;
+                lbl_profileName.Text = userObj.Name;
+                }
+            }
+
+            else
+            {
+                Session["admin_userInput"] = "nothing";
+                lbl_searchUserResult.Text = $"Failed to find a user of that phone number";
+                lbl_searchUserResult.ForeColor = Color.Red;
+                profilePfp.ImageUrl = "~/assets/images/pfp_placeholder.png";
+                lbl_profileName.Text = "";
+            }
+
         }
     }
 }

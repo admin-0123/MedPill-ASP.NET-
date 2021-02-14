@@ -2225,6 +2225,18 @@ namespace EDP_Clinic.EDP_DBReference {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/ApproveCaregiver", ReplyAction="http://tempuri.org/IService1/ApproveCaregiverResponse")]
         System.Threading.Tasks.Task<int> ApproveCaregiverAsync(string cg_id, string patient_id);
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/RemoveCaregiver", ReplyAction="http://tempuri.org/IService1/RemoveCaregiverResponse")]
+        int RemoveCaregiver(string cg_id, string patient_id);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/RemoveCaregiver", ReplyAction="http://tempuri.org/IService1/RemoveCaregiverResponse")]
+        System.Threading.Tasks.Task<int> RemoveCaregiverAsync(string cg_id, string patient_id);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetOneCGByCRID", ReplyAction="http://tempuri.org/IService1/GetOneCGByCRIDResponse")]
+        EDP_Clinic.EDP_DBReference.Caregiver GetOneCGByCRID(string id);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetOneCGByCRID", ReplyAction="http://tempuri.org/IService1/GetOneCGByCRIDResponse")]
+        System.Threading.Tasks.Task<EDP_Clinic.EDP_DBReference.Caregiver> GetOneCGByCRIDAsync(string id);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/CreateReport", ReplyAction="http://tempuri.org/IService1/CreateReportResponse")]
         int CreateReport(string id, string dname, string pname, string clinic, string date_of_report, string details);
         
@@ -2863,6 +2875,22 @@ namespace EDP_Clinic.EDP_DBReference {
         
         public System.Threading.Tasks.Task<int> ApproveCaregiverAsync(string cg_id, string patient_id) {
             return base.Channel.ApproveCaregiverAsync(cg_id, patient_id);
+        }
+        
+        public int RemoveCaregiver(string cg_id, string patient_id) {
+            return base.Channel.RemoveCaregiver(cg_id, patient_id);
+        }
+        
+        public System.Threading.Tasks.Task<int> RemoveCaregiverAsync(string cg_id, string patient_id) {
+            return base.Channel.RemoveCaregiverAsync(cg_id, patient_id);
+        }
+        
+        public EDP_Clinic.EDP_DBReference.Caregiver GetOneCGByCRID(string id) {
+            return base.Channel.GetOneCGByCRID(id);
+        }
+        
+        public System.Threading.Tasks.Task<EDP_Clinic.EDP_DBReference.Caregiver> GetOneCGByCRIDAsync(string id) {
+            return base.Channel.GetOneCGByCRIDAsync(id);
         }
         
         public int CreateReport(string id, string dname, string pname, string clinic, string date_of_report, string details) {

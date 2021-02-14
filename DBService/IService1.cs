@@ -191,6 +191,14 @@ namespace DBService
 
         int ApproveCaregiver(string cg_id, string patient_id);
 
+        [OperationContract]
+
+        int RemoveCaregiver(string cg_id, string patient_id);
+
+
+        [OperationContract]
+        Caregiver GetOneCGByCRID(string id);
+
 
         //
 

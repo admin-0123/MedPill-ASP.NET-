@@ -45,13 +45,13 @@ namespace EDP_Clinic
                 if (addCT == 1 && approveCG == 1)
                 {
 
-                    lbl_test.Text = $"Your request to be a caregiver has been approved by {patient_obj.Name} \n Caregiver Name: {cg_obj.Name} \n Care Receiver: {patient_obj.Name}";
+                    lbl_test.Text = $"You have approved {cg_obj.Name}'s request to be a caregiver for you. \n Caregiver Name: {cg_obj.Name} \n Care Receiver: {patient_obj.Name}";
                 }
 
                 // If the crendentials match but the server couldnt update
                 else
                 {
-                    lbl_test.Text = $"Your request to be a caregiver has been approved by {patient_obj.Name} \n But it seems like there is a problem with the server, please request again";
+                    lbl_test.Text = $"You have approved {cg_obj.Name}'s request to be a caregiver for you. \n But it seems like there is a problem with the server, please request again";
                 }
 
             }

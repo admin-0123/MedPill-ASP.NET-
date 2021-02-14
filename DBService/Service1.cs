@@ -375,6 +375,21 @@ namespace DBService
         }
 
 
+        public int RemoveCaregiver(string cg_id, string patient_id)
+        {
+            Caregiver cg = new Caregiver();
+            return cg.RemoveCaregiver(cg_id, patient_id);
+        }
+
+        public Caregiver GetOneCGByCRID(string id)
+        {
+            Caregiver cg = new Caregiver();
+            return cg.SelectByCRId(id);
+        }
+
+
+
+
 
         /* Appointments End - */
 

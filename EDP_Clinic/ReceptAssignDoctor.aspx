@@ -27,6 +27,11 @@
                                 color:black;
     text-decoration:none;
             }
+
+
+                                            .btn_assignDoctor {
+            border-radius:15px;
+        }
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
@@ -36,10 +41,10 @@
         <nav aria-label="breadcrumb">
   <ol class="breadcrumb">
       <li class="breadcrumb-item active">
-              <asp:HyperLink ID="hl_bc_appt" runat="server" CssClass="hyperlink_breadcrumb" NavigateUrl="#">User Page</asp:HyperLink></asp:Label>
+              <asp:HyperLink ID="hl_bc_appt" runat="server" CssClass="hyperlink_breadcrumb" NavigateUrl="~/receptionistPage.aspx">User Page</asp:HyperLink></asp:Label>
       </li>
             <li class="breadcrumb-item active">
-              <asp:HyperLink ID="HyperLink1" runat="server" CssClass="hyperlink_breadcrumb" NavigateUrl="#">Receptionist Appointment Control</asp:HyperLink></asp:Label>
+              <asp:HyperLink ID="HyperLink1" runat="server" CssClass="hyperlink_breadcrumb" NavigateUrl="~/ReceptAppts.aspx">Receptionist Appointment Control</asp:HyperLink></asp:Label>
       </li>
     <li class="breadcrumb-item active" aria-current="page"> 
         <asp:HyperLink ID="hl_bc_profileName" runat="server" CssClass="hyperlink_breadcrumb_active"> </asp:HyperLink></asp:Label>
@@ -65,7 +70,7 @@
             <div class="col-6">
             </div>
             <div class="col-6">
-                <asp:Button ID="btn_assignDoctor" runat="server" Text="Assign" OnClick="btn_assignDoctor_Click" />
+                <asp:Button ID="btn_assignDoctor" runat="server" Text="Assign" OnClick="btn_assignDoctor_Click" CssClass="btn_assignDoctor btn btn-primary text-white" />
                 <asp:Label ID="lbl_updateResult" runat="server"></asp:Label>
             </div>
         </div>

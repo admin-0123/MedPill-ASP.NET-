@@ -32,8 +32,10 @@ namespace EDP_Clinic
             mail.IsBodyHtml = true;
             mail.Priority = MailPriority.High;
             mail.From = new MailAddress("bryanchinzw@gmail.com");
-            mail.To.Add(new MailAddress("wilfred.h.junwen@gmail.com"));
+            mail.To.Add(new MailAddress(selected_patient_obj.Email));
             emailClient.Send(mail);
+
+            lbl_notification.Text = $"An email has been sent to {selected_patient_obj.Name}";
         }
     }
 }

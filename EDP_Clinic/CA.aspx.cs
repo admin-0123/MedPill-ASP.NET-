@@ -102,7 +102,7 @@ namespace EDP_Clinic
             // if input is a valid date, run the code block
             if (checkdate_bool != false)
             {
-                if (Convert.ToDateTime(tb_startdate.Text) < DateTime.Now.AddDays(1))
+                if (Convert.ToDateTime(tb_startdate.Text) < DateTime.Now)
                 {
                     Session["startDate"] = DateTime.Now.AddDays(1);
                     lbl_validDates.Text = $"Invalid past date searched";
@@ -123,6 +123,7 @@ namespace EDP_Clinic
                     {
                         //lbl_validDates.Text = $"You may only pick a date between {startDate.Day} {startDate.ToString("MMMM")} to {endDate.Day} {endDate.ToString("MMMM")}";
                         lbl_validDates.Text = $"You may only pick a date between {DateTime.Now.AddDays(1).Day} {DateTime.Now.AddDays(1).ToString("MMMM")} to {endDate.Day} {endDate.ToString("MMMM")}";
+                        lbl_validDates.ForeColor = Color.Black;
                     }
 
                     else
