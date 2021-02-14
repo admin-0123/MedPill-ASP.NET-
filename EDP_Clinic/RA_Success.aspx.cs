@@ -15,7 +15,7 @@ namespace EDP_Clinic
         {
 
 
-            if (Session["LoggedIn"] == null || Session["admin_userInput"] == null)
+            if (Session["LoggedIn"] == null || Session["current_appt_profile"] == null)
             {
                 Response.Redirect("~/Home.aspx");
             }

@@ -15,58 +15,65 @@ namespace EDP_Clinic
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            
-            EDP_DBReference.Service1Client svc_client = new EDP_DBReference.Service1Client();
-            User current_user = svc_client.GetOneUser(Session["current_appt_profile"].ToString());
-            // For breadcrumb elements
-            hl_bc_profileName.Text = current_user.Name;
-            //
-
-            Photo current_user_photo_obj = svc_client.GetOnePhoto(current_user.Id);
-
-            //profilePfp.ImageUrl = $"~/assets/images/{current_user_photo_obj.Photo_Resource.Trim()}.jpg";
-
-            var exist = svc_client.CheckPhotoExist(current_user.Id);
-            if (exist == 1)
+            if (Session["LoggedIn"] != null || Session["current_appt_profile"] != null)
             {
-                var photo = svc_client.GetOnePhoto(current_user.Id);
-                var fileName = photo.Photo_Resource.ToString();
-                var path = "~/UserImg/" + fileName;
-                profilePfp.ImageUrl = path;
-            }
+                EDP_DBReference.Service1Client svc_client = new EDP_DBReference.Service1Client();
+                User current_user = svc_client.GetOneUser(Session["current_appt_profile"].ToString());
+                // For breadcrumb elements
+                hl_bc_profileName.Text = current_user.Name;
+                //
+
+                Photo current_user_photo_obj = svc_client.GetOnePhoto(current_user.Id);
+
+                //profilePfp.ImageUrl = $"~/assets/images/{current_user_photo_obj.Photo_Resource.Trim()}.jpg";
+
+                var exist = svc_client.CheckPhotoExist(current_user.Id);
+                if (exist == 1)
+                {
+                    var photo = svc_client.GetOnePhoto(current_user.Id);
+                    var fileName = photo.Photo_Resource.ToString();
+                    var path = "~/UserImg/" + fileName;
+                    profilePfp.ImageUrl = path;
+                }
 
 
-            lbl_profileName.Text = current_user.Name;
+                lbl_profileName.Text = current_user.Name;
 
-            tb_startdate_CalendarExtender.StartDate = DateTime.Now.AddDays(1);
-            tb_startdate_CalendarExtender.EndDate = DateTime.Now.AddMonths(2);
-            if (Session["gv_timeSlot"] == null)
-            {
-                Session["startDate"] = DateTime.Now.AddDays(1);
-                DateTime startDate = Convert.ToDateTime(Session["startDate"]);
-                DateTime endDate = DateTime.Now.AddMonths(2);
-                lbl_validDates.Text = $"You may only pick a date between {startDate.Day} {startDate.ToString("MMMM")} to {endDate.Day} {endDate.ToString("MMMM")}";
-                Session["gv_timeSlot"] = "Testing";
+                tb_startdate_CalendarExtender.StartDate = DateTime.Now.AddDays(1);
+                tb_startdate_CalendarExtender.EndDate = DateTime.Now.AddMonths(2);
+                if (Session["gv_timeSlot"] == null)
+                {
+                    Session["startDate"] = DateTime.Now.AddDays(1);
+                    DateTime startDate = Convert.ToDateTime(Session["startDate"]);
+                    DateTime endDate = DateTime.Now.AddMonths(2);
+                    lbl_validDates.Text = $"You may only pick a date between {startDate.Day} {startDate.ToString("MMMM")} to {endDate.Day} {endDate.ToString("MMMM")}";
+                    Session["gv_timeSlot"] = "Testing";
 
 
 
-                gv_timeslots.Visible = true;
-                gv_timeslots.DataSource = Onload_Retrieve_Available_Appts();
-                gv_timeslots.DataBind();
+                    gv_timeslots.Visible = true;
+                    gv_timeslots.DataSource = Onload_Retrieve_Available_Appts();
+                    gv_timeslots.DataBind();
+
+                }
+
+                else
+                {
+                    gv_timeslots.Visible = true;
+                    gv_timeslots.DataSource = Search_AvailableAppts();
+                    gv_timeslots.DataBind();
+                }
+
+                lbl_current_at.Text = $"Appointment Type: {Session["selected_appt_type"]}";
+                lbl_current_dt.Text = $"Date time: {Session["selected_appt_date"].ToString()}";
+
 
             }
 
             else
             {
-                gv_timeslots.Visible = true;
-                gv_timeslots.DataSource = Search_AvailableAppts();
-                gv_timeslots.DataBind();
+                Response.Redirect("~/Home.aspx", false);
             }
-
-            lbl_current_at.Text = $"Appointment Type: {Session["selected_appt_type"]}";
-            lbl_current_dt.Text = $"Date time: {Session["selected_appt_date"].ToString()}";
-
-
         }
 
 

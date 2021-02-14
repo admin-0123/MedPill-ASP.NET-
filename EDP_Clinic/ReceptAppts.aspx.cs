@@ -13,54 +13,69 @@ namespace EDP_Clinic
         protected void Page_Load(object sender, EventArgs e)
         {
             // On initial load of the page, set the session variable for viewstate
-            if (!IsPostBack)
+            if (Session["LoggedIn"] != null)
             {
-                Session["appt_viewstate_admin"] = "upcoming";
-                Session["appt_viewstate_admin_viewMode"] = "All";
-
-                profilePfp.Visible = false;
-                //leftArrow_redirect.Visible = false;
-                // On every postback, search for the session, check the current session value of viewstate and display the contents accordingly.
-                // Edit: Shifted the switch statement from page load to here initial page load only as it is causing
-                // System.ArgumentException: Invalid postback or callback argument.  Event validation is enabled using <pages enableEventValidation="true"/> in configuration or <%@ Page EnableEventValidation="true" %> in a page.  For security purposes, this feature verifies that arguments to postback or callback events originate from the server control that originally rendered them.  If the data is valid and expected, use the ClientScriptManager.RegisterForEventValidation method in order to register the postback or callback data for validation.
-
-                switch (Session["appt_viewstate_admin"])
+                if (Session["UserRole"].ToString() == "Receptionist")
                 {
-                    case "upcoming":
-                        if (Session["appt_viewstate_admin_viewMode"].ToString() == "Unassigned")
-                        {
-                            listview_appts.DataSource = GetApptsAdminUpcomingUnassigned();
-                            listview_appts.DataBind();
-                        }
+                    if (!IsPostBack)
+                    {
+                        Session["appt_viewstate_admin"] = "upcoming";
+                        Session["appt_viewstate_admin_viewMode"] = "All";
 
-                        else
-                        {
-                            listview_appts.DataSource = GetApptsAdminUpcoming();
-                            listview_appts.DataBind();
-                        }
-                        lbl_viewMode.Visible = true;
-                        ddl_viewMode.Visible = true;
-                        break;
-                    case "past":
-                        listview_appts.DataSource = GetApptsAdminPast();
-                        listview_appts.DataBind();
-                        lbl_viewMode.Visible = false;
-                        ddl_viewMode.Visible = false;
-                        break;
-                    case "missed":
-                        listview_appts.DataSource = GetApptsAdminMissed();
-                        listview_appts.DataBind();
-                        lbl_viewMode.Visible = false;
-                        ddl_viewMode.Visible = false;
-                        break;
+                        profilePfp.Visible = false;
+                        //leftArrow_redirect.Visible = false;
+                        // On every postback, search for the session, check the current session value of viewstate and display the contents accordingly.
+                        // Edit: Shifted the switch statement from page load to here initial page load only as it is causing
+                        // System.ArgumentException: Invalid postback or callback argument.  Event validation is enabled using <pages enableEventValidation="true"/> in configuration or <%@ Page EnableEventValidation="true" %> in a page.  For security purposes, this feature verifies that arguments to postback or callback events originate from the server control that originally rendered them.  If the data is valid and expected, use the ClientScriptManager.RegisterForEventValidation method in order to register the postback or callback data for validation.
 
+                        switch (Session["appt_viewstate_admin"])
+                        {
+                            case "upcoming":
+                                if (Session["appt_viewstate_admin_viewMode"].ToString() == "Unassigned")
+                                {
+                                    listview_appts.DataSource = GetApptsAdminUpcomingUnassigned();
+                                    listview_appts.DataBind();
+                                }
+
+                                else
+                                {
+                                    listview_appts.DataSource = GetApptsAdminUpcoming();
+                                    listview_appts.DataBind();
+                                }
+                                lbl_viewMode.Visible = true;
+                                ddl_viewMode.Visible = true;
+                                break;
+                            case "past":
+                                listview_appts.DataSource = GetApptsAdminPast();
+                                listview_appts.DataBind();
+                                lbl_viewMode.Visible = false;
+                                ddl_viewMode.Visible = false;
+                                break;
+                            case "missed":
+                                listview_appts.DataSource = GetApptsAdminMissed();
+                                listview_appts.DataBind();
+                                lbl_viewMode.Visible = false;
+                                ddl_viewMode.Visible = false;
+                                break;
+
+                        }
+                    }
                 }
+
+                else
+                {
+                    Response.Redirect("Home.aspx", false);
+                }
+
+
+
+
             }
 
-
-
-
-
+            else
+            {
+                Response.Redirect("Login.aspx", false);
+            }
 
         }
 
