@@ -884,6 +884,21 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="ApproveCaregiver">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="cg_id" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="patient_id" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ApproveCaregiverResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="ApproveCaregiverResult" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
   <xs:element name="CreateReport">
     <xs:complexType>
       <xs:sequence>

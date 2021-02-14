@@ -24,7 +24,18 @@ namespace EDP_Clinic
 
             Photo current_user_photo_obj = svc_client.GetOnePhoto(current_user.Id);
 
-            profilePfp.ImageUrl = $"~/assets/images/{current_user_photo_obj.Photo_Resource.Trim()}.jpg";
+            //profilePfp.ImageUrl = $"~/assets/images/{current_user_photo_obj.Photo_Resource.Trim()}.jpg";
+
+            var exist = svc_client.CheckPhotoExist(current_user.Id);
+            if (exist == 1)
+            {
+                var photo = svc_client.GetOnePhoto(current_user.Id);
+                var fileName = photo.Photo_Resource.ToString();
+                var path = "~/UserImg/" + fileName;
+                profilePfp.ImageUrl = path;
+            }
+
+
             lbl_profileName.Text = current_user.Name;
 
             tb_startdate_CalendarExtender.StartDate = DateTime.Now.AddDays(1);

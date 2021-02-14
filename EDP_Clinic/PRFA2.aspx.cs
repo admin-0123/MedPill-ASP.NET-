@@ -48,8 +48,18 @@ namespace EDP_Clinic
             //
 
             Photo current_user_photo_obj = svc_client.GetOnePhoto(current_user.Id);
-            profilePfp.ImageUrl = $"~/assets/images/{current_user_photo_obj.Photo_Resource.Trim()}.jpg";
+            //profilePfp.ImageUrl = $"~/assets/images/{current_user_photo_obj.Photo_Resource.Trim()}.jpg";
             lbl_profileName.Text = current_user.Name;
+
+
+            var exist3 = svc_client.CheckPhotoExist(current_user.Id);
+            if (exist3 == 1)
+            {
+                var photo = svc_client.GetOnePhoto(current_user.Id);
+                var fileName = photo.Photo_Resource.ToString();
+                var path = "~/UserImg/" + fileName;
+                profilePfp.ImageUrl = path;
+            }
 
             //repeater_appts.DataSource = GetApptsUser();
             //repeater_appts.DataBind();

@@ -366,6 +366,16 @@ namespace DBService
             User user = new User();
             return user.SelectPatientByName(patient_name);
         }
+
+
+        public int ApproveCaregiver(string cg_id, string patient_id)
+        {
+            Caregiver cg = new Caregiver();
+            return cg.ApproveCaregiver(cg_id, patient_id);
+        }
+
+
+
         /* Appointments End - */
 
         /* Owen's Reports */

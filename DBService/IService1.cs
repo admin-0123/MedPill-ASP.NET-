@@ -187,6 +187,12 @@ namespace DBService
 
         User GetPatientByName(string patient_name);
 
+        [OperationContract]
+
+        int ApproveCaregiver(string cg_id, string patient_id);
+
+
+        //
 
         [OperationContract]
         int CreateReport(string id, string dname, string pname, string clinic, string date_of_report, string details);

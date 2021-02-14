@@ -33,7 +33,7 @@ namespace EDP_Clinic
 
         protected void appointmentBtn_Click(object sender, EventArgs e)
         {
-
+            Response.Redirect("PFA.aspx", false);
         }
 
         protected void medicationBtn_Click(object sender, EventArgs e)
@@ -64,6 +64,9 @@ namespace EDP_Clinic
             Response.Redirect("Patient_view_details.aspx");
         }
 
-        
+        protected void cgBtn_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("CaregiverSignup.aspx");
+        }
     }
 }

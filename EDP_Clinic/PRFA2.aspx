@@ -108,7 +108,7 @@
             <div class="row">
                                     <asp:Button ID="btn_Rsch" runat="server" Text="Reschedule" CssClass="btn_Rsch bg-primary text-white col-3 align-content-end ml-2" OnClick="btn_RschOnClick" />
                                     <span class="col-3"></span>
-                                    <asp:Button ID="btn_Cancel" runat="server" Text="Cancel2" CssClass="btn_Cancel bg-white text-primary btn-outline-primary col-3" OnClick="btn_CancelOnClick" />
+                                    <asp:Button ID="btn_Cancel" runat="server" Text="Cancel" CssClass="btn_Cancel bg-white text-primary btn-outline-primary col-3" OnClick="btn_CancelOnClick" />
                          <span class="col-3"></span>
             </div>
                                 <% } %> 
