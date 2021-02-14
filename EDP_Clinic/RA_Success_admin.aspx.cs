@@ -9,7 +9,7 @@ using Twilio.Rest.Api.V2010.Account;
 
 namespace EDP_Clinic
 {
-    public partial class RA_Success : System.Web.UI.Page
+    public partial class WebForm8 : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -45,7 +45,7 @@ namespace EDP_Clinic
 
             if (!IsPostBack)
             {
-/*                var accountSid = Environment.GetEnvironmentVariable("TWILIO_ACCOUNT_SID");
+                var accountSid = Environment.GetEnvironmentVariable("TWILIO_ACCOUNT_SID");
                 var authToken = Environment.GetEnvironmentVariable("TWILIO_AUTH_TOKEN");
 
                 TwilioClient.Init(accountSid, authToken);
@@ -62,18 +62,13 @@ namespace EDP_Clinic
                 else
                 {
                     var message = MessageResource.Create(
-                    body: $"You have successfully updated your appointment with MedPill Clinic, report to the clinic on {appt.dateTime.ToString("G")}",
+                    body: $"Your Appointment has successfully been updated by the receptionist, report to the clinic on {appt.dateTime.ToString("G")}",
                     from: new Twilio.Types.PhoneNumber("+14242066417"),
                     to: new Twilio.Types.PhoneNumber("+6587558054")
                     );
-                }*/
+                }
 
             }
-
-
-
-
-
         }
 
         protected void btn_go_pfa_Click(object sender, EventArgs e)

@@ -254,6 +254,24 @@ namespace DBService
             return appt.SelectAllForOneUser(uid);
         }
 
+        public List<Appointment> GetAllApptAdminUpcoming()
+        {
+            Appointment appt = new Appointment();
+            return appt.SelectAllForAdminUpcoming();
+        }
+
+        public List<Appointment> GetAllApptAdminPast()
+        {
+            Appointment appt = new Appointment();
+            return appt.SelectAllForAdminPast();
+        }
+
+        public List<Appointment> GetAllApptAdminMissed()
+        {
+            Appointment appt = new Appointment();
+            return appt.SelectAllForAdminMissed();
+        }
+
         public List<Appointment> GetAllApptUserUpcoming(int uid)
         {
             Appointment appt = new Appointment();
@@ -312,6 +330,33 @@ namespace DBService
             return cg.SelectById(id);
         }
 
+
+        public int UpdateDoctor(int uid, DateTime old_time, int doctor_id)
+        {
+            Appointment appt = new Appointment();
+            return appt.UpdateDoctor(uid, old_time, doctor_id);
+        }
+
+
+        public List<User> GetAllDoctors()
+        {
+            User user = new User();
+            return user.SelectAllDoctors();
+        }
+
+
+        public User GetOneDoctor(string doctor_name)
+        {
+            User user = new User();
+            return user.SelectDoctorByName(doctor_name);
+        }
+
+
+        public User GetPatientByName(string patient_name)
+        {
+            User user = new User();
+            return user.SelectPatientByName(patient_name);
+        }
         /* Appointments End - */
 
 

@@ -208,6 +208,11 @@
     <Content Include="assets\vendor\bootstrap\css\bootstrap.css.map" />
     <Content Include="assets\vendor\bootstrap\css\bootstrap.min.css.map" />
     <Content Include="AdminPage.aspx" />
+    <Content Include="RA_Success.aspx" />
+    <Content Include="ReceptAppts.aspx" />
+    <Content Include="ReceptAssignDoctor.aspx" />
+    <Content Include="RA_admin.aspx" />
+    <Content Include="RA_Success_admin.aspx" />
     <None Include="Connected Services\EDP_DBReference\configuration91.svcinfo" />
     <None Include="Connected Services\EDP_DBReference\configuration.svcinfo" />
     <Content Include="CardList.aspx" />
@@ -507,6 +512,13 @@
     <Compile Include="RA.aspx.designer.cs">
       <DependentUpon>RA.aspx</DependentUpon>
     </Compile>
+    <Compile Include="RA_Success.aspx.cs">
+      <DependentUpon>RA_Success.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="RA_Success.aspx.designer.cs">
+      <DependentUpon>RA_Success.aspx</DependentUpon>
+    </Compile>
     <Compile Include="ReceiptDetail.aspx.cs">
       <DependentUpon>ReceiptDetail.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -576,6 +588,34 @@
     </Compile>
     <Compile Include="Verify.aspx.designer.cs">
       <DependentUpon>Verify.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ReceptAppts.aspx.cs">
+      <DependentUpon>ReceptAppts.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ReceptAppts.aspx.designer.cs">
+      <DependentUpon>ReceptAppts.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ReceptAssignDoctor.aspx.cs">
+      <DependentUpon>ReceptAssignDoctor.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ReceptAssignDoctor.aspx.designer.cs">
+      <DependentUpon>ReceptAssignDoctor.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="RA_admin.aspx.cs">
+      <DependentUpon>RA_admin.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="RA_admin.aspx.designer.cs">
+      <DependentUpon>RA_admin.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="RA_Success_admin.aspx.cs">
+      <DependentUpon>RA_Success_admin.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="RA_Success_admin.aspx.designer.cs">
+      <DependentUpon>RA_Success_admin.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>

@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="RA.aspx.cs" Inherits="EDP_Clinic.RA" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="RA_admin.aspx.cs" Inherits="EDP_Clinic.WebForm7" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <!-- had to add this jquery cdn script here to make the jquery code able to run on webpage start,
         did not work on masterpage -->
@@ -82,26 +82,14 @@
       </li>
   </ol>
 </nav>
-            <h2>Reschedule an Appointment </h2>
+            <h2>Book an Appointment </h2>
             <div class="card-header">
             <div class="row">
                 <div class="col-sm-12"> 
-                    <!--
-                    <span class="fa fa-arrow-left" style="height:inherit"></span>
-                    &nbsp
-                    <img src="assets/images/profileImage_placeholder.png" width="50px" height="50px"></img>
-                                        &nbsp
-                    <span> Johnny Lim</span>
-                        -->
                     <asp:ImageButton ID="leftArrow_redirect" runat="server" Height="50px" ImageAlign="Left" ImageUrl="~/assets/images/leftArrow.png" Width="50px" OnClick="leftArrow_redirect_Click" />
                     <asp:Image ID="profilePfp" runat="server" ImageUrl="~/assets/images/pfp_placeholder.png" Height="50px" Width="50px" />
                     <asp:Label ID="lbl_profileName" runat="server" Text=""></asp:Label>
                 </div>
-                <!--
-                <div class="col-sm-4"> 
-                    <asp:Button runat="server" Text="Make New Appointment" CssClass="btn_mka btn btn-primary text-white" ID="btn_makeAppt"/>
-                    <!-- <button class="btn_mka btn btn-primary text-white"> Make New Appointment</button> 
-                </div> -->
             </div>
             </div>
             <p>
@@ -156,16 +144,6 @@
                         <PagerStyle CssClass="gv_pager" />
             </asp:GridView>
             
-
-<!--
-        <p>
-            &nbsp;
-        </p>
-    <p>
-        <a href="#" class="load_more">Load more</a>
-        <asp:Button ID="Btn_LoadMore" runat="server" Text="Load More" Width="1110px" CssClass="btn btn-primary" />
-    </p>
-            -->
     <div>
                     <asp:Label ID="lbl_error_make_appt" runat="server"></asp:Label>
         <br />
@@ -194,4 +172,5 @@
 
 
 </asp:Content>
+
 

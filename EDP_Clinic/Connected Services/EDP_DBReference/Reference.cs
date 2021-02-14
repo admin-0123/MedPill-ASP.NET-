@@ -1418,6 +1418,24 @@ namespace EDP_Clinic.EDP_DBReference {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetAllApptUserMissed", ReplyAction="http://tempuri.org/IService1/GetAllApptUserMissedResponse")]
         System.Threading.Tasks.Task<EDP_Clinic.EDP_DBReference.Appointment[]> GetAllApptUserMissedAsync(int uid);
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetAllApptAdminUpcoming", ReplyAction="http://tempuri.org/IService1/GetAllApptAdminUpcomingResponse")]
+        EDP_Clinic.EDP_DBReference.Appointment[] GetAllApptAdminUpcoming();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetAllApptAdminUpcoming", ReplyAction="http://tempuri.org/IService1/GetAllApptAdminUpcomingResponse")]
+        System.Threading.Tasks.Task<EDP_Clinic.EDP_DBReference.Appointment[]> GetAllApptAdminUpcomingAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetAllApptAdminPast", ReplyAction="http://tempuri.org/IService1/GetAllApptAdminPastResponse")]
+        EDP_Clinic.EDP_DBReference.Appointment[] GetAllApptAdminPast();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetAllApptAdminPast", ReplyAction="http://tempuri.org/IService1/GetAllApptAdminPastResponse")]
+        System.Threading.Tasks.Task<EDP_Clinic.EDP_DBReference.Appointment[]> GetAllApptAdminPastAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetAllApptAdminMissed", ReplyAction="http://tempuri.org/IService1/GetAllApptAdminMissedResponse")]
+        EDP_Clinic.EDP_DBReference.Appointment[] GetAllApptAdminMissed();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetAllApptAdminMissed", ReplyAction="http://tempuri.org/IService1/GetAllApptAdminMissedResponse")]
+        System.Threading.Tasks.Task<EDP_Clinic.EDP_DBReference.Appointment[]> GetAllApptAdminMissedAsync();
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/CreateAppointment", ReplyAction="http://tempuri.org/IService1/CreateAppointmentResponse")]
         int CreateAppointment(int patientID, string appointmentType, System.DateTime dateTime, string status);
         
@@ -1453,6 +1471,30 @@ namespace EDP_Clinic.EDP_DBReference {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetOneCG", ReplyAction="http://tempuri.org/IService1/GetOneCGResponse")]
         System.Threading.Tasks.Task<EDP_Clinic.EDP_DBReference.Caregiver> GetOneCGAsync(string id);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetAllDoctors", ReplyAction="http://tempuri.org/IService1/GetAllDoctorsResponse")]
+        EDP_Clinic.EDP_DBReference.User[] GetAllDoctors();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetAllDoctors", ReplyAction="http://tempuri.org/IService1/GetAllDoctorsResponse")]
+        System.Threading.Tasks.Task<EDP_Clinic.EDP_DBReference.User[]> GetAllDoctorsAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetOneDoctor", ReplyAction="http://tempuri.org/IService1/GetOneDoctorResponse")]
+        EDP_Clinic.EDP_DBReference.User GetOneDoctor(string doctor_name);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetOneDoctor", ReplyAction="http://tempuri.org/IService1/GetOneDoctorResponse")]
+        System.Threading.Tasks.Task<EDP_Clinic.EDP_DBReference.User> GetOneDoctorAsync(string doctor_name);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/UpdateDoctor", ReplyAction="http://tempuri.org/IService1/UpdateDoctorResponse")]
+        int UpdateDoctor(int uid, System.DateTime old_time, int doctor_id);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/UpdateDoctor", ReplyAction="http://tempuri.org/IService1/UpdateDoctorResponse")]
+        System.Threading.Tasks.Task<int> UpdateDoctorAsync(int uid, System.DateTime old_time, int doctor_id);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetPatientByName", ReplyAction="http://tempuri.org/IService1/GetPatientByNameResponse")]
+        EDP_Clinic.EDP_DBReference.User GetPatientByName(string patient_name);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetPatientByName", ReplyAction="http://tempuri.org/IService1/GetPatientByNameResponse")]
+        System.Threading.Tasks.Task<EDP_Clinic.EDP_DBReference.User> GetPatientByNameAsync(string patient_name);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -1850,6 +1892,30 @@ namespace EDP_Clinic.EDP_DBReference {
             return base.Channel.GetAllApptUserMissedAsync(uid);
         }
         
+        public EDP_Clinic.EDP_DBReference.Appointment[] GetAllApptAdminUpcoming() {
+            return base.Channel.GetAllApptAdminUpcoming();
+        }
+        
+        public System.Threading.Tasks.Task<EDP_Clinic.EDP_DBReference.Appointment[]> GetAllApptAdminUpcomingAsync() {
+            return base.Channel.GetAllApptAdminUpcomingAsync();
+        }
+        
+        public EDP_Clinic.EDP_DBReference.Appointment[] GetAllApptAdminPast() {
+            return base.Channel.GetAllApptAdminPast();
+        }
+        
+        public System.Threading.Tasks.Task<EDP_Clinic.EDP_DBReference.Appointment[]> GetAllApptAdminPastAsync() {
+            return base.Channel.GetAllApptAdminPastAsync();
+        }
+        
+        public EDP_Clinic.EDP_DBReference.Appointment[] GetAllApptAdminMissed() {
+            return base.Channel.GetAllApptAdminMissed();
+        }
+        
+        public System.Threading.Tasks.Task<EDP_Clinic.EDP_DBReference.Appointment[]> GetAllApptAdminMissedAsync() {
+            return base.Channel.GetAllApptAdminMissedAsync();
+        }
+        
         public int CreateAppointment(int patientID, string appointmentType, System.DateTime dateTime, string status) {
             return base.Channel.CreateAppointment(patientID, appointmentType, dateTime, status);
         }
@@ -1896,6 +1962,38 @@ namespace EDP_Clinic.EDP_DBReference {
         
         public System.Threading.Tasks.Task<EDP_Clinic.EDP_DBReference.Caregiver> GetOneCGAsync(string id) {
             return base.Channel.GetOneCGAsync(id);
+        }
+        
+        public EDP_Clinic.EDP_DBReference.User[] GetAllDoctors() {
+            return base.Channel.GetAllDoctors();
+        }
+        
+        public System.Threading.Tasks.Task<EDP_Clinic.EDP_DBReference.User[]> GetAllDoctorsAsync() {
+            return base.Channel.GetAllDoctorsAsync();
+        }
+        
+        public EDP_Clinic.EDP_DBReference.User GetOneDoctor(string doctor_name) {
+            return base.Channel.GetOneDoctor(doctor_name);
+        }
+        
+        public System.Threading.Tasks.Task<EDP_Clinic.EDP_DBReference.User> GetOneDoctorAsync(string doctor_name) {
+            return base.Channel.GetOneDoctorAsync(doctor_name);
+        }
+        
+        public int UpdateDoctor(int uid, System.DateTime old_time, int doctor_id) {
+            return base.Channel.UpdateDoctor(uid, old_time, doctor_id);
+        }
+        
+        public System.Threading.Tasks.Task<int> UpdateDoctorAsync(int uid, System.DateTime old_time, int doctor_id) {
+            return base.Channel.UpdateDoctorAsync(uid, old_time, doctor_id);
+        }
+        
+        public EDP_Clinic.EDP_DBReference.User GetPatientByName(string patient_name) {
+            return base.Channel.GetPatientByName(patient_name);
+        }
+        
+        public System.Threading.Tasks.Task<EDP_Clinic.EDP_DBReference.User> GetPatientByNameAsync(string patient_name) {
+            return base.Channel.GetPatientByNameAsync(patient_name);
         }
     }
 }
