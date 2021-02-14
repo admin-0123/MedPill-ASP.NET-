@@ -13,12 +13,35 @@ namespace EDP_Clinic
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+
+
+            if (Session["LoggedIn"] == null || Session["current_appt_profile"] == null)
+            {
+                Response.Redirect("~/Home.aspx");
+            }
+
+
+            else
+            {
+                if (Session["admin_userInput"].ToString() != "nothing")
+                {
+                    loadSuccessMsg();
+                }
+            }
+
+
+
+        }
+
+
+        protected void loadSuccessMsg()
+        {
             EDP_DBReference.Service1Client svc_client = new EDP_DBReference.Service1Client();
             Dictionary<String, String> apptDetail = (Dictionary<string, string>)Session["successful_appt_details"];
 
             DateTime dateTimeinput;
             dateTimeinput = Convert.ToDateTime(apptDetail["dateTime"]);
-            var appt = svc_client.GetOneAppt(Convert.ToInt32(Session["selected_appt_user"]), dateTimeinput);
+            var appt = svc_client.GetOneAppt(Convert.ToInt32(Session["current_appt_profile"]), dateTimeinput);
 
             var patient = svc_client.GetOneUser(appt.patientID.ToString());
 
@@ -45,7 +68,7 @@ namespace EDP_Clinic
 
             if (!IsPostBack)
             {
-/*                var accountSid = Environment.GetEnvironmentVariable("TWILIO_ACCOUNT_SID");
+                var accountSid = Environment.GetEnvironmentVariable("TWILIO_ACCOUNT_SID");
                 var authToken = Environment.GetEnvironmentVariable("TWILIO_AUTH_TOKEN");
 
                 TwilioClient.Init(accountSid, authToken);
@@ -66,19 +89,18 @@ namespace EDP_Clinic
                     from: new Twilio.Types.PhoneNumber("+14242066417"),
                     to: new Twilio.Types.PhoneNumber("+6587558054")
                     );
-                }*/
+                }
 
             }
-
-
-
-
-
         }
-
         protected void btn_go_pfa_Click(object sender, EventArgs e)
         {
             Response.Redirect("~/PFA.aspx");
+        }
+
+        protected void btn_go_userpage_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/UserPage.aspx");
         }
     }
 }

@@ -65,6 +65,12 @@
             background-color: lightgray;
         }
 
+                
+            .hyperlink_breadcrumb {
+                color:black;
+    text-decoration:none;
+            }
+
     </style>
     </asp:Content>
     <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
@@ -79,7 +85,7 @@
               <asp:HyperLink ID="hl_bc_appt" runat="server" CssClass="hyperlink_breadcrumb" NavigateUrl="~/PFA.aspx">Appointments</asp:HyperLink></asp:Label>
       </li>
     <li class="breadcrumb-item active" aria-current="page"> 
-        <asp:HyperLink ID="hl_bc_profileName" runat="server" CssClass="hyperlink_breadcrumb"></asp:HyperLink></asp:Label>
+        <asp:HyperLink ID="hl_bc_profileName" runat="server" CssClass="hyperlink_breadcrumb" NavigateUrl="~/PRFA2.aspx"></asp:HyperLink></asp:Label>
       </li>
     <li class="breadcrumb-item active" aria-current="page"> 
         <asp:HyperLink ID="hl_bc_makeappt" runat="server" CssClass="hyperlink_breadcrumb_active"></asp:HyperLink>Make Appointment</asp:Label>

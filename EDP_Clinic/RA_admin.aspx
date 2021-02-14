@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="RA_admin.aspx.cs" Inherits="EDP_Clinic.WebForm7" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="RA_admin.aspx.cs" Inherits="EDP_Clinic.RA_admin" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <!-- had to add this jquery cdn script here to make the jquery code able to run on webpage start,
         did not work on masterpage -->
@@ -64,6 +64,12 @@
             background-color: lightgray;
         }
 
+        
+            .hyperlink_breadcrumb {
+                color:black;
+    text-decoration:none;
+            }
+
     </style>
     </asp:Content>
     <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
@@ -72,10 +78,10 @@
         <nav aria-label="breadcrumb">
   <ol class="breadcrumb">
       <li class="breadcrumb-item active">
-              <asp:HyperLink ID="hl_bc_appt" runat="server" CssClass="hyperlink_breadcrumb" NavigateUrl="#">User Page</asp:HyperLink></asp:Label>
+              <asp:HyperLink ID="hl_bc_appt" runat="server" CssClass="hyperlink_breadcrumb" NavigateUrl="~/receptionistPage.aspx">User Page</asp:HyperLink></asp:Label>
       </li>
             <li class="breadcrumb-item active">
-              <asp:HyperLink ID="HyperLink1" runat="server" CssClass="hyperlink_breadcrumb" NavigateUrl="#">Receptionist Appointment Control</asp:HyperLink></asp:Label>
+              <asp:HyperLink ID="HyperLink1" runat="server" CssClass="hyperlink_breadcrumb" NavigateUrl="~/ReceptAppts.aspx">Receptionist Appointment Control</asp:HyperLink></asp:Label>
       </li>
     <li class="breadcrumb-item active" aria-current="page"> 
         <asp:HyperLink ID="hl_bc_profileName" runat="server" CssClass="hyperlink_breadcrumb"></asp:HyperLink></asp:Label>

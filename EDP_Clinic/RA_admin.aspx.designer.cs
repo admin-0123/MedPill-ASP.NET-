@@ -11,7 +11,7 @@ namespace EDP_Clinic
 {
 
 
-    public partial class WebForm7
+    public partial class RA_admin
     {
 
         /// <summary>

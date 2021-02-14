@@ -11,7 +11,7 @@ namespace EDP_Clinic
 {
 
 
-    public partial class CaregiverNotification
+    public partial class CaregiverRemoval
     {
 
         /// <summary>
