@@ -20,7 +20,10 @@ namespace EDP_Clinic
         Service1Client client = new Service1Client();
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            if (Session["LoggedIn"] == null)
+            {
+                Response.Redirect("Login.aspx", false);
+            }
         }
 
         protected void submitBtn_Click(object sender, EventArgs e)

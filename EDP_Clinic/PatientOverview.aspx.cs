@@ -14,6 +14,17 @@ namespace EDP_Clinic
         Service1Client client = new Service1Client();
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (Session["LoggedIn"] == null)
+            {
+                Response.Redirect("Login.aspx", false);
+            }
+            else
+            {
+                if (Session["UserRole"].ToString() == "Patient")
+                {
+                    Response.Redirect("Home.aspx", false);
+                }
+            }
             List<displayPatient> patientList = new List<displayPatient>();
             patientList = client.DisplayAllPatients().ToList<displayPatient>();
             PatientGridView.Visible = true;
@@ -62,5 +73,14 @@ namespace EDP_Clinic
             PatientGridView.DataBind();
         }
 
+        protected void ViewReport_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("Create_Report.aspx");
+        }
+
+        protected void btn_med_condition_click(object sender, EventArgs e)
+        {
+            Response.Redirect("Patient_Medical_Condition.aspx");
+        }
     }
 }

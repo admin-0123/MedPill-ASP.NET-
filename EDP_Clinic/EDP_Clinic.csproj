@@ -121,9 +121,17 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="assets\images\pfp_placeholder.png" />
     <Content Include="CA.aspx" />
     <Content Include="CA_Success.aspx" />
     <Content Include="ChangeInfo.aspx" />
+    <Content Include="Create_Report.aspx" />
+    <Content Include="Dashboard.aspx" />
+    <Content Include="RA_admin.aspx" />
+    <Content Include="RA_Success_admin.aspx" />
+    <Content Include="ReceptAppts.aspx" />
+    <Content Include="ReceptAssignDoctor.aspx" />
+    <Content Include="receptionistPage.aspx" />
     <Content Include="error\400.aspx" />
     <Content Include="error\401.aspx" />
     <Content Include="error\402.aspx" />
@@ -217,6 +225,9 @@
     <Content Include="assets\vendor\bootstrap\css\bootstrap.css.map" />
     <Content Include="assets\vendor\bootstrap\css\bootstrap.min.css.map" />
     <Content Include="AdminPage.aspx" />
+    <Content Include="CaregiverSignup.aspx" />
+    <Content Include="CaregiverNotification.aspx" />
+    <Content Include="CaregiverApproval.aspx" />
     <None Include="Connected Services\EDP_DBReference\configuration91.svcinfo" />
     <None Include="Connected Services\EDP_DBReference\configuration.svcinfo" />
     <Content Include="CardList.aspx" />
@@ -240,13 +251,28 @@
     <Content Include="Connected Services\EDP_DBReference\EDP_Clinic.EDP_DBReference.Caregiver.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
+    <Content Include="Connected Services\EDP_DBReference\EDP_Clinic.EDP_DBReference.Details.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\EDP_DBReference\EDP_Clinic.EDP_DBReference.displayPatient.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\EDP_DBReference\EDP_Clinic.EDP_DBReference.Medical_Condition.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\EDP_DBReference\EDP_Clinic.EDP_DBReference.Patient_MC.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\EDP_DBReference\EDP_Clinic.EDP_DBReference.Payment_Report.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
     <Content Include="Connected Services\EDP_DBReference\EDP_Clinic.EDP_DBReference.Photo.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
     <Content Include="Connected Services\EDP_DBReference\EDP_Clinic.EDP_DBReference.Receipt.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
-    <Content Include="Connected Services\EDP_DBReference\EDP_Clinic.EDP_DBReference.displayPatient.datasource">
+    <Content Include="Connected Services\EDP_DBReference\EDP_Clinic.EDP_DBReference.Report.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
     <None Include="Connected Services\EDP_DBReference\Reference.svcmap">
@@ -258,8 +284,17 @@
     <Content Include="ForgetPassword.aspx" />
     <Content Include="Login.aspx" />
     <Content Include="Logout.aspx" />
+    <Content Include="Medical_Condition_Create.aspx" />
+    <Content Include="Medical_Condition_Details.aspx" />
+    <Content Include="Medical_Condition_Details_Update.aspx" />
     <Content Include="PatientOverview.aspx" />
     <Content Include="error\generalError.aspx" />
+    <Content Include="Patient_MC.aspx" />
+    <Content Include="Patient_Medical_Condition.aspx" />
+    <Content Include="Patient_report.aspx" />
+    <Content Include="Patient_update_details.aspx" />
+    <Content Include="Patient_Update_Report.aspx" />
+    <Content Include="Patient_view_details.aspx" />
     <Content Include="Payment.aspx" />
     <Content Include="PaymentInfoDeleted.aspx" />
     <Content Include="PaymentInformation.aspx" />
@@ -270,6 +305,7 @@
     <Content Include="RA.aspx" />
     <Content Include="ReceiptList.aspx" />
     <Content Include="ReceiptListAdmin.aspx" />
+    <Content Include="Receptionist_payment_report.aspx" />
     <Content Include="Register.aspx" />
     <Content Include="UserPage.aspx" />
     <Content Include="Verify.aspx" />
@@ -292,12 +328,61 @@
     <Compile Include="CA_Success.aspx.designer.cs">
       <DependentUpon>CA_Success.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Create_Report.aspx.cs">
+      <DependentUpon>Create_Report.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Create_Report.aspx.designer.cs">
+      <DependentUpon>Create_Report.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Dashboard.aspx.cs">
+      <DependentUpon>Dashboard.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Dashboard.aspx.designer.cs">
+      <DependentUpon>Dashboard.aspx</DependentUpon>
+    </Compile>
     <Compile Include="ChangeInfo.aspx.cs">
       <DependentUpon>ChangeInfo.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="ChangeInfo.aspx.designer.cs">
       <DependentUpon>ChangeInfo.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="RA_admin.aspx.cs">
+      <DependentUpon>RA_admin.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="RA_admin.aspx.designer.cs">
+      <DependentUpon>RA_admin.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="RA_Success_admin.aspx.cs">
+      <DependentUpon>RA_Success_admin.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="RA_Success_admin.aspx.designer.cs">
+      <DependentUpon>RA_Success_admin.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ReceptAppts.aspx.cs">
+      <DependentUpon>ReceptAppts.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ReceptAppts.aspx.designer.cs">
+      <DependentUpon>ReceptAppts.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ReceptAssignDoctor.aspx.cs">
+      <DependentUpon>ReceptAssignDoctor.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ReceptAssignDoctor.aspx.designer.cs">
+      <DependentUpon>ReceptAssignDoctor.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="receptionistPage.aspx.cs">
+      <DependentUpon>receptionistPage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="receptionistPage.aspx.designer.cs">
+      <DependentUpon>receptionistPage.aspx</DependentUpon>
     </Compile>
     <Compile Include="error\400.aspx.cs">
       <DependentUpon>400.aspx</DependentUpon>
@@ -444,6 +529,27 @@
     <Compile Include="Logout.aspx.designer.cs">
       <DependentUpon>Logout.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Medical_Condition_Create.aspx.cs">
+      <DependentUpon>Medical_Condition_Create.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Medical_Condition_Create.aspx.designer.cs">
+      <DependentUpon>Medical_Condition_Create.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Medical_Condition_Details.aspx.cs">
+      <DependentUpon>Medical_Condition_Details.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Medical_Condition_Details.aspx.designer.cs">
+      <DependentUpon>Medical_Condition_Details.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Medical_Condition_Details_Update.aspx.cs">
+      <DependentUpon>Medical_Condition_Details_Update.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Medical_Condition_Details_Update.aspx.designer.cs">
+      <DependentUpon>Medical_Condition_Details_Update.aspx</DependentUpon>
+    </Compile>
     <Compile Include="PatientOverview.aspx.cs">
       <DependentUpon>PatientOverview.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -458,9 +564,50 @@
     <Compile Include="error\generalError.aspx.designer.cs">
       <DependentUpon>generalError.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Patient_MC.aspx.cs">
+      <DependentUpon>Patient_MC.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Patient_MC.aspx.designer.cs">
+      <DependentUpon>Patient_MC.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Patient_Medical_Condition.aspx.cs">
+      <DependentUpon>Patient_Medical_Condition.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Patient_Medical_Condition.aspx.designer.cs">
+      <DependentUpon>Patient_Medical_Condition.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Patient_report.aspx.cs">
+      <DependentUpon>Patient_report.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Patient_report.aspx.designer.cs">
+      <DependentUpon>Patient_report.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Patient_update_details.aspx.cs">
+      <DependentUpon>Patient_update_details.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Patient_update_details.aspx.designer.cs">
+      <DependentUpon>Patient_update_details.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Patient_Update_Report.aspx.cs">
+      <DependentUpon>Patient_Update_Report.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Patient_Update_Report.aspx.designer.cs">
+      <DependentUpon>Patient_Update_Report.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Patient_view_details.aspx.cs">
+      <DependentUpon>Patient_view_details.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Patient_view_details.aspx.designer.cs">
+      <DependentUpon>Patient_view_details.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Payment.aspx.cs">
       <DependentUpon>Payment.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Payment.aspx.designer.cs">
       <DependentUpon>Payment.aspx</DependentUpon>
@@ -529,6 +676,13 @@
     <Compile Include="ReceiptListAdmin.aspx.designer.cs">
       <DependentUpon>ReceiptListAdmin.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Receptionist_payment_report.aspx.cs">
+      <DependentUpon>Receptionist_payment_report.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Receptionist_payment_report.aspx.designer.cs">
+      <DependentUpon>Receptionist_payment_report.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Register.aspx.cs">
       <DependentUpon>Register.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -577,6 +731,27 @@
     </Compile>
     <Compile Include="Verify.aspx.designer.cs">
       <DependentUpon>Verify.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CaregiverSignup.aspx.cs">
+      <DependentUpon>CaregiverSignup.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CaregiverSignup.aspx.designer.cs">
+      <DependentUpon>CaregiverSignup.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CaregiverNotification.aspx.cs">
+      <DependentUpon>CaregiverNotification.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CaregiverNotification.aspx.designer.cs">
+      <DependentUpon>CaregiverNotification.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CaregiverApproval.aspx.cs">
+      <DependentUpon>CaregiverApproval.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CaregiverApproval.aspx.designer.cs">
+      <DependentUpon>CaregiverApproval.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>

@@ -14,6 +14,10 @@ namespace EDP_Clinic
         Service1Client client = new Service1Client();
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (Session["LoggedIn"] == null)
+            {
+                Response.Redirect("Login.aspx", false);
+            }
             imgPfp.Visible = false;
             var email = Session["LoggedIn"].ToString();
             var user = client.GetOneUserByEmail(email);
@@ -33,7 +37,7 @@ namespace EDP_Clinic
 
         protected void appointmentBtn_Click(object sender, EventArgs e)
         {
-
+            Response.Redirect("PFA.aspx", false);
         }
 
         protected void medicationBtn_Click(object sender, EventArgs e)
@@ -57,6 +61,16 @@ namespace EDP_Clinic
         {
             Response.Redirect("ChangeInfo.aspx", false);
 
+        }
+
+        protected void Change_Personal_Info_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("Patient_view_details.aspx");
+        }
+
+        protected void cgBtn_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("CaregiverSignup.aspx");
         }
     }
 }

@@ -256,6 +256,24 @@ namespace DBService
             return appt.SelectAllForOneUser(uid);
         }
 
+        public List<Appointment> GetAllApptAdminUpcoming()
+        {
+            Appointment appt = new Appointment();
+            return appt.SelectAllForAdminUpcoming();
+        }
+
+        public List<Appointment> GetAllApptAdminPast()
+        {
+            Appointment appt = new Appointment();
+            return appt.SelectAllForAdminPast();
+        }
+
+        public List<Appointment> GetAllApptAdminMissed()
+        {
+            Appointment appt = new Appointment();
+            return appt.SelectAllForAdminMissed();
+        }
+
         public List<Appointment> GetAllApptUserUpcoming(int uid)
         {
             Appointment appt = new Appointment();
@@ -329,8 +347,138 @@ namespace DBService
             return cg.SelectById(id);
         }
 
+
+        public int UpdateDoctor(int uid, DateTime old_time, int doctor_id)
+        {
+            Appointment appt = new Appointment();
+            return appt.UpdateDoctor(uid, old_time, doctor_id);
+        }
+
+
+        public List<User> GetAllDoctors()
+        {
+            User user = new User();
+            return user.SelectAllDoctors();
+        }
+
+
+        public User GetOneDoctor(string doctor_name)
+        {
+            User user = new User();
+            return user.SelectDoctorByName(doctor_name);
+        }
+
+
+        public User GetPatientByName(string patient_name)
+        {
+            User user = new User();
+            return user.SelectPatientByName(patient_name);
+        }
+
+
+        public int ApproveCaregiver(string cg_id, string patient_id)
+        {
+            Caregiver cg = new Caregiver();
+            return cg.ApproveCaregiver(cg_id, patient_id);
+        }
+
+
+
         /* Appointments End - */
 
+        /* Owen's Reports */
+        public int CreateReport(string id, string dname, string pname, string clinic, string date_of_report, string details)
+        {
+            Report rp = new Report(id, dname, pname, clinic, date_of_report, details);
+            return rp.Insert();
+        }
+        public Report GetReportById(string Id)
+        {
+            Report rp = new Report();
+            return rp.SelectById(Id);
+        }
+        public List<Report> GetAllReport()
+        {
+            Report rp = new Report();
+            return rp.SelectAll();
+        }
+        public int UpdateReportById(string id, string dname, string pname, string clinic, string date_of_report, string details)
+        {
+            Report rp = new Report();
+            return rp.UpdateReportById(id, dname, pname, clinic, date_of_report, details);
+        }
+        public int CreateDetails(string name, string nric, string date_of_birth, string gender, string phone, string email, string address, string postal)
+        {
+            Details de = new Details(name, nric, date_of_birth, gender, phone, email, address, postal);
+            return de.Insert();
+        }
+        public Details GetDetailsById(string Id)
+        {
+            Details de = new Details();
+            return de.SelectById(Id);
+        }
+        public List<Details> GetAllDetails()
+        {
+            Details de = new Details();
+            return de.SelectAll();
+        }
+        public int UpdateDetailsById(string id, string name, string nric, string date_of_birth, string gender, string phone, string email, string address, string postal)
+        {
+            Details de = new Details();
+            return de.UpdateDetailsById(id, name, nric, date_of_birth, gender, phone, email, address, postal);
+        }
+        public int CreateMedicalCondition(string id, string name, string med_condition, string date_diagnosis, string doctor, string clinic, string treatment, string condition_desc, string patient_codition, string comments)
+        {
+            Medical_Condition de = new Medical_Condition(id, name, med_condition, date_diagnosis, doctor, clinic, treatment, condition_desc, patient_codition, comments);
+            return de.Insert();
+        }
+        public Medical_Condition GetMedicalConditionById(string Id)
+        {
+            Medical_Condition de = new Medical_Condition();
+            return de.SelectById(Id);
+        }
+        public List<Medical_Condition> GetAllMedicalCondition()
+        {
+            Medical_Condition de = new Medical_Condition();
+            return de.SelectAll();
+        }
+        public int UpdateMedicalConditionById(string id, string patient_condition, string comments)
+        {
+            Medical_Condition rp = new Medical_Condition();
+            return rp.UpdateMedicalConditionById(id, patient_condition, comments);
+        }
+
+        public int CreatePatient_MC(string reg_no, string name, string nric, string duration, string type_of_leave, string clinic, string signature, string date)
+        {
+            Patient_MC de = new Patient_MC(reg_no, name, nric, duration, type_of_leave, clinic, signature, date);
+            return de.Insert();
+        }
+        public Patient_MC GetPatient_MCById(string Id)
+        {
+            Patient_MC de = new Patient_MC();
+            return de.SelectById(Id);
+        }
+        public List<Patient_MC> GetAllPatient_MC()
+        {
+            Patient_MC de = new Patient_MC();
+            return de.SelectAll();
+        }
+
+        public int CreatePayment_Report(string date_of_appointment, string purpose_visit, string fees)
+        {
+            Payment_Report de = new Payment_Report(date_of_appointment, purpose_visit, fees);
+            return de.Insert();
+        }
+        public Payment_Report GetPayment_ReportById(string Id)
+        {
+            Payment_Report de = new Payment_Report();
+            return de.SelectById(Id);
+        }
+        public List<Payment_Report> GetAllPayment_Report()
+        {
+            Payment_Report de = new Payment_Report();
+            return de.SelectAll();
+        }
 
         // Taken from practical 4, here all the method bodies for the methods listed in IService1.CS
         /*        public List<Employee> GetAllEmployee()
