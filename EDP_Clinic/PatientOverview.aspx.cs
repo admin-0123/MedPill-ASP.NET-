@@ -18,14 +18,22 @@ namespace EDP_Clinic
         Service1Client client = new Service1Client();
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!Page.IsPostBack)
+            if (Session["LoggedIn"] == null)
             {
-                List<displayPatient> patientList = new List<displayPatient>();
-                patientList = client.DisplayAllPatients().ToList<displayPatient>();
-                PatientGridView.Visible = true;
-                PatientGridView.DataSource = patientList;
-                PatientGridView.DataBind();
+                Response.Redirect("Login.aspx", false);
             }
+            else
+            {
+                if (Session["UserRole"].ToString() == "Patient")
+                {
+                    Response.Redirect("Home.aspx", false);
+                }
+            }
+            List<displayPatient> patientList = new List<displayPatient>();
+            patientList = client.DisplayAllPatients().ToList<displayPatient>();
+            PatientGridView.Visible = true;
+            PatientGridView.DataSource = patientList;
+            PatientGridView.DataBind();
         }
         protected void ViewPatients_Click(object sender, EventArgs e)
         {

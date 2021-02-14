@@ -61,5 +61,35 @@ namespace DBService.Entity
             }
             return caregiver;
         }
+
+        public int ApproveCaregiver(string cg_id, string patient_id)
+        {
+            string DBConnect = ConfigurationManager.ConnectionStrings["EDP_DB"].ConnectionString;
+            SqlConnection myConn = new SqlConnection(DBConnect);
+            string sqlStatement = "INSERT INTO [Caregiver] VALUES(@cg_id, @patient_id, @cg_verify)";
+            SqlCommand cmd = new SqlCommand(sqlStatement, myConn);
+            cmd.Parameters.AddWithValue("@cg_id", cg_id);
+            cmd.Parameters.AddWithValue("@patient_id", patient_id);
+            cmd.Parameters.AddWithValue("@cg_verify", 1);
+
+            myConn.Open();
+            int result = cmd.ExecuteNonQuery();
+            myConn.Close();
+            return result;
+        }
+
+        /*        public int ApproveCaregiver(string cg_id, string patient_id)
+                {
+                    string DBConnect = ConfigurationManager.ConnectionStrings["EDP_DB"].ConnectionString;
+                    SqlConnection myConn = new SqlConnection(DBConnect);
+                    string sqlStatement = "UPDATE [Caregiver] SET IsCaretaker = @Caretaker WHERE Id = @id";
+                    SqlCommand cmd = new SqlCommand(sqlStatement, myConn);
+                    cmd.Parameters.AddWithValue("@id", );
+                    cmd.Parameters.AddWithValue("@Caretaker", "Yes");
+                    myConn.Open();
+                    int result = cmd.ExecuteNonQuery();
+                    myConn.Close();
+                    return result;
+                }*/
     }
 }

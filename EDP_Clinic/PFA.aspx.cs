@@ -5,6 +5,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Diagnostics;
 
 namespace EDP_Clinic
 {
@@ -32,13 +33,13 @@ namespace EDP_Clinic
 
         protected void LoadProfile()
         {
-            EDP_DBReference.Service1Client client = new EDP_DBReference.Service1Client();
+            Service1Client client = new Service1Client();
 
-            System.Diagnostics.Debug.WriteLine("SESSION EMAIL IS " + Session["LoggedIn"].ToString());
+            Debug.WriteLine("SESSION EMAIL IS " + Session["LoggedIn"].ToString());
 
             User userobj = client.GetOneUserByEmail(Session["LoggedIn"].ToString());
 
-            System.Diagnostics.Debug.WriteLine("USER ID IS " + userobj.Id);
+            Debug.WriteLine("USER ID IS " + userobj.Id);
 
             Photo photo_obj = client.GetOnePhoto(userobj.Id);
 
@@ -47,23 +48,57 @@ namespace EDP_Clinic
                 //lbl_profileName.Text = "NAME: " + userobj.Name;
                 lbl_profileName.Text = userobj.Name;
                 // Need to trim the string variable, or the image url will not display properly due to encoded whitespaces %20%20
-                userPfp.ImageUrl = $"~/assets/images/{photo_obj.Photo_Resource.Trim()}.jpg";
+                //userPfp.ImageUrl = $"~/assets/images/{photo_obj.Photo_Resource.Trim()}.jpg";
 
-                System.Diagnostics.Debug.WriteLine("CARE GIVER ID IS " + userobj.Id);
+                var exist = client.CheckPhotoExist(userobj.Id);
+                if (exist == 1)
+                {
+                    var photo = client.GetOnePhoto(userobj.Id);
+                    var fileName = photo.Photo_Resource.ToString();
+                    var path = "~/UserImg/" + fileName;
+                    userPfp.ImageUrl = path;
+                }
+
+                else
+                {
+                    //userPfp.ImageUrl = $"~/assets/images/pfp_placeholder.jpg";
+                    userPfp.ImageUrl = "https://icon-library.com/images/default-profile-icon/default-profile-icon-16.jpg";
+                }
+
+                //System.Diagnostics.Debug.WriteLine("CARE GIVER ID IS " + userobj.Id);
                 Caregiver caregiver_obj = client.GetOneCG(userobj.Id);
 
-                System.Diagnostics.Debug.WriteLine("CARE RECEIVER ID IS " + caregiver_obj.Carereceiver_id);
-                User care_receiverobj = client.GetOneUser(caregiver_obj.Carereceiver_id);
-                System.Diagnostics.Debug.WriteLine("CARE RECEIVER NAME IS " + care_receiverobj.Name);
-                System.Diagnostics.Debug.WriteLine("CARE RECEIVER ID IS " + care_receiverobj.Id);
+                if (caregiver_obj != null)
+                {
+                    //System.Diagnostics.Debug.WriteLine("CARE RECEIVER ID IS " + caregiver_obj.Carereceiver_id);
+                    User care_receiverobj = client.GetOneUser(caregiver_obj.Carereceiver_id);
+                    //System.Diagnostics.Debug.WriteLine("CARE RECEIVER NAME IS " + care_receiverobj.Name);
+                    //System.Diagnostics.Debug.WriteLine("CARE RECEIVER ID IS " + care_receiverobj.Id);
 
-                Photo photo_obj_cr = client.GetOnePhoto(caregiver_obj.Carereceiver_id);
+                    Photo photo_obj_cr = client.GetOnePhoto(caregiver_obj.Carereceiver_id);
+
+                    if (care_receiverobj != null)
+                    {
+                        lbl_crName.Text = care_receiverobj.Name;
+                        //crPfp.ImageUrl = $"~/assets/images/{photo_obj_cr.Photo_Resource.Trim()}.jpg";
+                        var exist2 = client.CheckPhotoExist(care_receiverobj.Id);
+                        if (exist2 == 1)
+                        {
+                            var photo = client.GetOnePhoto(care_receiverobj.Id);
+                            var fileName = photo.Photo_Resource.ToString();
+                            var path = "~/UserImg/" + fileName;
+                            crPfp.ImageUrl = path;
+                        }
+                    }
+
+                    else
+                    {
+                        crPfp.Visible = false;
+                        crArrow.Visible = false;
+                        lbl_crName.Text = "You do not have any care receivers";
+                    }
 
 
-                if (care_receiverobj != null)
-                {    
-                    lbl_crName.Text = care_receiverobj.Name;
-                    crPfp.ImageUrl = $"~/assets/images/{photo_obj_cr.Photo_Resource.Trim()}.jpg";
                 }
 
                 else
@@ -72,6 +107,14 @@ namespace EDP_Clinic
                     crArrow.Visible = false;
                     lbl_crName.Text = "You do not have any care receivers";
                 }
+
+
+
+
+
+
+
+
             }
 
         }

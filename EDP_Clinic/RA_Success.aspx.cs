@@ -18,11 +18,11 @@ namespace EDP_Clinic
 
             DateTime dateTimeinput;
             dateTimeinput = Convert.ToDateTime(apptDetail["dateTime"]);
-            var appt = svc_client.GetOneAppt(Convert.ToInt32(Session["current_appt_profile"]), dateTimeinput);
+            var appt = svc_client.GetOneAppt(Convert.ToInt32(Session["selected_appt_user"]), dateTimeinput);
 
-            var patient = svc_client.GetOneUser(appt.patientID);
+            var patient = svc_client.GetOneUser(appt.patientID.ToString());
 
-            var doctor = svc_client.GetOneUser(appt.doctorID);
+            var doctor = svc_client.GetOneUser(appt.doctorID.ToString());
 
             lbl_apptType.Text = $"Appointment Type: {appt.appointmentType.ToString()}";
             lbl_datetime.Text = $"Appointment Time: {appt.dateTime.ToString()}";
@@ -45,12 +45,12 @@ namespace EDP_Clinic
 
             if (!IsPostBack)
             {
-                var accountSid = Environment.GetEnvironmentVariable("TWILIO_ACCOUNT_SID");
+/*                var accountSid = Environment.GetEnvironmentVariable("TWILIO_ACCOUNT_SID");
                 var authToken = Environment.GetEnvironmentVariable("TWILIO_AUTH_TOKEN");
 
                 TwilioClient.Init(accountSid, authToken);
 
-                if (patient.Id != Convert.ToInt32(Session["UserID"]))
+                if (patient.Id != Convert.ToInt32(Session["UserID"]).ToString())
                 {
                     var message = MessageResource.Create(
                     body: $"You have successfully updated your appointment for {patient.Name.Trim()} with MedPill Clinic, report to the clinic on {appt.dateTime.ToString("G")}",
@@ -66,7 +66,7 @@ namespace EDP_Clinic
                     from: new Twilio.Types.PhoneNumber("+14242066417"),
                     to: new Twilio.Types.PhoneNumber("+6587558054")
                     );
-                }
+                }*/
 
             }
 

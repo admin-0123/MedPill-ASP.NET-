@@ -22,27 +22,24 @@ namespace EDP_Clinic
 {
     public partial class AdminPage : System.Web.UI.Page
     {
-        byte[] Key;
-        byte[] IV;
-        string deleteid;
         Service1Client client = new Service1Client();
         SmtpClient emailClient = new SmtpClient("smtp-relay.sendinblue.com", 587);
        
         
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!this.IsPostBack)
+            if (Session["LoggedIn"] == null)
             {
-                try
+                Response.Redirect("Login.aspx", false);
+            }
+            else
+            {
+                if (Session["UserRole"].ToString() != "Admin")
                 {
-                    refreshgrid();
-                }
-                catch (Exception ex)
-                {
-                    Debug.WriteLine(ex);
+                    Response.Redirect("Home.aspx", false);
                 }
             }
-           
+            refreshgrid();
         }
         protected void EmployeeGridView_RowCommand1(object sender, GridViewCommandEventArgs e)
         {
@@ -229,6 +226,9 @@ namespace EDP_Clinic
                     }
                     else
                     {
+                        tbAddEmail.Text = "";
+                        tbAddName.Text = "";
+                        tbAddMobile.Text = "";
                         var code = makeCode(); 
                         client.AddCode(email, code);
                         var link = "https://localhost:44310/EmployeePasswordSet.aspx?value=" + code;

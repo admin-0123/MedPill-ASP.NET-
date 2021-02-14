@@ -30,6 +30,7 @@ namespace DBService
             return composite;
         }
 
+        //User Methods 
         public User GetOneUser(string id)
         {
             User user = new User();
@@ -187,7 +188,7 @@ namespace DBService
             return user.Insert(email, code);
         }
 
-        //CardInfo Methods
+        //CardInfo Methods - Hasan
         public int CreateCardInfo(string userID, string cardName, string cardNumber,
             DateTime cardExpiry, string cvvNumber, byte[] iv, byte[] key, bool stillValid, string uniqueIdentifier)
         {
@@ -214,7 +215,8 @@ namespace DBService
             CardInfo cif = new CardInfo();
             return cif.DeleteByCardNumber(uniqueIdentifier);
         }
-        //Receipt Entity Methods
+
+        //Receipt Entity Methods - Hasan
         public int CreateReceipt(string userID, DateTime dateSale, double totalSum, bool isPaid, string receiptLink, string uniqueIdentifier)
         {
             Receipt rep = new Receipt(userID, dateSale, totalSum, isPaid, receiptLink, uniqueIdentifier);
@@ -234,6 +236,12 @@ namespace DBService
             return rep.SelectByReceiptID(userID, uniqueIdentifier);
         }
 
+        public List<Receipt> SelectAllReceiptsAdmin()
+        {
+            Receipt rep = new Receipt();
+            return rep.SelectAllReceiptsAdmin();
+        }
+
         /* Appointment Methods - Wilfred */
 
         public List<Appointment> GetAllApptAdmin()
@@ -246,6 +254,24 @@ namespace DBService
         {
             Appointment appt = new Appointment();
             return appt.SelectAllForOneUser(uid);
+        }
+
+        public List<Appointment> GetAllApptAdminUpcoming()
+        {
+            Appointment appt = new Appointment();
+            return appt.SelectAllForAdminUpcoming();
+        }
+
+        public List<Appointment> GetAllApptAdminPast()
+        {
+            Appointment appt = new Appointment();
+            return appt.SelectAllForAdminPast();
+        }
+
+        public List<Appointment> GetAllApptAdminMissed()
+        {
+            Appointment appt = new Appointment();
+            return appt.SelectAllForAdminMissed();
         }
 
         public List<Appointment> GetAllApptUserUpcoming(int uid)
@@ -320,6 +346,43 @@ namespace DBService
             Caregiver cg = new Caregiver();
             return cg.SelectById(id);
         }
+
+
+        public int UpdateDoctor(int uid, DateTime old_time, int doctor_id)
+        {
+            Appointment appt = new Appointment();
+            return appt.UpdateDoctor(uid, old_time, doctor_id);
+        }
+
+
+        public List<User> GetAllDoctors()
+        {
+            User user = new User();
+            return user.SelectAllDoctors();
+        }
+
+
+        public User GetOneDoctor(string doctor_name)
+        {
+            User user = new User();
+            return user.SelectDoctorByName(doctor_name);
+        }
+
+
+        public User GetPatientByName(string patient_name)
+        {
+            User user = new User();
+            return user.SelectPatientByName(patient_name);
+        }
+
+
+        public int ApproveCaregiver(string cg_id, string patient_id)
+        {
+            Caregiver cg = new Caregiver();
+            return cg.ApproveCaregiver(cg_id, patient_id);
+        }
+
+
 
         /* Appointments End - */
 

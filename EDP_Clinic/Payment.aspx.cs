@@ -405,7 +405,7 @@ namespace EDP_Clinic
 
         protected void backBtn_Click(object sender, EventArgs e)
         {
-            //Response.Redirect
+            Response.Redirect("PRFA2.aspx",false);
         }
 
         protected void cardListView_ItemCommand(object sender, ListViewCommandEventArgs e)
@@ -687,10 +687,6 @@ namespace EDP_Clinic
             Debug.WriteLine(message.Sid);
         }
 
-        protected void phonePay_Click(object sender, EventArgs e)
-        {
-
-        }
     }
 
 }

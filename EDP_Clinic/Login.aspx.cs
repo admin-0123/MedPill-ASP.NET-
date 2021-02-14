@@ -18,7 +18,7 @@ namespace EDP_Clinic
         Service1Client client = new Service1Client();
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            
         }
         protected void Button1_Click(object sender, EventArgs e)
         {
