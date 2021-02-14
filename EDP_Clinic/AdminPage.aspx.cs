@@ -31,7 +31,7 @@ namespace EDP_Clinic
         
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (Session["Login"] == null)
+            if (Session["LoggedIn"] == null)
             {
                 Response.Redirect("Login.aspx", false);
             }

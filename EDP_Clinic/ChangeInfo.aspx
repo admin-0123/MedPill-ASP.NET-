@@ -31,14 +31,14 @@
                                 <div class="col-md-6">
                                     <div class="mb-3">
                                         <label>Password</label>
-                                        <asp:TextBox ID="passwordTB" runat="server" CssClass="form-control" ></asp:TextBox>
+                                        <asp:TextBox ID="passwordTB" runat="server" CssClass="form-control" TextMode="Password" ></asp:TextBox>
                                         <asp:Label ID="passError" runat="server"></asp:Label>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="mb-3">
                                         <label>New Password (Enter to change password)</label>
-                                        <asp:TextBox ID="password2TB" runat="server" CssClass="form-control"></asp:TextBox>
+                                        <asp:TextBox ID="password2TB" runat="server" CssClass="form-control" TextMode="Password"></asp:TextBox>
                                         <asp:Label ID="pass2Error" runat="server"></asp:Label>
                                     </div>
                                 </div>
