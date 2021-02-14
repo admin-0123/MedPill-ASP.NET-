@@ -18,20 +18,23 @@ namespace EDP_Clinic
             {
                 Response.Redirect("Login.aspx", false);
             }
-            imgPfp.Visible = false;
-            var email = Session["LoggedIn"].ToString();
-            var user = client.GetOneUserByEmail(email);
-            lblName.Text = user.Name.ToString();
-            var id = user.Id.ToString();
-            var exist = client.CheckPhotoExist(id);
-            if (exist == 1)
+            else
             {
-                defaultPfp.Visible = false;
-                imgPfp.Visible = true;
-                var photo = client.GetOnePhoto(id);
-                var fileName = photo.Photo_Resource.ToString();
-                var path ="~/UserImg/" + fileName;
-                imgPfp.ImageUrl = path;
+                imgPfp.Visible = false;
+                var email = Session["LoggedIn"].ToString();
+                var user = client.GetOneUserByEmail(email);
+                lblName.Text = user.Name.ToString();
+                var id = user.Id.ToString();
+                var exist = client.CheckPhotoExist(id);
+                if (exist == 1)
+                {
+                    defaultPfp.Visible = false;
+                    imgPfp.Visible = true;
+                    var photo = client.GetOnePhoto(id);
+                    var fileName = photo.Photo_Resource.ToString();
+                    var path = "~/UserImg/" + fileName;
+                    imgPfp.ImageUrl = path;
+                }
             }
         }
 
