@@ -323,5 +323,14 @@ namespace EDP_Clinic
             }
         }
 
+        protected void btn_PaymentOnClick(object sender, EventArgs e)
+        {
+            Response.Redirect("~/Payment.aspx");
+        }
+
+        protected void listview_appts_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

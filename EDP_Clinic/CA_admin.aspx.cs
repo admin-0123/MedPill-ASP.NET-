@@ -1,31 +1,29 @@
 ﻿using EDP_Clinic.EDP_DBReference;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using System.Drawing;
-using Twilio;
-using Twilio.Rest.Api.V2010.Account;
 
 namespace EDP_Clinic
 {
-    public partial class RA : System.Web.UI.Page
+    public partial class WebForm9 : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            
+
             EDP_DBReference.Service1Client svc_client = new EDP_DBReference.Service1Client();
-            User current_user = svc_client.GetOneUser(Session["current_appt_profile"].ToString());
+            //User current_user = svc_client.GetOneUser(Session["selected_appt_user"].ToString());
             // For breadcrumb elements
-            hl_bc_profileName.Text = current_user.Name;
+            //hl_bc_profileName.Text = current_user.Name;
             //
 
-            Photo current_user_photo_obj = svc_client.GetOnePhoto(current_user.Id);
+            //Photo current_user_photo_obj = svc_client.GetOnePhoto(current_user.Id);
 
-            profilePfp.ImageUrl = $"~/assets/images/{current_user_photo_obj.Photo_Resource.Trim()}.jpg";
-            lbl_profileName.Text = current_user.Name;
+            //profilePfp.ImageUrl = $"~/assets/images/{current_user_photo_obj.Photo_Resource.Trim()}.jpg";
+            //lbl_profileName.Text = current_user.Name;
 
             tb_startdate_CalendarExtender.StartDate = DateTime.Now.AddDays(1);
             tb_startdate_CalendarExtender.EndDate = DateTime.Now.AddMonths(2);
@@ -36,8 +34,6 @@ namespace EDP_Clinic
                 DateTime endDate = DateTime.Now.AddMonths(2);
                 lbl_validDates.Text = $"You may only pick a date between {startDate.Day} {startDate.ToString("MMMM")} to {endDate.Day} {endDate.ToString("MMMM")}";
                 Session["gv_timeSlot"] = "Testing";
-
-
 
                 gv_timeslots.Visible = true;
                 gv_timeslots.DataSource = Onload_Retrieve_Available_Appts();
@@ -52,13 +48,8 @@ namespace EDP_Clinic
                 gv_timeslots.DataBind();
             }
 
-            lbl_current_at.Text = $"Appointment Type: {Session["selected_appt_type"]}";
-            lbl_current_dt.Text = $"Date time: {Session["selected_appt_date"].ToString()}";
-
 
         }
-
-
 
         protected void btn_searchSlot_Click(object sender, EventArgs e)
         {
@@ -69,34 +60,22 @@ namespace EDP_Clinic
             // if input is a valid date, run the code block
             if (checkdate_bool != false)
             {
-                if (Convert.ToDateTime(tb_startdate.Text) < DateTime.Now.AddDays(1))
+                Session["startDate"] = Convert.ToDateTime(tb_startdate.Text);
+                gv_timeslots.DataSource = Search_AvailableAppts();
+                gv_timeslots.DataBind();
+
+                DateTime startDate = Convert.ToDateTime(Session["startDate"]);
+                DateTime endDate = DateTime.Now.AddMonths(2);
+
+                if (startDate < endDate)
                 {
-                    Session["startDate"] = DateTime.Now.AddDays(1);
-                    lbl_validDates.Text = $"Invalid past date searched";
-                    lbl_validDates.ForeColor = Color.Red;
+                    lbl_validDates.Text = $"You may only pick a date between {startDate.Day} {startDate.ToString("MMMM")} to {endDate.Day} {endDate.ToString("MMMM")}";
                 }
 
                 else
                 {
-                    Session["startDate"] = Convert.ToDateTime(tb_startdate.Text);
-                    gv_timeslots.DataSource = Search_AvailableAppts();
-                    gv_timeslots.DataBind();
-
-                    DateTime startDate = Convert.ToDateTime(Session["startDate"]);
-                    DateTime endDate = DateTime.Now.AddMonths(2);
-
-
-                    if (startDate < endDate)
-                    {
-                        //lbl_validDates.Text = $"You may only pick a date between {startDate.Day} {startDate.ToString("MMMM")} to {endDate.Day} {endDate.ToString("MMMM")}";
-                        lbl_validDates.Text = $"You may only pick a date between {DateTime.Now.AddDays(1).Day} {DateTime.Now.AddDays(1).ToString("MMMM")} to {endDate.Day} {endDate.ToString("MMMM")}";
-                    }
-
-                    else
-                    {
-                        lbl_validDates.Text = $"Sorry, you can't enter a date later than two months of the current day";
-                        lbl_validDates.ForeColor = Color.Red;
-                    }
+                    lbl_validDates.Text = $"Sorry, you can't enter a date later than two months of the current day";
+                    lbl_validDates.ForeColor = Color.Red;
                 }
             }
 
@@ -244,19 +223,18 @@ namespace EDP_Clinic
             {
                 // Get the data needed
 
-                int current_profile = Convert.ToInt32(Session["current_appt_profile"]);
+                int current_profile = Convert.ToInt32(Session["selected_appt_user"]);
                 string appointmentType = ddl_apptType.SelectedValue;
                 DateTime rb_userinput = Convert.ToDateTime(Request["rb_apptslot"]);
-                DateTime old_time = Convert.ToDateTime(Session["selected_appt_date"]);
                 string status = "upcoming";
+
                 EDP_DBReference.Service1Client svc_client = new EDP_DBReference.Service1Client();
-                //int insert_result = svc_client.CreateAppointment(current_profile, appointmentType, rb_userinput, status);
-                int insert_result = svc_client.UpdateOneAppt(current_profile, appointmentType, old_time, rb_userinput);
+                int insert_result = svc_client.CreateAppointment(current_profile, appointmentType, rb_userinput, status);
                 if (insert_result == 1)
                 {
 
                     lbl_error_make_appt.ForeColor = Color.Green;
-                    lbl_error_make_appt.Text = "Update Made Successfully!";
+                    lbl_error_make_appt.Text = "Appointment Made Successfully!";
                     gv_timeslots.DataSource = Search_AvailableAppts();
                     gv_timeslots.DataBind();
 
@@ -266,7 +244,7 @@ namespace EDP_Clinic
     {"status", status.ToString() }
 };
                     Session["successful_appt_details"] = appt_success_dict;
-                    Response.Redirect("~/RA_Success.aspx");
+                    Response.Redirect("~/CA_Success.aspx");
                 }
                 else
                 {

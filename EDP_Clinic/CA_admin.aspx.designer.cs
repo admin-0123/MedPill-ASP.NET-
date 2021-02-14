@@ -11,17 +11,8 @@ namespace EDP_Clinic
 {
 
 
-    public partial class PRFA2
+    public partial class WebForm9
     {
-
-        /// <summary>
-        /// HyperLink1 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.HyperLink HyperLink1;
 
         /// <summary>
         /// hl_bc_appt control.
@@ -40,6 +31,15 @@ namespace EDP_Clinic
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HyperLink hl_bc_profileName;
+
+        /// <summary>
+        /// hl_bc_makeappt control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HyperLink hl_bc_makeappt;
 
         /// <summary>
         /// leftArrow_redirect control.
@@ -78,66 +78,102 @@ namespace EDP_Clinic
         protected global::System.Web.UI.WebControls.Button btn_makeAppt;
 
         /// <summary>
-        /// lbtn_upcoming control.
+        /// Label1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton lbtn_upcoming;
+        protected global::System.Web.UI.WebControls.Label Label1;
 
         /// <summary>
-        /// lbtn_past control.
+        /// ddl_apptType control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton lbtn_past;
+        protected global::System.Web.UI.WebControls.DropDownList ddl_apptType;
 
         /// <summary>
-        /// lbtn_missed control.
+        /// tb_startdate control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton lbtn_missed;
+        protected global::System.Web.UI.WebControls.TextBox tb_startdate;
 
         /// <summary>
-        /// listview_appts control.
+        /// tb_startdate_CalendarExtender control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ListView listview_appts;
+        protected global::AjaxControlToolkit.CalendarExtender tb_startdate_CalendarExtender;
 
         /// <summary>
-        /// dp_listview_appt control.
+        /// btn_searchSlot control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DataPager dp_listview_appt;
+        protected global::System.Web.UI.WebControls.Button btn_searchSlot;
 
         /// <summary>
-        /// btn_Rsch control.
+        /// lbl_validDates control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btn_Rsch;
+        protected global::System.Web.UI.WebControls.Label lbl_validDates;
 
         /// <summary>
-        /// btn_Rsch3 control.
+        /// gv_timeslots control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btn_Rsch3;
+        protected global::System.Web.UI.WebControls.GridView gv_timeslots;
+
+        /// <summary>
+        /// Btn_LoadMore control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button Btn_LoadMore;
+
+        /// <summary>
+        /// lbl_error_make_appt control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbl_error_make_appt;
+
+        /// <summary>
+        /// btn_createAppt control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btn_createAppt;
+
+        /// <summary>
+        /// btn_cancelAppt control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btn_cancelAppt;
     }
 }

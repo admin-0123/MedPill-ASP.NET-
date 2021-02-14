@@ -97,13 +97,13 @@ namespace EDP_Clinic
         // Navigate backwards arrow
         protected void leftArrow_redirect_Click(object sender, ImageClickEventArgs e)
         {
-            Response.Redirect("~/PFA.aspx");
+            Response.Redirect("~/UserPage.aspx");
         }
 
         // Go to Make Appointment Page
         protected void btn_makeAppt_Click(object sender, EventArgs e)
         {
-            Response.Redirect("~/CA.aspx");
+            Response.Redirect("~/CA_admin.aspx");
         }
 
         // Method that is called when page change for listview_appts control

@@ -13,6 +13,7 @@ namespace EDP_Clinic
         {
             if (!IsPostBack)
             {
+                hl_bc_profileName.Text = $"{Session["patient_name"].ToString()}'s Appointment on {Convert.ToDateTime(Session["selected_appt_date"])}";
                 EDP_DBReference.Service1Client svc_client = new EDP_DBReference.Service1Client();
                 var doc_list = svc_client.GetAllDoctors();
                 var new_list = new List<String>();

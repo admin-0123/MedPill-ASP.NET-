@@ -53,6 +53,9 @@
         <!-- Breadcrumb -->
         <nav aria-label="breadcrumb">
   <ol class="breadcrumb">
+            <li class="breadcrumb-item active">
+              <asp:HyperLink ID="HyperLink1" runat="server" CssClass="hyperlink_breadcrumb" NavigateUrl="~/UserPage.aspx">User Page</asp:HyperLink></asp:Label>
+      </li>
       <li class="breadcrumb-item active">
               <asp:HyperLink ID="hl_bc_appt" runat="server" CssClass="hyperlink_breadcrumb" NavigateUrl="~/PFA.aspx">Appointments</asp:HyperLink></asp:Label>
       </li>
@@ -92,7 +95,7 @@
 
 
 
-                <asp:ListView ID="listview_appts" runat="server" OnPagePropertiesChanging="listview_appts_PagePropertiesChanging">
+                <asp:ListView ID="listview_appts" runat="server" OnPagePropertiesChanging="listview_appts_PagePropertiesChanging" OnSelectedIndexChanged="listview_appts_SelectedIndexChanged">
                         <ItemTemplate>
                             <div class="card-header">
                                 <p> Date Time: <asp:Label ID="lbl_c_dt" runat="server" Text='<%# Eval("dateTime") %>'></asp:Label> </p>
@@ -108,7 +111,18 @@
                                     <asp:Button ID="btn_Cancel" runat="server" Text="Cancel2" CssClass="btn_Cancel bg-white text-primary btn-outline-primary col-3" OnClick="btn_CancelOnClick" />
                          <span class="col-3"></span>
             </div>
-                                <% } %>
+                                <% } %> 
+
+                                <% else if (Session["appt_viewstate"].ToString() == "past")
+    {  %>
+                                <div class="row">
+                                    <asp:Button ID="Button1" runat="server" Text="Payment" CssClass="btn_Rsch bg-primary text-white col-3 align-content-end ml-2" OnClick="btn_PaymentOnClick" />
+                                    <span class="col-3"></span>
+                                    <!-- <asp:Button ID="Button2" runat="server" Text="Cancel2" CssClass="btn_Cancel bg-white text-primary btn-outline-primary col-3" OnClick="btn_CancelOnClick" /> -->
+                         <span class="col-3"></span>
+            </div>
+
+                                <%} %>
 
         </div>
             </ItemTemplate>

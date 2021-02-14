@@ -15,6 +15,42 @@ namespace EDP_Clinic
     {
 
         /// <summary>
+        /// hl_bc_appt control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HyperLink hl_bc_appt;
+
+        /// <summary>
+        /// HyperLink1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HyperLink HyperLink1;
+
+        /// <summary>
+        /// hl_bc_profileName control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HyperLink hl_bc_profileName;
+
+        /// <summary>
+        /// hl_bc_resch_appt control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HyperLink hl_bc_resch_appt;
+
+        /// <summary>
         /// ddl_chooseDoctors control.
         /// </summary>
         /// <remarks>

@@ -1,8 +1,54 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="ReceptAssignDoctor.aspx.cs" Inherits="EDP_Clinic.WebForm6" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+            <style>
+        .btn_mka {
+            border-radius:15px;
+        }
+
+        .btn_Cancel {
+            border-radius:15px;
+        }
+
+        .btn_Rsch {
+                        border-radius:15px;
+        }
+
+
+            .breadcrumb-item + .breadcrumb-item::before {
+        content: ">";
+    }
+
+            .hyperlink_breadcrumb {
+                color:black;
+    text-decoration:none;
+            }
+
+            .lbtn_inactive {
+                                color:black;
+    text-decoration:none;
+            }
+    </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <div class="container">
+
+                <!-- Breadcrumb -->
+        <nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+      <li class="breadcrumb-item active">
+              <asp:HyperLink ID="hl_bc_appt" runat="server" CssClass="hyperlink_breadcrumb" NavigateUrl="#">User Page</asp:HyperLink></asp:Label>
+      </li>
+            <li class="breadcrumb-item active">
+              <asp:HyperLink ID="HyperLink1" runat="server" CssClass="hyperlink_breadcrumb" NavigateUrl="#">Receptionist Appointment Control</asp:HyperLink></asp:Label>
+      </li>
+    <li class="breadcrumb-item active" aria-current="page"> 
+        <asp:HyperLink ID="hl_bc_profileName" runat="server" CssClass="hyperlink_breadcrumb_active"> </asp:HyperLink></asp:Label>
+      </li>
+    <li class="breadcrumb-item active" aria-current="page"> 
+        <asp:HyperLink ID="hl_bc_resch_appt" runat="server" CssClass="hyperlink_breadcrumb_active"></asp:HyperLink>Assign Doctor </asp:Label>
+      </li>
+  </ol>
+</nav>
         <h3 class="h3">
             Assign Doctor
         </h3>

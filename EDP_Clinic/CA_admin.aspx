@@ -1,5 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="CA.aspx.cs" Inherits="EDP_Clinic.WebForm5" %>
-
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="CA_admin.aspx.cs" Inherits="EDP_Clinic.WebForm9" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <!-- had to add this jquery cdn script here to make the jquery code able to run on webpage start,
         did not work on masterpage -->
@@ -72,9 +71,6 @@
         <!-- Breadcrumb -->
         <nav aria-label="breadcrumb">
   <ol class="breadcrumb">
-                  <li class="breadcrumb-item active">
-              <asp:HyperLink ID="HyperLink1" runat="server" CssClass="hyperlink_breadcrumb" NavigateUrl="~/UserPage.aspx">User Page</asp:HyperLink></asp:Label>
-      </li>
       <li class="breadcrumb-item active">
               <asp:HyperLink ID="hl_bc_appt" runat="server" CssClass="hyperlink_breadcrumb" NavigateUrl="~/PFA.aspx">Appointments</asp:HyperLink></asp:Label>
       </li>
@@ -111,7 +107,7 @@
             <p>&nbsp;</p>
             <p>
                 <asp:Label ID="Label1" runat="server" Text="Appointment Type:"></asp:Label>
-                &nbsp;<asp:DropDownList ID="ddl_apptType" runat="server">
+                &nbsp;<asp:DropDownList ID="ddl_apptType" runat="server" OnSelectedIndexChanged="ddl_apptType_SelectedIndexChanged">
                     <asp:ListItem>Consultation</asp:ListItem>
                     <asp:ListItem>Diagnosis</asp:ListItem>
                     <asp:ListItem>Treatment</asp:ListItem>
@@ -191,5 +187,3 @@
 
 
 </asp:Content>
-
-

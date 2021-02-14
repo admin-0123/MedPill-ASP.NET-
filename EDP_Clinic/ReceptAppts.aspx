@@ -55,10 +55,10 @@
         <nav aria-label="breadcrumb">
   <ol class="breadcrumb">
       <li class="breadcrumb-item active">
-              <asp:HyperLink ID="hl_bc_appt" runat="server" CssClass="hyperlink_breadcrumb" NavigateUrl="~/PFA.aspx">Appointments</asp:HyperLink></asp:Label>
+              <asp:HyperLink ID="hl_bc_appt" runat="server" CssClass="hyperlink_breadcrumb" NavigateUrl="~/PFA.aspx">User Page</asp:HyperLink></asp:Label>
       </li>
     <li class="breadcrumb-item active" aria-current="page"> 
-        <asp:HyperLink ID="hl_bc_profileName" runat="server" CssClass="hyperlink_breadcrumb_active"></asp:HyperLink></asp:Label>
+        <asp:HyperLink ID="hl_bc_profileName" runat="server" CssClass="hyperlink_breadcrumb_active"> Receptionist Appointment Control</asp:HyperLink></asp:Label>
       </li>
   </ol>
 </nav>
@@ -72,7 +72,7 @@
                                         <asp:Label ID="lbl_profileName" runat="server" Text=""></asp:Label>
                 </div>
                 <div class="col-sm-4"> 
-                    <asp:Button runat="server" Text="Make New Appointment For User" CssClass="btn_mka btn btn-primary text-white" ID="btn_makeAppt" OnClick="btn_makeAppt_Click" />
+                    <asp:Button runat="server" Text="Make New Appointment For User" CssClass="btn_mka btn btn-primary text-white" ID="btn_makeAppt" OnClick="btn_makeAppt_Click" hidden/>
                 </div>
             </div>
             <div class="row mt-2">

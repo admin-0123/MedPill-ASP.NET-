@@ -49,29 +49,41 @@ namespace EDP_Clinic
                 // Need to trim the string variable, or the image url will not display properly due to encoded whitespaces %20%20
                 userPfp.ImageUrl = $"~/assets/images/{photo_obj.Photo_Resource.Trim()}.jpg";
 
-                System.Diagnostics.Debug.WriteLine("CARE GIVER ID IS " + userobj.Id);
+                //System.Diagnostics.Debug.WriteLine("CARE GIVER ID IS " + userobj.Id);
                 Caregiver caregiver_obj = client.GetOneCG(userobj.Id);
 
-                System.Diagnostics.Debug.WriteLine("CARE RECEIVER ID IS " + caregiver_obj.Carereceiver_id);
-                User care_receiverobj = client.GetOneUser(caregiver_obj.Carereceiver_id);
-                System.Diagnostics.Debug.WriteLine("CARE RECEIVER NAME IS " + care_receiverobj.Name);
-                System.Diagnostics.Debug.WriteLine("CARE RECEIVER ID IS " + care_receiverobj.Id);
-
-                Photo photo_obj_cr = client.GetOnePhoto(caregiver_obj.Carereceiver_id);
-
-
-                if (care_receiverobj != null)
-                {    
-                    lbl_crName.Text = care_receiverobj.Name;
-                    crPfp.ImageUrl = $"~/assets/images/{photo_obj_cr.Photo_Resource.Trim()}.jpg";
-                }
-
-                else
+                if (caregiver_obj.Carereceiver_id != null)
                 {
-                    crPfp.Visible = false;
-                    crArrow.Visible = false;
-                    lbl_crName.Text = "You do not have any care receivers";
+                    //System.Diagnostics.Debug.WriteLine("CARE RECEIVER ID IS " + caregiver_obj.Carereceiver_id);
+                    User care_receiverobj = client.GetOneUser(caregiver_obj.Carereceiver_id);
+                    //System.Diagnostics.Debug.WriteLine("CARE RECEIVER NAME IS " + care_receiverobj.Name);
+                    //System.Diagnostics.Debug.WriteLine("CARE RECEIVER ID IS " + care_receiverobj.Id);
+
+                    Photo photo_obj_cr = client.GetOnePhoto(caregiver_obj.Carereceiver_id);
+
+                    if (care_receiverobj != null)
+                    {
+                        lbl_crName.Text = care_receiverobj.Name;
+                        crPfp.ImageUrl = $"~/assets/images/{photo_obj_cr.Photo_Resource.Trim()}.jpg";
+                    }
+
+                    else
+                    {
+                        crPfp.Visible = false;
+                        crArrow.Visible = false;
+                        lbl_crName.Text = "You do not have any care receivers";
+                    }
+
+
                 }
+
+
+
+
+
+
+
+
             }
 
         }
