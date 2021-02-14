@@ -153,24 +153,16 @@ namespace EDP_Clinic
             }
             else
             {
-                //int currentYear = DateTime.Now.Year;
-                //int currentMonth = DateTime.Now.Month;
-                //int currentDay = DateTime.Now.Day;
-
-                //cardExpiryError.Text = currentMonth.ToString();
-                //cardExpiryError.Text = cardExpiryTB.Text;
                 DateTime inputDate = Convert.ToDateTime(cardExpiryTB.Text);
                 double monthDifference = inputDate.Subtract(currentDate).Days / (365.25 / 12);
                 if (monthDifference < 3)
                 {
                     cardExpiryError.Text = "Please ensure that your expiry date is at least 3 months from current date";
-                    //cardExpiryError.Text = monthDifference.ToString();
                     cardExpiryError.ForeColor = Color.Red;
                     cardExpiryError.Visible = true;
                 }
                 else
                 {
-                    //cardExpiryError.Text = monthDifference.ToString();
                     cardExpiryError.Text = "Excellent";
                     cardExpiryError.ForeColor = Color.Green;
                     cardExpiryError.Visible = true;

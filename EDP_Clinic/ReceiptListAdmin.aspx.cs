@@ -9,7 +9,7 @@ using System.Web.UI.WebControls;
 
 namespace EDP_Clinic
 {
-    public partial class ReceiptListAdmin : System.Web.UI.Page
+    public partial class ReceiptListAdmin : Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -38,7 +38,7 @@ namespace EDP_Clinic
 
             List<Receipt> repList = new List<Receipt>();
             Service1Client client = new Service1Client();
-            repList = client.SelectAllReceiptsAdmin().ToList<Receipt>();
+            repList = client.SelectAllReceiptsAdmin().ToList();
 
             receiptListAdminView.DataSource = repList;
             receiptListAdminView.Visible = true;

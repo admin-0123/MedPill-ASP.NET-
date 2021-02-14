@@ -24,16 +24,6 @@ namespace EDP_Clinic
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            //Session code implemented on 27/01/2021
-
-            //Session["Login"] = "someone@example.com";
-
-            //string guidToken = Guid.NewGuid().ToString();
-            //Session["AuthToken"] = guidToken;
-            //HttpCookie AuthToken = new HttpCookie("AuthToken");
-            //AuthToken.Value = guidToken;
-            //Response.Cookies.Add(AuthToken);
-
             if (Session["LoggedIn"] != null && Session["AuthToken"] != null && Request.Cookies["AuthToken"] != null)
             {
                 if (!Session["AuthToken"].ToString().Equals(Request.Cookies["AuthToken"].Value))
@@ -377,13 +367,13 @@ namespace EDP_Clinic
                     //Just in case there is some error here
                     else
                     {
-                        Response.Redirect("CardList.aspx");
+                        Response.Redirect("CardList.aspx", false);
                     }
                 }
                 //If OTP is invalid
                 else
                 {
-                    Response.Redirect("Authentication.aspx");
+                    Response.Redirect("Authentication.aspx", false);
                 }
 
             }

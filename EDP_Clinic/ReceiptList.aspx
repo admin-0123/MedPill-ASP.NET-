@@ -18,7 +18,7 @@
                         <div class="card mb-3">
                             <div class="card-body">
                                 <div class="row">
-                                    <div class="col-md-9">
+                                    <div class="col-md-8">
                                         <h5 class="card-title">Receipt ID: 
                                             <asp:Label ID="receiptID" runat="server" Text='<%#Eval("UniqueIdentifier").ToString()%>'></asp:Label></h5>
                                         </h5>
@@ -28,13 +28,13 @@
                                         </p>
                                     </div>
                                     <div class="col-md-1">
-                                        <asp:LinkButton ID="downloadBtn" runat="server" CssClass="btn btn-primary" CommandName="downloadReceipt" CommandArgument='<%# Eval("UniqueIdentifier") %>'>Download</asp:LinkButton>
+                                        <asp:LinkButton ID="downloadBtn" runat="server" CssClass="btn btn-primary" CommandName="downloadReceipt" CommandArgument='<%# Eval("UniqueIdentifier") %>' Text="Download" Visible="False"></asp:LinkButton>
                                     </div>
                                     <div class="col-md-1">
-                                        <asp:LinkButton ID="printBtn" runat="server" CssClass="btn btn-primary" CommandName="printReceipt" CommandArgument='<%# Eval("UniqueIdentifier") %>'>Print</asp:LinkButton>
+                                        <asp:LinkButton ID="printBtn" runat="server" CssClass="btn btn-primary" CommandName="printReceipt" CommandArgument='<%# Eval("UniqueIdentifier") %>' Text="Print" Visible="False"></asp:LinkButton>
                                     </div>
-                                    <div class="col-md-1">
-                                        <asp:LinkButton ID="moreBtn" runat="server" CssClass="btn btn-primary" CommandName="viewMore" CommandArgument='<%# Eval("UniqueIdentifier") %>'>More</asp:LinkButton>
+                                    <div class="col-md-2">
+                                        <asp:LinkButton ID="moreBtn" runat="server" CssClass="btn btn-primary" CommandName="viewMore" CommandArgument='<%# Eval("UniqueIdentifier") %>' Text="View More"></asp:LinkButton>
                                     </div>
                                 </div>
                             </div>

@@ -96,7 +96,7 @@
                             <p>Service</p>
                         </div>
                         <div class="col-6">
-                            <p>Amount ($)</p>
+                            <p>Amount (S$)</p>
                         </div>
                     </div>
                     <div class="row">

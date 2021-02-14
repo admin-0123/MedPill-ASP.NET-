@@ -5,6 +5,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Diagnostics;
 
 namespace EDP_Clinic
 {
@@ -32,13 +33,13 @@ namespace EDP_Clinic
 
         protected void LoadProfile()
         {
-            EDP_DBReference.Service1Client client = new EDP_DBReference.Service1Client();
+            Service1Client client = new Service1Client();
 
-            System.Diagnostics.Debug.WriteLine("SESSION EMAIL IS " + Session["LoggedIn"].ToString());
+            Debug.WriteLine("SESSION EMAIL IS " + Session["LoggedIn"].ToString());
 
             User userobj = client.GetOneUserByEmail(Session["LoggedIn"].ToString());
 
-            System.Diagnostics.Debug.WriteLine("USER ID IS " + userobj.Id);
+            Debug.WriteLine("USER ID IS " + userobj.Id);
 
             Photo photo_obj = client.GetOnePhoto(userobj.Id);
 
@@ -47,15 +48,19 @@ namespace EDP_Clinic
                 //lbl_profileName.Text = "NAME: " + userobj.Name;
                 lbl_profileName.Text = userobj.Name;
                 // Need to trim the string variable, or the image url will not display properly due to encoded whitespaces %20%20
-                userPfp.ImageUrl = $"~/assets/images/{photo_obj.Photo_Resource.Trim()}.jpg";
+                if (photo_obj != null)
+                {
+                    // Add ImageURL line here
+                    userPfp.ImageUrl = $"~/assets/images/{photo_obj.Photo_Resource.Trim()}.jpg";
+                }
 
-                System.Diagnostics.Debug.WriteLine("CARE GIVER ID IS " + userobj.Id);
+                Debug.WriteLine("CARE GIVER ID IS " + userobj.Id);
                 Caregiver caregiver_obj = client.GetOneCG(userobj.Id);
 
-                System.Diagnostics.Debug.WriteLine("CARE RECEIVER ID IS " + caregiver_obj.Carereceiver_id);
+                Debug.WriteLine("CARE RECEIVER ID IS " + caregiver_obj.Carereceiver_id);
                 User care_receiverobj = client.GetOneUser(caregiver_obj.Carereceiver_id);
-                System.Diagnostics.Debug.WriteLine("CARE RECEIVER NAME IS " + care_receiverobj.Name);
-                System.Diagnostics.Debug.WriteLine("CARE RECEIVER ID IS " + care_receiverobj.Id);
+                Debug.WriteLine("CARE RECEIVER NAME IS " + care_receiverobj.Name);
+                Debug.WriteLine("CARE RECEIVER ID IS " + care_receiverobj.Id);
 
                 Photo photo_obj_cr = client.GetOnePhoto(caregiver_obj.Carereceiver_id);
 
