@@ -114,6 +114,9 @@ namespace DBService
         [OperationContract]
         Receipt SelectByReceiptID(string userID, string uniqueIdentifier);
 
+        [OperationContract]
+        List<Receipt> SelectAllReceiptsAdmin();
+
         // Appointments IService Methods
         [OperationContract]
         List<Appointment> GetAllApptAdmin();

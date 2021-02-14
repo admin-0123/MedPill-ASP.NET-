@@ -2093,6 +2093,12 @@ namespace EDP_Clinic.EDP_DBReference {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/SelectByReceiptID", ReplyAction="http://tempuri.org/IService1/SelectByReceiptIDResponse")]
         System.Threading.Tasks.Task<EDP_Clinic.EDP_DBReference.Receipt> SelectByReceiptIDAsync(string userID, string uniqueIdentifier);
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/SelectAllReceiptsAdmin", ReplyAction="http://tempuri.org/IService1/SelectAllReceiptsAdminResponse")]
+        EDP_Clinic.EDP_DBReference.Receipt[] SelectAllReceiptsAdmin();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/SelectAllReceiptsAdmin", ReplyAction="http://tempuri.org/IService1/SelectAllReceiptsAdminResponse")]
+        System.Threading.Tasks.Task<EDP_Clinic.EDP_DBReference.Receipt[]> SelectAllReceiptsAdminAsync();
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetAllApptAdmin", ReplyAction="http://tempuri.org/IService1/GetAllApptAdminResponse")]
         EDP_Clinic.EDP_DBReference.Appointment[] GetAllApptAdmin();
         
@@ -2687,6 +2693,14 @@ namespace EDP_Clinic.EDP_DBReference {
         
         public System.Threading.Tasks.Task<EDP_Clinic.EDP_DBReference.Receipt> SelectByReceiptIDAsync(string userID, string uniqueIdentifier) {
             return base.Channel.SelectByReceiptIDAsync(userID, uniqueIdentifier);
+        }
+        
+        public EDP_Clinic.EDP_DBReference.Receipt[] SelectAllReceiptsAdmin() {
+            return base.Channel.SelectAllReceiptsAdmin();
+        }
+        
+        public System.Threading.Tasks.Task<EDP_Clinic.EDP_DBReference.Receipt[]> SelectAllReceiptsAdminAsync() {
+            return base.Channel.SelectAllReceiptsAdminAsync();
         }
         
         public EDP_Clinic.EDP_DBReference.Appointment[] GetAllApptAdmin() {

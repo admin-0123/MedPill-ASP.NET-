@@ -30,6 +30,7 @@ namespace DBService
             return composite;
         }
 
+        //User Methods 
         public User GetOneUser(string id)
         {
             User user = new User();
@@ -187,7 +188,7 @@ namespace DBService
             return user.Insert(email, code);
         }
 
-        //CardInfo Methods
+        //CardInfo Methods - Hasan
         public int CreateCardInfo(string userID, string cardName, string cardNumber,
             DateTime cardExpiry, string cvvNumber, byte[] iv, byte[] key, bool stillValid, string uniqueIdentifier)
         {
@@ -214,7 +215,8 @@ namespace DBService
             CardInfo cif = new CardInfo();
             return cif.DeleteByCardNumber(uniqueIdentifier);
         }
-        //Receipt Entity Methods
+
+        //Receipt Entity Methods - Hasan
         public int CreateReceipt(string userID, DateTime dateSale, double totalSum, bool isPaid, string receiptLink, string uniqueIdentifier)
         {
             Receipt rep = new Receipt(userID, dateSale, totalSum, isPaid, receiptLink, uniqueIdentifier);
@@ -232,6 +234,12 @@ namespace DBService
         {
             Receipt rep = new Receipt();
             return rep.SelectByReceiptID(userID, uniqueIdentifier);
+        }
+
+        public List<Receipt> SelectAllReceiptsAdmin()
+        {
+            Receipt rep = new Receipt();
+            return rep.SelectAllReceiptsAdmin();
         }
 
         /* Appointment Methods - Wilfred */

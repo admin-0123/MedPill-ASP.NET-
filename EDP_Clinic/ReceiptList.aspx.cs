@@ -95,7 +95,7 @@ namespace EDP_Clinic
 
                 //PrintNodeComputer computer = new PrintNodeComputer();
 
-
+                
                 ////PrintNodePrintJobAuthentication.
                 ////PrintNodeRequestOptions;
                 //var type = PrintNodeNet.PrintNodeConfiguration.ApiKey;
@@ -131,32 +131,6 @@ namespace EDP_Clinic
 
                 //WebResponse response = request.GetResponse();
 
-
-                //// Display the status.
-                //Debug.WriteLine(((HttpWebResponse)response).StatusDescription);
-
-                //// Get the stream containing content returned by the server.
-                //// The using block ensures the stream is automatically closed.
-                //using (Stream dataStream = response.GetResponseStream())
-                //{
-                //    // Open the stream using a StreamReader for easy access.
-                //    StreamReader reader = new StreamReader(dataStream);
-                //    // Read the content.
-                //    string responseFromServer = reader.ReadToEnd();
-                //    // Display the content.
-                //    Debug.WriteLine(responseFromServer);
-                //}
-
-                //// Close the response.
-                //response.Close();
-                //var Renderer = new IronPdf.HtmlToPdf();
-                //Renderer.RenderHtmlAsPdf("<h1>Html with CSS and Images</h1>").SaveAs("example.pdf");
-                // Create a PDF from any existing web page
-                //var Renderer = new IronPdf.HtmlToPdf();
-                //var PDF = Renderer.RenderUrlAsPdf("https://en.wikipedia.org/wiki/Portable_Document_Format");
-                //PDF.SaveAs("wikipedia.pdf");
-                //// This neat trick opens our PDF file so we can see the result
-                //System.Diagnostics.Process.Start("~/wikipedia.pdf");
             }
             else if (String.Equals(e.CommandName, "downloadReceipt"))
             {
