@@ -62,5 +62,12 @@ namespace EDP_Clinic
             Response.Redirect("ChangeInfo.aspx", false);
 
         }
+
+        protected void Change_Personal_Info_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("Patient_view_details.aspx");
+        }
+
+        
     }
 }

@@ -1,6 +1,6 @@
 ﻿<%@ Page Title="Patient Overview" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="PatientOverview.aspx.cs" Inherits="EDP_Clinic.PatientOverview" %>
 
-<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server" >
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
@@ -333,6 +333,7 @@
     </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
+
         <div class="container-xl">
             <div class="table-responsive">
                 <div class="table-wrapper">
@@ -342,23 +343,34 @@
                                 <h2 style="color: white;">Patient <b>Overview</b></h2>
                             </div>
                             <div class="col-sm-6">
-                                <asp:Button ID="ViewPatientBtn" runat="server" Text="View Patients" OnClick="ViewPatients_Click" />
-                                <asp:Button ID="ViewCaretakerBtn" runat="server" Text="View Caretakers" OnClick="ViewCaretaker_Click" />
-                                <asp:LinkButton ID="RefreshBtn" runat="server" Style="color: white;" Text="<i class='fas fa-sync-alt fa-lg'></i>" OnClick="RefreshBtn_Click" />
-                                <asp:TextBox ID="searchtb" runat="server" Height="25px" Width="250px"></asp:TextBox>
-                                <asp:LinkButton ID="SearchBtn" runat="server" Style="color: white;" Text="<i class='fas fa-search fa-lg'></i>" OnClick="SearchBtn_Click" />
+               
+                            
+                            <asp:Button ID="ViewReport" runat="server" Text="View Reports" OnClick="ViewReport_Click"/>
+               
+                            <asp:Button ID="ViewPatientBtn" runat="server" Text="View Patients" OnClick="ViewPatients_Click" />
+                            <asp:Button ID="ViewCaretakerBtn" runat="server" Text="View Caretakers" OnClick="ViewCaretaker_Click" />
+                            <asp:LinkButton ID="RefreshBtn" runat="server" style="color: white;" Text="<i class='fas fa-sync-alt fa-lg'></i>" OnClick="RefreshBtn_Click"/>
+                            <asp:TextBox ID="searchtb" runat="server" Height="25px" Width="150px"></asp:TextBox>
+                            <asp:LinkButton ID="SearchBtn"  runat="server" style="color: white;" Text="<i class='fas fa-search fa-lg'></i>" OnClick="SearchBtn_Click" />                    
+                                  
                             </div>
                         </div>
                     </div>
                     <asp:GridView ID="PatientGridView"
-                        AutoGenerateColumns="True"
                         class="table table-striped table-hover"
                         runat="server">
+                        <Columns>
+                            <asp:TemplateField>
+                                <ItemTemplate>
+                                    <asp:Button ID="btn_med_condition" runat="server" OnClick="btn_med_condition_click" Text="Medical Condition" />
+                                </ItemTemplate>
+                            </asp:TemplateField>
+                        </Columns>
                     </asp:GridView>
                 </div>
             </div>
         </div>
-        <!-- Edit Modal HTML -->
+
     </div>
 
 </asp:Content>

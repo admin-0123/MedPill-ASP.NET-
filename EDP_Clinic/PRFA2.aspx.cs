@@ -188,7 +188,9 @@ namespace EDP_Clinic
         {
             if (Session["appt_viewstate"].ToString() != "upcoming")
             {
-
+                // Line Below fixes the bug of being on page 2 or later in a viewstate and then changing to another viewstate, causing the indexes to still be there
+                // Reset the page to the first
+                dp_listview_appt.SetPageProperties(0, dp_listview_appt.MaximumRows, false);
                 lbtn_upcoming.CssClass = "";
                 lbtn_past.CssClass = "lbtn_inactive";
                 lbtn_missed.CssClass = "lbtn_inactive";
@@ -203,7 +205,9 @@ namespace EDP_Clinic
         {
             if (Session["appt_viewstate"].ToString() != "past")
             {
-
+                // Line Below fixes the bug of being on page 2 or later in a viewstate and then changing to another viewstate, causing the indexes to still be there
+                // Reset the page to the first
+                dp_listview_appt.SetPageProperties(0, dp_listview_appt.MaximumRows, false);
                 lbtn_upcoming.CssClass = "lbtn_inactive";
                 lbtn_past.CssClass = "";
                 lbtn_missed.CssClass = "lbtn_inactive";
@@ -220,7 +224,9 @@ namespace EDP_Clinic
         protected void lbtn_missed_Click(object sender, EventArgs e)
         {
             if (Session["appt_viewstate"].ToString() != "missed")
-            {
+            {   // Line Below fixes the bug of being on page 2 or later in a viewstate and then changing to another viewstate, causing the indexes to still be there
+                // Reset the page to the first
+                dp_listview_appt.SetPageProperties(0, dp_listview_appt.MaximumRows, false);
                 lbtn_upcoming.CssClass = "lbtn_inactive";
                 lbtn_past.CssClass = "lbtn_inactive";
                 lbtn_missed.CssClass = "";
@@ -290,14 +296,17 @@ namespace EDP_Clinic
                 switch (Session["appt_viewstate"])
                 {
                     case "upcoming":
+                        dp_listview_appt.SetPageProperties(0, dp_listview_appt.MaximumRows, false);
                         listview_appts.DataSource = GetApptsUserUpcoming();
                         listview_appts.DataBind();
                         break;
                     case "past":
+                        dp_listview_appt.SetPageProperties(0, dp_listview_appt.MaximumRows, false);
                         listview_appts.DataSource = GetApptsUserPast();
                         listview_appts.DataBind();
                         break;
                     case "missed":
+                        dp_listview_appt.SetPageProperties(0, dp_listview_appt.MaximumRows, false);
                         listview_appts.DataSource = GetApptsUserMissed();
                         listview_appts.DataBind();
                         break;
@@ -314,5 +323,14 @@ namespace EDP_Clinic
             }
         }
 
+        protected void btn_PaymentOnClick(object sender, EventArgs e)
+        {
+            Response.Redirect("~/Payment.aspx");
+        }
+
+        protected void listview_appts_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

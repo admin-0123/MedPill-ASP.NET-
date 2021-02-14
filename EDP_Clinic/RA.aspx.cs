@@ -69,22 +69,34 @@ namespace EDP_Clinic
             // if input is a valid date, run the code block
             if (checkdate_bool != false)
             {
-                Session["startDate"] = Convert.ToDateTime(tb_startdate.Text);
-                gv_timeslots.DataSource = Search_AvailableAppts();
-                gv_timeslots.DataBind();
-
-                DateTime startDate = Convert.ToDateTime(Session["startDate"]);
-                DateTime endDate = DateTime.Now.AddMonths(2);
-
-                if (startDate < endDate)
+                if (Convert.ToDateTime(tb_startdate.Text) < DateTime.Now.AddDays(1))
                 {
-                    lbl_validDates.Text = $"You may only pick a date between {startDate.Day} {startDate.ToString("MMMM")} to {endDate.Day} {endDate.ToString("MMMM")}";
+                    Session["startDate"] = DateTime.Now.AddDays(1);
+                    lbl_validDates.Text = $"Invalid past date searched";
+                    lbl_validDates.ForeColor = Color.Red;
                 }
 
                 else
                 {
-                    lbl_validDates.Text = $"Sorry, you can't enter a date later than two months of the current day";
-                    lbl_validDates.ForeColor = Color.Red;
+                    Session["startDate"] = Convert.ToDateTime(tb_startdate.Text);
+                    gv_timeslots.DataSource = Search_AvailableAppts();
+                    gv_timeslots.DataBind();
+
+                    DateTime startDate = Convert.ToDateTime(Session["startDate"]);
+                    DateTime endDate = DateTime.Now.AddMonths(2);
+
+
+                    if (startDate < endDate)
+                    {
+                        //lbl_validDates.Text = $"You may only pick a date between {startDate.Day} {startDate.ToString("MMMM")} to {endDate.Day} {endDate.ToString("MMMM")}";
+                        lbl_validDates.Text = $"You may only pick a date between {DateTime.Now.AddDays(1).Day} {DateTime.Now.AddDays(1).ToString("MMMM")} to {endDate.Day} {endDate.ToString("MMMM")}";
+                    }
+
+                    else
+                    {
+                        lbl_validDates.Text = $"Sorry, you can't enter a date later than two months of the current day";
+                        lbl_validDates.ForeColor = Color.Red;
+                    }
                 }
             }
 
