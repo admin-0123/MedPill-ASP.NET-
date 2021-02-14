@@ -11,34 +11,52 @@ namespace EDP_Clinic
 {
 
 
-    public partial class ReceiptList
+    public partial class employeePage
     {
 
         /// <summary>
-        /// backBtn control.
+        /// defaultPfp control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button backBtn;
+        protected global::System.Web.UI.HtmlControls.HtmlImage defaultPfp;
 
         /// <summary>
-        /// receiptListView control.
+        /// imgPfp control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ListView receiptListView;
+        protected global::System.Web.UI.WebControls.Image imgPfp;
 
         /// <summary>
-        /// receiptListPager control.
+        /// changeinfoBtn control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DataPager receiptListPager;
+        protected global::System.Web.UI.WebControls.Button changeinfoBtn;
+
+        /// <summary>
+        /// lblName control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblName;
+
+        /// <summary>
+        /// receptionistBtn control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button receptionistBtn;
     }
 }

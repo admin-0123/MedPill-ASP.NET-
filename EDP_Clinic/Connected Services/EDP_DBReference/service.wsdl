@@ -242,11 +242,11 @@
   <wsdl:message name="IService1_CreateReceipt_OutputMessage">
     <wsdl:part name="parameters" element="tns:CreateReceiptResponse" />
   </wsdl:message>
-  <wsdl:message name="IService1_SelectAllReceipt_InputMessage">
-    <wsdl:part name="parameters" element="tns:SelectAllReceipt" />
+  <wsdl:message name="IService1_SelectAllReceipts_InputMessage">
+    <wsdl:part name="parameters" element="tns:SelectAllReceipts" />
   </wsdl:message>
-  <wsdl:message name="IService1_SelectAllReceipt_OutputMessage">
-    <wsdl:part name="parameters" element="tns:SelectAllReceiptResponse" />
+  <wsdl:message name="IService1_SelectAllReceipts_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SelectAllReceiptsResponse" />
   </wsdl:message>
   <wsdl:message name="IService1_SelectByReceiptID_InputMessage">
     <wsdl:part name="parameters" element="tns:SelectByReceiptID" />
@@ -603,9 +603,9 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IService1/CreateReceipt" message="tns:IService1_CreateReceipt_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IService1/CreateReceiptResponse" message="tns:IService1_CreateReceipt_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="SelectAllReceipt">
-      <wsdl:input wsaw:Action="http://tempuri.org/IService1/SelectAllReceipt" message="tns:IService1_SelectAllReceipt_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IService1/SelectAllReceiptResponse" message="tns:IService1_SelectAllReceipt_OutputMessage" />
+    <wsdl:operation name="SelectAllReceipts">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/SelectAllReceipts" message="tns:IService1_SelectAllReceipts_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/SelectAllReceiptsResponse" message="tns:IService1_SelectAllReceipts_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="SelectByReceiptID">
       <wsdl:input wsaw:Action="http://tempuri.org/IService1/SelectByReceiptID" message="tns:IService1_SelectByReceiptID_InputMessage" />
@@ -1093,8 +1093,8 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="SelectAllReceipt">
-      <soap:operation soapAction="http://tempuri.org/IService1/SelectAllReceipt" style="document" />
+    <wsdl:operation name="SelectAllReceipts">
+      <soap:operation soapAction="http://tempuri.org/IService1/SelectAllReceipts" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

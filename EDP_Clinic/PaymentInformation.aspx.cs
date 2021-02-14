@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Drawing;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -57,7 +58,25 @@ namespace EDP_Clinic
                     string cardNumberDisplay = cif.CardNumber.Substring(12, 4);
                     cardNumberText.Text = "**** **** **** " + cardNumberDisplay;
                     cardExpiryText.Text = cardExpiryDate.ToString("MMMM yyyy");//Convert.ToDateTime.ToMon(cif.CardExpiry);
-                    //cvvNumberText.Text = cif.CVVNumber;
+                    
+                    //Display card expiry status
+                    DateTime currentDate = DateTime.Now;
+                    double monthDifference = cardExpiryDate.Subtract(currentDate).Days / (365.25 / 12);
+                    if(monthDifference > 3)
+                    {
+                        cardExpiryStatus.Text = "Your card exipiry date is valid.";
+                        cardExpiryStatus.ForeColor = Color.Green;
+                    }
+                    else if(monthDifference <= 3 && monthDifference > 0)
+                    {
+                        cardExpiryStatus.Text = "Please ensure that your card expiry date is 3 months from current date.";
+                        cardExpiryStatus.ForeColor = Color.Red;
+                    }
+                    else
+                    {
+                        cardExpiryStatus.Text = "Please update your card information immediately by deleting and then adding a new card information.";
+                        cardExpiryStatus.ForeColor = Color.Red;
+                    }
                 }
             }
             else
@@ -91,11 +110,7 @@ namespace EDP_Clinic
             Session["deleteCardInfo"] = guid;
 
             string cardNumber = Session["UniqueIdentifier"].ToString();
-            //string cardNumber = Request.QueryString["cardNumber"];
             Service1Client client = new Service1Client();
-            //CardInfo cif = client.GetCardByCardNumber(cardNumber);
-            //Delete at authentication page
-            //Session["cardNumber"] = cif.CardNumber;
 
             Response.Cookies.Add(new HttpCookie("deleteCardInfo", guid));
             Response.Redirect("Authentication.aspx", false);

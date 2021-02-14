@@ -9,7 +9,7 @@
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
-     <script src="https://kit.fontawesome.com/af00ae0421.js"></script>
+    <script src="https://kit.fontawesome.com/af00ae0421.js"></script>
     <style>
         body {
             color: #566787;
@@ -344,6 +344,7 @@
                             </div>
                             <div class="col-sm-6">
                
+                            
                             <asp:Button ID="ViewReport" runat="server" Text="View Reports" OnClick="ViewReport_Click"/>
                
                             <asp:Button ID="ViewPatientBtn" runat="server" Text="View Patients" OnClick="ViewPatients_Click" />
@@ -351,7 +352,7 @@
                             <asp:LinkButton ID="RefreshBtn" runat="server" style="color: white;" Text="<i class='fas fa-sync-alt fa-lg'></i>" OnClick="RefreshBtn_Click"/>
                             <asp:TextBox ID="searchtb" runat="server" Height="25px" Width="150px"></asp:TextBox>
                             <asp:LinkButton ID="SearchBtn"  runat="server" style="color: white;" Text="<i class='fas fa-search fa-lg'></i>" OnClick="SearchBtn_Click" />                    
-               
+                                  
                             </div>
                         </div>
                     </div>

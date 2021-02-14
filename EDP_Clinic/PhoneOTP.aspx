@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="PhoneOTP.aspx.cs" Inherits="EDP_Clinic.PhoneOTP" %>
+﻿<%@ Page Title="OTP" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="PhoneOTP.aspx.cs" Inherits="EDP_Clinic.PhoneOTP" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <style type="text/css">
  

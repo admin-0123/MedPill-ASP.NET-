@@ -1,5 +1,4 @@
-﻿<%@ Page Title="User Page" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="UserPage.aspx.cs" Inherits="EDP_Clinic.UserPage" %>
-
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="receptionistPage.aspx.cs" Inherits="EDP_Clinic.employeePage" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <style>
         .pfp {
@@ -60,12 +59,7 @@
     </div>--%>
             <div class="mt-5 text-center mx-auto">
                 <div class="btn-group btn-group-lg" role="group" aria-label="User Options">
-                    <asp:Button ID="appointmentBtn" runat="server" Text="Appointments" CssClass="btn btn-primary" OnClick="appointmentBtn_Click" />
-                    <asp:Button ID="medicationBtn" runat="server" Text="Medication" CssClass="btn btn-primary" OnClick="medicationBtn_Click" />
-                    <asp:Button ID="paymentMethodBtn" runat="server" Text="Payment Methods" CssClass="btn btn-primary" OnClick="paymentMethodBtn_Click" />
-                    <asp:Button ID="paymentHistoryBtn" runat="server" Text="Payment History" CssClass="btn btn-primary" OnClick="paymentHistoryBtn_Click" />
-            <asp:Button ID="changeinfoBtn0" runat="server" Text="Change Personal Information" CssClass="btn btn-primary" OnClick="Change_Personal_Info_Click" Width="283px" />
-            
+                    <asp:Button ID="receptionistBtn" runat="server" Text="Appointments" CssClass="btn btn-primary" OnClick="receptionistBtn_Click" />
                 </div>
             </div>
            
