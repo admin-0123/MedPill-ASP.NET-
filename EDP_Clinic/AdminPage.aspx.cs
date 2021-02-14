@@ -31,18 +31,17 @@ namespace EDP_Clinic
         
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!this.IsPostBack)
+            if (Session["LoggedIn"] == null)
             {
-                try
+                Response.Redirect("Login.aspx", false);
+            }
+            else
+            {
+                if (Session["UserRole"].ToString() != "Admin")
                 {
-                    refreshgrid();
-                }
-                catch (Exception ex)
-                {
-                    Debug.WriteLine(ex);
+                    Response.Redirect("Home.aspx", false);
                 }
             }
-           
         }
         protected void EmployeeGridView_RowCommand1(object sender, GridViewCommandEventArgs e)
         {
