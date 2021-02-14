@@ -66,5 +66,10 @@ namespace EDP_Clinic
         {
             Response.Redirect("Create_Report.aspx");
         }
+
+        protected void btn_med_condition_click(object sender, EventArgs e)
+        {
+            Response.Redirect("Patient_Medical_Condition.aspx");
+        }
     }
 }

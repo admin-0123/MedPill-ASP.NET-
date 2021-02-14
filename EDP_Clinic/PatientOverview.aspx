@@ -344,21 +344,27 @@
                             </div>
                             <div class="col-sm-6">
                
+                            <asp:Button ID="ViewReport" runat="server" Text="View Reports" OnClick="ViewReport_Click"/>
+               
                             <asp:Button ID="ViewPatientBtn" runat="server" Text="View Patients" OnClick="ViewPatients_Click" />
                             <asp:Button ID="ViewCaretakerBtn" runat="server" Text="View Caretakers" OnClick="ViewCaretaker_Click" />
                             <asp:LinkButton ID="RefreshBtn" runat="server" style="color: white;" Text="<i class='fas fa-sync-alt fa-lg'></i>" OnClick="RefreshBtn_Click"/>
-                            <asp:TextBox ID="searchtb" runat="server" Height="25px" Width="250px"></asp:TextBox>
+                            <asp:TextBox ID="searchtb" runat="server" Height="25px" Width="150px"></asp:TextBox>
                             <asp:LinkButton ID="SearchBtn"  runat="server" style="color: white;" Text="<i class='fas fa-search fa-lg'></i>" OnClick="SearchBtn_Click" />                    
-               
-                            <asp:Button ID="ViewReport" runat="server" Text="View Reports" OnClick="ViewReport_Click"/>
                
                             </div>
                         </div>
                     </div>
                     <asp:GridView ID="PatientGridView"
-                        AutoGenerateColumns="True"
                         class="table table-striped table-hover"
                         runat="server">
+                        <Columns>
+                            <asp:TemplateField>
+                                <ItemTemplate>
+                                    <asp:Button ID="btn_med_condition" runat="server" OnClick="btn_med_condition_click" Text="Medical Condition" />
+                                </ItemTemplate>
+                            </asp:TemplateField>
+                        </Columns>
                     </asp:GridView>
                 </div>
             </div>

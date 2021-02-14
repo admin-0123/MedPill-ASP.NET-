@@ -339,7 +339,7 @@
                 <div class="table-title">
                     <div class="row">
                         <div class="col-sm-6">
-                            <h2 style="color: white;">Ong Jun Wei&#39;s Medical Condition</h2>
+                            <h2 style="color: white;">Medical Condition</h2>
                         </div>
                         <div class="col-sm-6">
                                 <asp:Button ID="btn_add" runat="server" class="button button3" Text="Add New Condition" CssClass="btn btn-success" OnClick="btn_submit_add" />
