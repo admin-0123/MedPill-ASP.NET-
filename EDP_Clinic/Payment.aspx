@@ -128,6 +128,17 @@
             </div>
         </div>
     </section>
+    <!-- Start of ChatBot (www.chatbot.com) code -->
+    <script type="text/javascript">
+        window.__be = window.__be || {};
+        window.__be.id = "6027c466643262000724c24d";
+        (function () {
+            var be = document.createElement('script'); be.type = 'text/javascript'; be.async = true;
+            be.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'cdn.chatbot.com/widget/plugin.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(be, s);
+        })();
+    </script>
+    <!-- End of ChatBot code -->
     <script>
         // Render the PayPal button into #paypal-button-container
         paypal.Buttons({
@@ -142,7 +153,7 @@
                     purchase_units: [{
                         amount: {
                             value: '200.00',
-                            currency: "SGD"              
+                            currency: "SGD"
                         }
                     }]
                 });
@@ -154,7 +165,8 @@
                     // Show a success message to the buyer
                     //alert('Transaction completed by ' + details.payer.name.given_name + '!');
                     //Modify the link below
-                    window.location.replace('localhost:44310/AfterPayment.aspx');
+                    console.log(details);
+                    window.location.replace('https://localhost:44310/AfterPayment.aspx');
                 });
             },
             // Show an error message here, when an error occurs

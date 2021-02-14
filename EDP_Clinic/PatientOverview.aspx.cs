@@ -1,6 +1,7 @@
 ﻿using EDP_Clinic.EDP_DBReference;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -42,7 +43,7 @@ namespace EDP_Clinic
             refreshgrid();
         }
         protected void SearchBtn_Click(object sender, EventArgs e)
-        {
+        {    
             var search = HttpUtility.HtmlEncode(searchtb.Text);
             List<displayPatient> patientList = new List<displayPatient>();
             patientList = client.DisplayAllSearchedPatients(search).ToList<displayPatient>();
@@ -61,5 +62,14 @@ namespace EDP_Clinic
             PatientGridView.DataBind();
         }
 
+        protected void ViewReport_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("Create_Report.aspx");
+        }
+
+        protected void btn_med_condition_click(object sender, EventArgs e)
+        {
+            Response.Redirect("Patient_Medical_Condition.aspx");
+        }
     }
 }

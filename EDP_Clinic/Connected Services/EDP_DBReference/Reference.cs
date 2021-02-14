@@ -1138,6 +1138,711 @@ namespace EDP_Clinic.EDP_DBReference {
         }
     }
     
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="Report", Namespace="http://schemas.datacontract.org/2004/07/DBService.Entity")]
+    [System.SerializableAttribute()]
+    public partial class Report : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string ClinicField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string Date_of_reportField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string DetailsField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string DnameField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string IdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string PnameField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Clinic {
+            get {
+                return this.ClinicField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ClinicField, value) != true)) {
+                    this.ClinicField = value;
+                    this.RaisePropertyChanged("Clinic");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Date_of_report {
+            get {
+                return this.Date_of_reportField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.Date_of_reportField, value) != true)) {
+                    this.Date_of_reportField = value;
+                    this.RaisePropertyChanged("Date_of_report");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Details {
+            get {
+                return this.DetailsField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.DetailsField, value) != true)) {
+                    this.DetailsField = value;
+                    this.RaisePropertyChanged("Details");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Dname {
+            get {
+                return this.DnameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.DnameField, value) != true)) {
+                    this.DnameField = value;
+                    this.RaisePropertyChanged("Dname");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Id {
+            get {
+                return this.IdField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.IdField, value) != true)) {
+                    this.IdField = value;
+                    this.RaisePropertyChanged("Id");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Pname {
+            get {
+                return this.PnameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.PnameField, value) != true)) {
+                    this.PnameField = value;
+                    this.RaisePropertyChanged("Pname");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="Details", Namespace="http://schemas.datacontract.org/2004/07/DBService.Entity")]
+    [System.SerializableAttribute()]
+    public partial class Details : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string AddressField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string Date_of_birthField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string EmailField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string GenderField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string NameField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string NricField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string PhoneField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string PostalField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Address {
+            get {
+                return this.AddressField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.AddressField, value) != true)) {
+                    this.AddressField = value;
+                    this.RaisePropertyChanged("Address");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Date_of_birth {
+            get {
+                return this.Date_of_birthField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.Date_of_birthField, value) != true)) {
+                    this.Date_of_birthField = value;
+                    this.RaisePropertyChanged("Date_of_birth");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Email {
+            get {
+                return this.EmailField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.EmailField, value) != true)) {
+                    this.EmailField = value;
+                    this.RaisePropertyChanged("Email");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Gender {
+            get {
+                return this.GenderField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.GenderField, value) != true)) {
+                    this.GenderField = value;
+                    this.RaisePropertyChanged("Gender");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Name {
+            get {
+                return this.NameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.NameField, value) != true)) {
+                    this.NameField = value;
+                    this.RaisePropertyChanged("Name");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Nric {
+            get {
+                return this.NricField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.NricField, value) != true)) {
+                    this.NricField = value;
+                    this.RaisePropertyChanged("Nric");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Phone {
+            get {
+                return this.PhoneField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.PhoneField, value) != true)) {
+                    this.PhoneField = value;
+                    this.RaisePropertyChanged("Phone");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Postal {
+            get {
+                return this.PostalField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.PostalField, value) != true)) {
+                    this.PostalField = value;
+                    this.RaisePropertyChanged("Postal");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="Medical_Condition", Namespace="http://schemas.datacontract.org/2004/07/DBService.Entity")]
+    [System.SerializableAttribute()]
+    public partial class Medical_Condition : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string ClinicField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string CommentsField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string Condition_DescField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string Date_DiagnosisField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string DoctorField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string IdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string Med_ConditionField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string NameField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string Patient_CoditionField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string TreatmentField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Clinic {
+            get {
+                return this.ClinicField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ClinicField, value) != true)) {
+                    this.ClinicField = value;
+                    this.RaisePropertyChanged("Clinic");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Comments {
+            get {
+                return this.CommentsField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.CommentsField, value) != true)) {
+                    this.CommentsField = value;
+                    this.RaisePropertyChanged("Comments");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Condition_Desc {
+            get {
+                return this.Condition_DescField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.Condition_DescField, value) != true)) {
+                    this.Condition_DescField = value;
+                    this.RaisePropertyChanged("Condition_Desc");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Date_Diagnosis {
+            get {
+                return this.Date_DiagnosisField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.Date_DiagnosisField, value) != true)) {
+                    this.Date_DiagnosisField = value;
+                    this.RaisePropertyChanged("Date_Diagnosis");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Doctor {
+            get {
+                return this.DoctorField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.DoctorField, value) != true)) {
+                    this.DoctorField = value;
+                    this.RaisePropertyChanged("Doctor");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Id {
+            get {
+                return this.IdField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.IdField, value) != true)) {
+                    this.IdField = value;
+                    this.RaisePropertyChanged("Id");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Med_Condition {
+            get {
+                return this.Med_ConditionField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.Med_ConditionField, value) != true)) {
+                    this.Med_ConditionField = value;
+                    this.RaisePropertyChanged("Med_Condition");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Name {
+            get {
+                return this.NameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.NameField, value) != true)) {
+                    this.NameField = value;
+                    this.RaisePropertyChanged("Name");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Patient_Codition {
+            get {
+                return this.Patient_CoditionField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.Patient_CoditionField, value) != true)) {
+                    this.Patient_CoditionField = value;
+                    this.RaisePropertyChanged("Patient_Codition");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Treatment {
+            get {
+                return this.TreatmentField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.TreatmentField, value) != true)) {
+                    this.TreatmentField = value;
+                    this.RaisePropertyChanged("Treatment");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="Patient_MC", Namespace="http://schemas.datacontract.org/2004/07/DBService.Entity")]
+    [System.SerializableAttribute()]
+    public partial class Patient_MC : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string ClinicField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string DateField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string DurationField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string NameField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string NricField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string Reg_noField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string SignatureField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string Type_of_leaveField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Clinic {
+            get {
+                return this.ClinicField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ClinicField, value) != true)) {
+                    this.ClinicField = value;
+                    this.RaisePropertyChanged("Clinic");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Date {
+            get {
+                return this.DateField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.DateField, value) != true)) {
+                    this.DateField = value;
+                    this.RaisePropertyChanged("Date");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Duration {
+            get {
+                return this.DurationField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.DurationField, value) != true)) {
+                    this.DurationField = value;
+                    this.RaisePropertyChanged("Duration");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Name {
+            get {
+                return this.NameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.NameField, value) != true)) {
+                    this.NameField = value;
+                    this.RaisePropertyChanged("Name");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Nric {
+            get {
+                return this.NricField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.NricField, value) != true)) {
+                    this.NricField = value;
+                    this.RaisePropertyChanged("Nric");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Reg_no {
+            get {
+                return this.Reg_noField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.Reg_noField, value) != true)) {
+                    this.Reg_noField = value;
+                    this.RaisePropertyChanged("Reg_no");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Signature {
+            get {
+                return this.SignatureField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.SignatureField, value) != true)) {
+                    this.SignatureField = value;
+                    this.RaisePropertyChanged("Signature");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Type_of_leave {
+            get {
+                return this.Type_of_leaveField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.Type_of_leaveField, value) != true)) {
+                    this.Type_of_leaveField = value;
+                    this.RaisePropertyChanged("Type_of_leave");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="Payment_Report", Namespace="http://schemas.datacontract.org/2004/07/DBService.Entity")]
+    [System.SerializableAttribute()]
+    public partial class Payment_Report : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string Date_of_appointmentField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string FeesField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string Purpose_visitField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Date_of_appointment {
+            get {
+                return this.Date_of_appointmentField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.Date_of_appointmentField, value) != true)) {
+                    this.Date_of_appointmentField = value;
+                    this.RaisePropertyChanged("Date_of_appointment");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Fees {
+            get {
+                return this.FeesField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.FeesField, value) != true)) {
+                    this.FeesField = value;
+                    this.RaisePropertyChanged("Fees");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Purpose_visit {
+            get {
+                return this.Purpose_visitField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.Purpose_visitField, value) != true)) {
+                    this.Purpose_visitField = value;
+                    this.RaisePropertyChanged("Purpose_visit");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="EDP_DBReference.IService1")]
     public interface IService1 {
@@ -1376,11 +2081,11 @@ namespace EDP_Clinic.EDP_DBReference {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/CreateReceipt", ReplyAction="http://tempuri.org/IService1/CreateReceiptResponse")]
         System.Threading.Tasks.Task<int> CreateReceiptAsync(string userID, System.DateTime dateSale, double totalSum, bool isPaid, string receiptLink, string uniqueIdentifier);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/SelectAllReceipt", ReplyAction="http://tempuri.org/IService1/SelectAllReceiptResponse")]
-        EDP_Clinic.EDP_DBReference.Receipt[] SelectAllReceipt(string userID);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/SelectAllReceipts", ReplyAction="http://tempuri.org/IService1/SelectAllReceiptsResponse")]
+        EDP_Clinic.EDP_DBReference.Receipt[] SelectAllReceipts(string userID);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/SelectAllReceipt", ReplyAction="http://tempuri.org/IService1/SelectAllReceiptResponse")]
-        System.Threading.Tasks.Task<EDP_Clinic.EDP_DBReference.Receipt[]> SelectAllReceiptAsync(string userID);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/SelectAllReceipts", ReplyAction="http://tempuri.org/IService1/SelectAllReceiptsResponse")]
+        System.Threading.Tasks.Task<EDP_Clinic.EDP_DBReference.Receipt[]> SelectAllReceiptsAsync(string userID);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/SelectByReceiptID", ReplyAction="http://tempuri.org/IService1/SelectByReceiptIDResponse")]
         EDP_Clinic.EDP_DBReference.Receipt SelectByReceiptID(string userID, string uniqueIdentifier);
@@ -1418,24 +2123,6 @@ namespace EDP_Clinic.EDP_DBReference {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetAllApptUserMissed", ReplyAction="http://tempuri.org/IService1/GetAllApptUserMissedResponse")]
         System.Threading.Tasks.Task<EDP_Clinic.EDP_DBReference.Appointment[]> GetAllApptUserMissedAsync(int uid);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetAllApptAdminUpcoming", ReplyAction="http://tempuri.org/IService1/GetAllApptAdminUpcomingResponse")]
-        EDP_Clinic.EDP_DBReference.Appointment[] GetAllApptAdminUpcoming();
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetAllApptAdminUpcoming", ReplyAction="http://tempuri.org/IService1/GetAllApptAdminUpcomingResponse")]
-        System.Threading.Tasks.Task<EDP_Clinic.EDP_DBReference.Appointment[]> GetAllApptAdminUpcomingAsync();
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetAllApptAdminPast", ReplyAction="http://tempuri.org/IService1/GetAllApptAdminPastResponse")]
-        EDP_Clinic.EDP_DBReference.Appointment[] GetAllApptAdminPast();
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetAllApptAdminPast", ReplyAction="http://tempuri.org/IService1/GetAllApptAdminPastResponse")]
-        System.Threading.Tasks.Task<EDP_Clinic.EDP_DBReference.Appointment[]> GetAllApptAdminPastAsync();
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetAllApptAdminMissed", ReplyAction="http://tempuri.org/IService1/GetAllApptAdminMissedResponse")]
-        EDP_Clinic.EDP_DBReference.Appointment[] GetAllApptAdminMissed();
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetAllApptAdminMissed", ReplyAction="http://tempuri.org/IService1/GetAllApptAdminMissedResponse")]
-        System.Threading.Tasks.Task<EDP_Clinic.EDP_DBReference.Appointment[]> GetAllApptAdminMissedAsync();
-        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/CreateAppointment", ReplyAction="http://tempuri.org/IService1/CreateAppointmentResponse")]
         int CreateAppointment(int patientID, string appointmentType, System.DateTime dateTime, string status);
         
@@ -1466,35 +2153,137 @@ namespace EDP_Clinic.EDP_DBReference {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetOnePhoto", ReplyAction="http://tempuri.org/IService1/GetOnePhotoResponse")]
         System.Threading.Tasks.Task<EDP_Clinic.EDP_DBReference.Photo> GetOnePhotoAsync(string id);
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/CheckPhotoExist", ReplyAction="http://tempuri.org/IService1/CheckPhotoExistResponse")]
+        int CheckPhotoExist(string id);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/CheckPhotoExist", ReplyAction="http://tempuri.org/IService1/CheckPhotoExistResponse")]
+        System.Threading.Tasks.Task<int> CheckPhotoExistAsync(string id);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/AddOnePhoto", ReplyAction="http://tempuri.org/IService1/AddOnePhotoResponse")]
+        int AddOnePhoto(string id, string img);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/AddOnePhoto", ReplyAction="http://tempuri.org/IService1/AddOnePhotoResponse")]
+        System.Threading.Tasks.Task<int> AddOnePhotoAsync(string id, string img);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/UpdateOnePhoto", ReplyAction="http://tempuri.org/IService1/UpdateOnePhotoResponse")]
+        int UpdateOnePhoto(string id, string img);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/UpdateOnePhoto", ReplyAction="http://tempuri.org/IService1/UpdateOnePhotoResponse")]
+        System.Threading.Tasks.Task<int> UpdateOnePhotoAsync(string id, string img);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetOneCG", ReplyAction="http://tempuri.org/IService1/GetOneCGResponse")]
         EDP_Clinic.EDP_DBReference.Caregiver GetOneCG(string id);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetOneCG", ReplyAction="http://tempuri.org/IService1/GetOneCGResponse")]
         System.Threading.Tasks.Task<EDP_Clinic.EDP_DBReference.Caregiver> GetOneCGAsync(string id);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetAllDoctors", ReplyAction="http://tempuri.org/IService1/GetAllDoctorsResponse")]
-        EDP_Clinic.EDP_DBReference.User[] GetAllDoctors();
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/CreateReport", ReplyAction="http://tempuri.org/IService1/CreateReportResponse")]
+        int CreateReport(string id, string dname, string pname, string clinic, string date_of_report, string details);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetAllDoctors", ReplyAction="http://tempuri.org/IService1/GetAllDoctorsResponse")]
-        System.Threading.Tasks.Task<EDP_Clinic.EDP_DBReference.User[]> GetAllDoctorsAsync();
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/CreateReport", ReplyAction="http://tempuri.org/IService1/CreateReportResponse")]
+        System.Threading.Tasks.Task<int> CreateReportAsync(string id, string dname, string pname, string clinic, string date_of_report, string details);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetOneDoctor", ReplyAction="http://tempuri.org/IService1/GetOneDoctorResponse")]
-        EDP_Clinic.EDP_DBReference.User GetOneDoctor(string doctor_name);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetReportById", ReplyAction="http://tempuri.org/IService1/GetReportByIdResponse")]
+        EDP_Clinic.EDP_DBReference.Report GetReportById(string id);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetOneDoctor", ReplyAction="http://tempuri.org/IService1/GetOneDoctorResponse")]
-        System.Threading.Tasks.Task<EDP_Clinic.EDP_DBReference.User> GetOneDoctorAsync(string doctor_name);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetReportById", ReplyAction="http://tempuri.org/IService1/GetReportByIdResponse")]
+        System.Threading.Tasks.Task<EDP_Clinic.EDP_DBReference.Report> GetReportByIdAsync(string id);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/UpdateDoctor", ReplyAction="http://tempuri.org/IService1/UpdateDoctorResponse")]
-        int UpdateDoctor(int uid, System.DateTime old_time, int doctor_id);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetAllReport", ReplyAction="http://tempuri.org/IService1/GetAllReportResponse")]
+        EDP_Clinic.EDP_DBReference.Report[] GetAllReport();
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/UpdateDoctor", ReplyAction="http://tempuri.org/IService1/UpdateDoctorResponse")]
-        System.Threading.Tasks.Task<int> UpdateDoctorAsync(int uid, System.DateTime old_time, int doctor_id);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetAllReport", ReplyAction="http://tempuri.org/IService1/GetAllReportResponse")]
+        System.Threading.Tasks.Task<EDP_Clinic.EDP_DBReference.Report[]> GetAllReportAsync();
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetPatientByName", ReplyAction="http://tempuri.org/IService1/GetPatientByNameResponse")]
-        EDP_Clinic.EDP_DBReference.User GetPatientByName(string patient_name);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/UpdateReportById", ReplyAction="http://tempuri.org/IService1/UpdateReportByIdResponse")]
+        int UpdateReportById(string id, string dname, string pname, string clinic, string date_of_report, string details);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetPatientByName", ReplyAction="http://tempuri.org/IService1/GetPatientByNameResponse")]
-        System.Threading.Tasks.Task<EDP_Clinic.EDP_DBReference.User> GetPatientByNameAsync(string patient_name);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/UpdateReportById", ReplyAction="http://tempuri.org/IService1/UpdateReportByIdResponse")]
+        System.Threading.Tasks.Task<int> UpdateReportByIdAsync(string id, string dname, string pname, string clinic, string date_of_report, string details);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/CreateDetails", ReplyAction="http://tempuri.org/IService1/CreateDetailsResponse")]
+        int CreateDetails(string name, string nric, string date_of_birth, string gender, string phone, string email, string address, string postal);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/CreateDetails", ReplyAction="http://tempuri.org/IService1/CreateDetailsResponse")]
+        System.Threading.Tasks.Task<int> CreateDetailsAsync(string name, string nric, string date_of_birth, string gender, string phone, string email, string address, string postal);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetDetailsById", ReplyAction="http://tempuri.org/IService1/GetDetailsByIdResponse")]
+        EDP_Clinic.EDP_DBReference.Details GetDetailsById(string id);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetDetailsById", ReplyAction="http://tempuri.org/IService1/GetDetailsByIdResponse")]
+        System.Threading.Tasks.Task<EDP_Clinic.EDP_DBReference.Details> GetDetailsByIdAsync(string id);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetAllDetails", ReplyAction="http://tempuri.org/IService1/GetAllDetailsResponse")]
+        EDP_Clinic.EDP_DBReference.Details[] GetAllDetails();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetAllDetails", ReplyAction="http://tempuri.org/IService1/GetAllDetailsResponse")]
+        System.Threading.Tasks.Task<EDP_Clinic.EDP_DBReference.Details[]> GetAllDetailsAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/UpdateDetailsById", ReplyAction="http://tempuri.org/IService1/UpdateDetailsByIdResponse")]
+        int UpdateDetailsById(string id, string name, string nric, string date_of_birth, string gender, string phone, string email, string address, string postal);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/UpdateDetailsById", ReplyAction="http://tempuri.org/IService1/UpdateDetailsByIdResponse")]
+        System.Threading.Tasks.Task<int> UpdateDetailsByIdAsync(string id, string name, string nric, string date_of_birth, string gender, string phone, string email, string address, string postal);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/CreateMedicalCondition", ReplyAction="http://tempuri.org/IService1/CreateMedicalConditionResponse")]
+        int CreateMedicalCondition(string id, string name, string med_condition, string date_diagnosis, string doctor, string clinic, string treatment, string condition_desc, string patient_codition, string comments);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/CreateMedicalCondition", ReplyAction="http://tempuri.org/IService1/CreateMedicalConditionResponse")]
+        System.Threading.Tasks.Task<int> CreateMedicalConditionAsync(string id, string name, string med_condition, string date_diagnosis, string doctor, string clinic, string treatment, string condition_desc, string patient_codition, string comments);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetMedicalConditionById", ReplyAction="http://tempuri.org/IService1/GetMedicalConditionByIdResponse")]
+        EDP_Clinic.EDP_DBReference.Medical_Condition GetMedicalConditionById(string id);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetMedicalConditionById", ReplyAction="http://tempuri.org/IService1/GetMedicalConditionByIdResponse")]
+        System.Threading.Tasks.Task<EDP_Clinic.EDP_DBReference.Medical_Condition> GetMedicalConditionByIdAsync(string id);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetAllMedicalCondition", ReplyAction="http://tempuri.org/IService1/GetAllMedicalConditionResponse")]
+        EDP_Clinic.EDP_DBReference.Medical_Condition[] GetAllMedicalCondition();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetAllMedicalCondition", ReplyAction="http://tempuri.org/IService1/GetAllMedicalConditionResponse")]
+        System.Threading.Tasks.Task<EDP_Clinic.EDP_DBReference.Medical_Condition[]> GetAllMedicalConditionAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/UpdateMedicalConditionById", ReplyAction="http://tempuri.org/IService1/UpdateMedicalConditionByIdResponse")]
+        int UpdateMedicalConditionById(string id, string Patient_Condition, string Comments);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/UpdateMedicalConditionById", ReplyAction="http://tempuri.org/IService1/UpdateMedicalConditionByIdResponse")]
+        System.Threading.Tasks.Task<int> UpdateMedicalConditionByIdAsync(string id, string Patient_Condition, string Comments);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/CreatePatient_MC", ReplyAction="http://tempuri.org/IService1/CreatePatient_MCResponse")]
+        int CreatePatient_MC(string reg_no, string name, string nric, string duration, string type_of_leave, string clinic, string signature, string date);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/CreatePatient_MC", ReplyAction="http://tempuri.org/IService1/CreatePatient_MCResponse")]
+        System.Threading.Tasks.Task<int> CreatePatient_MCAsync(string reg_no, string name, string nric, string duration, string type_of_leave, string clinic, string signature, string date);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetPatient_MCById", ReplyAction="http://tempuri.org/IService1/GetPatient_MCByIdResponse")]
+        EDP_Clinic.EDP_DBReference.Patient_MC GetPatient_MCById(string id);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetPatient_MCById", ReplyAction="http://tempuri.org/IService1/GetPatient_MCByIdResponse")]
+        System.Threading.Tasks.Task<EDP_Clinic.EDP_DBReference.Patient_MC> GetPatient_MCByIdAsync(string id);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetAllPatient_MC", ReplyAction="http://tempuri.org/IService1/GetAllPatient_MCResponse")]
+        EDP_Clinic.EDP_DBReference.Patient_MC[] GetAllPatient_MC();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetAllPatient_MC", ReplyAction="http://tempuri.org/IService1/GetAllPatient_MCResponse")]
+        System.Threading.Tasks.Task<EDP_Clinic.EDP_DBReference.Patient_MC[]> GetAllPatient_MCAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/CreatePayment_Report", ReplyAction="http://tempuri.org/IService1/CreatePayment_ReportResponse")]
+        int CreatePayment_Report(string date_of_appointment, string purpose_visit, string fees);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/CreatePayment_Report", ReplyAction="http://tempuri.org/IService1/CreatePayment_ReportResponse")]
+        System.Threading.Tasks.Task<int> CreatePayment_ReportAsync(string date_of_appointment, string purpose_visit, string fees);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetPayment_ReportById", ReplyAction="http://tempuri.org/IService1/GetPayment_ReportByIdResponse")]
+        EDP_Clinic.EDP_DBReference.Payment_Report GetPayment_ReportById(string id);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetPayment_ReportById", ReplyAction="http://tempuri.org/IService1/GetPayment_ReportByIdResponse")]
+        System.Threading.Tasks.Task<EDP_Clinic.EDP_DBReference.Payment_Report> GetPayment_ReportByIdAsync(string id);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetAllPayment_Report", ReplyAction="http://tempuri.org/IService1/GetAllPayment_ReportResponse")]
+        EDP_Clinic.EDP_DBReference.Payment_Report[] GetAllPayment_Report();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetAllPayment_Report", ReplyAction="http://tempuri.org/IService1/GetAllPayment_ReportResponse")]
+        System.Threading.Tasks.Task<EDP_Clinic.EDP_DBReference.Payment_Report[]> GetAllPayment_ReportAsync();
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -1836,12 +2625,12 @@ namespace EDP_Clinic.EDP_DBReference {
             return base.Channel.CreateReceiptAsync(userID, dateSale, totalSum, isPaid, receiptLink, uniqueIdentifier);
         }
         
-        public EDP_Clinic.EDP_DBReference.Receipt[] SelectAllReceipt(string userID) {
-            return base.Channel.SelectAllReceipt(userID);
+        public EDP_Clinic.EDP_DBReference.Receipt[] SelectAllReceipts(string userID) {
+            return base.Channel.SelectAllReceipts(userID);
         }
         
-        public System.Threading.Tasks.Task<EDP_Clinic.EDP_DBReference.Receipt[]> SelectAllReceiptAsync(string userID) {
-            return base.Channel.SelectAllReceiptAsync(userID);
+        public System.Threading.Tasks.Task<EDP_Clinic.EDP_DBReference.Receipt[]> SelectAllReceiptsAsync(string userID) {
+            return base.Channel.SelectAllReceiptsAsync(userID);
         }
         
         public EDP_Clinic.EDP_DBReference.Receipt SelectByReceiptID(string userID, string uniqueIdentifier) {
@@ -1892,30 +2681,6 @@ namespace EDP_Clinic.EDP_DBReference {
             return base.Channel.GetAllApptUserMissedAsync(uid);
         }
         
-        public EDP_Clinic.EDP_DBReference.Appointment[] GetAllApptAdminUpcoming() {
-            return base.Channel.GetAllApptAdminUpcoming();
-        }
-        
-        public System.Threading.Tasks.Task<EDP_Clinic.EDP_DBReference.Appointment[]> GetAllApptAdminUpcomingAsync() {
-            return base.Channel.GetAllApptAdminUpcomingAsync();
-        }
-        
-        public EDP_Clinic.EDP_DBReference.Appointment[] GetAllApptAdminPast() {
-            return base.Channel.GetAllApptAdminPast();
-        }
-        
-        public System.Threading.Tasks.Task<EDP_Clinic.EDP_DBReference.Appointment[]> GetAllApptAdminPastAsync() {
-            return base.Channel.GetAllApptAdminPastAsync();
-        }
-        
-        public EDP_Clinic.EDP_DBReference.Appointment[] GetAllApptAdminMissed() {
-            return base.Channel.GetAllApptAdminMissed();
-        }
-        
-        public System.Threading.Tasks.Task<EDP_Clinic.EDP_DBReference.Appointment[]> GetAllApptAdminMissedAsync() {
-            return base.Channel.GetAllApptAdminMissedAsync();
-        }
-        
         public int CreateAppointment(int patientID, string appointmentType, System.DateTime dateTime, string status) {
             return base.Channel.CreateAppointment(patientID, appointmentType, dateTime, status);
         }
@@ -1956,6 +2721,30 @@ namespace EDP_Clinic.EDP_DBReference {
             return base.Channel.GetOnePhotoAsync(id);
         }
         
+        public int CheckPhotoExist(string id) {
+            return base.Channel.CheckPhotoExist(id);
+        }
+        
+        public System.Threading.Tasks.Task<int> CheckPhotoExistAsync(string id) {
+            return base.Channel.CheckPhotoExistAsync(id);
+        }
+        
+        public int AddOnePhoto(string id, string img) {
+            return base.Channel.AddOnePhoto(id, img);
+        }
+        
+        public System.Threading.Tasks.Task<int> AddOnePhotoAsync(string id, string img) {
+            return base.Channel.AddOnePhotoAsync(id, img);
+        }
+        
+        public int UpdateOnePhoto(string id, string img) {
+            return base.Channel.UpdateOnePhoto(id, img);
+        }
+        
+        public System.Threading.Tasks.Task<int> UpdateOnePhotoAsync(string id, string img) {
+            return base.Channel.UpdateOnePhotoAsync(id, img);
+        }
+        
         public EDP_Clinic.EDP_DBReference.Caregiver GetOneCG(string id) {
             return base.Channel.GetOneCG(id);
         }
@@ -1964,36 +2753,148 @@ namespace EDP_Clinic.EDP_DBReference {
             return base.Channel.GetOneCGAsync(id);
         }
         
-        public EDP_Clinic.EDP_DBReference.User[] GetAllDoctors() {
-            return base.Channel.GetAllDoctors();
+        public int CreateReport(string id, string dname, string pname, string clinic, string date_of_report, string details) {
+            return base.Channel.CreateReport(id, dname, pname, clinic, date_of_report, details);
         }
         
-        public System.Threading.Tasks.Task<EDP_Clinic.EDP_DBReference.User[]> GetAllDoctorsAsync() {
-            return base.Channel.GetAllDoctorsAsync();
+        public System.Threading.Tasks.Task<int> CreateReportAsync(string id, string dname, string pname, string clinic, string date_of_report, string details) {
+            return base.Channel.CreateReportAsync(id, dname, pname, clinic, date_of_report, details);
         }
         
-        public EDP_Clinic.EDP_DBReference.User GetOneDoctor(string doctor_name) {
-            return base.Channel.GetOneDoctor(doctor_name);
+        public EDP_Clinic.EDP_DBReference.Report GetReportById(string id) {
+            return base.Channel.GetReportById(id);
         }
         
-        public System.Threading.Tasks.Task<EDP_Clinic.EDP_DBReference.User> GetOneDoctorAsync(string doctor_name) {
-            return base.Channel.GetOneDoctorAsync(doctor_name);
+        public System.Threading.Tasks.Task<EDP_Clinic.EDP_DBReference.Report> GetReportByIdAsync(string id) {
+            return base.Channel.GetReportByIdAsync(id);
         }
         
-        public int UpdateDoctor(int uid, System.DateTime old_time, int doctor_id) {
-            return base.Channel.UpdateDoctor(uid, old_time, doctor_id);
+        public EDP_Clinic.EDP_DBReference.Report[] GetAllReport() {
+            return base.Channel.GetAllReport();
         }
         
-        public System.Threading.Tasks.Task<int> UpdateDoctorAsync(int uid, System.DateTime old_time, int doctor_id) {
-            return base.Channel.UpdateDoctorAsync(uid, old_time, doctor_id);
+        public System.Threading.Tasks.Task<EDP_Clinic.EDP_DBReference.Report[]> GetAllReportAsync() {
+            return base.Channel.GetAllReportAsync();
         }
         
-        public EDP_Clinic.EDP_DBReference.User GetPatientByName(string patient_name) {
-            return base.Channel.GetPatientByName(patient_name);
+        public int UpdateReportById(string id, string dname, string pname, string clinic, string date_of_report, string details) {
+            return base.Channel.UpdateReportById(id, dname, pname, clinic, date_of_report, details);
         }
         
-        public System.Threading.Tasks.Task<EDP_Clinic.EDP_DBReference.User> GetPatientByNameAsync(string patient_name) {
-            return base.Channel.GetPatientByNameAsync(patient_name);
+        public System.Threading.Tasks.Task<int> UpdateReportByIdAsync(string id, string dname, string pname, string clinic, string date_of_report, string details) {
+            return base.Channel.UpdateReportByIdAsync(id, dname, pname, clinic, date_of_report, details);
+        }
+        
+        public int CreateDetails(string name, string nric, string date_of_birth, string gender, string phone, string email, string address, string postal) {
+            return base.Channel.CreateDetails(name, nric, date_of_birth, gender, phone, email, address, postal);
+        }
+        
+        public System.Threading.Tasks.Task<int> CreateDetailsAsync(string name, string nric, string date_of_birth, string gender, string phone, string email, string address, string postal) {
+            return base.Channel.CreateDetailsAsync(name, nric, date_of_birth, gender, phone, email, address, postal);
+        }
+        
+        public EDP_Clinic.EDP_DBReference.Details GetDetailsById(string id) {
+            return base.Channel.GetDetailsById(id);
+        }
+        
+        public System.Threading.Tasks.Task<EDP_Clinic.EDP_DBReference.Details> GetDetailsByIdAsync(string id) {
+            return base.Channel.GetDetailsByIdAsync(id);
+        }
+        
+        public EDP_Clinic.EDP_DBReference.Details[] GetAllDetails() {
+            return base.Channel.GetAllDetails();
+        }
+        
+        public System.Threading.Tasks.Task<EDP_Clinic.EDP_DBReference.Details[]> GetAllDetailsAsync() {
+            return base.Channel.GetAllDetailsAsync();
+        }
+        
+        public int UpdateDetailsById(string id, string name, string nric, string date_of_birth, string gender, string phone, string email, string address, string postal) {
+            return base.Channel.UpdateDetailsById(id, name, nric, date_of_birth, gender, phone, email, address, postal);
+        }
+        
+        public System.Threading.Tasks.Task<int> UpdateDetailsByIdAsync(string id, string name, string nric, string date_of_birth, string gender, string phone, string email, string address, string postal) {
+            return base.Channel.UpdateDetailsByIdAsync(id, name, nric, date_of_birth, gender, phone, email, address, postal);
+        }
+        
+        public int CreateMedicalCondition(string id, string name, string med_condition, string date_diagnosis, string doctor, string clinic, string treatment, string condition_desc, string patient_codition, string comments) {
+            return base.Channel.CreateMedicalCondition(id, name, med_condition, date_diagnosis, doctor, clinic, treatment, condition_desc, patient_codition, comments);
+        }
+        
+        public System.Threading.Tasks.Task<int> CreateMedicalConditionAsync(string id, string name, string med_condition, string date_diagnosis, string doctor, string clinic, string treatment, string condition_desc, string patient_codition, string comments) {
+            return base.Channel.CreateMedicalConditionAsync(id, name, med_condition, date_diagnosis, doctor, clinic, treatment, condition_desc, patient_codition, comments);
+        }
+        
+        public EDP_Clinic.EDP_DBReference.Medical_Condition GetMedicalConditionById(string id) {
+            return base.Channel.GetMedicalConditionById(id);
+        }
+        
+        public System.Threading.Tasks.Task<EDP_Clinic.EDP_DBReference.Medical_Condition> GetMedicalConditionByIdAsync(string id) {
+            return base.Channel.GetMedicalConditionByIdAsync(id);
+        }
+        
+        public EDP_Clinic.EDP_DBReference.Medical_Condition[] GetAllMedicalCondition() {
+            return base.Channel.GetAllMedicalCondition();
+        }
+        
+        public System.Threading.Tasks.Task<EDP_Clinic.EDP_DBReference.Medical_Condition[]> GetAllMedicalConditionAsync() {
+            return base.Channel.GetAllMedicalConditionAsync();
+        }
+        
+        public int UpdateMedicalConditionById(string id, string Patient_Condition, string Comments) {
+            return base.Channel.UpdateMedicalConditionById(id, Patient_Condition, Comments);
+        }
+        
+        public System.Threading.Tasks.Task<int> UpdateMedicalConditionByIdAsync(string id, string Patient_Condition, string Comments) {
+            return base.Channel.UpdateMedicalConditionByIdAsync(id, Patient_Condition, Comments);
+        }
+        
+        public int CreatePatient_MC(string reg_no, string name, string nric, string duration, string type_of_leave, string clinic, string signature, string date) {
+            return base.Channel.CreatePatient_MC(reg_no, name, nric, duration, type_of_leave, clinic, signature, date);
+        }
+        
+        public System.Threading.Tasks.Task<int> CreatePatient_MCAsync(string reg_no, string name, string nric, string duration, string type_of_leave, string clinic, string signature, string date) {
+            return base.Channel.CreatePatient_MCAsync(reg_no, name, nric, duration, type_of_leave, clinic, signature, date);
+        }
+        
+        public EDP_Clinic.EDP_DBReference.Patient_MC GetPatient_MCById(string id) {
+            return base.Channel.GetPatient_MCById(id);
+        }
+        
+        public System.Threading.Tasks.Task<EDP_Clinic.EDP_DBReference.Patient_MC> GetPatient_MCByIdAsync(string id) {
+            return base.Channel.GetPatient_MCByIdAsync(id);
+        }
+        
+        public EDP_Clinic.EDP_DBReference.Patient_MC[] GetAllPatient_MC() {
+            return base.Channel.GetAllPatient_MC();
+        }
+        
+        public System.Threading.Tasks.Task<EDP_Clinic.EDP_DBReference.Patient_MC[]> GetAllPatient_MCAsync() {
+            return base.Channel.GetAllPatient_MCAsync();
+        }
+        
+        public int CreatePayment_Report(string date_of_appointment, string purpose_visit, string fees) {
+            return base.Channel.CreatePayment_Report(date_of_appointment, purpose_visit, fees);
+        }
+        
+        public System.Threading.Tasks.Task<int> CreatePayment_ReportAsync(string date_of_appointment, string purpose_visit, string fees) {
+            return base.Channel.CreatePayment_ReportAsync(date_of_appointment, purpose_visit, fees);
+        }
+        
+        public EDP_Clinic.EDP_DBReference.Payment_Report GetPayment_ReportById(string id) {
+            return base.Channel.GetPayment_ReportById(id);
+        }
+        
+        public System.Threading.Tasks.Task<EDP_Clinic.EDP_DBReference.Payment_Report> GetPayment_ReportByIdAsync(string id) {
+            return base.Channel.GetPayment_ReportByIdAsync(id);
+        }
+        
+        public EDP_Clinic.EDP_DBReference.Payment_Report[] GetAllPayment_Report() {
+            return base.Channel.GetAllPayment_Report();
+        }
+        
+        public System.Threading.Tasks.Task<EDP_Clinic.EDP_DBReference.Payment_Report[]> GetAllPayment_ReportAsync() {
+            return base.Channel.GetAllPayment_ReportAsync();
         }
     }
 }

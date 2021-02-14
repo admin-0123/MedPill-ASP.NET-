@@ -43,9 +43,11 @@
                             <h5 class="widget-title">Contact Us</h5>
                             <ul class="icon-rounded address">
                                 <li>
-                                    <p>#135 block, Barnard St. Brooklyn,
+                                    <p>
+                                        #135 block, Barnard St. Brooklyn,
                                         <br>
-                                        NY 10036, USA</p>
+                                        NY 10036, USA
+                                    </p>
                                 </li>
                                 <li class="mt-3">
                                     <p><span class="fa fa-phone"></span><a href="tel:+404-11-22-89">+1-2345-345-678-11</a></p>
@@ -410,4 +412,23 @@
         </div>
     </div>
 </section> --->
+    <script type="text/javascript" src="assets/js/green-audio-player.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            new GreenAudioPlayer('.ready-player-1', { stopOthersOnPlay: true });
+        });
+    </script>
+
+    <!-- video popup -->
+    <script>
+        $('#notify').change(function () {
+            if ($('#notify').is("Active")) {
+                $('body').css('overflow', 'hidden');
+            } else {
+                $('body').css('overflow', 'auto');
+            }
+        });
+    </script>
+    <!-- //video popup -->
 </asp:Content>

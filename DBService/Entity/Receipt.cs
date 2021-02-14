@@ -75,15 +75,13 @@ namespace DBService.Entity
                     }
                 }
             }
-
-            //will continue adding more here
         }
         public Receipt SelectByReceiptID(string userID, string uniqueIdentifier)
         {
             string DBConnect = ConfigurationManager.ConnectionStrings["EDP_DB"].ConnectionString;
             using (SqlConnection myConn = new SqlConnection(DBConnect))
             {
-                string sqlStatement = "SELECT * FROM Receipt WHERE UserId = @paraUserID, UniqueIdentifier = @paraUniqueIdentifier";
+                string sqlStatement = "SELECT * FROM Receipt WHERE UserId = @paraUserID AND UniqueIdentifier = @paraUniqueIdentifier";
                 using (SqlDataAdapter da = new SqlDataAdapter(sqlStatement, myConn))
                 {
                     da.SelectCommand.Parameters.AddWithValue("@paraUserID", userID);
