@@ -63,5 +63,7 @@ namespace EDP_Clinic
         {
             Response.Redirect("Patient_view_details.aspx");
         }
+
+        
     }
 }

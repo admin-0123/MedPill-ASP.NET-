@@ -18,7 +18,7 @@ namespace EDP_Clinic
             }
             else
             {
-                var role = Session["Role"].ToString();
+                var role = Session["UserRole"].ToString();
                 if (role == "Patient")
                 {
                     receptionistPageBtn.Visible = false;
