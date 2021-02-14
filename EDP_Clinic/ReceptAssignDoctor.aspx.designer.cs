@@ -11,7 +11,7 @@ namespace EDP_Clinic
 {
 
 
-    public partial class WebForm6
+    public partial class ReceptAssignDoctor
     {
 
         /// <summary>

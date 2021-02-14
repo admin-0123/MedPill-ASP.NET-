@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="ReceptAppts.aspx.cs" Inherits="EDP_Clinic.WebForm4" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="ReceptAppts.aspx.cs" Inherits="EDP_Clinic.ReceptAppts" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
         <style>
         .btn_mka {

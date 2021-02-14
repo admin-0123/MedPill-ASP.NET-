@@ -11,7 +11,7 @@ namespace EDP_Clinic
 {
 
 
-    public partial class WebForm8
+    public partial class RA_Success_admin
     {
 
         /// <summary>

@@ -284,6 +284,24 @@
   <wsdl:message name="IService1_GetAllApptUserMissed_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetAllApptUserMissedResponse" />
   </wsdl:message>
+  <wsdl:message name="IService1_GetAllApptAdminUpcoming_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllApptAdminUpcoming" />
+  </wsdl:message>
+  <wsdl:message name="IService1_GetAllApptAdminUpcoming_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllApptAdminUpcomingResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService1_GetAllApptAdminPast_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllApptAdminPast" />
+  </wsdl:message>
+  <wsdl:message name="IService1_GetAllApptAdminPast_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllApptAdminPastResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService1_GetAllApptAdminMissed_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllApptAdminMissed" />
+  </wsdl:message>
+  <wsdl:message name="IService1_GetAllApptAdminMissed_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllApptAdminMissedResponse" />
+  </wsdl:message>
   <wsdl:message name="IService1_CreateAppointment_InputMessage">
     <wsdl:part name="parameters" element="tns:CreateAppointment" />
   </wsdl:message>
@@ -337,6 +355,30 @@
   </wsdl:message>
   <wsdl:message name="IService1_GetOneCG_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetOneCGResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService1_GetAllDoctors_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllDoctors" />
+  </wsdl:message>
+  <wsdl:message name="IService1_GetAllDoctors_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllDoctorsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService1_GetOneDoctor_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetOneDoctor" />
+  </wsdl:message>
+  <wsdl:message name="IService1_GetOneDoctor_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetOneDoctorResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService1_UpdateDoctor_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateDoctor" />
+  </wsdl:message>
+  <wsdl:message name="IService1_UpdateDoctor_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateDoctorResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService1_GetPatientByName_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetPatientByName" />
+  </wsdl:message>
+  <wsdl:message name="IService1_GetPatientByName_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetPatientByNameResponse" />
   </wsdl:message>
   <wsdl:message name="IService1_CreateReport_InputMessage">
     <wsdl:part name="parameters" element="tns:CreateReport" />
@@ -631,6 +673,18 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IService1/GetAllApptUserMissed" message="tns:IService1_GetAllApptUserMissed_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IService1/GetAllApptUserMissedResponse" message="tns:IService1_GetAllApptUserMissed_OutputMessage" />
     </wsdl:operation>
+    <wsdl:operation name="GetAllApptAdminUpcoming">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/GetAllApptAdminUpcoming" message="tns:IService1_GetAllApptAdminUpcoming_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/GetAllApptAdminUpcomingResponse" message="tns:IService1_GetAllApptAdminUpcoming_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllApptAdminPast">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/GetAllApptAdminPast" message="tns:IService1_GetAllApptAdminPast_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/GetAllApptAdminPastResponse" message="tns:IService1_GetAllApptAdminPast_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllApptAdminMissed">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/GetAllApptAdminMissed" message="tns:IService1_GetAllApptAdminMissed_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/GetAllApptAdminMissedResponse" message="tns:IService1_GetAllApptAdminMissed_OutputMessage" />
+    </wsdl:operation>
     <wsdl:operation name="CreateAppointment">
       <wsdl:input wsaw:Action="http://tempuri.org/IService1/CreateAppointment" message="tns:IService1_CreateAppointment_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IService1/CreateAppointmentResponse" message="tns:IService1_CreateAppointment_OutputMessage" />
@@ -666,6 +720,22 @@
     <wsdl:operation name="GetOneCG">
       <wsdl:input wsaw:Action="http://tempuri.org/IService1/GetOneCG" message="tns:IService1_GetOneCG_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IService1/GetOneCGResponse" message="tns:IService1_GetOneCG_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllDoctors">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/GetAllDoctors" message="tns:IService1_GetAllDoctors_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/GetAllDoctorsResponse" message="tns:IService1_GetAllDoctors_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetOneDoctor">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/GetOneDoctor" message="tns:IService1_GetOneDoctor_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/GetOneDoctorResponse" message="tns:IService1_GetOneDoctor_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateDoctor">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/UpdateDoctor" message="tns:IService1_UpdateDoctor_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/UpdateDoctorResponse" message="tns:IService1_UpdateDoctor_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPatientByName">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/GetPatientByName" message="tns:IService1_GetPatientByName_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/GetPatientByNameResponse" message="tns:IService1_GetPatientByName_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="CreateReport">
       <wsdl:input wsaw:Action="http://tempuri.org/IService1/CreateReport" message="tns:IService1_CreateReport_InputMessage" />
@@ -1156,6 +1226,33 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="GetAllApptAdminUpcoming">
+      <soap:operation soapAction="http://tempuri.org/IService1/GetAllApptAdminUpcoming" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllApptAdminPast">
+      <soap:operation soapAction="http://tempuri.org/IService1/GetAllApptAdminPast" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllApptAdminMissed">
+      <soap:operation soapAction="http://tempuri.org/IService1/GetAllApptAdminMissed" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="CreateAppointment">
       <soap:operation soapAction="http://tempuri.org/IService1/CreateAppointment" style="document" />
       <wsdl:input>
@@ -1230,6 +1327,42 @@
     </wsdl:operation>
     <wsdl:operation name="GetOneCG">
       <soap:operation soapAction="http://tempuri.org/IService1/GetOneCG" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllDoctors">
+      <soap:operation soapAction="http://tempuri.org/IService1/GetAllDoctors" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetOneDoctor">
+      <soap:operation soapAction="http://tempuri.org/IService1/GetOneDoctor" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateDoctor">
+      <soap:operation soapAction="http://tempuri.org/IService1/UpdateDoctor" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPatientByName">
+      <soap:operation soapAction="http://tempuri.org/IService1/GetPatientByName" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

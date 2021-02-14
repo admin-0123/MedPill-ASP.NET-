@@ -11,7 +11,7 @@ namespace EDP_Clinic
 {
 
 
-    public partial class WebForm4
+    public partial class ReceptAppts
     {
 
         /// <summary>

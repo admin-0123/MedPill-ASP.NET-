@@ -9,7 +9,7 @@ using Twilio.Rest.Api.V2010.Account;
 
 namespace EDP_Clinic
 {
-    public partial class WebForm8 : System.Web.UI.Page
+    public partial class RA_Success_admin : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
