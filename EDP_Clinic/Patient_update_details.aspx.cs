@@ -1,7 +1,11 @@
 ﻿using EDP_Clinic.EDP_DBReference;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.Drawing;
+using System.Globalization;
 using System.Linq;
+using System.Net.Mail;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -38,20 +42,72 @@ namespace EDP_Clinic
 
         protected void btn_submit_click(object sender, EventArgs e)
         {
+            CultureInfo culture;
+            DateTimeStyles styles;
+            DateTime dateResult;
+            culture = CultureInfo.CreateSpecificCulture("en-US");
+            styles = DateTimeStyles.None;
+
+            int numberResult;
+
             int update;
             string id = Request.QueryString["id"];
-            var name = tb_name.Text.ToString();
-            var nric = tb_nric.Text.ToString();
-            var dob = tb_dob.Text.ToString();
-            var gender = tb_gender.Text.ToString();
-            var phone = tb_phone.Text.ToString();
-            var email = tb_email.Text.ToString();
-            var address = tb_address.Text.ToString();
-            var postal = tb_postal.Text.ToString();
-            EDP_DBReference.Service1Client client = new EDP_DBReference.Service1Client();
-            update = client.UpdateDetailsById(id, name, nric, dob, gender, phone, email, address, postal);
-            Response.Redirect("Patient_view_details.aspx");
+            var name = HttpUtility.HtmlEncode(tb_name.Text.ToString());
+            var nric = HttpUtility.HtmlEncode(tb_nric.Text.ToString());
+            var dob = HttpUtility.HtmlEncode(tb_dob.Text.ToString());
+            var gender = HttpUtility.HtmlEncode(tb_gender.Text.ToString());
+            var phone = HttpUtility.HtmlEncode(tb_phone.Text.ToString());
+            var email = HttpUtility.HtmlEncode(tb_email.Text.ToString());
+            var address = HttpUtility.HtmlEncode(tb_address.Text.ToString());
+            var postal = HttpUtility.HtmlEncode(tb_postal.Text.ToString());
+            if (name == "" || nric == "" || dob == "" || gender == "" || phone == "" || email == "" || address == "" || postal == "")
+            {
+                lb_error.Text = "Missing Inputs";
+            }
+            else if (DateTime.TryParse(dob, culture, styles, out dateResult) == false)
+            {
+                lb_error.Text = "Invaild Date";
+                lb_error.ForeColor = Color.Red;
+            }
+            else if (gender.ToLower() != "male" && gender.ToLower() != "female")
+            {
+                Debug.WriteLine(gender.ToLower());
+                lb_error.Text = "Gender can only be 'male' or 'female'";
+                lb_error.ForeColor = Color.Red;
+            }
+            else if (phone.Length != 8 && int.TryParse(phone, out numberResult)) 
+            {
+                lb_error.Text = "Invaild Phone Number";
+                lb_error.ForeColor = Color.Red;
+            }
+            else if (IsValidEmail(email) == false)
+            {
+                lb_error.Text = "Invaild Email";
+                lb_error.ForeColor = Color.Red;
+            }
+            else
+            {
+                EDP_DBReference.Service1Client client = new EDP_DBReference.Service1Client();
+                update = client.UpdateDetailsById(id, name, nric, dob, gender, phone, email, address, postal);
+                Response.Redirect("Patient_view_details.aspx");
+            }
+            
+
+        }
+        public static bool IsValidEmail(string email)
+        {
+            try
+            {
+                MailAddress m = new MailAddress(email);
+
+                return true;
+            }
+            catch (FormatException)
+            {
+                return false;
+            }
         }
     }
+
 
 }

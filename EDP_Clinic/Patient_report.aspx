@@ -1,36 +1,15 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Patient_report.aspx.cs" Inherits="EDP_Clinic.Patient_report" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <style type="text/css">
-        .auto-style1 {
-            height: 32px;
-        }
-        .auto-style2 {
-            height: 32px;
-            width: 222px;
-        }
         .auto-style3 {
             width: 222px;
-        }
-        .auto-style4 {
-            height: 32px;
-            width: 292px;
         }
         .auto-style5 {
             width: 292px;
         }
 
-        .auto-style1 {
-            width: 306px;
-        }
-        .auto-style2 {
-            width: 229px;
-        }
         .auto-style3 {
             width: 229px;
-            height: 33px;
-        }
-        .auto-style4 {
-            width: 306px;
             height: 33px;
         }
         .auto-style5 {
@@ -62,6 +41,13 @@
             height: 33px;
             width: 306px;
         }
+        .auto-style8 {
+            width: 292px;
+            height: 33px;
+        }
+        .auto-style9 {
+            height: 33px;
+        }
     </style>
 
 </asp:Content>
@@ -69,22 +55,28 @@
     <table class="w-100">
         <tr>
             <td class="auto-style6"></td>
-            <td class="auto-style7" >&nbsp;</td>
+            <td class="auto-style7" ></td>
             <td class="auto-style7" style="font-size: x-large; font-weight: bold">Report Details</td>
             <td class="auto-style7"></td>
         </tr>
         <tr>
-            <td class="auto-style2"></td>
-            <td class="auto-style4"></td>
-            <td class="auto-style1">
-                &nbsp;</td>
-            <td class="auto-style1">&nbsp;</td>
+            <td class="auto-style6"></td>
+            <td class="auto-style7"></td>
+            <td class="auto-style7">
+                </td>
+            <td class="auto-style7"></td>
         </tr>
         <tr>
             <td class="auto-style3">&nbsp;</td>
             <td class="auto-style5">Doctor In Charge:</td>
             <td>
-                <asp:TextBox ID="tb_doctor" runat="server"></asp:TextBox>
+                <asp:DropDownList ID="dp_doctor" runat="server" Width="185px">
+                    <asp:ListItem Selected="True" Value="--Select--">--Select--</asp:ListItem>
+                    <asp:ListItem>Dr Ong</asp:ListItem>
+                    <asp:ListItem>Dr Wong</asp:ListItem>
+                    <asp:ListItem>Dr Song</asp:ListItem>
+                    <asp:ListItem>Dr Long</asp:ListItem>
+                </asp:DropDownList>
             </td>
             <td>&nbsp;</td>
         </tr>
@@ -97,12 +89,17 @@
             <td>&nbsp;</td>
         </tr>
         <tr>
-            <td class="auto-style3">&nbsp;</td>
-            <td class="auto-style5">Clinic:</td>
-            <td>
-                <asp:TextBox ID="tb_clinic" runat="server"></asp:TextBox>
+            <td class="auto-style6"></td>
+            <td class="auto-style8">Clinic:</td>
+            <td class="auto-style9">
+                <asp:DropDownList ID="dp_clinic" runat="server" Width="185px">
+                    <asp:ListItem Selected="True" Value="--Select--">--Select--</asp:ListItem>
+                    <asp:ListItem>Medpill</asp:ListItem>
+                    <asp:ListItem>Singapore General Hospital</asp:ListItem>
+                    <asp:ListItem>Tan Tock Seng Hospital</asp:ListItem>
+                </asp:DropDownList>
             </td>
-            <td>&nbsp;</td>
+            <td class="auto-style9"></td>
         </tr>
         <tr>
             <td class="auto-style3">&nbsp;</td>

@@ -362,7 +362,12 @@
                         <Columns>
                             <asp:TemplateField>
                                 <ItemTemplate>
-                                    <asp:Button ID="btn_med_condition" runat="server" OnClick="btn_med_condition_click" Text="Medical Condition" />
+                                    <asp:Button ID="btn_med_condition" runat="server" OnClick="Med_Condition_Click" Text="Medical Condition" />
+                                </ItemTemplate>
+                            </asp:TemplateField>
+                            <asp:TemplateField>
+                                <ItemTemplate>
+                                    <asp:Button ID="btn_send_cert" runat="server" OnClick="btn_send_cert_Click" Text="Send Medical Certificate" />
                                 </ItemTemplate>
                             </asp:TemplateField>
                         </Columns>

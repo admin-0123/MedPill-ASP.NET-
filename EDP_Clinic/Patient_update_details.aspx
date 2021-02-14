@@ -124,6 +124,19 @@
             </td>
         </tr>
         <tr>
+            <td class="auto-style2">&nbsp;</td>
+            <td class="auto-style1">&nbsp;</td>
+            <td>
+                &nbsp;</td>
+        </tr>
+        <tr>
+            <td class="auto-style2">&nbsp;</td>
+            <td class="auto-style1">&nbsp;</td>
+            <td>
+                <asp:Label ID="lb_error" runat="server"></asp:Label>
+            </td>
+        </tr>
+        <tr>
             <td class="auto-style3"></td>
             <td class="auto-style4"></td>
             <td class="auto-style5">&nbsp;</td>

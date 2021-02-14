@@ -121,12 +121,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="assets\images\medical_certificate.jpg" />
     <Content Include="CA.aspx" />
     <Content Include="CA_Success.aspx" />
     <Content Include="ChangeInfo.aspx" />
-	  <Content Include="Create_Report.aspx" />
-	  <Content Include="Dashboard.aspx" />
-	  <Content Include="receptionistPage.aspx" />
+    <Content Include="Create_Report.aspx" />
+    <Content Include="Dashboard.aspx" />
+    <Content Include="receptionistPage.aspx" />
     <Content Include="error\400.aspx" />
     <Content Include="error\401.aspx" />
     <Content Include="error\402.aspx" />

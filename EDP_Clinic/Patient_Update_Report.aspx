@@ -155,6 +155,28 @@
         </tr>
         <tr>
             <td class="auto-style3">&nbsp;</td>
+            <td class="auto-style5">&nbsp;</td>
+            <td class="auto-style9">
+                &nbsp;</td>
+            <td>&nbsp;</td>
+        </tr>
+        <tr>
+            <td class="auto-style3">&nbsp;</td>
+            <td class="auto-style5">&nbsp;</td>
+            <td class="auto-style9">
+                <asp:Label ID="lb_error" runat="server"></asp:Label>
+            </td>
+            <td>&nbsp;</td>
+        </tr>
+        <tr>
+            <td class="auto-style3">&nbsp;</td>
+            <td class="auto-style5">&nbsp;</td>
+            <td class="auto-style9">
+                &nbsp;</td>
+            <td>&nbsp;</td>
+        </tr>
+        <tr>
+            <td class="auto-style3">&nbsp;</td>
             <td class="auto-style5">
                 <asp:Button ID="btn_back" runat="server" Text="Back" class="button button3" OnClick="btn_back_click"/>
             </td>

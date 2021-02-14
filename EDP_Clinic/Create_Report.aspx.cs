@@ -1,5 +1,6 @@
 ﻿using EDP_Clinic.EDP_DBReference;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -13,29 +14,45 @@ namespace EDP_Clinic
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!IsPostBack)
-            {
-                RefreshGridView();
-            }
+            
         }
 
+        protected void gv_report_PreRender(object sender, EventArgs e)
+        {
+            if (!IsPostBack)
+            {
+                RefreshGridView(0);
+                gv_report.DataBind();
+            }
+            
+        }
         protected void btn_submit_add(object sender, EventArgs e)
         {
             Response.Redirect("Patient_report.aspx");
         }
 
-        private void RefreshGridView()
+        private void RefreshGridView(int pageNumber)
         {
             List<Report> eList = new List<Report>();
             EDP_DBReference.Service1Client client = new EDP_DBReference.Service1Client();
             eList = client.GetAllReport().ToList<Report>();
-
-            // using gridview to bind to the list of employee objects
-            gv_report.Visible = true;
+            gv_report.PageIndex = pageNumber;
             gv_report.DataSource = eList;
+            gv_report.Visible = true;
+            
+            
+            // using gridview to bind to the list of employee objects
+            
+            
+        }
+        protected void gv_report_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            gv_report.PageIndex = e.NewPageIndex;
+            Debug.WriteLine("Yes " + gv_report.PageIndex);
+            RefreshGridView(gv_report.PageIndex);
             gv_report.DataBind();
         }
-
+                
         protected void gv_report_RowCommand1(object sender, GridViewCommandEventArgs e)
         {
             if (e.CommandName == "editing")
@@ -53,4 +70,7 @@ namespace EDP_Clinic
             }
         }
     }
+    
+
+    
 }

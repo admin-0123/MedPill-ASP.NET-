@@ -136,6 +136,21 @@
         <tr>
             <td class="auto-style4">&nbsp;</td>
             <td class="auto-style1">&nbsp;</td>
+            <td class="auto-style6">
+                &nbsp;</td>
+            <td>&nbsp;</td>
+        </tr>
+        <tr>
+            <td class="auto-style4">&nbsp;</td>
+            <td class="auto-style1">&nbsp;</td>
+            <td class="auto-style6">
+                <asp:Label ID="lb_error" runat="server"></asp:Label>
+            </td>
+            <td>&nbsp;</td>
+        </tr>
+        <tr>
+            <td class="auto-style4">&nbsp;</td>
+            <td class="auto-style1">&nbsp;</td>
             <td class="auto-style6">&nbsp;</td>
             <td>&nbsp;</td>
         </tr>
