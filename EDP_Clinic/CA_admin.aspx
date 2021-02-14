@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="CA_admin.aspx.cs" Inherits="EDP_Clinic.WebForm9" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="CA_admin.aspx.cs" Inherits="EDP_Clinic.CA_admin" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <!-- had to add this jquery cdn script here to make the jquery code able to run on webpage start,
         did not work on masterpage -->
@@ -10,7 +10,7 @@
 
 
 
-    </script>
+</script>
     <style type="text/css">
         table#slotTables tr:nth-child(odd) {
             background-color: #c9d4cc
@@ -64,6 +64,12 @@
             background-color: lightgray;
         }
 
+                
+            .hyperlink_breadcrumb {
+                color:black;
+    text-decoration:none;
+            }
+
     </style>
     </asp:Content>
     <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
@@ -71,11 +77,14 @@
         <!-- Breadcrumb -->
         <nav aria-label="breadcrumb">
   <ol class="breadcrumb">
+                  <li class="breadcrumb-item active">
+              <asp:HyperLink ID="HyperLink1" runat="server" CssClass="hyperlink_breadcrumb" NavigateUrl="~/receptionistPage.aspx">User Page</asp:HyperLink></asp:Label>
+      </li>
       <li class="breadcrumb-item active">
-              <asp:HyperLink ID="hl_bc_appt" runat="server" CssClass="hyperlink_breadcrumb" NavigateUrl="~/PFA.aspx">Appointments</asp:HyperLink></asp:Label>
+              <asp:HyperLink ID="hl_bc_appt" runat="server" CssClass="hyperlink_breadcrumb" NavigateUrl="~/ReceptAppts.aspx">Receptionist Appointment Control</asp:HyperLink></asp:Label>
       </li>
     <li class="breadcrumb-item active" aria-current="page"> 
-        <asp:HyperLink ID="hl_bc_profileName" runat="server" CssClass="hyperlink_breadcrumb"></asp:HyperLink></asp:Label>
+        <asp:HyperLink ID="hl_bc_profileName" runat="server" CssClass="hyperlink_breadcrumb"> Receptionist </asp:HyperLink></asp:Label>
       </li>
     <li class="breadcrumb-item active" aria-current="page"> 
         <asp:HyperLink ID="hl_bc_makeappt" runat="server" CssClass="hyperlink_breadcrumb_active"></asp:HyperLink>Make Appointment</asp:Label>
@@ -107,11 +116,18 @@
             <p>&nbsp;</p>
             <p>
                 <asp:Label ID="Label1" runat="server" Text="Appointment Type:"></asp:Label>
-                &nbsp;<asp:DropDownList ID="ddl_apptType" runat="server" OnSelectedIndexChanged="ddl_apptType_SelectedIndexChanged">
+                &nbsp;<asp:DropDownList ID="ddl_apptType" runat="server">
                     <asp:ListItem>Consultation</asp:ListItem>
                     <asp:ListItem>Diagnosis</asp:ListItem>
                     <asp:ListItem>Treatment</asp:ListItem>
                 </asp:DropDownList>
+            </p>
+                        <p>&nbsp;</p>
+            <p>
+                <asp:Label ID="lbl_searchUser" runat="server" Text="Search User:"></asp:Label>
+                <asp:TextBox ID="tb_searchUser" runat="server" CssClass="input-group-sm" placeholder="Enter phone no. of user..."> </asp:TextBox>
+                <asp:Button ID="btn_searchUser" runat="server" Text="Search" OnClick="btn_searchUser_Click" CssClass="btn btn-primary"/>
+                <asp:Label ID="lbl_searchUserResult" runat="server" Text=""></asp:Label>
             </p>
             <p>&nbsp;</p>
             <div>
@@ -187,3 +203,5 @@
 
 
 </asp:Content>
+
+

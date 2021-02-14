@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="RA_Success_admin.aspx.cs" Inherits="EDP_Clinic.RA_Success_admin" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="CA_admin_Success.aspx.cs" Inherits="EDP_Clinic.CA_admin_Success" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
@@ -25,7 +25,7 @@
         </div>
         <div class="row">
              <div class="col-lg-3 col-md-4">
-                            <asp:Button ID="btn_go_dashboard" runat="server" Text="Dashboard" BorderStyle="None" CssClass="bg-primary text-white mt-4 btn_block btn-sm" OnClick="btn_go_receptpage_Click" />
+                            <asp:Button ID="btn_go_dashboard" runat="server" Text="Dashboard" BorderStyle="None" CssClass="bg-primary text-white mt-4 btn_block btn-sm" OnClick="btn_go_userpage_Click" />
             </div>
             <div class="col-lg-3 col-md-4">
                            <asp:Button ID="btn_go_pfa" runat="server" Text="Appointment" BorderStyle="None" CssClass="bg-primary text-white mt-4 btn_block btn-sm" OnClick="btn_go_pfa_Click" />

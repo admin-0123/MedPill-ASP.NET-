@@ -123,11 +123,13 @@
   <ItemGroup>
     <Content Include="assets\images\pfp_placeholder.png" />
     <Content Include="CA.aspx" />
+    <Content Include="CA_admin.aspx" />
     <Content Include="CA_Success.aspx" />
     <Content Include="ChangeInfo.aspx" />
     <Content Include="Create_Report.aspx" />
     <Content Include="Dashboard.aspx" />
     <Content Include="RA_admin.aspx" />
+    <Content Include="RA_Success.aspx" />
     <Content Include="RA_Success_admin.aspx" />
     <Content Include="ReceptAppts.aspx" />
     <Content Include="ReceptAssignDoctor.aspx" />
@@ -228,6 +230,8 @@
     <Content Include="CaregiverSignup.aspx" />
     <Content Include="CaregiverNotification.aspx" />
     <Content Include="CaregiverApproval.aspx" />
+    <Content Include="CaregiverRemoval.aspx" />
+    <Content Include="CA_admin_Success.aspx" />
     <None Include="Connected Services\EDP_DBReference\configuration91.svcinfo" />
     <None Include="Connected Services\EDP_DBReference\configuration.svcinfo" />
     <Content Include="CardList.aspx" />
@@ -321,6 +325,13 @@
     <Compile Include="CA.aspx.designer.cs">
       <DependentUpon>CA.aspx</DependentUpon>
     </Compile>
+    <Compile Include="CA_admin.aspx.cs">
+      <DependentUpon>CA_admin.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CA_admin.aspx.designer.cs">
+      <DependentUpon>CA_admin.aspx</DependentUpon>
+    </Compile>
     <Compile Include="CA_Success.aspx.cs">
       <DependentUpon>CA_Success.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -355,6 +366,13 @@
     </Compile>
     <Compile Include="RA_admin.aspx.designer.cs">
       <DependentUpon>RA_admin.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="RA_Success.aspx.cs">
+      <DependentUpon>RA_Success.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="RA_Success.aspx.designer.cs">
+      <DependentUpon>RA_Success.aspx</DependentUpon>
     </Compile>
     <Compile Include="RA_Success_admin.aspx.cs">
       <DependentUpon>RA_Success_admin.aspx</DependentUpon>
@@ -752,6 +770,20 @@
     </Compile>
     <Compile Include="CaregiverApproval.aspx.designer.cs">
       <DependentUpon>CaregiverApproval.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CaregiverRemoval.aspx.cs">
+      <DependentUpon>CaregiverRemoval.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CaregiverRemoval.aspx.designer.cs">
+      <DependentUpon>CaregiverRemoval.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CA_admin_Success.aspx.cs">
+      <DependentUpon>CA_admin_Success.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CA_admin_Success.aspx.designer.cs">
+      <DependentUpon>CA_admin_Success.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>

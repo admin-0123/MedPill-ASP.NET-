@@ -13,61 +13,69 @@ namespace EDP_Clinic
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            // On initial load of the page, set the session variable for viewstate
-            if (!IsPostBack)
+            if (Session["LoggedIn"] != null)
             {
-                Session["appt_viewstate"] = "upcoming";
-
-                // On every postback, search for the session, check the current session value of viewstate and display the contents accordingly.
-                // Edit: Shifted the switch statement from page load to here initial page load only as it is causing
-                // System.ArgumentException: Invalid postback or callback argument.  Event validation is enabled using <pages enableEventValidation="true"/> in configuration or <%@ Page EnableEventValidation="true" %> in a page.  For security purposes, this feature verifies that arguments to postback or callback events originate from the server control that originally rendered them.  If the data is valid and expected, use the ClientScriptManager.RegisterForEventValidation method in order to register the postback or callback data for validation.
-
-                switch (Session["appt_viewstate"])
+                // On initial load of the page, set the session variable for viewstate
+                if (!IsPostBack)
                 {
-                    case "upcoming":
-                        listview_appts.DataSource = GetApptsUserUpcoming();
-                        listview_appts.DataBind();
-                        break;
-                    case "past":
-                        listview_appts.DataSource = GetApptsUserPast();
-                        listview_appts.DataBind();
-                        break;
-                    case "missed":
-                        listview_appts.DataSource = GetApptsUserMissed();
-                        listview_appts.DataBind();
-                        break;
+                    Session["appt_viewstate"] = "upcoming";
 
+                    // On every postback, search for the session, check the current session value of viewstate and display the contents accordingly.
+                    // Edit: Shifted the switch statement from page load to here initial page load only as it is causing
+                    // System.ArgumentException: Invalid postback or callback argument.  Event validation is enabled using <pages enableEventValidation="true"/> in configuration or <%@ Page EnableEventValidation="true" %> in a page.  For security purposes, this feature verifies that arguments to postback or callback events originate from the server control that originally rendered them.  If the data is valid and expected, use the ClientScriptManager.RegisterForEventValidation method in order to register the postback or callback data for validation.
+
+                    switch (Session["appt_viewstate"])
+                    {
+                        case "upcoming":
+                            listview_appts.DataSource = GetApptsUserUpcoming();
+                            listview_appts.DataBind();
+                            break;
+                        case "past":
+                            listview_appts.DataSource = GetApptsUserPast();
+                            listview_appts.DataBind();
+                            break;
+                        case "missed":
+                            listview_appts.DataSource = GetApptsUserMissed();
+                            listview_appts.DataBind();
+                            break;
+
+                    }
                 }
+
+                // Search for the current profile selected and set the necessary contents like profileName.. etc
+                EDP_DBReference.Service1Client svc_client = new EDP_DBReference.Service1Client();
+                User current_user = svc_client.GetOneUser(Session["current_appt_profile"].ToString());
+                // For breadcrumb elements
+                hl_bc_profileName.Text = current_user.Name;
+                //
+
+                Photo current_user_photo_obj = svc_client.GetOnePhoto(current_user.Id);
+                //profilePfp.ImageUrl = $"~/assets/images/{current_user_photo_obj.Photo_Resource.Trim()}.jpg";
+                lbl_profileName.Text = current_user.Name;
+
+
+                var exist3 = svc_client.CheckPhotoExist(current_user.Id);
+                if (exist3 == 1)
+                {
+                    var photo = svc_client.GetOnePhoto(current_user.Id);
+                    var fileName = photo.Photo_Resource.ToString();
+                    var path = "~/UserImg/" + fileName;
+                    profilePfp.ImageUrl = path;
+                }
+
+                //repeater_appts.DataSource = GetApptsUser();
+                //repeater_appts.DataBind();
+
+
+
+                var test123 = listview_appts.SelectedIndex;
+                //System.Diagnostics.Debug.WriteLine($"SELECTED INDEX IS {test123}");
             }
-            
-            // Search for the current profile selected and set the necessary contents like profileName.. etc
-            EDP_DBReference.Service1Client svc_client = new EDP_DBReference.Service1Client();
-            User current_user = svc_client.GetOneUser(Session["current_appt_profile"].ToString());
-            // For breadcrumb elements
-            hl_bc_profileName.Text = current_user.Name;
-            //
 
-            Photo current_user_photo_obj = svc_client.GetOnePhoto(current_user.Id);
-            //profilePfp.ImageUrl = $"~/assets/images/{current_user_photo_obj.Photo_Resource.Trim()}.jpg";
-            lbl_profileName.Text = current_user.Name;
-
-
-            var exist3 = svc_client.CheckPhotoExist(current_user.Id);
-            if (exist3 == 1)
+            else
             {
-                var photo = svc_client.GetOnePhoto(current_user.Id);
-                var fileName = photo.Photo_Resource.ToString();
-                var path = "~/UserImg/" + fileName;
-                profilePfp.ImageUrl = path;
+                Response.Redirect("Login.aspx", false);
             }
-
-            //repeater_appts.DataSource = GetApptsUser();
-            //repeater_appts.DataBind();
-
-
-
-            var test123 = listview_appts.SelectedIndex;
-            //System.Diagnostics.Debug.WriteLine($"SELECTED INDEX IS {test123}");
         }
 
 /*        protected void btn_cancel_click(object sender, EventArgs e)

@@ -3,6 +3,6 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <div class="container">
-
+        <asp:Label ID="lbl_notification" runat="server" Text=""></asp:Label>
     </div>
 </asp:Content>

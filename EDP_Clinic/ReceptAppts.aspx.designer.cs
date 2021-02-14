@@ -96,6 +96,24 @@ namespace EDP_Clinic
         protected global::System.Web.UI.WebControls.LinkButton lbtn_missed;
 
         /// <summary>
+        /// lbl_viewMode control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbl_viewMode;
+
+        /// <summary>
+        /// ddl_viewMode control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddl_viewMode;
+
+        /// <summary>
         /// listview_appts control.
         /// </summary>
         /// <remarks>
