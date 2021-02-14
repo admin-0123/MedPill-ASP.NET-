@@ -25,7 +25,8 @@
                 </div>
                 <h4 class="mb-4">Card Expiry: 
                     <asp:Label ID="cardExpiryText" runat="server"></asp:Label></h4>
-                <p class="mb-4"><asp:Label ID="cardExpiryStatus" runat="server"></asp:Label></p>
+                <p class="mb-4">
+                    <asp:Label ID="cardExpiryStatus" runat="server"></asp:Label></p>
             </div>
             <div class="row">
                 <div class="col-md-6"></div>
@@ -37,4 +38,15 @@
             </div>
         </div>
     </section>
+    <!-- Start of ChatBot (www.chatbot.com) code -->
+    <script type="text/javascript">
+        window.__be = window.__be || {};
+        window.__be.id = "6027c466643262000724c24d";
+        (function () {
+            var be = document.createElement('script'); be.type = 'text/javascript'; be.async = true;
+            be.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'cdn.chatbot.com/widget/plugin.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(be, s);
+        })();
+    </script>
+    <!-- End of ChatBot code -->
 </asp:Content>

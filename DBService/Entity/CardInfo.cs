@@ -214,10 +214,6 @@ namespace DBService.Entity
             return false;
         }
         //Select all card info
-
-        //BIG NOTE HERE
-        //Make sure end product select cards based on userID
-        //Because currently, we select all users' cards
         public List<CardInfo> SelectAllCards(string userID)
         {
             //Step 1 -  Define a connection to the database by getting

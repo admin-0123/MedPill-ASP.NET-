@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
+using System.Diagnostics;
 
 namespace DBService.Entity
 {
@@ -195,7 +196,7 @@ namespace DBService.Entity
             SqlConnection myConn = new SqlConnection(DBConnect);
 
             //Step 2 -  Create a DataAdapter object to retrieve data from the database table
-            string sqlStmt = "Select * from [User] WHERE Role = @Role or Role = @Role2 or Role = @Role3 AND IsDeleted = 'No' AND Name LIKE @Name";
+            string sqlStmt = "Select * from [User] WHERE Role = @Role AND IsDeleted = 'No' AND Name LIKE @Name or Role = @Role2 AND IsDeleted = 'No' AND Name LIKE @Name or Role = @Role3 AND IsDeleted = 'No' AND Name LIKE @Name";
 
             SqlDataAdapter da = new SqlDataAdapter(sqlStmt, myConn);
             da.SelectCommand.Parameters.AddWithValue("@Role", "Nurse");

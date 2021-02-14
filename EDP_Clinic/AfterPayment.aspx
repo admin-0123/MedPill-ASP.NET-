@@ -6,7 +6,7 @@
     <section class="w3l-contact py-5" id="paymentInfoEmpty" style="height: 100vh;">
         <div class="container py-lg-3">
             <div class="mb-3">
-                <asp:Button ID="goHomeBtn" runat="server" Text="Home" CssClass="btn btn-primary btn-style" OnClick="goHomeBtn_Click" />>
+                <asp:Button ID="goHomeBtn" runat="server" Text="Home" CssClass="btn btn-primary btn-style" OnClick="goHomeBtn_Click" />
             </div>
             <div class="mt-5 text-center">
                 <h1 class="title mb-4">Thank You</h1>

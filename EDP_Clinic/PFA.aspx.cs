@@ -5,6 +5,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Diagnostics;
 
 namespace EDP_Clinic
 {
@@ -32,13 +33,13 @@ namespace EDP_Clinic
 
         protected void LoadProfile()
         {
-            EDP_DBReference.Service1Client client = new EDP_DBReference.Service1Client();
+            Service1Client client = new Service1Client();
 
-            System.Diagnostics.Debug.WriteLine("SESSION EMAIL IS " + Session["LoggedIn"].ToString());
+            Debug.WriteLine("SESSION EMAIL IS " + Session["LoggedIn"].ToString());
 
             User userobj = client.GetOneUserByEmail(Session["LoggedIn"].ToString());
 
-            System.Diagnostics.Debug.WriteLine("USER ID IS " + userobj.Id);
+            Debug.WriteLine("USER ID IS " + userobj.Id);
 
             Photo photo_obj = client.GetOnePhoto(userobj.Id);
 

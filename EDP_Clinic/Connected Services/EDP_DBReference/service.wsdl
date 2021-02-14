@@ -254,6 +254,12 @@
   <wsdl:message name="IService1_SelectByReceiptID_OutputMessage">
     <wsdl:part name="parameters" element="tns:SelectByReceiptIDResponse" />
   </wsdl:message>
+  <wsdl:message name="IService1_SelectAllReceiptsAdmin_InputMessage">
+    <wsdl:part name="parameters" element="tns:SelectAllReceiptsAdmin" />
+  </wsdl:message>
+  <wsdl:message name="IService1_SelectAllReceiptsAdmin_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SelectAllReceiptsAdminResponse" />
+  </wsdl:message>
   <wsdl:message name="IService1_GetAllApptAdmin_InputMessage">
     <wsdl:part name="parameters" element="tns:GetAllApptAdmin" />
   </wsdl:message>
@@ -670,6 +676,10 @@
     <wsdl:operation name="SelectByReceiptID">
       <wsdl:input wsaw:Action="http://tempuri.org/IService1/SelectByReceiptID" message="tns:IService1_SelectByReceiptID_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IService1/SelectByReceiptIDResponse" message="tns:IService1_SelectByReceiptID_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SelectAllReceiptsAdmin">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/SelectAllReceiptsAdmin" message="tns:IService1_SelectAllReceiptsAdmin_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/SelectAllReceiptsAdminResponse" message="tns:IService1_SelectAllReceiptsAdmin_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="GetAllApptAdmin">
       <wsdl:input wsaw:Action="http://tempuri.org/IService1/GetAllApptAdmin" message="tns:IService1_GetAllApptAdmin_InputMessage" />
@@ -1204,6 +1214,15 @@
     </wsdl:operation>
     <wsdl:operation name="SelectByReceiptID">
       <soap:operation soapAction="http://tempuri.org/IService1/SelectByReceiptID" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SelectAllReceiptsAdmin">
+      <soap:operation soapAction="http://tempuri.org/IService1/SelectAllReceiptsAdmin" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

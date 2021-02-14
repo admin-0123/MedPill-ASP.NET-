@@ -119,6 +119,7 @@ namespace DBService.Entity
             }
         }
 
+        //Check based on userID
         public List<Receipt> SelectAllReceipts(string userID)
         {
             string DBConnect = ConfigurationManager.ConnectionStrings["EDP_DB"].ConnectionString;
@@ -157,6 +158,51 @@ namespace DBService.Entity
                         finally
                         {
                             Debug.WriteLine("Retrieve all Receipt Complete!");
+                        }
+                    }
+                }
+            }
+        }
+
+        //For admin use
+        public List<Receipt> SelectAllReceiptsAdmin()
+        {
+            string DBConnect = ConfigurationManager.ConnectionStrings["EDP_DB"].ConnectionString;
+            using (SqlConnection myConn = new SqlConnection(DBConnect))
+            {
+                string sqlStatement = "SELECT * FROM Receipt";
+                using (SqlDataAdapter da = new SqlDataAdapter(sqlStatement, myConn))
+                {
+                    using (DataSet ds = new DataSet())
+                    {
+                        try
+                        {
+                            da.Fill(ds);
+
+                            List<Receipt> repList = new List<Receipt>();
+                            int rec_cnt = ds.Tables[0].Rows.Count;
+                            for (int i = 0; i < rec_cnt; i++)
+                            {
+                                DataRow row = ds.Tables[0].Rows[i];
+                                string userID = row["UserId"].ToString();
+                                DateTime dateSale = Convert.ToDateTime(row["DateSale"].ToString());
+                                double totalSum = Convert.ToDouble(row["TotalSum"].ToString());
+                                bool isPaid = Convert.ToBoolean(row["IsPaid"].ToString());
+                                string receiptLink = row["ReceiptLink"].ToString();
+                                string uniqueIdentifier = row["UniqueIdentifier"].ToString();
+
+                                Receipt rep = new Receipt(userID, dateSale, totalSum, isPaid, receiptLink, uniqueIdentifier);
+                                repList.Add(rep);
+                            }
+                            return repList;
+                        }
+                        catch (SqlException ex)
+                        {
+                            throw new Exception(ex.ToString());
+                        }
+                        finally
+                        {
+                            Debug.WriteLine("Retrieve all Receipt Admin Complete!");
                         }
                     }
                 }
