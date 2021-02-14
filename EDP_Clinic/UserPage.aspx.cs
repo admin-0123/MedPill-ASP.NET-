@@ -14,6 +14,10 @@ namespace EDP_Clinic
         Service1Client client = new Service1Client();
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (Session["Login"] == null)
+            {
+                Response.Redirect("Login.aspx", false);
+            }
             imgPfp.Visible = false;
             var email = Session["LoggedIn"].ToString();
             var user = client.GetOneUserByEmail(email);

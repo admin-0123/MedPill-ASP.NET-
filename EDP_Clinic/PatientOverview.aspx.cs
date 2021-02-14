@@ -14,6 +14,17 @@ namespace EDP_Clinic
         Service1Client client = new Service1Client();
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (Session["Login"] == null)
+            {
+                Response.Redirect("Login.aspx", false);
+            }
+            else
+            {
+                if (Session["UserRole"].ToString() == "Patient")
+                {
+                    Response.Redirect("Home.aspx", false);
+                }
+            }
             List<displayPatient> patientList = new List<displayPatient>();
             patientList = client.DisplayAllPatients().ToList<displayPatient>();
             PatientGridView.Visible = true;
