@@ -68,6 +68,13 @@ namespace EDP_Clinic
                     //Calls Twilio API
                     else
                     {
+                        string userID = Session["LoggedIn"].ToString().Trim();
+                        Service1Client client = new Service1Client();
+                        User user = new User();
+                        user = client.GetOneUserByEmail(userID);
+                        string phoneNumber = user.PhoneNo.ToString().Trim();
+                        Debug.WriteLine(user.PhoneNo.ToString().Trim());
+
                         //Might put the Twilio Verify API into a function - 6/1/2021
 
                         //Retrieve keys from web.config
@@ -82,14 +89,13 @@ namespace EDP_Clinic
 
                         //Sends OTP
 
-                        /*var verification = VerificationResource.Create(
-                            to: "+6590251744",
-                            channel: "sms",
-                            pathServiceSid: "VA4ceee8345f84c5be3a44bc9ab3db5790"
-                        );
+                        //var verification = VerificationResource.Create(
+                        //    to: "+65" + phoneNumber,
+                        //    channel: "sms",
+                        //    pathServiceSid: "VA4ceee8345f84c5be3a44bc9ab3db5790"
+                        //);
 
-                        Debug.WriteLine(verification.Sid);
-                        //Console.WriteLine(verification.Sid);*/
+                        //Debug.WriteLine(verification.Sid);
                     }
                 }
             }
@@ -178,6 +184,11 @@ namespace EDP_Clinic
         //Checks OTP sent to user's phone no.
         private bool checkOTP()
         {
+            string userID = Session["LoggedIn"].ToString().Trim();
+            Service1Client client = new Service1Client();
+            User user = new User();
+            user = client.GetOneUserByEmail(userID);
+            string phoneNumber = user.PhoneNo.ToString().Trim();
 
             //Checks OTP
             var verificationCheck = VerificationCheckResource.Create(
@@ -259,6 +270,12 @@ namespace EDP_Clinic
         //Will need to put in parameters to add in phone number and personalise message
         protected void TwilioSMS(string messageBody)
         {
+            string userID = Session["LoggedIn"].ToString().Trim();
+            Service1Client client = new Service1Client();
+            User user = new User();
+            user = client.GetOneUserByEmail(userID);
+            string phoneNumber = user.PhoneNo.ToString().Trim();
+
             Debug.WriteLine("Calling Twilio SMS Function");
             //Retrieve keys from web.config
             NameValueCollection myKeys = ConfigurationManager.AppSettings;

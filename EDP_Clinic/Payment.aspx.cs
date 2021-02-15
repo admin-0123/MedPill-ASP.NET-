@@ -31,33 +31,24 @@ namespace EDP_Clinic
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            //Session["Login"] = "someone@example.com";
-
-            //string guidToken = Guid.NewGuid().ToString();
-            //Session["AuthToken"] = guidToken;
-            //HttpCookie AuthToken = new HttpCookie("AuthToken");
-            //AuthToken.Value = guidToken;
-            //Response.Cookies.Add(AuthToken);
-
-
             //Checks user session
-            //if (Session["Login"] != null && Session["AuthToken"] != null && Request.Cookies["AuthToken"] != null)
-            //{
-            //    if (!Session["AuthToken"].ToString().Equals(Request.Cookies["AuthToken"].Value))
-            //    {
-            //        Response.Redirect("Login.aspx", false);
-            //    }
-            //    else
-            //    {
-            //        Debug.WriteLine("Going to payment page");
-            retrieveCardInfo();
-            //    }
-            //}
-            ////No credentials at all
-            //else
-            //{
-            //    Response.Redirect("Login.aspx", false);
-            //}
+            if (Session["LoggedIn"] != null && Session["AuthToken"] != null && Request.Cookies["AuthToken"] != null)
+            {
+                if (!Session["AuthToken"].ToString().Equals(Request.Cookies["AuthToken"].Value))
+                {
+                    Response.Redirect("~/Login.aspx", false);
+                }
+                else
+                {
+                    Debug.WriteLine("Going to payment page");
+                    retrieveCardInfo();
+                }
+            }
+            //No credentials at all
+            else
+            {
+                Response.Redirect("~/Login.aspx", false);
+            }
         }
         protected void retrieveCardInfo()
         {
