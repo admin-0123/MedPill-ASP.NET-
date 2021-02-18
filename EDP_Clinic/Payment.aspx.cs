@@ -1,4 +1,4 @@
-﻿/*
+﻿
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -405,7 +405,7 @@ namespace EDP_Clinic
 
         protected void backBtn_Click(object sender, EventArgs e)
         {
-            Response.Redirect("PRFA2.aspx",false);
+            Response.Redirect("PRFA2.aspx", false);
         }
 
         protected void cardListView_ItemCommand(object sender, ListViewCommandEventArgs e)
@@ -544,7 +544,7 @@ namespace EDP_Clinic
         }
 
         //PayPal Payment
-        protected void payPalBtn_Click(object sender, EventArgs e)
+/*        protected void payPalBtn_Click(object sender, EventArgs e)
         {
             // Get a reference to the config
             var config = ConfigManager.Instance.GetProperties();
@@ -662,7 +662,7 @@ namespace EDP_Clinic
             //var jsonResponse = result.Content.ReadAsStreamAsync();
             //Debug.WriteLine(jsonResponse.Result);
 
-        }
+        }*/
 
         protected void TwilioSMS()
         {
@@ -690,4 +690,3 @@ namespace EDP_Clinic
     }
 
 }
-*/

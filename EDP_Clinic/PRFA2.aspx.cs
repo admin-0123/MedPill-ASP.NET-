@@ -200,6 +200,26 @@ namespace EDP_Clinic
             }
         }
 
+        protected String Convert_ID_To_Name(object id)
+        {
+            if (Convert.ToInt32(id) == 0)
+            {
+                return "Unassigned";
+            }
+            else
+            {
+                EDP_DBReference.Service1Client svc_client = new EDP_DBReference.Service1Client();
+                var user = svc_client.GetOneUser(id.ToString());
+
+                if (user == null)
+                {
+                    user.Name = "No name found";
+                }
+
+                return user.Name.ToString();
+            }
+        }
+
 
         // Link Buttons to change the type of appointment records being displayed
         protected void lbtn_upcoming_Click(object sender, EventArgs e)
