@@ -117,7 +117,13 @@
             <td class="auto-style6"></td>
             <td class="auto-style15">Doctor In Charge:</td>
             <td class="auto-style10">
-                <asp:TextBox ID="tb_doctor" runat="server"></asp:TextBox>
+                <asp:DropDownList ID="dp_doctor" runat="server" Width="185px">
+                    <asp:ListItem Selected="True" Value="--Select--">--Select--</asp:ListItem>
+                    <asp:ListItem>Dr Ong</asp:ListItem>
+                    <asp:ListItem>Dr Wong</asp:ListItem>
+                    <asp:ListItem>Dr Song</asp:ListItem>
+                    <asp:ListItem>Dr Long</asp:ListItem>
+                </asp:DropDownList>
             </td>
             <td class="auto-style16"></td>
         </tr>
@@ -133,7 +139,12 @@
             <td class="auto-style11"></td>
             <td class="auto-style12">Clinic:</td>
             <td class="auto-style13">
-                <asp:TextBox ID="tb_clinic" runat="server"></asp:TextBox>
+                <asp:DropDownList ID="dp_clinic" runat="server" Width="185px">
+                    <asp:ListItem Selected="True" Value="--Select--">--Select--</asp:ListItem>
+                    <asp:ListItem>Medpill</asp:ListItem>
+                    <asp:ListItem>Singapore General Hospital</asp:ListItem>
+                    <asp:ListItem>Tan Tock Seng Hospital</asp:ListItem>
+                </asp:DropDownList>
             </td>
             <td class="auto-style14"></td>
         </tr>

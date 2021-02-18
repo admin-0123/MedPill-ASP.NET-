@@ -19,7 +19,17 @@ namespace EDP_Clinic
             if (!IsPostBack)
 
             {
-
+                if (Session["LoggedIn"] == null)
+                {
+                    Response.Redirect("Login.aspx", false);
+                }
+                else
+                {
+                    if (Session["UserRole"].ToString() != "Patient")
+                    {
+                        Response.Redirect("Home.aspx", false);
+                    }
+                }
                 string id = Request.QueryString["id"];
                 Details eList = new Details();
                 EDP_DBReference.Service1Client client = new EDP_DBReference.Service1Client();

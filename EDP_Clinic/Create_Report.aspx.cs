@@ -14,7 +14,17 @@ namespace EDP_Clinic
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            
+            if (Session["LoggedIn"] == null)
+            {
+                Response.Redirect("Login.aspx", false);
+            }
+            else
+            {
+                if (Session["UserRole"].ToString() != "Doctor" && Session["UserRole"].ToString() != "Nurse")
+                {
+                    Response.Redirect("Home.aspx", false);
+                }
+            }
         }
 
         protected void gv_report_PreRender(object sender, EventArgs e)

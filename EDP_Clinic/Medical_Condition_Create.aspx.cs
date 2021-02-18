@@ -14,7 +14,17 @@ namespace EDP_Clinic
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            if (Session["LoggedIn"] == null)
+            {
+                Response.Redirect("Login.aspx", false);
+            }
+            else
+            {
+                if (Session["UserRole"].ToString() != "Doctor" && Session["UserRole"].ToString() != "Nurse")
+                {
+                    Response.Redirect("Home.aspx", false);
+                }
+            }
         }
 
         protected void btn_back_click(object sender, EventArgs e)
@@ -35,15 +45,20 @@ namespace EDP_Clinic
             string patient = HttpUtility.HtmlEncode(tb_patient.Text.ToString());
             string med_condition = HttpUtility.HtmlEncode(tb_med_condition.Text.ToString());
             string date = HttpUtility.HtmlEncode(tb_date.Text.ToString());
-            string doctor = HttpUtility.HtmlEncode(tb_doctor.Text.ToString());
-            string clinic = HttpUtility.HtmlEncode(tb_clinic.Text.ToString());
+            string doctor = dp_doctor.SelectedValue.ToString();
+            string clinic = dp_clinic.SelectedValue.ToString();
             string treatment = HttpUtility.HtmlEncode(tb_treatment.Text.ToString());
             string condition_desc = HttpUtility.HtmlEncode(tb_condition_desc.Text.ToString());
             string patient_condition = HttpUtility.HtmlEncode(tb_patient_condition.Text.ToString());
             string comments = HttpUtility.HtmlEncode(tb_comments.Text.ToString());
-            if (patient == "" || med_condition == "" || date == "" || doctor == "" || clinic == "" || treatment == "" || condition_desc == "" || patient_condition == "" || comments == "")
+            if (patient == "" || med_condition == "" || date == "" || treatment == "" || condition_desc == "" || patient_condition == "" || comments == "")
             {
                 lb_error.Text = "Missing Inputs";
+            }
+            else if (doctor == "--Select--"|| clinic == "--Select--")
+            {
+                lb_error.Text = "Select the dropdown options";
+
             }
             else if (DateTime.TryParse(date, culture, styles, out dateResult) == false)
             {

@@ -17,14 +17,24 @@ namespace EDP_Clinic
             if (!IsPostBack)
 
             {
-
+                if (Session["LoggedIn"] == null)
+                {
+                    Response.Redirect("Login.aspx", false);
+                }
+                else
+                {
+                    if (Session["UserRole"].ToString() != "Doctor" && Session["UserRole"].ToString() != "Nurse")
+                    {
+                        Response.Redirect("Home.aspx", false);
+                    }
+                }
                 string id = Request.QueryString["id"];
                 Report eList = new Report();
                 EDP_DBReference.Service1Client client = new EDP_DBReference.Service1Client();
                 eList = client.GetReportById(id);
-                tb_doctor.Text = eList.Dname;
+                dp_doctor.SelectedValue = eList.Dname;
                 tb_patient.Text = eList.Pname;
-                tb_clinic.Text = eList.Clinic;
+                dp_clinic.SelectedValue = eList.Clinic;
                 tb_date.Text = eList.Date_of_report;
                 tb_details.Text = eList.Details;
 
@@ -48,14 +58,18 @@ namespace EDP_Clinic
 
             int update;
             string id = Request.QueryString["id"];
-            var dname = HttpUtility.HtmlEncode(tb_doctor.Text.ToString());
+            var dname = dp_doctor.SelectedValue.ToString();
             var pname = HttpUtility.HtmlEncode(tb_patient.Text.ToString());
-            var clinic = HttpUtility.HtmlEncode(tb_clinic.Text.ToString());
+            var clinic = dp_clinic.SelectedValue.ToString();
             var date = HttpUtility.HtmlEncode(tb_date.Text.ToString());
             var details = HttpUtility.HtmlEncode(tb_details.Text.ToString());
-            if (dname == "" || pname == "" || clinic == "" || date == "" || details == "")
+            if (pname == "" || date == "" || details == "")
             {
                 lb_error.Text = "Missing Inputs";
+            }
+            else if (dname == "--Select--" || clinic == "--Select--")
+            {
+                lb_error.Text = "Select the dropdown options";
             }
             else if (DateTime.TryParse(date, culture, styles, out dateResult) == false)
             {
@@ -66,7 +80,7 @@ namespace EDP_Clinic
             {
                 EDP_DBReference.Service1Client client = new EDP_DBReference.Service1Client();
                 update = client.UpdateReportById(id, dname, pname, clinic, date, details);
-                Response.Redirect("Create Report.aspx?id=" + dname);
+                Response.Redirect("Create_Report.aspx");
             }
             
         }
