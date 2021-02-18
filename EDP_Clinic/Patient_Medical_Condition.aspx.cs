@@ -3,8 +3,6 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using System.Web;
-using System.Web.UI;
 using System.Web.UI.WebControls;
 
 namespace EDP_Clinic
@@ -33,6 +31,7 @@ namespace EDP_Clinic
                 gv_medical.DataBind();
             }
 
+            
         }
         private void RefreshGridView(int pageNumber)
         {
@@ -55,6 +54,7 @@ namespace EDP_Clinic
             gv_medical.DataBind();
         }
 
+       
 
         protected void gv_medical_RowCommand1(object sender, GridViewCommandEventArgs e)
         {

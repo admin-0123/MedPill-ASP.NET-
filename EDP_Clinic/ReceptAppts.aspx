@@ -55,14 +55,14 @@
         <nav aria-label="breadcrumb">
   <ol class="breadcrumb">
       <li class="breadcrumb-item active">
-              <asp:HyperLink ID="hl_bc_appt" runat="server" CssClass="hyperlink_breadcrumb" NavigateUrl="~/PFA.aspx">User Page</asp:HyperLink></asp:Label>
+              <asp:HyperLink ID="hl_bc_appt" runat="server" CssClass="hyperlink_breadcrumb" NavigateUrl="~/receptionistPage.aspx">User Page</asp:HyperLink></asp:Label>
       </li>
     <li class="breadcrumb-item active" aria-current="page"> 
         <asp:HyperLink ID="hl_bc_profileName" runat="server" CssClass="hyperlink_breadcrumb_active"> Receptionist Appointment Control</asp:HyperLink></asp:Label>
       </li>
   </ol>
 </nav>
-                    <h2> View Appointments </h2>
+                    <h2> View All Appointments </h2>
         <div class="card-header">
 
             <div class="row">
@@ -72,7 +72,7 @@
                                         <asp:Label ID="lbl_profileName" runat="server" Text=""></asp:Label>
                 </div>
                 <div class="col-sm-4"> 
-                    <asp:Button runat="server" Text="Make New Appointment For User" CssClass="btn_mka btn btn-primary text-white" ID="btn_makeAppt" OnClick="btn_makeAppt_Click" hidden/>
+                    <asp:Button runat="server" Text="Make New Appointment For User" CssClass="btn_mka btn btn-primary text-white" ID="btn_makeAppt" OnClick="btn_makeAppt_Click" />
                 </div>
             </div>
             <div class="row mt-2">
@@ -91,7 +91,11 @@
 
         </div>
 
-
+            <asp:Label ID="lbl_viewMode" runat="server" Text="View Mode: " CssClass="mb-3"></asp:Label>
+            <asp:DropDownList ID="ddl_viewMode" runat="server" CssClass="mb-3" OnSelectedIndexChanged="ddl_viewMode_SelectedIndexChanged" AutoPostBack="true">
+                <asp:ListItem Selected="True">All</asp:ListItem>
+                <asp:ListItem>Unassigned</asp:ListItem>
+            </asp:DropDownList>
 
                 <asp:ListView ID="listview_appts" runat="server" OnPagePropertiesChanging="listview_appts_PagePropertiesChanging">
                         <ItemTemplate>

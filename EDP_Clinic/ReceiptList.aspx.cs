@@ -1,18 +1,9 @@
 ﻿using EDP_Clinic.EDP_DBReference;
 using System;
 using System.Collections.Generic;
-using System.Collections;
 using System.Diagnostics;
 using System.Linq;
-using System.Web;
-using System.Web.UI;
 using System.Web.UI.WebControls;
-using PrintNodeNet;
-using System.Net.Http;
-using System.Text;
-using System.Net;
-using System.IO;
-using System.Net.Http.Headers;
 
 namespace EDP_Clinic
 {
@@ -95,7 +86,7 @@ namespace EDP_Clinic
 
                 //PrintNodeComputer computer = new PrintNodeComputer();
 
-                
+
                 ////PrintNodePrintJobAuthentication.
                 ////PrintNodeRequestOptions;
                 //var type = PrintNodeNet.PrintNodeConfiguration.ApiKey;

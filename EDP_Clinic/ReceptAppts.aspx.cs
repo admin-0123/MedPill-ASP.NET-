@@ -2,7 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
@@ -13,41 +12,96 @@ namespace EDP_Clinic
         protected void Page_Load(object sender, EventArgs e)
         {
             // On initial load of the page, set the session variable for viewstate
-            if (!IsPostBack)
+            if (Session["LoggedIn"] != null)
             {
-                Session["appt_viewstate_admin"] = "upcoming";
-
-                // On every postback, search for the session, check the current session value of viewstate and display the contents accordingly.
-                // Edit: Shifted the switch statement from page load to here initial page load only as it is causing
-                // System.ArgumentException: Invalid postback or callback argument.  Event validation is enabled using <pages enableEventValidation="true"/> in configuration or <%@ Page EnableEventValidation="true" %> in a page.  For security purposes, this feature verifies that arguments to postback or callback events originate from the server control that originally rendered them.  If the data is valid and expected, use the ClientScriptManager.RegisterForEventValidation method in order to register the postback or callback data for validation.
-
-                switch (Session["appt_viewstate_admin"])
+                if (Session["UserRole"].ToString() == "Receptionist")
                 {
-                    case "upcoming":
-                        listview_appts.DataSource = GetApptsAdminUpcoming();
-                        listview_appts.DataBind();
-                        break;
-                    case "past":
-                        listview_appts.DataSource = GetApptsAdminPast();
-                        listview_appts.DataBind();
-                        break;
-                    case "missed":
-                        listview_appts.DataSource = GetApptsAdminMissed();
-                        listview_appts.DataBind();
-                        break;
+                    if (!IsPostBack)
+                    {
+                        Session["appt_viewstate_admin"] = "upcoming";
+                        Session["appt_viewstate_admin_viewMode"] = "All";
 
+                        profilePfp.Visible = false;
+                        //leftArrow_redirect.Visible = false;
+                        // On every postback, search for the session, check the current session value of viewstate and display the contents accordingly.
+                        // Edit: Shifted the switch statement from page load to here initial page load only as it is causing
+                        // System.ArgumentException: Invalid postback or callback argument.  Event validation is enabled using <pages enableEventValidation="true"/> in configuration or <%@ Page EnableEventValidation="true" %> in a page.  For security purposes, this feature verifies that arguments to postback or callback events originate from the server control that originally rendered them.  If the data is valid and expected, use the ClientScriptManager.RegisterForEventValidation method in order to register the postback or callback data for validation.
+
+                        switch (Session["appt_viewstate_admin"])
+                        {
+                            case "upcoming":
+                                if (Session["appt_viewstate_admin_viewMode"].ToString() == "Unassigned")
+                                {
+                                    listview_appts.DataSource = GetApptsAdminUpcomingUnassigned();
+                                    listview_appts.DataBind();
+                                }
+
+                                else
+                                {
+                                    listview_appts.DataSource = GetApptsAdminUpcoming();
+                                    listview_appts.DataBind();
+                                }
+                                lbl_viewMode.Visible = true;
+                                ddl_viewMode.Visible = true;
+                                break;
+                            case "past":
+                                listview_appts.DataSource = GetApptsAdminPast();
+                                listview_appts.DataBind();
+                                lbl_viewMode.Visible = false;
+                                ddl_viewMode.Visible = false;
+                                break;
+                            case "missed":
+                                listview_appts.DataSource = GetApptsAdminMissed();
+                                listview_appts.DataBind();
+                                lbl_viewMode.Visible = false;
+                                ddl_viewMode.Visible = false;
+                                break;
+
+                        }
+                    }
                 }
+
+                else
+                {
+                    Response.Redirect("Home.aspx", false);
+                }
+
+
+
+
             }
 
-
-
-
-
+            else
+            {
+                Response.Redirect("Login.aspx", false);
+            }
 
         }
 
         // Get All Appts for one user where status is upcoming
         public List<Appointment> GetApptsAdminUpcoming()
+        {
+            List<Appointment> testList = new List<Appointment>();
+            EDP_DBReference.Service1Client svc_client = new EDP_DBReference.Service1Client();
+
+            testList = svc_client.GetAllApptAdminUpcoming().ToList<Appointment>();
+
+            List<Appointment> sortedList = new List<Appointment>();
+
+            if (testList == null)
+            {
+                testList = new List<Appointment>();
+            }
+
+
+            sortedList = testList.OrderBy(x => x.dateTime).ToList();
+
+
+            return sortedList;
+        }
+
+
+        public List<Appointment> GetApptsAdminUpcomingUnassigned()
         {
             List<Appointment> testList = new List<Appointment>();
             EDP_DBReference.Service1Client svc_client = new EDP_DBReference.Service1Client();
@@ -60,10 +114,20 @@ namespace EDP_Clinic
                 testList = new List<Appointment>();
             }
 
+            foreach (var i in testList.ToList())
+            {
+                if (i.doctorID != 0)
+                {
+                    testList.Remove(i);
+                }
+            }
+
+            testList = testList.OrderBy(x => x.dateTime).ToList();
+
             return testList;
         }
 
-        // Get All Appts for one user where status is upcoming
+        // Get All Appts for one user where status is past
         public List<Appointment> GetApptsAdminPast()
         {
             List<Appointment> testList = new List<Appointment>();
@@ -75,10 +139,12 @@ namespace EDP_Clinic
             {
                 testList = new List<Appointment>();
             }
+
+            testList = testList.OrderBy(x => x.dateTime).ToList();
             return testList;
         }
 
-        // Get All Appts for one user where status is upcoming
+        // Get All Appts for one user where status is missed
         public List<Appointment> GetApptsAdminMissed()
         {
             List<Appointment> testList = new List<Appointment>();
@@ -91,13 +157,14 @@ namespace EDP_Clinic
                 testList = new List<Appointment>();
             }
 
+            testList = testList.OrderBy(x => x.dateTime).ToList();
             return testList;
         }
 
         // Navigate backwards arrow
         protected void leftArrow_redirect_Click(object sender, ImageClickEventArgs e)
         {
-            Response.Redirect("~/UserPage.aspx");
+            Response.Redirect("~/receptionistPage.aspx");
         }
 
         // Go to Make Appointment Page
@@ -117,8 +184,18 @@ namespace EDP_Clinic
             switch (Session["appt_viewstate_admin"])
             {
                 case "upcoming":
-                    listview_appts.DataSource = GetApptsAdminUpcoming();
-                    listview_appts.DataBind();
+                    if (Session["appt_viewstate_admin_viewMode"].ToString() == "Unassigned")
+                    {
+                        listview_appts.DataSource = GetApptsAdminUpcomingUnassigned();
+                        listview_appts.DataBind();
+                    }
+
+                    else
+                    {
+                        listview_appts.DataSource = GetApptsAdminUpcoming();
+                        listview_appts.DataBind();
+                    }
+
                     break;
                 case "past":
                     listview_appts.DataSource = GetApptsAdminPast();
@@ -181,6 +258,8 @@ namespace EDP_Clinic
                 Session["appt_viewstate_admin"] = "upcoming";
                 listview_appts.DataSource = GetApptsAdminUpcoming();
                 listview_appts.DataBind();
+                lbl_viewMode.Visible = true;
+                ddl_viewMode.Visible = true;
             }
 
         }
@@ -198,6 +277,8 @@ namespace EDP_Clinic
                 Session["appt_viewstate_admin"] = "past";
                 listview_appts.DataSource = GetApptsAdminPast();
                 listview_appts.DataBind();
+                lbl_viewMode.Visible = false;
+                ddl_viewMode.Visible = false;
 
 
             }
@@ -218,6 +299,8 @@ namespace EDP_Clinic
                 Session["appt_viewstate_admin"] = "missed";
                 listview_appts.DataSource = GetApptsAdminMissed();
                 listview_appts.DataBind();
+                lbl_viewMode.Visible = false;
+                ddl_viewMode.Visible = false;
             }
 
         }
@@ -293,18 +376,33 @@ namespace EDP_Clinic
                 {
                     case "upcoming":
                         dp_listview_appt.SetPageProperties(0, dp_listview_appt.MaximumRows, false);
-                        listview_appts.DataSource = GetApptsAdminUpcoming();
-                        listview_appts.DataBind();
+                        if (Session["appt_viewstate_admin_viewMode"].ToString() == "Unassigned")
+                        {
+                            listview_appts.DataSource = GetApptsAdminUpcomingUnassigned();
+                            listview_appts.DataBind();
+                        }
+
+                        else
+                        {
+                            listview_appts.DataSource = GetApptsAdminUpcoming();
+                            listview_appts.DataBind();
+                        }
+                        lbl_viewMode.Visible = true;
+                        ddl_viewMode.Visible = true;
                         break;
                     case "past":
                         dp_listview_appt.SetPageProperties(0, dp_listview_appt.MaximumRows, false);
                         listview_appts.DataSource = GetApptsAdminPast();
                         listview_appts.DataBind();
+                        lbl_viewMode.Visible = false;
+                        ddl_viewMode.Visible = false;
                         break;
                     case "missed":
                         dp_listview_appt.SetPageProperties(0, dp_listview_appt.MaximumRows, false);
                         listview_appts.DataSource = GetApptsAdminMissed();
                         listview_appts.DataBind();
+                        lbl_viewMode.Visible = false;
+                        ddl_viewMode.Visible = false;
                         break;
 
                 }
@@ -345,6 +443,26 @@ namespace EDP_Clinic
             Session["patient_name"] = lblPN_value;
 
             Response.Redirect("~/ReceptAssignDoctor.aspx");
+        }
+
+        protected void ddl_viewMode_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (ddl_viewMode.SelectedValue == "Unassigned")
+            {
+                Session["appt_viewstate_admin_viewMode"] = "Unassigned";
+                dp_listview_appt.SetPageProperties(0, dp_listview_appt.MaximumRows, false);
+                listview_appts.DataSource = GetApptsAdminUpcomingUnassigned();
+                listview_appts.DataBind();
+            }
+
+            else
+            {
+                Session["appt_viewstate_admin_viewMode"] = "All";
+                dp_listview_appt.SetPageProperties(0, dp_listview_appt.MaximumRows, false);
+                listview_appts.DataSource = GetApptsAdminUpcoming();
+                listview_appts.DataBind();
+
+            }
         }
     }
 }

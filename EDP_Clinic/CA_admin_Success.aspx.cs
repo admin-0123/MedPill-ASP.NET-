@@ -5,7 +5,7 @@ using Twilio.Rest.Api.V2010.Account;
 
 namespace EDP_Clinic
 {
-    public partial class RA_Success_admin : System.Web.UI.Page
+    public partial class CA_admin_Success : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -22,6 +22,12 @@ namespace EDP_Clinic
                     loadSuccessMsg();
                 }
             }
+
+
+
+
+
+
         }
 
         protected void loadSuccessMsg()
@@ -31,7 +37,7 @@ namespace EDP_Clinic
 
             DateTime dateTimeinput;
             dateTimeinput = Convert.ToDateTime(apptDetail["dateTime"]);
-            var appt = svc_client.GetOneAppt(Convert.ToInt32(Session["selected_appt_user"]), dateTimeinput);
+            var appt = svc_client.GetOneAppt(Convert.ToInt32(Session["admin_userInput"]), dateTimeinput);
 
             var patient = svc_client.GetOneUser(appt.patientID.ToString());
 
@@ -63,23 +69,28 @@ namespace EDP_Clinic
 
                 TwilioClient.Init(accountSid, authToken);
 
-                var message = MessageResource.Create(
-                body: $"Your Appointment has successfully been updated by the receptionist, report to the clinic on {appt.dateTime.ToString("G")}",
-                from: new Twilio.Types.PhoneNumber("+14242066417"),
-                to: new Twilio.Types.PhoneNumber("+6587558054")
+                if (patient.Id == Session["admin_userInput"].ToString())
+                {
+                    var message = MessageResource.Create(
+                    body: $"Our receptionist has booked an appointment for you. Report to the clinic on {appt.dateTime.ToString("G")}",
+                    from: new Twilio.Types.PhoneNumber("+14242066417"),
+                    to: new Twilio.Types.PhoneNumber("+6587558054")
                     );
+                }
+
 
             }
         }
+
         protected void btn_go_pfa_Click(object sender, EventArgs e)
         {
             Response.Redirect("~/ReceptAppts.aspx");
         }
 
-        protected void btn_go_receptpage_Click(object sender, EventArgs e)
+
+        protected void btn_go_userpage_Click(object sender, EventArgs e)
         {
             Response.Redirect("~/receptionistPage.aspx");
         }
-
     }
 }

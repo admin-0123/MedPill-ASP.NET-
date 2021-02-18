@@ -1,11 +1,6 @@
 ﻿using EDP_Clinic.EDP_DBReference;
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
 
 namespace EDP_Clinic
 {
@@ -18,7 +13,7 @@ namespace EDP_Clinic
             {
                 Response.Redirect("Login.aspx", false);
             }
-            else 
+            else
             {
                 Debug.WriteLine(Session["UserRole"].ToString());
                 if (Session["UserRole"].ToString() != "Receptionist")
@@ -49,7 +44,8 @@ namespace EDP_Clinic
         }
         protected void receptionistBtn_Click(object sender, EventArgs e)
         {
-
+            Response.Redirect("ReceptAppts.aspx", false);
         }
+
     }
 }

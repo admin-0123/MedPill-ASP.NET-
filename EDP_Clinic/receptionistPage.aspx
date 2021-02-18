@@ -59,7 +59,7 @@
     </div>--%>
             <div class="mt-5 text-center mx-auto">
                 <div class="btn-group btn-group-lg" role="group" aria-label="User Options">
-                    <asp:Button ID="receptionistBtn" runat="server" Text="Appointments" CssClass="btn btn-primary" OnClick="receptionistBtn_Click" />
+                    <asp:Button ID="receptionistBtn" runat="server" Text="Receptionist Appointment Control" CssClass="btn btn-primary" OnClick="receptionistBtn_Click" />
                 </div>
             </div>
            

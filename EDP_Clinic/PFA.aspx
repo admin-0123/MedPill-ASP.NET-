@@ -46,10 +46,10 @@
         <nav aria-label="breadcrumb">
   <ol class="breadcrumb">
             <li class="breadcrumb-item">
-              <asp:HyperLink ID="HyperLink1" runat="server" CssClass="hyperlink_breadcrumb" NavigateUrl="~/UserPage.aspx">User Page</asp:HyperLink></asp:Label>
+              <asp:HyperLink ID="HyperLink1" runat="server" CssClass="hyperlink_breadcrumb lbtn_inactive" NavigateUrl="~/UserPage.aspx">User Page</asp:HyperLink></asp:Label>
       </li>
       <li class="breadcrumb-item active">
-              <asp:HyperLink ID="hl_bc_appt" runat="server" CssClass="hyperlink_breadcrumb_ACTIVE" NavigateUrl="~/PFA.aspx">Appointments</asp:HyperLink></asp:Label>
+              <asp:HyperLink ID="hl_bc_appt" runat="server" CssClass="hyperlink_breadcrumb">Appointments</asp:HyperLink></asp:Label>
       </li>
   </ol>
 </nav>

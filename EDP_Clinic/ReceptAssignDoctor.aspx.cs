@@ -1,9 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
 
 namespace EDP_Clinic
 {
@@ -11,22 +7,36 @@ namespace EDP_Clinic
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!IsPostBack)
+            if (Session["LoggedIn"] != null)
             {
-                hl_bc_profileName.Text = $"{Session["patient_name"].ToString()}'s Appointment on {Convert.ToDateTime(Session["selected_appt_date"])}";
-                EDP_DBReference.Service1Client svc_client = new EDP_DBReference.Service1Client();
-                var doc_list = svc_client.GetAllDoctors();
-                var new_list = new List<String>();
-                foreach (var i in doc_list)
+
+                if (Session["UserRole"].ToString() == "Receptionist")
                 {
-                    new_list.Add(i.Name);
+                    if (!IsPostBack)
+                    {
+                        hl_bc_profileName.Text = $"{Session["patient_name"].ToString()}'s Appointment on {Convert.ToDateTime(Session["selected_appt_date"])}";
+                        EDP_DBReference.Service1Client svc_client = new EDP_DBReference.Service1Client();
+                        var doc_list = svc_client.GetAllDoctors();
+                        var new_list = new List<String>();
+                        foreach (var i in doc_list)
+                        {
+                            new_list.Add(i.Name);
+                        }
+                        ddl_chooseDoctors.DataSource = new_list;
+                        ddl_chooseDoctors.DataBind();
+                    }
                 }
-                ddl_chooseDoctors.DataSource = new_list;
-                ddl_chooseDoctors.DataBind();
+
+                else
+                {
+                    Response.Redirect("Home.aspx", false);
+                }
             }
 
-
-
+            else
+            {
+                Response.Redirect("Login.aspx", false);
+            }
         }
 
         protected void btn_assignDoctor_Click(object sender, EventArgs e)
@@ -48,9 +58,9 @@ namespace EDP_Clinic
             var updateDoctor = svc_client.UpdateDoctor(Convert.ToInt32(patient_obj.Id), date_time, Convert.ToInt32(doctor_obj.Id));
             if (updateDoctor == 1)
             {
-                    lbl_updateResult.Text = "Update Successful";
+                lbl_updateResult.Text = "Update Successful";
             }
-            
+
 
 
 

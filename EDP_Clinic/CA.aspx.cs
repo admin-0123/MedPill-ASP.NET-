@@ -1,13 +1,10 @@
 ﻿using EDP_Clinic.EDP_DBReference;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
-using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using System.Drawing;
-using Twilio;
-using Twilio.Rest.Api.V2010.Account;
 
 namespace EDP_Clinic
 {
@@ -20,77 +17,84 @@ namespace EDP_Clinic
         // List<DateTime> openSlots = new List<DateTime>();
         protected void Page_Load(object sender, EventArgs e)
         {
-
-            EDP_DBReference.Service1Client svc_client = new EDP_DBReference.Service1Client();
-            User current_user = svc_client.GetOneUser(Session["current_appt_profile"].ToString());
-            // For breadcrumb elements
-            hl_bc_profileName.Text = current_user.Name;
-            //
-
-            Photo current_user_photo_obj = svc_client.GetOnePhoto(current_user.Id);
-
-            //profilePfp.ImageUrl = $"~/assets/images/{current_user_photo_obj.Photo_Resource.Trim()}.jpg";
-            var exist = svc_client.CheckPhotoExist(current_user.Id);
-            if (exist == 1)
+            if (Session["LoggedIn"] != null || Session["current_appt_profile"] != null)
             {
-                var photo = svc_client.GetOnePhoto(current_user.Id);
-                var fileName = photo.Photo_Resource.ToString();
-                var path = "~/UserImg/" + fileName;
-                profilePfp.ImageUrl = path;
-            }
+                EDP_DBReference.Service1Client svc_client = new EDP_DBReference.Service1Client();
+                User current_user = svc_client.GetOneUser(Session["current_appt_profile"].ToString());
+                // For breadcrumb elements
+                hl_bc_profileName.Text = current_user.Name;
+                //
 
-            lbl_profileName.Text = current_user.Name;
+                Photo current_user_photo_obj = svc_client.GetOnePhoto(current_user.Id);
 
-            tb_startdate_CalendarExtender.StartDate = DateTime.Now.AddDays(1);
-            tb_startdate_CalendarExtender.EndDate = DateTime.Now.AddMonths(2);
-            if (Session["gv_timeSlot"] == null)
-            {
-                Session["startDate"] = DateTime.Now.AddDays(1);
-                DateTime startDate = Convert.ToDateTime(Session["startDate"]);
-                DateTime endDate = DateTime.Now.AddMonths(2);
-                lbl_validDates.Text = $"You may only pick a date between {startDate.Day} {startDate.ToString("MMMM")} to {endDate.Day} {endDate.ToString("MMMM")}";
-                Session["gv_timeSlot"] = "Testing";
+                //profilePfp.ImageUrl = $"~/assets/images/{current_user_photo_obj.Photo_Resource.Trim()}.jpg";
+                var exist = svc_client.CheckPhotoExist(current_user.Id);
+                if (exist == 1)
+                {
+                    var photo = svc_client.GetOnePhoto(current_user.Id);
+                    var fileName = photo.Photo_Resource.ToString();
+                    var path = "~/UserImg/" + fileName;
+                    profilePfp.ImageUrl = path;
+                }
 
-                /*               List<DateTime> openSlots = new List<DateTime>();
-                               for (var dt = startDate; dt <= endDate; dt = dt.AddDays(1))
-                               {
-                                   dt = new DateTime(dt.Year, dt.Month, dt.Day, 9, 00, 00);
+                lbl_profileName.Text = current_user.Name;
 
-                                   while (dt.Hour != 17)
+                tb_startdate_CalendarExtender.StartDate = DateTime.Now.AddDays(1);
+                tb_startdate_CalendarExtender.EndDate = DateTime.Now.AddMonths(2);
+                if (Session["gv_timeSlot"] == null)
+                {
+                    Session["startDate"] = DateTime.Now.AddDays(1);
+                    DateTime startDate = Convert.ToDateTime(Session["startDate"]);
+                    DateTime endDate = DateTime.Now.AddMonths(2);
+                    lbl_validDates.Text = $"You may only pick a date between {startDate.Day} {startDate.ToString("MMMM")} to {endDate.Day} {endDate.ToString("MMMM")}";
+                    Session["gv_timeSlot"] = "Testing";
+
+                    /*               List<DateTime> openSlots = new List<DateTime>();
+                                   for (var dt = startDate; dt <= endDate; dt = dt.AddDays(1))
                                    {
-                                       // Query from appointment table and check if timeslot alr exist (to be added)
-                                       openSlots.Add(dt);
-                                       dt = dt.AddMinutes(30);
-                                   }
+                                       dt = new DateTime(dt.Year, dt.Month, dt.Day, 9, 00, 00);
+
+                                       while (dt.Hour != 17)
+                                       {
+                                           // Query from appointment table and check if timeslot alr exist (to be added)
+                                           openSlots.Add(dt);
+                                           dt = dt.AddMinutes(30);
+                                       }
 
 
-                               }*/
+                                   }*/
 
-                gv_timeslots.Visible = true;
-                gv_timeslots.DataSource = Onload_Retrieve_Available_Appts();
-                gv_timeslots.DataBind();
+                    gv_timeslots.Visible = true;
+                    gv_timeslots.DataSource = Onload_Retrieve_Available_Appts();
+                    gv_timeslots.DataBind();
+
+                }
+
+                else
+                {
+                    gv_timeslots.Visible = true;
+                    gv_timeslots.DataSource = Search_AvailableAppts();
+                    gv_timeslots.DataBind();
+                }
+
+                // mySlots = openSlots;
+
+                //gv_timeslots.DataSource = mySlots;
+                //gv_timeslots.DataBind();
+                /* Code to check the list items, more efficient than for loop, takes less memory, similar to an iterator/generator 
+                var enumerator = openSlots.GetEnumerator();
+                while (enumerator.MoveNext())
+                {
+                    System.Diagnostics.Debug.WriteLine("THE LIST OF DATES ARE " + enumerator.Current);
+                }
+                */
 
             }
 
             else
             {
-                gv_timeslots.Visible = true;
-                gv_timeslots.DataSource = Search_AvailableAppts();
-                gv_timeslots.DataBind();
+                Response.Redirect("~/Home.aspx", false);
             }
-
-            // mySlots = openSlots;
-
-            //gv_timeslots.DataSource = mySlots;
-            //gv_timeslots.DataBind();
-            /* Code to check the list items, more efficient than for loop, takes less memory, similar to an iterator/generator 
-            var enumerator = openSlots.GetEnumerator();
-            while (enumerator.MoveNext())
-            {
-                System.Diagnostics.Debug.WriteLine("THE LIST OF DATES ARE " + enumerator.Current);
-            }
-            */
-
         }
 
         protected void btn_searchSlot_Click(object sender, EventArgs e)
@@ -102,7 +106,7 @@ namespace EDP_Clinic
             // if input is a valid date, run the code block
             if (checkdate_bool != false)
             {
-                if (Convert.ToDateTime(tb_startdate.Text) < DateTime.Now.AddDays(1))
+                if (Convert.ToDateTime(tb_startdate.Text) < DateTime.Now)
                 {
                     Session["startDate"] = DateTime.Now.AddDays(1);
                     lbl_validDates.Text = $"Invalid past date searched";
@@ -123,6 +127,7 @@ namespace EDP_Clinic
                     {
                         //lbl_validDates.Text = $"You may only pick a date between {startDate.Day} {startDate.ToString("MMMM")} to {endDate.Day} {endDate.ToString("MMMM")}";
                         lbl_validDates.Text = $"You may only pick a date between {DateTime.Now.AddDays(1).Day} {DateTime.Now.AddDays(1).ToString("MMMM")} to {endDate.Day} {endDate.ToString("MMMM")}";
+                        lbl_validDates.ForeColor = Color.Black;
                     }
 
                     else

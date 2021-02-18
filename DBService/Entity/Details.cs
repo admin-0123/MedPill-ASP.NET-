@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DBService.Entity
 {
@@ -100,7 +96,7 @@ namespace DBService.Entity
                 string email = row["Email"].ToString();
                 string address = row["Address"].ToString();
                 string postal = row["Postal_Code"].ToString();
-                emp = new Details(name,nric,dob,gender,phone,email,address,postal);
+                emp = new Details(name, nric, dob, gender, phone, email, address, postal);
             }
             return emp;
         }

@@ -1,18 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
-using System.Collections.Specialized;
-using System.Security.Claims;
+﻿using EDP_Clinic.EDP_DBReference;
+using System;
+using System.Diagnostics;
 using System.Security.Cryptography;
 using System.Text;
-using System.Data.SqlClient;
-using System.Data;
-using System.Diagnostics;
-using System.IO;
-using EDP_Clinic.EDP_DBReference;
 using System.Text.RegularExpressions;
 
 namespace EDP_Clinic
@@ -104,6 +94,6 @@ namespace EDP_Clinic
         }
 
     }
-    
+
 
 }

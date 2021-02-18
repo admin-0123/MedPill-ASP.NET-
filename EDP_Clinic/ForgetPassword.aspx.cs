@@ -1,14 +1,10 @@
 ﻿using EDP_Clinic.EDP_DBReference;
 using System;
-using System.Collections.Generic;
-using System.Data.SqlClient;
 using System.Diagnostics;
 using System.Drawing;
-using System.Linq;
 using System.Net.Mail;
 using System.Web;
 using System.Web.UI;
-using System.Web.UI.WebControls;
 
 namespace EDP_Clinic
 {
@@ -35,7 +31,8 @@ namespace EDP_Clinic
             string code;
             var existingcode = client.CheckCodeByEmail(email);
             Debug.WriteLine(existingcode);
-            if (existingcode == "error") { 
+            if (existingcode == "error")
+            {
                 code = makeCode();
                 client.AddCode(email, code);
             }

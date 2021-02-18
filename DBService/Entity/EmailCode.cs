@@ -1,11 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DBService.Entity
 {
@@ -47,7 +43,7 @@ namespace DBService.Entity
                 string Email = row["Email"].ToString();
                 string Code = row["Code"].ToString();
 
-                user = new EmailCode(Email,Code);
+                user = new EmailCode(Email, Code);
             }
             return user.Email;
         }
@@ -100,7 +96,7 @@ namespace DBService.Entity
             using (SqlConnection myConn = new SqlConnection(DBConnect))
             {
                 string sqlStatement = "INSERT INTO [EmailCode] VALUES (@paraEmail, @paraCode)";
-                using (SqlCommand sqlCmd = new SqlCommand(sqlStatement,myConn))
+                using (SqlCommand sqlCmd = new SqlCommand(sqlStatement, myConn))
                 {
                     sqlCmd.Parameters.AddWithValue("@paraEmail", email);
                     sqlCmd.Parameters.AddWithValue("@paraCode", code);

@@ -1,8 +1,6 @@
-﻿using EDP_Clinic.EDP_DBReference;
-using System;
+﻿using System;
+
 using System.Collections.Generic;
-using System.Drawing;
-using System.Globalization;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -43,7 +41,7 @@ namespace EDP_Clinic
             var date = HttpUtility.HtmlEncode(tb_date.Text.ToString());
             var details = HttpUtility.HtmlEncode(tb_details.Text.ToString());
 
-            if (pname == "" || date == "" || details == "")
+            if (dname == ""|| pname == "" || clinic == "" || date == "" || details == "")
             {
                 lb_error.Text = "Missing Inputs";
                 lb_error.ForeColor = Color.Red;
@@ -66,7 +64,7 @@ namespace EDP_Clinic
 
                 Response.Redirect("Create_Report.aspx");
             }
-           
+
         }
 
         protected void btn_back_click(object sender, EventArgs e)
