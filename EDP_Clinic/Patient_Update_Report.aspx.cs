@@ -1,6 +1,8 @@
 ﻿using EDP_Clinic.EDP_DBReference;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
+using System.Globalization;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -56,10 +58,10 @@ namespace EDP_Clinic
 
             int update;
             string id = Request.QueryString["id"];
-            var dname = tb_doctor.Text.ToString();
-            var pname = tb_patient.Text.ToString();
-            var clinic = tb_clinic.Text.ToString();
-            var date = tb_date.Text.ToString();
+            var dname = dp_doctor.SelectedValue.ToString();
+            var pname = HttpUtility.HtmlEncode(tb_patient.Text.ToString());
+            var clinic = dp_clinic.SelectedValue.ToString();
+            var date = HttpUtility.HtmlEncode(tb_date.Text.ToString());
             var details = HttpUtility.HtmlEncode(tb_details.Text.ToString());
             if (pname == "" || date == "" || details == "")
             {
