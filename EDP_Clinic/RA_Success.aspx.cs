@@ -19,7 +19,7 @@ namespace EDP_Clinic
 
             else
             {
-                if (Session["admin_userInput"].ToString() != "nothing")
+                if (Session["current_appt_profile"].ToString() != "nothing")
                 {
                     loadSuccessMsg();
                 }

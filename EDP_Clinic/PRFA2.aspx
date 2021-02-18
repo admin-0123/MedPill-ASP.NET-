@@ -100,7 +100,7 @@
                             <div class="card-header">
                                 <p> Date Time: <asp:Label ID="lbl_c_dt" runat="server" Text='<%# Eval("dateTime") %>'></asp:Label> </p>
                                <p> Type: <asp:Label ID="lbl_c_at" runat="server" Text='<%# Eval("appointmentType") %>'></asp:Label></p>
-                                <p> Doctor: <asp:Label ID="lbl_c_dn" runat="server" Text='<%# Convert_Placebo( Eval("doctorID") ) %>'></asp:Label> </p>
+                                <p> Doctor: <asp:Label ID="lbl_c_dn" runat="server" Text='<%# Convert_ID_To_Name( Eval("doctorID") ) %>'></asp:Label> </p>
 
 
                     <% if (Session["appt_viewstate"].ToString() == "upcoming")
