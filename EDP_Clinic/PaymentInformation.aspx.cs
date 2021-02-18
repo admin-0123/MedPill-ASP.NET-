@@ -1,12 +1,8 @@
 ﻿using EDP_Clinic.EDP_DBReference;
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
-using System.Linq;
 using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
 
 namespace EDP_Clinic
 {
@@ -58,16 +54,16 @@ namespace EDP_Clinic
                     string cardNumberDisplay = cif.CardNumber.Substring(12, 4);
                     cardNumberText.Text = "**** **** **** " + cardNumberDisplay;
                     cardExpiryText.Text = cardExpiryDate.ToString("MMMM yyyy");//Convert.ToDateTime.ToMon(cif.CardExpiry);
-                    
+
                     //Display card expiry status
                     DateTime currentDate = DateTime.Now;
                     double monthDifference = cardExpiryDate.Subtract(currentDate).Days / (365.25 / 12);
-                    if(monthDifference > 3)
+                    if (monthDifference > 3)
                     {
                         cardExpiryStatus.Text = "Your card exipiry date is valid.";
                         cardExpiryStatus.ForeColor = Color.Green;
                     }
-                    else if(monthDifference <= 3 && monthDifference > 0)
+                    else if (monthDifference <= 3 && monthDifference > 0)
                     {
                         cardExpiryStatus.Text = "Please ensure that your card expiry date is 3 months from current date.";
                         cardExpiryStatus.ForeColor = Color.Red;

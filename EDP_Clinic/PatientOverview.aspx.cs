@@ -1,11 +1,8 @@
 ﻿using EDP_Clinic.EDP_DBReference;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
 
 namespace EDP_Clinic
 {
@@ -54,7 +51,7 @@ namespace EDP_Clinic
             refreshgrid();
         }
         protected void SearchBtn_Click(object sender, EventArgs e)
-        {    
+        {
             var search = HttpUtility.HtmlEncode(searchtb.Text);
             List<displayPatient> patientList = new List<displayPatient>();
             patientList = client.DisplayAllSearchedPatients(search).ToList<displayPatient>();
@@ -62,7 +59,7 @@ namespace EDP_Clinic
             PatientGridView.DataSource = patientList;
             PatientGridView.DataBind();
         }
-        
+
         public void refreshgrid()
         {
             List<displayPatient> patientList = new List<displayPatient>();

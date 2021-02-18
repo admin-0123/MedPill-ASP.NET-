@@ -1,29 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
+﻿using EDP_Clinic.EDP_DBReference;
 using Stripe;
-using Stripe.Checkout;
-using System.Text.RegularExpressions;
-using System.Drawing;
-using System.Security.Cryptography;
-using System.Text;
-using System.Net;
-using System.IO;
-using System.Web.Script.Serialization;
-using EDP_Clinic.EDP_DBReference;
-using System.Diagnostics;
-using System.Net.Http;
-using System.Net.Mail;
-using System.Threading.Tasks;
-using System.Net.Http.Headers;
-using PayPal.Api;
-using Twilio;
-using Twilio.Rest.Api.V2010.Account;
+using System;
+using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Configuration;
+using System.Diagnostics;
+using System.Drawing;
+using System.IO;
+using System.Linq;
+using System.Net;
+using System.Net.Mail;
+using System.Text;
+using System.Text.RegularExpressions;
+using System.Web;
+using System.Web.Script.Serialization;
+using System.Web.UI.WebControls;
+using Twilio;
+using Twilio.Rest.Api.V2010.Account;
 
 namespace EDP_Clinic
 {
@@ -269,7 +262,7 @@ namespace EDP_Clinic
 
                     //Add if else for create receipt
 
-                    //TwilioSMS();
+                    TwilioSMS();
 
                     //var service = new PaymentIntentService();
                     //var paymentIntent = service.Create(options);

@@ -1,10 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net.Mail;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
 
 namespace EDP_Clinic
 {
@@ -41,10 +37,10 @@ namespace EDP_Clinic
                 // Do not allow either one to be added to list of available patients
                 var cg_object = svc_client.GetOneCG(i.Id);
                 var cg_objectbyCR = svc_client.GetOneCGByCRID(i.Id);
-                
+
                 if (cg_object != null || cg_objectbyCR != null)
                 {
-                    
+
                 }
 
                 else
@@ -61,7 +57,8 @@ namespace EDP_Clinic
 
 
             // Remove the current user himself from list of selectable care receivers.
-            if (new_list.Contains(current_user_obj.Name)) {
+            if (new_list.Contains(current_user_obj.Name))
+            {
                 new_list.Remove(current_user_obj.Name);
             }
 

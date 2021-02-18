@@ -2,10 +2,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using System.Drawing;
 
 namespace EDP_Clinic
 {
@@ -78,10 +76,10 @@ namespace EDP_Clinic
             }
         }
 
-/*        protected void btn_cancel_click(object sender, EventArgs e)
-        {
-            ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "showModal();", true);
-        }*/
+        /*        protected void btn_cancel_click(object sender, EventArgs e)
+                {
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "showModal();", true);
+                }*/
 
 
         // Get All Appts for one user regardless of the status
@@ -92,7 +90,7 @@ namespace EDP_Clinic
 
             //System.Diagnostics.Debug.WriteLine("THE SESSION VALUE IS " + Session["UserID"]);
             testList = svc_client.GetAllApptUser(Convert.ToInt32(Session["current_appt_profile"].ToString())).ToList<Appointment>();
-            
+
             if (testList == null)
             {
                 testList = new List<Appointment>();
@@ -232,8 +230,8 @@ namespace EDP_Clinic
                 Session["appt_viewstate"] = "past";
                 listview_appts.DataSource = GetApptsUserPast();
                 listview_appts.DataBind();
-                
-                
+
+
             }
 
 

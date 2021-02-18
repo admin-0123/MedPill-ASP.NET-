@@ -1,22 +1,18 @@
-﻿using System;
+﻿using EDP_Clinic.EDP_DBReference;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
-using System.Text.RegularExpressions;
-using System.Drawing;
-using System.Configuration;
 using System.Collections.Specialized;
-using System.Net;
+using System.Configuration;
+using System.Diagnostics;
+using System.Drawing;
 using System.IO;
+using System.Net;
+using System.Text.RegularExpressions;
+using System.Web;
 using System.Web.Script.Serialization;
 using Twilio;
-using Twilio.Rest.Verify.V2.Service;
-using Twilio.Rest.Notify;
-using EDP_Clinic.EDP_DBReference;
-using System.Diagnostics;
 using Twilio.Rest.Api.V2010.Account;
+using Twilio.Rest.Verify.V2.Service;
 
 namespace EDP_Clinic
 {
@@ -89,11 +85,11 @@ namespace EDP_Clinic
 
                         //Sends OTP
 
-                        //var verification = VerificationResource.Create(
-                        //    to: "+65" + phoneNumber,
-                        //    channel: "sms",
-                        //    pathServiceSid: "VA4ceee8345f84c5be3a44bc9ab3db5790"
-                        //);
+                        var verification = VerificationResource.Create(
+                            to: "+65" + phoneNumber,
+                            channel: "sms",
+                            pathServiceSid: "VA4ceee8345f84c5be3a44bc9ab3db5790"
+                        );
 
                         //Debug.WriteLine(verification.Sid);
                     }
@@ -192,7 +188,7 @@ namespace EDP_Clinic
 
             //Checks OTP
             var verificationCheck = VerificationCheckResource.Create(
-                to: "+6590251744",
+                to: "+65" + phoneNumber,
                 code: OTPTB.Text.ToString().Trim(),
                 pathServiceSid: "VA4ceee8345f84c5be3a44bc9ab3db5790"
             );
@@ -305,7 +301,7 @@ namespace EDP_Clinic
 
             int validSessionReason = checkIntention();
 
-            bool validOTP = true;// checkOTP();
+            bool validOTP = checkOTP();
 
             //Checks if user enters a valid OTP format and is not a bot
             if (ValidInput == true && validCaptcha == true)
@@ -318,7 +314,7 @@ namespace EDP_Clinic
                 if (validOTP == true)
                 {
                     //Call Twilio SMS Function
-                    //TwilioSMS("an authentication has been made on your account.");
+                    TwilioSMS("an authentication has been made on your account.");
 
                     //A bunch of if else statements here to redirect user to respective pages
                     if (validSessionReason == 1)

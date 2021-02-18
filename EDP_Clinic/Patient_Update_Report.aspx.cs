@@ -1,10 +1,5 @@
 ﻿using EDP_Clinic.EDP_DBReference;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
 
 namespace EDP_Clinic
 {
@@ -27,7 +22,7 @@ namespace EDP_Clinic
                 tb_details.Text = eList.Details;
 
             }
-            
+
 
         }
 
@@ -47,7 +42,7 @@ namespace EDP_Clinic
             var details = tb_details.Text.ToString();
             EDP_DBReference.Service1Client client = new EDP_DBReference.Service1Client();
             update = client.UpdateReportById(id, dname, pname, clinic, date, details);
-            Response.Redirect("Create Report.aspx?id="+dname);
+            Response.Redirect("Create Report.aspx?id=" + dname);
         }
     }
 }

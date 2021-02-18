@@ -1,17 +1,12 @@
 ﻿using EDP_Clinic.EDP_DBReference;
 using System;
-using System.Collections.Generic;
-using System.Diagnostics;
 using System.Drawing;
 using System.IO;
-using System.Linq;
 using System.Net.Mail;
 using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
 
 namespace EDP_Clinic
 {
@@ -126,10 +121,11 @@ namespace EDP_Clinic
             {
                 var id = user.Id;
                 if (password2 != "")
-                {   if (filename != "")
+                {
+                    if (filename != "")
                     {
                         var photoExist = client.CheckPhotoExist(id);
-                        if(photoExist == 1)
+                        if (photoExist == 1)
                         {
                             var path = Server.MapPath("~/UserImg");
                             client.UpdateOnePhoto(id, filename);

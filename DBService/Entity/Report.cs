@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DBService.Entity
 {
@@ -22,7 +18,7 @@ namespace DBService.Entity
         {
 
         }
-        
+
         public Report(string id, string dname, string pname, string clinic, string date_of_report, string details)
         {
             Id = id;
@@ -92,7 +88,7 @@ namespace DBService.Entity
                 string clinic = row["clinic"].ToString();
                 string date_of_report = row["date_of_report"].ToString();
                 string detail = row["details"].ToString();
-                emp = new Report(Id,dname,pname,clinic, date_of_report, detail);
+                emp = new Report(Id, dname, pname, clinic, date_of_report, detail);
             }
             return emp;
         }

@@ -1,10 +1,7 @@
 ﻿using EDP_Clinic.EDP_DBReference;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
-using System.Web;
-using System.Web.UI;
 using System.Web.UI.WebControls;
 
 namespace EDP_Clinic
@@ -44,12 +41,12 @@ namespace EDP_Clinic
                 // property to an Integer.
                 int index = Convert.ToInt32(e.CommandArgument);
 
-                GridViewRow selectedRow = gv_report.Rows[index-1];
+                GridViewRow selectedRow = gv_report.Rows[index - 1];
                 string id = selectedRow.Cells[0].Text;
 
                 string url = "Patient_Update_report.aspx?id=" + id;
                 Response.Redirect(url);
-                
+
             }
         }
     }

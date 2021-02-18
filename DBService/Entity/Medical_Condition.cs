@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DBService.Entity
 {
@@ -107,7 +103,7 @@ namespace DBService.Entity
                 string condition_desc = row["Condition_Desc"].ToString();
                 string patient_codition = row["Patient_Codition"].ToString();
                 string comments = row["Comments"].ToString();
-                emp = new Medical_Condition(Id,name, med_condition, date_diagnosis, doctor, clinic, treatment,condition_desc,patient_codition,comments);
+                emp = new Medical_Condition(Id, name, med_condition, date_diagnosis, doctor, clinic, treatment, condition_desc, patient_codition, comments);
             }
             return emp;
         }

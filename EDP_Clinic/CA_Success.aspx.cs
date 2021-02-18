@@ -1,9 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
 using Twilio;
 using Twilio.Rest.Api.V2010.Account;
 
@@ -22,7 +18,7 @@ namespace EDP_Clinic
 
             else
             {
-                if (Session["admin_userInput"].ToString() != "nothing")
+                if (Session["current_appt_profile"].ToString() != "nothing")
                 {
                     loadSuccessMsg();
                 }

@@ -3,7 +3,6 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
-using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
@@ -251,7 +250,7 @@ namespace EDP_Clinic
                 lbl_error_make_appt.Text = "You did not select an appointment timeslot";
             }
 
-            else if (Session["admin_userInput"].ToString() == "nothing" )
+            else if (Session["admin_userInput"].ToString() == "nothing")
             {
                 result = false;
                 lbl_error_make_appt.ForeColor = Color.Red;
@@ -326,11 +325,11 @@ namespace EDP_Clinic
                 var exist = svc_client.CheckPhotoExist(Session["admin_userInput"].ToString());
                 if (exist == 1)
                 {
-                var photo = svc_client.GetOnePhoto(Session["admin_userInput"].ToString());
-                var fileName = photo.Photo_Resource.ToString();
-                var path = "~/UserImg/" + fileName;
-                profilePfp.ImageUrl = path;
-                lbl_profileName.Text = userObj.Name;
+                    var photo = svc_client.GetOnePhoto(Session["admin_userInput"].ToString());
+                    var fileName = photo.Photo_Resource.ToString();
+                    var path = "~/UserImg/" + fileName;
+                    profilePfp.ImageUrl = path;
+                    lbl_profileName.Text = userObj.Name;
                 }
             }
 

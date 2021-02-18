@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
+﻿using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DBService.Entity
 {
@@ -13,7 +8,8 @@ namespace DBService.Entity
     {
         public string Id { get; set; }
         public string Photo_Resource { get; set; }
-        public Photo() {
+        public Photo()
+        {
 
         }
 
@@ -64,7 +60,7 @@ namespace DBService.Entity
             SqlCommand sqlCmd = new SqlCommand(sqlStmt, myConn);
             sqlCmd.Parameters.AddWithValue("@paraId", id);
             myConn.Open();
-            var result =sqlCmd.ExecuteScalar();
+            var result = sqlCmd.ExecuteScalar();
             myConn.Close();
             if (result != null)
             {
@@ -109,7 +105,7 @@ namespace DBService.Entity
             return result;
 
         }
-                    
+
 
     }
 }
