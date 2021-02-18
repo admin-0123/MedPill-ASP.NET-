@@ -1,13 +1,10 @@
 ﻿using EDP_Clinic.EDP_DBReference;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
-using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using System.Drawing;
-using Twilio;
-using Twilio.Rest.Api.V2010.Account;
 
 namespace EDP_Clinic
 {
@@ -15,47 +12,65 @@ namespace EDP_Clinic
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            
-            EDP_DBReference.Service1Client svc_client = new EDP_DBReference.Service1Client();
-            User current_user = svc_client.GetOneUser(Session["current_appt_profile"].ToString());
-            // For breadcrumb elements
-            hl_bc_profileName.Text = current_user.Name;
-            //
-
-            Photo current_user_photo_obj = svc_client.GetOnePhoto(current_user.Id);
-
-            profilePfp.ImageUrl = $"~/assets/images/{current_user_photo_obj.Photo_Resource.Trim()}.jpg";
-            lbl_profileName.Text = current_user.Name;
-
-            tb_startdate_CalendarExtender.StartDate = DateTime.Now.AddDays(1);
-            tb_startdate_CalendarExtender.EndDate = DateTime.Now.AddMonths(2);
-            if (Session["gv_timeSlot"] == null)
+            if (Session["LoggedIn"] != null || Session["current_appt_profile"] != null)
             {
-                Session["startDate"] = DateTime.Now.AddDays(1);
-                DateTime startDate = Convert.ToDateTime(Session["startDate"]);
-                DateTime endDate = DateTime.Now.AddMonths(2);
-                lbl_validDates.Text = $"You may only pick a date between {startDate.Day} {startDate.ToString("MMMM")} to {endDate.Day} {endDate.ToString("MMMM")}";
-                Session["gv_timeSlot"] = "Testing";
+                EDP_DBReference.Service1Client svc_client = new EDP_DBReference.Service1Client();
+                User current_user = svc_client.GetOneUser(Session["current_appt_profile"].ToString());
+                // For breadcrumb elements
+                hl_bc_profileName.Text = current_user.Name;
+                //
+
+                Photo current_user_photo_obj = svc_client.GetOnePhoto(current_user.Id);
+
+                //profilePfp.ImageUrl = $"~/assets/images/{current_user_photo_obj.Photo_Resource.Trim()}.jpg";
+
+                var exist = svc_client.CheckPhotoExist(current_user.Id);
+                if (exist == 1)
+                {
+                    var photo = svc_client.GetOnePhoto(current_user.Id);
+                    var fileName = photo.Photo_Resource.ToString();
+                    var path = "~/UserImg/" + fileName;
+                    profilePfp.ImageUrl = path;
+                }
+
+
+                lbl_profileName.Text = current_user.Name;
+
+                tb_startdate_CalendarExtender.StartDate = DateTime.Now.AddDays(1);
+                tb_startdate_CalendarExtender.EndDate = DateTime.Now.AddMonths(2);
+                if (Session["gv_timeSlot"] == null)
+                {
+                    Session["startDate"] = DateTime.Now.AddDays(1);
+                    DateTime startDate = Convert.ToDateTime(Session["startDate"]);
+                    DateTime endDate = DateTime.Now.AddMonths(2);
+                    lbl_validDates.Text = $"You may only pick a date between {startDate.Day} {startDate.ToString("MMMM")} to {endDate.Day} {endDate.ToString("MMMM")}";
+                    Session["gv_timeSlot"] = "Testing";
 
 
 
-                gv_timeslots.Visible = true;
-                gv_timeslots.DataSource = Onload_Retrieve_Available_Appts();
-                gv_timeslots.DataBind();
+                    gv_timeslots.Visible = true;
+                    gv_timeslots.DataSource = Onload_Retrieve_Available_Appts();
+                    gv_timeslots.DataBind();
+
+                }
+
+                else
+                {
+                    gv_timeslots.Visible = true;
+                    gv_timeslots.DataSource = Search_AvailableAppts();
+                    gv_timeslots.DataBind();
+                }
+
+                lbl_current_at.Text = $"Appointment Type: {Session["selected_appt_type"]}";
+                lbl_current_dt.Text = $"Date time: {Session["selected_appt_date"].ToString()}";
+
 
             }
 
             else
             {
-                gv_timeslots.Visible = true;
-                gv_timeslots.DataSource = Search_AvailableAppts();
-                gv_timeslots.DataBind();
+                Response.Redirect("~/Home.aspx", false);
             }
-
-            lbl_current_at.Text = $"Appointment Type: {Session["selected_appt_type"]}";
-            lbl_current_dt.Text = $"Date time: {Session["selected_appt_date"].ToString()}";
-
-
         }
 
 
@@ -69,22 +84,35 @@ namespace EDP_Clinic
             // if input is a valid date, run the code block
             if (checkdate_bool != false)
             {
-                Session["startDate"] = Convert.ToDateTime(tb_startdate.Text);
-                gv_timeslots.DataSource = Search_AvailableAppts();
-                gv_timeslots.DataBind();
-
-                DateTime startDate = Convert.ToDateTime(Session["startDate"]);
-                DateTime endDate = DateTime.Now.AddMonths(2);
-
-                if (startDate < endDate)
+                if (Convert.ToDateTime(tb_startdate.Text) < DateTime.Now)
                 {
-                    lbl_validDates.Text = $"You may only pick a date between {startDate.Day} {startDate.ToString("MMMM")} to {endDate.Day} {endDate.ToString("MMMM")}";
+                    Session["startDate"] = DateTime.Now.AddDays(1);
+                    lbl_validDates.Text = $"Invalid past date searched";
+                    lbl_validDates.ForeColor = Color.Red;
                 }
 
                 else
                 {
-                    lbl_validDates.Text = $"Sorry, you can't enter a date later than two months of the current day";
-                    lbl_validDates.ForeColor = Color.Red;
+                    Session["startDate"] = Convert.ToDateTime(tb_startdate.Text);
+                    gv_timeslots.DataSource = Search_AvailableAppts();
+                    gv_timeslots.DataBind();
+
+                    DateTime startDate = Convert.ToDateTime(Session["startDate"]);
+                    DateTime endDate = DateTime.Now.AddMonths(2);
+
+
+                    if (startDate < endDate)
+                    {
+                        //lbl_validDates.Text = $"You may only pick a date between {startDate.Day} {startDate.ToString("MMMM")} to {endDate.Day} {endDate.ToString("MMMM")}";
+                        lbl_validDates.Text = $"You may only pick a date between {DateTime.Now.AddDays(1).Day} {DateTime.Now.AddDays(1).ToString("MMMM")} to {endDate.Day} {endDate.ToString("MMMM")}";
+                        lbl_validDates.ForeColor = Color.Black;
+                    }
+
+                    else
+                    {
+                        lbl_validDates.Text = $"Sorry, you can't enter a date later than two months of the current day";
+                        lbl_validDates.ForeColor = Color.Red;
+                    }
                 }
             }
 

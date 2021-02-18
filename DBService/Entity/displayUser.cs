@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 // Add
 
@@ -17,7 +13,7 @@ namespace DBService.Entity
     {
         // Let all properties start with caps
         public string Id { get; set; }
-        public string Name { get; set; } 
+        public string Name { get; set; }
 
         public string Email { get; set; }
 
@@ -32,7 +28,7 @@ namespace DBService.Entity
 
         }
 
-        public displayUser(string id, string name,  string email, string phoneno, string role, string verified)
+        public displayUser(string id, string name, string email, string phoneno, string role, string verified)
         {
             Id = id;
             Name = name;
@@ -107,7 +103,7 @@ namespace DBService.Entity
                 string Role = row["Role"].ToString();
                 string Verified = row["Verified"].ToString();
 
-                displayUser obj = new displayUser(Id, Name, Password,  PhoneNo, Role, Verified);
+                displayUser obj = new displayUser(Id, Name, Password, PhoneNo, Role, Verified);
                 userList.Add(obj);
             }
             return userList;
@@ -195,7 +191,7 @@ namespace DBService.Entity
             SqlConnection myConn = new SqlConnection(DBConnect);
 
             //Step 2 -  Create a DataAdapter object to retrieve data from the database table
-            string sqlStmt = "Select * from [User] WHERE Role = @Role or Role = @Role2 or Role = @Role3 AND IsDeleted = 'No' AND Name LIKE @Name";
+            string sqlStmt = "Select * from [User] WHERE Role = @Role AND IsDeleted = 'No' AND Name LIKE @Name or Role = @Role2 AND IsDeleted = 'No' AND Name LIKE @Name or Role = @Role3 AND IsDeleted = 'No' AND Name LIKE @Name";
 
             SqlDataAdapter da = new SqlDataAdapter(sqlStmt, myConn);
             da.SelectCommand.Parameters.AddWithValue("@Role", "Nurse");

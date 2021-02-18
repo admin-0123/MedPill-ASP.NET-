@@ -1,14 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
-using System.Security.Cryptography;
-using System.IO;
 using System.Diagnostics;
+using System.IO;
+using System.Security.Cryptography;
+using System.Text;
 
 namespace DBService.Entity
 {
@@ -214,10 +212,6 @@ namespace DBService.Entity
             return false;
         }
         //Select all card info
-
-        //BIG NOTE HERE
-        //Make sure end product select cards based on userID
-        //Because currently, we select all users' cards
         public List<CardInfo> SelectAllCards(string userID)
         {
             //Step 1 -  Define a connection to the database by getting

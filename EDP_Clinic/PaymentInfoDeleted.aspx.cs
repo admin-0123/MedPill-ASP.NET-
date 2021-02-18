@@ -1,10 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
 
 namespace EDP_Clinic
 {
@@ -34,12 +29,12 @@ namespace EDP_Clinic
 
         protected void goHomeBtn_Click(object sender, EventArgs e)
         {
-            Response.Redirect("UserPage.aspx",false);
+            Response.Redirect("UserPage.aspx", false);
         }
 
         protected void paymentListBtn_Click(object sender, EventArgs e)
         {
-            Response.Redirect("CardList.aspx",false);
+            Response.Redirect("CardList.aspx", false);
         }
     }
 }

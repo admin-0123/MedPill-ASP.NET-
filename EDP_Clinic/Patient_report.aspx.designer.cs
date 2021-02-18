@@ -15,13 +15,13 @@ namespace EDP_Clinic
     {
 
         /// <summary>
-        /// tb_doctor control.
+        /// dp_doctor control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox tb_doctor;
+        protected global::System.Web.UI.WebControls.DropDownList dp_doctor;
 
         /// <summary>
         /// tb_patient control.
@@ -33,13 +33,13 @@ namespace EDP_Clinic
         protected global::System.Web.UI.WebControls.TextBox tb_patient;
 
         /// <summary>
-        /// tb_clinic control.
+        /// dp_clinic control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox tb_clinic;
+        protected global::System.Web.UI.WebControls.DropDownList dp_clinic;
 
         /// <summary>
         /// tb_date control.

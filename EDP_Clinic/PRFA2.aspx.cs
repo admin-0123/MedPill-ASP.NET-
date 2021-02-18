@@ -2,10 +2,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using System.Drawing;
 
 namespace EDP_Clinic
 {
@@ -13,57 +11,75 @@ namespace EDP_Clinic
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            // On initial load of the page, set the session variable for viewstate
-            if (!IsPostBack)
+            if (Session["LoggedIn"] != null)
             {
-                Session["appt_viewstate"] = "upcoming";
-
-                // On every postback, search for the session, check the current session value of viewstate and display the contents accordingly.
-                // Edit: Shifted the switch statement from page load to here initial page load only as it is causing
-                // System.ArgumentException: Invalid postback or callback argument.  Event validation is enabled using <pages enableEventValidation="true"/> in configuration or <%@ Page EnableEventValidation="true" %> in a page.  For security purposes, this feature verifies that arguments to postback or callback events originate from the server control that originally rendered them.  If the data is valid and expected, use the ClientScriptManager.RegisterForEventValidation method in order to register the postback or callback data for validation.
-
-                switch (Session["appt_viewstate"])
+                // On initial load of the page, set the session variable for viewstate
+                if (!IsPostBack)
                 {
-                    case "upcoming":
-                        listview_appts.DataSource = GetApptsUserUpcoming();
-                        listview_appts.DataBind();
-                        break;
-                    case "past":
-                        listview_appts.DataSource = GetApptsUserPast();
-                        listview_appts.DataBind();
-                        break;
-                    case "missed":
-                        listview_appts.DataSource = GetApptsUserMissed();
-                        listview_appts.DataBind();
-                        break;
+                    Session["appt_viewstate"] = "upcoming";
 
+                    // On every postback, search for the session, check the current session value of viewstate and display the contents accordingly.
+                    // Edit: Shifted the switch statement from page load to here initial page load only as it is causing
+                    // System.ArgumentException: Invalid postback or callback argument.  Event validation is enabled using <pages enableEventValidation="true"/> in configuration or <%@ Page EnableEventValidation="true" %> in a page.  For security purposes, this feature verifies that arguments to postback or callback events originate from the server control that originally rendered them.  If the data is valid and expected, use the ClientScriptManager.RegisterForEventValidation method in order to register the postback or callback data for validation.
+
+                    switch (Session["appt_viewstate"])
+                    {
+                        case "upcoming":
+                            listview_appts.DataSource = GetApptsUserUpcoming();
+                            listview_appts.DataBind();
+                            break;
+                        case "past":
+                            listview_appts.DataSource = GetApptsUserPast();
+                            listview_appts.DataBind();
+                            break;
+                        case "missed":
+                            listview_appts.DataSource = GetApptsUserMissed();
+                            listview_appts.DataBind();
+                            break;
+
+                    }
                 }
+
+                // Search for the current profile selected and set the necessary contents like profileName.. etc
+                EDP_DBReference.Service1Client svc_client = new EDP_DBReference.Service1Client();
+                User current_user = svc_client.GetOneUser(Session["current_appt_profile"].ToString());
+                // For breadcrumb elements
+                hl_bc_profileName.Text = current_user.Name;
+                //
+
+                Photo current_user_photo_obj = svc_client.GetOnePhoto(current_user.Id);
+                //profilePfp.ImageUrl = $"~/assets/images/{current_user_photo_obj.Photo_Resource.Trim()}.jpg";
+                lbl_profileName.Text = current_user.Name;
+
+
+                var exist3 = svc_client.CheckPhotoExist(current_user.Id);
+                if (exist3 == 1)
+                {
+                    var photo = svc_client.GetOnePhoto(current_user.Id);
+                    var fileName = photo.Photo_Resource.ToString();
+                    var path = "~/UserImg/" + fileName;
+                    profilePfp.ImageUrl = path;
+                }
+
+                //repeater_appts.DataSource = GetApptsUser();
+                //repeater_appts.DataBind();
+
+
+
+                var test123 = listview_appts.SelectedIndex;
+                //System.Diagnostics.Debug.WriteLine($"SELECTED INDEX IS {test123}");
             }
-            
-            // Search for the current profile selected and set the necessary contents like profileName.. etc
-            EDP_DBReference.Service1Client svc_client = new EDP_DBReference.Service1Client();
-            User current_user = svc_client.GetOneUser(Session["current_appt_profile"].ToString());
-            // For breadcrumb elements
-            hl_bc_profileName.Text = current_user.Name;
-            //
 
-            Photo current_user_photo_obj = svc_client.GetOnePhoto(current_user.Id);
-            profilePfp.ImageUrl = $"~/assets/images/{current_user_photo_obj.Photo_Resource.Trim()}.jpg";
-            lbl_profileName.Text = current_user.Name;
-
-            //repeater_appts.DataSource = GetApptsUser();
-            //repeater_appts.DataBind();
-
-
-
-            var test123 = listview_appts.SelectedIndex;
-            //System.Diagnostics.Debug.WriteLine($"SELECTED INDEX IS {test123}");
+            else
+            {
+                Response.Redirect("Login.aspx", false);
+            }
         }
 
-/*        protected void btn_cancel_click(object sender, EventArgs e)
-        {
-            ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "showModal();", true);
-        }*/
+        /*        protected void btn_cancel_click(object sender, EventArgs e)
+                {
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "showModal();", true);
+                }*/
 
 
         // Get All Appts for one user regardless of the status
@@ -74,7 +90,7 @@ namespace EDP_Clinic
 
             //System.Diagnostics.Debug.WriteLine("THE SESSION VALUE IS " + Session["UserID"]);
             testList = svc_client.GetAllApptUser(Convert.ToInt32(Session["current_appt_profile"].ToString())).ToList<Appointment>();
-            
+
             if (testList == null)
             {
                 testList = new List<Appointment>();
@@ -182,13 +198,35 @@ namespace EDP_Clinic
             }
         }
 
+        protected String Convert_ID_To_Name(object id)
+        {
+            if (Convert.ToInt32(id) == 0)
+            {
+                return "Unassigned";
+            }
+            else
+            {
+                EDP_DBReference.Service1Client svc_client = new EDP_DBReference.Service1Client();
+                var user = svc_client.GetOneUser(id.ToString());
+
+                if (user == null)
+                {
+                    user.Name = "No name found";
+                }
+
+                return user.Name.ToString();
+            }
+        }
+
 
         // Link Buttons to change the type of appointment records being displayed
         protected void lbtn_upcoming_Click(object sender, EventArgs e)
         {
             if (Session["appt_viewstate"].ToString() != "upcoming")
             {
-
+                // Line Below fixes the bug of being on page 2 or later in a viewstate and then changing to another viewstate, causing the indexes to still be there
+                // Reset the page to the first
+                dp_listview_appt.SetPageProperties(0, dp_listview_appt.MaximumRows, false);
                 lbtn_upcoming.CssClass = "";
                 lbtn_past.CssClass = "lbtn_inactive";
                 lbtn_missed.CssClass = "lbtn_inactive";
@@ -203,15 +241,17 @@ namespace EDP_Clinic
         {
             if (Session["appt_viewstate"].ToString() != "past")
             {
-
+                // Line Below fixes the bug of being on page 2 or later in a viewstate and then changing to another viewstate, causing the indexes to still be there
+                // Reset the page to the first
+                dp_listview_appt.SetPageProperties(0, dp_listview_appt.MaximumRows, false);
                 lbtn_upcoming.CssClass = "lbtn_inactive";
                 lbtn_past.CssClass = "";
                 lbtn_missed.CssClass = "lbtn_inactive";
                 Session["appt_viewstate"] = "past";
                 listview_appts.DataSource = GetApptsUserPast();
                 listview_appts.DataBind();
-                
-                
+
+
             }
 
 
@@ -220,7 +260,9 @@ namespace EDP_Clinic
         protected void lbtn_missed_Click(object sender, EventArgs e)
         {
             if (Session["appt_viewstate"].ToString() != "missed")
-            {
+            {   // Line Below fixes the bug of being on page 2 or later in a viewstate and then changing to another viewstate, causing the indexes to still be there
+                // Reset the page to the first
+                dp_listview_appt.SetPageProperties(0, dp_listview_appt.MaximumRows, false);
                 lbtn_upcoming.CssClass = "lbtn_inactive";
                 lbtn_past.CssClass = "lbtn_inactive";
                 lbtn_missed.CssClass = "";
@@ -290,14 +332,17 @@ namespace EDP_Clinic
                 switch (Session["appt_viewstate"])
                 {
                     case "upcoming":
+                        dp_listview_appt.SetPageProperties(0, dp_listview_appt.MaximumRows, false);
                         listview_appts.DataSource = GetApptsUserUpcoming();
                         listview_appts.DataBind();
                         break;
                     case "past":
+                        dp_listview_appt.SetPageProperties(0, dp_listview_appt.MaximumRows, false);
                         listview_appts.DataSource = GetApptsUserPast();
                         listview_appts.DataBind();
                         break;
                     case "missed":
+                        dp_listview_appt.SetPageProperties(0, dp_listview_appt.MaximumRows, false);
                         listview_appts.DataSource = GetApptsUserMissed();
                         listview_appts.DataBind();
                         break;
@@ -314,5 +359,14 @@ namespace EDP_Clinic
             }
         }
 
+        protected void btn_PaymentOnClick(object sender, EventArgs e)
+        {
+            Response.Redirect("~/Payment.aspx");
+        }
+
+        protected void listview_appts_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

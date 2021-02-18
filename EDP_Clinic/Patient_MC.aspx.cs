@@ -1,10 +1,5 @@
 ﻿using EDP_Clinic.EDP_DBReference;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
 
 namespace EDP_Clinic
 {
@@ -12,6 +7,17 @@ namespace EDP_Clinic
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (Session["LoggedIn"] == null)
+            {
+                Response.Redirect("Login.aspx", false);
+            }
+            else
+            {
+                if (Session["UserRole"].ToString() != "Doctor" && Session["UserRole"].ToString() != "Patient")
+                {
+                    Response.Redirect("Home.aspx", false);
+                }
+            }
             string x = "1";
             Patient_MC eList = new Patient_MC();
             EDP_DBReference.Service1Client client = new EDP_DBReference.Service1Client();

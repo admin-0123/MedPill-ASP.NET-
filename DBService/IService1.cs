@@ -1,11 +1,9 @@
-﻿using System;
+﻿// Bring in entity folder
+using DBService.Entity;
+using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Runtime.Serialization;
 using System.ServiceModel;
-using System.Text;
-// Bring in entity folder
-using DBService.Entity;
 
 namespace DBService
 {
@@ -114,6 +112,9 @@ namespace DBService
         [OperationContract]
         Receipt SelectByReceiptID(string userID, string uniqueIdentifier);
 
+        [OperationContract]
+        List<Receipt> SelectAllReceiptsAdmin();
+
         // Appointments IService Methods
         [OperationContract]
         List<Appointment> GetAllApptAdmin();
@@ -132,6 +133,18 @@ namespace DBService
         [OperationContract]
 
         List<Appointment> GetAllApptUserMissed(int uid);
+
+        [OperationContract]
+
+        List<Appointment> GetAllApptAdminUpcoming();
+
+        [OperationContract]
+
+        List<Appointment> GetAllApptAdminPast();
+
+        [OperationContract]
+
+        List<Appointment> GetAllApptAdminMissed();
 
         [OperationContract]
         int CreateAppointment(int patientID, string appointmentType, DateTime dateTime, string status);
@@ -158,6 +171,37 @@ namespace DBService
         [OperationContract]
         Caregiver GetOneCG(string id);
 
+        [OperationContract]
+
+        List<User> GetAllDoctors();
+
+
+        [OperationContract]
+
+        User GetOneDoctor(string doctor_name);
+
+        [OperationContract]
+
+        int UpdateDoctor(int uid, DateTime old_time, int doctor_id);
+
+        [OperationContract]
+
+        User GetPatientByName(string patient_name);
+
+        [OperationContract]
+
+        int ApproveCaregiver(string cg_id, string patient_id);
+
+        [OperationContract]
+
+        int RemoveCaregiver(string cg_id, string patient_id);
+
+
+        [OperationContract]
+        Caregiver GetOneCGByCRID(string id);
+
+
+        //
 
         [OperationContract]
         int CreateReport(string id, string dname, string pname, string clinic, string date_of_report, string details);

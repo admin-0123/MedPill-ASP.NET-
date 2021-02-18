@@ -1,15 +1,10 @@
 ﻿using EDP_Clinic.EDP_DBReference;
 using System;
-using System.Collections.Generic;
-using System.Data.SqlClient;
 using System.Drawing;
-using System.Linq;
 using System.Net.Mail;
 using System.Security.Cryptography;
 using System.Text;
 using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
 
 namespace EDP_Clinic
 {
@@ -98,7 +93,7 @@ namespace EDP_Clinic
             {
                 return false;
             }
-            
+
         }
 
         protected void Button2_Click(object sender, EventArgs e)

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 // Add
 
@@ -417,6 +413,134 @@ namespace DBService.Entity
             }
             return userList;
         }
+
+
+        public List<User> SelectAllDoctors()
+        {
+            //Step 1 -  Define a connection to the database by getting
+            //          the connection string from App.config
+            string DBConnect = ConfigurationManager.ConnectionStrings["EDP_DB"].ConnectionString;
+            SqlConnection myConn = new SqlConnection(DBConnect);
+
+            //Step 2 -  Create a DataAdapter object to retrieve data from the database table
+            string sqlStmt = "Select * from [User] WHERE Role = @Role AND IsDeleted = 'No'";
+            SqlDataAdapter da = new SqlDataAdapter(sqlStmt, myConn);
+            da.SelectCommand.Parameters.AddWithValue("@Role", "Doctor");
+            //Step 3 -  Create a DataSet to store the data to be retrieved
+            DataSet ds = new DataSet();
+
+            //Step 4 -  Use the DataAdapter to fill the DataSet with data retrieved
+            da.Fill(ds);
+
+            //Step 5 -  Read data from DataSet to List
+            List<User> userList = new List<User>();
+            int rec_cnt = ds.Tables[0].Rows.Count;
+            for (int i = 0; i < rec_cnt; i++)
+            {
+                DataRow row = ds.Tables[0].Rows[i];  // Sql command returns only one record
+                string Id = row["Id"].ToString();
+                string Name = row["Name"].ToString();
+                string Password = row["Password"].ToString();
+                string Salt = row["Salt"].ToString();
+                string Email = row["Email"].ToString();
+                string PhoneNo = row["PhoneNo"].ToString();
+                string Role = row["Role"].ToString();
+                string Verified = row["Verified"].ToString();
+                string IsDeleted = row["IsDeleted"].ToString();
+                string IsCaretaker = row["IsCaretaker"].ToString();
+
+                User obj = new User(Id, Name, Password, Salt, Email, PhoneNo, Role, Verified, IsDeleted, IsCaretaker);
+                userList.Add(obj);
+            }
+            return userList;
+        }
+
+        public User SelectDoctorByName(string doctor_name)
+        {
+            //Step 1 -  Define a connection to the database by getting
+            //          the connection string from App.config
+            string DBConnect = ConfigurationManager.ConnectionStrings["EDP_DB"].ConnectionString;
+            SqlConnection myConn = new SqlConnection(DBConnect);
+
+            //Step 2 -  Create a DataAdapter to retrieve data from the database table
+            string sqlStmt = "Select * from [User] WHERE Role = @Role AND Name = @Name";
+            SqlDataAdapter da = new SqlDataAdapter(sqlStmt, myConn);
+            da.SelectCommand.Parameters.AddWithValue("@Role", "Doctor");
+            da.SelectCommand.Parameters.AddWithValue("@Name", doctor_name);
+
+            //Step 3 -  Create a DataSet to store the data to be retrieved
+            DataSet ds = new DataSet();
+
+            //Step 4 -  Use the DataAdapter to fill the DataSet with data retrieved
+            da.Fill(ds);
+
+            //Step 5 -  Read data from DataSet.
+            User user = null;
+            int rec_cnt = ds.Tables[0].Rows.Count;
+            if (rec_cnt == 1)
+            {
+                DataRow row = ds.Tables[0].Rows[0];  // Sql command returns only one record
+                string Id = row["Id"].ToString();
+                string Name = row["Name"].ToString();
+                string Password = row["Password"].ToString();
+                string Salt = row["Salt"].ToString();
+                string Email = row["Email"].ToString();
+                string PhoneNo = row["PhoneNo"].ToString();
+                string Role = row["Role"].ToString();
+                string Verified = row["Verified"].ToString();
+                string IsDeleted = row["IsDeleted"].ToString();
+                string IsCaretaker = row["IsCaretaker"].ToString();
+
+
+                user = new User(Id, Name, Password, Salt, Email, PhoneNo, Role, Verified, IsDeleted, IsCaretaker);
+            }
+            return user;
+        }
+
+
+        public User SelectPatientByName(string patient_name)
+        {
+            //Step 1 -  Define a connection to the database by getting
+            //          the connection string from App.config
+            string DBConnect = ConfigurationManager.ConnectionStrings["EDP_DB"].ConnectionString;
+            SqlConnection myConn = new SqlConnection(DBConnect);
+
+            //Step 2 -  Create a DataAdapter to retrieve data from the database table
+            string sqlStmt = "Select * from [User] WHERE Role = @Role AND Name = @Name";
+            SqlDataAdapter da = new SqlDataAdapter(sqlStmt, myConn);
+            da.SelectCommand.Parameters.AddWithValue("@Role", "Patient");
+            da.SelectCommand.Parameters.AddWithValue("@Name", patient_name);
+
+            //Step 3 -  Create a DataSet to store the data to be retrieved
+            DataSet ds = new DataSet();
+
+            //Step 4 -  Use the DataAdapter to fill the DataSet with data retrieved
+            da.Fill(ds);
+
+            //Step 5 -  Read data from DataSet.
+            User user = null;
+            int rec_cnt = ds.Tables[0].Rows.Count;
+            if (rec_cnt == 1)
+            {
+                DataRow row = ds.Tables[0].Rows[0];  // Sql command returns only one record
+                string Id = row["Id"].ToString();
+                string Name = row["Name"].ToString();
+                string Password = row["Password"].ToString();
+                string Salt = row["Salt"].ToString();
+                string Email = row["Email"].ToString();
+                string PhoneNo = row["PhoneNo"].ToString();
+                string Role = row["Role"].ToString();
+                string Verified = row["Verified"].ToString();
+                string IsDeleted = row["IsDeleted"].ToString();
+                string IsCaretaker = row["IsCaretaker"].ToString();
+
+
+                user = new User(Id, Name, Password, Salt, Email, PhoneNo, Role, Verified, IsDeleted, IsCaretaker);
+            }
+            return user;
+        }
+
+
         public List<User> SelectAllEmployees()
         {
             //Step 1 -  Define a connection to the database by getting

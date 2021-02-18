@@ -1,18 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
-using System.Collections.Specialized;
-using System.Security.Claims;
+﻿using EDP_Clinic.EDP_DBReference;
+using System;
+using System.Diagnostics;
 using System.Security.Cryptography;
 using System.Text;
-using System.Data.SqlClient;
-using System.Data;
-using System.Diagnostics;
-using System.IO;
-using EDP_Clinic.EDP_DBReference;
 using System.Text.RegularExpressions;
 
 namespace EDP_Clinic
@@ -25,6 +15,10 @@ namespace EDP_Clinic
         protected void Page_Load(object sender, EventArgs e)
         {
             var code = Request.QueryString["value"];
+            if (code == null)
+            {
+                Response.Redirect("Home.aspx", false);
+            }
             Debug.WriteLine(code);
             codeLbl.Text = code;
 
@@ -80,19 +74,19 @@ namespace EDP_Clinic
             {
                 errors = errors + "Password must at least be 8 characters long <br/>";
             }
-            if (Regex.IsMatch(password, "[a-s]"))
+            if (!Regex.IsMatch(password, "[a-s]"))
             {
                 errors = errors + "Password must contain lowercase letters <br/>";
             }
-            if (Regex.IsMatch(password, "[A-Z]"))
+            if (!Regex.IsMatch(password, "[A-Z]"))
             {
                 errors = errors + "Password must contain uppercase letters <br/>";
             }
-            if (Regex.IsMatch(password, "[0-9]"))
+            if (!Regex.IsMatch(password, "[0-9]"))
             {
                 errors = errors + "Password must contain at least 1 number <br/>";
             }
-            if (Regex.IsMatch(password, "[^0-9a-zA-Z]"))
+            if (!Regex.IsMatch(password, "[^0-9a-zA-Z]"))
             {
                 errors = errors + "Password must contain at least one symbol <br/>";
             }
@@ -100,6 +94,6 @@ namespace EDP_Clinic
         }
 
     }
-    
+
 
 }

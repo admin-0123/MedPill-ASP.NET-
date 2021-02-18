@@ -1,12 +1,8 @@
 ﻿using EDP_Clinic.EDP_DBReference;
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
-using System.Linq;
 using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
 using Twilio.Rest.Verify.V2.Service;
 
 namespace EDP_Clinic
@@ -16,14 +12,17 @@ namespace EDP_Clinic
         Service1Client client = new Service1Client();
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (Session["MobileLogin"] == null)
+            {
+                Response.Redirect("Login.aspx", false);
+            }
 
         }
-
         protected void Button1_Click(object sender, EventArgs e)
         {
             var phoneNo = Session["MobileLogin"].ToString();
             var phoneNumber = "+65" + phoneNo;
-            var otp = HttpUtility.HtmlEncode(phoneOTP.Text);
+            var otp = HttpUtility.HtmlEncode(phoneOTP.Text.ToString());
             var result = checkOTP(phoneNumber, otp);
             if (!result)
             {
@@ -34,10 +33,6 @@ namespace EDP_Clinic
             }
             else
             {
-                Session.Clear();
-                Session.Abandon();
-                Session.RemoveAll();
-
                 var user = client.GetOneUserByPhoneNo(phoneNo);
                 var role = user.Role;
                 Session["UserRole"] = role;
@@ -47,7 +42,7 @@ namespace EDP_Clinic
                 if (role == "Patient")
                 {
                     Response.Cookies.Add(new HttpCookie("AuthToken", guid));
-                    Response.Redirect("UserPage.aspx", false);
+                    Response.Redirect("Home.aspx", false);
                 }
                 else if (role == "Admin")
                 {
@@ -57,7 +52,7 @@ namespace EDP_Clinic
                 else
                 {
                     Response.Cookies.Add(new HttpCookie("AuthToken", guid));
-                    Response.Redirect("PatientOverview.aspx", false);
+                    Response.Redirect("Home.aspx", false);
                 }
             }
         }

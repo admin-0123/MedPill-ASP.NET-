@@ -1,48 +1,38 @@
 ﻿using EDP_Clinic.EDP_DBReference;
 using System;
 using System.Collections.Generic;
-using System.Data;
-using System.Data.SqlClient;
-using System.Globalization;
+using System.Diagnostics;
+using System.Drawing;
 using System.Linq;
+using System.Net.Mail;
+using System.Security.Cryptography;
 using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using System.Diagnostics;
-using System.IdentityModel.Tokens.Jwt;
-using Microsoft.IdentityModel.Tokens;
-using System.Security.Claims;
-using System.Security.Cryptography;
-using System.Text;
-using System.Drawing;
-using System.Net.Mail;
 
 namespace EDP_Clinic
 {
     public partial class AdminPage : System.Web.UI.Page
     {
-        byte[] Key;
-        byte[] IV;
-        string deleteid;
         Service1Client client = new Service1Client();
         SmtpClient emailClient = new SmtpClient("smtp-relay.sendinblue.com", 587);
-       
-        
+
+
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!this.IsPostBack)
+            if (Session["LoggedIn"] == null)
             {
-                try
+                Response.Redirect("Login.aspx", false);
+            }
+            else
+            {
+                if (Session["UserRole"].ToString() != "Admin")
                 {
-                    refreshgrid();
-                }
-                catch (Exception ex)
-                {
-                    Debug.WriteLine(ex);
+                    Response.Redirect("Home.aspx", false);
                 }
             }
-           
+            refreshgrid();
         }
         protected void EmployeeGridView_RowCommand1(object sender, GridViewCommandEventArgs e)
         {
@@ -66,7 +56,7 @@ namespace EDP_Clinic
             if (e.CommandName == "deleteinfo")
             {
                 Debug.WriteLine("delete clicked");
-                
+
                 int index = Convert.ToInt32(e.CommandArgument);
                 GridViewRow selectedRow = EmployeeGridView.Rows[index];
                 var deleteid = selectedRow.Cells[3].Text;
@@ -81,7 +71,7 @@ namespace EDP_Clinic
             var id = delLbl.Text;
             try
             {
-               var result =  client.DeleteOneUser(id);
+                var result = client.DeleteOneUser(id);
                 if (result == 1)
                 {
                     Debug.WriteLine("success");
@@ -119,7 +109,7 @@ namespace EDP_Clinic
                 editError.ForeColor = Color.Red;
                 editError.Visible = true;
                 return;
-                
+
             }
             else
             {
@@ -142,9 +132,9 @@ namespace EDP_Clinic
                 var exist = client.CheckPhoneNo(mobile);
                 if (exist == 1)
                 {
-                editError.Text = "Phone number already in use";
-                editError.ForeColor = Color.Red;
-                editError.Visible = true;
+                    editError.Text = "Phone number already in use";
+                    editError.ForeColor = Color.Red;
+                    editError.Visible = true;
                 }
             }
             try
@@ -184,7 +174,7 @@ namespace EDP_Clinic
         {
             refreshgrid();
         }
-            protected void Button1_Click(object sender, EventArgs e)
+        protected void Button1_Click(object sender, EventArgs e)
         {
             var email = tbAddEmail.Text;
             var name = tbAddName.Text;
@@ -222,14 +212,17 @@ namespace EDP_Clinic
                     byte[] saltByte = new byte[8];
                     rng.GetBytes(saltByte);
                     var salt = Convert.ToBase64String(saltByte);
-                    var result  =  client.AddOneUser(name, "placeholder", salt, email, mobile, role, "No");
+                    var result = client.AddOneUser(name, "placeholder", salt, email, mobile, role, "No");
                     if (result == 0)
                     {
                         return;
                     }
                     else
                     {
-                        var code = makeCode(); 
+                        tbAddEmail.Text = "";
+                        tbAddName.Text = "";
+                        tbAddMobile.Text = "";
+                        var code = makeCode();
                         client.AddCode(email, code);
                         var link = "https://localhost:44310/EmployeePasswordSet.aspx?value=" + code;
                         emailClient.Credentials = new System.Net.NetworkCredential("bryanchinzw@gmail.com", "vPDBKArZRY7HcIJC");
@@ -252,14 +245,14 @@ namespace EDP_Clinic
                             Debug.WriteLine(ex);
                         }
                     }
-                    
+
                 }
 
             }
         }
         public static bool IsValidEmail(string email)
         {
-           try
+            try
             {
                 MailAddress m = new MailAddress(email);
 
@@ -270,7 +263,7 @@ namespace EDP_Clinic
                 return false;
             }
         }
-        
+
         public void refreshgrid()
         {
             List<displayUser> patientList = new List<displayUser>();
@@ -291,7 +284,7 @@ namespace EDP_Clinic
                 r = generator.Next(0, 1000000).ToString("D6");
                 exist = client.CheckCodeExist(r);
             }
-            
+
             return r;
         }
 

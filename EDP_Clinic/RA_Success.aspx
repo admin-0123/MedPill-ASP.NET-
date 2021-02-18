@@ -25,7 +25,7 @@
         </div>
         <div class="row">
              <div class="col-lg-3 col-md-4">
-                            <asp:Button ID="btn_go_dashboard" runat="server" Text="Dashboard" BorderStyle="None" CssClass="bg-primary text-white mt-4 btn_block btn-sm" />
+                            <asp:Button ID="btn_go_dashboard" runat="server" Text="Dashboard" BorderStyle="None" CssClass="bg-primary text-white mt-4 btn_block btn-sm" OnClick="btn_go_userpage_Click" />
             </div>
             <div class="col-lg-3 col-md-4">
                            <asp:Button ID="btn_go_pfa" runat="server" Text="Appointment" BorderStyle="None" CssClass="bg-primary text-white mt-4 btn_block btn-sm" OnClick="btn_go_pfa_Click" />

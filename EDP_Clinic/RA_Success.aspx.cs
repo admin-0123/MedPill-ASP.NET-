@@ -1,9 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
 using Twilio;
 using Twilio.Rest.Api.V2010.Account;
 
@@ -13,6 +9,29 @@ namespace EDP_Clinic
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+
+
+            if (Session["LoggedIn"] == null || Session["current_appt_profile"] == null)
+            {
+                Response.Redirect("~/Home.aspx");
+            }
+
+
+            else
+            {
+                if (Session["current_appt_profile"].ToString() != "nothing")
+                {
+                    loadSuccessMsg();
+                }
+            }
+
+
+
+        }
+
+
+        protected void loadSuccessMsg()
+        {
             EDP_DBReference.Service1Client svc_client = new EDP_DBReference.Service1Client();
             Dictionary<String, String> apptDetail = (Dictionary<string, string>)Session["successful_appt_details"];
 
@@ -20,9 +39,9 @@ namespace EDP_Clinic
             dateTimeinput = Convert.ToDateTime(apptDetail["dateTime"]);
             var appt = svc_client.GetOneAppt(Convert.ToInt32(Session["current_appt_profile"]), dateTimeinput);
 
-            var patient = svc_client.GetOneUser(appt.patientID);
+            var patient = svc_client.GetOneUser(appt.patientID.ToString());
 
-            var doctor = svc_client.GetOneUser(appt.doctorID);
+            var doctor = svc_client.GetOneUser(appt.doctorID.ToString());
 
             lbl_apptType.Text = $"Appointment Type: {appt.appointmentType.ToString()}";
             lbl_datetime.Text = $"Appointment Time: {appt.dateTime.ToString()}";
@@ -50,7 +69,7 @@ namespace EDP_Clinic
 
                 TwilioClient.Init(accountSid, authToken);
 
-                if (patient.Id != Convert.ToInt32(Session["UserID"]))
+                if (patient.Id != Convert.ToInt32(Session["UserID"]).ToString())
                 {
                     var message = MessageResource.Create(
                     body: $"You have successfully updated your appointment for {patient.Name.Trim()} with MedPill Clinic, report to the clinic on {appt.dateTime.ToString("G")}",
@@ -69,16 +88,15 @@ namespace EDP_Clinic
                 }
 
             }
-
-
-
-
-
         }
-
         protected void btn_go_pfa_Click(object sender, EventArgs e)
         {
             Response.Redirect("~/PFA.aspx");
+        }
+
+        protected void btn_go_userpage_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/UserPage.aspx");
         }
     }
 }

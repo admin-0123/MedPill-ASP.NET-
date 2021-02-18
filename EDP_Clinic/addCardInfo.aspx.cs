@@ -1,21 +1,16 @@
-﻿using System;
+﻿using EDP_Clinic.EDP_DBReference;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
-using System.Text.RegularExpressions;
-using System.Drawing;
-using System.Security.Cryptography;
-using System.Text;
-using System.Net;
-using System.IO;
-using System.Web.Script.Serialization;
-using System.Diagnostics;
-using EDP_Clinic.EDP_DBReference;
-using Twilio;
 using System.Collections.Specialized;
 using System.Configuration;
+using System.Diagnostics;
+using System.Drawing;
+using System.IO;
+using System.Net;
+using System.Security.Cryptography;
+using System.Text.RegularExpressions;
+using System.Web.Script.Serialization;
+using Twilio;
 using Twilio.Rest.Api.V2010.Account;
 
 namespace EDP_Clinic
@@ -153,24 +148,16 @@ namespace EDP_Clinic
             }
             else
             {
-                //int currentYear = DateTime.Now.Year;
-                //int currentMonth = DateTime.Now.Month;
-                //int currentDay = DateTime.Now.Day;
-
-                //cardExpiryError.Text = currentMonth.ToString();
-                //cardExpiryError.Text = cardExpiryTB.Text;
                 DateTime inputDate = Convert.ToDateTime(cardExpiryTB.Text);
                 double monthDifference = inputDate.Subtract(currentDate).Days / (365.25 / 12);
                 if (monthDifference < 3)
                 {
                     cardExpiryError.Text = "Please ensure that your expiry date is at least 3 months from current date";
-                    //cardExpiryError.Text = monthDifference.ToString();
                     cardExpiryError.ForeColor = Color.Red;
                     cardExpiryError.Visible = true;
                 }
                 else
                 {
-                    //cardExpiryError.Text = monthDifference.ToString();
                     cardExpiryError.Text = "Excellent";
                     cardExpiryError.ForeColor = Color.Green;
                     cardExpiryError.Visible = true;

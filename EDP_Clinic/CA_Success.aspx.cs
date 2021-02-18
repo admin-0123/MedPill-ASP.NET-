@@ -1,9 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
 using Twilio;
 using Twilio.Rest.Api.V2010.Account;
 
@@ -12,6 +8,28 @@ namespace EDP_Clinic
     public partial class CA_Success : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
+        {
+
+            if (Session["LoggedIn"] == null || Session["current_appt_profile"] == null)
+            {
+                Response.Redirect("~/Home.aspx");
+            }
+
+
+            else
+            {
+                if (Session["current_appt_profile"].ToString() != "nothing")
+                {
+                    loadSuccessMsg();
+                }
+            }
+
+
+
+
+        }
+
+        protected void loadSuccessMsg()
         {
             EDP_DBReference.Service1Client svc_client = new EDP_DBReference.Service1Client();
             Dictionary<String, String> apptDetail = (Dictionary<string, string>)Session["successful_appt_details"];
@@ -69,16 +87,17 @@ namespace EDP_Clinic
                 }
 
             }
-
-
-
-
-
         }
 
         protected void btn_go_pfa_Click(object sender, EventArgs e)
         {
             Response.Redirect("~/PFA.aspx");
+        }
+
+
+        protected void btn_go_userpage_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/UserPage.aspx");
         }
     }
 }

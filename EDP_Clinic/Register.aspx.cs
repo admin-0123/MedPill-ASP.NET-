@@ -1,19 +1,12 @@
 ﻿using EDP_Clinic.EDP_DBReference;
 using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.SqlClient;
 using System.Diagnostics;
 using System.Drawing;
-using System.Globalization;
-using System.Linq;
 using System.Net.Mail;
 using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
-using System.Web;
 using System.Web.UI;
-using System.Web.UI.WebControls;
 
 namespace EDP_Clinic
 {
@@ -71,7 +64,7 @@ namespace EDP_Clinic
                     errorMsg.Visible = true;
                     return;
                 }
-                    if (password == password2)
+                if (password == password2)
                 {
                     var errors = passwordcheck(password);
                     if (errors != "")
@@ -132,7 +125,7 @@ namespace EDP_Clinic
                     MailMessage mail = new MailMessage();
                     mail.Subject = "Verify Account (MedPill)";
                     mail.SubjectEncoding = System.Text.Encoding.UTF8;
-                    mail.Body = "Please to verify account <br> <a>" + link +"</a>";
+                    mail.Body = "Please to verify account <br> <a>" + link + "</a>";
                     mail.IsBodyHtml = true;
                     mail.Priority = MailPriority.High;
                     mail.From = new MailAddress("bryanchinzw@gmail.com");

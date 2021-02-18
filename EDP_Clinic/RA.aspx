@@ -64,6 +64,12 @@
             background-color: lightgray;
         }
 
+        
+            .hyperlink_breadcrumb {
+                color:black;
+    text-decoration:none;
+            }
+
     </style>
     </asp:Content>
     <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
@@ -71,18 +77,21 @@
         <!-- Breadcrumb -->
         <nav aria-label="breadcrumb">
   <ol class="breadcrumb">
+                  <li class="breadcrumb-item active">
+              <asp:HyperLink ID="HyperLink1" runat="server" CssClass="hyperlink_breadcrumb" NavigateUrl="~/UserPage.aspx">User Page</asp:HyperLink></asp:Label>
+      </li>
       <li class="breadcrumb-item active">
               <asp:HyperLink ID="hl_bc_appt" runat="server" CssClass="hyperlink_breadcrumb" NavigateUrl="~/PFA.aspx">Appointments</asp:HyperLink></asp:Label>
       </li>
     <li class="breadcrumb-item active" aria-current="page"> 
-        <asp:HyperLink ID="hl_bc_profileName" runat="server" CssClass="hyperlink_breadcrumb"></asp:HyperLink></asp:Label>
+        <asp:HyperLink ID="hl_bc_profileName" runat="server" CssClass="hyperlink_breadcrumb" NavigateUrl="~/PRFA2.aspx"></asp:HyperLink></asp:Label>
       </li>
     <li class="breadcrumb-item active" aria-current="page"> 
         <asp:HyperLink ID="hl_bc_resch_appt" runat="server" CssClass="hyperlink_breadcrumb_active"></asp:HyperLink>Reschedule Appointment</asp:Label>
       </li>
   </ol>
 </nav>
-            <h2>Book an Appointment </h2>
+            <h2>Reschedule an Appointment </h2>
             <div class="card-header">
             <div class="row">
                 <div class="col-sm-12"> 

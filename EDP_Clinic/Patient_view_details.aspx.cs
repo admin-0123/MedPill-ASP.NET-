@@ -1,10 +1,5 @@
 ﻿using EDP_Clinic.EDP_DBReference;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
 
 namespace EDP_Clinic
 {
@@ -12,6 +7,17 @@ namespace EDP_Clinic
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (Session["LoggedIn"] == null)
+            {
+                Response.Redirect("Login.aspx", false);
+            }
+            else
+            {
+                if (Session["UserRole"].ToString() != "Patient")
+                {
+                    Response.Redirect("Home.aspx", false);
+                }
+            }
             string id = "1";
             Details eList = new Details();
             EDP_DBReference.Service1Client client = new EDP_DBReference.Service1Client();
@@ -29,13 +35,13 @@ namespace EDP_Clinic
 
         protected void btn_back_click(object sender, EventArgs e)
         {
-            
+            Response.Redirect("UserPage.aspx", false);
         }
 
         protected void btn_update_click(object sender, EventArgs e)
         {
             string id = "1";
-            string url = "Patient_update_details.aspx?id="+id;
+            string url = "Patient_update_details.aspx?id=" + id;
             Response.Redirect(url);
         }
     }
