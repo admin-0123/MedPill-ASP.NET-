@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.Serialization;
-using System.ServiceModel;
-using System.Text;
-// Bring in entity folder
+﻿// Bring in entity folder
 using DBService.Entity;
+using System;
+using System.Collections.Generic;
 
 namespace DBService
 {
@@ -39,7 +35,7 @@ namespace DBService
         public int AddOneUser(string name, string password, string salt, string email, string phoneNo, string role, string verified)
         {
             User user = new User();
-            return user.AddUser(name, password,salt,email,phoneNo,role,verified);
+            return user.AddUser(name, password, salt, email, phoneNo, role, verified);
         }
         public int EditOneUser(string id, string name, string email, string mobile)
         {
@@ -177,7 +173,7 @@ namespace DBService
             EmailCode user = new EmailCode();
             return user.CheckCode(code);
         }
-        public string CheckCodeByEmail (string email)
+        public string CheckCodeByEmail(string email)
         {
             EmailCode user = new EmailCode();
             return user.CheckCodeByEmail(email);

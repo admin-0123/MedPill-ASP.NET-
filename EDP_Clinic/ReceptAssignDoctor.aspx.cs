@@ -1,9 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
 
 namespace EDP_Clinic
 {
@@ -62,9 +58,9 @@ namespace EDP_Clinic
             var updateDoctor = svc_client.UpdateDoctor(Convert.ToInt32(patient_obj.Id), date_time, Convert.ToInt32(doctor_obj.Id));
             if (updateDoctor == 1)
             {
-                    lbl_updateResult.Text = "Update Successful";
+                lbl_updateResult.Text = "Update Successful";
             }
-            
+
 
 
 

@@ -2,7 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
@@ -115,7 +114,7 @@ namespace EDP_Clinic
                 testList = new List<Appointment>();
             }
 
-            foreach(var i in testList.ToList())
+            foreach (var i in testList.ToList())
             {
                 if (i.doctorID != 0)
                 {

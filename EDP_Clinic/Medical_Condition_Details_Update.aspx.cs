@@ -1,10 +1,5 @@
 ﻿using EDP_Clinic.EDP_DBReference;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
 
 namespace EDP_Clinic
 {
@@ -44,7 +39,7 @@ namespace EDP_Clinic
             var Patient_Condition = tb_patient_condition.Text.ToString();
             var Comments = tb_comments.Text.ToString();
             EDP_DBReference.Service1Client client = new EDP_DBReference.Service1Client();
-            update = client.UpdateMedicalConditionById(id, Patient_Condition,Comments);
+            update = client.UpdateMedicalConditionById(id, Patient_Condition, Comments);
             Response.Redirect("Patient_Medical_Condition.aspx");
         }
     }

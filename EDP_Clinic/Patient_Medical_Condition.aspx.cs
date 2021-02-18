@@ -2,8 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
-using System.Web.UI;
 using System.Web.UI.WebControls;
 
 namespace EDP_Clinic
@@ -17,7 +15,7 @@ namespace EDP_Clinic
                 RefreshGridView();
             }
 
-            
+
         }
         private void RefreshGridView()
         {
@@ -32,7 +30,7 @@ namespace EDP_Clinic
 
         }
 
-       
+
 
         protected void gv_medical_RowCommand1(object sender, GridViewCommandEventArgs e)
         {

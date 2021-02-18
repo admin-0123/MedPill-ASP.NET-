@@ -1,12 +1,8 @@
 ﻿using EDP_Clinic.EDP_DBReference;
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
-using System.Linq;
 using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
 using Twilio.Rest.Verify.V2.Service;
 
 namespace EDP_Clinic
@@ -16,11 +12,11 @@ namespace EDP_Clinic
         Service1Client client = new Service1Client();
         protected void Page_Load(object sender, EventArgs e)
         {
-           if(Session["MobileLogin"] == null)
-           {
-                Response.Redirect("Login.aspx",false);
-           }
-           
+            if (Session["MobileLogin"] == null)
+            {
+                Response.Redirect("Login.aspx", false);
+            }
+
         }
         protected void Button1_Click(object sender, EventArgs e)
         {

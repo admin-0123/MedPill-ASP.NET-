@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 // Add
 
@@ -10,7 +6,6 @@ using System.Threading.Tasks;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
-using System.Diagnostics;
 
 namespace DBService.Entity
 {
@@ -18,7 +13,7 @@ namespace DBService.Entity
     {
         // Let all properties start with caps
         public string Id { get; set; }
-        public string Name { get; set; } 
+        public string Name { get; set; }
 
         public string Email { get; set; }
 
@@ -33,7 +28,7 @@ namespace DBService.Entity
 
         }
 
-        public displayUser(string id, string name,  string email, string phoneno, string role, string verified)
+        public displayUser(string id, string name, string email, string phoneno, string role, string verified)
         {
             Id = id;
             Name = name;
@@ -108,7 +103,7 @@ namespace DBService.Entity
                 string Role = row["Role"].ToString();
                 string Verified = row["Verified"].ToString();
 
-                displayUser obj = new displayUser(Id, Name, Password,  PhoneNo, Role, Verified);
+                displayUser obj = new displayUser(Id, Name, Password, PhoneNo, Role, Verified);
                 userList.Add(obj);
             }
             return userList;

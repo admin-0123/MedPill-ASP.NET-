@@ -1,11 +1,9 @@
-﻿using System;
+﻿// Bring in entity folder
+using DBService.Entity;
+using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Runtime.Serialization;
 using System.ServiceModel;
-using System.Text;
-// Bring in entity folder
-using DBService.Entity;
 
 namespace DBService
 {

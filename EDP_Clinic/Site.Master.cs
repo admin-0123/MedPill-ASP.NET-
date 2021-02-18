@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Diagnostics;
 
 namespace EDP_Clinic
 {
@@ -14,7 +13,7 @@ namespace EDP_Clinic
                 employeePageBtn.Visible = false;
                 adminPageBtn.Visible = false;
                 receptionistPageBtn.Visible = false;
-              
+
             }
             else
             {
@@ -40,7 +39,7 @@ namespace EDP_Clinic
                     receptionistPageBtn.Visible = false;
                     loginBtn.Visible = false;
                 }
-                if ( role == "Admin")
+                if (role == "Admin")
                 {
                     employeePageBtn.Visible = false;
                     userPageBtn.Visible = false;

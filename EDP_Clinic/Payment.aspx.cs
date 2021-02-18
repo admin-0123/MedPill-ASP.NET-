@@ -1,30 +1,22 @@
-﻿
+using EDP_Clinic.EDP_DBReference;
+using Stripe;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
-using Stripe;
-using Stripe.Checkout;
-using System.Text.RegularExpressions;
-using System.Drawing;
-using System.Security.Cryptography;
-using System.Text;
-using System.Net;
-using System.IO;
-using System.Web.Script.Serialization;
-using EDP_Clinic.EDP_DBReference;
-using System.Diagnostics;
-using System.Net.Http;
-using System.Net.Mail;
-using System.Threading.Tasks;
-using System.Net.Http.Headers;
-using PayPal.Api;
-using Twilio;
-using Twilio.Rest.Api.V2010.Account;
 using System.Collections.Specialized;
 using System.Configuration;
+using System.Diagnostics;
+using System.Drawing;
+using System.IO;
+using System.Linq;
+using System.Net;
+using System.Net.Mail;
+using System.Text;
+using System.Text.RegularExpressions;
+using System.Web;
+using System.Web.Script.Serialization;
+using System.Web.UI.WebControls;
+using Twilio;
+using Twilio.Rest.Api.V2010.Account;
 
 namespace EDP_Clinic
 {
@@ -32,33 +24,24 @@ namespace EDP_Clinic
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            //Session["Login"] = "someone@example.com";
-
-            //string guidToken = Guid.NewGuid().ToString();
-            //Session["AuthToken"] = guidToken;
-            //HttpCookie AuthToken = new HttpCookie("AuthToken");
-            //AuthToken.Value = guidToken;
-            //Response.Cookies.Add(AuthToken);
-
-
             //Checks user session
-            //if (Session["Login"] != null && Session["AuthToken"] != null && Request.Cookies["AuthToken"] != null)
-            //{
-            //    if (!Session["AuthToken"].ToString().Equals(Request.Cookies["AuthToken"].Value))
-            //    {
-            //        Response.Redirect("Login.aspx", false);
-            //    }
-            //    else
-            //    {
-            //        Debug.WriteLine("Going to payment page");
-            retrieveCardInfo();
-            //    }
-            //}
-            ////No credentials at all
-            //else
-            //{
-            //    Response.Redirect("Login.aspx", false);
-            //}
+            if (Session["LoggedIn"] != null && Session["AuthToken"] != null && Request.Cookies["AuthToken"] != null)
+            {
+                if (!Session["AuthToken"].ToString().Equals(Request.Cookies["AuthToken"].Value))
+                {
+                    Response.Redirect("~/Login.aspx", false);
+                }
+                else
+                {
+                    Debug.WriteLine("Going to payment page");
+                    retrieveCardInfo();
+                }
+            }
+            //No credentials at all
+            else
+            {
+                Response.Redirect("~/Login.aspx", false);
+            }
         }
         protected void retrieveCardInfo()
         {
@@ -279,7 +262,7 @@ namespace EDP_Clinic
 
                     //Add if else for create receipt
 
-                    //TwilioSMS();
+                    TwilioSMS();
 
                     //var service = new PaymentIntentService();
                     //var paymentIntent = service.Create(options);
@@ -542,127 +525,6 @@ namespace EDP_Clinic
             mail.To.Add(new MailAddress(emailLink));
             emailClient.Send(mail);
         }
-
-        //PayPal Payment
-/*        protected void payPalBtn_Click(object sender, EventArgs e)
-        {
-            // Get a reference to the config
-            var config = ConfigManager.Instance.GetProperties();
-
-            // Use OAuthTokenCredential to request an access token from PayPal
-            var accessToken = new OAuthTokenCredential(config).GetAccessToken();
-
-            var apiContext = new APIContext(accessToken);
-
-            string payerId = Request.Params["PayerID"];
-
-            if (String.IsNullOrEmpty(payerId))
-            {
-                var itemList = new ItemList()
-                {
-                    items = new List<Item>()
-                    {
-                        new Item()
-                        {
-                            name = "MedPill Services",
-                            currency = "SGD",
-                            price = "200",
-                            quantity = "1",
-                            sku = "sku"
-                        }
-                    }
-                };
-
-
-                var payer = new Payer() { payment_method = "paypal" };
-
-                var baseURI = Request.Url.Scheme + "://" + Request.Url.Authority + "/Payment.aspx?";
-                var guid = Convert.ToString((new Random()).Next(100000));
-                var redirectUrl = baseURI + "guid=" + guid;
-                var redirUrls = new RedirectUrls()
-                {
-                    cancel_url = redirectUrl + "&cancel=true",
-                    return_url = redirectUrl
-                };
-
-                var details = new Details()
-                {
-                    tax = "0",
-                    shipping = "0",
-                    subtotal = "200"
-                };
-
-                var amount = new Amount()
-                {
-                    currency = "SGD",
-                    total = "200.00", // Total must be equal to sum of shipping, tax and subtotal.
-                    details = details
-                };
-
-                var transactionList = new List<Transaction>();
-
-                transactionList.Add(new Transaction()
-                {
-                    description = "Transaction description.",
-                    invoice_number = Guid.NewGuid().ToString(),
-                    amount = amount,
-                    item_list = itemList
-                });
-
-                var payments = new PayPal.Api.Payment()
-                {
-                    intent = "sale",
-                    payer = payer,
-                    transactions = transactionList,
-                    redirect_urls = redirUrls
-                };
-
-                var createdPayment = payments.Create(apiContext);
-
-                var links = createdPayment.links.GetEnumerator();
-
-                var link = links.Current;
-
-                //while (links.MoveNext())
-                //{
-                //    var link = links.Current;
-                //    if (link.rel.ToLower().Trim().Equals("approval_url"))
-                //    {
-                //        var flow = RecordRedirectUrl("Redirect to PayPal to approve the payment...", link.href);
-                //    }
-                //}
-                Session.Add(guid, createdPayment.id);
-                //Session.Add("flow-" + guid, link.href);
-            }
-            else
-            {
-
-            }
-
-            var payment = PayPal.Api.Payment.Get(apiContext, "PAY-0XL713371A312273YKE2GCNI");//Payment.Get(apiContext, "PAY-0XL713371A312273YKE2GCNI");
-
-            Debug.WriteLine(payment.ConvertToJson());
-
-            //HttpClient client = new HttpClient();
-
-            //client.BaseAddress = new Uri("https://api-m.sandbox.paypal.com/");
-            //client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("client_id", "AT9DJyeJMIR8vwF_hXg51sixRS0sEi3gKj6NZIzrlFq0JdlldbY5NKstWc6AYYNYiNIjZz4xLwnac153");
-            //client.DefaultRequestHeaders
-            //    .Accept
-            //    .Add(new MediaTypeWithQualityHeaderValue("application/json"));
-
-            //Task<HttpResponseMessage> responseTask;
-            //responseTask = client.GetAsync("v1/oauth2/token");
-            //responseTask.Wait();
-
-            //var result = responseTask.Result;
-            //Debug.WriteLine(result.ToString());
-            //Debug.WriteLine(result.StatusCode);
-            ////Debug.WriteLine(result.Content.ReadAsStreamAsync());
-            //var jsonResponse = result.Content.ReadAsStreamAsync();
-            //Debug.WriteLine(jsonResponse.Result);
-
-        }*/
 
         protected void TwilioSMS()
         {

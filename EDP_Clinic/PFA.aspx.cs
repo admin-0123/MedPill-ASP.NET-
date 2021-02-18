@@ -1,11 +1,7 @@
 ﻿using EDP_Clinic.EDP_DBReference;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
 using System.Diagnostics;
+using System.Web.UI;
 
 namespace EDP_Clinic
 {
@@ -18,7 +14,8 @@ namespace EDP_Clinic
             //Session["LoggedIn"] = "placeholder";
             // Session["userName"]
 
-            if (Session["LoggedIn"] != null) {
+            if (Session["LoggedIn"] != null)
+            {
                 LoadProfile();
             }
 
