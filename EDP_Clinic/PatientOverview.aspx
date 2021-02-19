@@ -353,19 +353,16 @@
                             <asp:TextBox ID="searchtb" runat="server" Height="25px" Width="150px"></asp:TextBox>
                             <asp:LinkButton ID="SearchBtn"  runat="server" style="color: white;" Text="<i class='fas fa-search fa-lg'></i>" OnClick="SearchBtn_Click" />                    
                                   
+                            <asp:Button ID="btn_med_condition" runat="server" OnClick="Med_Condition_Click" Text="Medical Condition" />
+                                  
+                                <asp:Button ID="btn_send_cert" runat="server" OnClick="btn_send_cert_Click" Text="Send Medical Certificate" />
+                                  
                             </div>
                         </div>
                     </div>
                     <asp:GridView ID="PatientGridView"
                         class="table table-striped table-hover"
                         runat="server">
-                        <Columns>
-                            <asp:TemplateField>
-                                <ItemTemplate>
-                                    <asp:Button ID="btn_med_condition" runat="server" OnClick="btn_med_condition_click" Text="Medical Condition" />
-                                </ItemTemplate>
-                            </asp:TemplateField>
-                        </Columns>
                     </asp:GridView>
                 </div>
             </div>

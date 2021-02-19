@@ -1,4 +1,4 @@
-﻿using EDP_Clinic.EDP_DBReference;
+using EDP_Clinic.EDP_DBReference;
 using Stripe;
 using System;
 using System.Collections.Generic;

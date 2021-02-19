@@ -159,6 +159,20 @@
             <td>&nbsp;</td>
         </tr>
         <tr>
+            <td class="auto-style12">&nbsp;</td>
+            <td class="auto-style1">&nbsp;</td>
+            <td class="auto-style9">
+                <asp:Label ID="lb_error" runat="server"></asp:Label>
+            </td>
+            <td>&nbsp;</td>
+        </tr>
+        <tr>
+            <td class="auto-style12">&nbsp;</td>
+            <td class="auto-style1">&nbsp;</td>
+            <td class="auto-style9">&nbsp;</td>
+            <td>&nbsp;</td>
+        </tr>
+        <tr>
             <td class="auto-style12">
                 &nbsp;</td>
             <td class="auto-style1">
