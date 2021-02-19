@@ -49,17 +49,28 @@ namespace EDP_Clinic
 
             var doctor_obj = svc_client.GetOneDoctor(ddl_chooseDoctors.SelectedValue.ToString());
             System.Diagnostics.Debug.WriteLine("NEW DOCTOR NAME IS " + ddl_chooseDoctors.SelectedValue.ToString());
-            var patient_obj = svc_client.GetPatientByName(Session["patient_name"].ToString());
-            var date_time = Convert.ToDateTime(Session["selected_appt_date"]);
-
-            System.Diagnostics.Debug.WriteLine("PATIENT ID IS " + patient_obj.Id);
-
-            System.Diagnostics.Debug.WriteLine("DOCTOR ID IS " + doctor_obj.Id);
-            var updateDoctor = svc_client.UpdateDoctor(Convert.ToInt32(patient_obj.Id), date_time, Convert.ToInt32(doctor_obj.Id));
-            if (updateDoctor == 1)
+            try
             {
-                lbl_updateResult.Text = "Update Successful";
+                var patient_obj = svc_client.GetPatientByName(Session["patient_name"].ToString());
+
+                var date_time = Convert.ToDateTime(Session["selected_appt_date"]);
+
+                System.Diagnostics.Debug.WriteLine("PATIENT ID IS " + patient_obj.Id);
+
+                System.Diagnostics.Debug.WriteLine("DOCTOR ID IS " + doctor_obj.Id);
+                var updateDoctor = svc_client.UpdateDoctor(Convert.ToInt32(patient_obj.Id), date_time, Convert.ToInt32(doctor_obj.Id));
+                if (updateDoctor == 1)
+                {
+                    lbl_updateResult.Text = "Update Successful";
+                }
             }
+
+            // Problem only occur if trying to assign doctor to an appointment that is created with receptionist account, line of code below to handle the error.
+            catch (NullReferenceException)
+            {
+                lbl_updateResult.Text = "Update Failed, cannot assign doctor to an appointment without a valid patient";
+            }
+
 
 
 
