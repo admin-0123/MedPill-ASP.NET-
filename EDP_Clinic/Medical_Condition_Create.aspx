@@ -87,7 +87,13 @@
             <td class="auto-style4">&nbsp;</td>
             <td class="auto-style1">Doctor in charge:</td>
             <td class="auto-style6">
-                <asp:TextBox ID="tb_doctor" runat="server"></asp:TextBox>
+                <asp:DropDownList ID="dp_doctor" runat="server" Width="185px">
+                    <asp:ListItem Selected="True" Value="--Select--">--Select--</asp:ListItem>
+                    <asp:ListItem>Dr Ong</asp:ListItem>
+                    <asp:ListItem>Dr Wong</asp:ListItem>
+                    <asp:ListItem>Dr Song</asp:ListItem>
+                    <asp:ListItem>Dr Long</asp:ListItem>
+                </asp:DropDownList>
             </td>
             <td>&nbsp;</td>
         </tr>
@@ -95,7 +101,12 @@
             <td class="auto-style5">&nbsp;</td>
             <td class="auto-style2">Clinic of diagnosis:</td>
             <td class="auto-style7">
-                <asp:TextBox ID="tb_clinic" runat="server"></asp:TextBox>
+                <asp:DropDownList ID="dp_clinic" runat="server" Width="185px">
+                    <asp:ListItem Selected="True" Value="--Select--">--Select--</asp:ListItem>
+                    <asp:ListItem>Medpill</asp:ListItem>
+                    <asp:ListItem>Singapore General Hospital</asp:ListItem>
+                    <asp:ListItem>Tan Tock Seng Hospital</asp:ListItem>
+                </asp:DropDownList>
             </td>
             <td class="auto-style3">&nbsp;</td>
         </tr>
@@ -130,6 +141,21 @@
             <td class="auto-style1">Doctors Comment:</td>
             <td class="auto-style6">
                 <asp:TextBox ID="tb_comments" runat="server"></asp:TextBox>
+            </td>
+            <td>&nbsp;</td>
+        </tr>
+        <tr>
+            <td class="auto-style4">&nbsp;</td>
+            <td class="auto-style1">&nbsp;</td>
+            <td class="auto-style6">
+                &nbsp;</td>
+            <td>&nbsp;</td>
+        </tr>
+        <tr>
+            <td class="auto-style4">&nbsp;</td>
+            <td class="auto-style1">&nbsp;</td>
+            <td class="auto-style6">
+                <asp:Label ID="lb_error" runat="server"></asp:Label>
             </td>
             <td>&nbsp;</td>
         </tr>

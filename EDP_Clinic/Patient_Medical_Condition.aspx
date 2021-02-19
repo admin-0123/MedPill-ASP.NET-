@@ -353,7 +353,7 @@
                     </form>
                 </div>
                 <div>
-                    <asp:GridView ID="gv_medical" class="table table-striped table-hover" runat="server" AutoGenerateColumns="False" Width="1028px" OnRowCommand="gv_medical_RowCommand1">
+                    <asp:GridView ID="gv_medical" class="table table-striped table-hover" runat="server" AutoGenerateColumns="False" Width="1028px" OnRowCommand="gv_medical_RowCommand1" AllowPaging="True"  OnPreRender="gv_medical_PreRender" OnPageIndexChanging="gv_medical_PageIndexChanging" PageSize="5" >
                         <Columns>
                             <asp:BoundField DataField="Id" HeaderText="Id" ReadOnly="True" />
                             <asp:BoundField DataField="med_condition" HeaderText="Med_Condition" ReadOnly="True" />
@@ -366,16 +366,8 @@
                                 </ItemTemplate>
                             </asp:TemplateField>
                         </Columns>
+                        <PagerSettings PageButtonCount="5" />
                     </asp:GridView>
-                    <ul class="pagination">
-                        <li class="page-item disabled"><a href="#">Previous</a></li>
-                        <li class="page-item active"><a href="#" class="page-link">1</a></li>
-                        <li class="page-item"><a href="#" class="page-link">2</a></li>
-                        <li class="page-item"><a href="#" class="page-link">3</a></li>
-                        <li class="page-item"><a href="#" class="page-link">4</a></li>
-                        <li class="page-item"><a href="#" class="page-link">5</a></li>
-                        <li class="page-item"><a href="#" class="page-link">Next</a></li>
-                    </ul>
                 </div>
             </div>
         </div>

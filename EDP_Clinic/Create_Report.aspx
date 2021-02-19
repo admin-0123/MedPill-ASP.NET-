@@ -354,7 +354,7 @@
                     </div>
                 </div>
                 <div>
-                    <asp:GridView ID="gv_report" class="table table-striped table-hover" runat="server" AutoGenerateColumns="False" Width="1006px" OnRowCommand="gv_report_RowCommand1">
+                    <asp:GridView ID="gv_report" class="table table-striped table-hover" runat="server" AutoGenerateColumns="False" Width="1006px" OnRowCommand="gv_report_RowCommand1" OnPreRender="gv_report_PreRender" OnPageIndexChanging="gv_report_PageIndexChanging" AllowPaging="True" PageSize="5">
                         <Columns>
                             <asp:BoundField DataField="Id" HeaderText="Id" ReadOnly="True" />
                             <asp:BoundField DataField="Dname" HeaderText="Doctor in charge" ReadOnly="True" />
@@ -370,20 +370,13 @@
                                 </ItemTemplate>
                             </asp:TemplateField>
 
-
+                            
                         </Columns>
+                        <PagerSettings FirstPageText="First" LastPageText="Last" PageButtonCount="4"/>
                     </asp:GridView>
                 </div>
                 <div class="clearfix">
-                    <ul class="pagination">
-                        <li class="page-item disabled"><a href="#">Previous</a></li>
-                        <li class="page-item active"><a href="#" class="page-link">1</a></li>
-                        <li class="page-item"><a href="#" class="page-link">2</a></li>
-                        <li class="page-item"><a href="#" class="page-link">3</a></li>
-                        <li class="page-item"><a href="#" class="page-link">4</a></li>
-                        <li class="page-item"><a href="#" class="page-link">5</a></li>
-                        <li class="page-item"><a href="#" class="page-link">Next</a></li>
-                    </ul>
+                   
                 </div>
             </div>
         </div>

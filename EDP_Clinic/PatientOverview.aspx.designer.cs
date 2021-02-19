@@ -69,6 +69,24 @@ namespace EDP_Clinic
         protected global::System.Web.UI.WebControls.LinkButton SearchBtn;
 
         /// <summary>
+        /// btn_med_condition control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btn_med_condition;
+
+        /// <summary>
+        /// btn_send_cert control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btn_send_cert;
+
+        /// <summary>
         /// PatientGridView control.
         /// </summary>
         /// <remarks>

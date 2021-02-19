@@ -121,15 +121,16 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="assets\images\pfp_placeholder.png" />
+	  <Content Include="assets\images\pfp_placeholder.png" />
+	  <Content Include="assets\images\medical_certificate.jpg" />
     <Content Include="CA.aspx" />
     <Content Include="CA_admin.aspx" />
     <Content Include="CA_Success.aspx" />
     <Content Include="ChangeInfo.aspx" />
-    <Content Include="Create_Report.aspx" />
+    
+	  <Content Include="Create_Report.aspx" />
     <Content Include="Dashboard.aspx" />
     <Content Include="RA_admin.aspx" />
-    <Content Include="RA_Success.aspx" />
     <Content Include="RA_Success_admin.aspx" />
     <Content Include="ReceptAppts.aspx" />
     <Content Include="ReceptAssignDoctor.aspx" />

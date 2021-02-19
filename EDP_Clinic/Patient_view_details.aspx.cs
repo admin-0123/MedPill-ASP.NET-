@@ -7,6 +7,17 @@ namespace EDP_Clinic
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (Session["LoggedIn"] == null)
+            {
+                Response.Redirect("Login.aspx", false);
+            }
+            else
+            {
+                if (Session["UserRole"].ToString() != "Patient")
+                {
+                    Response.Redirect("Home.aspx", false);
+                }
+            }
             string id = "1";
             Details eList = new Details();
             EDP_DBReference.Service1Client client = new EDP_DBReference.Service1Client();
@@ -24,7 +35,7 @@ namespace EDP_Clinic
 
         protected void btn_back_click(object sender, EventArgs e)
         {
-
+            Response.Redirect("UserPage.aspx", false);
         }
 
         protected void btn_update_click(object sender, EventArgs e)
