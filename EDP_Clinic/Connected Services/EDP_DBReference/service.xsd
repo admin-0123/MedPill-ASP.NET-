@@ -1,0 +1,1230 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://tempuri.org/" elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import namespace="http://schemas.datacontract.org/2004/07/DBService" />
+  <xs:import namespace="http://schemas.datacontract.org/2004/07/DBService.Entity" />
+  <xs:element name="GetData">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="value" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetDataResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="GetDataResult" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetDataUsingDataContract">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/DBService" minOccurs="0" name="composite" nillable="true" type="q1:CompositeType" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetDataUsingDataContractResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/DBService" minOccurs="0" name="GetDataUsingDataContractResult" nillable="true" type="q2:CompositeType" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetOneUser">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="id" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetOneUserResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/DBService.Entity" minOccurs="0" name="GetOneUserResult" nillable="true" type="q3:User" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AddOneUser">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="name" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="password" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="salt" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="email" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="phoneNo" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="role" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="verified" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AddOneUserResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="AddOneUserResult" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="EditOneUser">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="id" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="name" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="email" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="mobile" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="EditOneUserResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="EditOneUserResult" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="UpdateOneUser">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="id" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="name" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="email" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="mobile" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="password" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="UpdateOneUserResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="UpdateOneUserResult" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="DeleteOneUser">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="id" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="DeleteOneUserResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="DeleteOneUserResult" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AddCaretaker">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="id" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AddCaretakerResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="AddCaretakerResult" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="RemoveCaretaker">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="id" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="RemoveCaretakerResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="RemoveCaretakerResult" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CheckOneUser">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="email" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CheckOneUserResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="CheckOneUserResult" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CheckPhoneNo">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="phoneno" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CheckPhoneNoResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="CheckPhoneNoResult" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="VerifyOneUser">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="email" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="VerifyOneUserResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="VerifyOneUserResult" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ChangePassword">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="password" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="email" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ChangePasswordResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="ChangePasswordResult" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetOneUserByEmail">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="email" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetOneUserByEmailResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/DBService.Entity" minOccurs="0" name="GetOneUserByEmailResult" nillable="true" type="q4:User" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetOneUserByPhoneNo">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="phonoNo" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetOneUserByPhoneNoResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/DBService.Entity" minOccurs="0" name="GetOneUserByPhoneNoResult" nillable="true" type="q5:User" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetAllUsers">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetAllUsersResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/DBService.Entity" minOccurs="0" name="GetAllUsersResult" nillable="true" type="q6:ArrayOfUser" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetAllPatients">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetAllPatientsResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/DBService.Entity" minOccurs="0" name="GetAllPatientsResult" nillable="true" type="q7:ArrayOfUser" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetAllEmployees">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetAllEmployeesResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/DBService.Entity" minOccurs="0" name="GetAllEmployeesResult" nillable="true" type="q8:ArrayOfUser" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ShowOneUser">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="id" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ShowOneUserResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/DBService.Entity" minOccurs="0" name="ShowOneUserResult" nillable="true" type="q9:displayUser" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ShowAllUsers">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ShowAllUsersResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q10="http://schemas.datacontract.org/2004/07/DBService.Entity" minOccurs="0" name="ShowAllUsersResult" nillable="true" type="q10:ArrayOfdisplayUser" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ShowAllPatients">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ShowAllPatientsResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q11="http://schemas.datacontract.org/2004/07/DBService.Entity" minOccurs="0" name="ShowAllPatientsResult" nillable="true" type="q11:ArrayOfdisplayUser" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ShowAllEmployees">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ShowAllEmployeesResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q12="http://schemas.datacontract.org/2004/07/DBService.Entity" minOccurs="0" name="ShowAllEmployeesResult" nillable="true" type="q12:ArrayOfdisplayUser" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ShowSearchedEmployees">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="name" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ShowSearchedEmployeesResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q13="http://schemas.datacontract.org/2004/07/DBService.Entity" minOccurs="0" name="ShowSearchedEmployeesResult" nillable="true" type="q13:ArrayOfdisplayUser" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ShowSearchedPatients">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="name" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ShowSearchedPatientsResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q14="http://schemas.datacontract.org/2004/07/DBService.Entity" minOccurs="0" name="ShowSearchedPatientsResult" nillable="true" type="q14:ArrayOfdisplayUser" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="DisplayOnePatient">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="email" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="DisplayOnePatientResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q15="http://schemas.datacontract.org/2004/07/DBService.Entity" minOccurs="0" name="DisplayOnePatientResult" nillable="true" type="q15:displayPatient" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="DisplayAllPatients">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="DisplayAllPatientsResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q16="http://schemas.datacontract.org/2004/07/DBService.Entity" minOccurs="0" name="DisplayAllPatientsResult" nillable="true" type="q16:ArrayOfdisplayPatient" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="DisplayCaretakers">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="DisplayCaretakersResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q17="http://schemas.datacontract.org/2004/07/DBService.Entity" minOccurs="0" name="DisplayCaretakersResult" nillable="true" type="q17:ArrayOfdisplayPatient" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="DisplayPatientsOnly">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="DisplayPatientsOnlyResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q18="http://schemas.datacontract.org/2004/07/DBService.Entity" minOccurs="0" name="DisplayPatientsOnlyResult" nillable="true" type="q18:ArrayOfdisplayPatient" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="DisplayAllSearchedPatients">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="name" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="DisplayAllSearchedPatientsResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q19="http://schemas.datacontract.org/2004/07/DBService.Entity" minOccurs="0" name="DisplayAllSearchedPatientsResult" nillable="true" type="q19:ArrayOfdisplayPatient" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetEmailbyCode">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="code" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetEmailbyCodeResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="GetEmailbyCodeResult" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CheckCodeExist">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="code" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CheckCodeExistResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="CheckCodeExistResult" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CheckCodeByEmail">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="email" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CheckCodeByEmailResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="CheckCodeByEmailResult" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AddCode">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="email" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="code" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AddCodeResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="AddCodeResult" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CreateCardInfo">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="userID" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="cardName" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="cardNumber" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="cardExpiry" type="xs:dateTime" />
+        <xs:element minOccurs="0" name="cvvNumber" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="iv" nillable="true" type="xs:base64Binary" />
+        <xs:element minOccurs="0" name="key" nillable="true" type="xs:base64Binary" />
+        <xs:element minOccurs="0" name="stillValid" type="xs:boolean" />
+        <xs:element minOccurs="0" name="uniqueIdentifier" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CreateCardInfoResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="CreateCardInfoResult" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetCardByCardNumber">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="userID" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="uniqueIdentifier" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetCardByCardNumberResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q20="http://schemas.datacontract.org/2004/07/DBService.Entity" minOccurs="0" name="GetCardByCardNumberResult" nillable="true" type="q20:CardInfo" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetAllCards">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="userID" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetAllCardsResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q21="http://schemas.datacontract.org/2004/07/DBService.Entity" minOccurs="0" name="GetAllCardsResult" nillable="true" type="q21:ArrayOfCardInfo" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="DeleteByCardNumber">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="uniqueIdentifier" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="DeleteByCardNumberResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="DeleteByCardNumberResult" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CheckCardByCardNumber">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="uniqueIdentifier" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CheckCardByCardNumberResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="CheckCardByCardNumberResult" type="xs:boolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CreateReceipt">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="userID" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="dateSale" type="xs:dateTime" />
+        <xs:element minOccurs="0" name="totalSum" type="xs:double" />
+        <xs:element minOccurs="0" name="isPaid" type="xs:boolean" />
+        <xs:element minOccurs="0" name="receiptLink" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="uniqueIdentifier" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CreateReceiptResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="CreateReceiptResult" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SelectAllReceipts">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="userID" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SelectAllReceiptsResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q22="http://schemas.datacontract.org/2004/07/DBService.Entity" minOccurs="0" name="SelectAllReceiptsResult" nillable="true" type="q22:ArrayOfReceipt" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SelectByReceiptID">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="userID" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="uniqueIdentifier" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SelectByReceiptIDResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q23="http://schemas.datacontract.org/2004/07/DBService.Entity" minOccurs="0" name="SelectByReceiptIDResult" nillable="true" type="q23:Receipt" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SelectAllReceiptsAdmin">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SelectAllReceiptsAdminResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q24="http://schemas.datacontract.org/2004/07/DBService.Entity" minOccurs="0" name="SelectAllReceiptsAdminResult" nillable="true" type="q24:ArrayOfReceipt" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetAllApptAdmin">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetAllApptAdminResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q25="http://schemas.datacontract.org/2004/07/DBService.Entity" minOccurs="0" name="GetAllApptAdminResult" nillable="true" type="q25:ArrayOfAppointment" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetAllApptUser">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="uid" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetAllApptUserResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q26="http://schemas.datacontract.org/2004/07/DBService.Entity" minOccurs="0" name="GetAllApptUserResult" nillable="true" type="q26:ArrayOfAppointment" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetAllApptUserUpcoming">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="uid" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetAllApptUserUpcomingResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q27="http://schemas.datacontract.org/2004/07/DBService.Entity" minOccurs="0" name="GetAllApptUserUpcomingResult" nillable="true" type="q27:ArrayOfAppointment" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetAllApptUserPast">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="uid" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetAllApptUserPastResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q28="http://schemas.datacontract.org/2004/07/DBService.Entity" minOccurs="0" name="GetAllApptUserPastResult" nillable="true" type="q28:ArrayOfAppointment" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetAllApptUserMissed">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="uid" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetAllApptUserMissedResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q29="http://schemas.datacontract.org/2004/07/DBService.Entity" minOccurs="0" name="GetAllApptUserMissedResult" nillable="true" type="q29:ArrayOfAppointment" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetAllApptAdminUpcoming">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetAllApptAdminUpcomingResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q30="http://schemas.datacontract.org/2004/07/DBService.Entity" minOccurs="0" name="GetAllApptAdminUpcomingResult" nillable="true" type="q30:ArrayOfAppointment" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetAllApptAdminPast">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetAllApptAdminPastResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q31="http://schemas.datacontract.org/2004/07/DBService.Entity" minOccurs="0" name="GetAllApptAdminPastResult" nillable="true" type="q31:ArrayOfAppointment" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetAllApptAdminMissed">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetAllApptAdminMissedResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q32="http://schemas.datacontract.org/2004/07/DBService.Entity" minOccurs="0" name="GetAllApptAdminMissedResult" nillable="true" type="q32:ArrayOfAppointment" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CreateAppointment">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="patientID" type="xs:int" />
+        <xs:element minOccurs="0" name="appointmentType" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="dateTime" type="xs:dateTime" />
+        <xs:element minOccurs="0" name="status" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CreateAppointmentResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="CreateAppointmentResult" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetOneAppt">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="patientID" type="xs:int" />
+        <xs:element minOccurs="0" name="dateTime" type="xs:dateTime" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetOneApptResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q33="http://schemas.datacontract.org/2004/07/DBService.Entity" minOccurs="0" name="GetOneApptResult" nillable="true" type="q33:Appointment" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="UpdateOneAppt">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="patientID" type="xs:int" />
+        <xs:element minOccurs="0" name="appointmentType" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="oldTime" type="xs:dateTime" />
+        <xs:element minOccurs="0" name="newTime" type="xs:dateTime" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="UpdateOneApptResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="UpdateOneApptResult" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="DeleteOneAppt">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="uid" type="xs:int" />
+        <xs:element minOccurs="0" name="dateTime" type="xs:dateTime" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="DeleteOneApptResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="DeleteOneApptResult" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetOnePhoto">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="id" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetOnePhotoResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q34="http://schemas.datacontract.org/2004/07/DBService.Entity" minOccurs="0" name="GetOnePhotoResult" nillable="true" type="q34:Photo" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CheckPhotoExist">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="id" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CheckPhotoExistResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="CheckPhotoExistResult" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AddOnePhoto">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="id" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="img" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AddOnePhotoResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="AddOnePhotoResult" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="UpdateOnePhoto">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="id" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="img" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="UpdateOnePhotoResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="UpdateOnePhotoResult" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetOneCG">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="id" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetOneCGResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q35="http://schemas.datacontract.org/2004/07/DBService.Entity" minOccurs="0" name="GetOneCGResult" nillable="true" type="q35:Caregiver" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetAllDoctors">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetAllDoctorsResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q36="http://schemas.datacontract.org/2004/07/DBService.Entity" minOccurs="0" name="GetAllDoctorsResult" nillable="true" type="q36:ArrayOfUser" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetOneDoctor">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="doctor_name" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetOneDoctorResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q37="http://schemas.datacontract.org/2004/07/DBService.Entity" minOccurs="0" name="GetOneDoctorResult" nillable="true" type="q37:User" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="UpdateDoctor">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="uid" type="xs:int" />
+        <xs:element minOccurs="0" name="old_time" type="xs:dateTime" />
+        <xs:element minOccurs="0" name="doctor_id" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="UpdateDoctorResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="UpdateDoctorResult" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetPatientByName">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="patient_name" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetPatientByNameResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q38="http://schemas.datacontract.org/2004/07/DBService.Entity" minOccurs="0" name="GetPatientByNameResult" nillable="true" type="q38:User" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ApproveCaregiver">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="cg_id" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="patient_id" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ApproveCaregiverResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="ApproveCaregiverResult" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="RemoveCaregiver">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="cg_id" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="patient_id" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="RemoveCaregiverResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="RemoveCaregiverResult" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetOneCGByCRID">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="id" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetOneCGByCRIDResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q39="http://schemas.datacontract.org/2004/07/DBService.Entity" minOccurs="0" name="GetOneCGByCRIDResult" nillable="true" type="q39:Caregiver" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CreateReport">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="id" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="dname" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="pname" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="clinic" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="date_of_report" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="details" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CreateReportResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="CreateReportResult" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetReportById">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="id" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetReportByIdResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q40="http://schemas.datacontract.org/2004/07/DBService.Entity" minOccurs="0" name="GetReportByIdResult" nillable="true" type="q40:Report" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetAllReport">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetAllReportResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q41="http://schemas.datacontract.org/2004/07/DBService.Entity" minOccurs="0" name="GetAllReportResult" nillable="true" type="q41:ArrayOfReport" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="UpdateReportById">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="id" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="dname" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="pname" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="clinic" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="date_of_report" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="details" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="UpdateReportByIdResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="UpdateReportByIdResult" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CreateDetails">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="name" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="nric" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="date_of_birth" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="gender" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="phone" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="email" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="address" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="postal" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CreateDetailsResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="CreateDetailsResult" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetDetailsById">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="id" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetDetailsByIdResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q42="http://schemas.datacontract.org/2004/07/DBService.Entity" minOccurs="0" name="GetDetailsByIdResult" nillable="true" type="q42:Details" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetAllDetails">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetAllDetailsResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q43="http://schemas.datacontract.org/2004/07/DBService.Entity" minOccurs="0" name="GetAllDetailsResult" nillable="true" type="q43:ArrayOfDetails" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="UpdateDetailsById">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="id" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="name" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="nric" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="date_of_birth" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="gender" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="phone" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="email" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="address" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="postal" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="UpdateDetailsByIdResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="UpdateDetailsByIdResult" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CreateMedicalCondition">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="id" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="name" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="med_condition" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="date_diagnosis" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="doctor" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="clinic" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="treatment" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="condition_desc" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="patient_codition" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="comments" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CreateMedicalConditionResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="CreateMedicalConditionResult" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetMedicalConditionById">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="id" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetMedicalConditionByIdResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q44="http://schemas.datacontract.org/2004/07/DBService.Entity" minOccurs="0" name="GetMedicalConditionByIdResult" nillable="true" type="q44:Medical_Condition" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetAllMedicalCondition">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetAllMedicalConditionResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q45="http://schemas.datacontract.org/2004/07/DBService.Entity" minOccurs="0" name="GetAllMedicalConditionResult" nillable="true" type="q45:ArrayOfMedical_Condition" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="UpdateMedicalConditionById">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="id" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="Patient_Condition" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="Comments" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="UpdateMedicalConditionByIdResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="UpdateMedicalConditionByIdResult" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CreatePatient_MC">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="reg_no" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="name" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="nric" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="duration" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="type_of_leave" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="clinic" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="signature" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="date" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CreatePatient_MCResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="CreatePatient_MCResult" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetPatient_MCById">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="id" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetPatient_MCByIdResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q46="http://schemas.datacontract.org/2004/07/DBService.Entity" minOccurs="0" name="GetPatient_MCByIdResult" nillable="true" type="q46:Patient_MC" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetAllPatient_MC">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetAllPatient_MCResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q47="http://schemas.datacontract.org/2004/07/DBService.Entity" minOccurs="0" name="GetAllPatient_MCResult" nillable="true" type="q47:ArrayOfPatient_MC" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CreatePayment_Report">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="date_of_appointment" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="purpose_visit" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="fees" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CreatePayment_ReportResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="CreatePayment_ReportResult" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetPayment_ReportById">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="id" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetPayment_ReportByIdResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q48="http://schemas.datacontract.org/2004/07/DBService.Entity" minOccurs="0" name="GetPayment_ReportByIdResult" nillable="true" type="q48:Payment_Report" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetAllPayment_Report">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetAllPayment_ReportResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q49="http://schemas.datacontract.org/2004/07/DBService.Entity" minOccurs="0" name="GetAllPayment_ReportResult" nillable="true" type="q49:ArrayOfPayment_Report" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

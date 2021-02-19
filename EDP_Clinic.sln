@@ -4,6 +4,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 16.0.30621.155
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EDP_Clinic", "EDP_Clinic\EDP_Clinic.csproj", "{C52B98C5-6290-4BE9-BA63-17CD239CB84E}"
+	ProjectSection(ProjectDependencies) = postProject
+		{0EA3ECDB-B384-472F-A510-0F608E4D09E0} = {0EA3ECDB-B384-472F-A510-0F608E4D09E0}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DBService", "DBService\DBService.csproj", "{0EA3ECDB-B384-472F-A510-0F608E4D09E0}"
 EndProject
