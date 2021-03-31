@@ -22,7 +22,7 @@ namespace EDP_Clinic
 
         protected void Button1_Click(object sender, EventArgs e)
         {
-            var phoneNo = HttpUtility.HtmlEncode(tbPhoneNo.Text);
+            string phoneNo = HttpUtility.HtmlEncode(tbPhoneNo.Text);
             if (phoneNo == "")
             {
                 errorMsg.Text = "Enter proper phone number";

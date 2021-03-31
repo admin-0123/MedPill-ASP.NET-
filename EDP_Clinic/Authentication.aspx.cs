@@ -394,7 +394,6 @@ namespace EDP_Clinic
             {
                 OTPError.Visible = true;
             }
-
         }
 
         //Initialise an object to store Recaptcha response

@@ -66,16 +66,16 @@ Author URL: http://w3layouts.com
                             <a class="nav-link" href="UserPage.aspx" id="userPageBtn" runat="server">User Page</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="ReceptionistPage.aspx" ID="receptionistPageBtn" runat="server">Receptionist Page</a>
+                            <a class="nav-link" href="ReceptionistPage.aspx" id="receptionistPageBtn" runat="server">Receptionist Page</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="PatientOverview.aspx" ID="employeePageBtn" runat="server">Patient Overview</a>
+                            <a class="nav-link" href="PatientOverview.aspx" id="employeePageBtn" runat="server">Patient Overview</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="AdminPage.aspx" ID="adminPageBtn" runat="server">Admin Page</a>
+                            <a class="nav-link" href="AdminPage.aspx" id="adminPageBtn" runat="server">Admin Page</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="Logout.aspx" ID="logoutBtn" runat="server">Log Out</a>
+                            <a class="nav-link" href="Logout.aspx" id="logoutBtn" runat="server">Log Out</a>
                         </li>
                     </ul>
                 </div>
@@ -94,10 +94,8 @@ Author URL: http://w3layouts.com
         <!-- Add the INVISIBLE SCRIPT MANAGER CONTROL IN ORDER TO USE AJAX TOOLKIT CONTROLS! -->
         <asp:ScriptManager ID="ScriptManager1" runat="server">
         </asp:ScriptManager>
-        <div>
-            <asp:ContentPlaceHolder ID="MainContent" runat="server">
-            </asp:ContentPlaceHolder>
-        </div>
+        <asp:ContentPlaceHolder ID="MainContent" runat="server">
+        </asp:ContentPlaceHolder>
     </form>
     <!-- footer-28 block -->
     <section class="w3l-medpill-footer mt-5">

@@ -23,17 +23,15 @@ namespace EDP_Clinic
         }
         protected void Button1_Click(object sender, EventArgs e)
         {
-            Debug.WriteLine("ok");
-
-            var email = tbemail.Text;
-            var name = tbName.Text;
-            var mobile = tbMobile.Text;
-            var password = tbpassword.Text;
-            var password2 = tbConfirm.Text;
+            string email = tbemail.Text;
+            string name = tbName.Text;
+            string mobile = tbMobile.Text;
+            string password = tbpassword.Text;
+            string password2 = tbConfirm.Text;
             if (email == "" || name == "" || mobile == "" || password == "" || password2 == "")
             {
                 errorMsg.Text = "Please input all fields";
-                errorMsg.ForeColor = System.Drawing.Color.Red;
+                errorMsg.ForeColor = Color.Red;
                 errorMsg.Visible = true;
                 Debug.WriteLine("ok");
                 return;
@@ -52,7 +50,7 @@ namespace EDP_Clinic
                 if (!valid)
                 {
                     errorMsg.Text = "Enter valid email";
-                    errorMsg.ForeColor = System.Drawing.Color.Red;
+                    errorMsg.ForeColor = Color.Red;
                     errorMsg.Visible = true;
                     return;
 
@@ -60,7 +58,7 @@ namespace EDP_Clinic
                 if (!Regex.IsMatch(mobile, @"\d{8}"))
                 {
                     errorMsg.Text = "Enter valid phone number";
-                    errorMsg.ForeColor = System.Drawing.Color.Red;
+                    errorMsg.ForeColor = Color.Red;
                     errorMsg.Visible = true;
                     return;
                 }
@@ -70,7 +68,7 @@ namespace EDP_Clinic
                     if (errors != "")
                     {
                         errorMsg.Text = errors;
-                        errorMsg.ForeColor = System.Drawing.Color.Red;
+                        errorMsg.ForeColor = Color.Red;
                         errorMsg.Visible = true;
                         return;
                     }
@@ -78,7 +76,7 @@ namespace EDP_Clinic
                 else
                 {
                     errorMsg.Text = "Passwords not the same";
-                    errorMsg.ForeColor = System.Drawing.Color.Red;
+                    errorMsg.ForeColor = Color.Red;
                     errorMsg.Visible = true;
                     return;
                 }
@@ -104,7 +102,7 @@ namespace EDP_Clinic
                 if (result == 0)
                 {
                     errorMsg.Text = "unknown error has occured ";
-                    errorMsg.ForeColor = System.Drawing.Color.Red;
+                    errorMsg.ForeColor = Color.Red;
                     errorMsg.Visible = true;
                     return;
                 }
@@ -124,7 +122,7 @@ namespace EDP_Clinic
                     emailClient.EnableSsl = true;
                     MailMessage mail = new MailMessage();
                     mail.Subject = "Verify Account (MedPill)";
-                    mail.SubjectEncoding = System.Text.Encoding.UTF8;
+                    mail.SubjectEncoding = Encoding.UTF8;
                     mail.Body = "Please to verify account <br> <a>" + link + "</a>";
                     mail.IsBodyHtml = true;
                     mail.Priority = MailPriority.High;
@@ -189,6 +187,5 @@ namespace EDP_Clinic
 
             return r;
         }
-
     }
 }
