@@ -79,7 +79,6 @@ namespace EDP_Clinic
             {
                 Response.Redirect("CardList.aspx", false);
             }
-
         }
 
         protected void backBtn_Click(object sender, EventArgs e)
@@ -111,6 +110,5 @@ namespace EDP_Clinic
             Response.Cookies.Add(new HttpCookie("deleteCardInfo", guid));
             Response.Redirect("Authentication.aspx", false);
         }
-
     }
 }

@@ -6,6 +6,7 @@ using System.Net.Mail;
 using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Web;
 using System.Web.UI;
 
 namespace EDP_Clinic
@@ -23,17 +24,19 @@ namespace EDP_Clinic
         }
         protected void Button1_Click(object sender, EventArgs e)
         {
-            string email = tbemail.Text;
-            string name = tbName.Text;
-            string mobile = tbMobile.Text;
-            string password = tbpassword.Text;
-            string password2 = tbConfirm.Text;
-            if (email == "" || name == "" || mobile == "" || password == "" || password2 == "")
+            string email = HttpUtility.HtmlEncode(tbemail.Text.Trim());
+            string name = HttpUtility.HtmlEncode(tbName.Text.Trim());
+            string mobile = HttpUtility.HtmlEncode(tbMobile.Text.Trim());
+            string password = HttpUtility.HtmlEncode(tbpassword.Text.Trim());
+            string password2 = HttpUtility.HtmlEncode(tbConfirm.Text.Trim());
+            if (String.IsNullOrEmpty(email) || String.IsNullOrEmpty(name)
+                || String.IsNullOrEmpty(mobile) || String.IsNullOrEmpty(password)
+                || String.IsNullOrEmpty(password2))
             {
-                errorMsg.Text = "Please input all fields";
+                errorMsg.Text = "Please input all fields correctly";
                 errorMsg.ForeColor = Color.Red;
                 errorMsg.Visible = true;
-                Debug.WriteLine("ok");
+                Debug.WriteLine("Some fields are invalid");
                 return;
             }
             else
@@ -131,7 +134,6 @@ namespace EDP_Clinic
                     emailClient.Send(mail);
                 }
 
-
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "Redit", "alert('Please check email to verify account'); window.location='" + Request.ApplicationPath + "Login.aspx';", true);
 
             }
@@ -184,7 +186,6 @@ namespace EDP_Clinic
                 r = generator.Next(0, 1000000).ToString("D6");
                 exist = client.CheckCodeExist(r);
             }
-
             return r;
         }
     }

@@ -17,8 +17,8 @@ namespace EDP_Clinic
         }
         protected void submitBtn_Click(object sender, EventArgs e)
         {
-            string email = HttpUtility.HtmlEncode(tbemail.Text);
-            string password = HttpUtility.HtmlEncode(tbpassword.Text);
+            string email = HttpUtility.HtmlEncode(tbemail.Text.Trim());
+            string password = HttpUtility.HtmlEncode(tbpassword.Text.Trim());
 
             var emailexist = client.CheckOneUser(email);
             if (emailexist == 0)

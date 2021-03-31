@@ -75,62 +75,6 @@ namespace EDP_Clinic
                 string receiptLink = rep.ReceiptLink.ToString().Trim();
                 Response.Redirect(receiptLink, false);
             }
-            else if (String.Equals(e.CommandName, "printReceipt"))
-            {
-                //var testing = PrintNodeAuthenticationType.BasicAuth;
-                //PrintNodeConfiguration.ApiKey = "DGjrFiPUgRwFrGqlSEJjGntiRj-DHjoqOxXeRX7RV-o";
-                //Debug.WriteLine(testing);
-                ////var testing2 = PrintNodeComputer;
-                //var printingType = PrintNodeContentType.raw_uri;
-                ////var testing3 = PrintNodePrinter.Id;
-
-                //PrintNodeComputer computer = new PrintNodeComputer();
-
-
-                ////PrintNodePrintJobAuthentication.
-                ////PrintNodeRequestOptions;
-                //var type = PrintNodeNet.PrintNodeConfiguration.ApiKey;
-                //PrintNodeCredentials cre = new PrintNodeCredentials();
-                //Debug.WriteLine(cre.Pass);
-                //Debug.WriteLine(cre.User);
-                //Debug.WriteLine(type);
-                //using (var httpClient = new HttpClient())
-                //{
-                //    using (var request = new HttpRequestMessage(new HttpMethod("GET"), "https://api.printnode.com/whoami"))
-                //    {
-                //        var base64authorization = Convert.ToBase64String(Encoding.ASCII.GetBytes("DGjrFiPUgRwFrGqlSEJjGntiRj-DHjoqOxXeRX7RV-o"));
-                //        request.Headers.TryAddWithoutValidation("Authorization", $"Basic {base64authorization}");
-
-                //        var response = httpClient.GetAsync(request);
-                //        var testing2 = response.ToString();
-                //        Debug.WriteLine(response.ToString());
-                //    }
-                //}
-                // Create a request for the URL.
-                //WebRequest request = WebRequest.Create(
-                //  "https://api.printnode.com/whoami");
-                //// If required by the server, set the credentials.
-                //request.Credentials = CredentialCache.DefaultCredentials;
-                //request.Method = "GET";
-                ////Base 64
-                ////REdqckZpUFVnUndGckdxbFNFSmpHbnRpUmotREhqb3FPeFhlUlg3UlYtbw==
-                //request.Headers.Add("Authorization", "Basic " + "REdqckZpUFVnUndGckdxbFNFSmpHbnRpUmotREhqb3FPeFhlUlg3UlYtbw");
-                ////request.Headers["Authorization"] = "DGjrFiPUgRwFrGqlSEJjGntiRj-DHjoqOxXeRX7RV-o";
-                //request.ContentType = "application/json";
-
-                //// Get the response.
-
-                //WebResponse response = request.GetResponse();
-
-            }
-            else if (String.Equals(e.CommandName, "downloadReceipt"))
-            {
-                //using (var client = new WebClient())
-                //{
-                //    client.DownloadFile("https://pay.stripe.com/receipts/", "acct_1HveuKAVRV4JC5fk/ch_1IIbzrAVRV4JC5fkguWPM0CF/rcpt_IuQrRNFAPkLyCK19cQlB497Z4i67HB3");
-                //}
-                //Debug.WriteLine("Downloading Receipt");
-            }
         }
     }
 }

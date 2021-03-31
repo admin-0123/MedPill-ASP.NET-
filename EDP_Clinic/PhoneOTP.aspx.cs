@@ -14,14 +14,14 @@ namespace EDP_Clinic
         {
             if (Session["MobileLogin"] == null)
             {
-                Response.Redirect("Login.aspx", false);
+                Response.Redirect("~/Login.aspx", false);
             }
 
         }
         protected void Button1_Click(object sender, EventArgs e)
         {
             var phoneNo = Session["MobileLogin"].ToString();
-            var phoneNumber = "+65" + phoneNo;
+            string phoneNumber = "+65" + phoneNo;
             var otp = HttpUtility.HtmlEncode(phoneOTP.Text.ToString());
             var result = checkOTP(phoneNumber, otp);
             if (!result)
@@ -58,7 +58,6 @@ namespace EDP_Clinic
         }
         private bool checkOTP(string phoneNo, string otp)
         {
-
             //Checks OTP
             var verificationCheck = VerificationCheckResource.Create(
                 to: phoneNo,
