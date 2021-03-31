@@ -16,11 +16,8 @@ namespace DBService.Entity
         public string Name { get; set; }
         public string Password { get; set; }
         public string Salt { get; set; }
-
         public string Email { get; set; }
-
         public string PhoneNo { get; set; }
-
         public string Role { get; set; }
         public string Verified { get; set; }
         public string IsDeleted { get; set; }
@@ -414,7 +411,6 @@ namespace DBService.Entity
             return userList;
         }
 
-
         public List<User> SelectAllDoctors()
         {
             //Step 1 -  Define a connection to the database by getting
@@ -497,7 +493,6 @@ namespace DBService.Entity
             return user;
         }
 
-
         public User SelectPatientByName(string patient_name)
         {
             //Step 1 -  Define a connection to the database by getting
@@ -539,7 +534,6 @@ namespace DBService.Entity
             }
             return user;
         }
-
 
         public List<User> SelectAllEmployees()
         {
@@ -583,10 +577,5 @@ namespace DBService.Entity
             }
             return userList;
         }
-
-
-
-
-
     }
 }

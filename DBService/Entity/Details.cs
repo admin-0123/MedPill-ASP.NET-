@@ -54,7 +54,6 @@ namespace DBService.Entity
             sqlCmd.Parameters.AddWithValue("@paraAddress", Address);
             sqlCmd.Parameters.AddWithValue("@paraPostal_Code", Postal);
 
-
             // Step 4 Open connection the execute NonQuery of sql command   
             myConn.Open();
             int result = sqlCmd.ExecuteNonQuery();

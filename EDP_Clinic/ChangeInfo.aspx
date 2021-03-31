@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="ChangeInfo.aspx.cs" Inherits="EDP_Clinic.ChangeInfo" %>
+﻿<%@ Page Title="Change Information" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="ChangeInfo.aspx.cs" Inherits="EDP_Clinic.ChangeInfo" %>
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
     <section class="w3l-contact py-5" id="changePaymentInfo">
         <div class="container py-lg-3">
@@ -6,7 +6,7 @@
                 <asp:Button ID="backBtn" runat="server" Text="Back" CssClass="btn btn-primary btn-style" OnClick="backBtn_Click"  />
             </div>
             <h1 class="title mb-4">Change Information</h1>
-            <p>Enter only fields you wish to change</p>
+            <p class="mb-4">Enter only fields you wish to change</p>
             <div class="row">
                 <div class="col-md-8">
                     <div class="contact-form">
@@ -19,7 +19,7 @@
                             </div>
                             <div class="mb-3">
                                 <label>Email</label>
-                                <asp:TextBox ID="emailTB" runat="server" CssClass="form-control"></asp:TextBox>
+                                <asp:TextBox ID="emailTB" runat="server" CssClass="form-control" TextMode="Email"></asp:TextBox>
                                 <asp:Label ID="emailError" runat="server"></asp:Label>
                             </div>
                             <div class="mb-3">
@@ -46,7 +46,7 @@
                         </form>
                         <div class="row">
                             <div class="col-md-10">
-                                <asp:FileUpload ID="imgUpload" runat="server" Width="300px" />
+                                <asp:FileUpload ID="imgUpload" runat="server" Width="300px" CssClass="form-control" />
                             </div>
                             <div class="col-md-2">
                                 <input type="hidden" id="g-recaptcha-response" name="g-recaptcha-response" />

@@ -32,18 +32,6 @@ namespace EDP_Clinic
             }
         }
 
-        /*byte[] ObjectToByteArray(object obj)
-        {
-            if (obj == null)
-                return null;
-            BinaryFormatter bf = new BinaryFormatter();
-            using (MemoryStream ms = new MemoryStream())
-            {
-                bf.Serialize(ms, obj);
-                return ms.ToArray();
-            }
-        }*/
-
         protected void retrieveCardInfo()
         {
             string userID = Session["LoggedIn"].ToString().Trim();
@@ -55,7 +43,6 @@ namespace EDP_Clinic
             cardListView.Visible = true;
             cardListView.DataSource = cifList;
             cardListView.DataBind();
-
 
             //If user has less than 3 cards
             //Allow user to add more cards
@@ -91,10 +78,6 @@ namespace EDP_Clinic
             //Checks if button clicked is view more button
             if (String.Equals(e.CommandName, "viewMore"))
             {
-                //Card number will be encrypted later on
-                //For now, just pass a plain-text number
-                //var cardNumber = ObjectToByteArray(e.CommandArgument);
-
                 Session["UniqueIdentifier"] = e.CommandArgument.ToString();
 
                 //Create intention for user to view card info
@@ -103,16 +86,12 @@ namespace EDP_Clinic
 
                 Response.Cookies.Add(new HttpCookie("viewCardInfo", guid));
                 Response.Redirect("Authentication.aspx", false);
-                //Response.Redirect("PaymentInformation.aspx?cardNumber=" + e.CommandArgument);
             }
-            //else if()
-
         }
 
         protected void backBtn_Click(object sender, EventArgs e)
         {
             Response.Redirect("UserPage.aspx", false);
         }
-
     }
 }

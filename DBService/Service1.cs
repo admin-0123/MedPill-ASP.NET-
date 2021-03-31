@@ -217,7 +217,6 @@ namespace DBService
         {
             Receipt rep = new Receipt(userID, dateSale, totalSum, isPaid, receiptLink, uniqueIdentifier);
             return rep.Insert();
-
         }
 
         public List<Receipt> SelectAllReceipts(string userID)
@@ -239,7 +238,6 @@ namespace DBService
         }
 
         /* Appointment Methods - Wilfred */
-
         public List<Appointment> GetAllApptAdmin()
         {
             Appointment appt = new Appointment();
@@ -343,13 +341,11 @@ namespace DBService
             return cg.SelectById(id);
         }
 
-
         public int UpdateDoctor(int uid, DateTime old_time, int doctor_id)
         {
             Appointment appt = new Appointment();
             return appt.UpdateDoctor(uid, old_time, doctor_id);
         }
-
 
         public List<User> GetAllDoctors()
         {
@@ -357,13 +353,11 @@ namespace DBService
             return user.SelectAllDoctors();
         }
 
-
         public User GetOneDoctor(string doctor_name)
         {
             User user = new User();
             return user.SelectDoctorByName(doctor_name);
         }
-
 
         public User GetPatientByName(string patient_name)
         {
@@ -371,13 +365,11 @@ namespace DBService
             return user.SelectPatientByName(patient_name);
         }
 
-
         public int ApproveCaregiver(string cg_id, string patient_id)
         {
             Caregiver cg = new Caregiver();
             return cg.ApproveCaregiver(cg_id, patient_id);
         }
-
 
         public int RemoveCaregiver(string cg_id, string patient_id)
         {
@@ -390,10 +382,6 @@ namespace DBService
             Caregiver cg = new Caregiver();
             return cg.SelectByCRId(id);
         }
-
-
-
-
 
         /* Appointments End - */
 
@@ -490,30 +478,5 @@ namespace DBService
             Payment_Report de = new Payment_Report();
             return de.SelectAll();
         }
-
-        // Taken from practical 4, here all the method bodies for the methods listed in IService1.CS
-        /*        public List<Employee> GetAllEmployee()
-                {
-                    Employee emp = new Employee();
-                    return emp.SelectAll();
-                }
-
-                public Employee GetEmployeeByNric(string nric)
-                {
-                    Employee emp = new Employee();
-                    return emp.SelectByNric(nric);
-                }
-
-                public int CreateEmployee(string nric, string name, DateTime dob, string dept, double wage)
-                {
-                    Employee emp = new Employee(nric, name, dob, dept, wage);
-                    return emp.Insert();
-                }
-
-                public Customer GetCustomerById(string id)
-                {
-                    Customer obj = new Customer();
-                    return obj.SelectById(id);
-                }*/
     }
 }

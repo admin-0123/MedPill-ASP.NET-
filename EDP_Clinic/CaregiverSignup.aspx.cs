@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Net.Mail;
 
 namespace EDP_Clinic
@@ -9,14 +10,12 @@ namespace EDP_Clinic
         SmtpClient emailClient = new SmtpClient("smtp-relay.sendinblue.com", 587);
         protected void Page_Load(object sender, EventArgs e)
         {
-
             if (Session["LoggedIn"] != null)
             {
                 if (!IsPostBack)
                 {
                     LoadPatients();
                 }
-
             }
 
             else
@@ -47,14 +46,7 @@ namespace EDP_Clinic
                 {
                     new_list.Add(i.Name);
                 }
-
-
             }
-
-
-
-
-
 
             // Remove the current user himself from list of selectable care receivers.
             if (new_list.Contains(current_user_obj.Name))
@@ -67,12 +59,13 @@ namespace EDP_Clinic
 
             if (current_user_obj.IsCaretaker == "No" || current_user_obj.IsCaretaker == null)
             {
-                lbl_cgstatus.Text = "Not a caregiver ";
+                lbl_cgstatus.Text = "Not currently a caregiver";
             }
 
             else
             {
-                lbl_cgstatus.Text = "You are a caregiver";
+                lbl_cgstatus.Text = "You currently a caregiver";
+                lbl_cgstatus.ForeColor = Color.Green;
                 ddl_allPatients.Visible = false;
                 lbl_instruction.Visible = false;
                 btn_stopCG.Visible = true;
@@ -83,9 +76,6 @@ namespace EDP_Clinic
                 //btn_becomeCG.Click -= new EventHandler(btn_becomeCG_Click);
                 //btn_becomeCG.Click += new EventHandler(btn_stopCG_Click);
             }
-
-
-
         }
 
         protected void btn_becomeCG_Click(object sender, EventArgs e)
@@ -96,7 +86,6 @@ namespace EDP_Clinic
             Response.Redirect("~/CaregiverNotification.aspx");
         }
 
-
         protected void btn_stopCG_Click(object sender, EventArgs e)
         {
             EDP_DBReference.Service1Client svc_client = new EDP_DBReference.Service1Client();
@@ -104,6 +93,11 @@ namespace EDP_Clinic
             var selected_cr = svc_client.GetOneCG(current_user.Id);
             Session["Selected_CR"] = selected_cr.Carereceiver_id;
             Response.Redirect("~/CaregiverRemoval.aspx");
+        }
+
+        protected void backBtn_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/UserPage.aspx", false);
         }
     }
 }

@@ -20,7 +20,7 @@ namespace EDP_Clinic
             }
             string id = "1";
             Details eList = new Details();
-            EDP_DBReference.Service1Client client = new EDP_DBReference.Service1Client();
+            Service1Client client = new Service1Client();
             eList = client.GetDetailsById(id);
             Name.Text = eList.Name;
             Nric.Text = eList.Nric;

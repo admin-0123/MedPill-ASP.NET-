@@ -8,11 +8,8 @@ namespace DBService.Entity
     public class displayPatient
     {
         public string Name { get; set; }
-
         public string Email { get; set; }
-
         public string PhoneNo { get; set; }
-
         public string Verified { get; set; }
         public string IsCaretaker { get; set; }
         public displayPatient()
