@@ -174,7 +174,7 @@ Author URL: http://w3layouts.com
     <button onclick="topFunction()" id="movetop" title="Go to top">
       &#10548;
     </button>--->
-    <script>
+    <%--<script>
         // When the user scrolls down 20px from the top of the document, show the button
         window.onscroll = function () {
             scrollFunction()
@@ -193,7 +193,7 @@ Author URL: http://w3layouts.com
             document.body.scrollTop = 0;
             document.documentElement.scrollTop = 0;
         }
-    </script>
+    </script>--%>
     <!-- /move top -->
 
     <script type="text/javascript" src="assets/js/jquery-3.5.1.min.js"></script>
