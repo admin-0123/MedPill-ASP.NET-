@@ -55,7 +55,6 @@ namespace EDP_Clinic
             {
                 Response.Redirect("Login.aspx", false);
             }
-
         }
         private bool ValidateInput()
         {
@@ -82,7 +81,6 @@ namespace EDP_Clinic
                 nameOnCardError.Visible = true;
             }
 
-            //result = int.TryParse(cardNumberTB.Text, out cardNumber);
             //checks if card number is actually numbers     
             //checks if there is other character other than numbers
             if (!Regex.IsMatch(cardNumberTB.Text, "^[0-9]*$"))
@@ -200,7 +198,6 @@ namespace EDP_Clinic
                 //It will return true if there is 2 cards here
                 if (resultCheck == true)
                 {
-
                     cardNumberError.Text = "Please enter a valid card information";
                     cardNumberError.Visible = true;
                     cardNumberError.ForeColor = Color.Red;

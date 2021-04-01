@@ -86,7 +86,6 @@ namespace EDP_Clinic
             try
             {
                 MailAddress m = new MailAddress(email);
-
                 return true;
             }
             catch (FormatException)
