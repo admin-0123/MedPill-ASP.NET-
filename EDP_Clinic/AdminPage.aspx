@@ -153,7 +153,7 @@
             position: relative;
         }
 
-        .roleSelect {
+/*        .roleSelect {
             display: block;
             width: 100%;
             height: calc(1.5em + .75rem + 2px);
@@ -165,7 +165,7 @@
             background-color: #fff;
             background-clip: padding-box;
             border: 1px solid #ced4da;
-        }
+        }*/
 
         select::-ms-expand {
             display: block;
@@ -269,8 +269,8 @@
                         <asp:TextBox ID="tbAddEmail" runat="server" CssClass="form-control" TextMode="Email" placeholder="someone@example.com"></asp:TextBox>
                     </div>
                     <div class="form-group">
-                        <label>Role</label>
-                        <asp:DropDownList ID="AddRole" runat="server" CssClass="roleSelect custom-select">
+                        <label class="form-label">Role</label>
+                        <asp:DropDownList ID="AddRole" runat="server" CssClass="custom-select">
                             <asp:ListItem Value="Doctor">Doctor</asp:ListItem>
                             <asp:ListItem Value="Nurse">Nurse</asp:ListItem>
                             <asp:ListItem Value="Receptionist">Receptionist</asp:ListItem>
@@ -299,23 +299,23 @@
                 </div>
                 <div class="modal-body">
                     <div class="form-group">
-                        <label>Name</label>
+                        <label class="form-label">Name</label>
                         <asp:TextBox ID="tbEditName" runat="server" CssClass="form-control"></asp:TextBox>
                     </div>
                     <div class="form-group">
-                        <label>Email</label>
+                        <label class="form-label">Email</label>
                         <asp:TextBox ID="tbEditEmail" runat="server" CssClass="form-control" TextMode="Email"></asp:TextBox>
                     </div>
                     <div class="form-group">
-                        <label>Role</label>
-                        <asp:DropDownList ID="EditRole" runat="server" CssClass="roleSelect">
+                        <label class="form-label">Role</label>
+                        <asp:DropDownList ID="EditRole" runat="server" CssClass="custom-select">
                             <asp:ListItem Value="Doctor">Doctor</asp:ListItem>
                             <asp:ListItem Value="Nurse">Nurse</asp:ListItem>
                             <asp:ListItem Value="Receptionist">Receptionist</asp:ListItem>
                         </asp:DropDownList>
                     </div>
                     <div class="form-group">
-                        <label>Phone</label>
+                        <label class="form-label">Phone</label>
                         <asp:TextBox ID="tbEditMobile" runat="server" CssClass="form-control"></asp:TextBox>
                     </div>
                     <asp:Label ID="editError" runat="server"></asp:Label>

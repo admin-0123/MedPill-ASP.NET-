@@ -5,11 +5,11 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <div class="login-card">
-        <h1 class="title mb-5">Phone Login</h1>
+        <h1 class="title mb-5 text-center">Phone Login</h1>
         <asp:Label ID="errorMsg" runat="server"></asp:Label>
         <div class="mb-4">
             <asp:Label ID="phoneLbl" runat="server" Text="Phone Number" CssClass="form-label"></asp:Label>
-            <asp:TextBox ID="tbPhoneNo" runat="server"></asp:TextBox>
+            <asp:TextBox ID="tbPhoneNo" runat="server" CssClass="form-control"></asp:TextBox>
         </div>
         <div class="mb-4">
             <asp:Button ID="Button1" runat="server" Text="Submit" class="btn btn-primary" OnClick="Button1_Click" />

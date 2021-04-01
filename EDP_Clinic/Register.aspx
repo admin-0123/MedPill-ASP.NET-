@@ -1,17 +1,11 @@
 ﻿<%@ Page Title="Register" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Register.aspx.cs" Inherits="EDP_Clinic.Register" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
-    <style>
-        .login-card {
-            width: 400px;
-            margin: 100px auto 100px;
-        }
-    </style>
     <link rel="stylesheet" href="assets/css/style.css" media="screen" type="text/css" />
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <div class="login-card" style="width: 400px;">
-        <h1 class="title mb-5">Register</h1>
+        <h1 class="title mb-5 text-center">Register</h1>
         <asp:Label ID="errorMsg" runat="server"></asp:Label>
         <div class="mb-4">
             <asp:Label ID="emailLbl" runat="server" Text="Email" CssClass="form-label"></asp:Label>
