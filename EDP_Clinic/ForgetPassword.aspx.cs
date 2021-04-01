@@ -17,9 +17,9 @@ namespace EDP_Clinic
 
         }
 
-        protected void Button1_Click(object sender, EventArgs e)
+        protected void submitBtn_Click(object sender, EventArgs e)
         {
-            var email = HttpUtility.HtmlEncode(tbEmail.Text);
+            string email = HttpUtility.HtmlEncode(tbEmail.Text.Trim());
             var emailexist = client.CheckOneUser(email);
             Debug.WriteLine(emailexist);
             if (emailexist == 0)
@@ -55,9 +55,6 @@ namespace EDP_Clinic
             emailClient.Send(mail);
             ScriptManager.RegisterStartupScript(this, this.GetType(), "Redit", "alert('A link to reset your password has been sent to your email'); window.location='" + Request.ApplicationPath + "Login.aspx';", true);
             Context.ApplicationInstance.CompleteRequest();
-
-
-
         }
         public string makeCode()
         {
@@ -69,7 +66,6 @@ namespace EDP_Clinic
                 r = generator.Next(0, 1000000).ToString("D6");
                 exist = client.CheckCodeExist(r);
             }
-
             return r;
         }
     }

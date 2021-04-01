@@ -126,9 +126,6 @@ namespace DBService
         [OperationContract]
         bool CheckCardByCardNumber(string uniqueIdentifier);
 
-        //[OperationContract]
-        //int UpdateByCardNumber(string previousCardNumber, string cardName, string cardNumber, DateTime cardExpiry, string cvvNumber);
-
         // Receipt Entity Class
         [OperationContract]
         int CreateReceipt(string userID, DateTime dateSale, double totalSum, bool isPaid, string receiptLink, string uniqueIdentifier);

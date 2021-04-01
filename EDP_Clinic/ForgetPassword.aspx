@@ -12,7 +12,7 @@
             <asp:TextBox ID="tbEmail" runat="server" CssClass="form-control" TextMode="Email" required></asp:TextBox>
         </div>
         <div class="mb-4">
-            <asp:Button ID="Button1" runat="server" Text="Submit" class="btn btn-primary" OnClick="Button1_Click" />
+            <asp:Button ID="submitBtn" runat="server" Text="Submit" class="btn btn-primary" OnClick="submitBtn_Click" />
         </div>
         <div class="mb-4 text-center">
             <a href="Register.aspx">Register</a> • <a href="Login.aspx">Login</a>

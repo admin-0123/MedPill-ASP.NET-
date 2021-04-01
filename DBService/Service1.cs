@@ -162,7 +162,6 @@ namespace DBService
             displayPatient user = new displayPatient();
             return user.DisplayAllSearchPatients(name);
         }
-
         public string GetEmailbyCode(string code)
         {
             EmailCode user = new EmailCode();
@@ -218,19 +217,16 @@ namespace DBService
             Receipt rep = new Receipt(userID, dateSale, totalSum, isPaid, receiptLink, uniqueIdentifier);
             return rep.Insert();
         }
-
         public List<Receipt> SelectAllReceipts(string userID)
         {
             Receipt rep = new Receipt();
             return rep.SelectAllReceipts(userID);
         }
-
         public Receipt SelectByReceiptID(string userID, string uniqueIdentifier)
         {
             Receipt rep = new Receipt();
             return rep.SelectByReceiptID(userID, uniqueIdentifier);
         }
-
         public List<Receipt> SelectAllReceiptsAdmin()
         {
             Receipt rep = new Receipt();
@@ -243,49 +239,41 @@ namespace DBService
             Appointment appt = new Appointment();
             return appt.SelectAllForAdmin();
         }
-
         public List<Appointment> GetAllApptUser(int uid)
         {
             Appointment appt = new Appointment();
             return appt.SelectAllForOneUser(uid);
         }
-
         public List<Appointment> GetAllApptAdminUpcoming()
         {
             Appointment appt = new Appointment();
             return appt.SelectAllForAdminUpcoming();
         }
-
         public List<Appointment> GetAllApptAdminPast()
         {
             Appointment appt = new Appointment();
             return appt.SelectAllForAdminPast();
         }
-
         public List<Appointment> GetAllApptAdminMissed()
         {
             Appointment appt = new Appointment();
             return appt.SelectAllForAdminMissed();
         }
-
         public List<Appointment> GetAllApptUserUpcoming(int uid)
         {
             Appointment appt = new Appointment();
             return appt.SelectAllForOneUserUpcoming(uid);
         }
-
         public List<Appointment> GetAllApptUserPast(int uid)
         {
             Appointment appt = new Appointment();
             return appt.SelectAllForOneUserPast(uid);
         }
-
         public List<Appointment> GetAllApptUserMissed(int uid)
         {
             Appointment appt = new Appointment();
             return appt.SelectAllForOneUserMissed(uid);
         }
-
         public int CreateAppointment(int patientID, string appointmentType, DateTime dateTime, string status)
         {
             Appointment appt = new Appointment();
@@ -295,25 +283,21 @@ namespace DBService
             appt.status = status;
             return appt.Insert();
         }
-
         public Appointment GetOneAppt(int patientID, DateTime dateTime)
         {
             Appointment appt = new Appointment();
             return appt.SelectOne(patientID, dateTime);
         }
-
         public int UpdateOneAppt(int patientID, string appointmentType, DateTime oldTime, DateTime newTime)
         {
             Appointment appt = new Appointment();
             return appt.UpdateOne(patientID, appointmentType, oldTime, newTime);
         }
-
         public int DeleteOneAppt(int uid, DateTime dateTime)
         {
             Appointment appt = new Appointment();
             return appt.DeleteOne(uid, dateTime);
         }
-
         public Photo GetOnePhoto(string id)
         {
             Photo photo = new Photo();
@@ -326,7 +310,6 @@ namespace DBService
         }
         public int AddOnePhoto(string id, string img)
         {
-
             Photo photo = new Photo();
             return photo.AddPhoto(id, img);
         }
@@ -340,49 +323,41 @@ namespace DBService
             Caregiver cg = new Caregiver();
             return cg.SelectById(id);
         }
-
         public int UpdateDoctor(int uid, DateTime old_time, int doctor_id)
         {
             Appointment appt = new Appointment();
             return appt.UpdateDoctor(uid, old_time, doctor_id);
         }
-
         public List<User> GetAllDoctors()
         {
             User user = new User();
             return user.SelectAllDoctors();
         }
-
         public User GetOneDoctor(string doctor_name)
         {
             User user = new User();
             return user.SelectDoctorByName(doctor_name);
         }
-
         public User GetPatientByName(string patient_name)
         {
             User user = new User();
             return user.SelectPatientByName(patient_name);
         }
-
         public int ApproveCaregiver(string cg_id, string patient_id)
         {
             Caregiver cg = new Caregiver();
             return cg.ApproveCaregiver(cg_id, patient_id);
         }
-
         public int RemoveCaregiver(string cg_id, string patient_id)
         {
             Caregiver cg = new Caregiver();
             return cg.RemoveCaregiver(cg_id, patient_id);
         }
-
         public Caregiver GetOneCGByCRID(string id)
         {
             Caregiver cg = new Caregiver();
             return cg.SelectByCRId(id);
         }
-
         /* Appointments End - */
 
         /* Owen's Reports */
@@ -446,7 +421,6 @@ namespace DBService
             Medical_Condition rp = new Medical_Condition();
             return rp.UpdateMedicalConditionById(id, patient_condition, comments);
         }
-
         public int CreatePatient_MC(string reg_no, string name, string nric, string duration, string type_of_leave, string clinic, string signature, string date)
         {
             Patient_MC de = new Patient_MC(reg_no, name, nric, duration, type_of_leave, clinic, signature, date);
@@ -462,7 +436,6 @@ namespace DBService
             Patient_MC de = new Patient_MC();
             return de.SelectAll();
         }
-
         public int CreatePayment_Report(string date_of_appointment, string purpose_visit, string fees)
         {
             Payment_Report de = new Payment_Report(date_of_appointment, purpose_visit, fees);
