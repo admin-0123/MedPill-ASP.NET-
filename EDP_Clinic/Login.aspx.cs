@@ -94,7 +94,7 @@ namespace EDP_Clinic
             }
 
         }
-
+        // Redirects user to phone login page
         protected void phoneBtn_Click(object sender, EventArgs e)
         {
             Response.Redirect("~/PhoneLogin.aspx", false);

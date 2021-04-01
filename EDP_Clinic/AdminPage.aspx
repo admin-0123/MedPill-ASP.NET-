@@ -1,14 +1,6 @@
 ﻿<%@ Page Title="Admin Page" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="AdminPage.aspx.cs" Inherits="EDP_Clinic.AdminPage" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
     <script src="https://kit.fontawesome.com/af00ae0421.js"></script>
     <script type="text/javascript">
         function openEditModal() {
@@ -25,19 +17,8 @@
         }
     </script>
     <style>
-        body {
-            color: #566787;
-            background-image: radial-gradient(#6bb5ff,#1463a3);
-            font-family: 'Varela Round', sans-serif;
-            font-size: 13px;
-        }
-
         .table-responsive {
             margin: 30px 0;
-        }
-
-        search {
-            padding: 5px;
         }
 
         .table-wrapper {
@@ -48,7 +29,7 @@
             box-shadow: 0 1px 1px rgba(0,0,0,.05);
         }
 
-        .table-title {
+        /*        .table-title {
             padding-bottom: 15px;
             background: #1d43b5;
             color: #fff;
@@ -56,39 +37,34 @@
             min-width: 100%;
             margin: -20px -25px 10px;
             border-radius: 3px 3px 0 0;
+        }*/
+
+        .table-title .btn-group {
+            float: right;
         }
 
-            .table-title h2 {
-                margin: 5px 0 0;
-                font-size: 24px;
+        .table-title .btn {
+            color: #fff;
+            float: right;
+            font-size: 13px;
+            border: none;
+            min-width: 50px;
+            border-radius: 2px;
+            border: none;
+            outline: none !important;
+            margin-left: 10px;
+        }
+
+            .table-title .btn i {
+                float: left;
+                font-size: 21px;
+                margin-right: 5px;
             }
 
-            .table-title .btn-group {
-                float: right;
+            .table-title .btn span {
+                float: left;
+                margin-top: 2px;
             }
-
-            .table-title .btn {
-                color: #fff;
-                float: right;
-                font-size: 13px;
-                border: none;
-                min-width: 50px;
-                border-radius: 2px;
-                border: none;
-                outline: none !important;
-                margin-left: 10px;
-            }
-
-                .table-title .btn i {
-                    float: left;
-                    font-size: 21px;
-                    margin-right: 5px;
-                }
-
-                .table-title .btn span {
-                    float: left;
-                    margin-top: 2px;
-                }
 
         table.table tr th, table.table tr td {
             border-color: #e9e9e9;
@@ -348,30 +324,33 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <div class="container-xl">
+        <h1 class="title text-black">Manage Employees</h1>
         <div class="table-responsive">
             <div class="table-wrapper">
                 <div class="table-title">
                     <div class="row">
                         <div class="col-sm-6">
-                            <h2 style="color: white;">Manage <b>Employees</b></h2>
                         </div>
                         <div class="col-sm-6">
-                            <a href="#addEmployeeModal" class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Add New Employee</span></a>
-
-                             <asp:LinkButton ID="RefreshBtn" runat="server" style="color: white;" Text="<i class='fas fa-sync-alt fa-lg'></i>" OnClick="RefreshBtn_Click"/>
-                            &nbsp;&nbsp;
-                            <asp:TextBox ID="searchtb" runat="server" Height="25px" Width="250px"></asp:TextBox>
-                            <asp:LinkButton ID="SearchBtn"  runat="server" style="color: white;" Text="<i class='fas fa-search fa-lg'></i>" OnClick="SearchBtn_Click" />                    
-     
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <asp:LinkButton ID="RefreshBtn" runat="server" CssClass="text-black" OnClick="RefreshBtn_Click">
+                                        <i class="fas fa-sync-alt fa-lg"></i>
+                                    </asp:LinkButton>
+                                    <asp:TextBox ID="searchtb" runat="server" Width="250px" CssClass="form-control" Placeholder="Search..."></asp:TextBox>
+                                    <asp:LinkButton ID="SearchBtn" runat="server" CssClass="text-black" OnClick="SearchBtn_Click">
+                                        <i class="fas fa-search fa-lg"></i>
+                                    </asp:LinkButton>
+                                </div>
+                                <div class="col-sm-6">
+                                    <a href="#addEmployeeModal" class="btn btn-success" data-toggle="modal">
+                                        <i class="material-icons">&#xE147;</i>
+                                        <span>Add New Employee</span>
+                                    </a>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="search">
-                    <!--
-			<form class="example" action="action_page.php">
-				 <input type="text" placeholder="Search.." name="search">
-				 <button type="submit"><i class="fa fa-search"></i></button>
-			</form> -->
                 </div>
                 <asp:GridView ID="EmployeeGridView"
                     AutoGenerateColumns="True"
@@ -395,10 +374,9 @@
         </div>
     </div>
     <!-- Edit Modal HTML -->
-    <div id="addEmployeeModal" class="modal fade" style="padding: 0;">
+    <div id="addEmployeeModal" class="modal fade">
         <div class="modal-dialog">
-            <div class="modal-content" style="padding: 0;">
-
+            <div class="modal-content p-0">
                 <div class="modal-header">
                     <h4 class="modal-title">Add Employee</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
@@ -440,8 +418,7 @@
     <!-- Edit Modal HTML -->
     <div id="editEmployeeModal" class="modal fade">
         <div class="modal-dialog">
-            <div class="modal-content" style="padding: 0;">
-
+            <div class="modal-content p-0">
                 <div class="modal-header">
                     <h4 class="modal-title">Edit Employee</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
@@ -467,7 +444,7 @@
                         <label>Phone</label>
                         <asp:TextBox ID="tbEditMobile" runat="server" CssClass="form-control"></asp:TextBox>
                     </div>
-                     <asp:Label ID="editError" runat="server"></asp:Label>
+                    <asp:Label ID="editError" runat="server"></asp:Label>
                 </div>
                 <div class="modal-footer">
                     <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
@@ -479,8 +456,7 @@
     <!-- Delete Modal HTML -->
     <div id="deleteEmployeeModal" class="modal fade">
         <div class="modal-dialog">
-            <div class="modal-content" style="padding: 0;">
-
+            <div class="modal-content p-0">
                 <div class="modal-header">
                     <h4 class="modal-title">Delete Employee</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
@@ -493,10 +469,7 @@
                     <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
                     <asp:Button ID="delBtn" class="btn btn-danger" runat="server" Text="Delete" OnClick="delBtn_Click" />
                 </div>
-
             </div>
         </div>
     </div>
-
 </asp:Content>
-
