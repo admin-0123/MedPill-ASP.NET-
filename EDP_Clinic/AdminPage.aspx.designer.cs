@@ -15,6 +15,24 @@ namespace EDP_Clinic
     {
 
         /// <summary>
+        /// editLbl control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label editLbl;
+
+        /// <summary>
+        /// delLbl control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label delLbl;
+
+        /// <summary>
         /// RefreshBtn control.
         /// </summary>
         /// <remarks>
@@ -49,24 +67,6 @@ namespace EDP_Clinic
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.GridView EmployeeGridView;
-
-        /// <summary>
-        /// editLbl control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label editLbl;
-
-        /// <summary>
-        /// delLbl control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label delLbl;
 
         /// <summary>
         /// tbAddName control.
