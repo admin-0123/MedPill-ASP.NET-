@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="receptionistPage.aspx.cs" Inherits="EDP_Clinic.employeePage" %>
+﻿<%@ Page Title="Receiptionist Page" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="receptionistPage.aspx.cs" Inherits="EDP_Clinic.employeePage" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <style>
         .pfp {
