@@ -14,10 +14,10 @@ namespace EDP_Clinic
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            var code = Request.QueryString["value"];
+            string code = Request.QueryString["value"];
             if (code == null)
             {
-                Response.Redirect("Home.aspx", false);
+                Response.Redirect("~/Home.aspx", false);
             }
             Debug.WriteLine(code);
             codeLbl.Text = code;
@@ -26,8 +26,8 @@ namespace EDP_Clinic
 
         protected void Button1_Click(object sender, EventArgs e)
         {
-            var password = tbpassword.Text;
-            var password2 = tbpassword2.Text;
+            string password = tbpassword.Text.ToString().Trim();
+            string password2 = tbpassword2.Text.ToString().Trim();
             if (password == password2)
             {
                 var errors = passwordcheck(password);
@@ -92,8 +92,5 @@ namespace EDP_Clinic
             }
             return errors;
         }
-
     }
-
-
 }

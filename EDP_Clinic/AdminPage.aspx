@@ -186,7 +186,7 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <section class="w3l-contact py-5">
         <div class="container">
-            <h2 class="title mb-5">Employee Dashboard</h2>
+            <h2 class="mb-5">Employee Dashboard</h2>
             <div class="mb-5">
                 <asp:Label ID="editLbl" runat="server" Visible="False"></asp:Label>
                 <asp:Label ID="delLbl" runat="server" Visible="False"></asp:Label>

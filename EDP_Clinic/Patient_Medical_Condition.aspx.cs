@@ -13,13 +13,13 @@ namespace EDP_Clinic
         {
             if (Session["LoggedIn"] == null)
             {
-                Response.Redirect("Login.aspx", false);
+                Response.Redirect("~/Login.aspx", false);
             }
             else
             {
                 if (Session["UserRole"].ToString() != "Doctor" && Session["UserRole"].ToString() != "Nurse")
                 {
-                    Response.Redirect("Home.aspx", false);
+                    Response.Redirect("~/Home.aspx", false);
                 }
             }
         }
@@ -30,8 +30,6 @@ namespace EDP_Clinic
                 RefreshGridView(0);
                 gv_medical.DataBind();
             }
-
-            
         }
         private void RefreshGridView(int pageNumber)
         {
@@ -43,8 +41,6 @@ namespace EDP_Clinic
             gv_medical.PageIndex = pageNumber;
             gv_medical.Visible = true;
             gv_medical.DataSource = eList;
-            
-
         }
         protected void gv_medical_PageIndexChanging(object sender, GridViewPageEventArgs e)
         {
@@ -53,9 +49,6 @@ namespace EDP_Clinic
             RefreshGridView(gv_medical.PageIndex);
             gv_medical.DataBind();
         }
-
-       
-
         protected void gv_medical_RowCommand1(object sender, GridViewCommandEventArgs e)
         {
             if (e.CommandName == "editing")
@@ -69,13 +62,12 @@ namespace EDP_Clinic
 
                 string url = "Medical_Condition_Details.aspx?id=" + id;
                 Response.Redirect(url);
-
             }
         }
 
         protected void btn_submit_add(object sender, EventArgs e)
         {
-            Response.Redirect("Medical_Condition_Create.aspx");
+            Response.Redirect("~/Medical_Condition_Create.aspx");
         }
     }
 }

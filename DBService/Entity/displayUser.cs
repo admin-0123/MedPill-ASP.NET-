@@ -1,8 +1,4 @@
 ﻿using System.Collections.Generic;
-
-// Add
-
-
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
@@ -14,14 +10,10 @@ namespace DBService.Entity
         // Let all properties start with caps
         public string Id { get; set; }
         public string Name { get; set; }
-
         public string Email { get; set; }
-
         public string PhoneNo { get; set; }
-
         public string Role { get; set; }
         public string Verified { get; set; }
-
 
         public displayUser()
         {
@@ -260,9 +252,5 @@ namespace DBService.Entity
             }
             return userList;
         }
-
-
-
-
     }
 }

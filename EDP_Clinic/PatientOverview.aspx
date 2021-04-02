@@ -1,145 +1,10 @@
 ﻿<%@ Page Title="Patient Overview" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="PatientOverview.aspx.cs" Inherits="EDP_Clinic.PatientOverview" %>
 
-<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server" >
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
-    <script src="https://kit.fontawesome.com/af00ae0421.js"></script>
     <style>
-        body {
-            color: #566787;
-            background-image: radial-gradient(#6bb5ff,#1463a3);
-            font-family: 'Varela Round', sans-serif;
-            font-size: 13px;
-        }
-
-        .table-responsive {
-            margin: 30px 0;
-        }
-
-        search {
-            padding: 5px;
-        }
-
-        .table-wrapper {
-            background: #fff;
-            padding: 20px 25px;
-            border-radius: 3px;
-            min-width: 1000px;
-            box-shadow: 0 1px 1px rgba(0,0,0,.05);
-        }
-
-        .table-title {
-            padding-bottom: 15px;
-            background: #1d43b5;
-            color: #fff;
-            padding: 16px 30px;
-            min-width: 100%;
-            margin: -20px -25px 10px;
-            border-radius: 3px 3px 0 0;
-        }
-
-            .table-title h2 {
-                margin: 5px 0 0;
-                font-size: 24px;
-            }
-
-            .table-title .btn-group {
-                float: right;
-            }
-
-            .table-title .btn {
-                color: #fff;
-                float: right;
-                font-size: 13px;
-                border: none;
-                min-width: 50px;
-                border-radius: 2px;
-                border: none;
-                outline: none !important;
-                margin-left: 10px;
-            }
-
-                .table-title .btn i {
-                    float: left;
-                    font-size: 21px;
-                    margin-right: 5px;
-                }
-
-                .table-title .btn span {
-                    float: left;
-                    margin-top: 2px;
-                }
-
-        table.table tr th, table.table tr td {
-            border-color: #e9e9e9;
-            padding: 12px 15px;
-            vertical-align: middle;
-        }
-
-            table.table tr th:first-child {
-                width: 25%;
-            }
-
-            table.table tr th:last-child {
-                width: 25%;
-            }
-
-        table.table-striped tbody tr:nth-of-type(odd) {
-            background-color: #fcfcfc;
-        }
-
-        table.table-striped.table-hover tbody tr:hover {
-            background: #f5f5f5;
-        }
-
-        table.table th i {
-            font-size: 13px;
-            margin: 0 5px;
-            cursor: pointer;
-        }
-
-        table.table td:last-child i {
-            opacity: 0.9;
-            font-size: 22px;
-            margin: 0 5px;
-        }
-
-        table.table td a {
-            font-weight: bold;
-            color: #566787;
-            display: inline-block;
-            text-decoration: none;
-            outline: none !important;
-        }
-
-            table.table td a:hover {
-                color: #2196F3;
-            }
-
-            table.table td a.edit {
-                color: #FFC107;
-            }
-
-            table.table td a.delete {
-                color: #F44336;
-            }
-
-        table.table td i {
-            font-size: 19px;
-        }
-
-        table.table .avatar {
-            border-radius: 50%;
-            vertical-align: middle;
-            margin-right: 10px;
-        }
-
         .pagination {
             float: right;
             margin: 0 0 5px;
@@ -288,20 +153,6 @@
             position: relative;
         }
 
-        .roleSelect {
-            display: block;
-            width: 100%;
-            height: calc(1.5em + .75rem + 2px);
-            padding: .375rem .75rem;
-            font-size: 1rem;
-            font-weight: 400;
-            line-height: 1.5;
-            color: #495057;
-            background-color: #fff;
-            background-clip: padding-box;
-            border: 1px solid #ced4da;
-        }
-
         select::-ms-expand {
             display: block;
         }
@@ -333,42 +184,48 @@
     </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-
-        <div class="container-xl">
-            <div class="table-responsive">
-                <div class="table-wrapper">
-                    <div class="table-title">
-                        <div class="row">
-                            <div class="col-sm-6">
-                                <h2 style="color: white;">Patient <b>Overview</b></h2>
+    <section class="w3l-contact py-5">
+        <div class="container">
+            <h2 class="mb-5">Patient Overview</h2>
+            <div class="mx-auto">
+                <div class="row mb-5">
+                    <div class="col-sm-6">
+                        <div class="btn-group">
+                            <asp:Button ID="ViewReport" runat="server" Text="View Reports" OnClick="ViewReport_Click" CssClass="btn btn-primary" />
+                            <asp:Button ID="ViewPatientBtn" runat="server" Text="View Patients" OnClick="ViewPatients_Click" CssClass="btn btn-primary" />
+                            <asp:Button ID="ViewCaretakerBtn" runat="server" Text="View Caretakers" OnClick="ViewCaretaker_Click" CssClass="btn btn-primary" />
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <asp:LinkButton ID="RefreshBtn" runat="server" OnClick="RefreshBtn_Click" CssClass="btn btn-primary">
+                                <span class="text-white">Refresh&nbsp</span>
+                                <i class="fas fa-sync-alt"></i>
+                                </asp:LinkButton>
                             </div>
-                            <div class="col-sm-6">
-               
-                            
-                            <asp:Button ID="ViewReport" runat="server" Text="View Reports" OnClick="ViewReport_Click"/>
-               
-                            <asp:Button ID="ViewPatientBtn" runat="server" Text="View Patients" OnClick="ViewPatients_Click" />
-                            <asp:Button ID="ViewCaretakerBtn" runat="server" Text="View Caretakers" OnClick="ViewCaretaker_Click" />
-                            <asp:LinkButton ID="RefreshBtn" runat="server" style="color: white;" Text="<i class='fas fa-sync-alt fa-lg'></i>" OnClick="RefreshBtn_Click"/>
-                            <asp:TextBox ID="searchtb" runat="server" Height="25px" Width="150px"></asp:TextBox>
-                            <asp:LinkButton ID="SearchBtn"  runat="server" style="color: white;" Text="<i class='fas fa-search fa-lg'></i>" OnClick="SearchBtn_Click" />                    
-                                  
-                            <asp:Button ID="btn_med_condition" runat="server" OnClick="Med_Condition_Click" Text="Medical Condition" />
-                                  
-                                <asp:Button ID="btn_send_cert" runat="server" OnClick="btn_send_cert_Click" Text="Send Medical Certificate" />
-                                  
+                            <asp:TextBox ID="searchtb" runat="server" CssClass="form-control" Placeholder="Search..."></asp:TextBox>
+                            <div class="input-group-append">
+                                <asp:LinkButton ID="SearchBtn" runat="server" OnClick="SearchBtn_Click" CssClass="btn btn-primary">
+                                     <span class="text-white">Search&nbsp</span>
+                                     <i class="fas fa-search"></i>
+                                </asp:LinkButton>
                             </div>
                         </div>
                     </div>
-                    <asp:GridView ID="PatientGridView"
-                        class="table table-striped table-hover"
-                        runat="server">
-                    </asp:GridView>
                 </div>
+                <div class="btn-group mb-5">
+                    <asp:Button ID="btn_med_condition" runat="server" OnClick="Med_Condition_Click" Text="Medical Condition" CssClass="btn btn-primary" />
+                    <asp:Button ID="btn_send_cert" runat="server" OnClick="btn_send_cert_Click" Text="Send Medical Certificate" CssClass="btn btn-primary" />
+                </div>
+                <asp:GridView ID="PatientGridView"
+                    CssClass="table table-striped table-bordered table-hover"
+                    runat="server"
+                    EmptyDataText="No data is available">
+                    <EmptyDataRowStyle
+                        CssClass="mb-3 mt-5 text-center" />
+                </asp:GridView>
             </div>
         </div>
-
-    </div>
-
+    </section>
 </asp:Content>
-

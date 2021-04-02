@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Patient_Medical_Condition.aspx.cs" Inherits="EDP_Clinic.Patient_Medical_Condition" %>
+﻿<%@ Page Title="Patient Medical Dashboard" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Patient_Medical_Condition.aspx.cs" Inherits="EDP_Clinic.Patient_Medical_Condition" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
@@ -342,18 +342,22 @@
                             <h2 style="color: white;">Medical Condition</h2>
                         </div>
                         <div class="col-sm-6">
-                                <asp:Button ID="btn_add" runat="server" class="button button3" Text="Add New Condition" CssClass="btn btn-success" OnClick="btn_submit_add" />
+                            <asp:Button ID="btn_add" runat="server" class="button button3" Text="Add New Condition" CssClass="btn btn-success" OnClick="btn_submit_add" />
                         </div>
                     </div>
                 </div>
-                <div class="search">
-                    <form class="example" action="action_page.php">
-                        <input type="text" placeholder="Search.." name="search">
+<%--                <div class="search">
+                        <input type="text" placeholder="Search.." CssClass="form-control">
                         <button type="submit"><i class="fa fa-search"></i></button>
-                    </form>
-                </div>
+                </div>--%>
                 <div>
-                    <asp:GridView ID="gv_medical" class="table table-striped table-hover" runat="server" AutoGenerateColumns="False" Width="1028px" OnRowCommand="gv_medical_RowCommand1" AllowPaging="True"  OnPreRender="gv_medical_PreRender" OnPageIndexChanging="gv_medical_PageIndexChanging" PageSize="5" >
+                    <asp:GridView ID="gv_medical"
+                        class="table table-striped table-hover"
+                        runat="server" AutoGenerateColumns="False"
+                        Width="1028px" OnRowCommand="gv_medical_RowCommand1"
+                        AllowPaging="True" OnPreRender="gv_medical_PreRender"
+                        OnPageIndexChanging="gv_medical_PageIndexChanging"
+                        PageSize="5" EmptyDataText="No data is available">
                         <Columns>
                             <asp:BoundField DataField="Id" HeaderText="Id" ReadOnly="True" />
                             <asp:BoundField DataField="med_condition" HeaderText="Med_Condition" ReadOnly="True" />
@@ -362,10 +366,12 @@
                             <asp:BoundField DataField="clinic" HeaderText="Clinic" ReadOnly="True" />
                             <asp:TemplateField>
                                 <ItemTemplate>
-                                    <asp:Button ID="btn_more" runat="server" CommandArgument='<%# Eval("Id") %>' CommandName="editing" Text="More Details"/>
+                                    <asp:Button ID="btn_more" runat="server" CommandArgument='<%# Eval("Id") %>' CommandName="editing" Text="More Details" />
                                 </ItemTemplate>
                             </asp:TemplateField>
                         </Columns>
+                        <EmptyDataRowStyle
+                            CssClass="mb-3 mt-5 text-center" />
                         <PagerSettings PageButtonCount="5" />
                     </asp:GridView>
                 </div>

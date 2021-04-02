@@ -121,14 +121,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-	  <Content Include="assets\images\pfp_placeholder.png" />
-	  <Content Include="assets\images\medical_certificate.jpg" />
+    <Content Include="assets\images\pfp_placeholder.png" />
+    <Content Include="assets\images\medical_certificate.jpg" />
     <Content Include="CA.aspx" />
     <Content Include="CA_admin.aspx" />
     <Content Include="CA_Success.aspx" />
     <Content Include="ChangeInfo.aspx" />
-    
-	  <Content Include="Create_Report.aspx" />
+    <Content Include="Create_Report.aspx" />
     <Content Include="Dashboard.aspx" />
     <Content Include="RA_admin.aspx" />
     <Content Include="RA_Success_admin.aspx" />
@@ -201,32 +200,7 @@
     <Content Include="assets\images\VBM_COF.png" />
     <Content Include="assets\js\bootstrap.min.js" />
     <Content Include="assets\js\owl.carousel.js" />
-    <Content Include="assets\vendor\animate\animate.css" />
-    <Content Include="assets\vendor\bootstrap\css\bootstrap-grid.css" />
-    <Content Include="assets\vendor\bootstrap\css\bootstrap-grid.min.css" />
-    <Content Include="assets\vendor\bootstrap\css\bootstrap-reboot.css" />
-    <Content Include="assets\vendor\bootstrap\css\bootstrap-reboot.min.css" />
-    <Content Include="assets\vendor\bootstrap\css\bootstrap.css" />
-    <Content Include="assets\vendor\bootstrap\css\bootstrap.min.css" />
-    <Content Include="assets\vendor\bootstrap\js\bootstrap.js" />
-    <Content Include="assets\vendor\bootstrap\js\bootstrap.min.js" />
-    <Content Include="assets\vendor\bootstrap\js\popper.js" />
-    <Content Include="assets\vendor\bootstrap\js\popper.min.js" />
-    <Content Include="assets\vendor\bootstrap\js\tooltip.js" />
-    <Content Include="assets\vendor\jquery\jquery-3.2.1.min.js" />
-    <Content Include="assets\vendor\perfect-scrollbar\perfect-scrollbar.css" />
-    <Content Include="assets\vendor\perfect-scrollbar\perfect-scrollbar.min.js" />
-    <Content Include="assets\vendor\select2\select2.css" />
-    <Content Include="assets\vendor\select2\select2.js" />
-    <Content Include="assets\vendor\select2\select2.min.css" />
-    <Content Include="assets\vendor\select2\select2.min.js" />
     <Content Include="Authentication.aspx" />
-    <Content Include="assets\vendor\bootstrap\css\bootstrap-grid.css.map" />
-    <Content Include="assets\vendor\bootstrap\css\bootstrap-grid.min.css.map" />
-    <Content Include="assets\vendor\bootstrap\css\bootstrap-reboot.css.map" />
-    <Content Include="assets\vendor\bootstrap\css\bootstrap-reboot.min.css.map" />
-    <Content Include="assets\vendor\bootstrap\css\bootstrap.css.map" />
-    <Content Include="assets\vendor\bootstrap\css\bootstrap.min.css.map" />
     <Content Include="AdminPage.aspx" />
     <Content Include="CaregiverSignup.aspx" />
     <Content Include="CaregiverNotification.aspx" />
