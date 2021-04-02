@@ -1,12 +1,7 @@
 ﻿using System;
-
-using System.Collections.Generic;
 using System.Drawing;
 using System.Globalization;
-using System.Linq;
 using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
 
 namespace EDP_Clinic
 {
@@ -55,7 +50,7 @@ namespace EDP_Clinic
             {
                 lb_error.Text = "Missing Inputs";
             }
-            else if (doctor == "--Select--"|| clinic == "--Select--")
+            else if (doctor == "--Select--" || clinic == "--Select--")
             {
                 lb_error.Text = "Select the dropdown options";
 
@@ -70,7 +65,7 @@ namespace EDP_Clinic
                 int Medical_Condition = client.CreateMedicalCondition(id, patient, med_condition, date, doctor, clinic, treatment, condition_desc, patient_condition, comments);
                 Response.Redirect("Patient_Medical_Condition.aspx");
             }
-            
+
         }
     }
 }

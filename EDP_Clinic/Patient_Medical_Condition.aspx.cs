@@ -34,7 +34,7 @@ namespace EDP_Clinic
         private void RefreshGridView(int pageNumber)
         {
             List<Medical_Condition> eList = new List<Medical_Condition>();
-            EDP_DBReference.Service1Client client = new EDP_DBReference.Service1Client();
+            Service1Client client = new Service1Client();
             eList = client.GetAllMedicalCondition().ToList<Medical_Condition>();
 
             // using gridview to bind to the list of employee objects
@@ -67,6 +67,7 @@ namespace EDP_Clinic
 
         protected void btn_submit_add(object sender, EventArgs e)
         {
+            Debug.WriteLine("Testing");
             Response.Redirect("~/Medical_Condition_Create.aspx");
         }
     }

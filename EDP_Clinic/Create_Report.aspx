@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Create_Report.aspx.cs" Inherits="EDP_Clinic.Create_Report" %>
+﻿<%@ Page Title="Medical Reports" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Create_Report.aspx.cs" Inherits="EDP_Clinic.Create_Report" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
@@ -12,8 +12,7 @@
         .button {
             background-color: darkblue;
             border: none;
-            color: whitez
-            padding: 20px;
+            color: whitez padding: 20px;
             text-align: center;
             text-decoration: none;
             display: inline-block;
@@ -339,48 +338,48 @@
     </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-    <div class="container-xl">
-        <div class="table-responsive">
-            <div class="table-wrapper">
-                <div class="table-title">
-                    <div class="row">
-                        <div class="col-sm-6">
-                            <h2>Manage <b>Report</b></h2>
-                        </div>
-                        <div class="col-sm-6">
-                            &nbsp;
-                                <asp:Button ID="Button8" runat="server" class="button button3" Text="Add New Report" CssClass="btn btn-success" OnClick="btn_submit_add" />
+    <section class="w3l-contact py-5">
+
+        <div class="container-xl">
+            <div class="table-responsive">
+                <div class="table-wrapper">
+                    <div class="table-title">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <h2>Medical Reports</h2>
+                            </div>
+                            <div class="col-sm-6">
+                                &nbsp;
+                                <asp:Button ID="Button8" runat="server" Text="+ Add New Report" CssClass="btn btn-success" OnClick="btn_submit_add" />
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div>
-                    <asp:GridView ID="gv_report" class="table table-striped table-hover" runat="server" AutoGenerateColumns="False" Width="1006px" OnRowCommand="gv_report_RowCommand1" OnPreRender="gv_report_PreRender" OnPageIndexChanging="gv_report_PageIndexChanging" AllowPaging="True" PageSize="5">
-                        <Columns>
-                            <asp:BoundField DataField="Id" HeaderText="Id" ReadOnly="True" />
-                            <asp:BoundField DataField="Dname" HeaderText="Doctor in charge" ReadOnly="True" />
-                            <asp:BoundField DataField="Pname" HeaderText="Patient" ReadOnly="True" />
-                            <asp:BoundField DataField="Clinic" HeaderText="Clinic" ReadOnly="True" />
-                            <asp:BoundField DataField="Date_of_report" HeaderText="Date of report" ReadOnly="True" />
-                            <asp:BoundField DataField="Details" HeaderText="Details" ReadOnly="True" />
-
-
-                            <asp:TemplateField HeaderText="Update">
-                                <ItemTemplate>
-                                    <asp:Button ID="btn_update" runat="server" Text="Update" CommandArgument='<%# Eval("Id") %>' CommandName="editing" />
-                                </ItemTemplate>
-                            </asp:TemplateField>
-
-                            
-                        </Columns>
-                        <PagerSettings FirstPageText="First" LastPageText="Last" PageButtonCount="4"/>
-                    </asp:GridView>
-                </div>
-                <div class="clearfix">
-                   
+                    <div>
+                        <asp:GridView ID="gv_report" runat="server"
+                            CssClass="table table-striped table-bordered table-hover" 
+                            AutoGenerateColumns="False" OnRowCommand="gv_report_RowCommand1" 
+                            OnPreRender="gv_report_PreRender" OnPageIndexChanging="gv_report_PageIndexChanging" 
+                            AllowPaging="True" PageSize="5">
+                            <Columns>
+                                <asp:BoundField DataField="Id" HeaderText="Id" ReadOnly="True" />
+                                <asp:BoundField DataField="Dname" HeaderText="Doctor in charge" ReadOnly="True" />
+                                <asp:BoundField DataField="Pname" HeaderText="Patient" ReadOnly="True" />
+                                <asp:BoundField DataField="Clinic" HeaderText="Clinic" ReadOnly="True" />
+                                <asp:BoundField DataField="Date_of_report" HeaderText="Date of report" ReadOnly="True" />
+                                <asp:BoundField DataField="Details" HeaderText="Details" ReadOnly="True" />
+                                <asp:TemplateField HeaderText="Update">
+                                    <ItemTemplate>
+                                        <asp:Button ID="btn_update" runat="server" Text="Update" CommandArgument='<%# Eval("Id") %>' CommandName="editing" />
+                                    </ItemTemplate>
+                                </asp:TemplateField>
+                            </Columns>
+                            <PagerSettings FirstPageText="First" LastPageText="Last" PageButtonCount="4" />
+                        </asp:GridView>
+                    </div>
+                    <div class="clearfix">
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    <!-- Edit Modal HTML -->
-
+    </section>
 </asp:Content>

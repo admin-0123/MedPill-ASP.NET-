@@ -1,6 +1,5 @@
 ﻿using EDP_Clinic.EDP_DBReference;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -32,7 +31,7 @@ namespace EDP_Clinic
                 RefreshGridView(0);
                 gv_report.DataBind();
             }
-            
+
         }
         protected void btn_submit_add(object sender, EventArgs e)
         {
@@ -47,11 +46,11 @@ namespace EDP_Clinic
             gv_report.PageIndex = pageNumber;
             gv_report.DataSource = eList;
             gv_report.Visible = true;
-            
-            
+
+
             // using gridview to bind to the list of employee objects
-            
-            
+
+
         }
         protected void gv_report_PageIndexChanging(object sender, GridViewPageEventArgs e)
         {
@@ -60,7 +59,7 @@ namespace EDP_Clinic
             RefreshGridView(gv_report.PageIndex);
             gv_report.DataBind();
         }
-                
+
         protected void gv_report_RowCommand1(object sender, GridViewCommandEventArgs e)
         {
             if (e.CommandName == "editing")
@@ -78,7 +77,7 @@ namespace EDP_Clinic
             }
         }
     }
-    
 
-    
+
+
 }
