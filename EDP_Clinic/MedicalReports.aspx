@@ -102,7 +102,7 @@
                         <asp:BoundField DataField="Clinic" HeaderText="Clinic" ReadOnly="True" />
                         <asp:BoundField DataField="Date_of_report" HeaderText="Date of report" ReadOnly="True" />
                         <asp:BoundField DataField="Details" HeaderText="Details" ReadOnly="True" />
-                        <asp:TemplateField HeaderText="Update">
+                        <asp:TemplateField HeaderText="Update" ItemStyle-HorizontalAlign="Center">
                             <ItemTemplate>
                                 <asp:Button ID="btn_update" runat="server" Text="Update" CommandArgument='<%# Eval("Id") %>' CommandName="editing" CssClass="btn btn-primary" />
                             </ItemTemplate>

@@ -110,6 +110,7 @@
         /* Modal styles */
         .modal .modal-dialog {
             max-width: 400px;
+            margin-top: 100px;
         }
 
         .modal .modal-header, .modal .modal-body, .modal .modal-footer {
@@ -203,7 +204,7 @@
                                             <i class="fas fa-sync-alt"></i>
                                 </asp:LinkButton>
                             </div>
-                            <asp:TextBox ID="searchtb" runat="server" CssClass="form-control" Placeholder="Search..."></asp:TextBox>
+                            <asp:TextBox ID="searchtb" runat="server" CssClass="form-control" Placeholder="Search by name..."></asp:TextBox>
                             <div class="input-group-append">
                                 <asp:LinkButton ID="SearchBtn" runat="server" CssClass="btn btn-primary" OnClick="SearchBtn_Click">
                                         <span class="text-white">Search&nbsp</span>
@@ -213,23 +214,29 @@
                         </div>
                     </div>
                     <div class="col-sm-2">
-                        <a href="#addEmployeeModal" class="btn btn-success" data-toggle="modal">
+                        <a href="#addEmployeeModal" class="btn btn-success float-right" data-toggle="modal">
                             <span>+ Add Employee</span>
                         </a>
                     </div>
                 </div>
                 <asp:GridView ID="EmployeeGridView"
-                    AutoGenerateColumns="True" class="table"
+                    AutoGenerateColumns="False"
                     runat="server" OnRowCommand="EmployeeGridView_RowCommand1" AllowCustomPaging="True"
-                    CssClass="table table-striped table-bordered table-hover">
+                    CssClass="table table-striped table-bordered table-hover" AllowSorting="False">
                     <Columns>
+                        <asp:BoundField DataField="Id" HeaderText="Id" ReadOnly="True" />
+                        <asp:BoundField DataField="Email" HeaderText="Email" ReadOnly="True" />
+                        <asp:BoundField DataField="Name" HeaderText="Name" ReadOnly="True" />
+                        <asp:BoundField DataField="PhoneNo" HeaderText="Phone Number" ReadOnly="True" />
+                        <asp:BoundField DataField="Role" HeaderText="Role" ReadOnly="True" />
+                        <asp:BoundField DataField="Verified" HeaderText="Verified" ReadOnly="True" />
                         <asp:ButtonField HeaderText="Edit" CommandName="changeinfo" Text="<i class='far fa-edit'></i>"
                             ButtonType="Link" ControlStyle-CssClass="btn btn-primary">
                             <ControlStyle CssClass="btn btn-primary"></ControlStyle>
                         </asp:ButtonField>
                         <asp:ButtonField HeaderText="Delete" CommandName="deleteinfo" Text="<i class='far fa-trash-alt'></i>"
-                            ButtonType="Link" ControlStyle-CssClass="btn btn-primary">
-                            <ControlStyle CssClass="btn btn-primary"></ControlStyle>
+                            ButtonType="Link" ControlStyle-CssClass="btn btn-danger">
+                            <ControlStyle CssClass="btn btn-danger"></ControlStyle>
                         </asp:ButtonField>
                     </Columns>
                     <PagerSettings FirstPageText="First" LastPageText="Last" PageButtonCount="5" />

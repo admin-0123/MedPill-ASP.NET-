@@ -273,7 +273,7 @@
     <Content Include="AddMedicalReports.aspx" />
     <Content Include="Patient_update_details.aspx" />
     <Content Include="UpdateMedicalReports.aspx" />
-    <Content Include="UpdateDetails.aspx" />
+    <Content Include="PatientDetails.aspx" />
     <Content Include="Payment.aspx" />
     <Content Include="PaymentInfoDeleted.aspx" />
     <Content Include="PaymentInformation.aspx" />
@@ -592,12 +592,12 @@
     <Compile Include="UpdateMedicalReports.aspx.designer.cs">
       <DependentUpon>UpdateMedicalReports.aspx</DependentUpon>
     </Compile>
-    <Compile Include="UpdateDetails.aspx.cs">
-      <DependentUpon>UpdateDetails.aspx</DependentUpon>
+    <Compile Include="PatientDetails.aspx.cs">
+      <DependentUpon>PatientDetails.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="UpdateDetails.aspx.designer.cs">
-      <DependentUpon>UpdateDetails.aspx</DependentUpon>
+    <Compile Include="PatientDetails.aspx.designer.cs">
+      <DependentUpon>PatientDetails.aspx</DependentUpon>
     </Compile>
     <Compile Include="Payment.aspx.cs">
       <DependentUpon>Payment.aspx</DependentUpon>

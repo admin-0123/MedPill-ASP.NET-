@@ -212,13 +212,10 @@
         <div class="container">
             <h2 class="mb-5">Patient Medical Conditions</h2>
             <div class="mx-auto">
-                <div class="row">
-                    <div class="col-sm-10">
-                    </div>
-                    <div class="auto-style1">
+
+                    <div class="d-flex justify-content-end mb-5">
                         <asp:Button ID="btn_add" runat="server" Text="+ Add New Condition" CssClass="btn btn-success" OnClick="btn_submit_add" />
                     </div>
-                </div>
                 <%--                <div class="search">
                         <input type="text" placeholder="Search.." CssClass="form-control">
                         <button type="submit"><i class="fa fa-search"></i></button>

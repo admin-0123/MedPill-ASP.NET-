@@ -42,7 +42,7 @@ namespace EDP_Clinic
                 int index = Convert.ToInt32(e.CommandArgument);
 
                 GridViewRow selectedRow = EmployeeGridView.Rows[index];
-                string id = selectedRow.Cells[3].Text;
+                string id = selectedRow.Cells[0].Text;
                 Debug.WriteLine(id);
                 editLbl.Text = id;
                 User employee = new User();

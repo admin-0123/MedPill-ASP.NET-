@@ -79,7 +79,7 @@
                 <div class="row mb-5">
                     <div class="col-sm-6">
                         <div class="btn-group">
-                            <asp:Button ID="ViewReport" runat="server" Text="View Reports" OnClick="ViewReport_Click" CssClass="btn btn-primary" />
+<%--                            <asp:Button ID="ViewReport" runat="server" Text="View Reports" OnClick="ViewReport_Click" CssClass="btn btn-primary" />--%>
                             <asp:Button ID="ViewPatientBtn" runat="server" Text="View Patients" OnClick="ViewPatients_Click" CssClass="btn btn-primary" />
                             <asp:Button ID="ViewCaretakerBtn" runat="server" Text="View Caretakers" OnClick="ViewCaretaker_Click" CssClass="btn btn-primary" />
                         </div>
