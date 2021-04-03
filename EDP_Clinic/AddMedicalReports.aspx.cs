@@ -11,13 +11,13 @@ namespace EDP_Clinic
         {
             if (Session["LoggedIn"] == null)
             {
-                Response.Redirect("Login.aspx", false);
+                Response.Redirect("~/Login.aspx", false);
             }
             else
             {
                 if (Session["UserRole"].ToString() != "Doctor")
                 {
-                    Response.Redirect("Home.aspx", false);
+                    Response.Redirect("~/Home.aspx", false);
                 }
             }
         }
@@ -33,10 +33,10 @@ namespace EDP_Clinic
             var id = "1";
             //var dname = HttpUtility.HtmlEncode(tb_doctor.Text.ToString());
             var dname = dp_doctor.SelectedValue.ToString();
-            var pname = HttpUtility.HtmlEncode(tb_patient.Text.ToString());
+            string pname = HttpUtility.HtmlEncode(tb_patient.Text.ToString());
             var clinic = dp_clinic.SelectedValue.ToString();
             var date = HttpUtility.HtmlEncode(tb_date.Text.ToString());
-            var details = HttpUtility.HtmlEncode(tb_details.Text.ToString());
+            string details = HttpUtility.HtmlEncode(tb_details.Text.ToString());
 
             if (dname == "" || pname == "" || clinic == "" || date == "" || details == "")
             {
@@ -59,15 +59,14 @@ namespace EDP_Clinic
                 int report = client.CreateReport(id, dname, pname, clinic, date, details);
                 //var url = "Create Report.aspx?dname=" + dname + "&pname=" + pname + "&clinic= "+clinic+"&date="+date+"&details=" + details;
 
-                Response.Redirect("Create_Report.aspx");
+                Response.Redirect("~/MedicalReports.aspx");
             }
 
         }
 
         protected void btn_back_click(object sender, EventArgs e)
         {
-            Response.Redirect("Create Report.aspx");
+            Response.Redirect("~/MedicalReports.aspx");
         }
-
     }
 }

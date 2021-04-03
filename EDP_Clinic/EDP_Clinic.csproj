@@ -127,7 +127,7 @@
     <Content Include="CA_admin.aspx" />
     <Content Include="CA_Success.aspx" />
     <Content Include="ChangeInfo.aspx" />
-    <Content Include="Create_Report.aspx" />
+    <Content Include="MedicalReports.aspx" />
     <Content Include="Dashboard.aspx" />
     <Content Include="RA_admin.aspx" />
     <Content Include="RA_Success_admin.aspx" />
@@ -270,7 +270,7 @@
     <Content Include="error\generalError.aspx" />
     <Content Include="Patient_MC.aspx" />
     <Content Include="Patient_Medical_Condition.aspx" />
-    <Content Include="Patient_report.aspx" />
+    <Content Include="AddMedicalReports.aspx" />
     <Content Include="Patient_update_details.aspx" />
     <Content Include="Patient_Update_Report.aspx" />
     <Content Include="Patient_view_details.aspx" />
@@ -314,12 +314,12 @@
     <Compile Include="CA_Success.aspx.designer.cs">
       <DependentUpon>CA_Success.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Create_Report.aspx.cs">
-      <DependentUpon>Create_Report.aspx</DependentUpon>
+    <Compile Include="MedicalReports.aspx.cs">
+      <DependentUpon>MedicalReports.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Create_Report.aspx.designer.cs">
-      <DependentUpon>Create_Report.aspx</DependentUpon>
+    <Compile Include="MedicalReports.aspx.designer.cs">
+      <DependentUpon>MedicalReports.aspx</DependentUpon>
     </Compile>
     <Compile Include="Dashboard.aspx.cs">
       <DependentUpon>Dashboard.aspx</DependentUpon>
@@ -571,12 +571,12 @@
     <Compile Include="Patient_Medical_Condition.aspx.designer.cs">
       <DependentUpon>Patient_Medical_Condition.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Patient_report.aspx.cs">
-      <DependentUpon>Patient_report.aspx</DependentUpon>
+    <Compile Include="AddMedicalReports.aspx.cs">
+      <DependentUpon>AddMedicalReports.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Patient_report.aspx.designer.cs">
-      <DependentUpon>Patient_report.aspx</DependentUpon>
+    <Compile Include="AddMedicalReports.aspx.designer.cs">
+      <DependentUpon>AddMedicalReports.aspx</DependentUpon>
     </Compile>
     <Compile Include="Patient_update_details.aspx.cs">
       <DependentUpon>Patient_update_details.aspx</DependentUpon>

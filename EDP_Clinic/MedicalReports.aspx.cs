@@ -13,13 +13,13 @@ namespace EDP_Clinic
         {
             if (Session["LoggedIn"] == null)
             {
-                Response.Redirect("Login.aspx", false);
+                Response.Redirect("~/Login.aspx", false);
             }
             else
             {
                 if (Session["UserRole"].ToString() != "Doctor" && Session["UserRole"].ToString() != "Nurse")
                 {
-                    Response.Redirect("Home.aspx", false);
+                    Response.Redirect("~/Home.aspx", false);
                 }
             }
         }
@@ -35,13 +35,13 @@ namespace EDP_Clinic
         }
         protected void btn_submit_add(object sender, EventArgs e)
         {
-            Response.Redirect("Patient_report.aspx");
+            Response.Redirect("~/AddMedicalReports.aspx");
         }
 
         private void RefreshGridView(int pageNumber)
         {
             List<Report> eList = new List<Report>();
-            EDP_DBReference.Service1Client client = new EDP_DBReference.Service1Client();
+            Service1Client client = new Service1Client();
             eList = client.GetAllReport().ToList<Report>();
             gv_report.PageIndex = pageNumber;
             gv_report.DataSource = eList;
@@ -77,7 +77,4 @@ namespace EDP_Clinic
             }
         }
     }
-
-
-
 }
