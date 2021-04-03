@@ -33,13 +33,13 @@ Author URL: http://w3layouts.com
     <section class="w3l-bootstrap-header">
         <nav class="navbar navbar-expand-md navbar-light py-3">
             <div class="container">
-                <a class="navbar-brand" href="Home.aspx">
-                    <img src="assets/images/award.png" class="img-fluid" width="52px">
+                <a class="navbar-brand" href="../Home.aspx">
+                    <img src="../assets/images/award.png" class="img-fluid" width="52px" alt="MedPill Logo">
                     Medpill</a>
-                <!-- if logo is image enable this   
-    <a class="navbar-brand" href="#index.html">
-        <img src="image-path" alt="Your logo" title="Your logo" style="height:35px;" />
-    </a> -->
+                <%--                 if logo is image enable this   --%>
+                <%--                <a class="navbar-brand" href="Home.aspx">
+                    <img src="assets/images/award.png" alt="MedPill" title="MedPill" style="height: 35px;" />
+                </a>--%>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                     aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     Menu
@@ -70,6 +70,9 @@ Author URL: http://w3layouts.com
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="PatientOverview.aspx" id="employeePageBtn" runat="server">Patient Overview</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="MedicalReports.aspx" id="medicalReportsBtn" runat="server">Medical Reports</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="AdminPage.aspx" id="adminPageBtn" runat="server">Admin Page</a>

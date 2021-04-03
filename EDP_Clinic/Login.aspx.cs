@@ -61,17 +61,17 @@ namespace EDP_Clinic
                 if (role == "Patient")
                 {
                     Response.Cookies.Add(new HttpCookie("AuthToken", guid));
-                    Response.Redirect("Home.aspx", false);
+                    Response.Redirect("~/Home.aspx", false);
                 }
                 else if (role == "Admin")
                 {
                     Response.Cookies.Add(new HttpCookie("AuthToken", guid));
-                    Response.Redirect("AdminPage.aspx", false);
+                    Response.Redirect("~/AdminPage.aspx", false);
                 }
                 else
                 {
                     Response.Cookies.Add(new HttpCookie("AuthToken", guid));
-                    Response.Redirect("Home.aspx", false);
+                    Response.Redirect("~/Home.aspx", false);
                 }
             }
             else

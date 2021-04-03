@@ -13,7 +13,7 @@ namespace EDP_Clinic
                 employeePageBtn.Visible = false;
                 adminPageBtn.Visible = false;
                 receptionistPageBtn.Visible = false;
-
+                medicalReportsBtn.Visible = false;
             }
             else
             {
@@ -24,6 +24,7 @@ namespace EDP_Clinic
                     employeePageBtn.Visible = false;
                     loginBtn.Visible = false;
                     adminPageBtn.Visible = false;
+                    medicalReportsBtn.Visible = false;
                 }
                 if (role == "Receptionist")
                 {
@@ -31,6 +32,7 @@ namespace EDP_Clinic
                     adminPageBtn.Visible = false;
                     userPageBtn.Visible = false;
                     loginBtn.Visible = false;
+                    medicalReportsBtn.Visible = false;
                 }
                 if (role == "Doctor" || role == "Nurse")
                 {
@@ -44,6 +46,7 @@ namespace EDP_Clinic
                     employeePageBtn.Visible = false;
                     userPageBtn.Visible = false;
                     receptionistPageBtn.Visible = false;
+                    medicalReportsBtn.Visible = false;
                     loginBtn.Visible = false;
                 }
             }

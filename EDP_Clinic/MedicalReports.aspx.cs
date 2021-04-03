@@ -46,8 +46,6 @@ namespace EDP_Clinic
             gv_report.PageIndex = pageNumber;
             gv_report.DataSource = eList;
             gv_report.Visible = true;
-
-
             // using gridview to bind to the list of employee objects
 
 
@@ -71,7 +69,7 @@ namespace EDP_Clinic
                 GridViewRow selectedRow = gv_report.Rows[index - 1];
                 string id = selectedRow.Cells[0].Text;
 
-                string url = "UpdateMedicalReports.aspx?id=" + id;
+                string url = "~/UpdateMedicalReports.aspx?id=" + id;
                 Response.Redirect(url);
 
             }
