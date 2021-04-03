@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Patient_Update_Report.aspx.cs" Inherits="EDP_Clinic.Patient_Update_Report" %>
+﻿<%@ Page Title="Update Medical Report" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="UpdateMedicalReports.aspx.cs" Inherits="EDP_Clinic.Patient_Update_Report" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <style type="text/css">
         .auto-style1 {

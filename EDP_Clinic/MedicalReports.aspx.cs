@@ -71,7 +71,7 @@ namespace EDP_Clinic
                 GridViewRow selectedRow = gv_report.Rows[index - 1];
                 string id = selectedRow.Cells[0].Text;
 
-                string url = "Patient_Update_report.aspx?id=" + id;
+                string url = "UpdateMedicalReports.aspx?id=" + id;
                 Response.Redirect(url);
 
             }
