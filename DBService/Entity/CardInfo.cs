@@ -379,6 +379,5 @@ namespace DBService.Entity
             finally { }
             return cipherText;
         }
-
     }
 }

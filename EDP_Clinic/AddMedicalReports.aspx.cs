@@ -32,7 +32,7 @@ namespace EDP_Clinic
 
             var id = "1";
             //var dname = HttpUtility.HtmlEncode(tb_doctor.Text.ToString());
-            var dname = dp_doctor.SelectedValue.ToString();
+            string dname = dp_doctor.SelectedValue.ToString();
             string pname = HttpUtility.HtmlEncode(tb_patient.Text.ToString());
             var clinic = dp_clinic.SelectedValue.ToString();
             var date = HttpUtility.HtmlEncode(tb_date.Text.ToString());

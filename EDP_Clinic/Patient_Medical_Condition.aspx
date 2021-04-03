@@ -107,79 +107,6 @@
                 box-shadow: none;
                 background: #ddd;
             }
-        /* Modal styles */
-        .modal .modal-dialog {
-            max-width: 400px;
-        }
-
-        .modal .modal-header, .modal .modal-body, .modal .modal-footer {
-            padding: 20px 30px;
-        }
-
-        .modal .modal-content {
-            border-radius: 3px;
-            font-size: 14px;
-        }
-
-        .modal .modal-footer {
-            background: #ecf0f1;
-            border-radius: 0 0 3px 3px;
-        }
-
-        .modal .modal-title {
-            display: inline-block;
-        }
-
-        .modal .form-control {
-            border-radius: 2px;
-            box-shadow: none;
-            border-color: #dddddd;
-        }
-
-        .modal textarea.form-control {
-            resize: vertical;
-        }
-
-        .modal .btn {
-            border-radius: 2px;
-            min-width: 100px;
-        }
-
-        .modal form label {
-            font-weight: normal;
-        }
-
-        .modal button.close {
-            position: relative;
-        }
-
-        .roleSelect {
-            display: block;
-            width: 100%;
-            height: calc(1.5em + .75rem + 2px);
-            padding: .375rem .75rem;
-            font-size: 1rem;
-            font-weight: 400;
-            line-height: 1.5;
-            color: #495057;
-            background-color: #fff;
-            background-clip: padding-box;
-            border: 1px solid #ced4da;
-        }
-
-        select::-ms-expand {
-            display: block;
-        }
-        .auto-style1 {
-            position: relative;
-            width: 100%;
-            flex: 0 0 16.66667%;
-            max-width: 16.66667%;
-            left: -1px;
-            top: -1px;
-            padding-left: 15px;
-            padding-right: 15px;
-        }
     </style>
     <script>
         $(document).ready(function () {
@@ -233,9 +160,9 @@
                         <asp:BoundField DataField="date_diagnosis" HeaderText="Date_Diagnosis" ReadOnly="True" />
                         <asp:BoundField DataField="doctor" HeaderText="Doctor" ReadOnly="True" />
                         <asp:BoundField DataField="clinic" HeaderText="Clinic" ReadOnly="True" />
-                        <asp:TemplateField>
+                        <asp:TemplateField HeaderText="View More">
                             <ItemTemplate>
-                                <asp:Button ID="btn_more" runat="server" CommandArgument='<%# Eval("Id") %>' CommandName="editing" Text="More Details" />
+                                <asp:Button ID="btn_more" runat="server" CommandArgument='<%# Eval("Id") %>' CommandName="editing" Text="View More" CssClass="btn btn-primary" />
                             </ItemTemplate>
                         </asp:TemplateField>
                     </Columns>
