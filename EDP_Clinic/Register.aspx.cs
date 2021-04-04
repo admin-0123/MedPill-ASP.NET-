@@ -15,9 +15,8 @@ namespace EDP_Clinic
     {
         //string MYDBConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["EDP_DB"].ConnectionString;
         static string finalHash;
-        SmtpClient emailClient = new SmtpClient("smtp-relay.sendinblue.com", 587);
-        static string salt;
-        Service1Client client = new Service1Client();
+        readonly SmtpClient emailClient = new SmtpClient("smtp-relay.sendinblue.com", 587);
+        readonly Service1Client client = new Service1Client();
         protected void Page_Load(object sender, EventArgs e)
         {
 
@@ -111,11 +110,11 @@ namespace EDP_Clinic
                 }
                 else
                 {
-                    var code = makeCode();
+                    var code = MakeCode();
                     var codeExist = client.CheckCodeExist(code);
                     while (codeExist == 1)
                     {
-                        code = makeCode();
+                        code = MakeCode();
                         codeExist = client.CheckCodeExist(code);
                     }
                     client.AddCode(email, code);
@@ -123,13 +122,15 @@ namespace EDP_Clinic
                     emailClient.Credentials = new System.Net.NetworkCredential("bryanchinzw@gmail.com", "vPDBKArZRY7HcIJC");
                     emailClient.DeliveryMethod = SmtpDeliveryMethod.Network;
                     emailClient.EnableSsl = true;
-                    MailMessage mail = new MailMessage();
-                    mail.Subject = "Verify Account (MedPill)";
-                    mail.SubjectEncoding = Encoding.UTF8;
-                    mail.Body = "Please to verify account <br> <a>" + link + "</a>";
-                    mail.IsBodyHtml = true;
-                    mail.Priority = MailPriority.High;
-                    mail.From = new MailAddress("bryanchinzw@gmail.com");
+                    MailMessage mail = new MailMessage
+                    {
+                        Subject = "Verify Account (MedPill)",
+                        SubjectEncoding = Encoding.UTF8,
+                        Body = "Please to verify account <br> <a>" + link + "</a>",
+                        IsBodyHtml = true,
+                        Priority = MailPriority.High,
+                        From = new MailAddress("bryanchinzw@gmail.com")
+                    };
                     mail.To.Add(new MailAddress(email));
                     emailClient.Send(mail);
                 }
@@ -143,23 +144,23 @@ namespace EDP_Clinic
             var errors = "";
             if (password.Length < 8)
             {
-                errors = errors + "Password must at least be 8 characters long <br/>";
+                errors += "Password must at least be 8 characters long <br/>";
             }
             if (!Regex.IsMatch(password, "[a-s]"))
             {
-                errors = errors + "Password must contain lowercase letters <br/>";
+                errors += "Password must contain lowercase letters <br/>";
             }
             if (!Regex.IsMatch(password, "[A-Z]"))
             {
-                errors = errors + "Password must contain uppercase letters <br/>";
+                errors += "Password must contain uppercase letters <br/>";
             }
             if (!Regex.IsMatch(password, "[0-9]"))
             {
-                errors = errors + "Password must contain at least 1 number <br/>";
+                errors += "Password must contain at least 1 number <br/>";
             }
             if (!Regex.IsMatch(password, "[^0-9a-zA-Z]"))
             {
-                errors = errors + "Password must contain at least one symbol <br/>";
+                errors += "Password must contain at least one symbol <br/>";
             }
             return errors;
         }
@@ -176,7 +177,7 @@ namespace EDP_Clinic
                 return false;
             }
         }
-        public string makeCode()
+        public string MakeCode()
         {
             var exist = 1;
             string r = "yes";

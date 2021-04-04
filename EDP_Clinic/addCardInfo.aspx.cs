@@ -247,9 +247,9 @@ namespace EDP_Clinic
         }
 
         //Initialise an object to store Recaptcha response
-        public class reCaptchaResponseObject
+        public class ReCaptchaResponseObject
         {
-            public string success { get; set; }
+            public string Success { get; set; }
             public List<string> ErrorMessage { get; set; }
         }
 
@@ -273,19 +273,19 @@ namespace EDP_Clinic
 
                         JavaScriptSerializer js = new JavaScriptSerializer();
 
-                        reCaptchaResponseObject jsonObject = js.Deserialize<reCaptchaResponseObject>(jsonResponse);
+                        ReCaptchaResponseObject jsonObject = js.Deserialize<ReCaptchaResponseObject>(jsonResponse);
 
                         //Console.WriteLine("--- Testing ---");
                         //Console.WriteLine(jsonObject);
                         //Read success property in json object
-                        result = Convert.ToBoolean(jsonObject.success);
+                        result = Convert.ToBoolean(jsonObject.Success);
                     }
                 }
                 return result;
             }
-            catch (WebException ex)
+            catch (WebException)
             {
-                throw ex;
+                throw;
             }
         }
 

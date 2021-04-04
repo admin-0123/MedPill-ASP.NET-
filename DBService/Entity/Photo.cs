@@ -88,7 +88,6 @@ namespace DBService.Entity
         }
         public int UpdatePhoto(string id, string new_photo)
         {
-
             string DBConnect = ConfigurationManager.ConnectionStrings["EDP_DB"].ConnectionString;
             SqlConnection myConn = new SqlConnection(DBConnect);
 
@@ -103,9 +102,6 @@ namespace DBService.Entity
             myConn.Close();
 
             return result;
-
         }
-
-
     }
 }

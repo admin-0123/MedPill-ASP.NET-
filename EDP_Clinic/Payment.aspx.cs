@@ -344,9 +344,9 @@ namespace EDP_Clinic
         }
 
         //Initialise an object to store Recaptcha response
-        public class reCaptchaResponseObject
+        public class ReCaptchaResponseObject
         {
-            public string success { get; set; }
+            public string Success { get; set; }
             public List<string> ErrorMessage { get; set; }
         }
 
@@ -370,12 +370,12 @@ namespace EDP_Clinic
 
                         JavaScriptSerializer js = new JavaScriptSerializer();
 
-                        reCaptchaResponseObject jsonObject = js.Deserialize<reCaptchaResponseObject>(jsonResponse);
+                        ReCaptchaResponseObject jsonObject = js.Deserialize<ReCaptchaResponseObject>(jsonResponse);
 
                         //Console.WriteLine("--- Testing ---");
                         //Console.WriteLine(jsonObject);
                         //Read success property in json object
-                        result = Convert.ToBoolean(jsonObject.success);
+                        result = Convert.ToBoolean(jsonObject.Success);
                     }
                 }
                 return result;
@@ -509,19 +509,23 @@ namespace EDP_Clinic
         //Send email function
         protected void SendEmail(string receiptLink, string emailLink)
         {
-            SmtpClient emailClient = new SmtpClient("smtp-relay.sendinblue.com", 587);
-            emailClient.Credentials = new NetworkCredential("bryanchinzw@gmail.com", "vPDBKArZRY7HcIJC");
-            emailClient.DeliveryMethod = SmtpDeliveryMethod.Network;
-            emailClient.EnableSsl = true;
+            SmtpClient emailClient = new SmtpClient("smtp-relay.sendinblue.com", 587)
+            {
+                Credentials = new NetworkCredential("bryanchinzw@gmail.com", "vPDBKArZRY7HcIJC"),
+                DeliveryMethod = SmtpDeliveryMethod.Network,
+                EnableSsl = true
+            };
 
-            MailMessage mail = new MailMessage();
-            mail.Subject = "Payment Receipt";
-            mail.SubjectEncoding = Encoding.UTF8;
-            mail.Body = "This is your receipt. Click on the link below to view it. <br>" + receiptLink;
-            mail.IsBodyHtml = true;
-            mail.Priority = MailPriority.High;
+            MailMessage mail = new MailMessage
+            {
+                Subject = "Payment Receipt",
+                SubjectEncoding = Encoding.UTF8,
+                Body = "This is your receipt. Click on the link below to view it. <br>" + receiptLink,
+                IsBodyHtml = true,
+                Priority = MailPriority.High,
 
-            mail.From = new MailAddress("bryanchinzw@gmail.com");
+                From = new MailAddress("bryanchinzw@gmail.com")
+            };
             mail.To.Add(new MailAddress(emailLink));
             emailClient.Send(mail);
         }
@@ -548,7 +552,5 @@ namespace EDP_Clinic
 
             Debug.WriteLine(message.Sid);
         }
-
     }
-
 }
