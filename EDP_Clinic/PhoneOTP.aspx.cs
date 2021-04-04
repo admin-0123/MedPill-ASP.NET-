@@ -14,14 +14,13 @@ namespace EDP_Clinic
         {
             if (Session["MobileLogin"] == null)
             {
-                Response.Redirect("Login.aspx", false);
+                Response.Redirect("~/Login.aspx", false);
             }
-
         }
-        protected void Button1_Click(object sender, EventArgs e)
+        protected void submitBtn_Click(object sender, EventArgs e)
         {
-            var phoneNo = Session["MobileLogin"].ToString();
-            var phoneNumber = "+65" + phoneNo;
+            string phoneNo = Session["MobileLogin"].ToString();
+            string phoneNumber = "+65" + phoneNo;
             var otp = HttpUtility.HtmlEncode(phoneOTP.Text.ToString());
             var result = checkOTP(phoneNumber, otp);
             if (!result)
@@ -42,23 +41,22 @@ namespace EDP_Clinic
                 if (role == "Patient")
                 {
                     Response.Cookies.Add(new HttpCookie("AuthToken", guid));
-                    Response.Redirect("Home.aspx", false);
+                    Response.Redirect("~/Home.aspx", false);
                 }
                 else if (role == "Admin")
                 {
                     Response.Cookies.Add(new HttpCookie("AuthToken", guid));
-                    Response.Redirect("AdminPage.aspx", false);
+                    Response.Redirect("~/AdminPage.aspx", false);
                 }
                 else
                 {
                     Response.Cookies.Add(new HttpCookie("AuthToken", guid));
-                    Response.Redirect("Home.aspx", false);
+                    Response.Redirect("~/Home.aspx", false);
                 }
             }
         }
         private bool checkOTP(string phoneNo, string otp)
         {
-
             //Checks OTP
             var verificationCheck = VerificationCheckResource.Create(
                 to: phoneNo,

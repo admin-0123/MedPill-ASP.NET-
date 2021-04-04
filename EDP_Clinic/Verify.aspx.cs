@@ -14,7 +14,7 @@ namespace EDP_Clinic
             Debug.WriteLine(code);
             var email = client.GetEmailbyCode(code);
             client.VerifyOneUser(email);
-            Response.Redirect("Login.aspx");
+            Response.Redirect("~/Login.aspx");
         }
     }
 }

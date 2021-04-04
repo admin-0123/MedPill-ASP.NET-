@@ -18,18 +18,17 @@ namespace EDP_Clinic
         Service1Client client = new Service1Client();
         SmtpClient emailClient = new SmtpClient("smtp-relay.sendinblue.com", 587);
 
-
         protected void Page_Load(object sender, EventArgs e)
         {
             if (Session["LoggedIn"] == null)
             {
-                Response.Redirect("Login.aspx", false);
+                Response.Redirect("~/Login.aspx", false);
             }
             else
             {
                 if (Session["UserRole"].ToString() != "Admin")
                 {
-                    Response.Redirect("Home.aspx", false);
+                    Response.Redirect("~/Home.aspx", false);
                 }
             }
             refreshgrid();
@@ -43,7 +42,7 @@ namespace EDP_Clinic
                 int index = Convert.ToInt32(e.CommandArgument);
 
                 GridViewRow selectedRow = EmployeeGridView.Rows[index];
-                string id = selectedRow.Cells[3].Text;
+                string id = selectedRow.Cells[0].Text;
                 Debug.WriteLine(id);
                 editLbl.Text = id;
                 User employee = new User();
@@ -63,7 +62,6 @@ namespace EDP_Clinic
                 delLbl.Text = deleteid;
                 Debug.WriteLine(deleteid);
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "ok", "openDeleteModal();", true);
-
             }
         }
         protected void delBtn_Click(object sender, EventArgs e)
@@ -87,14 +85,13 @@ namespace EDP_Clinic
             }
             refreshgrid();
             ScriptManager.RegisterStartupScript(this, this.GetType(), "Yes", "closeDeleteModal();", true);
-
         }
         protected void editBtn_Click(object sender, EventArgs e)
         {
-            var name = tbEditName.Text;
-            var email = tbEditEmail.Text;
-            var mobile = tbEditMobile.Text;
-            var id = editLbl.Text;
+            string name = tbEditName.Text;
+            string email = tbEditEmail.Text;
+            string mobile = tbEditMobile.Text;
+            string id = editLbl.Text;
             var user = client.GetOneUserByEmail(email);
             if (name == "")
             {
@@ -109,7 +106,6 @@ namespace EDP_Clinic
                 editError.ForeColor = Color.Red;
                 editError.Visible = true;
                 return;
-
             }
             else
             {
@@ -176,10 +172,10 @@ namespace EDP_Clinic
         }
         protected void Button1_Click(object sender, EventArgs e)
         {
-            var email = tbAddEmail.Text;
-            var name = tbAddName.Text;
-            var mobile = tbAddMobile.Text;
-            var role = AddRole.SelectedValue.ToString();
+            string email = tbAddEmail.Text;
+            string name = tbAddName.Text;
+            string mobile = tbAddMobile.Text;
+            string role = AddRole.SelectedValue.ToString();
             if (email == "" || name == "" || mobile == "")
             {
                 //add error msg for modal
@@ -245,9 +241,7 @@ namespace EDP_Clinic
                             Debug.WriteLine(ex);
                         }
                     }
-
                 }
-
             }
         }
         public static bool IsValidEmail(string email)
@@ -255,7 +249,6 @@ namespace EDP_Clinic
             try
             {
                 MailAddress m = new MailAddress(email);
-
                 return true;
             }
             catch (FormatException)
@@ -284,9 +277,7 @@ namespace EDP_Clinic
                 r = generator.Next(0, 1000000).ToString("D6");
                 exist = client.CheckCodeExist(r);
             }
-
             return r;
         }
-
     }
 }

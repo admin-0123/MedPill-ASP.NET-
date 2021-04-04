@@ -15,10 +15,10 @@ namespace EDP_Clinic
         {
 
         }
-        protected void Button1_Click(object sender, EventArgs e)
+        protected void submitBtn_Click(object sender, EventArgs e)
         {
-            var email = HttpUtility.HtmlEncode(tbemail.Text);
-            var password = HttpUtility.HtmlEncode(tbpassword.Text);
+            string email = HttpUtility.HtmlEncode(tbemail.Text.Trim());
+            string password = HttpUtility.HtmlEncode(tbpassword.Text.Trim());
 
             var emailexist = client.CheckOneUser(email);
             if (emailexist == 0)
@@ -31,7 +31,7 @@ namespace EDP_Clinic
             if (!valid)
             {
                 errorMsg.Text = "Enter valid email";
-                errorMsg.ForeColor = System.Drawing.Color.Red;
+                errorMsg.ForeColor = Color.Red;
                 errorMsg.Visible = true;
                 return;
 
@@ -41,7 +41,7 @@ namespace EDP_Clinic
             if (verify == "No")
             {
                 errorMsg.Text = "Please verify account";
-                errorMsg.ForeColor = System.Drawing.Color.Red;
+                errorMsg.ForeColor = Color.Red;
                 errorMsg.Visible = true;
                 return;
             }
@@ -61,17 +61,17 @@ namespace EDP_Clinic
                 if (role == "Patient")
                 {
                     Response.Cookies.Add(new HttpCookie("AuthToken", guid));
-                    Response.Redirect("Home.aspx", false);
+                    Response.Redirect("~/Home.aspx", false);
                 }
                 else if (role == "Admin")
                 {
                     Response.Cookies.Add(new HttpCookie("AuthToken", guid));
-                    Response.Redirect("AdminPage.aspx", false);
+                    Response.Redirect("~/AdminPage.aspx", false);
                 }
                 else
                 {
                     Response.Cookies.Add(new HttpCookie("AuthToken", guid));
-                    Response.Redirect("Home.aspx", false);
+                    Response.Redirect("~/Home.aspx", false);
                 }
             }
             else
@@ -86,7 +86,6 @@ namespace EDP_Clinic
             try
             {
                 MailAddress m = new MailAddress(email);
-
                 return true;
             }
             catch (FormatException)
@@ -95,10 +94,10 @@ namespace EDP_Clinic
             }
 
         }
-
-        protected void Button2_Click(object sender, EventArgs e)
+        // Redirects user to phone login page
+        protected void phoneBtn_Click(object sender, EventArgs e)
         {
-            Response.Redirect("PhoneLogin.aspx", false);
+            Response.Redirect("~/PhoneLogin.aspx", false);
         }
     }
 }

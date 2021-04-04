@@ -11,25 +11,25 @@ namespace EDP_Clinic
 {
 
 
-    public partial class WebForm2
+    public partial class Create_Report
     {
 
         /// <summary>
-        /// lblError control.
+        /// addReportBtn control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblError;
+        protected global::System.Web.UI.WebControls.Button addReportBtn;
 
         /// <summary>
-        /// ListView1 control.
+        /// gv_report control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ListView ListView1;
+        protected global::System.Web.UI.WebControls.GridView gv_report;
     }
 }

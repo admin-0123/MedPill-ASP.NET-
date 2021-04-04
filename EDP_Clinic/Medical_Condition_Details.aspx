@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Medical_Condition_Details.aspx.cs" Inherits="EDP_Clinic.Medical_Condition_Details" %>
+﻿<%@ Page Title="Patient Medical Condition Details" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Medical_Condition_Details.aspx.cs" Inherits="EDP_Clinic.Medical_Condition_Details" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <style type="text/css">
         .auto-style1 {
@@ -156,4 +156,3 @@
         </tr>
     </table>
 </asp:Content>
-

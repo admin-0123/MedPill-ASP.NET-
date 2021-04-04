@@ -1,11 +1,9 @@
-﻿using System.Collections.Generic;
-
-// Add
-
-
+﻿using System;
+using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
+using System.Diagnostics;
 
 namespace DBService.Entity
 {
@@ -16,11 +14,8 @@ namespace DBService.Entity
         public string Name { get; set; }
         public string Password { get; set; }
         public string Salt { get; set; }
-
         public string Email { get; set; }
-
         public string PhoneNo { get; set; }
-
         public string Role { get; set; }
         public string Verified { get; set; }
         public string IsDeleted { get; set; }
@@ -39,7 +34,9 @@ namespace DBService.Entity
 
         }
 
-        public User(string id, string name, string password, string salt, string email, string phoneno, string role, string verified, string isdeleted, string iscaretaker)
+        public User(string id, string name, string password,
+            string salt, string email, string phoneno, string role,
+            string verified, string isdeleted, string iscaretaker)
         {
             Id = id;
             Name = name;
@@ -51,7 +48,6 @@ namespace DBService.Entity
             Verified = verified;
             IsDeleted = isdeleted;
             IsCaretaker = iscaretaker;
-
         }
         public User SelectByID(string id)
         {
@@ -88,7 +84,8 @@ namespace DBService.Entity
                 string IsDeleted = row["IsDeleted"].ToString();
                 string IsCaretaker = row["IsCaretaker"].ToString();
 
-                user = new User(Id, Name, Password, Salt, Email, PhoneNo, Role, Verified, IsDeleted, IsCaretaker);
+                user = new User(Id, Name, Password, Salt, Email, 
+                    PhoneNo, Role, Verified, IsDeleted, IsCaretaker);
             }
             return user;
         }
@@ -97,40 +94,55 @@ namespace DBService.Entity
             //Step 1 -  Define a connection to the database by getting
             //          the connection string from App.config
             string DBConnect = ConfigurationManager.ConnectionStrings["EDP_DB"].ConnectionString;
-            SqlConnection myConn = new SqlConnection(DBConnect);
-
-            //Step 2 -  Create a DataAdapter to retrieve data from the database table
-            string sqlStmt = "Select * from [User] WHERE Email = @paraEmail AND IsDeleted = 'No'";
-            SqlDataAdapter da = new SqlDataAdapter(sqlStmt, myConn);
-            da.SelectCommand.Parameters.AddWithValue("@paraEmail", email);
-
-            //Step 3 -  Create a DataSet to store the data to be retrieved
-            DataSet ds = new DataSet();
-
-            //Step 4 -  Use the DataAdapter to fill the DataSet with data retrieved
-            da.Fill(ds);
-
-            //Step 5 -  Read data from DataSet.
-            User user = null;
-            int rec_cnt = ds.Tables[0].Rows.Count;
-            if (rec_cnt == 1)
+            using (SqlConnection myConn = new SqlConnection(DBConnect))
             {
-                DataRow row = ds.Tables[0].Rows[0];  // Sql command returns only one record
-                string Id = row["Id"].ToString();
-                string Name = row["Name"].ToString();
-                string Password = row["Password"].ToString();
-                string Salt = row["Salt"].ToString();
-                string Email = row["Email"].ToString();
-                string PhoneNo = row["PhoneNo"].ToString();
-                string Role = row["Role"].ToString();
-                string Verified = row["Verified"].ToString();
-                string IsDeleted = row["IsDeleted"].ToString();
-                string IsCaretaker = row["IsCaretaker"].ToString();
+                //Step 2 -  Create a DataAdapter to retrieve data from the database table
+                string sqlStmt = "Select * from [User] WHERE Email = @paraEmail AND IsDeleted = 'No'";
+                using (SqlDataAdapter da = new SqlDataAdapter(sqlStmt, myConn))
+                {
+                    da.SelectCommand.Parameters.AddWithValue("@paraEmail", email);
 
+                    //Step 3 -  Create a DataSet to store the data to be retrieved
+                    using (DataSet ds = new DataSet())
+                    {
+                        try
+                        {
+                            //Step 4 -  Use the DataAdapter to fill the DataSet with data retrieved
+                            da.Fill(ds);
 
-                user = new User(Id, Name, Password, Salt, Email, PhoneNo, Role, Verified, IsDeleted, IsCaretaker);
+                            //Step 5 -  Read data from DataSet.
+                            User user = null;
+                            int rec_cnt = ds.Tables[0].Rows.Count;
+                            if (rec_cnt == 1)
+                            {
+                                DataRow row = ds.Tables[0].Rows[0];  // Sql command returns only one record
+                                string Id = row["Id"].ToString();
+                                string Name = row["Name"].ToString();
+                                string Password = row["Password"].ToString();
+                                string Salt = row["Salt"].ToString();
+                                string Email = row["Email"].ToString();
+                                string PhoneNo = row["PhoneNo"].ToString();
+                                string Role = row["Role"].ToString();
+                                string Verified = row["Verified"].ToString();
+                                string IsDeleted = row["IsDeleted"].ToString();
+                                string IsCaretaker = row["IsCaretaker"].ToString();
+
+                                user = new User(Id, Name, Password, Salt, Email, 
+                                    PhoneNo, Role, Verified, IsDeleted, IsCaretaker);
+                            }
+                            return user;
+                        }
+                        catch (SqlException ex)
+                        {
+                            throw new Exception(ex.ToString());
+                        }
+                        finally
+                        {
+                            Debug.WriteLine("Select User by email has been completed!");
+                        }
+                    }
+                }
             }
-            return user;
         }
         public User SelectByPhone(string phoneNo)
         {
@@ -168,7 +180,8 @@ namespace DBService.Entity
                 string IsCaretaker = row["IsCaretaker"].ToString();
 
 
-                user = new User(Id, Name, Password, Salt, Email, PhoneNo, Role, Verified, IsDeleted, IsCaretaker);
+                user = new User(Id, Name, Password, Salt, Email, 
+                    PhoneNo, Role, Verified, IsDeleted, IsCaretaker);
             }
             return user;
         }
@@ -368,7 +381,8 @@ namespace DBService.Entity
                 string IsDeleted = row["IsDeleted"].ToString();
                 string IsCaretaker = row["IsCaretaker"].ToString();
 
-                User obj = new User(Id, Name, Password, Salt, Email, PhoneNo, Role, Verified, IsDeleted, IsCaretaker);
+                User obj = new User(Id, Name, Password, Salt, Email, 
+                    PhoneNo, Role, Verified, IsDeleted, IsCaretaker);
                 userList.Add(obj);
             }
             return userList;
@@ -408,12 +422,12 @@ namespace DBService.Entity
                 string IsDeleted = row["IsDeleted"].ToString();
                 string IsCaretaker = row["IsCaretaker"].ToString();
 
-                User obj = new User(Id, Name, Password, Salt, Email, PhoneNo, Role, Verified, IsDeleted, IsCaretaker);
+                User obj = new User(Id, Name, Password, Salt, Email, 
+                    PhoneNo, Role, Verified, IsDeleted, IsCaretaker);
                 userList.Add(obj);
             }
             return userList;
         }
-
 
         public List<User> SelectAllDoctors()
         {
@@ -449,7 +463,8 @@ namespace DBService.Entity
                 string IsDeleted = row["IsDeleted"].ToString();
                 string IsCaretaker = row["IsCaretaker"].ToString();
 
-                User obj = new User(Id, Name, Password, Salt, Email, PhoneNo, Role, Verified, IsDeleted, IsCaretaker);
+                User obj = new User(Id, Name, Password, Salt, Email, 
+                    PhoneNo, Role, Verified, IsDeleted, IsCaretaker);
                 userList.Add(obj);
             }
             return userList;
@@ -492,11 +507,11 @@ namespace DBService.Entity
                 string IsCaretaker = row["IsCaretaker"].ToString();
 
 
-                user = new User(Id, Name, Password, Salt, Email, PhoneNo, Role, Verified, IsDeleted, IsCaretaker);
+                user = new User(Id, Name, Password, Salt, Email, 
+                    PhoneNo, Role, Verified, IsDeleted, IsCaretaker);
             }
             return user;
         }
-
 
         public User SelectPatientByName(string patient_name)
         {
@@ -535,11 +550,11 @@ namespace DBService.Entity
                 string IsCaretaker = row["IsCaretaker"].ToString();
 
 
-                user = new User(Id, Name, Password, Salt, Email, PhoneNo, Role, Verified, IsDeleted, IsCaretaker);
+                user = new User(Id, Name, Password, Salt, Email, 
+                    PhoneNo, Role, Verified, IsDeleted, IsCaretaker);
             }
             return user;
         }
-
 
         public List<User> SelectAllEmployees()
         {
@@ -578,15 +593,11 @@ namespace DBService.Entity
                 string IsDeleted = row["IsDeleted"].ToString();
                 string IsCaretaker = row["IsCaretaker"].ToString();
 
-                User obj = new User(Id, Name, Password, Salt, Email, PhoneNo, Role, Verified, IsDeleted, IsCaretaker);
+                User obj = new User(Id, Name, Password, Salt, Email, 
+                    PhoneNo, Role, Verified, IsDeleted, IsCaretaker);
                 userList.Add(obj);
             }
             return userList;
         }
-
-
-
-
-
     }
 }

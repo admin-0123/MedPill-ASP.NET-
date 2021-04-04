@@ -8,11 +8,8 @@ namespace DBService.Entity
     public class Caregiver
     {
         public string Id { get; set; }
-
         public string Carereceiver_id { get; set; }
-
         public int Certified_cg { get; set; }
-
         public Caregiver()
         {
 
@@ -57,8 +54,6 @@ namespace DBService.Entity
             }
             return caregiver;
         }
-
-
         public Caregiver SelectByCRId(string cr_id)
         {
             //Step 1 -  Define a connection to the database by getting
@@ -91,7 +86,6 @@ namespace DBService.Entity
             }
             return caregiver;
         }
-
         public int ApproveCaregiver(string cg_id, string patient_id)
         {
             string DBConnect = ConfigurationManager.ConnectionStrings["EDP_DB"].ConnectionString;
@@ -107,8 +101,6 @@ namespace DBService.Entity
             myConn.Close();
             return result;
         }
-
-
         public int RemoveCaregiver(string cg_id, string patient_id)
         {
             string DBConnect = ConfigurationManager.ConnectionStrings["EDP_DB"].ConnectionString;
@@ -123,12 +115,6 @@ namespace DBService.Entity
             myConn.Close();
             return result;
         }
-
-
-
-
-
-
 
         /*        public int ApproveCaregiver(string cg_id, string patient_id)
                 {

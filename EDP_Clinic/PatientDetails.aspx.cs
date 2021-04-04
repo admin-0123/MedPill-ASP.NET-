@@ -9,18 +9,18 @@ namespace EDP_Clinic
         {
             if (Session["LoggedIn"] == null)
             {
-                Response.Redirect("Login.aspx", false);
+                Response.Redirect("~/Login.aspx", false);
             }
             else
             {
                 if (Session["UserRole"].ToString() != "Patient")
                 {
-                    Response.Redirect("Home.aspx", false);
+                    Response.Redirect("~/Home.aspx", false);
                 }
             }
             string id = "1";
             Details eList = new Details();
-            EDP_DBReference.Service1Client client = new EDP_DBReference.Service1Client();
+            Service1Client client = new Service1Client();
             eList = client.GetDetailsById(id);
             Name.Text = eList.Name;
             Nric.Text = eList.Nric;
@@ -35,7 +35,7 @@ namespace EDP_Clinic
 
         protected void btn_back_click(object sender, EventArgs e)
         {
-            Response.Redirect("UserPage.aspx", false);
+            Response.Redirect("~/UserPage.aspx", false);
         }
 
         protected void btn_update_click(object sender, EventArgs e)

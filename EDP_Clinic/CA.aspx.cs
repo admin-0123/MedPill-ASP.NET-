@@ -46,7 +46,7 @@ namespace EDP_Clinic
                     Session["startDate"] = DateTime.Now.AddDays(1);
                     DateTime startDate = Convert.ToDateTime(Session["startDate"]);
                     DateTime endDate = DateTime.Now.AddMonths(2);
-                    lbl_validDates.Text = $"You may only pick a date between {startDate.Day} {startDate.ToString("MMMM")} to {endDate.Day} {endDate.ToString("MMMM")}";
+                    lbl_validDates.Text = $"You may only pick a date between {startDate.Day} {startDate:MMMM} to {endDate.Day} {endDate:MMMM}";
                     Session["gv_timeSlot"] = "Testing";
 
                     /*               List<DateTime> openSlots = new List<DateTime>();
@@ -100,8 +100,7 @@ namespace EDP_Clinic
         protected void btn_searchSlot_Click(object sender, EventArgs e)
         {
 
-            DateTime checkdate_input;
-            var checkdate_bool = DateTime.TryParse(tb_startdate.Text, out checkdate_input);
+            var checkdate_bool = DateTime.TryParse(tb_startdate.Text, out DateTime checkdate_input);
 
             // if input is a valid date, run the code block
             if (checkdate_bool != false)
@@ -126,7 +125,7 @@ namespace EDP_Clinic
                     if (startDate < endDate)
                     {
                         //lbl_validDates.Text = $"You may only pick a date between {startDate.Day} {startDate.ToString("MMMM")} to {endDate.Day} {endDate.ToString("MMMM")}";
-                        lbl_validDates.Text = $"You may only pick a date between {DateTime.Now.AddDays(1).Day} {DateTime.Now.AddDays(1).ToString("MMMM")} to {endDate.Day} {endDate.ToString("MMMM")}";
+                        lbl_validDates.Text = $"You may only pick a date between {DateTime.Now.AddDays(1).Day} {DateTime.Now.AddDays(1):MMMM} to {endDate.Day} {endDate:MMMM}";
                         lbl_validDates.ForeColor = Color.Black;
                     }
 

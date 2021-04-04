@@ -1,6 +1,7 @@
 ﻿using EDP_Clinic.EDP_DBReference;
 using System;
 using System.Diagnostics;
+using System.Drawing;
 using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -20,15 +21,15 @@ namespace EDP_Clinic
 
         protected void Button1_Click(object sender, EventArgs e)
         {
-            var password = tbpassword.Text;
-            var password2 = tbpassword2.Text;
+            string password = tbpassword.Text;
+            string password2 = tbpassword2.Text;
             if (password == password2)
             {
                 var errors = passwordcheck(password);
                 if (errors != "")
                 {
                     errorMsg.Text = errors;
-                    errorMsg.ForeColor = System.Drawing.Color.Red;
+                    errorMsg.ForeColor = Color.Red;
                     errorMsg.Visible = true;
                     return;
                 }
@@ -36,7 +37,7 @@ namespace EDP_Clinic
             else
             {
                 errorMsg.Text = "Passwords not the same";
-                errorMsg.ForeColor = System.Drawing.Color.Red;
+                errorMsg.ForeColor = Color.Red;
                 errorMsg.Visible = true;
                 return;
             }
@@ -54,8 +55,8 @@ namespace EDP_Clinic
             var result = client.ChangePassword(finalHash, theEmail);
             if (result == 0)
             {
-                errorMsg.Text = "unknown error has occured ";
-                errorMsg.ForeColor = System.Drawing.Color.Red;
+                errorMsg.Text = "Unknown error has occured";
+                errorMsg.ForeColor = Color.Red;
                 errorMsg.Visible = true;
                 return;
             }

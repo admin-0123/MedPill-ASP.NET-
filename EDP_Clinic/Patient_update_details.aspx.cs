@@ -1,15 +1,10 @@
 ﻿using EDP_Clinic.EDP_DBReference;
 using System;
-
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
 using System.Globalization;
-using System.Linq;
 using System.Net.Mail;
 using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
 
 namespace EDP_Clinic
 {
@@ -86,7 +81,7 @@ namespace EDP_Clinic
                 lb_error.Text = "Gender can only be 'male' or 'female'";
                 lb_error.ForeColor = Color.Red;
             }
-            else if (phone.Length != 8 && int.TryParse(phone, out numberResult)) 
+            else if (phone.Length != 8 && int.TryParse(phone, out numberResult))
             {
                 lb_error.Text = "Invaild Phone Number";
                 lb_error.ForeColor = Color.Red;
@@ -102,7 +97,7 @@ namespace EDP_Clinic
                 update = client.UpdateDetailsById(id, name, nric, dob, gender, phone, email, address, postal);
                 Response.Redirect("Patient_view_details.aspx");
             }
-            
+
 
         }
         public static bool IsValidEmail(string email)

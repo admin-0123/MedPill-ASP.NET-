@@ -10,15 +10,15 @@ namespace EDP_Clinic
         {
             if (Session["LoggedIn"] == null)
             {
-                Response.Redirect("Login.aspx", false);
+                Response.Redirect("~/Login.aspx", false);
             }
             else
             {
                 imgPfp.Visible = false;
-                var email = Session["LoggedIn"].ToString();
+                string email = Session["LoggedIn"].ToString();
                 var user = client.GetOneUserByEmail(email);
                 lblName.Text = user.Name.ToString();
-                var id = user.Id.ToString();
+                string id = user.Id.ToString();
                 var exist = client.CheckPhotoExist(id);
                 if (exist == 1)
                 {
@@ -34,7 +34,7 @@ namespace EDP_Clinic
 
         protected void appointmentBtn_Click(object sender, EventArgs e)
         {
-            Response.Redirect("PFA.aspx", false);
+            Response.Redirect("~/PFA.aspx", false);
         }
 
         protected void medicationBtn_Click(object sender, EventArgs e)
@@ -46,28 +46,28 @@ namespace EDP_Clinic
         //Hasan's Stuff
         protected void paymentMethodBtn_Click(object sender, EventArgs e)
         {
-            Response.Redirect("CardList.aspx", false);
+            Response.Redirect("~/CardList.aspx", false);
         }
 
         protected void paymentHistoryBtn_Click(object sender, EventArgs e)
         {
-            Response.Redirect("ReceiptList.aspx", false);
+            Response.Redirect("~/ReceiptList.aspx", false);
         }
 
         protected void changeinfoBtn_Click(object sender, EventArgs e)
         {
-            Response.Redirect("ChangeInfo.aspx", false);
+            Response.Redirect("~/ChangeInfo.aspx", false);
 
         }
 
         protected void Change_Personal_Info_Click(object sender, EventArgs e)
         {
-            Response.Redirect("Patient_view_details.aspx");
+            Response.Redirect("~/Patient_view_details.aspx");
         }
 
         protected void cgBtn_Click(object sender, EventArgs e)
         {
-            Response.Redirect("CaregiverSignup.aspx");
+            Response.Redirect("~/CaregiverSignup.aspx");
         }
     }
 }

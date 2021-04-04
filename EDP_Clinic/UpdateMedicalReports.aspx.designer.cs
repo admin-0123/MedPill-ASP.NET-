@@ -15,6 +15,24 @@ namespace EDP_Clinic
     {
 
         /// <summary>
+        /// lb_error control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lb_error;
+
+        /// <summary>
+        /// doctorSelectLbl control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label doctorSelectLbl;
+
+        /// <summary>
         /// dp_doctor control.
         /// </summary>
         /// <remarks>
@@ -24,13 +42,13 @@ namespace EDP_Clinic
         protected global::System.Web.UI.WebControls.DropDownList dp_doctor;
 
         /// <summary>
-        /// tb_patient control.
+        /// clinicSelectLbl control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox tb_patient;
+        protected global::System.Web.UI.WebControls.Label clinicSelectLbl;
 
         /// <summary>
         /// dp_clinic control.
@@ -42,13 +60,13 @@ namespace EDP_Clinic
         protected global::System.Web.UI.WebControls.DropDownList dp_clinic;
 
         /// <summary>
-        /// tb_date control.
+        /// reportDetailLbl control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox tb_date;
+        protected global::System.Web.UI.WebControls.Label reportDetailLbl;
 
         /// <summary>
         /// tb_details control.
@@ -58,15 +76,6 @@ namespace EDP_Clinic
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox tb_details;
-
-        /// <summary>
-        /// lb_error control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lb_error;
 
         /// <summary>
         /// btn_back control.
@@ -85,5 +94,41 @@ namespace EDP_Clinic
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btn_submit;
+
+        /// <summary>
+        /// patientLbl control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label patientLbl;
+
+        /// <summary>
+        /// tb_patient control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox tb_patient;
+
+        /// <summary>
+        /// reportDateLbl control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label reportDateLbl;
+
+        /// <summary>
+        /// tb_date control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox tb_date;
     }
 }

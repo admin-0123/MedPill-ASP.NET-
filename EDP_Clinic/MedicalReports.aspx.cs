@@ -7,7 +7,7 @@ using System.Web.UI.WebControls;
 
 namespace EDP_Clinic
 {
-    public partial class Patient_Medical_Condition : System.Web.UI.Page
+    public partial class Create_Report : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -23,33 +23,42 @@ namespace EDP_Clinic
                 }
             }
         }
-        protected void gv_medical_PreRender(object sender, EventArgs e)
+
+        protected void gv_report_PreRender(object sender, EventArgs e)
         {
             if (!IsPostBack)
             {
                 RefreshGridView(0);
-                gv_medical.DataBind();
+                gv_report.DataBind();
             }
+
         }
+        protected void btn_submit_add(object sender, EventArgs e)
+        {
+            Response.Redirect("~/AddMedicalReports.aspx");
+        }
+
         private void RefreshGridView(int pageNumber)
         {
-            List<Medical_Condition> eList = new List<Medical_Condition>();
+            List<Report> eList = new List<Report>();
             Service1Client client = new Service1Client();
-            eList = client.GetAllMedicalCondition().ToList<Medical_Condition>();
-
+            eList = client.GetAllReport().ToList<Report>();
+            gv_report.PageIndex = pageNumber;
+            gv_report.DataSource = eList;
+            gv_report.Visible = true;
             // using gridview to bind to the list of employee objects
-            gv_medical.PageIndex = pageNumber;
-            gv_medical.Visible = true;
-            gv_medical.DataSource = eList;
+
+
         }
-        protected void gv_medical_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        protected void gv_report_PageIndexChanging(object sender, GridViewPageEventArgs e)
         {
-            gv_medical.PageIndex = e.NewPageIndex;
-            Debug.WriteLine("Yes " + gv_medical.PageIndex);
-            RefreshGridView(gv_medical.PageIndex);
-            gv_medical.DataBind();
+            gv_report.PageIndex = e.NewPageIndex;
+            Debug.WriteLine("Yes " + gv_report.PageIndex);
+            RefreshGridView(gv_report.PageIndex);
+            gv_report.DataBind();
         }
-        protected void gv_medical_RowCommand1(object sender, GridViewCommandEventArgs e)
+
+        protected void gv_report_RowCommand1(object sender, GridViewCommandEventArgs e)
         {
             if (e.CommandName == "editing")
             {
@@ -57,18 +66,13 @@ namespace EDP_Clinic
                 // property to an Integer.
                 int index = Convert.ToInt32(e.CommandArgument);
 
-                GridViewRow selectedRow = gv_medical.Rows[index - 1];
+                GridViewRow selectedRow = gv_report.Rows[index - 1];
                 string id = selectedRow.Cells[0].Text;
 
-                string url = "Medical_Condition_Details.aspx?id=" + id;
+                string url = "~/UpdateMedicalReports.aspx?id=" + id;
                 Response.Redirect(url);
-            }
-        }
 
-        protected void btn_submit_add(object sender, EventArgs e)
-        {
-            Debug.WriteLine("Testing");
-            Response.Redirect("~/Medical_Condition_Create.aspx");
+            }
         }
     }
 }

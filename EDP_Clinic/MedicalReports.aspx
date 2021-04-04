@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Patient Overview" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="PatientOverview.aspx.cs" Inherits="EDP_Clinic.PatientOverview" %>
+﻿<%@ Page Title="Medical Reports" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="MedicalReports.aspx.cs" Inherits="EDP_Clinic.Create_Report" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
@@ -44,6 +44,11 @@
                 padding-top: 6px
             }
 
+        .hint-text {
+            float: left;
+            margin-top: 10px;
+            font-size: 13px;
+        }
     </style>
     <script>
         $(document).ready(function () {
@@ -74,45 +79,41 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <section class="w3l-contact py-5">
         <div class="container">
-            <h2 class="mb-5">Patient Overview</h2>
+            <h2 class="mb-5">Medical Reports</h2>
             <div class="mx-auto">
                 <div class="row mb-5">
                     <div class="col-sm-6">
-                        <div class="btn-group">
-<%--                            <asp:Button ID="ViewReport" runat="server" Text="View Reports" OnClick="ViewReport_Click" CssClass="btn btn-primary" />--%>
-                            <asp:Button ID="ViewPatientBtn" runat="server" Text="View Patients" OnClick="ViewPatients_Click" CssClass="btn btn-primary" />
-                            <asp:Button ID="ViewCaretakerBtn" runat="server" Text="View Caretakers" OnClick="ViewCaretaker_Click" CssClass="btn btn-primary" />
-                        </div>
                     </div>
                     <div class="col-sm-6">
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <asp:LinkButton ID="RefreshBtn" runat="server" OnClick="RefreshBtn_Click" CssClass="btn btn-primary">
-                                <span class="text-white">Refresh&nbsp</span>
-                                <i class="fas fa-sync-alt"></i>
-                                </asp:LinkButton>
-                            </div>
-                            <asp:TextBox ID="searchtb" runat="server" CssClass="form-control" Placeholder="Search..."></asp:TextBox>
-                            <div class="input-group-append">
-                                <asp:LinkButton ID="SearchBtn" runat="server" OnClick="SearchBtn_Click" CssClass="btn btn-primary">
-                                     <span class="text-white">Search&nbsp</span>
-                                     <i class="fas fa-search"></i>
-                                </asp:LinkButton>
-                            </div>
-                        </div>
                     </div>
                 </div>
-                <div class="btn-group mb-5">
-                    <asp:Button ID="btn_med_condition" runat="server" OnClick="Med_Condition_Click" Text="Medical Condition" CssClass="btn btn-primary" />
-                    <asp:Button ID="btn_send_cert" runat="server" OnClick="btn_send_cert_Click" Text="Send Medical Certificate" CssClass="btn btn-primary" />
+                <div class="d-flex justify-content-end mb-5">
+                    <asp:Button ID="addReportBtn" runat="server" Text="+ Add New Report" CssClass="btn btn-success" OnClick="btn_submit_add" />
                 </div>
-                <asp:GridView ID="PatientGridView"
+                <asp:GridView ID="gv_report" runat="server"
                     CssClass="table table-striped table-bordered table-hover"
-                    runat="server"
-                    EmptyDataText="No data is available">
+                    AutoGenerateColumns="False" OnRowCommand="gv_report_RowCommand1"
+                    OnPreRender="gv_report_PreRender" OnPageIndexChanging="gv_report_PageIndexChanging"
+                    AllowPaging="True" PageSize="5" EmptyDataText="No data is available">
+                    <Columns>
+                        <asp:BoundField DataField="Id" HeaderText="Id" ReadOnly="True" />
+                        <asp:BoundField DataField="Dname" HeaderText="Doctor in charge" ReadOnly="True" />
+                        <asp:BoundField DataField="Pname" HeaderText="Patient" ReadOnly="True" />
+                        <asp:BoundField DataField="Clinic" HeaderText="Clinic" ReadOnly="True" />
+                        <asp:BoundField DataField="Date_of_report" HeaderText="Date of report" ReadOnly="True" />
+                        <asp:BoundField DataField="Details" HeaderText="Details" ReadOnly="True" />
+                        <asp:TemplateField HeaderText="Update" ItemStyle-HorizontalAlign="Center">
+                            <ItemTemplate>
+                                <asp:Button ID="btn_update" runat="server" Text="Update" CommandArgument='<%# Eval("Id") %>' CommandName="editing" CssClass="btn btn-primary" />
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                    </Columns>
+                    <PagerSettings FirstPageText="First" LastPageText="Last" PageButtonCount="4" />
                     <EmptyDataRowStyle
                         CssClass="mb-3 mt-5 text-center" />
                 </asp:GridView>
+            </div>
+            <div class="clearfix">
             </div>
         </div>
     </section>

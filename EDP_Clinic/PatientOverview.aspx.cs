@@ -1,8 +1,6 @@
 ﻿using EDP_Clinic.EDP_DBReference;
 using System;
 using System.Collections.Generic;
-
-using System.Diagnostics;
 using System.Linq;
 using System.Net.Mail;
 using System.Net.Mime;
@@ -18,13 +16,13 @@ namespace EDP_Clinic
         {
             if (Session["LoggedIn"] == null)
             {
-                Response.Redirect("Login.aspx", false);
+                Response.Redirect("~/Login.aspx", false);
             }
             else
             {
                 if (Session["UserRole"].ToString() == "Patient")
                 {
-                    Response.Redirect("Home.aspx", false);
+                    Response.Redirect("~/Home.aspx", false);
                 }
             }
             List<displayPatient> patientList = new List<displayPatient>();
@@ -36,7 +34,7 @@ namespace EDP_Clinic
         protected void ViewPatients_Click(object sender, EventArgs e)
         {
             List<displayPatient> patientList = new List<displayPatient>();
-            List<User> userlist = new List<User>();
+            // List<User> userlist = new List<User>();
             patientList = client.DisplayPatientsOnly().ToList<displayPatient>();
             PatientGridView.Visible = true;
             PatientGridView.DataSource = patientList;
@@ -45,7 +43,7 @@ namespace EDP_Clinic
         protected void ViewCaretaker_Click(object sender, EventArgs e)
         {
             List<displayPatient> patientList = new List<displayPatient>();
-            List<User> userlist = new List<User>();
+            // List<User> userlist = new List<User>();
             patientList = client.DisplayCaretakers().ToList<displayPatient>();
             PatientGridView.Visible = true;
             PatientGridView.DataSource = patientList;
@@ -57,7 +55,7 @@ namespace EDP_Clinic
         }
         protected void SearchBtn_Click(object sender, EventArgs e)
         {
-            var search = HttpUtility.HtmlEncode(searchtb.Text);
+            string search = HttpUtility.HtmlEncode(searchtb.Text.ToString().Trim());
             List<displayPatient> patientList = new List<displayPatient>();
             patientList = client.DisplayAllSearchedPatients(search).ToList<displayPatient>();
             PatientGridView.Visible = true;
@@ -77,12 +75,12 @@ namespace EDP_Clinic
 
         protected void ViewReport_Click(object sender, EventArgs e)
         {
-            Response.Redirect("Create_Report.aspx");
+            Response.Redirect("~/MedicalReports.aspx");
         }
 
         protected void Med_Condition_Click(object sender, EventArgs e)
         {
-            Response.Redirect("Patient_Medical_Condition.aspx");
+            Response.Redirect("~/Patient_Medical_Condition.aspx");
         }
 
         protected void btn_send_cert_Click(object sender, EventArgs e)
@@ -109,4 +107,3 @@ namespace EDP_Clinic
         }
     }
 }
-//C:\Users\owenn\Source\Repos\wilfredhuang\Entreprise_Development_Project\EDP_Clinic\assets\images\medical_certificate.jpg

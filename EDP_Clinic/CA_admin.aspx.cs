@@ -16,10 +16,7 @@ namespace EDP_Clinic
             {
                 if (Session["UserRole"].ToString() == "Receptionist")
                 {
-
-
-
-                    EDP_DBReference.Service1Client svc_client = new EDP_DBReference.Service1Client();
+                    Service1Client svc_client = new Service1Client();
                     if (!IsPostBack)
                     {
                         Session["admin_userInput"] = "nothing";
@@ -33,7 +30,7 @@ namespace EDP_Clinic
                         Session["startDate"] = DateTime.Now.AddDays(1);
                         DateTime startDate = Convert.ToDateTime(Session["startDate"]);
                         DateTime endDate = DateTime.Now.AddMonths(2);
-                        lbl_validDates.Text = $"You may only pick a date between {startDate.Day} {startDate.ToString("MMMM")} to {endDate.Day} {endDate.ToString("MMMM")}";
+                        lbl_validDates.Text = $"You may only pick a date between {startDate.Day} {startDate:MMMM} to {endDate.Day} {endDate:MMMM}";
                         Session["gv_timeSlot"] = "Testing";
 
                         /*               List<DateTime> openSlots = new List<DateTime>();
@@ -54,7 +51,6 @@ namespace EDP_Clinic
                         gv_timeslots.Visible = true;
                         gv_timeslots.DataSource = Onload_Retrieve_Available_Appts();
                         gv_timeslots.DataBind();
-
                     }
 
                     else
@@ -67,21 +63,19 @@ namespace EDP_Clinic
 
                 else
                 {
-                    Response.Redirect("Home.aspx", false);
+                    Response.Redirect("~/Home.aspx", false);
                 }
             }
 
             else
             {
-                Response.Redirect("Login.aspx", false);
+                Response.Redirect("~/Login.aspx", false);
             }
         }
 
         protected void btn_searchSlot_Click(object sender, EventArgs e)
         {
-
-            DateTime checkdate_input;
-            var checkdate_bool = DateTime.TryParse(tb_startdate.Text, out checkdate_input);
+            var checkdate_bool = DateTime.TryParse(tb_startdate.Text, out _);
 
             // if input is a valid date, run the code block
             if (checkdate_bool != false)
@@ -106,7 +100,7 @@ namespace EDP_Clinic
                     if (startDate < endDate)
                     {
                         //lbl_validDates.Text = $"You may only pick a date between {startDate.Day} {startDate.ToString("MMMM")} to {endDate.Day} {endDate.ToString("MMMM")}";
-                        lbl_validDates.Text = $"You may only pick a date between {DateTime.Now.AddDays(1).Day} {DateTime.Now.AddDays(1).ToString("MMMM")} to {endDate.Day} {endDate.ToString("MMMM")}";
+                        lbl_validDates.Text = $"You may only pick a date between {DateTime.Now.AddDays(1).Day} {DateTime.Now.AddDays(1):MMMM} to {endDate.Day} {endDate:MMMM}";
                         lbl_validDates.ForeColor = Color.Black;
                     }
 
@@ -140,7 +134,7 @@ namespace EDP_Clinic
             List<DateTime> openSlots = new List<DateTime>();
             DateTime startDate = DateTime.Now.AddDays(1);
             DateTime endDate = DateTime.Now.AddMonths(2);
-            EDP_DBReference.Service1Client svc_client = new EDP_DBReference.Service1Client();
+            Service1Client svc_client = new Service1Client();
             List<Appointment> Current_ApptList = svc_client.GetAllApptAdmin().ToList();
             bool matching_appt_record = false;
 
@@ -189,7 +183,7 @@ namespace EDP_Clinic
             List<DateTime> openSlots = new List<DateTime>();
             DateTime startDate = Convert.ToDateTime(Session["startDate"]);
             DateTime endDate = DateTime.Now.AddMonths(2);
-            EDP_DBReference.Service1Client svc_client = new EDP_DBReference.Service1Client();
+            Service1Client svc_client = new Service1Client();
             List<Appointment> Current_ApptList = svc_client.GetAllApptAdmin().ToList();
             bool matching_appt_record = false;
 
@@ -225,8 +219,6 @@ namespace EDP_Clinic
                     }
                     dt = dt.AddMinutes(30);
                 }
-
-
             }
 
             return openSlots;
@@ -236,7 +228,6 @@ namespace EDP_Clinic
         {
             Response.Redirect("~/ReceptAppts.aspx");
         }
-
 
         private bool ValidateInput()
         {
@@ -274,7 +265,7 @@ namespace EDP_Clinic
                 DateTime rb_userinput = Convert.ToDateTime(Request["rb_apptslot"]);
                 string status = "upcoming";
 
-                EDP_DBReference.Service1Client svc_client = new EDP_DBReference.Service1Client();
+                Service1Client svc_client = new Service1Client();
                 int insert_result = svc_client.CreateAppointment(current_profile, appointmentType, rb_userinput, status);
                 if (insert_result == 1)
                 {
@@ -299,9 +290,6 @@ namespace EDP_Clinic
                     gv_timeslots.DataSource = Search_AvailableAppts();
                     gv_timeslots.DataBind();
                 }
-
-
-
             }
         }
 
@@ -313,9 +301,8 @@ namespace EDP_Clinic
         protected void btn_searchUser_Click(object sender, EventArgs e)
         {
             var userInput = tb_searchUser.Text.Trim();
-            EDP_DBReference.Service1Client svc_client = new EDP_DBReference.Service1Client();
+            Service1Client svc_client = new Service1Client();
             var userObj = svc_client.GetOneUserByPhoneNo(userInput);
-
 
             if (userObj != null)
             {
@@ -332,7 +319,6 @@ namespace EDP_Clinic
                     lbl_profileName.Text = userObj.Name;
                 }
             }
-
             else
             {
                 Session["admin_userInput"] = "nothing";
@@ -341,7 +327,6 @@ namespace EDP_Clinic
                 profilePfp.ImageUrl = "~/assets/images/pfp_placeholder.png";
                 lbl_profileName.Text = "";
             }
-
         }
     }
 }

@@ -12,7 +12,7 @@ namespace EDP_Clinic
             {
                 if (!Session["AuthToken"].ToString().Equals(Request.Cookies["AuthToken"].Value))
                 {
-                    Response.Redirect("Login.aspx", false);
+                    Response.Redirect("~/Login.aspx", false);
                 }
                 else
                 {
@@ -23,19 +23,19 @@ namespace EDP_Clinic
             //No credentials at all
             else
             {
-                Response.Redirect("Login.aspx", false);
+                Response.Redirect("~/Login.aspx", false);
             }
         }
 
 
         protected void goToReceipt_Click(object sender, EventArgs e)
         {
-            Response.Redirect("ReceiptList.aspx", false);
+            Response.Redirect("~/ReceiptList.aspx", false);
         }
 
         protected void goHomeBtn_Click(object sender, EventArgs e)
         {
-            Response.Redirect("UserPage.aspx", false);
+            Response.Redirect("~/UserPage.aspx", false);
         }
     }
 }

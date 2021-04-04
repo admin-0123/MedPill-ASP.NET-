@@ -1,5 +1,4 @@
-﻿
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
@@ -11,17 +10,13 @@ namespace DBService.Entity
     {
         public int Id { get; set; }
         public int patientID { get; set; }
-
         public int doctorID { get; set; }
-
         public int nurseID { get; set; }
-
         public int caregiverID { get; set; }
         public string appointmentType { get; set; }
         public string prescription { get; set; }
         public string remarks { get; set; }
         public DateTime dateTime { get; set; }
-
         public string followUp { get; set; }
         public string status { get; set; }
 
@@ -155,8 +150,6 @@ namespace DBService.Entity
             }
             return apptList;
         }
-
-
         public List<Appointment> SelectAllForAdminUpcoming()
         {
             //Step 1 -  Define a connection to the database by getting
@@ -224,7 +217,6 @@ namespace DBService.Entity
             }
             return apptList;
         }
-
         public List<Appointment> SelectAllForAdminPast()
         {
             //Step 1 -  Define a connection to the database by getting
@@ -292,8 +284,6 @@ namespace DBService.Entity
             }
             return apptList;
         }
-
-
         public List<Appointment> SelectAllForAdminMissed()
         {
             //Step 1 -  Define a connection to the database by getting
@@ -361,7 +351,6 @@ namespace DBService.Entity
             }
             return apptList;
         }
-
         public List<Appointment> SelectAllForOneUser(int uid)
         {
             //Step 1 -  Define a connection to the database by getting
@@ -428,7 +417,6 @@ namespace DBService.Entity
             }
             return apptList;
         }
-
         public List<Appointment> SelectAllForOneUserUpcoming(int uid)
         {
             //Step 1 -  Define a connection to the database by getting
@@ -496,7 +484,6 @@ namespace DBService.Entity
             }
             return apptList;
         }
-
         public List<Appointment> SelectAllForOneUserPast(int uid)
         {
             //Step 1 -  Define a connection to the database by getting
@@ -564,7 +551,6 @@ namespace DBService.Entity
             }
             return apptList;
         }
-
         public List<Appointment> SelectAllForOneUserMissed(int uid)
         {
             //Step 1 -  Define a connection to the database by getting
@@ -632,7 +618,6 @@ namespace DBService.Entity
             }
             return apptList;
         }
-
         public Appointment SelectOne(int uid, DateTime appt_datetime)
         {
             //Step 1 -  Define a connection to the database by getting
@@ -695,11 +680,9 @@ namespace DBService.Entity
                     followUp = row["followUp"].ToString();
                 }
                 obj = new Appointment(patientID, doctorID, nurseID, caregiverID, appointmentType, prescription, remarks, dateTime, followUp, status);
-
             }
             return obj;
         }
-
         public int UpdateOne(int uid, string appointmentType, DateTime old_time, DateTime new_time)
         {
             string DBConnect = ConfigurationManager.ConnectionStrings["EDP_DB"].ConnectionString;
@@ -720,7 +703,6 @@ namespace DBService.Entity
 
             return result;
         }
-
         public int UpdateDoctor(int uid, DateTime old_time, int doctor_id)
         {
             string DBConnect = ConfigurationManager.ConnectionStrings["EDP_DB"].ConnectionString;
@@ -740,7 +722,6 @@ namespace DBService.Entity
 
             return result;
         }
-
         public int DeleteOne(int uid, DateTime dateTime)
         {
             string DBConnect = ConfigurationManager.ConnectionStrings["EDP_DB"].ConnectionString;
@@ -759,9 +740,5 @@ namespace DBService.Entity
 
             return result;
         }
-
     }
-
-
-
 }

@@ -55,7 +55,6 @@ namespace EDP_Clinic
             {
                 Response.Redirect("Login.aspx", false);
             }
-
         }
         private bool ValidateInput()
         {
@@ -82,7 +81,6 @@ namespace EDP_Clinic
                 nameOnCardError.Visible = true;
             }
 
-            //result = int.TryParse(cardNumberTB.Text, out cardNumber);
             //checks if card number is actually numbers     
             //checks if there is other character other than numbers
             if (!Regex.IsMatch(cardNumberTB.Text, "^[0-9]*$"))
@@ -200,7 +198,6 @@ namespace EDP_Clinic
                 //It will return true if there is 2 cards here
                 if (resultCheck == true)
                 {
-
                     cardNumberError.Text = "Please enter a valid card information";
                     cardNumberError.Visible = true;
                     cardNumberError.ForeColor = Color.Red;
@@ -250,9 +247,9 @@ namespace EDP_Clinic
         }
 
         //Initialise an object to store Recaptcha response
-        public class reCaptchaResponseObject
+        public class ReCaptchaResponseObject
         {
-            public string success { get; set; }
+            public string Success { get; set; }
             public List<string> ErrorMessage { get; set; }
         }
 
@@ -276,19 +273,19 @@ namespace EDP_Clinic
 
                         JavaScriptSerializer js = new JavaScriptSerializer();
 
-                        reCaptchaResponseObject jsonObject = js.Deserialize<reCaptchaResponseObject>(jsonResponse);
+                        ReCaptchaResponseObject jsonObject = js.Deserialize<ReCaptchaResponseObject>(jsonResponse);
 
                         //Console.WriteLine("--- Testing ---");
                         //Console.WriteLine(jsonObject);
                         //Read success property in json object
-                        result = Convert.ToBoolean(jsonObject.success);
+                        result = Convert.ToBoolean(jsonObject.Success);
                     }
                 }
                 return result;
             }
-            catch (WebException ex)
+            catch (WebException)
             {
-                throw ex;
+                throw;
             }
         }
 

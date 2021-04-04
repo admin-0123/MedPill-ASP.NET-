@@ -1,12 +1,7 @@
 ﻿using System;
-
-using System.Collections.Generic;
 using System.Drawing;
 using System.Globalization;
-using System.Linq;
 using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
 
 namespace EDP_Clinic
 {
@@ -16,20 +11,20 @@ namespace EDP_Clinic
         {
             if (Session["LoggedIn"] == null)
             {
-                Response.Redirect("Login.aspx", false);
+                Response.Redirect("~/Login.aspx", false);
             }
             else
             {
                 if (Session["UserRole"].ToString() != "Doctor" && Session["UserRole"].ToString() != "Nurse")
                 {
-                    Response.Redirect("Home.aspx", false);
+                    Response.Redirect("~/Home.aspx", false);
                 }
             }
         }
 
         protected void btn_back_click(object sender, EventArgs e)
         {
-            Response.Redirect("Patient_Medical_Condition.aspx");
+            Response.Redirect("~/Patient_Medical_Condition.aspx");
         }
 
         protected void btn_submit_click(object sender, EventArgs e)
@@ -55,7 +50,7 @@ namespace EDP_Clinic
             {
                 lb_error.Text = "Missing Inputs";
             }
-            else if (doctor == "--Select--"|| clinic == "--Select--")
+            else if (doctor == "--Select--" || clinic == "--Select--")
             {
                 lb_error.Text = "Select the dropdown options";
 
@@ -68,9 +63,9 @@ namespace EDP_Clinic
             else
             {
                 int Medical_Condition = client.CreateMedicalCondition(id, patient, med_condition, date, doctor, clinic, treatment, condition_desc, patient_condition, comments);
-                Response.Redirect("Patient_Medical_Condition.aspx");
+                Response.Redirect("~/Patient_Medical_Condition.aspx");
             }
-            
+
         }
     }
 }
