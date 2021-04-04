@@ -15,8 +15,8 @@ namespace EDP_Clinic
 {
     public partial class AdminPage : System.Web.UI.Page
     {
-        Service1Client client = new Service1Client();
-        SmtpClient emailClient = new SmtpClient("smtp-relay.sendinblue.com", 587);
+        readonly Service1Client client = new Service1Client();
+        readonly SmtpClient emailClient = new SmtpClient("smtp-relay.sendinblue.com", 587);
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -45,8 +45,7 @@ namespace EDP_Clinic
                 string id = selectedRow.Cells[0].Text;
                 Debug.WriteLine(id);
                 editLbl.Text = id;
-                User employee = new User();
-                employee = client.GetOneUser(id);
+                User employee = client.GetOneUser(id);
                 tbEditName.Text = employee.Name;
                 tbEditEmail.Text = employee.Email;
                 tbEditMobile.Text = employee.PhoneNo;
@@ -92,7 +91,7 @@ namespace EDP_Clinic
             string email = tbEditEmail.Text;
             string mobile = tbEditMobile.Text;
             string id = editLbl.Text;
-            var user = client.GetOneUserByEmail(email);
+            // var user = client.GetOneUserByEmail(email);
             if (name == "")
             {
                 editError.Text = "Enter name";
@@ -156,11 +155,10 @@ namespace EDP_Clinic
         }
         protected void SearchBtn_Click(object sender, EventArgs e)
         {
-            var search = HttpUtility.HtmlEncode(searchtb.Text);
-            List<displayUser> patientList = new List<displayUser>();
-            List<User> userlist = new List<User>();
-            //patientList = client.ShowAllPatients().ToList<displayUser>();
-            patientList = client.ShowSearchedEmployees(search).ToList<displayUser>();
+            string search = HttpUtility.HtmlEncode(searchtb.Text);
+            // List<User> userlist = new List<User>();
+            // patientList = client.ShowAllPatients().ToList<displayUser>();
+            List<displayUser> patientList = client.ShowSearchedEmployees(search).ToList<displayUser>();
             EmployeeGridView.Visible = true;
             EmployeeGridView.DataSource = patientList;
             EmployeeGridView.DataBind();
@@ -224,13 +222,15 @@ namespace EDP_Clinic
                         emailClient.Credentials = new System.Net.NetworkCredential("bryanchinzw@gmail.com", "vPDBKArZRY7HcIJC");
                         emailClient.DeliveryMethod = SmtpDeliveryMethod.Network;
                         emailClient.EnableSsl = true;
-                        MailMessage mail = new MailMessage();
-                        mail.Subject = "Set Password (MedPill)";
-                        mail.SubjectEncoding = System.Text.Encoding.UTF8;
-                        mail.Body = "Please Click link to change password <br> <a>" + link + "</a>";
-                        mail.IsBodyHtml = true;
-                        mail.Priority = MailPriority.High;
-                        mail.From = new MailAddress("bryanchinzw@gmail.com");
+                        MailMessage mail = new MailMessage
+                        {
+                            Subject = "Set Password (MedPill)",
+                            SubjectEncoding = System.Text.Encoding.UTF8,
+                            Body = "Please Click link to change password <br> <a>" + link + "</a>",
+                            IsBodyHtml = true,
+                            Priority = MailPriority.High,
+                            From = new MailAddress("bryanchinzw@gmail.com")
+                        };
                         mail.To.Add(new MailAddress(email));
                         try
                         {
@@ -259,10 +259,9 @@ namespace EDP_Clinic
 
         public void refreshgrid()
         {
-            List<displayUser> patientList = new List<displayUser>();
-            List<User> userlist = new List<User>();
+            // List<User> userlist = new List<User>();
             //patientList = client.ShowAllPatients().ToList<displayUser>();
-            patientList = client.ShowAllEmployees().ToList<displayUser>();
+            List<displayUser> patientList = client.ShowAllEmployees().ToList<displayUser>();
             EmployeeGridView.Visible = true;
             EmployeeGridView.DataSource = patientList;
             EmployeeGridView.DataBind();

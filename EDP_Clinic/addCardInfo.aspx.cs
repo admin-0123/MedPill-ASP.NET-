@@ -26,7 +26,7 @@ namespace EDP_Clinic
             {
                 if (!Session["AuthToken"].ToString().Equals(Request.Cookies["AuthToken"].Value))
                 {
-                    Response.Redirect("Login.aspx", false);
+                    Response.Redirect("~/Login.aspx", false);
                 }
                 //User session exists
                 else
@@ -36,7 +36,7 @@ namespace EDP_Clinic
                     {
                         if (!Session["authOTPAToken"].ToString().Equals(Request.Cookies["authOTPAToken"].Value))
                         {
-                            Response.Redirect("CardList.aspx", false);
+                            Response.Redirect("~/CardList.aspx", false);
                         }
                         else
                         {
@@ -46,14 +46,14 @@ namespace EDP_Clinic
                     }
                     else
                     {
-                        Response.Redirect("CardList.aspx", false);
+                        Response.Redirect("~/CardList.aspx", false);
                     }
                 }
             }
             //No credentials at all
             else
             {
-                Response.Redirect("Login.aspx", false);
+                Response.Redirect("~/Login.aspx", false);
             }
         }
         private bool ValidateInput()
@@ -229,12 +229,6 @@ namespace EDP_Clinic
                     {
                         errorMsg.Text = "Please enter valid information";
                     }
-
-                    /*
-                    nameOnCardError.Visible = false;
-                    cardNumberError.Visible = false;
-                    cardExpiryError.Visible = false;
-                    CVVError.Visible = false;*/
                 }
             }
             else
@@ -297,8 +291,7 @@ namespace EDP_Clinic
             Response.Cookies["authOTPAToken"].Expires = DateTime.Now.AddMonths(-20);
 
             //TwilioSMS();
-
-            Response.Redirect("CardList.aspx", false);
+            Response.Redirect("~/CardList.aspx", false);
         }
 
         protected void TwilioSMS()
@@ -320,7 +313,6 @@ namespace EDP_Clinic
             from: new Twilio.Types.PhoneNumber("+12132796783"),
             to: new Twilio.Types.PhoneNumber("+6590251744")
         );
-
             Debug.WriteLine(message.Sid);
         }
     }

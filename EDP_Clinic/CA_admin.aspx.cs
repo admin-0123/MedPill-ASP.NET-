@@ -16,13 +16,10 @@ namespace EDP_Clinic
             {
                 if (Session["UserRole"].ToString() == "Receptionist")
                 {
-                    Service1Client svc_client = new Service1Client();
                     if (!IsPostBack)
                     {
                         Session["admin_userInput"] = "nothing";
                     }
-
-
                     tb_startdate_CalendarExtender.StartDate = DateTime.Now.AddDays(1);
                     tb_startdate_CalendarExtender.EndDate = DateTime.Now.AddMonths(2);
                     if (Session["gv_timeSlot"] == null)
@@ -44,15 +41,12 @@ namespace EDP_Clinic
                                                openSlots.Add(dt);
                                                dt = dt.AddMinutes(30);
                                            }
-
-
                                        }*/
 
                         gv_timeslots.Visible = true;
                         gv_timeslots.DataSource = Onload_Retrieve_Available_Appts();
                         gv_timeslots.DataBind();
                     }
-
                     else
                     {
                         gv_timeslots.Visible = true;
@@ -60,19 +54,16 @@ namespace EDP_Clinic
                         gv_timeslots.DataBind();
                     }
                 }
-
                 else
                 {
                     Response.Redirect("~/Home.aspx", false);
                 }
             }
-
             else
             {
                 Response.Redirect("~/Login.aspx", false);
             }
         }
-
         protected void btn_searchSlot_Click(object sender, EventArgs e)
         {
             var checkdate_bool = DateTime.TryParse(tb_startdate.Text, out _);
