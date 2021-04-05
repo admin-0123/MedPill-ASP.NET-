@@ -1,4 +1,5 @@
-﻿using System;
+﻿using EDP_Clinic.EDP_DBReference;
+using System;
 using System.Collections.Generic;
 using Twilio;
 using Twilio.Rest.Api.V2010.Account;
@@ -14,8 +15,6 @@ namespace EDP_Clinic
             {
                 Response.Redirect("~/Home.aspx");
             }
-
-
             else
             {
                 if (Session["current_appt_profile"].ToString() != "nothing")
@@ -23,15 +22,11 @@ namespace EDP_Clinic
                     loadSuccessMsg();
                 }
             }
-
-
-
-
         }
 
         protected void loadSuccessMsg()
         {
-            EDP_DBReference.Service1Client svc_client = new EDP_DBReference.Service1Client();
+            Service1Client svc_client = new Service1Client();
             Dictionary<String, String> apptDetail = (Dictionary<string, string>)Session["successful_appt_details"];
 
             DateTime dateTimeinput;
@@ -42,8 +37,8 @@ namespace EDP_Clinic
 
             var doctor = svc_client.GetOneUser(appt.doctorID.ToString());
 
-            lbl_apptType.Text = $"Appointment Type: {appt.appointmentType.ToString()}";
-            lbl_datetime.Text = $"Appointment Time: {appt.dateTime.ToString()}";
+            lbl_apptType.Text = $"Appointment Type: {appt.appointmentType}";
+            lbl_datetime.Text = $"Appointment Time: {appt.dateTime}";
 
             if (doctor == null)
             {
@@ -66,26 +61,25 @@ namespace EDP_Clinic
                 var accountSid = Environment.GetEnvironmentVariable("TWILIO_ACCOUNT_SID");
                 var authToken = Environment.GetEnvironmentVariable("TWILIO_AUTH_TOKEN");
 
-                TwilioClient.Init(accountSid, authToken);
+                // Comment these out for testing purposes
+                // TwilioClient.Init(accountSid, authToken);
 
-                if (patient.Id != Session["current_appt_profile"].ToString())
-                {
-                    var message = MessageResource.Create(
-                    body: $"You have successfully made an appointment for {patient.Name.Trim()} with MedPill Clinic, report to the clinic on {appt.dateTime.ToString("G")}",
-                    from: new Twilio.Types.PhoneNumber("+14242066417"),
-                    to: new Twilio.Types.PhoneNumber("+6587558054")
-                    );
-                }
-
-                else
-                {
-                    var message = MessageResource.Create(
-                    body: $"You have successfully made an appointment with MedPill Clinic, report to the clinic on {appt.dateTime.ToString("G")}",
-                    from: new Twilio.Types.PhoneNumber("+14242066417"),
-                    to: new Twilio.Types.PhoneNumber("+6587558054")
-                    );
-                }
-
+                //if (patient.Id != Session["current_appt_profile"].ToString())
+                //{
+                //    var message = MessageResource.Create(
+                //    body: $"You have successfully made an appointment for {patient.Name.Trim()} with MedPill Clinic, report to the clinic on {appt.dateTime.ToString("G")}",
+                //    from: new Twilio.Types.PhoneNumber("+14242066417"),
+                //    to: new Twilio.Types.PhoneNumber("+6587558054")
+                //    );
+                //}
+                //else
+                //{
+                //    var message = MessageResource.Create(
+                //    body: $"You have successfully made an appointment with MedPill Clinic, report to the clinic on {appt.dateTime.ToString("G")}",
+                //    from: new Twilio.Types.PhoneNumber("+14242066417"),
+                //    to: new Twilio.Types.PhoneNumber("+6587558054")
+                //    );
+                //}
             }
         }
 
@@ -93,7 +87,6 @@ namespace EDP_Clinic
         {
             Response.Redirect("~/PFA.aspx");
         }
-
 
         protected void btn_go_userpage_Click(object sender, EventArgs e)
         {
