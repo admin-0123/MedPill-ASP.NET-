@@ -87,10 +87,10 @@ namespace EDP_Clinic
         }
         protected void editBtn_Click(object sender, EventArgs e)
         {
-            string name = tbEditName.Text;
-            string email = tbEditEmail.Text;
-            string mobile = tbEditMobile.Text;
-            string id = editLbl.Text;
+            string name = HttpUtility.HtmlEncode(tbEditName.Text.Trim());
+            string email = HttpUtility.HtmlEncode(tbEditEmail.Text.Trim());
+            string mobile = HttpUtility.HtmlEncode(tbEditMobile.Text.Trim());
+            string id = HttpUtility.HtmlEncode(editLbl.Text.Trim());
             // var user = client.GetOneUserByEmail(email);
             if (name == "")
             {
@@ -155,7 +155,7 @@ namespace EDP_Clinic
         }
         protected void SearchBtn_Click(object sender, EventArgs e)
         {
-            string search = HttpUtility.HtmlEncode(searchtb.Text);
+            string search = HttpUtility.HtmlEncode(searchtb.Text.Trim());
             // List<User> userlist = new List<User>();
             // patientList = client.ShowAllPatients().ToList<displayUser>();
             List<displayUser> patientList = client.ShowSearchedEmployees(search).ToList<displayUser>();

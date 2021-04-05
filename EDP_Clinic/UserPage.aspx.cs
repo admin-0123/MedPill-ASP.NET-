@@ -5,7 +5,6 @@ namespace EDP_Clinic
 {
     public partial class UserPage : System.Web.UI.Page
     {
-        Service1Client client = new Service1Client();
         protected void Page_Load(object sender, EventArgs e)
         {
             if (Session["LoggedIn"] == null)
@@ -16,7 +15,8 @@ namespace EDP_Clinic
             {
                 imgPfp.Visible = false;
                 string email = Session["LoggedIn"].ToString();
-                var user = client.GetOneUserByEmail(email);
+                Service1Client client = new Service1Client();
+                User user = client.GetOneUserByEmail(email);
                 lblName.Text = user.Name.ToString();
                 string id = user.Id.ToString();
                 var exist = client.CheckPhotoExist(id);
@@ -25,7 +25,7 @@ namespace EDP_Clinic
                     defaultPfp.Visible = false;
                     imgPfp.Visible = true;
                     var photo = client.GetOnePhoto(id);
-                    var fileName = photo.Photo_Resource.ToString();
+                    string fileName = photo.Photo_Resource.ToString();
                     var path = "~/UserImg/" + fileName;
                     imgPfp.ImageUrl = path;
                 }
@@ -41,7 +41,6 @@ namespace EDP_Clinic
         {
 
         }
-
 
         //Hasan's Stuff
         protected void paymentMethodBtn_Click(object sender, EventArgs e)

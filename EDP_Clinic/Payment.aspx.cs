@@ -379,9 +379,9 @@ namespace EDP_Clinic
                 }
                 return result;
             }
-            catch (WebException ex)
+            catch (WebException)
             {
-                throw ex;
+                throw;
             }
         }
 

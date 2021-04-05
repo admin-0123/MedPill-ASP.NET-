@@ -24,7 +24,7 @@ namespace EDP_Clinic
             {
                 if (!Session["AuthToken"].ToString().Equals(Request.Cookies["AuthToken"].Value))
                 {
-                    Response.Redirect("Login.aspx", false);
+                    Response.Redirect("~/Login.aspx", false);
                 }
                 else
                 {
@@ -66,8 +66,7 @@ namespace EDP_Clinic
                     {
                         string userID = Session["LoggedIn"].ToString().Trim();
                         Service1Client client = new Service1Client();
-                        User user = new User();
-                        user = client.GetOneUserByEmail(userID);
+                        User user = client.GetOneUserByEmail(userID);
                         string phoneNumber = user.PhoneNo.ToString().Trim();
                         Debug.WriteLine(user.PhoneNo.ToString().Trim());
 
@@ -90,16 +89,14 @@ namespace EDP_Clinic
                             channel: "sms",
                             pathServiceSid: "VA4ceee8345f84c5be3a44bc9ab3db5790"
                         );
-
-                        //Debug.WriteLine(verification.Sid);
+                        Debug.WriteLine(verification.Sid);
                     }
                 }
             }
             else
             {
-                Response.Redirect("Login.aspx", false);
+                Response.Redirect("~/Login.aspx", false);
             }
-
         }
         //Checks Sessions and Cookies which are GUIDs
         private int checkIntention()
@@ -182,8 +179,7 @@ namespace EDP_Clinic
         {
             string userID = Session["LoggedIn"].ToString().Trim();
             Service1Client client = new Service1Client();
-            User user = new User();
-            user = client.GetOneUserByEmail(userID);
+            User user = client.GetOneUserByEmail(userID);
             string phoneNumber = user.PhoneNo.ToString().Trim();
 
             //Checks OTP
@@ -268,8 +264,7 @@ namespace EDP_Clinic
         {
             string userID = Session["LoggedIn"].ToString().Trim();
             Service1Client client = new Service1Client();
-            User user = new User();
-            user = client.GetOneUserByEmail(userID);
+            User user = client.GetOneUserByEmail(userID);
             string phoneNumber = user.PhoneNo.ToString().Trim();
 
             Debug.WriteLine("Calling Twilio SMS Function");
@@ -289,7 +284,6 @@ namespace EDP_Clinic
             from: new Twilio.Types.PhoneNumber("+12132796783"),
             to: new Twilio.Types.PhoneNumber("+6590251744")
         );
-
             Debug.WriteLine(message.Sid);
         }
 
@@ -397,9 +391,9 @@ namespace EDP_Clinic
         }
 
         //Initialise an object to store Recaptcha response
-        public class reCaptchaResponseObject
+        public class ReCaptchaResponseObject
         {
-            public string success { get; set; }
+            public string Success { get; set; }
             public List<string> ErrorMessage { get; set; }
         }
 
@@ -423,19 +417,19 @@ namespace EDP_Clinic
 
                         JavaScriptSerializer js = new JavaScriptSerializer();
 
-                        reCaptchaResponseObject jsonObject = js.Deserialize<reCaptchaResponseObject>(jsonResponse);
+                        ReCaptchaResponseObject jsonObject = js.Deserialize<ReCaptchaResponseObject>(jsonResponse);
 
                         //Console.WriteLine("--- Testing ---");
                         //Console.WriteLine(jsonObject);
                         //Read success property in json object
-                        result = Convert.ToBoolean(jsonObject.success);
+                        result = Convert.ToBoolean(jsonObject.Success);
                     }
                 }
                 return result;
             }
-            catch (WebException ex)
+            catch (WebException)
             {
-                throw ex;
+                throw;
             }
         }
     }
