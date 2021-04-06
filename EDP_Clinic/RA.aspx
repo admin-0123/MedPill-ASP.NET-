@@ -72,16 +72,16 @@
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item active">
-                    <asp:HyperLink ID="HyperLink1" runat="server" CssClass="hyperlink_breadcrumb" NavigateUrl="~/UserPage.aspx">User Page</asp:HyperLink></asp:Label>
+                    <asp:HyperLink ID="HyperLink1" runat="server" CssClass="hyperlink_breadcrumb" NavigateUrl="~/UserPage.aspx">User Page</asp:HyperLink>
                 </li>
                 <li class="breadcrumb-item active">
-                    <asp:HyperLink ID="hl_bc_appt" runat="server" CssClass="hyperlink_breadcrumb" NavigateUrl="~/PFA.aspx">Appointments</asp:HyperLink></asp:Label>
+                    <asp:HyperLink ID="hl_bc_appt" runat="server" CssClass="hyperlink_breadcrumb" NavigateUrl="~/PFA.aspx">Appointments</asp:HyperLink>
                 </li>
                 <li class="breadcrumb-item active" aria-current="page">
-                    <asp:HyperLink ID="hl_bc_profileName" runat="server" CssClass="hyperlink_breadcrumb" NavigateUrl="~/PRFA2.aspx"></asp:HyperLink></asp:Label>
+                    <asp:HyperLink ID="hl_bc_profileName" runat="server" CssClass="hyperlink_breadcrumb" NavigateUrl="~/PRFA2.aspx"></asp:HyperLink>
                 </li>
                 <li class="breadcrumb-item active" aria-current="page">
-                    <asp:HyperLink ID="hl_bc_resch_appt" runat="server" CssClass="hyperlink_breadcrumb_active"></asp:HyperLink>Reschedule Appointment</asp:Label>
+                    <asp:HyperLink ID="hl_bc_resch_appt" runat="server" CssClass="hyperlink_breadcrumb_active"></asp:HyperLink>Reschedule Appointment
                 </li>
             </ol>
         </nav>

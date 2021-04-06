@@ -36,9 +36,9 @@ namespace EDP_Clinic
         {
             string userID = Session["LoggedIn"].ToString().Trim();
 
-            List<CardInfo> cifList = new List<CardInfo>();
+            //List<CardInfo> cifList = new List<CardInfo>();
             Service1Client client = new Service1Client();
-            cifList = client.GetAllCards(userID).ToList<CardInfo>();
+            List<CardInfo> cifList = client.GetAllCards(userID).ToList<CardInfo>();
 
             cardListView.Visible = true;
             cardListView.DataSource = cifList;

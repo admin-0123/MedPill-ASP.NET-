@@ -14,7 +14,6 @@
             border-radius: 15px;
         }
 
-
         .breadcrumb-item + .breadcrumb-item::before {
             content: ">";
         }
@@ -39,14 +38,6 @@
             $("#cancelBtn").click(function () {
                 showModal();
             });
-
-
-            function testing123() {
-                alert("Foo")
-                console.log("ABC")
-                return false;
-            }
-
     </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
@@ -55,13 +46,13 @@
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item active">
-                    <asp:HyperLink ID="HyperLink1" runat="server" CssClass="hyperlink_breadcrumb" NavigateUrl="~/UserPage.aspx">User Page</asp:HyperLink></asp:Label>
+                    <asp:HyperLink ID="HyperLink1" runat="server" CssClass="hyperlink_breadcrumb" NavigateUrl="~/UserPage.aspx">User Page</asp:HyperLink>
                 </li>
                 <li class="breadcrumb-item active">
-                    <asp:HyperLink ID="hl_bc_appt" runat="server" CssClass="hyperlink_breadcrumb" NavigateUrl="~/PFA.aspx">Appointments</asp:HyperLink></asp:Label>
+                    <asp:HyperLink ID="hl_bc_appt" runat="server" CssClass="hyperlink_breadcrumb" NavigateUrl="~/PFA.aspx">Appointments</asp:HyperLink>
                 </li>
                 <li class="breadcrumb-item active" aria-current="page">
-                    <asp:HyperLink ID="hl_bc_profileName" runat="server" CssClass="hyperlink_breadcrumb_active"></asp:HyperLink></asp:Label>
+                    <asp:HyperLink ID="hl_bc_profileName" runat="server" CssClass="hyperlink_breadcrumb_active"></asp:HyperLink>
                 </li>
             </ol>
         </nav>
@@ -91,41 +82,40 @@
         </div>
         <asp:ListView ID="listview_appts" runat="server" OnPagePropertiesChanging="listview_appts_PagePropertiesChanging" OnSelectedIndexChanged="listview_appts_SelectedIndexChanged">
             <ItemTemplate>
-                <div class="card-header">
-                    <p>
-                        Date Time:
+                <div class="card">
+                    <div class="card-header">
+                        <p>
+                            Date Time:
                         <asp:Label ID="lbl_c_dt" runat="server" Text='<%# Eval("dateTime") %>'></asp:Label>
-                    </p>
-                    <p>
-                        Type:
+                        </p>
+                        <p>
+                            Type:
                         <asp:Label ID="lbl_c_at" runat="server" Text='<%# Eval("appointmentType") %>'></asp:Label>
-                    </p>
-                    <p>
-                        Doctor:
+                        </p>
+                        <p>
+                            Doctor:
                         <asp:Label ID="lbl_c_dn" runat="server" Text='<%# Convert_ID_To_Name( Eval("doctorID") ) %>'></asp:Label>
-                    </p>
+                        </p>
+                        <% if (Session["appt_viewstate"].ToString() == "upcoming")
+                            { %>
+                        <div class="row mt-1">
+                            <asp:Button ID="btn_Rsch" runat="server" Text="Reschedule" CssClass="btn_Rsch bg-primary text-white col-3 align-content-end ml-2" OnClick="btn_RschOnClick" />
+                            <span class="col-3"></span>
+                            <asp:Button ID="btn_Cancel" runat="server" Text="Cancel" CssClass="btn_Cancel bg-white text-primary btn-outline-primary col-3" OnClick="btn_CancelOnClick" />
+                            <span class="col-3"></span>
+                        </div>
+                        <% } %>
 
-
-                    <% if (Session["appt_viewstate"].ToString() == "upcoming")
-                        { %>
-                    <div class="row mt-1">
-                        <asp:Button ID="btn_Rsch" runat="server" Text="Reschedule" CssClass="btn_Rsch bg-primary text-white col-3 align-content-end ml-2" OnClick="btn_RschOnClick" />
-                        <span class="col-3"></span>
-                        <asp:Button ID="btn_Cancel" runat="server" Text="Cancel" CssClass="btn_Cancel bg-white text-primary btn-outline-primary col-3" OnClick="btn_CancelOnClick" />
-                        <span class="col-3"></span>
+                        <% else if (Session["appt_viewstate"].ToString() == "past")
+                            {  %>
+                        <div class="row mt-1">
+                            <asp:Button ID="Button1" runat="server" Text="Payment" CssClass="btn_Rsch bg-primary text-white col-3 align-content-end ml-2" OnClick="btn_PaymentOnClick" />
+                            <span class="col-3"></span>
+                            <!-- <asp:Button ID="Button2" runat="server" Text="Cancel2" CssClass="btn_Cancel bg-white text-primary btn-outline-primary col-3" OnClick="btn_CancelOnClick" /> -->
+                            <span class="col-3"></span>
+                        </div>
+                        <%} %>
                     </div>
-                    <% } %>
-
-                    <% else if (Session["appt_viewstate"].ToString() == "past")
-                        {  %>
-                    <div class="row">
-                        <asp:Button ID="Button1" runat="server" Text="Payment" CssClass="btn_Rsch bg-primary text-white col-3 align-content-end ml-2" OnClick="btn_PaymentOnClick" />
-                        <span class="col-3"></span>
-                        <!-- <asp:Button ID="Button2" runat="server" Text="Cancel2" CssClass="btn_Cancel bg-white text-primary btn-outline-primary col-3" OnClick="btn_CancelOnClick" /> -->
-                        <span class="col-3"></span>
-                    </div>
-
-                    <%} %>
                 </div>
             </ItemTemplate>
             <EmptyDataTemplate>

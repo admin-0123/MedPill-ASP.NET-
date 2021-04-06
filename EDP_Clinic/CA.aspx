@@ -16,25 +16,6 @@
             background-color: #fff;
         }
 
-        /*        #Btn_LoadMore {
-            border-radius: 15px;
-        }*/
-
-        /*        select::-ms-expand {
-            display:none;
-        }*/
-
-        /*        #Btn_LoadMore {
-            background-color:deepskyblue;
-            color:white;
-        }*/
-        .auto-style6 {
-            max-width: 100%;
-            height: 55px;
-            width: 66px;
-        }
-
-
         .breadcrumb-item + .breadcrumb-item::before {
             content: ">";
         }
@@ -50,7 +31,6 @@
             background-color: lightgray;
         }
 
-
         .hyperlink_breadcrumb {
             color: black;
             text-decoration: none;
@@ -63,16 +43,16 @@
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item active">
-                    <asp:HyperLink ID="HyperLink1" runat="server" CssClass="hyperlink_breadcrumb" NavigateUrl="~/UserPage.aspx">User Page</asp:HyperLink></asp:Label>
+                    <asp:HyperLink ID="HyperLink1" runat="server" CssClass="hyperlink_breadcrumb" NavigateUrl="~/UserPage.aspx">User Page</asp:HyperLink>
                 </li>
                 <li class="breadcrumb-item active">
-                    <asp:HyperLink ID="hl_bc_appt" runat="server" CssClass="hyperlink_breadcrumb" NavigateUrl="~/PFA.aspx">Appointments</asp:HyperLink></asp:Label>
+                    <asp:HyperLink ID="hl_bc_appt" runat="server" CssClass="hyperlink_breadcrumb" NavigateUrl="~/PFA.aspx">Appointments</asp:HyperLink>
                 </li>
                 <li class="breadcrumb-item active" aria-current="page">
-                    <asp:HyperLink ID="hl_bc_profileName" runat="server" CssClass="hyperlink_breadcrumb" NavigateUrl="~/PRFA2.aspx"></asp:HyperLink></asp:Label>
+                    <asp:HyperLink ID="hl_bc_profileName" runat="server" CssClass="hyperlink_breadcrumb" NavigateUrl="~/PRFA2.aspx"></asp:HyperLink>
                 </li>
                 <li class="breadcrumb-item active" aria-current="page">
-                    <asp:HyperLink ID="hl_bc_makeappt" runat="server" CssClass="hyperlink_breadcrumb_active"></asp:HyperLink>Make Appointment</asp:Label>
+                    <asp:HyperLink ID="hl_bc_makeappt" runat="server" CssClass="hyperlink_breadcrumb_active"></asp:HyperLink>Make Appointment
                 </li>
             </ol>
         </nav>

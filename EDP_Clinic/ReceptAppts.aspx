@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="ReceptAppts.aspx.cs" Inherits="EDP_Clinic.ReceptAppts" %>
+﻿<%@ Page Title="View Appointments" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="ReceptAppts.aspx.cs" Inherits="EDP_Clinic.ReceptAppts" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <style>
@@ -38,13 +38,6 @@
             $("#cancelBtn").click(function () {
                 showModal();
             });
-
-            function testing123() {
-                alert("Foo")
-                console.log("ABC")
-                return false;
-            }
-
     </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
@@ -60,8 +53,8 @@
                 </li>
             </ol>
         </nav>
-        <h2>View All Appointments </h2>
-        <div class="card-header">
+        <h2 class="mb-3">View All Appointments </h2>
+        <div class="card-header mb-3">
             <div class="row">
                 <div class="col-sm-8">
                     <asp:ImageButton ID="leftArrow_redirect" runat="server" Height="50px" ImageAlign="Left" ImageUrl="~/assets/images/leftArrow.png" Width="50px" OnClick="leftArrow_redirect_Click" />
@@ -84,56 +77,66 @@
                 </div>
             </div>
         </div>
-        <div>
-            &nbsp
-            &nbsp
+        <div class="form-group mb-3" style="width: 250px;">
+            <asp:Label ID="lbl_viewMode" runat="server" Text="View Mode:"></asp:Label>
+            <asp:DropDownList ID="ddl_viewMode" runat="server" CssClass="custom-select" OnSelectedIndexChanged="ddl_viewMode_SelectedIndexChanged" AutoPostBack="true">
+                <asp:ListItem Selected="True">All</asp:ListItem>
+                <asp:ListItem>Unassigned</asp:ListItem>
+            </asp:DropDownList>
         </div>
-        <asp:Label ID="lbl_viewMode" runat="server" Text="View Mode: " CssClass="mb-3"></asp:Label>
-        <asp:DropDownList ID="ddl_viewMode" runat="server" CssClass="mb-3" OnSelectedIndexChanged="ddl_viewMode_SelectedIndexChanged" AutoPostBack="true">
-            <asp:ListItem Selected="True">All</asp:ListItem>
-            <asp:ListItem>Unassigned</asp:ListItem>
-        </asp:DropDownList>
-
         <asp:ListView ID="listview_appts" runat="server" OnPagePropertiesChanging="listview_appts_PagePropertiesChanging">
             <ItemTemplate>
-                <div class="card-header">
-                    <p>Patient:
+                <div class="card">
+                    <div class="card-header">
+                        <p>
+                            Patient:
                         <asp:Label ID="lbl_c_patient" runat="server" Text='<%# Convert_ID_To_Name ( Eval("patientID") ) %>'></asp:Label>
-                    </p>
-                    <p hidden>Patient ID:
+                        </p>
+                        <p hidden>
+                            Patient ID:
                         <asp:Label ID="lbl_c_patient_id" runat="server" Text='<%# ( Eval("patientID")) %>'></asp:Label>
-                    </p>
-                    <p>Date Time:
+                        </p>
+                        <p>
+                            Date Time:
                         <asp:Label ID="lbl_c_dt" runat="server" Text='<%# Eval("dateTime") %>'></asp:Label>
-                    </p>
-                    <p>Type:
-                        <asp:Label ID="lbl_c_at" runat="server" Text='<%# Eval("appointmentType") %>'></asp:Label></p>
-                    <p>Doctor:
+                        </p>
+                        <p>
+                            Type:
+                        <asp:Label ID="lbl_c_at" runat="server" Text='<%# Eval("appointmentType") %>'></asp:Label>
+                        </p>
+                        <p>
+                            Doctor:
                         <asp:Label ID="lbl_c_dn" runat="server" Text='<%# Convert_ID_To_Name( Eval("doctorID") ) %>'></asp:Label>
-                    </p>
-                    <% if (Session["appt_viewstate_admin"].ToString() == "upcoming")
-                        { %>
-                    <div class="row">
-                        <asp:Button ID="btn_AssignDoctor" runat="server" Text="Assign Doctor" CssClass="btn_Rsch bg-primary text-white col-3 align-content-end ml-2" OnClick="btn_AdOnClick" />
-                        <span class="col-1"></span>
-                        <asp:Button ID="btn_Rsch" runat="server" Text="Reschedule" CssClass="btn_Rsch bg-primary text-white col-3 align-content-end ml-2" OnClick="btn_RschOnClick" />
-                        <span class="col-1"></span>
-                        <asp:Button ID="btn_Cancel" runat="server" Text="Cancel" CssClass="btn_Cancel bg-white text-primary btn-outline-primary col-3" OnClick="btn_CancelOnClick" />
-
-
+                        </p>
+                        <% if (Session["appt_viewstate_admin"].ToString() == "upcoming")
+                            { %>
+                        <div class="row">
+                            <asp:Button ID="btn_AssignDoctor" runat="server" Text="Assign Doctor" CssClass="btn_Rsch bg-primary text-white col-3 align-content-end ml-2" OnClick="btn_AdOnClick" />
+                            <span class="col-1"></span>
+                            <asp:Button ID="btn_Rsch" runat="server" Text="Reschedule" CssClass="btn_Rsch bg-primary text-white col-3 align-content-end ml-2" OnClick="btn_RschOnClick" />
+                            <span class="col-1"></span>
+                            <asp:Button ID="btn_Cancel" runat="server" Text="Cancel" CssClass="btn_Cancel bg-white text-primary btn-outline-primary col-3" OnClick="btn_CancelOnClick" />
+                        </div>
+                        <% } %>
                     </div>
-                    <% } %>
                 </div>
             </ItemTemplate>
-            <EmptyDataTemplate>No Record Found </EmptyDataTemplate>
+            <EmptyDataTemplate>
+                <div class="mt-5 mb-3 text-center">
+                    <h5>No Record Found</h5>
+                </div>
+            </EmptyDataTemplate>
         </asp:ListView>
-        <asp:DataPager ID="dp_listview_appt" runat="server" PagedControlID="listview_appts" PageSize="2">
-            <Fields>
-                <asp:NumericPagerField ButtonType="Link" />
-            </Fields>
-        </asp:DataPager>
+        <div class="mt-5 text-center">
+            <asp:DataPager ID="dp_listview_appt" runat="server" PagedControlID="listview_appts" PageSize="2">
+                <Fields>
+                    <asp:NextPreviousPagerField ButtonCssClass="btn btn-primary" ButtonType="Button" ShowFirstPageButton="True" ShowNextPageButton="False" ShowPreviousPageButton="False" />
+                    <asp:NumericPagerField ButtonType="Link" />
+                    <asp:NextPreviousPagerField ButtonCssClass="btn btn-primary" ButtonType="Button" ShowLastPageButton="True" ShowNextPageButton="False" ShowPreviousPageButton="False" />
+                </Fields>
+            </asp:DataPager>
+        </div>
         <!-- Modal -->
-
         <div class="modal fade" id="cancelModal" tabindex="-1" role="dialog" aria-labelledby="cancelModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
