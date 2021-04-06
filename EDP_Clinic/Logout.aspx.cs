@@ -6,6 +6,7 @@ namespace EDP_Clinic
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            // Clears all sessions and cookies of user
             Session.Clear();
             Session.Abandon();
             Session.RemoveAll();
@@ -19,8 +20,7 @@ namespace EDP_Clinic
                 Response.Cookies["AuthToken"].Value = string.Empty;
                 Response.Cookies["AuthToken"].Expires = DateTime.Now.AddMonths(-20);
             }
-            Response.Redirect("Home.aspx", false);
-
+            Response.Redirect("~/Home.aspx", false);
         }
     }
 }
