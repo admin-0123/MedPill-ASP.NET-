@@ -78,6 +78,15 @@ namespace EDP_Clinic
         protected global::System.Web.UI.WebControls.Label lbl_profileName;
 
         /// <summary>
+        /// lbl_error_make_appt control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbl_error_make_appt;
+
+        /// <summary>
         /// lbl_current_ad control.
         /// </summary>
         /// <remarks>
@@ -123,6 +132,15 @@ namespace EDP_Clinic
         protected global::System.Web.UI.WebControls.DropDownList ddl_apptType;
 
         /// <summary>
+        /// appointmentDateLbl control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label appointmentDateLbl;
+
+        /// <summary>
         /// tb_startdate control.
         /// </summary>
         /// <remarks>
@@ -166,15 +184,6 @@ namespace EDP_Clinic
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.GridView gv_timeslots;
-
-        /// <summary>
-        /// lbl_error_make_appt control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbl_error_make_appt;
 
         /// <summary>
         /// btn_createAppt control.
