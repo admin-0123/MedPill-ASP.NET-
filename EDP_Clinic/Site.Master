@@ -77,7 +77,7 @@ Author URL: http://w3layouts.com
                             <a class="nav-link" href="AdminPage.aspx" id="adminPageBtn" runat="server">Admin Page</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="Logout.aspx" id="logoutBtn" runat="server">Log Out</a>
+                            <a class="btn btn-primary mr-5" href="Logout.aspx" id="logoutBtn" runat="server">Log Out</a>
                         </li>
                     </ul>
                 </div>

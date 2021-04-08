@@ -155,7 +155,6 @@
     <Content Include="assets\css\main.css" />
     <Content Include="assets\css\style-starter.css" />
     <Content Include="assets\css\style.css" />
-    <Content Include="assets\css\util.css" />
     <Content Include="assets\fonts\fontawesome-webfont.svg" />
     <Content Include="assets\images\ambulance.png" />
     <Content Include="assets\images\appointment.jpg" />
