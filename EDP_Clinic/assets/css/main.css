@@ -4,16 +4,16 @@
 [ FONT ]*/
 
 
-@font-face {
+/*@font-face {
   font-family: OpenSans-Regular;
   src: url('../fonts/OpenSans/OpenSans-Regular.ttf'); 
-}
+}*/
 
 
 
 /*//////////////////////////////////////////////////////////////////
 [ RESTYLE TAG ]*/
-* {
+/** {
 	margin: 0px; 
 	padding: 0px; 
 	box-sizing: border-box;
@@ -22,10 +22,10 @@
 body, html {
 	height: 100%;
 	font-family: sans-serif;
-}
+}*/
 
 /* ------------------------------------ */
-a {
+/*a {
 	margin: 0px;
 	transition: all 0.4s;
 	-webkit-transition: all 0.4s;
@@ -39,21 +39,21 @@ a:focus {
 
 a:hover {
 	text-decoration: none;
-}
+}*/
 
 /* ------------------------------------ */
-h1,h2,h3,h4,h5,h6 {margin: 0px;}
+/*h1,h2,h3,h4,h5,h6 {margin: 0px;}
 
 p {margin: 0px;}
 
 ul, li {
 	margin: 0px;
 	list-style-type: none;
-}
+}*/
 
 
 /* ------------------------------------ */
-input {
+/*input {
   display: block;
 	outline: none;
 	border: none !important;
@@ -66,10 +66,10 @@ textarea {
 
 textarea:focus, input:focus {
   border-color: transparent !important;
-}
+}*/
 
 /* ------------------------------------ */
-button {
+/*button {
 	outline: none !important;
 	border: none;
 	background: transparent;
@@ -81,7 +81,7 @@ button:hover {
 
 iframe {
 	border: none !important;
-}
+}*/
 
 
 
@@ -97,7 +97,7 @@ iframe {
 /*//////////////////////////////////////////////////////////////////
 [ Table ]*/
 
-.limiter {
+/*.limiter {
   width: 100%;
   margin: 0 auto;
 }
@@ -291,4 +291,4 @@ tbody tr:hover {
     padding-left: 15px;
     padding-right: 15px;
   }
-}
+}*/

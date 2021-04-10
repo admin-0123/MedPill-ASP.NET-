@@ -36,16 +36,14 @@ namespace EDP_Clinic
                             listview_appts.DataSource = GetApptsUserMissed();
                             listview_appts.DataBind();
                             break;
-
                     }
                 }
 
                 // Search for the current profile selected and set the necessary contents like profileName.. etc
-                EDP_DBReference.Service1Client svc_client = new EDP_DBReference.Service1Client();
+                Service1Client svc_client = new Service1Client();
                 User current_user = svc_client.GetOneUser(Session["current_appt_profile"].ToString());
                 // For breadcrumb elements
                 hl_bc_profileName.Text = current_user.Name;
-                //
 
                 Photo current_user_photo_obj = svc_client.GetOnePhoto(current_user.Id);
                 //profilePfp.ImageUrl = $"~/assets/images/{current_user_photo_obj.Photo_Resource.Trim()}.jpg";
@@ -64,12 +62,9 @@ namespace EDP_Clinic
                 //repeater_appts.DataSource = GetApptsUser();
                 //repeater_appts.DataBind();
 
-
-
                 var test123 = listview_appts.SelectedIndex;
                 //System.Diagnostics.Debug.WriteLine($"SELECTED INDEX IS {test123}");
             }
-
             else
             {
                 Response.Redirect("Login.aspx", false);
@@ -81,15 +76,14 @@ namespace EDP_Clinic
                     ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "showModal();", true);
                 }*/
 
-
         // Get All Appts for one user regardless of the status
         public List<Appointment> GetApptsUser()
         {
             List<Appointment> testList = new List<Appointment>();
-            EDP_DBReference.Service1Client svc_client = new EDP_DBReference.Service1Client();
+            Service1Client svc_client = new Service1Client();
 
             //System.Diagnostics.Debug.WriteLine("THE SESSION VALUE IS " + Session["UserID"]);
-            testList = svc_client.GetAllApptUser(Convert.ToInt32(Session["current_appt_profile"].ToString())).ToList<Appointment>();
+            testList = svc_client.GetAllApptUser(Convert.ToInt32(Session["current_appt_profile"].ToString())).ToList();
 
             if (testList == null)
             {
@@ -102,7 +96,7 @@ namespace EDP_Clinic
         public List<Appointment> GetApptsUserUpcoming()
         {
             List<Appointment> testList = new List<Appointment>();
-            EDP_DBReference.Service1Client svc_client = new EDP_DBReference.Service1Client();
+            Service1Client svc_client = new Service1Client();
 
             //System.Diagnostics.Debug.WriteLine("THE SESSION VALUE IS " + Session["UserID"]);
             testList = svc_client.GetAllApptUserUpcoming(Convert.ToInt32(Session["current_appt_profile"].ToString())).ToList<Appointment>();
@@ -111,7 +105,6 @@ namespace EDP_Clinic
             {
                 testList = new List<Appointment>();
             }
-
             return testList;
         }
 
@@ -119,7 +112,7 @@ namespace EDP_Clinic
         public List<Appointment> GetApptsUserPast()
         {
             List<Appointment> testList = new List<Appointment>();
-            EDP_DBReference.Service1Client svc_client = new EDP_DBReference.Service1Client();
+            Service1Client svc_client = new Service1Client();
 
             //System.Diagnostics.Debug.WriteLine("THE SESSION VALUE IS " + Session["UserID"]);
             testList = svc_client.GetAllApptUserPast(Convert.ToInt32(Session["current_appt_profile"].ToString())).ToList<Appointment>();
@@ -135,7 +128,7 @@ namespace EDP_Clinic
         public List<Appointment> GetApptsUserMissed()
         {
             List<Appointment> testList = new List<Appointment>();
-            EDP_DBReference.Service1Client svc_client = new EDP_DBReference.Service1Client();
+            Service1Client svc_client = new Service1Client();
 
             //System.Diagnostics.Debug.WriteLine("THE SESSION VALUE IS " + Session["UserID"]);
             testList = svc_client.GetAllApptUserMissed(Convert.ToInt32(Session["current_appt_profile"].ToString())).ToList<Appointment>();
@@ -181,7 +174,6 @@ namespace EDP_Clinic
                     listview_appts.DataSource = GetApptsUserMissed();
                     listview_appts.DataBind();
                     break;
-
             }
         }
 
@@ -206,18 +198,16 @@ namespace EDP_Clinic
             }
             else
             {
-                EDP_DBReference.Service1Client svc_client = new EDP_DBReference.Service1Client();
+                Service1Client svc_client = new Service1Client();
                 var user = svc_client.GetOneUser(id.ToString());
 
                 if (user == null)
                 {
                     user.Name = "No name found";
                 }
-
                 return user.Name.ToString();
             }
         }
-
 
         // Link Buttons to change the type of appointment records being displayed
         protected void lbtn_upcoming_Click(object sender, EventArgs e)
@@ -234,7 +224,6 @@ namespace EDP_Clinic
                 listview_appts.DataSource = GetApptsUserUpcoming();
                 listview_appts.DataBind();
             }
-
         }
 
         protected void lbtn_past_Click(object sender, EventArgs e)
@@ -250,11 +239,7 @@ namespace EDP_Clinic
                 Session["appt_viewstate"] = "past";
                 listview_appts.DataSource = GetApptsUserPast();
                 listview_appts.DataBind();
-
-
             }
-
-
         }
 
         protected void lbtn_missed_Click(object sender, EventArgs e)
@@ -270,7 +255,6 @@ namespace EDP_Clinic
                 listview_appts.DataSource = GetApptsUserMissed();
                 listview_appts.DataBind();
             }
-
         }
 
         protected void btn_RschOnClick(object sender, EventArgs e)
@@ -322,7 +306,7 @@ namespace EDP_Clinic
             //get the value
             string lblDN_value = lblDN.Text;
 
-            EDP_DBReference.Service1Client svc_client = new EDP_DBReference.Service1Client();
+            Service1Client svc_client = new Service1Client();
             int delete_result = svc_client.DeleteOneAppt(Convert.ToInt32(Session["current_appt_profile"]), lblDT_value);
 
             if (delete_result == 1)
@@ -346,10 +330,7 @@ namespace EDP_Clinic
                         listview_appts.DataSource = GetApptsUserMissed();
                         listview_appts.DataBind();
                         break;
-
                 }
-
-
             }
             else
             {

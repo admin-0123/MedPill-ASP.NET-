@@ -26,7 +26,6 @@ namespace EDP_Clinic
         {
             CultureInfo culture;
             DateTimeStyles styles;
-            DateTime dateResult;
             culture = CultureInfo.CreateSpecificCulture("en-US");
             styles = DateTimeStyles.None;
 
@@ -48,7 +47,7 @@ namespace EDP_Clinic
                 lb_error.Text = "Select the dropdown";
                 lb_error.ForeColor = Color.Red;
             }
-            else if (DateTime.TryParse(date, culture, styles, out dateResult) == false)
+            else if (DateTime.TryParse(date, culture, styles, out _) == false)
             {
                 lb_error.Text = "Invaild Date";
                 lb_error.ForeColor = Color.Red;
@@ -56,7 +55,7 @@ namespace EDP_Clinic
             else
             {
                 EDP_DBReference.Service1Client client = new EDP_DBReference.Service1Client();
-                int report = client.CreateReport(id, dname, pname, clinic, date, details);
+                client.CreateReport(id, dname, pname, clinic, date, details);
                 //var url = "Create Report.aspx?dname=" + dname + "&pname=" + pname + "&clinic= "+clinic+"&date="+date+"&details=" + details;
 
                 Response.Redirect("~/MedicalReports.aspx");

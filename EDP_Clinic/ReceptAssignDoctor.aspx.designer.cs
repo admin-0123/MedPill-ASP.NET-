@@ -51,6 +51,24 @@ namespace EDP_Clinic
         protected global::System.Web.UI.WebControls.HyperLink hl_bc_resch_appt;
 
         /// <summary>
+        /// lbl_updateResult control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbl_updateResult;
+
+        /// <summary>
+        /// doctorSelect control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label doctorSelect;
+
+        /// <summary>
         /// ddl_chooseDoctors control.
         /// </summary>
         /// <remarks>
@@ -67,14 +85,5 @@ namespace EDP_Clinic
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btn_assignDoctor;
-
-        /// <summary>
-        /// lbl_updateResult control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbl_updateResult;
     }
 }

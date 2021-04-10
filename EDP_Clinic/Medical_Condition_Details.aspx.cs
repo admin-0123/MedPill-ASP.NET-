@@ -21,9 +21,8 @@ namespace EDP_Clinic
                     }
                 }
                 string id = Request.QueryString["id"];
-                Medical_Condition eList = new Medical_Condition();
                 Service1Client client = new Service1Client();
-                eList = client.GetMedicalConditionById(id);
+                Medical_Condition eList = client.GetMedicalConditionById(id);
                 patient.Text = eList.Name;
                 condition.Text = eList.Med_Condition;
                 date.Text = eList.Date_Diagnosis;

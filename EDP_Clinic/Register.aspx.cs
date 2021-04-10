@@ -15,7 +15,6 @@ namespace EDP_Clinic
     {
         //string MYDBConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["EDP_DB"].ConnectionString;
         static string finalHash;
-        readonly SmtpClient emailClient = new SmtpClient("smtp-relay.sendinblue.com", 587);
         readonly Service1Client client = new Service1Client();
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -95,7 +94,7 @@ namespace EDP_Clinic
                 SHA512Managed hashing = new SHA512Managed();
 
                 string pwdWithSalt = pwd + salt;
-                byte[] plainHash = hashing.ComputeHash(Encoding.UTF8.GetBytes(pwd));
+                // byte[] plainHash = hashing.ComputeHash(Encoding.UTF8.GetBytes(pwd));
                 byte[] hashWithSalt = hashing.ComputeHash(Encoding.UTF8.GetBytes(pwdWithSalt));
 
                 finalHash = Convert.ToBase64String(hashWithSalt);
@@ -119,9 +118,12 @@ namespace EDP_Clinic
                     }
                     client.AddCode(email, code);
                     var link = "https://localhost:44310/Verify.aspx?value=" + code;
-                    emailClient.Credentials = new System.Net.NetworkCredential("bryanchinzw@gmail.com", "vPDBKArZRY7HcIJC");
-                    emailClient.DeliveryMethod = SmtpDeliveryMethod.Network;
-                    emailClient.EnableSsl = true;
+                    SmtpClient emailClient = new SmtpClient("smtp-relay.sendinblue.com", 587)
+                    {
+                        Credentials = new System.Net.NetworkCredential("bryanchinzw@gmail.com", "vPDBKArZRY7HcIJC"),
+                        DeliveryMethod = SmtpDeliveryMethod.Network,
+                        EnableSsl = true
+                    };
                     MailMessage mail = new MailMessage
                     {
                         Subject = "Verify Account (MedPill)",

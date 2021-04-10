@@ -5,11 +5,9 @@
     <div class="modal right fade" id="DomainModal" tabindex="-1" role="dialog" aria-labelledby="DomainModalLabel2">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
-
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span
                         aria-hidden="true">&times;</span></button>
-
                 <div class="modal-body">
                     <div class="modal__content">
                         <h2 class="logo">
@@ -74,8 +72,6 @@
                                 <li><a class="social-link tumblr" href="#url" target="_blank"><i class="fa fa-tumblr"></i></a></li>
                             </ul>
                         </div>
-
-
                     </div>
                 </div>
             </div>

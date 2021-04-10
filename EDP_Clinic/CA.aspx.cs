@@ -19,11 +19,10 @@ namespace EDP_Clinic
         {
             if (Session["LoggedIn"] != null || Session["current_appt_profile"] != null)
             {
-                EDP_DBReference.Service1Client svc_client = new EDP_DBReference.Service1Client();
+                Service1Client svc_client = new Service1Client();
                 User current_user = svc_client.GetOneUser(Session["current_appt_profile"].ToString());
                 // For breadcrumb elements
                 hl_bc_profileName.Text = current_user.Name;
-                //
 
                 Photo current_user_photo_obj = svc_client.GetOnePhoto(current_user.Id);
 
@@ -32,11 +31,10 @@ namespace EDP_Clinic
                 if (exist == 1)
                 {
                     var photo = svc_client.GetOnePhoto(current_user.Id);
-                    var fileName = photo.Photo_Resource.ToString();
+                    string fileName = photo.Photo_Resource.ToString();
                     var path = "~/UserImg/" + fileName;
                     profilePfp.ImageUrl = path;
                 }
-
                 lbl_profileName.Text = current_user.Name;
 
                 tb_startdate_CalendarExtender.StartDate = DateTime.Now.AddDays(1);
@@ -63,13 +61,10 @@ namespace EDP_Clinic
 
 
                                    }*/
-
                     gv_timeslots.Visible = true;
                     gv_timeslots.DataSource = Onload_Retrieve_Available_Appts();
                     gv_timeslots.DataBind();
-
                 }
-
                 else
                 {
                     gv_timeslots.Visible = true;
@@ -88,7 +83,6 @@ namespace EDP_Clinic
                     System.Diagnostics.Debug.WriteLine("THE LIST OF DATES ARE " + enumerator.Current);
                 }
                 */
-
             }
 
             else
@@ -99,8 +93,7 @@ namespace EDP_Clinic
 
         protected void btn_searchSlot_Click(object sender, EventArgs e)
         {
-
-            var checkdate_bool = DateTime.TryParse(tb_startdate.Text, out DateTime checkdate_input);
+            var checkdate_bool = DateTime.TryParse(tb_startdate.Text, out _);
 
             // if input is a valid date, run the code block
             if (checkdate_bool != false)
@@ -111,7 +104,6 @@ namespace EDP_Clinic
                     lbl_validDates.Text = $"Invalid past date searched";
                     lbl_validDates.ForeColor = Color.Red;
                 }
-
                 else
                 {
                     Session["startDate"] = Convert.ToDateTime(tb_startdate.Text);
@@ -136,8 +128,6 @@ namespace EDP_Clinic
                     }
                 }
             }
-
-
         }
 
         protected void gv_timeslots_SelectedIndexChanged(object sender, EventArgs e)
@@ -159,7 +149,7 @@ namespace EDP_Clinic
             List<DateTime> openSlots = new List<DateTime>();
             DateTime startDate = DateTime.Now.AddDays(1);
             DateTime endDate = DateTime.Now.AddMonths(2);
-            EDP_DBReference.Service1Client svc_client = new EDP_DBReference.Service1Client();
+            Service1Client svc_client = new Service1Client();
             List<Appointment> Current_ApptList = svc_client.GetAllApptAdmin().ToList();
             bool matching_appt_record = false;
 
@@ -208,7 +198,7 @@ namespace EDP_Clinic
             List<DateTime> openSlots = new List<DateTime>();
             DateTime startDate = Convert.ToDateTime(Session["startDate"]);
             DateTime endDate = DateTime.Now.AddMonths(2);
-            EDP_DBReference.Service1Client svc_client = new EDP_DBReference.Service1Client();
+            Service1Client svc_client = new Service1Client();
             List<Appointment> Current_ApptList = svc_client.GetAllApptAdmin().ToList();
             bool matching_appt_record = false;
 
@@ -244,10 +234,7 @@ namespace EDP_Clinic
                     }
                     dt = dt.AddMinutes(30);
                 }
-
-
             }
-
             return openSlots;
         }
 
@@ -255,7 +242,6 @@ namespace EDP_Clinic
         {
             Response.Redirect("~/PRFA2.aspx");
         }
-
 
         private bool ValidateInput()
         {
@@ -268,7 +254,6 @@ namespace EDP_Clinic
                 lbl_error_make_appt.ForeColor = Color.Red;
                 lbl_error_make_appt.Text = "You did not select an appointment timeslot";
             }
-
             return result;
 
         }
@@ -286,7 +271,7 @@ namespace EDP_Clinic
                 DateTime rb_userinput = Convert.ToDateTime(Request["rb_apptslot"]);
                 string status = "upcoming";
 
-                EDP_DBReference.Service1Client svc_client = new EDP_DBReference.Service1Client();
+                Service1Client svc_client = new Service1Client();
                 int insert_result = svc_client.CreateAppointment(current_profile, appointmentType, rb_userinput, status);
                 if (insert_result == 1)
                 {
@@ -297,10 +282,10 @@ namespace EDP_Clinic
                     gv_timeslots.DataBind();
 
                     var appt_success_dict = new Dictionary<string, string>(){
-    {"appointmentType", appointmentType.ToString()},
-    {"dateTime", rb_userinput.ToString()},
-    {"status", status.ToString() }
-};
+                    {"appointmentType", appointmentType.ToString()},
+                    {"dateTime", rb_userinput.ToString()},
+                    {"status", status.ToString() }
+                };
                     Session["successful_appt_details"] = appt_success_dict;
                     Response.Redirect("~/CA_Success.aspx");
                 }
@@ -311,9 +296,6 @@ namespace EDP_Clinic
                     gv_timeslots.DataSource = Search_AvailableAppts();
                     gv_timeslots.DataBind();
                 }
-
-
-
             }
         }
 
@@ -352,12 +334,8 @@ GridView1.DataBind();
 }
 */
 
-
-
         /* Code using the default asp calendar control, commented out in case switch back from ajax calendar to this
         // https://forums.asp.net/t/1285637.aspx?CALENDAR+Disable+past+dates
-
-
 
         // Method that decide how to render each cell of the calender
         protected void Calendar1_DayRender(object sender, DayRenderEventArgs e)

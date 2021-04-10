@@ -33,9 +33,8 @@ namespace EDP_Clinic
         }
         private void RefreshGridView(int pageNumber)
         {
-            List<Medical_Condition> eList = new List<Medical_Condition>();
             Service1Client client = new Service1Client();
-            eList = client.GetAllMedicalCondition().ToList<Medical_Condition>();
+            List<Medical_Condition> eList = client.GetAllMedicalCondition().ToList<Medical_Condition>();
 
             // using gridview to bind to the list of employee objects
             gv_medical.PageIndex = pageNumber;

@@ -47,9 +47,8 @@ namespace EDP_Clinic
         {
             string userID = Session["LoggedIn"].ToString().Trim();
 
-            List<CardInfo> cifList = new List<CardInfo>();
             Service1Client client = new Service1Client();
-            cifList = client.GetAllCards(userID).ToList<CardInfo>();
+            List<CardInfo> cifList = client.GetAllCards(userID).ToList<CardInfo>();
 
             cardListView.Visible = true;
             cardListView.DataSource = cifList;
@@ -193,7 +192,7 @@ namespace EDP_Clinic
 
                 string cardNumber = HttpUtility.HtmlEncode(cardNumberTB.Text.Trim());
 
-                string cardName = HttpUtility.HtmlEncode(nameOnCardTB.Text.Trim());
+                // string cardName = HttpUtility.HtmlEncode(nameOnCardTB.Text.Trim());
                 string cardExpiry = HttpUtility.HtmlEncode(cardExpiryTB.Text.Trim());
                 string cardCVV = HttpUtility.HtmlEncode(CVVTB.Text.Trim());
 
@@ -380,9 +379,9 @@ namespace EDP_Clinic
                 }
                 return result;
             }
-            catch (WebException ex)
+            catch (WebException)
             {
-                throw ex;
+                throw;
             }
         }
 
@@ -406,7 +405,7 @@ namespace EDP_Clinic
 
                 string cardNumber = cif.CardNumber;
 
-                string cardName = cif.CardName;
+                // string cardName = cif.CardName;
                 DateTime cardExpiry = cif.CardExpiry;
                 string cardCVV = cif.CVVNumber;
 

@@ -44,11 +44,10 @@ Author URL: http://w3layouts.com
                     aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     Menu
                 </button>
-
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item active">
-                            <a class="nav-link" href="Home.aspx">Home</a>
+                            <a class="nav-link" href="../Home.aspx">Home</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="About.aspx">About</a>
@@ -60,7 +59,7 @@ Author URL: http://w3layouts.com
                             <a class="nav-link" href="Contact.aspx">Contact</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="Login.aspx" id="loginBtn" runat="server">Log In</a>
+                            <a class="btn btn-primary" href="Login.aspx" id="loginBtn" runat="server">Login</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="UserPage.aspx" id="userPageBtn" runat="server">User Page</a>
@@ -78,7 +77,7 @@ Author URL: http://w3layouts.com
                             <a class="nav-link" href="AdminPage.aspx" id="adminPageBtn" runat="server">Admin Page</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="Logout.aspx" id="logoutBtn" runat="server">Log Out</a>
+                            <a class="btn btn-primary mr-5" href="Logout.aspx" id="logoutBtn" runat="server">Log Out</a>
                         </li>
                     </ul>
                 </div>
@@ -92,7 +91,6 @@ Author URL: http://w3layouts.com
             </div>
         </nav>
     </section>
-
     <form id="form1" runat="server">
         <!-- Add the INVISIBLE SCRIPT MANAGER CONTROL IN ORDER TO USE AJAX TOOLKIT CONTROLS! -->
         <asp:ScriptManager ID="ScriptManager1" runat="server">

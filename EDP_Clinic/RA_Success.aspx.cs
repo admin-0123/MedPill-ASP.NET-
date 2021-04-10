@@ -9,14 +9,10 @@ namespace EDP_Clinic
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
-
             if (Session["LoggedIn"] == null || Session["current_appt_profile"] == null)
             {
                 Response.Redirect("~/Home.aspx");
             }
-
-
             else
             {
                 if (Session["current_appt_profile"].ToString() != "nothing")
@@ -24,11 +20,7 @@ namespace EDP_Clinic
                     loadSuccessMsg();
                 }
             }
-
-
-
         }
-
 
         protected void loadSuccessMsg()
         {
@@ -67,25 +59,25 @@ namespace EDP_Clinic
                 var accountSid = Environment.GetEnvironmentVariable("TWILIO_ACCOUNT_SID");
                 var authToken = Environment.GetEnvironmentVariable("TWILIO_AUTH_TOKEN");
 
-                TwilioClient.Init(accountSid, authToken);
+                //TwilioClient.Init(accountSid, authToken);
 
-                if (patient.Id != Convert.ToInt32(Session["UserID"]).ToString())
-                {
-                    var message = MessageResource.Create(
-                    body: $"You have successfully updated your appointment for {patient.Name.Trim()} with MedPill Clinic, report to the clinic on {appt.dateTime.ToString("G")}",
-                    from: new Twilio.Types.PhoneNumber("+14242066417"),
-                    to: new Twilio.Types.PhoneNumber("+6587558054")
-                    );
-                }
+                //if (patient.Id != Convert.ToInt32(Session["UserID"]).ToString())
+                //{
+                //    var message = MessageResource.Create(
+                //    body: $"You have successfully updated your appointment for {patient.Name.Trim()} with MedPill Clinic, report to the clinic on {appt.dateTime.ToString("G")}",
+                //    from: new Twilio.Types.PhoneNumber("+14242066417"),
+                //    to: new Twilio.Types.PhoneNumber("+6587558054")
+                //    );
+                //}
 
-                else
-                {
-                    var message = MessageResource.Create(
-                    body: $"You have successfully updated your appointment with MedPill Clinic, report to the clinic on {appt.dateTime.ToString("G")}",
-                    from: new Twilio.Types.PhoneNumber("+14242066417"),
-                    to: new Twilio.Types.PhoneNumber("+6587558054")
-                    );
-                }
+                //else
+                //{
+                //    var message = MessageResource.Create(
+                //    body: $"You have successfully updated your appointment with MedPill Clinic, report to the clinic on {appt.dateTime.ToString("G")}",
+                //    from: new Twilio.Types.PhoneNumber("+14242066417"),
+                //    to: new Twilio.Types.PhoneNumber("+6587558054")
+                //    );
+                //}
 
             }
         }
@@ -93,7 +85,6 @@ namespace EDP_Clinic
         {
             Response.Redirect("~/PFA.aspx");
         }
-
         protected void btn_go_userpage_Click(object sender, EventArgs e)
         {
             Response.Redirect("~/UserPage.aspx");

@@ -276,11 +276,13 @@ namespace DBService
         }
         public int CreateAppointment(int patientID, string appointmentType, DateTime dateTime, string status)
         {
-            Appointment appt = new Appointment();
-            appt.patientID = patientID;
-            appt.appointmentType = appointmentType;
-            appt.dateTime = dateTime;
-            appt.status = status;
+            Appointment appt = new Appointment
+            {
+                patientID = patientID,
+                appointmentType = appointmentType,
+                dateTime = dateTime,
+                status = status
+            };
             return appt.Insert();
         }
         public Appointment GetOneAppt(int patientID, DateTime dateTime)

@@ -1,5 +1,8 @@
-﻿using System;
+﻿using EDP_Clinic.EDP_DBReference;
+using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
 
 namespace EDP_Clinic
 {
@@ -9,14 +12,13 @@ namespace EDP_Clinic
         {
             if (Session["LoggedIn"] != null)
             {
-
                 if (Session["UserRole"].ToString() == "Receptionist")
                 {
                     if (!IsPostBack)
                     {
-                        hl_bc_profileName.Text = $"{Session["patient_name"].ToString()}'s Appointment on {Convert.ToDateTime(Session["selected_appt_date"])}";
-                        EDP_DBReference.Service1Client svc_client = new EDP_DBReference.Service1Client();
-                        var doc_list = svc_client.GetAllDoctors();
+                        hl_bc_profileName.Text = $"{Session["patient_name"]}'s Appointment on {Convert.ToDateTime(Session["selected_appt_date"])}";
+                        Service1Client svc_client = new Service1Client();
+                        List<User> doc_list = svc_client.GetAllDoctors().ToList();
                         var new_list = new List<String>();
                         foreach (var i in doc_list)
                         {
@@ -26,56 +28,47 @@ namespace EDP_Clinic
                         ddl_chooseDoctors.DataBind();
                     }
                 }
-
                 else
                 {
-                    Response.Redirect("Home.aspx", false);
+                    Response.Redirect("~/Home.aspx", false);
                 }
             }
-
             else
             {
-                Response.Redirect("Login.aspx", false);
+                Response.Redirect("~/Login.aspx", false);
             }
         }
 
         protected void btn_assignDoctor_Click(object sender, EventArgs e)
         {
-            EDP_DBReference.Service1Client svc_client = new EDP_DBReference.Service1Client();
+            Service1Client svc_client = new Service1Client();
 
-            System.Diagnostics.Debug.WriteLine("DOCTOR NAME IS " + Session["doctor_name"].ToString());
-            System.Diagnostics.Debug.WriteLine("PATIENT NAME IS " + Session["patient_name"].ToString());
-            System.Diagnostics.Debug.WriteLine("APPT DATE IS " + Convert.ToDateTime(Session["selected_appt_date"]));
+            Debug.WriteLine("DOCTOR NAME IS " + Session["doctor_name"].ToString());
+            Debug.WriteLine("PATIENT NAME IS " + Session["patient_name"].ToString());
+            Debug.WriteLine("APPT DATE IS " + Convert.ToDateTime(Session["selected_appt_date"]));
 
             var doctor_obj = svc_client.GetOneDoctor(ddl_chooseDoctors.SelectedValue.ToString());
-            System.Diagnostics.Debug.WriteLine("NEW DOCTOR NAME IS " + ddl_chooseDoctors.SelectedValue.ToString());
+            Debug.WriteLine("NEW DOCTOR NAME IS " + ddl_chooseDoctors.SelectedValue.ToString());
             try
             {
-                var patient_obj = svc_client.GetPatientByName(Session["patient_name"].ToString());
+                User patient_obj = svc_client.GetPatientByName(Session["patient_name"].ToString());
 
-                var date_time = Convert.ToDateTime(Session["selected_appt_date"]);
+                DateTime date_time = Convert.ToDateTime(Session["selected_appt_date"]);
 
-                System.Diagnostics.Debug.WriteLine("PATIENT ID IS " + patient_obj.Id);
+                Debug.WriteLine("PATIENT ID IS " + patient_obj.Id);
 
-                System.Diagnostics.Debug.WriteLine("DOCTOR ID IS " + doctor_obj.Id);
+                Debug.WriteLine("DOCTOR ID IS " + doctor_obj.Id);
                 var updateDoctor = svc_client.UpdateDoctor(Convert.ToInt32(patient_obj.Id), date_time, Convert.ToInt32(doctor_obj.Id));
                 if (updateDoctor == 1)
                 {
                     lbl_updateResult.Text = "Update Successful";
                 }
             }
-
             // Problem only occur if trying to assign doctor to an appointment that is created with receptionist account, line of code below to handle the error.
             catch (NullReferenceException)
             {
                 lbl_updateResult.Text = "Update Failed, cannot assign doctor to an appointment without a valid patient";
             }
-
-
-
-
-
-
         }
     }
 }
