@@ -5,7 +5,7 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <div class="login-card">
-        <h1 class="title mb-5 text-center">Login</h1>
+        <h1 class="mb-5 text-center">Login</h1>
         <asp:Label ID="errorMsg" runat="server"></asp:Label>
         <div class="mb-4">
             <asp:Label ID="emailLbl" runat="server" Text="Email" CssClass="form-label"></asp:Label>
