@@ -1,5 +1,6 @@
 ﻿using EDP_Clinic.EDP_DBReference;
 using System;
+using System.Diagnostics;
 using System.Drawing;
 using System.Net.Mail;
 using System.Security.Cryptography;
@@ -19,6 +20,19 @@ namespace EDP_Clinic
         {
             string email = HttpUtility.HtmlEncode(tbemail.Text.Trim());
             string password = HttpUtility.HtmlEncode(tbpassword.Text.Trim());
+
+            bool validInput = ValidateInput(email, password);
+
+            if (validInput == true)
+            {
+                Debug.WriteLine("All inputs are in valid formats.");
+            }
+            else
+            {
+                //Return empty
+                Debug.WriteLine("Invalid input formats.");
+                return;
+            }
 
             var emailexist = client.CheckOneUser(email);
             if (emailexist == 0)
@@ -76,12 +90,13 @@ namespace EDP_Clinic
             }
             else
             {
-                errorMsg.Text = "Wrong Email/Password";
-                errorMsg.ForeColor = Color.Red;
+                //errorMsg.Text = "Wrong Email/Password";
+                //errorMsg.ForeColor = Color.Red;
+                Response.Redirect("~/Login.aspx", false);
                 return;
             }
         }
-        public static bool IsValidEmail(string email)
+        public bool IsValidEmail(string email)
         {
             try
             {
@@ -92,8 +107,50 @@ namespace EDP_Clinic
             {
                 return false;
             }
-
         }
+
+        protected bool ValidateInput(string email, string password)
+        {
+            // Validate email format
+            if (String.IsNullOrEmpty(email))
+            {
+                emailErrorMsg.Text = "Please enter your email";
+                emailErrorMsg.ForeColor = Color.Red;
+                return false;
+            }
+            else if (IsValidEmail(email) == false)
+            {
+                emailErrorMsg.Text = "Please enter a valid email";
+                emailErrorMsg.ForeColor = Color.Red;
+                return false;
+            }
+
+            // Validate password format
+            if (String.IsNullOrEmpty(password))
+            {
+                passwordErrorMsg.Text = "Please enter your password";
+                passwordErrorMsg.ForeColor = Color.Red;
+                return false;
+            }
+            else if (password.Length < 8)
+            {
+                passwordErrorMsg.Text = "Please enter a valid password";
+                passwordErrorMsg.ForeColor = Color.Red;
+                return false;
+            }
+            else
+            {
+                emailErrorMsg.Text = "Excellent";
+                emailErrorMsg.ForeColor = Color.Green;
+                passwordErrorMsg.Text = "Excellent";
+                passwordErrorMsg.ForeColor = Color.Green;
+                return true;
+            }
+        }
+
+        // Will add in Recaptcha Stuff here later
+
+
         // Redirects user to phone login page
         protected void phoneBtn_Click(object sender, EventArgs e)
         {

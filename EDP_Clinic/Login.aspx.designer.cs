@@ -42,6 +42,15 @@ namespace EDP_Clinic
         protected global::System.Web.UI.WebControls.TextBox tbemail;
 
         /// <summary>
+        /// emailErrorMsg control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label emailErrorMsg;
+
+        /// <summary>
         /// passwordLbl control.
         /// </summary>
         /// <remarks>
@@ -58,6 +67,15 @@ namespace EDP_Clinic
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox tbpassword;
+
+        /// <summary>
+        /// passwordErrorMsg control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label passwordErrorMsg;
 
         /// <summary>
         /// submitBtn control.

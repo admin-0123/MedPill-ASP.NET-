@@ -10,10 +10,12 @@
         <div class="mb-4">
             <asp:Label ID="emailLbl" runat="server" Text="Email" CssClass="form-label"></asp:Label>
             <asp:TextBox ID="tbemail" runat="server" CssClass="form-control" TextMode="Email"></asp:TextBox>
+            <asp:Label ID="emailErrorMsg" runat="server"></asp:Label>
         </div>
         <div class="mb-4">
             <asp:Label ID="passwordLbl" runat="server" Text="Password" CssClass="form-label"></asp:Label>
             <asp:TextBox ID="tbpassword" runat="server" CssClass="form-control" TextMode="Password"></asp:TextBox>
+            <asp:Label ID="passwordErrorMsg" runat="server"></asp:Label>
         </div>
         <div class="mb-4">
             <asp:Button ID="submitBtn" runat="server" Text="Submit" class="btn btn-primary mb-4" OnClick="submitBtn_Click" />
