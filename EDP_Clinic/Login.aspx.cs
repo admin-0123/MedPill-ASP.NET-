@@ -26,6 +26,13 @@ namespace EDP_Clinic
             if (validInput == true)
             {
                 Debug.WriteLine("All inputs are in valid formats.");
+
+                RecaptchaValidation validCaptcha = new RecaptchaValidation();
+
+                string captchaResponse = Request.Form["g-recaptcha-response"];
+
+                bool captchaResult = validCaptcha.ValidateCaptcha(captchaResponse);
+                Debug.WriteLine(captchaResult);
             }
             else
             {
