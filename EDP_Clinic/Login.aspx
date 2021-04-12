@@ -4,7 +4,7 @@
     <link rel="stylesheet" href="assets/css/style.css" media="screen" type="text/css" />
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-    <div class="login-card">
+    <div class="login-card" style="width:300px;">
         <h1 class="mb-5 text-center">Login</h1>
         <asp:Label ID="errorMsg" runat="server"></asp:Label>
         <div class="mb-4">
