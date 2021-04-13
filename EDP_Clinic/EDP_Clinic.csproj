@@ -127,6 +127,7 @@
     <Content Include="assets\images\pfp_placeholder.png" />
     <Content Include="assets\images\medical_certificate.jpg" />
     <Content Include="assets\js\main.js" />
+    <Content Include="assets\js\modals.js" />
     <Content Include="CA.aspx" />
     <Content Include="CA_admin.aspx" />
     <Content Include="CA_Success.aspx" />

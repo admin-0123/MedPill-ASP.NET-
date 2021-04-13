@@ -13,6 +13,8 @@ namespace EDP_Clinic
             }
             else
             {
+                // Will probably redo the code related to display profile image
+
                 imgPfp.Visible = false;
                 string email = Session["LoggedIn"].ToString();
                 Service1Client client = new Service1Client();
@@ -37,10 +39,10 @@ namespace EDP_Clinic
             Response.Redirect("~/PFA.aspx", false);
         }
 
-        protected void medicationBtn_Click(object sender, EventArgs e)
-        {
+        //protected void medicationBtn_Click(object sender, EventArgs e)
+        //{
 
-        }
+        //}
 
         //Hasan's Stuff
         protected void paymentMethodBtn_Click(object sender, EventArgs e)

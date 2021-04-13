@@ -2,42 +2,41 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <style type="text/css">
         .myPage {
-            background-color:white;
+            background-color: white;
         }
 
-                .profile_1 {
-            border-radius:30px;
+        .profile_1 {
+            border-radius: 30px;
         }
 
-                .profile_2 {
-            border-radius:30px;
+        .profile_2 {
+            border-radius: 30px;
         }
 
         .profile_1:hover {
-            color:skyblue;
+            color: skyblue;
         }
 
         .profile_2:hover {
-            color:skyblue;
+            color: skyblue;
         }
 
         .rightArrow {
-            
         }
 
-                    .breadcrumb-item + .breadcrumb-item::before {
-        content: ">";
-    }
+        .breadcrumb-item + .breadcrumb-item::before {
+            content: ">";
+        }
 
-            .hyperlink_breadcrumb {
-                color:black;
-    text-decoration:none;
-            }
+        .hyperlink_breadcrumb {
+            color: black;
+            text-decoration: none;
+        }
 
-            .lbtn_inactive {
-                                color:black;
-    text-decoration:none;
-            }
+        .lbtn_inactive {
+            color: black;
+            text-decoration: none;
+        }
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
