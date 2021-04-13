@@ -1,6 +1,8 @@
 ﻿using EDP_Clinic.EDP_DBReference;
 using System;
+using System.Net;
 using System.Net.Mail;
+using System.Text;
 
 namespace EDP_Clinic
 {
@@ -21,7 +23,7 @@ namespace EDP_Clinic
 
                 SmtpClient emailClient = new SmtpClient("smtp-relay.sendinblue.com", 587)
                 {
-                    Credentials = new System.Net.NetworkCredential("bryanchinzw@gmail.com", "vPDBKArZRY7HcIJC"),
+                    Credentials = new NetworkCredential("bryanchinzw@gmail.com", "vPDBKArZRY7HcIJC"),
                     DeliveryMethod = SmtpDeliveryMethod.Network,
                     EnableSsl = true
                 };
@@ -29,7 +31,7 @@ namespace EDP_Clinic
                 MailMessage mail = new MailMessage
                 {
                     Subject = "Allow Caregiver request (MedPill Clinic)",
-                    SubjectEncoding = System.Text.Encoding.UTF8,
+                    SubjectEncoding = Encoding.UTF8,
                     Body = "Please Click link to approve the caregiver for you <br>" + link,
                     IsBodyHtml = true,
                     Priority = MailPriority.High,
@@ -40,7 +42,6 @@ namespace EDP_Clinic
 
                 lbl_notification.Text = $"An email has been sent to {selected_patient_obj.Name}";
             }
-
             else
             {
                 Response.Redirect("404.aspx", false);

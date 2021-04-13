@@ -2,7 +2,9 @@
 using System;
 using System.Diagnostics;
 using System.Drawing;
+using System.Net;
 using System.Net.Mail;
+using System.Text;
 using System.Web;
 using System.Web.UI;
 
@@ -10,8 +12,7 @@ namespace EDP_Clinic
 {
     public partial class ForgetPassword : System.Web.UI.Page
     {
-        SmtpClient emailClient = new SmtpClient("smtp-relay.sendinblue.com", 587);
-        Service1Client client = new Service1Client();
+        readonly Service1Client client = new Service1Client();
         protected void Page_Load(object sender, EventArgs e)
         {
 
@@ -40,22 +41,28 @@ namespace EDP_Clinic
             {
                 code = existingcode;
             }
-            var link = "https://localhost:44310/ChangePassword.aspx?value=" + code;
-            emailClient.Credentials = new System.Net.NetworkCredential("bryanchinzw@gmail.com", "vPDBKArZRY7HcIJC");
-            emailClient.DeliveryMethod = SmtpDeliveryMethod.Network;
-            emailClient.EnableSsl = true;
-            MailMessage mail = new MailMessage();
-            mail.Subject = "Reset Password (MedPill)";
-            mail.SubjectEncoding = System.Text.Encoding.UTF8;
-            mail.Body = "Please Click link to change password <br>" + link;
-            mail.IsBodyHtml = true;
-            mail.Priority = MailPriority.High;
-            mail.From = new MailAddress("bryanchinzw@gmail.com");
+            string link = "https://localhost:44310/ChangePassword.aspx?value=" + code;
+            SmtpClient emailClient = new SmtpClient("smtp-relay.sendinblue.com", 587)
+            {
+                Credentials = new NetworkCredential("bryanchinzw@gmail.com", "vPDBKArZRY7HcIJC"),
+                DeliveryMethod = SmtpDeliveryMethod.Network,
+                EnableSsl = true
+            };
+            MailMessage mail = new MailMessage
+            {
+                Subject = "Reset Password (MedPill)",
+                SubjectEncoding = Encoding.UTF8,
+                Body = "Please Click link to change password <br>" + link,
+                IsBodyHtml = true,
+                Priority = MailPriority.High,
+                From = new MailAddress("bryanchinzw@gmail.com")
+            };
             mail.To.Add(new MailAddress(email));
             emailClient.Send(mail);
             ScriptManager.RegisterStartupScript(this, this.GetType(), "Redit", "alert('A link to reset your password has been sent to your email'); window.location='" + Request.ApplicationPath + "Login.aspx';", true);
             Context.ApplicationInstance.CompleteRequest();
         }
+        // Replace this with guid
         public string makeCode()
         {
             var exist = 1;

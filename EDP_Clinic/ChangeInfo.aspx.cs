@@ -17,7 +17,7 @@ namespace EDP_Clinic
         {
             if (Session["LoggedIn"] == null)
             {
-                Response.Redirect("Login.aspx", false);
+                Response.Redirect("~/Login.aspx", false);
             }
         }
 
@@ -25,13 +25,13 @@ namespace EDP_Clinic
         {
             HttpPostedFile postedFile = imgUpload.PostedFile;
             string filename = Path.GetFileName(postedFile.FileName);
-            var redColor = Color.Red;
+            // var redColor = Color.Red;
             var user = client.GetOneUserByEmail(Session["LoggedIn"].ToString());
-            var name = HttpUtility.HtmlEncode(nameTB.Text);
-            var email = HttpUtility.HtmlEncode(emailTB.Text);
-            var phoneNo = HttpUtility.HtmlEncode(phoneTB.Text);
-            var password = HttpUtility.HtmlEncode(passwordTB.Text);
-            var password2 = HttpUtility.HtmlEncode(password2TB.Text);
+            string name = HttpUtility.HtmlEncode(nameTB.Text);
+            string email = HttpUtility.HtmlEncode(emailTB.Text);
+            string phoneNo = HttpUtility.HtmlEncode(phoneTB.Text);
+            string password = HttpUtility.HtmlEncode(passwordTB.Text);
+            string password2 = HttpUtility.HtmlEncode(password2TB.Text);
             if (password == "")
             {
                 passError.Text = "Password must be filled";
@@ -127,7 +127,7 @@ namespace EDP_Clinic
                         var photoExist = client.CheckPhotoExist(id);
                         if (photoExist == 1)
                         {
-                            var path = Server.MapPath("~/UserImg");
+                            string path = Server.MapPath("~/UserImg");
                             client.UpdateOnePhoto(id, filename);
                             var directory = new DirectoryInfo(path);
 
@@ -135,12 +135,12 @@ namespace EDP_Clinic
                             {
                                 directory.Create();
                             }
-                            var file = Path.Combine(path, filename);
+                            string file = Path.Combine(path, filename);
                             postedFile.SaveAs(file);
                         }
                         else
                         {
-                            var path = Server.MapPath("~/UserImg");
+                            string path = Server.MapPath("~/UserImg");
                             client.UpdateOnePhoto(id, filename);
                             var directory = new DirectoryInfo(path);
 
@@ -166,7 +166,7 @@ namespace EDP_Clinic
                         var photoExist = client.CheckPhotoExist(id);
                         if (photoExist == 1)
                         {
-                            var path = Server.MapPath("~/UserImg");
+                            string path = Server.MapPath("~/UserImg");
                             client.UpdateOnePhoto(id, filename);
                             var directory = new DirectoryInfo(path);
 
@@ -214,38 +214,37 @@ namespace EDP_Clinic
             {
                 return false;
             }
-
         }
+
         protected string passwordcheck(string password)
         {
             var errors = "";
             if (password.Length < 8)
             {
-                errors = errors + "Password must at least be 8 characters long <br/>";
+                errors += "Password must at least be 8 characters long <br/>";
             }
             if (!Regex.IsMatch(password, "[a-s]"))
             {
-                errors = errors + "Password must contain lowercase letters <br/>";
+                errors += "Password must contain lowercase letters <br/>";
             }
             if (!Regex.IsMatch(password, "[A-Z]"))
             {
-                errors = errors + "Password must contain uppercase letters <br/>";
+                errors += "Password must contain uppercase letters <br/>";
             }
             if (!Regex.IsMatch(password, "[0-9]"))
             {
-                errors = errors + "Password must contain at least 1 number <br/>";
+                errors += "Password must contain at least 1 number <br/>";
             }
             if (!Regex.IsMatch(password, "[^0-9a-zA-Z]"))
             {
-                errors = errors + "Password must contain at least one symbol <br/>";
+                errors += "Password must contain at least one symbol <br/>";
             }
             return errors;
         }
 
         protected void backBtn_Click(object sender, EventArgs e)
         {
-            Response.Redirect("UserPage.aspx", false);
+            Response.Redirect("~/UserPage.aspx", false);
         }
-
     }
 }

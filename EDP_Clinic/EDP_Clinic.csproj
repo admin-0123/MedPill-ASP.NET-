@@ -154,7 +154,6 @@
     <Content Include="App_Data\EDP_DB_log.ldf">
       <DependentUpon>EDP_DB.mdf</DependentUpon>
     </Content>
-    <Content Include="assets\css\main.css" />
     <Content Include="assets\css\style-starter.css" />
     <Content Include="assets\css\style.css" />
     <Content Include="assets\fonts\fontawesome-webfont.svg" />
