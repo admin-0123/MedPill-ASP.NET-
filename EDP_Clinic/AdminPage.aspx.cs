@@ -16,7 +16,6 @@ namespace EDP_Clinic
     public partial class AdminPage : System.Web.UI.Page
     {
         readonly Service1Client client = new Service1Client();
-        readonly SmtpClient emailClient = new SmtpClient("smtp-relay.sendinblue.com", 587);
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -216,12 +215,15 @@ namespace EDP_Clinic
                         tbAddEmail.Text = "";
                         tbAddName.Text = "";
                         tbAddMobile.Text = "";
-                        var code = makeCode();
+                        string code = makeCode();
                         client.AddCode(email, code);
-                        var link = "https://localhost:44310/EmployeePasswordSet.aspx?value=" + code;
-                        emailClient.Credentials = new System.Net.NetworkCredential("bryanchinzw@gmail.com", "vPDBKArZRY7HcIJC");
-                        emailClient.DeliveryMethod = SmtpDeliveryMethod.Network;
-                        emailClient.EnableSsl = true;
+                        string link = "https://localhost:44310/EmployeePasswordSet.aspx?value=" + code;
+                        SmtpClient emailClient = new SmtpClient("smtp-relay.sendinblue.com", 587)
+                        {
+                            Credentials = new System.Net.NetworkCredential("bryanchinzw@gmail.com", "vPDBKArZRY7HcIJC"),
+                            DeliveryMethod = SmtpDeliveryMethod.Network,
+                            EnableSsl = true
+                        };
                         MailMessage mail = new MailMessage
                         {
                             Subject = "Set Password (MedPill)",

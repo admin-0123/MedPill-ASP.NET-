@@ -26,6 +26,8 @@ Author URL: http://w3layouts.com
     <!--- Google Recaptcha --->
     <script src="https://www.google.com/recaptcha/api.js?render=6LejmBwaAAAAAIDSwI7BQzo5s3UO3qDlAztog9Uh"></script>
 
+    <script src="../assets/js/main.js"></script>
+
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
 </head>

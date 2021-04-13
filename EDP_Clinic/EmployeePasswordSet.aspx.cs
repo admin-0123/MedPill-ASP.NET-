@@ -65,30 +65,30 @@ namespace EDP_Clinic
                 errorMsg.Visible = true;
                 return;
             }
-            Response.Redirect("Login.aspx", false);
+            Response.Redirect("~/Login.aspx", false);
         }
         protected string passwordcheck(string password)
         {
             var errors = "";
             if (password.Length < 8)
             {
-                errors = errors + "Password must at least be 8 characters long <br/>";
+                errors += "Password must at least be 8 characters long <br/>";
             }
             if (!Regex.IsMatch(password, "[a-s]"))
             {
-                errors = errors + "Password must contain lowercase letters <br/>";
+                errors += "Password must contain lowercase letters <br/>";
             }
             if (!Regex.IsMatch(password, "[A-Z]"))
             {
-                errors = errors + "Password must contain uppercase letters <br/>";
+                errors += "Password must contain uppercase letters <br/>";
             }
             if (!Regex.IsMatch(password, "[0-9]"))
             {
-                errors = errors + "Password must contain at least 1 number <br/>";
+                errors += "Password must contain at least 1 number <br/>";
             }
             if (!Regex.IsMatch(password, "[^0-9a-zA-Z]"))
             {
-                errors = errors + "Password must contain at least one symbol <br/>";
+                errors += "Password must contain at least one symbol <br/>";
             }
             return errors;
         }

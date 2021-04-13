@@ -20,96 +20,71 @@ namespace EDP_Clinic
         {
             string email = HttpUtility.HtmlEncode(tbemail.Text.Trim());
             string password = HttpUtility.HtmlEncode(tbpassword.Text.Trim());
+            string captchaResponse = Request.Form["g-recaptcha-response"];
 
             bool validInput = ValidateInput(email, password);
+            RecaptchaValidation validCaptcha = new RecaptchaValidation();
+            bool captchaResult = validCaptcha.ValidateCaptcha(captchaResponse);
 
-            if (validInput == true)
+            if (validInput == true && captchaResult == true)
             {
-                Debug.WriteLine("All inputs are in valid formats.");
-                string captchaResponse = Request.Form["g-recaptcha-response"];
-
-                RecaptchaValidation validCaptcha = new RecaptchaValidation();
-                bool captchaResult = validCaptcha.ValidateCaptcha(captchaResponse);
-                Debug.WriteLine(captchaResult);
-
-                if(captchaResult == true)
-                {
-                    Debug.WriteLine("Successful Recaptcha Validation");
-                }
-                else
-                {
-                    Debug.WriteLine("Failed Recaptcha Validation");
-                    return;
-                }
+                Debug.WriteLine("All inputs are in valid formats and recaptcha successfully validated.");
             }
             else
             {
-                //Return empty
+                //  Return empty
                 Debug.WriteLine("Invalid input formats.");
+                Debug.WriteLine("Failed Recaptcha Validation");
                 return;
             }
 
             var emailexist = client.CheckOneUser(email);
             if (emailexist == 0)
             {
-                errorMsg.Text = "Email does not exists";
-                errorMsg.ForeColor = Color.Red;
+                emailErrorMsg.Text = "Please enter a valid email";
+                emailErrorMsg.ForeColor = Color.Red;
                 return;
             }
-            //var valid = IsValidEmail(email);
-            //if (!valid)
-            //{
-            //    errorMsg.Text = "Enter valid email";
-            //    errorMsg.ForeColor = Color.Red;
-            //    errorMsg.Visible = true;
-            //    return;
 
-            //}
-            var user = client.GetOneUserByEmail(email);
+            User user = client.GetOneUserByEmail(email);
+            string salt = user.Salt;
+            string userPassword = user.Password;
             string verify = user.Verified;
             if (verify == "No")
             {
-                errorMsg.Text = "Please verify account";
+                errorMsg.Text = "Please verify your account";
                 errorMsg.ForeColor = Color.Red;
                 errorMsg.Visible = true;
                 return;
             }
 
-
-            //Shift all the code below to a dedicated function
-            var salt = user.Salt;
-            var pwdWithSalt = password + salt;
+            string pwdWithSalt = password + salt;
             SHA512Managed hashing = new SHA512Managed();
             byte[] hashWithSalt = hashing.ComputeHash(Encoding.UTF8.GetBytes(pwdWithSalt));
-            var finalHash = Convert.ToBase64String(hashWithSalt);
-            var userPassword = user.Password;
+            string finalHash = Convert.ToBase64String(hashWithSalt);
             if (finalHash == userPassword)
             {
-                var role = user.Role;
+                string role = user.Role;
                 Session["UserRole"] = role;
                 Session["LoggedIn"] = email;
                 string guid = Guid.NewGuid().ToString();
                 Session["AuthToken"] = guid;
+                Response.Cookies.Add(new HttpCookie("AuthToken", guid));
                 if (role == "Patient")
                 {
-                    Response.Cookies.Add(new HttpCookie("AuthToken", guid));
                     Response.Redirect("~/Home.aspx", false);
                 }
                 else if (role == "Admin")
                 {
-                    Response.Cookies.Add(new HttpCookie("AuthToken", guid));
                     Response.Redirect("~/AdminPage.aspx", false);
                 }
                 else
                 {
-                    Response.Cookies.Add(new HttpCookie("AuthToken", guid));
                     Response.Redirect("~/Home.aspx", false);
                 }
             }
             else
             {
-                //errorMsg.Text = "Wrong Email/Password";
-                //errorMsg.ForeColor = Color.Red;
                 Response.Redirect("~/Login.aspx", false);
                 return;
             }
