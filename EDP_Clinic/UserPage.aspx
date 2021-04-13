@@ -14,17 +14,13 @@
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-    <link rel="icon" type="image/png" href="assets/images/icons/favicon.ico" />
-<%--    <link rel="stylesheet" type="text/css" href="assets/css/main.css">--%>
     <link rel="stylesheet" href="assets/css/style.css" media="screen" type="text/css" />
     <section class="w3l-contact py-5" id="userPage">
         <div class="container py-lg-3">
             <div class="mb-3">
-                <img class="pfp" id="defaultPfp" src="https://icon-library.com/images/default-profile-icon/default-profile-icon-16.jpg" runat="server">
-                <asp:Image class="pfp" ID="imgPfp" runat="server" Style="border-style: solid; width: 150px; height: 150px; border-color: #17449e;" />
+                <asp:Image class="pfp" ID="imgPfp" runat="server" Style="border-style: solid; border-color: #17449e;" ImageAlign="Middle" Width="150px" Height="150px" />
             </div>
             <asp:Button ID="changeinfoBtn1" runat="server" Text="Change Infomation" CssClass="btn btn-primary" OnClick="changeinfoBtn_Click" />
-
             <div class="mb-3 text-center mx-auto">
                 <asp:Label ID="lblName" runat="server" CssClass="h3">Name</asp:Label>
             </div>

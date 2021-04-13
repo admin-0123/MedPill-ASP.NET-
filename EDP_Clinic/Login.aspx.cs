@@ -11,13 +11,14 @@ namespace EDP_Clinic
 {
     public partial class Login : System.Web.UI.Page
     {
-        Service1Client client = new Service1Client();
         protected void Page_Load(object sender, EventArgs e)
         {
 
         }
         protected void submitBtn_Click(object sender, EventArgs e)
         {
+            Service1Client client = new Service1Client();
+
             string email = HttpUtility.HtmlEncode(tbemail.Text.Trim());
             string password = HttpUtility.HtmlEncode(tbpassword.Text.Trim());
             string captchaResponse = Request.Form["g-recaptcha-response"];

@@ -14,6 +14,12 @@ namespace EDP_Clinic
         public string Success { get; set; }
         public List<String> ErrorMessage { get; set; }
 
+        //Default Constructor
+        public RecaptchaValidation()
+        {
+
+        }
+
         public bool ValidateCaptcha(string recaptchaResponse)
         {
             bool result;

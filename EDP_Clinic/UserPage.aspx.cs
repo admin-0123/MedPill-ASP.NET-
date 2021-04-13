@@ -13,24 +13,32 @@ namespace EDP_Clinic
             }
             else
             {
-                // Will probably redo the code related to display profile image
+                displayProfileImg();
+            }
+        }
 
-                imgPfp.Visible = false;
-                string email = Session["LoggedIn"].ToString();
-                Service1Client client = new Service1Client();
-                User user = client.GetOneUserByEmail(email);
-                lblName.Text = user.Name.ToString();
-                string id = user.Id.ToString();
-                var exist = client.CheckPhotoExist(id);
-                if (exist == 1)
-                {
-                    defaultPfp.Visible = false;
-                    imgPfp.Visible = true;
-                    var photo = client.GetOnePhoto(id);
-                    string fileName = photo.Photo_Resource.ToString();
-                    var path = "~/UserImg/" + fileName;
-                    imgPfp.ImageUrl = path;
-                }
+        protected void displayProfileImg()
+        {
+            string email = Session["LoggedIn"].ToString();
+            Service1Client client = new Service1Client();
+
+            User user = client.GetOneUserByEmail(email);
+            lblName.Text = user.Name.ToString();
+            string id = user.Id.ToString();
+            var exist = client.CheckPhotoExist(id);
+
+            // If user has existing profile picture
+            if (exist == 1)
+            {
+                var photo = client.GetOnePhoto(id);
+                string fileName = photo.Photo_Resource.ToString();
+                string path = "~/UserImg/" + fileName;
+                imgPfp.ImageUrl = path;
+            }
+            // If user does not have existing profile picture
+            else
+            {
+                imgPfp.ImageUrl = "https://icon-library.com/images/default-profile-icon/default-profile-icon-16.jpg";
             }
         }
 
