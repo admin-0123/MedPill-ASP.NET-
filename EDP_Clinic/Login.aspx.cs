@@ -26,13 +26,21 @@ namespace EDP_Clinic
             if (validInput == true)
             {
                 Debug.WriteLine("All inputs are in valid formats.");
-
-                RecaptchaValidation validCaptcha = new RecaptchaValidation();
-
                 string captchaResponse = Request.Form["g-recaptcha-response"];
 
+                RecaptchaValidation validCaptcha = new RecaptchaValidation();
                 bool captchaResult = validCaptcha.ValidateCaptcha(captchaResponse);
                 Debug.WriteLine(captchaResult);
+
+                if(captchaResult == true)
+                {
+                    Debug.WriteLine("Successful Recaptcha Validation");
+                }
+                else
+                {
+                    Debug.WriteLine("Failed Recaptcha Validation");
+                    return;
+                }
             }
             else
             {
@@ -48,17 +56,17 @@ namespace EDP_Clinic
                 errorMsg.ForeColor = Color.Red;
                 return;
             }
-            var valid = IsValidEmail(email);
-            if (!valid)
-            {
-                errorMsg.Text = "Enter valid email";
-                errorMsg.ForeColor = Color.Red;
-                errorMsg.Visible = true;
-                return;
+            //var valid = IsValidEmail(email);
+            //if (!valid)
+            //{
+            //    errorMsg.Text = "Enter valid email";
+            //    errorMsg.ForeColor = Color.Red;
+            //    errorMsg.Visible = true;
+            //    return;
 
-            }
+            //}
             var user = client.GetOneUserByEmail(email);
-            var verify = user.Verified;
+            string verify = user.Verified;
             if (verify == "No")
             {
                 errorMsg.Text = "Please verify account";
@@ -66,6 +74,9 @@ namespace EDP_Clinic
                 errorMsg.Visible = true;
                 return;
             }
+
+
+            //Shift all the code below to a dedicated function
             var salt = user.Salt;
             var pwdWithSalt = password + salt;
             SHA512Managed hashing = new SHA512Managed();
@@ -154,10 +165,6 @@ namespace EDP_Clinic
                 return true;
             }
         }
-
-        // Will add in Recaptcha Stuff here later
-
-
         // Redirects user to phone login page
         protected void phoneBtn_Click(object sender, EventArgs e)
         {

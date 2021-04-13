@@ -16,12 +16,9 @@ namespace EDP_Clinic
 
         public bool ValidateCaptcha(string recaptchaResponse)
         {
-            bool result = true;
+            bool result;
 
-            //Retrieves captcha response from captcha api
-            string captchaResponse = recaptchaResponse;//Request.Form["g-recaptcha-response"];
-
-            HttpWebRequest req = (HttpWebRequest)WebRequest.Create("https://www.google.com/recaptcha/api/siteverify?secret=6LejmBwaAAAAAN_gzUf_AT0q_3ZrPbD5WP5oaTml &response=" + captchaResponse);
+            HttpWebRequest req = (HttpWebRequest)WebRequest.Create("https://www.google.com/recaptcha/api/siteverify?secret=6LejmBwaAAAAAN_gzUf_AT0q_3ZrPbD5WP5oaTml &response=" + recaptchaResponse);
 
             try
             {
@@ -36,11 +33,8 @@ namespace EDP_Clinic
 
                         RecaptchaValidation jsonObject = js.Deserialize<RecaptchaValidation>(jsonResponse);
 
-                        //Console.WriteLine("--- Testing ---");
-                        Debug.WriteLine(jsonObject);
                         //Read success property in json object
                         result = Convert.ToBoolean(jsonObject.Success);
-                        Debug.WriteLine(result);
                     }
                 }
                 return result;
