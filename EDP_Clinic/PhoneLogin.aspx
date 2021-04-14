@@ -19,4 +19,12 @@
             <a href="Register.aspx">Register</a> • <a href="Login.aspx">Login</a>
         </div>
     </div>
+    <!--- Recaptcha --->
+    <script>
+        grecaptcha.ready(function () {
+            grecaptcha.execute('6LejmBwaAAAAAIDSwI7BQzo5s3UO3qDlAztog9Uh', { action: 'Submit' }).then(function (token) {
+                document.getElementById("g-recaptcha-response").value = token;
+            });
+        });
+    </script>
 </asp:Content>

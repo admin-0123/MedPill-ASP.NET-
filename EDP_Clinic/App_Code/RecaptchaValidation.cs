@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
+using System.Configuration;
 using System.IO;
 using System.Net;
 using System.Web.Script.Serialization;
 
-namespace EDP_Clinic
+namespace EDP_Clinic.App_Code
 {
     public class RecaptchaValidation
     {
@@ -21,7 +23,12 @@ namespace EDP_Clinic
         {
             bool result;
 
-            HttpWebRequest req = (HttpWebRequest)WebRequest.Create("https://www.google.com/recaptcha/api/siteverify?secret=6LejmBwaAAAAAN_gzUf_AT0q_3ZrPbD5WP5oaTml &response=" + recaptchaResponse);
+            //Retrieve keys from web.config
+            NameValueCollection myKeys = ConfigurationManager.AppSettings;
+            var googleSecretKey = myKeys["GOOGLE_RECAPTCHA_SECRET_KEY"];
+
+            HttpWebRequest req = (HttpWebRequest)WebRequest.Create("https://www.google.com/recaptcha/api/siteverify?secret="+
+                googleSecretKey + "&response=" + recaptchaResponse);
 
             try
             {

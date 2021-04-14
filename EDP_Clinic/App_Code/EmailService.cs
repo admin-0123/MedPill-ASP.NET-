@@ -10,7 +10,8 @@ namespace EDP_Clinic.App_Code
 {
     public class EmailService
     {
-        public string Email { get; set; }
+        public string ReceipientEmail { get; set; }
+        public string SenderEmail { get; set; }
         public string Url { get; set; }
         public string SubjectHeader { get; set; }
 

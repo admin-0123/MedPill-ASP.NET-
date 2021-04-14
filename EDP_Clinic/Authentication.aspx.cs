@@ -1,4 +1,5 @@
-﻿using EDP_Clinic.EDP_DBReference;
+﻿using EDP_Clinic.App_Code;
+using EDP_Clinic.EDP_DBReference;
 using System;
 using System.Collections.Specialized;
 using System.Configuration;
@@ -56,7 +57,6 @@ namespace EDP_Clinic
                     {
                         Response.Redirect("~/CardList.aspx");
                     }
-
                     //Calls Twilio API
                     else
                     {
@@ -103,13 +103,11 @@ namespace EDP_Clinic
             {
                 if (!Session["addCardInfo"].ToString().Equals(Request.Cookies["addCardInfo"].Value))
                 {
-                    //Response.Redirect("CardList.aspx");
                     resultNum = 0;
                     return resultNum;
                 }
                 else
                 {
-                    //OTPError.Text = "Add Card";
                     resultNum = 1;
                     return resultNum;
                 }
@@ -119,13 +117,11 @@ namespace EDP_Clinic
             {
                 if (!Session["changeCardInfo"].ToString().Equals(Request.Cookies["changeCardInfo"].Value))
                 {
-                    //Response.Redirect("CardList.aspx");
                     resultNum = 0;
                     return resultNum;
                 }
                 else
                 {
-                    //OTPError.Text = "Change Card";
                     resultNum = 2;
                     return resultNum;
                 }
@@ -135,13 +131,11 @@ namespace EDP_Clinic
             {
                 if (!Session["deleteCardInfo"].ToString().Equals(Request.Cookies["deleteCardInfo"].Value))
                 {
-                    //Response.Redirect("CardList.aspx");
                     resultNum = 0;
                     return resultNum;
                 }
                 else
                 {
-                    //OTPError.Text = "Delete Card";
                     resultNum = 3;
                     return resultNum;
                 }
@@ -151,20 +145,17 @@ namespace EDP_Clinic
             {
                 if (!Session["viewCardInfo"].ToString().Equals(Request.Cookies["viewCardInfo"].Value))
                 {
-                    //Response.Redirect("CardList.aspx");
                     resultNum = 0;
                     return resultNum;
                 }
                 else
                 {
-                    //OTPError.Text = "Delete Card";
                     resultNum = 4;
                     return resultNum;
                 }
             }
             else
             {
-                //Response.Redirect("CardList.aspx");
                 resultNum = 0;
                 return resultNum;
             }
@@ -369,7 +360,6 @@ namespace EDP_Clinic
                         Response.Cookies.Add(new HttpCookie("authOTPVToken", guid));
                         Response.Redirect("~/PaymentInformation.aspx", false);
                     }
-
                     //Just in case there is some error here
                     else
                     {

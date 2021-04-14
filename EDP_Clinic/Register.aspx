@@ -40,4 +40,12 @@
             <p><a href="Login.aspx">Already have an account?</a></p>
         </div>
     </div>
+    <!--- Recaptcha --->
+    <script>
+        grecaptcha.ready(function () {
+            grecaptcha.execute('6LejmBwaAAAAAIDSwI7BQzo5s3UO3qDlAztog9Uh', { action: 'Submit' }).then(function (token) {
+                document.getElementById("g-recaptcha-response").value = token;
+            });
+        });
+    </script>
 </asp:Content>

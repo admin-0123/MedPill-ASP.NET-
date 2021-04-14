@@ -1,4 +1,5 @@
-﻿using EDP_Clinic.EDP_DBReference;
+﻿using EDP_Clinic.App_Code;
+using EDP_Clinic.EDP_DBReference;
 using System;
 using System.Diagnostics;
 using System.Drawing;
@@ -94,28 +95,31 @@ namespace EDP_Clinic
                     }
                     client.AddCode(email, code);
                     string link = "https://localhost:44310/Verify.aspx?value=" + code;
-
+                    string subjectHeader = "Verify Account (MedPill)";
+                    string message = "";
                     // Will shift these email codes to EmailService Class
 
-                    SmtpClient emailClient = new SmtpClient("smtp-relay.sendinblue.com", 587)
-                    {
-                        Credentials = new NetworkCredential("bryanchinzw@gmail.com", "vPDBKArZRY7HcIJC"),
-                        DeliveryMethod = SmtpDeliveryMethod.Network,
-                        EnableSsl = true
-                    };
-                    MailMessage mail = new MailMessage
-                    {
-                        Subject = "Verify Account (MedPill)",
-                        SubjectEncoding = Encoding.UTF8,
-                        Body = "Please to verify account <br> <a>" + link + "</a>",
-                        IsBodyHtml = true,
-                        Priority = MailPriority.High,
-                        From = new MailAddress("bryanchinzw@gmail.com")
-                    };
-                    mail.To.Add(new MailAddress(email));
-                    emailClient.Send(mail);
-                }
+                    EmailService emailService = new EmailService();
+                    emailService.SendEmail(email, link, subjectHeader, message);
 
+                    //SmtpClient emailClient = new SmtpClient("smtp-relay.sendinblue.com", 587)
+                    //{
+                    //    Credentials = new NetworkCredential("bryanchinzw@gmail.com", "vPDBKArZRY7HcIJC"),
+                    //    DeliveryMethod = SmtpDeliveryMethod.Network,
+                    //    EnableSsl = true
+                    //};
+                    //MailMessage mail = new MailMessage
+                    //{
+                    //    Subject = "Verify Account (MedPill)",
+                    //    SubjectEncoding = Encoding.UTF8,
+                    //    Body = "Please to verify account <br> <a>" + link + "</a>",
+                    //    IsBodyHtml = true,
+                    //    Priority = MailPriority.High,
+                    //    From = new MailAddress("bryanchinzw@gmail.com")
+                    //};
+                    //mail.To.Add(new MailAddress(email));
+                    //emailClient.Send(mail);
+                }
                 ScriptManager.RegisterStartupScript(this, this.GetType(),
                     "Redit", "alert('Please check email to verify account'); window.location='" + 
                     Request.ApplicationPath + "Login.aspx';", true);

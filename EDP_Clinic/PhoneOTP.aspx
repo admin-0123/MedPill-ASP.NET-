@@ -6,13 +6,22 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <div class="login-card">
         <h1 class="mb-5 text-center">Enter OTP</h1>
-        <asp:Label ID="errorMsg" runat="server"></asp:Label>
         <div class="mb-4">
             <asp:Label ID="otpLbl" runat="server" Text="6-digit OTP" CssClass="form-label"></asp:Label>
             <asp:TextBox ID="phoneOTP" runat="server" CssClass=" form-control" required></asp:TextBox>
+            <asp:Label ID="errorMsg" runat="server"></asp:Label>
         </div>
         <div class="mb-4">
+            <input type="hidden" id="g-recaptcha-response" name="g-recaptcha-response" />
             <asp:Button ID="submitBtn" runat="server" Text="Submit" class="btn btn-primary" OnClick="submitBtn_Click" />
         </div>
     </div>
+    <!--- Recaptcha --->
+    <script>
+        grecaptcha.ready(function () {
+            grecaptcha.execute('6LejmBwaAAAAAIDSwI7BQzo5s3UO3qDlAztog9Uh', { action: 'Submit' }).then(function (token) {
+                document.getElementById("g-recaptcha-response").value = token;
+            });
+        });
+    </script>
 </asp:Content>

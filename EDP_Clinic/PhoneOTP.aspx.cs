@@ -1,4 +1,5 @@
-﻿using EDP_Clinic.EDP_DBReference;
+﻿using EDP_Clinic.App_Code;
+using EDP_Clinic.EDP_DBReference;
 using System;
 using System.Diagnostics;
 using System.Drawing;
@@ -20,36 +21,56 @@ namespace EDP_Clinic
         {
             string phoneNo = Session["MobileLogin"].ToString();
             string phoneNumber = "+65" + phoneNo;
-            var otp = HttpUtility.HtmlEncode(phoneOTP.Text.ToString());
-            var result = checkOTP(phoneNumber, otp);
-            if (!result)
+            string otp = HttpUtility.HtmlEncode(phoneOTP.Text.ToString());
+            string captchaResponse = Request.Form["g-recaptcha-response"];
+
+            RecaptchaValidation validCaptcha = new RecaptchaValidation();
+            bool captchaResult = validCaptcha.ValidateCaptcha(captchaResponse);
+
+            //  Check if field is empty or not so that we don't call the OTP function for empty inputs
+            if (String.IsNullOrEmpty(otp) || captchaResult == false)
             {
-                errorMsg.Text = "Wrong code";
+                errorMsg.Text = "Please enter a 6-digit OTP";
                 errorMsg.ForeColor = Color.Red;
-                errorMsg.Visible = true;
+                return;
+            }
+            else if (otp.Length != 6 || captchaResult == false)
+            {
+                errorMsg.Text = "Please enter a 6-digit OTP";
+                errorMsg.ForeColor = Color.Red;
                 return;
             }
             else
             {
-                Service1Client client = new Service1Client();
-                var user = client.GetOneUserByPhoneNo(phoneNo);
-                string role = user.Role;
-                Session["UserRole"] = role;
-                Session["LoggedIn"] = user.Email.ToString();
-                string guid = Guid.NewGuid().ToString();
-                Session["AuthToken"] = guid;
-                Response.Cookies.Add(new HttpCookie("AuthToken", guid));
-                if (role == "Patient")
+                var result = checkOTP(phoneNumber, otp);
+                if (!result)
                 {
-                    Response.Redirect("~/Home.aspx", false);
-                }
-                else if (role == "Admin")
-                {
-                    Response.Redirect("~/AdminPage.aspx", false);
+                    errorMsg.Text = "Please enter the correct 6-digit OTP";
+                    errorMsg.ForeColor = Color.Red;
+                    return;
                 }
                 else
                 {
-                    Response.Redirect("~/Home.aspx", false);
+                    Service1Client client = new Service1Client();
+                    var user = client.GetOneUserByPhoneNo(phoneNo);
+                    string role = user.Role;
+                    Session["UserRole"] = role;
+                    Session["LoggedIn"] = user.Email.ToString();
+                    string guid = Guid.NewGuid().ToString();
+                    Session["AuthToken"] = guid;
+                    Response.Cookies.Add(new HttpCookie("AuthToken", guid));
+                    if (role == "Patient")
+                    {
+                        Response.Redirect("~/Home.aspx", false);
+                    }
+                    else if (role == "Admin")
+                    {
+                        Response.Redirect("~/AdminPage.aspx", false);
+                    }
+                    else
+                    {
+                        Response.Redirect("~/Home.aspx", false);
+                    }
                 }
             }
         }
