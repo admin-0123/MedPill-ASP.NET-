@@ -179,12 +179,15 @@ namespace EDP_Clinic
         //Update button is actually add card btn
         protected void addBtn_Click(object sender, EventArgs e)
         {
+            string captchaResponse = Request.Form["g-recaptcha-response"];
+            RecaptchaValidation validCaptcha = new RecaptchaValidation();
+
             bool validInput = ValidateInput();
 
-            bool validCaptcha = ValidateCaptcha();
+            bool captchaResult = validCaptcha.ValidateCaptcha(captchaResponse);
 
             //checks if all input has been validated
-            if (validInput == true && validCaptcha == true)
+            if (validInput == true && captchaResult == true)
             {
                 //Will add another if else statement to check if card number already exists or not
                 RijndaelManaged cipher = new RijndaelManaged();
@@ -237,49 +240,6 @@ namespace EDP_Clinic
                 cardNumberError.Visible = true;
                 cardExpiryError.Visible = true;
                 CVVError.Visible = true;
-            }
-        }
-
-        //Initialise an object to store Recaptcha response
-        public class ReCaptchaResponseObject
-        {
-            public string Success { get; set; }
-            public List<string> ErrorMessage { get; set; }
-        }
-
-        public bool ValidateCaptcha()
-        {
-            bool result = true;
-
-            //Retrieves captcha response from captcha api
-            string captchaResponse = Request.Form["g-recaptcha-response"];
-
-            HttpWebRequest req = (HttpWebRequest)WebRequest.Create("https://www.google.com/recaptcha/api/siteverify?secret=6LejmBwaAAAAAN_gzUf_AT0q_3ZrPbD5WP5oaTml &response=" + captchaResponse);
-
-            try
-            {
-                using (WebResponse wResponse = req.GetResponse())
-                {
-                    using (StreamReader readStream = new StreamReader(wResponse.GetResponseStream()))
-                    {
-                        //Read entire json response from recaptcha
-                        string jsonResponse = readStream.ReadToEnd();
-
-                        JavaScriptSerializer js = new JavaScriptSerializer();
-
-                        ReCaptchaResponseObject jsonObject = js.Deserialize<ReCaptchaResponseObject>(jsonResponse);
-
-                        //Console.WriteLine("--- Testing ---");
-                        //Console.WriteLine(jsonObject);
-                        //Read success property in json object
-                        result = Convert.ToBoolean(jsonObject.Success);
-                    }
-                }
-                return result;
-            }
-            catch (WebException)
-            {
-                throw;
             }
         }
 

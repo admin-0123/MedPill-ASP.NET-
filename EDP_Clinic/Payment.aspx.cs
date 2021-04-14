@@ -179,17 +179,15 @@ namespace EDP_Clinic
 
         protected void submitBtn_Click(object sender, EventArgs e)
         {
+            RecaptchaValidation validCaptcha = new RecaptchaValidation();
+            string captchaResponse = Request.Form["g-recaptcha-response"];
+
             bool validInput = ValidateInput();
 
-            bool validCaptcha = ValidateCaptcha();
+            bool captchaResult = validCaptcha.ValidateCaptcha(captchaResponse);
 
-            //HttpClient client = new HttpClient();
-
-            //client.BaseAddress = new Uri("https://localhost:44310/");
-
-            if (validInput == true && validCaptcha == true)
+            if (validInput == true && captchaResult == true)
             {
-
                 string cardNumber = HttpUtility.HtmlEncode(cardNumberTB.Text.Trim());
 
                 // string cardName = HttpUtility.HtmlEncode(nameOnCardTB.Text.Trim());
@@ -201,8 +199,6 @@ namespace EDP_Clinic
 
                 Debug.WriteLine(cardExpiry.Substring(0, 4));
                 Debug.WriteLine(cardExpiry.Substring(5, 2));
-
-                //Consolidate Stripe Payment API by 3/2/2021
 
                 //Testing Stripe
                 StripeConfiguration.ApiKey = "sk_test_51HveuKAVRV4JC5fkn1zDUAxrUGZgetyR05RVCIGpNFFAlZczY6xwAQtn60BO1stWGXHJJJOh1DZQozuL4RtJSW4700ONZrgRzD";
@@ -227,7 +223,6 @@ namespace EDP_Clinic
                     var options = new PaymentIntentCreateOptions
                     {
                         //We will change the total amount charged here
-
                         Amount = 20000,
                         Currency = "sgd",
                         PaymentMethodTypes = new List<string>
@@ -342,52 +337,9 @@ namespace EDP_Clinic
             }
         }
 
-        //Initialise an object to store Recaptcha response
-        public class ReCaptchaResponseObject
-        {
-            public string Success { get; set; }
-            public List<string> ErrorMessage { get; set; }
-        }
-
-        public bool ValidateCaptcha()
-        {
-            bool result = true;
-
-            //Retrieves captcha response from captcha api
-            string captchaResponse = Request.Form["g-recaptcha-response"];
-
-            HttpWebRequest req = (HttpWebRequest)WebRequest.Create("https://www.google.com/recaptcha/api/siteverify?secret=6LejmBwaAAAAAN_gzUf_AT0q_3ZrPbD5WP5oaTml &response=" + captchaResponse);
-
-            try
-            {
-                using (WebResponse wResponse = req.GetResponse())
-                {
-                    using (StreamReader readStream = new StreamReader(wResponse.GetResponseStream()))
-                    {
-                        //Read entire json response from recaptcha
-                        string jsonResponse = readStream.ReadToEnd();
-
-                        JavaScriptSerializer js = new JavaScriptSerializer();
-
-                        ReCaptchaResponseObject jsonObject = js.Deserialize<ReCaptchaResponseObject>(jsonResponse);
-
-                        //Console.WriteLine("--- Testing ---");
-                        //Console.WriteLine(jsonObject);
-                        //Read success property in json object
-                        result = Convert.ToBoolean(jsonObject.Success);
-                    }
-                }
-                return result;
-            }
-            catch (WebException)
-            {
-                throw;
-            }
-        }
-
         protected void backBtn_Click(object sender, EventArgs e)
         {
-            Response.Redirect("PRFA2.aspx", false);
+            Response.Redirect("~/PRFA2.aspx", false);
         }
 
         protected void cardListView_ItemCommand(object sender, ListViewCommandEventArgs e)
