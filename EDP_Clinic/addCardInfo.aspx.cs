@@ -1,15 +1,11 @@
 ﻿using EDP_Clinic.EDP_DBReference;
 using System;
-using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Configuration;
 using System.Diagnostics;
 using System.Drawing;
-using System.IO;
-using System.Net;
 using System.Security.Cryptography;
 using System.Text.RegularExpressions;
-using System.Web.Script.Serialization;
 using Twilio;
 using Twilio.Rest.Api.V2010.Account;
 

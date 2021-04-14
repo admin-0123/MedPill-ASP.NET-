@@ -13,7 +13,6 @@ namespace EDP_Clinic
 {
     public partial class Register : System.Web.UI.Page
     {
-        //string MYDBConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["EDP_DB"].ConnectionString;
         static string finalHash;
         readonly Service1Client client = new Service1Client();
         protected void Page_Load(object sender, EventArgs e)
@@ -28,68 +27,38 @@ namespace EDP_Clinic
             string password = HttpUtility.HtmlEncode(tbpassword.Text.Trim());
             string password2 = HttpUtility.HtmlEncode(tbConfirm.Text.Trim());
 
-            string captchaResponse = Request.Form["g-recaptcha-response"];
+            bool validInput = ValidateInput(email, name, mobile, password, password2);
 
-            // bool validInput = ValidateInput(email);
+            //  Call recaptcha function here
+            string captchaResponse = Request.Form["g-recaptcha-response"];
             RecaptchaValidation validCaptcha = new RecaptchaValidation();
             bool captchaResult = validCaptcha.ValidateCaptcha(captchaResponse);
 
-            if (String.IsNullOrEmpty(name)
-                || String.IsNullOrEmpty(mobile) || String.IsNullOrEmpty(password)
-                || String.IsNullOrEmpty(password2))
+            if (validInput == false || captchaResult == false)
             {
-                errorMsg.Text = "Please input all fields correctly";
-                errorMsg.ForeColor = Color.Red;
-                errorMsg.Visible = true;
-                Debug.WriteLine("Some fields are invalid");
                 return;
             }
+            // If all input is correctly formatted and captcha is validated
             else
             {
+                var errors = passwordcheck(password);
+
                 var emailexist = client.CheckOneUser(email);
                 Debug.WriteLine(emailexist);
                 if (emailexist == 1)
                 {
-                    errorMsg.Text = "Email already exists";
-                    errorMsg.ForeColor = Color.Red;
-                    return;
-                }
-                //var valid = IsValidEmail(email);
-                //if (!valid)
-                //{
-                //    errorMsg.Text = "Enter valid email";
-                //    errorMsg.ForeColor = Color.Red;
-                //    errorMsg.Visible = true;
-                //    return;
-
-                //}
-                if (!Regex.IsMatch(mobile, @"\d{8}"))
-                {
-                    errorMsg.Text = "Enter valid phone number";
-                    errorMsg.ForeColor = Color.Red;
-                    errorMsg.Visible = true;
-                    return;
-                }
-                if (password == password2)
-                {
-                    var errors = passwordcheck(password);
-                    if (errors != "")
-                    {
-                        errorMsg.Text = errors;
-                        errorMsg.ForeColor = Color.Red;
-                        errorMsg.Visible = true;
-                        return;
-                    }
-                }
-                else
-                {
-                    errorMsg.Text = "Passwords not the same";
-                    errorMsg.ForeColor = Color.Red;
-                    errorMsg.Visible = true;
+                    emailErrorMsg.Text = "Email already exists";
+                    emailErrorMsg.ForeColor = Color.Red;
                     return;
                 }
 
-                //add checker if email is in use
+                if (errors != "")
+                {
+                    passwordErrorMsg.Text = errors;
+                    passwordErrorMsg.ForeColor = Color.Red;
+                    passwordErrorMsg.Visible = true;
+                    return;
+                }
 
                 string pwd = tbpassword.Text.ToString();
                 RNGCryptoServiceProvider rng = new RNGCryptoServiceProvider();
@@ -126,7 +95,7 @@ namespace EDP_Clinic
                     client.AddCode(email, code);
                     string link = "https://localhost:44310/Verify.aspx?value=" + code;
 
-                    // Simplify email codes
+                    // Will shift these email codes to EmailService Class
 
                     SmtpClient emailClient = new SmtpClient("smtp-relay.sendinblue.com", 587)
                     {
@@ -147,8 +116,9 @@ namespace EDP_Clinic
                     emailClient.Send(mail);
                 }
 
-                ScriptManager.RegisterStartupScript(this, this.GetType(), "Redit", "alert('Please check email to verify account'); window.location='" + Request.ApplicationPath + "Login.aspx';", true);
-
+                ScriptManager.RegisterStartupScript(this, this.GetType(),
+                    "Redit", "alert('Please check email to verify account'); window.location='" + 
+                    Request.ApplicationPath + "Login.aspx';", true);
             }
         }
         protected string passwordcheck(string password)
@@ -190,7 +160,8 @@ namespace EDP_Clinic
             }
         }
 
-        protected bool ValidateInput(string email)
+        protected bool ValidateInput(string email, string name,
+            string mobileNo, string password, string passwordConfirm)
         {
             // Validate email format
             if (String.IsNullOrEmpty(email))
@@ -206,10 +177,64 @@ namespace EDP_Clinic
                 return false;
             }
 
-            return false;
+            //Checks if name is empty
+            if (String.IsNullOrEmpty(name))
+            {
+                nameErrorMsg.Text = "Please enter name on card";
+                nameErrorMsg.ForeColor = Color.Red;
+                nameErrorMsg.Visible = true;
+                return false;
+            }
+            else if (!Regex.IsMatch(name, "^[a-zA-Z0-9 ]*$"))
+            {
+                nameErrorMsg.Text = "Please enter a valid name";
+                nameErrorMsg.ForeColor = Color.Red;
+                nameErrorMsg.Visible = true;
+                return false;
+            }
+
+            //Checks if mobile number is empty
+            if (String.IsNullOrEmpty(mobileNo))
+            {
+                phoneErrorMsg.Text = "Please enter your mobile number";
+                phoneErrorMsg.ForeColor = Color.Red;
+                phoneErrorMsg.Visible = true;
+                return false;
+            }
+            // Checks if phone number has 8 digits
+            else if (!Regex.IsMatch(mobileNo, @"\d{8}"))
+            {
+                phoneErrorMsg.Text = "Enter valid phone number";
+                phoneErrorMsg.ForeColor = Color.Red;
+                phoneErrorMsg.Visible = true;
+                return false;
+            }
+
+            // Validate password format
+            if (String.IsNullOrEmpty(password))
+            {
+                passwordErrorMsg.Text = "Please enter your password";
+                passwordErrorMsg.ForeColor = Color.Red;
+                return false;
+            }
+            // Validate confirm password format
+            else if (String.IsNullOrEmpty(passwordConfirm))
+            {
+                passwordConfirmErrorMsg.Text = "Please enter your password again";
+                passwordConfirmErrorMsg.ForeColor = Color.Red;
+                return false;
+            }
+            else if (password != passwordConfirm)
+            {
+                passwordConfirmErrorMsg.Text = "Please ensure both passwords are the same";
+                passwordConfirmErrorMsg.ForeColor = Color.Red;
+                return false;
+            }
+            else
+            {
+                return true;
+            }
         }
-
-
         // Replace the code below with guid
 
         public string MakeCode()

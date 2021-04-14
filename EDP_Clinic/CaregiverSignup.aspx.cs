@@ -1,10 +1,7 @@
 ﻿using EDP_Clinic.EDP_DBReference;
 using System;
-using System.Text;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Net.Mail;
-using System.Web.UI;
 
 namespace EDP_Clinic
 {

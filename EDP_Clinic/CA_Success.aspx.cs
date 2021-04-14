@@ -1,8 +1,6 @@
 ﻿using EDP_Clinic.EDP_DBReference;
 using System;
 using System.Collections.Generic;
-using Twilio;
-using Twilio.Rest.Api.V2010.Account;
 
 namespace EDP_Clinic
 {
