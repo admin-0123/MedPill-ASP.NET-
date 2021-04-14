@@ -10,11 +10,6 @@ namespace EDP_Clinic
 {
     public partial class WebForm5 : System.Web.UI.Page
     {
-        // Scraping the use of global variables because they arent good
-        //public List<DateTime> mySlots = Get_AvailableAppt();
-        //public DateTime startDate;
-        //public DateTime endDate = Convert.ToDateTime("08/08/2021");
-        // List<DateTime> openSlots = new List<DateTime>();
         protected void Page_Load(object sender, EventArgs e)
         {
             if (Session["LoggedIn"] != null || Session["current_appt_profile"] != null)
@@ -145,7 +140,6 @@ namespace EDP_Clinic
         // Method to retrieve available appointments on first load
         public List<DateTime> Onload_Retrieve_Available_Appts()
         {
-
             List<DateTime> openSlots = new List<DateTime>();
             DateTime startDate = DateTime.Now.AddDays(1);
             DateTime endDate = DateTime.Now.AddMonths(2);
@@ -185,16 +179,12 @@ namespace EDP_Clinic
                     }
                     dt = dt.AddMinutes(30);
                 }
-
-
             }
-
             return openSlots;
         }
 
         public List<DateTime> Search_AvailableAppts()
         {
-
             List<DateTime> openSlots = new List<DateTime>();
             DateTime startDate = Convert.ToDateTime(Session["startDate"]);
             DateTime endDate = DateTime.Now.AddMonths(2);
@@ -255,7 +245,6 @@ namespace EDP_Clinic
                 lbl_error_make_appt.Text = "You did not select an appointment timeslot";
             }
             return result;
-
         }
 
         protected void btn_createAppt_Click(object sender, EventArgs e)
@@ -304,35 +293,35 @@ namespace EDP_Clinic
             Response.Redirect("~/PRFA2.aspx");
         }
         /*
-public List<Appointment> GetAppts()
-{
-List<Appointment> testList = new List<Appointment>();
-EDP_DBReference.Service1Client svc_client = new EDP_DBReference.Service1Client();
+        public List<Appointment> GetAppts()
+        {
+        List<Appointment> testList = new List<Appointment>();
+        EDP_DBReference.Service1Client svc_client = new EDP_DBReference.Service1Client();
 
-testList = svc_client.GetAllApptAdmin().ToList<Appointment>();
-return testList;
-}
-private void RefreshGridView()
-{
-List<Employee> eList = new List<Employee>();
-MyDBServiceReference.Service1Client client = new MyDBServiceReference.Service1Client();
-eList = client.GetAllEmployee().ToList<Employee>();
+        testList = svc_client.GetAllApptAdmin().ToList<Appointment>();
+        return testList;
+        }
+        private void RefreshGridView()
+        {
+        List<Employee> eList = new List<Employee>();
+        MyDBServiceReference.Service1Client client = new MyDBServiceReference.Service1Client();
+        eList = client.GetAllEmployee().ToList<Employee>();
 
-// using gridview to bind to the list of employee objects
-gvEmployee.Visible = true;
-gvEmployee.DataSource = eList;
-gvEmployee.DataBind();
+        // using gridview to bind to the list of employee objects
+        gvEmployee.Visible = true;
+        gvEmployee.DataSource = eList;
+        gvEmployee.DataBind();
 
 
-List<Appointment> aList = new List<Appointment>();
+        List<Appointment> aList = new List<Appointment>();
 
-aList = client.GetAllAppt().ToList<Appointment>();
+        aList = client.GetAllAppt().ToList<Appointment>();
 
-GridView1.Visible = true;
-GridView1.DataSource = aList;
-GridView1.DataBind();
-}
-*/
+        GridView1.Visible = true;
+        GridView1.DataSource = aList;
+        GridView1.DataBind();
+        }
+        */
 
         /* Code using the default asp calendar control, commented out in case switch back from ajax calendar to this
         // https://forums.asp.net/t/1285637.aspx?CALENDAR+Disable+past+dates

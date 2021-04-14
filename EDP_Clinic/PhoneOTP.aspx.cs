@@ -9,7 +9,6 @@ namespace EDP_Clinic
 {
     public partial class PhoneOTP : System.Web.UI.Page
     {
-        Service1Client client = new Service1Client();
         protected void Page_Load(object sender, EventArgs e)
         {
             if (Session["MobileLogin"] == null)
@@ -32,25 +31,24 @@ namespace EDP_Clinic
             }
             else
             {
+                Service1Client client = new Service1Client();
                 var user = client.GetOneUserByPhoneNo(phoneNo);
-                var role = user.Role;
+                string role = user.Role;
                 Session["UserRole"] = role;
                 Session["LoggedIn"] = user.Email.ToString();
                 string guid = Guid.NewGuid().ToString();
                 Session["AuthToken"] = guid;
+                Response.Cookies.Add(new HttpCookie("AuthToken", guid));
                 if (role == "Patient")
                 {
-                    Response.Cookies.Add(new HttpCookie("AuthToken", guid));
                     Response.Redirect("~/Home.aspx", false);
                 }
                 else if (role == "Admin")
                 {
-                    Response.Cookies.Add(new HttpCookie("AuthToken", guid));
                     Response.Redirect("~/AdminPage.aspx", false);
                 }
                 else
                 {
-                    Response.Cookies.Add(new HttpCookie("AuthToken", guid));
                     Response.Redirect("~/Home.aspx", false);
                 }
             }

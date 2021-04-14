@@ -2,6 +2,7 @@
 using System;
 using System.Diagnostics;
 using System.Drawing;
+using System.Net;
 using System.Net.Mail;
 using System.Security.Cryptography;
 using System.Text;
@@ -13,7 +14,6 @@ namespace EDP_Clinic
 {
     public partial class Register : System.Web.UI.Page
     {
-        static string finalHash;
         readonly Service1Client client = new Service1Client();
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -73,7 +73,7 @@ namespace EDP_Clinic
                 // byte[] plainHash = hashing.ComputeHash(Encoding.UTF8.GetBytes(pwd));
                 byte[] hashWithSalt = hashing.ComputeHash(Encoding.UTF8.GetBytes(pwdWithSalt));
 
-                finalHash = Convert.ToBase64String(hashWithSalt);
+                string finalHash = Convert.ToBase64String(hashWithSalt);
 
                 var result = client.AddOneUser(name, finalHash, salt, email, tbMobile.Text, "Patient", "No");
                 if (result == 0)
@@ -99,7 +99,7 @@ namespace EDP_Clinic
 
                     SmtpClient emailClient = new SmtpClient("smtp-relay.sendinblue.com", 587)
                     {
-                        Credentials = new System.Net.NetworkCredential("bryanchinzw@gmail.com", "vPDBKArZRY7HcIJC"),
+                        Credentials = new NetworkCredential("bryanchinzw@gmail.com", "vPDBKArZRY7HcIJC"),
                         DeliveryMethod = SmtpDeliveryMethod.Network,
                         EnableSsl = true
                     };

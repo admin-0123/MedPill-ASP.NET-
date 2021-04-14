@@ -102,8 +102,6 @@ namespace EDP_Clinic
                     }
                 }
             }
-
-
         }
 
         protected void gv_timeslots_SelectedIndexChanged(object sender, EventArgs e)
@@ -121,7 +119,6 @@ namespace EDP_Clinic
         // Method to retrieve available appointments on first load
         public List<DateTime> Onload_Retrieve_Available_Appts()
         {
-
             List<DateTime> openSlots = new List<DateTime>();
             DateTime startDate = DateTime.Now.AddDays(1);
             DateTime endDate = DateTime.Now.AddMonths(2);
@@ -147,30 +144,24 @@ namespace EDP_Clinic
                             //System.Diagnostics.Debug.WriteLine(Convert.ToDateTime(booked_appt.dateTime));
                             matching_appt_record = true;
                         }
-
                     }
                     // If match is found, skip and reset the check counter
                     if (matching_appt_record == true)
                     {
                         matching_appt_record = false;
                     }
-
                     else
                     {
                         openSlots.Add(dt);
                     }
                     dt = dt.AddMinutes(30);
                 }
-
-
             }
-
             return openSlots;
         }
 
         public List<DateTime> Search_AvailableAppts()
         {
-
             List<DateTime> openSlots = new List<DateTime>();
             DateTime startDate = Convert.ToDateTime(Session["startDate"]);
             DateTime endDate = DateTime.Now.AddMonths(2);
@@ -211,7 +202,6 @@ namespace EDP_Clinic
                     dt = dt.AddMinutes(30);
                 }
             }
-
             return openSlots;
         }
 
@@ -238,9 +228,7 @@ namespace EDP_Clinic
                 lbl_error_make_appt.ForeColor = Color.Red;
                 lbl_error_make_appt.Text = "You did not search an actual user";
             }
-
             return result;
-
         }
 
         protected void btn_createAppt_Click(object sender, EventArgs e)
@@ -267,10 +255,10 @@ namespace EDP_Clinic
                     gv_timeslots.DataBind();
 
                     var appt_success_dict = new Dictionary<string, string>(){
-    {"appointmentType", appointmentType.ToString()},
-    {"dateTime", rb_userinput.ToString()},
-    {"status", status.ToString() }
-};
+                    {"appointmentType", appointmentType.ToString()},
+                    {"dateTime", rb_userinput.ToString()},
+                    {"status", status.ToString() }
+                };
                     Session["successful_appt_details"] = appt_success_dict;
                     Response.Redirect("~/CA_admin_Success.aspx");
                 }

@@ -15,15 +15,6 @@ namespace EDP_Clinic
     {
 
         /// <summary>
-        /// errorMsg control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label errorMsg;
-
-        /// <summary>
         /// phoneLbl control.
         /// </summary>
         /// <remarks>
@@ -42,12 +33,21 @@ namespace EDP_Clinic
         protected global::System.Web.UI.WebControls.TextBox tbPhoneNo;
 
         /// <summary>
-        /// Button1 control.
+        /// phoneErrorMsg control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button Button1;
+        protected global::System.Web.UI.WebControls.Label phoneErrorMsg;
+
+        /// <summary>
+        /// SubmitBtn control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button SubmitBtn;
     }
 }
