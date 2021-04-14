@@ -31,7 +31,9 @@ Author URL: http://w3layouts.com
 
     <script src="../assets/js/main.js"></script>
 
-<%--    <style>
+<%-- If you want to disable the recaptcha badge
+    https://developers.google.com/recaptcha/docs/faq#id-like-to-hide-the-recaptcha-badge.-what-is-allowed
+    <style>
         .grecaptcha-badge {
             visibility: hidden;
         }
@@ -178,7 +180,7 @@ Author URL: http://w3layouts.com
             </div>
         </footer>
         <!-- move top -->
-        <button onclick="topFunction()" id="movetop" title="Go to top">
+        <button onclick="topFunction()" id="movetop" title="Go to top" style="visibility:hidden;">
             <i class="fas fa-arrow-up"></i>
         </button>
     </section>

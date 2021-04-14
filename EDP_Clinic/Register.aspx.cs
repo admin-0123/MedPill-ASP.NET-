@@ -20,14 +20,21 @@ namespace EDP_Clinic
         {
 
         }
-        protected void Button1_Click(object sender, EventArgs e)
+        protected void RegisterBtn_Click(object sender, EventArgs e)
         {
             string email = HttpUtility.HtmlEncode(tbemail.Text.Trim());
             string name = HttpUtility.HtmlEncode(tbName.Text.Trim());
             string mobile = HttpUtility.HtmlEncode(tbMobile.Text.Trim());
             string password = HttpUtility.HtmlEncode(tbpassword.Text.Trim());
             string password2 = HttpUtility.HtmlEncode(tbConfirm.Text.Trim());
-            if (String.IsNullOrEmpty(email) || String.IsNullOrEmpty(name)
+
+            string captchaResponse = Request.Form["g-recaptcha-response"];
+
+            // bool validInput = ValidateInput(email);
+            RecaptchaValidation validCaptcha = new RecaptchaValidation();
+            bool captchaResult = validCaptcha.ValidateCaptcha(captchaResponse);
+
+            if (String.IsNullOrEmpty(name)
                 || String.IsNullOrEmpty(mobile) || String.IsNullOrEmpty(password)
                 || String.IsNullOrEmpty(password2))
             {
@@ -47,15 +54,15 @@ namespace EDP_Clinic
                     errorMsg.ForeColor = Color.Red;
                     return;
                 }
-                var valid = IsValidEmail(email);
-                if (!valid)
-                {
-                    errorMsg.Text = "Enter valid email";
-                    errorMsg.ForeColor = Color.Red;
-                    errorMsg.Visible = true;
-                    return;
+                //var valid = IsValidEmail(email);
+                //if (!valid)
+                //{
+                //    errorMsg.Text = "Enter valid email";
+                //    errorMsg.ForeColor = Color.Red;
+                //    errorMsg.Visible = true;
+                //    return;
 
-                }
+                //}
                 if (!Regex.IsMatch(mobile, @"\d{8}"))
                 {
                     errorMsg.Text = "Enter valid phone number";
@@ -117,7 +124,10 @@ namespace EDP_Clinic
                         codeExist = client.CheckCodeExist(code);
                     }
                     client.AddCode(email, code);
-                    var link = "https://localhost:44310/Verify.aspx?value=" + code;
+                    string link = "https://localhost:44310/Verify.aspx?value=" + code;
+
+                    // Simplify email codes
+
                     SmtpClient emailClient = new SmtpClient("smtp-relay.sendinblue.com", 587)
                     {
                         Credentials = new System.Net.NetworkCredential("bryanchinzw@gmail.com", "vPDBKArZRY7HcIJC"),
@@ -166,7 +176,7 @@ namespace EDP_Clinic
             }
             return errors;
         }
-        public static bool IsValidEmail(string email)
+        public bool IsValidEmail(string email)
         {
             try
             {
@@ -179,6 +189,29 @@ namespace EDP_Clinic
                 return false;
             }
         }
+
+        protected bool ValidateInput(string email)
+        {
+            // Validate email format
+            if (String.IsNullOrEmpty(email))
+            {
+                emailErrorMsg.Text = "Please enter your email";
+                emailErrorMsg.ForeColor = Color.Red;
+                return false;
+            }
+            else if (IsValidEmail(email) == false)
+            {
+                emailErrorMsg.Text = "Please enter a valid email";
+                emailErrorMsg.ForeColor = Color.Red;
+                return false;
+            }
+
+            return false;
+        }
+
+
+        // Replace the code below with guid
+
         public string MakeCode()
         {
             var exist = 1;

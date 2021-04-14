@@ -11,12 +11,12 @@
         </div>
         <div class="form-group mb-4">
             <asp:Label ID="emailLbl" runat="server" Text="Email" CssClass="form-label"></asp:Label>
-            <asp:TextBox ID="tbemail" runat="server" CssClass="form-control" TextMode="Email" required></asp:TextBox>
+            <asp:TextBox ID="tbemail" runat="server" CssClass="form-control" TextMode="Email"></asp:TextBox>
             <asp:Label ID="emailErrorMsg" runat="server"></asp:Label>
         </div>
         <div class="form-group mb-4">
             <asp:Label ID="passwordLbl" runat="server" Text="Password" CssClass="form-label"></asp:Label>
-            <asp:TextBox ID="tbpassword" runat="server" CssClass="form-control" TextMode="Password" required></asp:TextBox>
+            <asp:TextBox ID="tbpassword" runat="server" CssClass="form-control" TextMode="Password"></asp:TextBox>
             <asp:Label ID="passwordErrorMsg" runat="server"></asp:Label>
         </div>
         <div class="mb-4">
