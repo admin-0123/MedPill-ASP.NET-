@@ -1,4 +1,5 @@
-﻿using System;
+﻿using EDP_Clinic.EDP_DBReference;
+using System;
 using System.Collections.Generic;
 using Twilio;
 using Twilio.Rest.Api.V2010.Account;
@@ -13,8 +14,6 @@ namespace EDP_Clinic
             {
                 Response.Redirect("~/Home.aspx");
             }
-
-
             else
             {
                 if (Session["admin_userInput"].ToString() != "nothing")
@@ -22,17 +21,11 @@ namespace EDP_Clinic
                     loadSuccessMsg();
                 }
             }
-
-
-
-
-
-
         }
 
         protected void loadSuccessMsg()
         {
-            EDP_DBReference.Service1Client svc_client = new EDP_DBReference.Service1Client();
+            Service1Client svc_client = new Service1Client();
             Dictionary<String, String> apptDetail = (Dictionary<string, string>)Session["successful_appt_details"];
 
             DateTime dateTimeinput;
@@ -43,8 +36,8 @@ namespace EDP_Clinic
 
             var doctor = svc_client.GetOneUser(appt.doctorID.ToString());
 
-            lbl_apptType.Text = $"Appointment Type: {appt.appointmentType.ToString()}";
-            lbl_datetime.Text = $"Appointment Time: {appt.dateTime.ToString()}";
+            lbl_apptType.Text = $"Appointment Type: {appt.appointmentType}";
+            lbl_datetime.Text = $"Appointment Time: {appt.dateTime}";
 
             if (doctor == null)
             {
@@ -72,13 +65,11 @@ namespace EDP_Clinic
                 if (patient.Id == Session["admin_userInput"].ToString())
                 {
                     var message = MessageResource.Create(
-                    body: $"Our receptionist has booked an appointment for you. Report to the clinic on {appt.dateTime.ToString("G")}",
+                    body: $"Our receptionist has booked an appointment for you. Report to the clinic on {appt.dateTime:G}",
                     from: new Twilio.Types.PhoneNumber("+14242066417"),
                     to: new Twilio.Types.PhoneNumber("+6587558054")
                     );
                 }
-
-
             }
         }
 
@@ -86,7 +77,6 @@ namespace EDP_Clinic
         {
             Response.Redirect("~/ReceptAppts.aspx");
         }
-
 
         protected void btn_go_userpage_Click(object sender, EventArgs e)
         {

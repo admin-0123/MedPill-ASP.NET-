@@ -2,18 +2,6 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <style>
-        .btn_mka {
-            border-radius: 15px;
-        }
-
-        .btn_Cancel {
-            border-radius: 15px;
-        }
-
-        .btn_Rsch {
-            border-radius: 15px;
-        }
-
         .breadcrumb-item + .breadcrumb-item::before {
             content: ">";
         }

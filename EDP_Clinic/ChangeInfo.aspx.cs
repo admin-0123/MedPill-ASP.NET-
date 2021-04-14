@@ -27,16 +27,16 @@ namespace EDP_Clinic
             string filename = Path.GetFileName(postedFile.FileName);
             // var redColor = Color.Red;
             var user = client.GetOneUserByEmail(Session["LoggedIn"].ToString());
-            string name = HttpUtility.HtmlEncode(nameTB.Text);
-            string email = HttpUtility.HtmlEncode(emailTB.Text);
-            string phoneNo = HttpUtility.HtmlEncode(phoneTB.Text);
-            string password = HttpUtility.HtmlEncode(passwordTB.Text);
-            string password2 = HttpUtility.HtmlEncode(password2TB.Text);
-            if (password == "")
+            string name = HttpUtility.HtmlEncode(nameTB.Text.Trim());
+            string email = HttpUtility.HtmlEncode(emailTB.Text.Trim());
+            string phoneNo = HttpUtility.HtmlEncode(phoneTB.Text.Trim());
+            string password = HttpUtility.HtmlEncode(passwordTB.Text.Trim());
+            string password2 = HttpUtility.HtmlEncode(password2TB.Text.Trim());
+
+            if (String.IsNullOrEmpty(password))
             {
                 passError.Text = "Password must be filled";
                 passError.ForeColor = Color.Red;
-                passError.Visible = true;
                 return;
             }
             if (name == "")
@@ -53,7 +53,6 @@ namespace EDP_Clinic
                 {
                     emailError.Text = "Enter proper email";
                     emailError.ForeColor = Color.Red;
-                    emailError.Visible = true;
                 }
             }
             else
@@ -63,7 +62,6 @@ namespace EDP_Clinic
                 {
                     emailError.Text = "Email already in use";
                     emailError.ForeColor = Color.Red;
-                    emailError.Visible = true;
                 }
             }
             if (phoneNo == "")
@@ -76,7 +74,6 @@ namespace EDP_Clinic
                 {
                     phoneError.Text = "Enter proper phone number";
                     phoneError.ForeColor = Color.Red;
-                    phoneError.Visible = true;
                 }
                 else
                 {
@@ -85,7 +82,6 @@ namespace EDP_Clinic
                     {
                         phoneError.Text = "Phone number already in use";
                         phoneError.ForeColor = Color.Red;
-                        phoneError.Visible = true;
                     }
                 }
             }
@@ -96,7 +92,6 @@ namespace EDP_Clinic
                 {
                     pass2Error.Text = errors;
                     pass2Error.ForeColor = Color.Red;
-                    pass2Error.Visible = true;
                     return;
                 }
             }
@@ -110,10 +105,12 @@ namespace EDP_Clinic
             {
                 passError.Text = "Incorrect password";
                 passError.ForeColor = Color.Red;
-                passError.Visible = true;
                 return;
             }
-            if (emailError.ForeColor == Color.Red || phoneError.ForeColor == Color.Red || passError.ForeColor == Color.Red || pass2Error.ForeColor == Color.Red)
+            if (emailError.ForeColor == Color.Red ||
+                phoneError.ForeColor == Color.Red ||
+                passError.ForeColor == Color.Red ||
+                pass2Error.ForeColor == Color.Red)
             {
                 return;
             }
@@ -157,7 +154,7 @@ namespace EDP_Clinic
                     byte[] hash2WithSalt = hashing.ComputeHash(Encoding.UTF8.GetBytes(pwd2WithSalt));
                     var finalHash2 = Convert.ToBase64String(hash2WithSalt);
                     client.UpdateOneUser(id, name, email, phoneNo, finalHash2);
-                    Response.Redirect("UserPage.aspx", false);
+                    Response.Redirect("~/UserPage.aspx", false);
                 }
                 else
                 {
@@ -194,7 +191,7 @@ namespace EDP_Clinic
                         }
                     }
                     client.UpdateOneUser(id, name, email, phoneNo, passInDB);
-                    Response.Redirect("UserPage.aspx", false);
+                    Response.Redirect("~/UserPage.aspx", false);
                 }
             }
         }

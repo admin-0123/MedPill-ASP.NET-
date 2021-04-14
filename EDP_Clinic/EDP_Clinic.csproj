@@ -296,7 +296,7 @@
     <Content Include="Services.aspx" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Code\EmailService.cs" />
+    <Compile Include="App_Code\EmailService.cs" />
     <Compile Include="CA.aspx.cs">
       <DependentUpon>CA.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

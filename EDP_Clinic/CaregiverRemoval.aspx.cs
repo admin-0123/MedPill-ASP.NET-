@@ -28,7 +28,7 @@ namespace EDP_Clinic
             var current_user_obj = svc_client.GetOneUserByEmail(Session["LoggedIn"].ToString());
 
             var removeResult = svc_client.RemoveCaregiver(current_user_obj.Id, selected_patient_obj.Id);
-            var removeResult2 = svc_client.RemoveCaretaker(current_user_obj.Id);
+            // var removeResult2 = svc_client.RemoveCaretaker(current_user_obj.Id);
 
             if (removeResult == 1)
             {

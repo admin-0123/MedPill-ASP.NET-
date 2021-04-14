@@ -1,4 +1,5 @@
-﻿using System;
+﻿using EDP_Clinic.EDP_DBReference;
+using System;
 using System.Drawing;
 using System.Globalization;
 using System.Web;
@@ -35,7 +36,7 @@ namespace EDP_Clinic
             culture = CultureInfo.CreateSpecificCulture("en-US");
             styles = DateTimeStyles.None;
 
-            EDP_DBReference.Service1Client client = new EDP_DBReference.Service1Client();
+            Service1Client client = new Service1Client();
             string id = "1";
             string patient = HttpUtility.HtmlEncode(tb_patient.Text.ToString());
             string med_condition = HttpUtility.HtmlEncode(tb_med_condition.Text.ToString());

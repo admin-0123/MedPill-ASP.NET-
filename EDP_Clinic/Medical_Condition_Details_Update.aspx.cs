@@ -12,18 +12,18 @@ namespace EDP_Clinic
             {
                 if (Session["LoggedIn"] == null)
                 {
-                    Response.Redirect("Login.aspx", false);
+                    Response.Redirect("~/Login.aspx", false);
                 }
                 else
                 {
                     if (Session["UserRole"].ToString() != "Doctor" && Session["UserRole"].ToString() != "Nurse")
                     {
-                        Response.Redirect("Home.aspx", false);
+                        Response.Redirect("~/Home.aspx", false);
                     }
                 }
                 string id = Request.QueryString["id"];
                 Medical_Condition eList = new Medical_Condition();
-                EDP_DBReference.Service1Client client = new EDP_DBReference.Service1Client();
+                Service1Client client = new Service1Client();
                 eList = client.GetMedicalConditionById(id);
                 patient.Text = eList.Name;
                 condition.Text = eList.Med_Condition;
@@ -54,9 +54,9 @@ namespace EDP_Clinic
             {
                 lb_error.Text = "Missing Inputs";
             }
-            EDP_DBReference.Service1Client client = new EDP_DBReference.Service1Client();
+            Service1Client client = new Service1Client();
             update = client.UpdateMedicalConditionById(id, Patient_Condition, Comments);
-            Response.Redirect("Patient_Medical_Condition.aspx");
+            Response.Redirect("~/Patient_Medical_Condition.aspx");
         }
     }
 }

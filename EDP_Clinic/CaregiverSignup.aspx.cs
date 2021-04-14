@@ -38,7 +38,6 @@ namespace EDP_Clinic
                 {
 
                 }
-
                 else
                 {
                     new_list.Add(i.Name);
@@ -58,7 +57,6 @@ namespace EDP_Clinic
             {
                 lbl_cgstatus.Text = "Not currently a caregiver";
             }
-
             else
             {
                 lbl_cgstatus.Text = "You currently a caregiver";

@@ -29,8 +29,11 @@ namespace EDP_Clinic
                 {
                     Response.Redirect("~/Home.aspx", false);
                 }
+                else
+                {
+                    refreshgrid();
+                }
             }
-            refreshgrid();
         }
         protected void EmployeeGridView_RowCommand1(object sender, GridViewCommandEventArgs e)
         {

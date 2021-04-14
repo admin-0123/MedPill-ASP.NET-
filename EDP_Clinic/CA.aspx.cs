@@ -79,7 +79,6 @@ namespace EDP_Clinic
                 }
                 */
             }
-
             else
             {
                 Response.Redirect("~/Home.aspx", false);
@@ -172,7 +171,6 @@ namespace EDP_Clinic
                     {
                         matching_appt_record = false;
                     }
-
                     else
                     {
                         openSlots.Add(dt);
@@ -210,7 +208,6 @@ namespace EDP_Clinic
                             //System.Diagnostics.Debug.WriteLine(Convert.ToDateTime(booked_appt.dateTime));
                             matching_appt_record = true;
                         }
-
                     }
                     // If match is found, skip and reset the check counter
                     if (matching_appt_record == true)

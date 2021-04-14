@@ -5,14 +5,12 @@ using System.Drawing;
 using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Web;
 
 namespace EDP_Clinic
 {
     public partial class EmployeePasswordSet : System.Web.UI.Page
     {
-        static string finalHash;
-        static string salt;
-
         protected void Page_Load(object sender, EventArgs e)
         {
             string code = Request.QueryString["value"];
@@ -26,8 +24,11 @@ namespace EDP_Clinic
 
         protected void Button1_Click(object sender, EventArgs e)
         {
-            string password = tbpassword.Text.ToString().Trim();
-            string password2 = tbpassword2.Text.ToString().Trim();
+            string finalHash;
+            string salt;
+
+            string password = HttpUtility.HtmlEncode(tbpassword.Text.ToString().Trim());
+            string password2 = HttpUtility.HtmlEncode(tbpassword2.Text.ToString().Trim());
             if (password == password2)
             {
                 var errors = passwordcheck(password);

@@ -13,7 +13,6 @@ namespace EDP_Clinic
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
-
             {
                 if (Session["LoggedIn"] == null)
                 {
@@ -28,7 +27,7 @@ namespace EDP_Clinic
                 }
                 string id = Request.QueryString["id"];
                 Details eList = new Details();
-                EDP_DBReference.Service1Client client = new EDP_DBReference.Service1Client();
+                Service1Client client = new Service1Client();
                 eList = client.GetDetailsById(id);
                 tb_name.Text = eList.Name;
                 tb_nric.Text = eList.Nric;
@@ -43,7 +42,7 @@ namespace EDP_Clinic
 
         protected void btn_back_click(object sender, EventArgs e)
         {
-            Response.Redirect("Patient_view_details.aspx");
+            Response.Redirect("~/Patient_view_details.aspx");
         }
 
         protected void btn_submit_click(object sender, EventArgs e)
@@ -93,9 +92,9 @@ namespace EDP_Clinic
             }
             else
             {
-                EDP_DBReference.Service1Client client = new EDP_DBReference.Service1Client();
+                Service1Client client = new Service1Client();
                 update = client.UpdateDetailsById(id, name, nric, dob, gender, phone, email, address, postal);
-                Response.Redirect("Patient_view_details.aspx");
+                Response.Redirect("~/Patient_view_details.aspx");
             }
 
 
@@ -114,6 +113,4 @@ namespace EDP_Clinic
             }
         }
     }
-
-
 }

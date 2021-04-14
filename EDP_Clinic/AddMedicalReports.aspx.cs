@@ -1,4 +1,5 @@
-﻿using System;
+﻿using EDP_Clinic.EDP_DBReference;
+using System;
 using System.Drawing;
 using System.Globalization;
 using System.Web;
@@ -54,7 +55,7 @@ namespace EDP_Clinic
             }
             else
             {
-                EDP_DBReference.Service1Client client = new EDP_DBReference.Service1Client();
+                Service1Client client = new Service1Client();
                 client.CreateReport(id, dname, pname, clinic, date, details);
                 //var url = "Create Report.aspx?dname=" + dname + "&pname=" + pname + "&clinic= "+clinic+"&date="+date+"&details=" + details;
 
