@@ -1,4 +1,5 @@
-﻿using EDP_Clinic.EDP_DBReference;
+﻿using EDP_Clinic.App_Code;
+using EDP_Clinic.EDP_DBReference;
 using System;
 using System.Diagnostics;
 using System.Drawing;
@@ -30,50 +31,27 @@ namespace EDP_Clinic
                 return;
             }
             string code;
-            var existingcode = client.CheckCodeByEmail(email);
+            string existingcode = client.CheckCodeByEmail(email);
             Debug.WriteLine(existingcode);
             if (existingcode == "error")
             {
-                code = makeCode();
+                code = Guid.NewGuid().ToString();
                 client.AddCode(email, code);
             }
             else
             {
                 code = existingcode;
             }
+
+            string subjectHeader = "Reset Password (MedPill)";
             string link = "https://localhost:44310/ChangePassword.aspx?value=" + code;
-            SmtpClient emailClient = new SmtpClient("smtp-relay.sendinblue.com", 587)
-            {
-                Credentials = new NetworkCredential("bryanchinzw@gmail.com", "vPDBKArZRY7HcIJC"),
-                DeliveryMethod = SmtpDeliveryMethod.Network,
-                EnableSsl = true
-            };
-            MailMessage mail = new MailMessage
-            {
-                Subject = "Reset Password (MedPill)",
-                SubjectEncoding = Encoding.UTF8,
-                Body = "Please Click link to change password <br>" + link,
-                IsBodyHtml = true,
-                Priority = MailPriority.High,
-                From = new MailAddress("bryanchinzw@gmail.com")
-            };
-            mail.To.Add(new MailAddress(email));
-            emailClient.Send(mail);
+            string message = "Please Click link to change password <br>" + link;
+
+            EmailService emailService = new EmailService();
+            emailService.SendEmail(email, subjectHeader, message);
+
             ScriptManager.RegisterStartupScript(this, this.GetType(), "Redit", "alert('A link to reset your password has been sent to your email'); window.location='" + Request.ApplicationPath + "Login.aspx';", true);
             Context.ApplicationInstance.CompleteRequest();
-        }
-        // Replace this with guid
-        public string makeCode()
-        {
-            var exist = 1;
-            string r = "yes";
-            while (exist == 1)
-            {
-                Random generator = new Random();
-                r = generator.Next(0, 1000000).ToString("D6");
-                exist = client.CheckCodeExist(r);
-            }
-            return r;
         }
     }
 }
