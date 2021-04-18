@@ -6,7 +6,10 @@ namespace EDP_Clinic
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            if (Session["LoggedIn"] == null)
+            {
+                Response.Redirect("~/Login.aspx", false);
+            }
         }
 
         protected void btn_report_Click(object sender, EventArgs e)

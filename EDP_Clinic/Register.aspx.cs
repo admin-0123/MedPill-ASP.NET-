@@ -15,7 +15,6 @@ namespace EDP_Clinic
 {
     public partial class Register : System.Web.UI.Page
     {
-        readonly Service1Client client = new Service1Client();
         protected void Page_Load(object sender, EventArgs e)
         {
 
@@ -43,6 +42,8 @@ namespace EDP_Clinic
             else
             {
                 var errors = passwordcheck(password);
+
+                Service1Client client = new Service1Client();
 
                 var emailexist = client.CheckOneUser(email);
                 Debug.WriteLine(emailexist);
@@ -86,39 +87,16 @@ namespace EDP_Clinic
                 }
                 else
                 {
-                    var code = MakeCode();
-                    var codeExist = client.CheckCodeExist(code);
-                    while (codeExist == 1)
-                    {
-                        code = MakeCode();
-                        codeExist = client.CheckCodeExist(code);
-                    }
+                    //  Use GUID as it is more random
+                    string code = Guid.NewGuid().ToString();//MakeCode();
                     client.AddCode(email, code);
-                    string link = "https://localhost:44310/Verify.aspx?value=" + code;
+
                     string subjectHeader = "Verify Account (MedPill)";
-                    string message = "";
-                    // Will shift these email codes to EmailService Class
+                    string link = "https://localhost:44310/Verify.aspx?value=" + code;
+                    string message = "Please to verify account <br> <a>" + link + "</a>";
 
                     EmailService emailService = new EmailService();
-                    emailService.SendEmail(email, link, subjectHeader, message);
-
-                    //SmtpClient emailClient = new SmtpClient("smtp-relay.sendinblue.com", 587)
-                    //{
-                    //    Credentials = new NetworkCredential("bryanchinzw@gmail.com", "vPDBKArZRY7HcIJC"),
-                    //    DeliveryMethod = SmtpDeliveryMethod.Network,
-                    //    EnableSsl = true
-                    //};
-                    //MailMessage mail = new MailMessage
-                    //{
-                    //    Subject = "Verify Account (MedPill)",
-                    //    SubjectEncoding = Encoding.UTF8,
-                    //    Body = "Please to verify account <br> <a>" + link + "</a>",
-                    //    IsBodyHtml = true,
-                    //    Priority = MailPriority.High,
-                    //    From = new MailAddress("bryanchinzw@gmail.com")
-                    //};
-                    //mail.To.Add(new MailAddress(email));
-                    //emailClient.Send(mail);
+                    emailService.SendEmail(email, subjectHeader, message);
                 }
                 ScriptManager.RegisterStartupScript(this, this.GetType(),
                     "Redit", "alert('Please check email to verify account'); window.location='" + 
@@ -238,20 +216,6 @@ namespace EDP_Clinic
             {
                 return true;
             }
-        }
-        // Replace the code below with guid
-
-        public string MakeCode()
-        {
-            var exist = 1;
-            string r = "yes";
-            while (exist == 1)
-            {
-                Random generator = new Random();
-                r = generator.Next(0, 1000000).ToString("D6");
-                exist = client.CheckCodeExist(r);
-            }
-            return r;
         }
     }
 }

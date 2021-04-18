@@ -235,14 +235,19 @@ namespace EDP_Clinic
                     var service = new PaymentIntentService();
                     var resultPayment = service.Create(options);
                     var paymentIntentID = resultPayment.Id;
-                    var emailLink = resultPayment.ReceiptEmail;
+                    var receipientEmail = resultPayment.ReceiptEmail;
                     var resultConfirmPayment = service.Confirm(paymentIntentID);
                     Debug.WriteLine(resultConfirmPayment);
                     Debug.WriteLine("+++++++++++++++++++++++++++++++++");
                     var receiptLink = resultConfirmPayment.Charges.Data[0].ReceiptUrl;
                     Debug.WriteLine(receiptLink);
                     Debug.WriteLine(resultConfirmPayment);
-                    SendEmail(receiptLink, emailLink);
+
+                    string subjectHeader = "Payment Receipt";
+                    string message = "This is your receipt. Click on the link below to view it. <br>" + receiptLink;
+
+                    EmailService emailService = new EmailService();
+                    emailService.SendEmail(receipientEmail, subjectHeader, message);
 
 
                     string userID = Session["LoggedIn"].ToString().Trim();
@@ -253,40 +258,8 @@ namespace EDP_Clinic
 
                     int result = client.CreateReceipt(userID, dateSale, 200, true, receiptLink, guid);
 
-                    //Add if else for create receipt
-
                     TwilioSMS();
-
-                    //var service = new PaymentIntentService();
-                    //var paymentIntent = service.Create(options);
-                    //Debug.WriteLine(paymentIntent);
-
-                    //var service = new PaymentMethodService();
-                    //service.Create(options);
-
-                    //var options = new SessionCreateOptions
-                    //{
-                    //    SuccessUrl = "https://localhost:44310/Home.aspx",
-                    //    CancelUrl = "https://example.com/cancel",
-                    //    PaymentMethodTypes = new List<string>
-                    //  {
-                    //    "card",
-                    //  },
-                    //    LineItems = new List<SessionLineItemOptions>
-                    //  {
-                    //    new SessionLineItemOptions
-                    //    {
-                    //      Price = "price_1IFcWdAVRV4JC5fkywjZt6Tf",
-                    //      Quantity = 1,
-                    //    },
-                    //  },
-                    //    Mode = "payment",
-                    //};
-                    //var service = new SessionService();
-                    //service.Create(options);
-
-                    //Debug.WriteLine(service);
-                    Response.Redirect("AfterPayment.aspx", false);
+                    Response.Redirect("~/AfterPayment.aspx", false);
                 }
                 catch (StripeException ex)
                 {
@@ -401,13 +374,21 @@ namespace EDP_Clinic
                     var service = new PaymentIntentService();
                     var resultPayment = service.Create(options);
                     var paymentIntentID = resultPayment.Id;
-                    var emailLink = resultPayment.ReceiptEmail;
+                    var receipientEmail = resultPayment.ReceiptEmail;
                     //Debug.WriteLine(emailLink);
+
                     var resultConfirmPayment = service.Confirm(paymentIntentID);
                     var receiptLink = resultConfirmPayment.Charges.Data[0].ReceiptUrl;
+
                     Debug.WriteLine(receiptLink);
                     Debug.WriteLine(resultConfirmPayment);
-                    SendEmail(receiptLink, emailLink);
+                    // SendEmail(receiptLink, receipientEmail);
+
+                    string subjectHeader = "Payment Receipt";
+                    string message = "This is your receipt. Click on the link below to view it. <br>" + receiptLink;
+
+                    EmailService emailService = new EmailService();
+                    emailService.SendEmail(receipientEmail, subjectHeader, message);
 
                     DateTime dateSale = DateTime.Now;
                     string guid = Guid.NewGuid().ToString();
@@ -415,7 +396,7 @@ namespace EDP_Clinic
                     int result = client.CreateReceipt(userID, dateSale, 200, true, receiptLink, guid);
 
                     //TwilioSMS();
-                    Response.Redirect("AfterPayment.aspx", false);
+                    Response.Redirect("~/AfterPayment.aspx", false);
                 }
                 catch (StripeException ex)
                 {
@@ -454,30 +435,6 @@ namespace EDP_Clinic
                     //throw new Exception(ex.ToString());
                 }
             }
-        }
-
-        //Send email function
-        protected void SendEmail(string receiptLink, string emailLink)
-        {
-            SmtpClient emailClient = new SmtpClient("smtp-relay.sendinblue.com", 587)
-            {
-                Credentials = new NetworkCredential("bryanchinzw@gmail.com", "vPDBKArZRY7HcIJC"),
-                DeliveryMethod = SmtpDeliveryMethod.Network,
-                EnableSsl = true
-            };
-
-            MailMessage mail = new MailMessage
-            {
-                Subject = "Payment Receipt",
-                SubjectEncoding = Encoding.UTF8,
-                Body = "This is your receipt. Click on the link below to view it. <br>" + receiptLink,
-                IsBodyHtml = true,
-                Priority = MailPriority.High,
-
-                From = new MailAddress("bryanchinzw@gmail.com")
-            };
-            mail.To.Add(new MailAddress(emailLink));
-            emailClient.Send(mail);
         }
 
         protected void TwilioSMS()

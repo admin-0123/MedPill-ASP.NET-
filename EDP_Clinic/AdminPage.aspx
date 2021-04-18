@@ -193,10 +193,12 @@
                     <div class="form-group">
                         <label class="form-label">Name</label>
                         <asp:TextBox ID="tbAddName" runat="server" CssClass="form-control"></asp:TextBox>
+                        <asp:Label ID="addNameErrMsg" runat="server"></asp:Label>
                     </div>
                     <div class="form-group">
                         <label class="form-label">Email</label>
                         <asp:TextBox ID="tbAddEmail" runat="server" CssClass="form-control" TextMode="Email" placeholder="someone@example.com"></asp:TextBox>
+                        <asp:Label ID="addEmailErrMsg" runat="server"></asp:Label>
                     </div>
                     <div class="form-group">
                         <label class="form-label">Role</label>
@@ -214,7 +216,7 @@
                 </div>
                 <div class="modal-footer">
                     <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
-                    <asp:Button ID="Button1" runat="server" Text="Add" class="btn btn-info" OnClick="Button1_Click" />
+                    <asp:Button ID="AddBtn" runat="server" Text="Add" class="btn btn-info" OnClick="AddBtn_Click" />
                 </div>
             </div>
         </div>
@@ -231,10 +233,12 @@
                     <div class="form-group">
                         <label class="form-label">Name</label>
                         <asp:TextBox ID="tbEditName" runat="server" CssClass="form-control"></asp:TextBox>
+                        <asp:Label ID="editNameErrMsg" runat="server"></asp:Label>
                     </div>
                     <div class="form-group">
                         <label class="form-label">Email</label>
                         <asp:TextBox ID="tbEditEmail" runat="server" CssClass="form-control" TextMode="Email"></asp:TextBox>
+                        <asp:Label ID="editEmailErrMsg" runat="server"></asp:Label>
                     </div>
                     <div class="form-group">
                         <label class="form-label">Role</label>

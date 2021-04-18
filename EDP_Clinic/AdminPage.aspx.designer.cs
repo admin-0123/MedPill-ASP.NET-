@@ -78,6 +78,15 @@ namespace EDP_Clinic
         protected global::System.Web.UI.WebControls.TextBox tbAddName;
 
         /// <summary>
+        /// addNameErrMsg control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label addNameErrMsg;
+
+        /// <summary>
         /// tbAddEmail control.
         /// </summary>
         /// <remarks>
@@ -85,6 +94,15 @@ namespace EDP_Clinic
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox tbAddEmail;
+
+        /// <summary>
+        /// addEmailErrMsg control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label addEmailErrMsg;
 
         /// <summary>
         /// AddRole control.
@@ -114,13 +132,13 @@ namespace EDP_Clinic
         protected global::System.Web.UI.WebControls.Label addError;
 
         /// <summary>
-        /// Button1 control.
+        /// AddBtn control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button Button1;
+        protected global::System.Web.UI.WebControls.Button AddBtn;
 
         /// <summary>
         /// tbEditName control.
@@ -132,6 +150,15 @@ namespace EDP_Clinic
         protected global::System.Web.UI.WebControls.TextBox tbEditName;
 
         /// <summary>
+        /// editNameErrMsg control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label editNameErrMsg;
+
+        /// <summary>
         /// tbEditEmail control.
         /// </summary>
         /// <remarks>
@@ -139,6 +166,15 @@ namespace EDP_Clinic
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox tbEditEmail;
+
+        /// <summary>
+        /// editEmailErrMsg control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label editEmailErrMsg;
 
         /// <summary>
         /// EditRole control.

@@ -1,11 +1,14 @@
-﻿using EDP_Clinic.EDP_DBReference;
+﻿using EDP_Clinic.App_Code;
+using EDP_Clinic.EDP_DBReference;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
+using System.Net;
 using System.Net.Mail;
 using System.Security.Cryptography;
+using System.Text;
 using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.UI;
@@ -65,6 +68,15 @@ namespace EDP_Clinic
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "ok", "openDeleteModal();", true);
             }
         }
+        protected void SearchBtn_Click(object sender, EventArgs e)
+        {
+            string search = HttpUtility.HtmlEncode(searchtb.Text.Trim());
+            List<displayUser> patientList = client.ShowSearchedEmployees(search).ToList<displayUser>();
+
+            EmployeeGridView.Visible = true;
+            EmployeeGridView.DataSource = patientList;
+            EmployeeGridView.DataBind();
+        }
         protected void delBtn_Click(object sender, EventArgs e)
         {
             var id = delLbl.Text;
@@ -94,18 +106,23 @@ namespace EDP_Clinic
             string mobile = HttpUtility.HtmlEncode(tbEditMobile.Text.Trim());
             string id = HttpUtility.HtmlEncode(editLbl.Text.Trim());
             // var user = client.GetOneUserByEmail(email);
-            if (name == "")
+
+            if (String.IsNullOrEmpty(name))
             {
-                editError.Text = "Enter name";
-                editError.ForeColor = Color.Red;
-                editError.Visible = true;
+                editNameErrMsg.Text = "Please enter staff name";
+                editNameErrMsg.ForeColor = Color.Red;
                 return;
             }
-            if (!IsValidEmail(email))
+            if (String.IsNullOrEmpty(email))
             {
-                editError.Text = "Enter proper email";
-                editError.ForeColor = Color.Red;
-                editError.Visible = true;
+                editEmailErrMsg.Text = "Please enter staff email";
+                editEmailErrMsg.ForeColor = Color.Red;
+                return;
+            }
+            else if (!IsValidEmail(email))
+            {
+                editEmailErrMsg.Text = "Please enter a valid email";
+                editEmailErrMsg.ForeColor = Color.Red;
                 return;
             }
             else
@@ -113,9 +130,9 @@ namespace EDP_Clinic
                 var exist = client.CheckOneUser(email);
                 if (exist == 1)
                 {
-                    editError.Text = "Email already in use";
-                    editError.ForeColor = Color.Red;
-                    editError.Visible = true;
+                    editEmailErrMsg.Text = "Email is already in use";
+                    editEmailErrMsg.ForeColor = Color.Red;
+                    return;
                 }
             }
             if (!Regex.IsMatch(mobile, @"\d{8}"))
@@ -155,22 +172,12 @@ namespace EDP_Clinic
             ScriptManager.RegisterStartupScript(this, this.GetType(), "Yes", "closeEditModal();", true);
 
         }
-        protected void SearchBtn_Click(object sender, EventArgs e)
-        {
-            string search = HttpUtility.HtmlEncode(searchtb.Text.Trim());
-            // List<User> userlist = new List<User>();
-            // patientList = client.ShowAllPatients().ToList<displayUser>();
-            List<displayUser> patientList = client.ShowSearchedEmployees(search).ToList<displayUser>();
-            EmployeeGridView.Visible = true;
-            EmployeeGridView.DataSource = patientList;
-            EmployeeGridView.DataBind();
 
-        }
         protected void RefreshBtn_Click(object sender, EventArgs e)
         {
             refreshgrid();
         }
-        protected void Button1_Click(object sender, EventArgs e)
+        protected void AddBtn_Click(object sender, EventArgs e)
         {
             string email = tbAddEmail.Text;
             string name = tbAddName.Text;
@@ -218,33 +225,16 @@ namespace EDP_Clinic
                         tbAddEmail.Text = "";
                         tbAddName.Text = "";
                         tbAddMobile.Text = "";
-                        string code = makeCode();
+
+                        string code = Guid.NewGuid().ToString();
                         client.AddCode(email, code);
+
+                        string subjectHeader = "Set Password (MedPill)";
                         string link = "https://localhost:44310/EmployeePasswordSet.aspx?value=" + code;
-                        SmtpClient emailClient = new SmtpClient("smtp-relay.sendinblue.com", 587)
-                        {
-                            Credentials = new System.Net.NetworkCredential("bryanchinzw@gmail.com", "vPDBKArZRY7HcIJC"),
-                            DeliveryMethod = SmtpDeliveryMethod.Network,
-                            EnableSsl = true
-                        };
-                        MailMessage mail = new MailMessage
-                        {
-                            Subject = "Set Password (MedPill)",
-                            SubjectEncoding = System.Text.Encoding.UTF8,
-                            Body = "Please Click link to change password <br> <a>" + link + "</a>",
-                            IsBodyHtml = true,
-                            Priority = MailPriority.High,
-                            From = new MailAddress("bryanchinzw@gmail.com")
-                        };
-                        mail.To.Add(new MailAddress(email));
-                        try
-                        {
-                            emailClient.Send(mail);
-                        }
-                        catch (SmtpFailedRecipientException ex)
-                        {
-                            Debug.WriteLine(ex);
-                        }
+                        string message = "Please Click link to change password <br> <a>" + link + "</a>";
+
+                        EmailService emailService = new EmailService();
+                        emailService.SendEmail(email, subjectHeader, message);
                     }
                 }
             }
@@ -270,18 +260,6 @@ namespace EDP_Clinic
             EmployeeGridView.Visible = true;
             EmployeeGridView.DataSource = patientList;
             EmployeeGridView.DataBind();
-        }
-        public string makeCode()
-        {
-            var exist = 1;
-            string r = "yes";
-            while (exist == 1)
-            {
-                Random generator = new Random();
-                r = generator.Next(0, 1000000).ToString("D6");
-                exist = client.CheckCodeExist(r);
-            }
-            return r;
         }
     }
 }

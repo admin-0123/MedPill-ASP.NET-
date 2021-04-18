@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Net;
 using System.Net.Mail;
@@ -20,7 +21,7 @@ namespace EDP_Clinic.App_Code
 
         }
 
-        public void SendEmail(string email, string url, string subjectHeader, string message)
+        public void SendEmail(string receipientEmail, string subjectHeader, string message)
         {
             SmtpClient emailClient = new SmtpClient("smtp-relay.sendinblue.com", 587)
             {
@@ -30,15 +31,26 @@ namespace EDP_Clinic.App_Code
             };
             MailMessage mail = new MailMessage
             {
-                Subject = "Verify Account (MedPill)",
+                Subject = subjectHeader,
                 SubjectEncoding = Encoding.UTF8,
-                Body = "Please to verify account <br> <a>" + url + "</a>",
+                Body = message,
                 IsBodyHtml = true,
                 Priority = MailPriority.High,
                 From = new MailAddress("bryanchinzw@gmail.com")
             };
-            mail.To.Add(new MailAddress(email));
-            emailClient.Send(mail);
+            mail.To.Add(new MailAddress(receipientEmail));
+            try
+            {
+                emailClient.Send(mail);
+            }
+            catch (SmtpFailedRecipientException ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                Debug.WriteLine("Email Service is called!");
+            }
         }
     }
 }

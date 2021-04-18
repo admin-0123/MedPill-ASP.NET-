@@ -45,7 +45,7 @@
                         </div>
                         <div class="row">
                             <div class="col-md-10">
-                                <asp:FileUpload ID="imgUpload" runat="server" Width="300px" CssClass="form-control" />
+                                <asp:FileUpload ID="imgUpload" runat="server" Width="300px" CssClass="form-control" ViewStateMode="Inherit" />
                             </div>
                             <div class="col-md-2">
                                 <input type="hidden" id="g-recaptcha-response" name="g-recaptcha-response" />

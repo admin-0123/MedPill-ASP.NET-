@@ -26,7 +26,7 @@ namespace EDP_Clinic
             HttpPostedFile postedFile = imgUpload.PostedFile;
             string filename = Path.GetFileName(postedFile.FileName);
             // var redColor = Color.Red;
-            var user = client.GetOneUserByEmail(Session["LoggedIn"].ToString());
+            User user = client.GetOneUserByEmail(Session["LoggedIn"].ToString());
             string name = HttpUtility.HtmlEncode(nameTB.Text.Trim());
             string email = HttpUtility.HtmlEncode(emailTB.Text.Trim());
             string phoneNo = HttpUtility.HtmlEncode(phoneTB.Text.Trim());

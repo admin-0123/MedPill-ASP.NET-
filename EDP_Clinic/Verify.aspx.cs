@@ -10,7 +10,7 @@ namespace EDP_Clinic
         {
             Service1Client client = new Service1Client();
 
-            var code = Request.QueryString["value"];
+            string code = Request.QueryString["value"];
             Debug.WriteLine(code);
             var email = client.GetEmailbyCode(code);
             client.VerifyOneUser(email);
