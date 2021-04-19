@@ -15,7 +15,7 @@ namespace EDP_Clinic
             {
                 if (!Session["authOTPVToken"].ToString().Equals(Request.Cookies["authOTPVToken"].Value))
                 {
-                    Response.Redirect("CardList.aspx", false);
+                    Response.Redirect("~/CardList.aspx", false);
                 }
                 else
                 {
@@ -40,7 +40,7 @@ namespace EDP_Clinic
                     //Discover Card
                     else if (cardStartNum == "6")
                     {
-                        //
+
                     }
                     else
                     {
@@ -77,7 +77,7 @@ namespace EDP_Clinic
             }
             else
             {
-                Response.Redirect("CardList.aspx", false);
+                Response.Redirect("~/CardList.aspx", false);
             }
         }
 
@@ -90,7 +90,7 @@ namespace EDP_Clinic
             Response.Cookies["authOTPVToken"].Value = string.Empty;
             Response.Cookies["authOTPVToken"].Expires = DateTime.Now.AddMonths(-20);
 
-            Response.Redirect("CardList.aspx", false);
+            Response.Redirect("~/CardList.aspx", false);
         }
 
         protected void deleteBtn_Click(object sender, EventArgs e)
@@ -108,7 +108,7 @@ namespace EDP_Clinic
             Service1Client client = new Service1Client();
 
             Response.Cookies.Add(new HttpCookie("deleteCardInfo", guid));
-            Response.Redirect("Authentication.aspx", false);
+            Response.Redirect("~/Authentication.aspx", false);
         }
     }
 }

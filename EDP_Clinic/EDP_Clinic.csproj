@@ -126,6 +126,8 @@
   <ItemGroup>
     <Content Include="assets\images\pfp_placeholder.png" />
     <Content Include="assets\images\medical_certificate.jpg" />
+    <Content Include="assets\js\main.js" />
+    <Content Include="assets\js\modals.js" />
     <Content Include="CA.aspx" />
     <Content Include="CA_admin.aspx" />
     <Content Include="CA_Success.aspx" />
@@ -152,7 +154,6 @@
     <Content Include="App_Data\EDP_DB_log.ldf">
       <DependentUpon>EDP_DB.mdf</DependentUpon>
     </Content>
-    <Content Include="assets\css\main.css" />
     <Content Include="assets\css\style-starter.css" />
     <Content Include="assets\css\style.css" />
     <Content Include="assets\fonts\fontawesome-webfont.svg" />
@@ -295,6 +296,7 @@
     <Content Include="Services.aspx" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App_Code\EmailService.cs" />
     <Compile Include="CA.aspx.cs">
       <DependentUpon>CA.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -358,6 +360,7 @@
     <Compile Include="RA_Success_admin.aspx.designer.cs">
       <DependentUpon>RA_Success_admin.aspx</DependentUpon>
     </Compile>
+    <Compile Include="App_Code\RecaptchaValidation.cs" />
     <Compile Include="ReceptAppts.aspx.cs">
       <DependentUpon>ReceptAppts.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

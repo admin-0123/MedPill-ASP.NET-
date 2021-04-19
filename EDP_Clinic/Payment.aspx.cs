@@ -1,3 +1,4 @@
+using EDP_Clinic.App_Code;
 using EDP_Clinic.EDP_DBReference;
 using Stripe;
 using System;
@@ -6,14 +7,12 @@ using System.Collections.Specialized;
 using System.Configuration;
 using System.Diagnostics;
 using System.Drawing;
-using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Mail;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Web;
-using System.Web.Script.Serialization;
 using System.Web.UI.WebControls;
 using Twilio;
 using Twilio.Rest.Api.V2010.Account;
@@ -179,17 +178,15 @@ namespace EDP_Clinic
 
         protected void submitBtn_Click(object sender, EventArgs e)
         {
+            RecaptchaValidation validCaptcha = new RecaptchaValidation();
+            string captchaResponse = Request.Form["g-recaptcha-response"];
+
             bool validInput = ValidateInput();
 
-            bool validCaptcha = ValidateCaptcha();
+            bool captchaResult = validCaptcha.ValidateCaptcha(captchaResponse);
 
-            //HttpClient client = new HttpClient();
-
-            //client.BaseAddress = new Uri("https://localhost:44310/");
-
-            if (validInput == true && validCaptcha == true)
+            if (validInput == true && captchaResult == true)
             {
-
                 string cardNumber = HttpUtility.HtmlEncode(cardNumberTB.Text.Trim());
 
                 // string cardName = HttpUtility.HtmlEncode(nameOnCardTB.Text.Trim());
@@ -201,8 +198,6 @@ namespace EDP_Clinic
 
                 Debug.WriteLine(cardExpiry.Substring(0, 4));
                 Debug.WriteLine(cardExpiry.Substring(5, 2));
-
-                //Consolidate Stripe Payment API by 3/2/2021
 
                 //Testing Stripe
                 StripeConfiguration.ApiKey = "sk_test_51HveuKAVRV4JC5fkn1zDUAxrUGZgetyR05RVCIGpNFFAlZczY6xwAQtn60BO1stWGXHJJJOh1DZQozuL4RtJSW4700ONZrgRzD";
@@ -227,7 +222,6 @@ namespace EDP_Clinic
                     var options = new PaymentIntentCreateOptions
                     {
                         //We will change the total amount charged here
-
                         Amount = 20000,
                         Currency = "sgd",
                         PaymentMethodTypes = new List<string>
@@ -241,14 +235,19 @@ namespace EDP_Clinic
                     var service = new PaymentIntentService();
                     var resultPayment = service.Create(options);
                     var paymentIntentID = resultPayment.Id;
-                    var emailLink = resultPayment.ReceiptEmail;
+                    var receipientEmail = resultPayment.ReceiptEmail;
                     var resultConfirmPayment = service.Confirm(paymentIntentID);
                     Debug.WriteLine(resultConfirmPayment);
                     Debug.WriteLine("+++++++++++++++++++++++++++++++++");
                     var receiptLink = resultConfirmPayment.Charges.Data[0].ReceiptUrl;
                     Debug.WriteLine(receiptLink);
                     Debug.WriteLine(resultConfirmPayment);
-                    SendEmail(receiptLink, emailLink);
+
+                    string subjectHeader = "Payment Receipt";
+                    string message = "This is your receipt. Click on the link below to view it. <br>" + receiptLink;
+
+                    EmailService emailService = new EmailService();
+                    emailService.SendEmail(receipientEmail, subjectHeader, message);
 
 
                     string userID = Session["LoggedIn"].ToString().Trim();
@@ -259,40 +258,8 @@ namespace EDP_Clinic
 
                     int result = client.CreateReceipt(userID, dateSale, 200, true, receiptLink, guid);
 
-                    //Add if else for create receipt
-
                     TwilioSMS();
-
-                    //var service = new PaymentIntentService();
-                    //var paymentIntent = service.Create(options);
-                    //Debug.WriteLine(paymentIntent);
-
-                    //var service = new PaymentMethodService();
-                    //service.Create(options);
-
-                    //var options = new SessionCreateOptions
-                    //{
-                    //    SuccessUrl = "https://localhost:44310/Home.aspx",
-                    //    CancelUrl = "https://example.com/cancel",
-                    //    PaymentMethodTypes = new List<string>
-                    //  {
-                    //    "card",
-                    //  },
-                    //    LineItems = new List<SessionLineItemOptions>
-                    //  {
-                    //    new SessionLineItemOptions
-                    //    {
-                    //      Price = "price_1IFcWdAVRV4JC5fkywjZt6Tf",
-                    //      Quantity = 1,
-                    //    },
-                    //  },
-                    //    Mode = "payment",
-                    //};
-                    //var service = new SessionService();
-                    //service.Create(options);
-
-                    //Debug.WriteLine(service);
-                    Response.Redirect("AfterPayment.aspx", false);
+                    Response.Redirect("~/AfterPayment.aspx", false);
                 }
                 catch (StripeException ex)
                 {
@@ -342,52 +309,9 @@ namespace EDP_Clinic
             }
         }
 
-        //Initialise an object to store Recaptcha response
-        public class ReCaptchaResponseObject
-        {
-            public string Success { get; set; }
-            public List<string> ErrorMessage { get; set; }
-        }
-
-        public bool ValidateCaptcha()
-        {
-            bool result = true;
-
-            //Retrieves captcha response from captcha api
-            string captchaResponse = Request.Form["g-recaptcha-response"];
-
-            HttpWebRequest req = (HttpWebRequest)WebRequest.Create("https://www.google.com/recaptcha/api/siteverify?secret=6LejmBwaAAAAAN_gzUf_AT0q_3ZrPbD5WP5oaTml &response=" + captchaResponse);
-
-            try
-            {
-                using (WebResponse wResponse = req.GetResponse())
-                {
-                    using (StreamReader readStream = new StreamReader(wResponse.GetResponseStream()))
-                    {
-                        //Read entire json response from recaptcha
-                        string jsonResponse = readStream.ReadToEnd();
-
-                        JavaScriptSerializer js = new JavaScriptSerializer();
-
-                        ReCaptchaResponseObject jsonObject = js.Deserialize<ReCaptchaResponseObject>(jsonResponse);
-
-                        //Console.WriteLine("--- Testing ---");
-                        //Console.WriteLine(jsonObject);
-                        //Read success property in json object
-                        result = Convert.ToBoolean(jsonObject.Success);
-                    }
-                }
-                return result;
-            }
-            catch (WebException)
-            {
-                throw;
-            }
-        }
-
         protected void backBtn_Click(object sender, EventArgs e)
         {
-            Response.Redirect("PRFA2.aspx", false);
+            Response.Redirect("~/PRFA2.aspx", false);
         }
 
         protected void cardListView_ItemCommand(object sender, ListViewCommandEventArgs e)
@@ -450,13 +374,21 @@ namespace EDP_Clinic
                     var service = new PaymentIntentService();
                     var resultPayment = service.Create(options);
                     var paymentIntentID = resultPayment.Id;
-                    var emailLink = resultPayment.ReceiptEmail;
+                    var receipientEmail = resultPayment.ReceiptEmail;
                     //Debug.WriteLine(emailLink);
+
                     var resultConfirmPayment = service.Confirm(paymentIntentID);
                     var receiptLink = resultConfirmPayment.Charges.Data[0].ReceiptUrl;
+
                     Debug.WriteLine(receiptLink);
                     Debug.WriteLine(resultConfirmPayment);
-                    SendEmail(receiptLink, emailLink);
+                    // SendEmail(receiptLink, receipientEmail);
+
+                    string subjectHeader = "Payment Receipt";
+                    string message = "This is your receipt. Click on the link below to view it. <br>" + receiptLink;
+
+                    EmailService emailService = new EmailService();
+                    emailService.SendEmail(receipientEmail, subjectHeader, message);
 
                     DateTime dateSale = DateTime.Now;
                     string guid = Guid.NewGuid().ToString();
@@ -464,7 +396,7 @@ namespace EDP_Clinic
                     int result = client.CreateReceipt(userID, dateSale, 200, true, receiptLink, guid);
 
                     //TwilioSMS();
-                    Response.Redirect("AfterPayment.aspx", false);
+                    Response.Redirect("~/AfterPayment.aspx", false);
                 }
                 catch (StripeException ex)
                 {
@@ -503,30 +435,6 @@ namespace EDP_Clinic
                     //throw new Exception(ex.ToString());
                 }
             }
-        }
-
-        //Send email function
-        protected void SendEmail(string receiptLink, string emailLink)
-        {
-            SmtpClient emailClient = new SmtpClient("smtp-relay.sendinblue.com", 587)
-            {
-                Credentials = new NetworkCredential("bryanchinzw@gmail.com", "vPDBKArZRY7HcIJC"),
-                DeliveryMethod = SmtpDeliveryMethod.Network,
-                EnableSsl = true
-            };
-
-            MailMessage mail = new MailMessage
-            {
-                Subject = "Payment Receipt",
-                SubjectEncoding = Encoding.UTF8,
-                Body = "This is your receipt. Click on the link below to view it. <br>" + receiptLink,
-                IsBodyHtml = true,
-                Priority = MailPriority.High,
-
-                From = new MailAddress("bryanchinzw@gmail.com")
-            };
-            mail.To.Add(new MailAddress(emailLink));
-            emailClient.Send(mail);
         }
 
         protected void TwilioSMS()

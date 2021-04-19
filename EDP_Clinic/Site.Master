@@ -26,6 +26,19 @@ Author URL: http://w3layouts.com
     <!--- Google Recaptcha --->
     <script src="https://www.google.com/recaptcha/api.js?render=6LejmBwaAAAAAIDSwI7BQzo5s3UO3qDlAztog9Uh"></script>
 
+    <!--- JQuery 3.5.1 --->
+    <script src="assets/js/jquery-3.5.1.min.js"></script>
+
+    <script src="../assets/js/main.js"></script>
+
+<%-- If you want to disable the recaptcha badge
+    https://developers.google.com/recaptcha/docs/faq#id-like-to-hide-the-recaptcha-badge.-what-is-allowed
+    <style>
+        .grecaptcha-badge {
+            visibility: hidden;
+        }
+    </style>--%>
+
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
 </head>
@@ -166,14 +179,13 @@ Author URL: http://w3layouts.com
                 </div>
             </div>
         </footer>
+        <!-- move top -->
+        <button onclick="topFunction()" id="movetop" title="Go to top" style="visibility:hidden;">
+            <i class="fas fa-arrow-up"></i>
+        </button>
     </section>
 
-    <!-- move top -->
-    <!---
-    <button onclick="topFunction()" id="movetop" title="Go to top">
-      &#10548;
-    </button>--->
-    <%--<script>
+    <script>
         // When the user scrolls down 20px from the top of the document, show the button
         window.onscroll = function () {
             scrollFunction()
@@ -192,10 +204,8 @@ Author URL: http://w3layouts.com
             document.body.scrollTop = 0;
             document.documentElement.scrollTop = 0;
         }
-    </script>--%>
+    </script>
     <!-- /move top -->
-
-    <script type="text/javascript" src="assets/js/jquery-3.5.1.min.js"></script>
 
     <script src="assets/js/owl.carousel.js"></script>
     <!-- script for banner slider-->
@@ -243,6 +253,5 @@ Author URL: http://w3layouts.com
     </script>
     <!-- disable body scroll which navbar is in active -->
 
-    <script src="assets/js/bootstrap.min.js"></script>
 </body>
 </html>

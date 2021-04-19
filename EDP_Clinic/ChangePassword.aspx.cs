@@ -5,13 +5,12 @@ using System.Drawing;
 using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Web;
 
 namespace EDP_Clinic
 {
     public partial class ChangePassword : System.Web.UI.Page
     {
-        static string finalHash;
-        static string salt;
         protected void Page_Load(object sender, EventArgs e)
         {
             var code = Request.QueryString["value"];
@@ -21,8 +20,11 @@ namespace EDP_Clinic
 
         protected void Button1_Click(object sender, EventArgs e)
         {
-            string password = tbpassword.Text;
-            string password2 = tbpassword2.Text;
+            string finalHash;
+            string salt;
+
+            string password = HttpUtility.HtmlEncode(tbpassword.Text.Trim());
+            string password2 = HttpUtility.HtmlEncode(tbpassword2.Text.Trim());
             if (password == password2)
             {
                 var errors = passwordcheck(password);
@@ -60,7 +62,7 @@ namespace EDP_Clinic
                 errorMsg.Visible = true;
                 return;
             }
-            Response.Redirect("Login.aspx", false);
+            Response.Redirect("~/Login.aspx", false);
 
         }
         protected string passwordcheck(string password)
@@ -68,23 +70,23 @@ namespace EDP_Clinic
             var errors = "";
             if (password.Length < 8)
             {
-                errors = errors + "Password must at least be 8 characters long <br/>";
+                errors += "Password must at least be 8 characters long <br/>";
             }
             if (!Regex.IsMatch(password, "[a-s]"))
             {
-                errors = errors + "Password must contain lowercase letters <br/>";
+                errors += "Password must contain lowercase letters <br/>";
             }
             if (!Regex.IsMatch(password, "[A-Z]"))
             {
-                errors = errors + "Password must contain uppercase letters <br/>";
+                errors += "Password must contain uppercase letters <br/>";
             }
             if (!Regex.IsMatch(password, "[0-9]"))
             {
-                errors = errors + "Password must contain at least 1 number <br/>";
+                errors += "Password must contain at least 1 number <br/>";
             }
             if (!Regex.IsMatch(password, "[^0-9a-zA-Z]"))
             {
-                errors = errors + "Password must contain at least one symbol <br/>";
+                errors += "Password must contain at least one symbol <br/>";
             }
             return errors;
         }

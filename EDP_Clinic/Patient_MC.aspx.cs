@@ -9,18 +9,18 @@ namespace EDP_Clinic
         {
             if (Session["LoggedIn"] == null)
             {
-                Response.Redirect("Login.aspx", false);
+                Response.Redirect("~/Login.aspx", false);
             }
             else
             {
                 if (Session["UserRole"].ToString() != "Doctor" && Session["UserRole"].ToString() != "Patient")
                 {
-                    Response.Redirect("Home.aspx", false);
+                    Response.Redirect("~/Home.aspx", false);
                 }
             }
             string x = "1";
             Patient_MC eList = new Patient_MC();
-            EDP_DBReference.Service1Client client = new EDP_DBReference.Service1Client();
+            Service1Client client = new Service1Client();
             eList = client.GetPatient_MCById(x);
             Reg_no.Text = eList.Reg_no;
             Name.Text = eList.Name;
@@ -30,8 +30,6 @@ namespace EDP_Clinic
             Clinic.Text = eList.Clinic;
             Signature.Text = eList.Signature;
             Date.Text = eList.Date;
-
         }
-
     }
 }

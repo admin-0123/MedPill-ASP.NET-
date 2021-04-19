@@ -44,69 +44,6 @@
                 padding-top: 6px
             }
 
-        .hint-text {
-            float: left;
-            margin-top: 10px;
-            font-size: 13px;
-        }
-        /* Custom checkbox */
-        .custom-checkbox {
-            position: relative;
-        }
-
-            .custom-checkbox input[type="checkbox"] {
-                opacity: 0;
-                position: absolute;
-                margin: 5px 0 0 3px;
-                z-index: 9;
-            }
-
-            .custom-checkbox label:before {
-                width: 18px;
-                height: 18px;
-            }
-
-            .custom-checkbox label:before {
-                content: '';
-                margin-right: 10px;
-                display: inline-block;
-                vertical-align: text-top;
-                background: white;
-                border: 1px solid #bbb;
-                border-radius: 2px;
-                box-sizing: border-box;
-                z-index: 2;
-            }
-
-            .custom-checkbox input[type="checkbox"]:checked + label:after {
-                content: '';
-                position: absolute;
-                left: 6px;
-                top: 3px;
-                width: 6px;
-                height: 11px;
-                border: solid #000;
-                border-width: 0 3px 3px 0;
-                transform: inherit;
-                z-index: 3;
-                transform: rotateZ(45deg);
-            }
-
-            .custom-checkbox input[type="checkbox"]:checked + label:before {
-                border-color: #03A9F4;
-                background: #03A9F4;
-            }
-
-            .custom-checkbox input[type="checkbox"]:checked + label:after {
-                border-color: #fff;
-            }
-
-            .custom-checkbox input[type="checkbox"]:disabled + label:before {
-                color: #b8b8b8;
-                cursor: auto;
-                box-shadow: none;
-                background: #ddd;
-            }
         /* Modal styles */
         .modal .modal-dialog {
             max-width: 400px;
@@ -256,10 +193,12 @@
                     <div class="form-group">
                         <label class="form-label">Name</label>
                         <asp:TextBox ID="tbAddName" runat="server" CssClass="form-control"></asp:TextBox>
+                        <asp:Label ID="addNameErrMsg" runat="server"></asp:Label>
                     </div>
                     <div class="form-group">
                         <label class="form-label">Email</label>
                         <asp:TextBox ID="tbAddEmail" runat="server" CssClass="form-control" TextMode="Email" placeholder="someone@example.com"></asp:TextBox>
+                        <asp:Label ID="addEmailErrMsg" runat="server"></asp:Label>
                     </div>
                     <div class="form-group">
                         <label class="form-label">Role</label>
@@ -277,7 +216,7 @@
                 </div>
                 <div class="modal-footer">
                     <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
-                    <asp:Button ID="Button1" runat="server" Text="Add" class="btn btn-info" OnClick="Button1_Click" />
+                    <asp:Button ID="AddBtn" runat="server" Text="Add" class="btn btn-info" OnClick="AddBtn_Click" />
                 </div>
             </div>
         </div>
@@ -294,10 +233,12 @@
                     <div class="form-group">
                         <label class="form-label">Name</label>
                         <asp:TextBox ID="tbEditName" runat="server" CssClass="form-control"></asp:TextBox>
+                        <asp:Label ID="editNameErrMsg" runat="server"></asp:Label>
                     </div>
                     <div class="form-group">
                         <label class="form-label">Email</label>
                         <asp:TextBox ID="tbEditEmail" runat="server" CssClass="form-control" TextMode="Email"></asp:TextBox>
+                        <asp:Label ID="editEmailErrMsg" runat="server"></asp:Label>
                     </div>
                     <div class="form-group">
                         <label class="form-label">Role</label>

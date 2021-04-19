@@ -9,24 +9,15 @@ namespace EDP_Clinic
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            // Validation if no valid user session, redirect to error page
-            //Session["UserID"] = 1;
-            //Session["LoggedIn"] = "placeholder";
-            // Session["userName"]
-
             if (Session["LoggedIn"] != null)
             {
                 LoadProfile();
             }
-
             else
             {
                 Response.Redirect("404.aspx", false);
             }
-
-
         }
-
 
         protected void LoadProfile()
         {
@@ -55,10 +46,8 @@ namespace EDP_Clinic
                     var path = "~/UserImg/" + fileName;
                     userPfp.ImageUrl = path;
                 }
-
                 else
                 {
-                    //userPfp.ImageUrl = $"~/assets/images/pfp_placeholder.jpg";
                     userPfp.ImageUrl = "https://icon-library.com/images/default-profile-icon/default-profile-icon-16.jpg";
                 }
 
@@ -67,10 +56,10 @@ namespace EDP_Clinic
 
                 if (caregiver_obj != null)
                 {
-                    //System.Diagnostics.Debug.WriteLine("CARE RECEIVER ID IS " + caregiver_obj.Carereceiver_id);
+                    //Debug.WriteLine("CARE RECEIVER ID IS " + caregiver_obj.Carereceiver_id);
                     User care_receiverobj = client.GetOneUser(caregiver_obj.Carereceiver_id);
-                    //System.Diagnostics.Debug.WriteLine("CARE RECEIVER NAME IS " + care_receiverobj.Name);
-                    //System.Diagnostics.Debug.WriteLine("CARE RECEIVER ID IS " + care_receiverobj.Id);
+                    //Debug.WriteLine("CARE RECEIVER NAME IS " + care_receiverobj.Name);
+                    //Debug.WriteLine("CARE RECEIVER ID IS " + care_receiverobj.Id);
 
                     Photo photo_obj_cr = client.GetOnePhoto(caregiver_obj.Carereceiver_id);
 
@@ -87,38 +76,25 @@ namespace EDP_Clinic
                             crPfp.ImageUrl = path;
                         }
                     }
-
                     else
                     {
                         crPfp.Visible = false;
                         crArrow.Visible = false;
                         lbl_crName.Text = "You do not have any care receivers";
                     }
-
-
                 }
-
                 else
                 {
                     crPfp.Visible = false;
                     crArrow.Visible = false;
                     lbl_crName.Text = "You do not have any care receivers";
                 }
-
-
-
-
-
-
-
-
             }
-
         }
 
         protected void View_Appt_Patient(object sender, ImageClickEventArgs e)
         {
-            EDP_DBReference.Service1Client client = new EDP_DBReference.Service1Client();
+            Service1Client client = new Service1Client();
             User userobj = client.GetOneUserByEmail(Session["LoggedIn"].ToString());
             Session["current_appt_profile"] = userobj.Id;
             Response.Redirect("~/PRFA2.aspx");
@@ -126,7 +102,7 @@ namespace EDP_Clinic
 
         protected void View_Appt_CR(object sender, ImageClickEventArgs e)
         {
-            EDP_DBReference.Service1Client client = new EDP_DBReference.Service1Client();
+            Service1Client client = new Service1Client();
             User userobj = client.GetOneUserByEmail(Session["LoggedIn"].ToString());
             Caregiver caregiver_obj = client.GetOneCG(userobj.Id);
             User care_receiverobj = client.GetOneUser(caregiver_obj.Carereceiver_id);

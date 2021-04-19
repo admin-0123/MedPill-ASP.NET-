@@ -1,10 +1,7 @@
 ﻿using EDP_Clinic.EDP_DBReference;
 using System;
-using System.Text;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Net.Mail;
-using System.Web.UI;
 
 namespace EDP_Clinic
 {
@@ -41,7 +38,6 @@ namespace EDP_Clinic
                 {
 
                 }
-
                 else
                 {
                     new_list.Add(i.Name);
@@ -61,7 +57,6 @@ namespace EDP_Clinic
             {
                 lbl_cgstatus.Text = "Not currently a caregiver";
             }
-
             else
             {
                 lbl_cgstatus.Text = "You currently a caregiver";

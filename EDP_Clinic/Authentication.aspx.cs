@@ -1,15 +1,12 @@
-﻿using EDP_Clinic.EDP_DBReference;
+﻿using EDP_Clinic.App_Code;
+using EDP_Clinic.EDP_DBReference;
 using System;
-using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Configuration;
 using System.Diagnostics;
 using System.Drawing;
-using System.IO;
-using System.Net;
 using System.Text.RegularExpressions;
 using System.Web;
-using System.Web.Script.Serialization;
 using Twilio;
 using Twilio.Rest.Api.V2010.Account;
 using Twilio.Rest.Verify.V2.Service;
@@ -58,9 +55,8 @@ namespace EDP_Clinic
 
                     if (validSessionReason == 0)
                     {
-                        Response.Redirect("CardList.aspx");
+                        Response.Redirect("~/CardList.aspx");
                     }
-
                     //Calls Twilio API
                     else
                     {
@@ -107,13 +103,11 @@ namespace EDP_Clinic
             {
                 if (!Session["addCardInfo"].ToString().Equals(Request.Cookies["addCardInfo"].Value))
                 {
-                    //Response.Redirect("CardList.aspx");
                     resultNum = 0;
                     return resultNum;
                 }
                 else
                 {
-                    //OTPError.Text = "Add Card";
                     resultNum = 1;
                     return resultNum;
                 }
@@ -123,13 +117,11 @@ namespace EDP_Clinic
             {
                 if (!Session["changeCardInfo"].ToString().Equals(Request.Cookies["changeCardInfo"].Value))
                 {
-                    //Response.Redirect("CardList.aspx");
                     resultNum = 0;
                     return resultNum;
                 }
                 else
                 {
-                    //OTPError.Text = "Change Card";
                     resultNum = 2;
                     return resultNum;
                 }
@@ -139,13 +131,11 @@ namespace EDP_Clinic
             {
                 if (!Session["deleteCardInfo"].ToString().Equals(Request.Cookies["deleteCardInfo"].Value))
                 {
-                    //Response.Redirect("CardList.aspx");
                     resultNum = 0;
                     return resultNum;
                 }
                 else
                 {
-                    //OTPError.Text = "Delete Card";
                     resultNum = 3;
                     return resultNum;
                 }
@@ -155,20 +145,17 @@ namespace EDP_Clinic
             {
                 if (!Session["viewCardInfo"].ToString().Equals(Request.Cookies["viewCardInfo"].Value))
                 {
-                    //Response.Redirect("CardList.aspx");
                     resultNum = 0;
                     return resultNum;
                 }
                 else
                 {
-                    //OTPError.Text = "Delete Card";
                     resultNum = 4;
                     return resultNum;
                 }
             }
             else
             {
-                //Response.Redirect("CardList.aspx");
                 resultNum = 0;
                 return resultNum;
             }
@@ -291,14 +278,17 @@ namespace EDP_Clinic
         {
             bool ValidInput = ValidateInput();
 
-            bool validCaptcha = ValidateCaptcha();
+            //  Call recaptcha function here
+            string captchaResponse = Request.Form["g-recaptcha-response"];
+            RecaptchaValidation validCaptcha = new RecaptchaValidation();
+            bool captchaResult = validCaptcha.ValidateCaptcha(captchaResponse);
 
             int validSessionReason = checkIntention();
 
             bool validOTP = checkOTP();
 
             //Checks if user enters a valid OTP format and is not a bot
-            if (ValidInput == true && validCaptcha == true)
+            if (ValidInput == true && captchaResult == true)
             {
                 //OTPError.Visible = false;
                 //string guid = Guid.NewGuid().ToString();
@@ -323,7 +313,7 @@ namespace EDP_Clinic
                         Session["authOTPAToken"] = guid;
 
                         Response.Cookies.Add(new HttpCookie("authOTPAToken", guid));
-                        Response.Redirect("addCardInfo.aspx", false);
+                        Response.Redirect("~/addCardInfo.aspx", false);
                     }
                     //Perform delete here
                     //And then redirect to delete page
@@ -346,11 +336,11 @@ namespace EDP_Clinic
                             //Call Twilio SMS Function to tell user that cardInfo has been deleted
                             //TwilioSMS("we have successfully deleted your card information.");
 
-                            Response.Redirect("CardList.aspx", false);
+                            Response.Redirect("~/CardList.aspx", false);
                         }
                         else
                         {
-                            Response.Redirect("CardList.aspx", false);
+                            Response.Redirect("~/CardList.aspx", false);
                         }
                     }
                     //View more card information
@@ -368,68 +358,24 @@ namespace EDP_Clinic
                         Session["authOTPVToken"] = guid;
 
                         Response.Cookies.Add(new HttpCookie("authOTPVToken", guid));
-                        Response.Redirect("PaymentInformation.aspx?", false);
+                        Response.Redirect("~/PaymentInformation.aspx", false);
                     }
-
                     //Just in case there is some error here
                     else
                     {
-                        Response.Redirect("CardList.aspx", false);
+                        Response.Redirect("~/CardList.aspx", false);
                     }
                 }
                 //If OTP is invalid
                 else
                 {
-                    Response.Redirect("Authentication.aspx", false);
+                    Response.Redirect("~/Authentication.aspx", false);
                 }
 
             }
             else
             {
                 OTPError.Visible = true;
-            }
-        }
-
-        //Initialise an object to store Recaptcha response
-        public class ReCaptchaResponseObject
-        {
-            public string Success { get; set; }
-            public List<string> ErrorMessage { get; set; }
-        }
-
-        public bool ValidateCaptcha()
-        {
-            bool result = true;
-
-            //Retrieves captcha response from captcha api
-            string captchaResponse = Request.Form["g-recaptcha-response"];
-
-            HttpWebRequest req = (HttpWebRequest)WebRequest.Create("https://www.google.com/recaptcha/api/siteverify?secret=6LejmBwaAAAAAN_gzUf_AT0q_3ZrPbD5WP5oaTml &response=" + captchaResponse);
-
-            try
-            {
-                using (WebResponse wResponse = req.GetResponse())
-                {
-                    using (StreamReader readStream = new StreamReader(wResponse.GetResponseStream()))
-                    {
-                        //Read entire json response from recaptcha
-                        string jsonResponse = readStream.ReadToEnd();
-
-                        JavaScriptSerializer js = new JavaScriptSerializer();
-
-                        ReCaptchaResponseObject jsonObject = js.Deserialize<ReCaptchaResponseObject>(jsonResponse);
-
-                        //Console.WriteLine("--- Testing ---");
-                        //Console.WriteLine(jsonObject);
-                        //Read success property in json object
-                        result = Convert.ToBoolean(jsonObject.Success);
-                    }
-                }
-                return result;
-            }
-            catch (WebException)
-            {
-                throw;
             }
         }
     }

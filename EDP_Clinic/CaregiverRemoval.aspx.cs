@@ -1,6 +1,8 @@
 ﻿using EDP_Clinic.EDP_DBReference;
 using System;
+using System.Net;
 using System.Net.Mail;
+using System.Text;
 
 namespace EDP_Clinic
 {
@@ -21,18 +23,18 @@ namespace EDP_Clinic
         {
             Service1Client svc_client = new Service1Client();
 
-            var cr_id = Session["Selected_CR"].ToString();
+            string cr_id = Session["Selected_CR"].ToString();
             var selected_patient_obj = svc_client.GetOneUser(cr_id);
             var current_user_obj = svc_client.GetOneUserByEmail(Session["LoggedIn"].ToString());
 
             var removeResult = svc_client.RemoveCaregiver(current_user_obj.Id, selected_patient_obj.Id);
-            var removeResult2 = svc_client.RemoveCaretaker(current_user_obj.Id);
+            // var removeResult2 = svc_client.RemoveCaretaker(current_user_obj.Id);
 
             if (removeResult == 1)
             {
                 SmtpClient emailClient = new SmtpClient("smtp-relay.sendinblue.com", 587)
                 {
-                    Credentials = new System.Net.NetworkCredential("bryanchinzw@gmail.com", "vPDBKArZRY7HcIJC"),
+                    Credentials = new NetworkCredential("bryanchinzw@gmail.com", "vPDBKArZRY7HcIJC"),
                     DeliveryMethod = SmtpDeliveryMethod.Network,
                     EnableSsl = true
                 };
@@ -40,7 +42,7 @@ namespace EDP_Clinic
                 MailMessage mail = new MailMessage
                 {
                     Subject = "Removal of Caregiver request (MedPill Clinic)",
-                    SubjectEncoding = System.Text.Encoding.UTF8,
+                    SubjectEncoding = Encoding.UTF8,
                     Body = $"This email is to notify you that {current_user_obj.Name} has stopped being your Caregiver.  <br>",
                     IsBodyHtml = true,
                     Priority = MailPriority.High,

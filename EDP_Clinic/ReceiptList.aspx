@@ -27,8 +27,10 @@
                                             <asp:Label ID="datePayment" runat="server" Text='<%#Convert.ToDateTime(Eval("DateSale")).ToString("dd/MM/yyyy")%>'></asp:Label>
                                         </p>
                                     </div>
-                                    <div class="col-md-2">
-                                        <asp:LinkButton ID="moreBtn" runat="server" CssClass="btn btn-primary" CommandName="viewMore" CommandArgument='<%# Eval("UniqueIdentifier") %>' Text="View More"></asp:LinkButton>
+                                    <div class="col-md-4">
+                                        <div class="d-flex justify-content-end">
+                                            <asp:LinkButton ID="moreBtn" runat="server" CssClass="btn btn-primary" CommandName="viewMore" CommandArgument='<%# Eval("UniqueIdentifier") %>' Text="View More"></asp:LinkButton>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
