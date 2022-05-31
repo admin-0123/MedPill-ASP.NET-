@@ -11,7 +11,7 @@ This is done by a group of four students on a Healthcare themed clinic, develope
 4. Hasan (Online Payment and stored card info system)
 
 ## Executive summary
-Our Web Application aims to digitise the work at MedPill Endocrinology Clinic. Our features include view, creating, modifying and deleting appointments slots, a variety of payment methods for users to pay for their treatment as well as saving card information for quick easy payment later on and creating and viewing reports. 
+Our Web Application aims to digitise the work at MedPill Endocrinology Clinic, a private endocrinology clinic. Our features include view, creating, modifying and deleting appointments slots, a variety of payment methods for users to pay for their treatment as well as saving card information for quick easy payment later on and creating and viewing reports. 
 
 To access these features, users are able to login via their phone number as an alternative to traditional login methods with an email and password.
 
